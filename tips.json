@@ -1,7 +1,8 @@
 [
-  { "Id": 1, "TextA": "Grau - Sp. Lima over 2,5", "TextB": "Panama - Salvador over 2,5" },
+  { "Id": 1, "TextA": "Sparta - Slavia over 2,5", "TextB": "Hluk - Lhota over 2,5" },
   { "Id": 2, "TextA": "Team X vs Team Y over 3,0", "TextB": "Team M vs Team N oba skórují" },
   { "Id": 3, "TextA": "Tip A pro jiný den", "TextB": "Druhý tip A" }
 
 ]
+
 
