@@ -1,8 +1,19 @@
 [
-  { "Id": 1, "TextA": "1.Czech Sparta Praha - Slavia Praha over 2,5 1,8", "TextB": "1.England Manchester United - Chelsea over 2,5 1,9" }
-  
+  {
+  "league": "Czech",
+  "match": "Sparta Praha - Slavia Praha",
+  "tip": "Over 2.5",
+  "odds": "1.8"
+},
+{
+  "league": "England",
+  "match": "Manchester United - Chelsea",
+  "tip": "Over 2.5",
+  "odds": "1.9"
+}
  
 ]
+
 
 
 
