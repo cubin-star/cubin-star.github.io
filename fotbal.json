@@ -1,21 +1,21 @@
 [
   {
-  "league": "Italy",
-  "match": "FC Torino - Lecce",
+  "league": "Portugal",
+  "match": "Casa Pia - FC Porto",
   "tip": "Over 2.5",
-  "odds": "2,6"
+  "odds": "1,8"
 },
 {
   "league": "England",
-  "match": "Manchester United - Fulham",
+  "match": "Sunderland - Burnley",
   "tip": "Over 2.5",
-  "odds": "1,6"
+  "odds": "2,23"
 },
 {
-  "league": "Czech",
-  "match": "Karvina - Plzen",
+  "league": "Turkey",
+  "match": "Kocaelispor - Fenerbahce ",
   "tip": "Over 2.5",
-  "odds": "1,8"
+  "odds": "2"
 } 
 ]
 
