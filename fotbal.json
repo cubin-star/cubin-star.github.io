@@ -1,21 +1,21 @@
 [
   {
-  "league": "Germany",
-  "match": "Freiburg - Bremen",
+  "league": "Czech",
+  "match": "Bohemians - Pardubice",
   "tip": "Over 2.5",
-  "odds": "1,76"
+  "odds": "2,05"
 },
 {
   "league": "England",
-  "match": "Burnley - West Ham",
+  "match": "Brighton - Crystal Palace",
   "tip": "Over 2.5",
-  "odds": "1,79"
+  "odds": "1,82"
 },
 {
-  "league": "Czech",
-  "match": "Teplice - Karvina",
+  "league": "Denmark",
+  "match": "Brondby Kobenhaven - Randers Freja",
   "tip": "Over 2.5",
-  "odds": "1,99"
+  "odds": "1,79"
 } 
 ]
 
