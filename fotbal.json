@@ -1,21 +1,21 @@
 [
   {
-  "league": "Scotland",
-  "match": "Hearts - Hibernian",
+  "league": "England",
+  "match": "Crystal Palace - Burnley",
   "tip": "Over 2.5",
-  "odds": "1,98"
-},
-{
-  "league": "Italy cup",
-  "match": "Napoli - Como",
-  "tip": "Over 2.5",
-  "odds": "2,27"
+  "odds": "1,91"
 },
 {
   "league": "Swiss",
-  "match": "Luzern - Grasshoppers",
+  "match": "Lugano - Servette",
   "tip": "Over 2.5",
-  "odds": "1,63"
+  "odds": "1,74"
+},
+{
+  "league": "AFC Champions league two",
+  "match": "Arkadag - Al Nassr",
+  "tip": "Over 2.5",
+  "odds": "1,73"
 } 
 ]
 
