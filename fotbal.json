@@ -1,21 +1,21 @@
 [
   {
-  "league": "3.England",
-  "match": "Cardiff - AFC Wimbledon",
+  "league": "Italy",
+  "match": "AC Milano - Como",
   "tip": "Over 2.5",
-  "odds": "1,72"
+  "odds": "2,13"
 },
 {
-  "league": "Kuwajt",
-  "match": "Al Tadamon - Kazma SC",
+  "league": "Champions League",
+  "match": "Bodo Glimt - Inter Milano",
+  "tip": "Over 2.5",
+  "odds": "1,53"
+},
+{
+  "league": "England",
+  "match": "Wolverhampton - Arsenal",
   "tip": "Over 2.5",
   "odds": "1,73"
-},
-{
-  "league": "2.Turkey",
-  "match": "Istanbulspor - Esenier Erokspor",
-  "tip": "Over 2.5",
-  "odds": "1,62"
 } 
 ]
 
