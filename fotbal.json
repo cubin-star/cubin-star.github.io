@@ -1,21 +1,21 @@
 [
   {
-  "league": "Italy",
-  "match": "AC Milano - Como",
+  "league": "European League",
+  "match": "Brann Bergen - Bologna",
   "tip": "Over 2.5",
   "odds": "2,13"
 },
 {
-  "league": "Champions League",
-  "match": "Bodo Glimt - Inter Milano",
+  "league": "Conference League",
+  "match": "Bialystok - Fiorentina",
   "tip": "Over 2.5",
-  "odds": "1,53"
+  "odds": "1,9"
 },
 {
-  "league": "England",
-  "match": "Wolverhampton - Arsenal",
+  "league": "India",
+  "match": "Mumbai City FC - Chennaiyin FC",
   "tip": "Over 2.5",
-  "odds": "1,73"
+  "odds": "1,85"
 } 
 ]
 
