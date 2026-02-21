@@ -1,21 +1,21 @@
 [
   {
-  "league": "France",
-  "match": "Brest - Marseille",
+  "league": "Czech",
+  "match": "Jablonec - Karvina",
+  "tip": "Over 2.5",
+  "odds": "1,8"
+},
+{
+  "league": "England",
+  "match": "Brentford - Brighton",
+  "tip": "Over 2.5",
+  "odds": "1,78"
+},
+{
+  "league": "Germany",
+  "match": "Wolfsburg - Augsburg",
   "tip": "Over 2.5",
   "odds": "1,73"
-},
-{
-  "league": "Indonesia",
-  "match": "Semen Padang FC - Malut United",
-  "tip": "Over 2.5",
-  "odds": "1,75"
-},
-{
-  "league": "Denmark",
-  "match": "Nordsjaeland - Vejle",
-  "tip": "Over 2.5",
-  "odds": "1,51"
 } 
 ]
 
