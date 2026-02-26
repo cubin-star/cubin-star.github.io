@@ -1,21 +1,21 @@
 [
   {
+  "league": "European League",
+  "match": "Plzen - Panathinaikos",
+  "tip": "Over 2.5",
+  "odds": "2,19"
+},
+{
+  "league": "Conferencion Cup",
+  "match": "Lausanne - Olomouc",
+  "tip": "Over 2.5",
+  "odds": "1,99"
+},
+{
   "league": "Brazil",
-  "match": "Cruzeiro - Corinthias",
+  "match": "Santos - Vasco",
   "tip": "Over 2.5",
-  "odds": "2,05"
-},
-{
-  "league": "Thailand",
-  "match": "Nakhon Ratchasima - Rayong",
-  "tip": "Over 2.5",
-  "odds": "1,94"
-},
-{
-  "league": "2.England",
-  "match": "Norwich - Sheffield Wednesday",
-  "tip": "Over 2.5",
-  "odds": "1,51"
+  "odds": "1,98"
 } 
 ]
 
