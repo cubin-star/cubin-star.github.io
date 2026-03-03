@@ -58,33 +58,72 @@ def discover_hockey_sports() -> list[str]:
 
 
 def fetch_odds(sport_key: str) -> list[dict]:
-    """Stáhne Over/Under kurzy pro danou ligu (pouze zápasy do 24h)."""
-    now = datetime.now(timezone.utc)
-    commence_to = (now + timedelta(hours=24)).isoformat()
-
+    """Stáhne Over/Under kurzy pro danou ligu."""
     url = f"https://api.the-odds-api.com/v4/sports/{sport_key}/odds"
-    # Zkusíme eu + us + uk regiony, aby se maximalizoval počet bookmakerů
     params = {
         "apiKey": API_KEY,
-        "regions": "eu,us,uk",
+        "regions": "us,eu,uk",
         "markets": "totals",
         "oddsFormat": "decimal",
-        "commenceTimeTo": commence_to,
     }
     try:
         resp = requests.get(url, params=params, timeout=20)
         remaining = resp.headers.get("x-requests-remaining", "?")
-        print(f"   (API requesty zbývají: {remaining})")
+        used = resp.headers.get("x-requests-used", "?")
+        print(f"   (HTTP {resp.status_code}, použito: {used}, zbývá: {remaining})")
+
         if resp.status_code in (404, 422):
+            print(f"   ⚠ API vrátilo {resp.status_code}: {resp.text[:200]}")
             return []
         resp.raise_for_status()
         data = resp.json()
-        if isinstance(data, dict) and "message" in data:
-            print(f"   ⚠ API zpráva: {data['message']}")
+
+        # Diagnostika: pokud API vrátí dict s chybou
+        if isinstance(data, dict):
+            print(f"   ⚠ API odpověď (dict): {json.dumps(data, indent=2)[:300]}")
             return []
-        return data
+
+        # Diagnostika: pokud prázdný seznam
+        if isinstance(data, list) and len(data) == 0:
+            print(f"   (API vrátilo prázdný seznam)")
+
+        # Diagnostika: první zápas raw výpis (jen pro první ligu s daty)
+        if isinstance(data, list) and len(data) > 0:
+            print(f"   📦 API vrátilo {len(data)} zápasů")
+            # Ukáž raw první zápas pro debug
+            first = data[0]
+            print(f"   🔍 Ukázkový zápas: {first.get('home_team')} vs {first.get('away_team')}")
+            print(f"      commence_time: {first.get('commence_time')}")
+            bks = first.get("bookmakers", [])
+            print(f"      bookmakers: {len(bks)}")
+            if bks:
+                first_bk = bks[0]
+                print(f"      první bookmaker: {first_bk.get('key')}")
+                for mkt in first_bk.get("markets", []):
+                    print(f"      market: {mkt.get('key')}, outcomes: {mkt.get('outcomes', [])[:3]}")
+
+        return data if isinstance(data, list) else []
     except requests.RequestException as e:
-        print(f"  ⚠ Chyba při stahování {sport_key}: {e}")
+        print(f"  ⚠ Chyba: {e}")
+        return []
+
+
+def fetch_odds_h2h_test(sport_key: str) -> list[dict]:
+    """Diagnostický test: stáhne h2h kurzy (základní market) pro ověření API."""
+    url = f"https://api.the-odds-api.com/v4/sports/{sport_key}/odds"
+    params = {
+        "apiKey": API_KEY,
+        "regions": "us",
+        "markets": "h2h",
+        "oddsFormat": "decimal",
+    }
+    try:
+        resp = requests.get(url, params=params, timeout=20)
+        if resp.status_code != 200:
+            return []
+        data = resp.json()
+        return data if isinstance(data, list) else []
+    except Exception:
         return []
 
 
@@ -178,6 +217,16 @@ def main():
     all_sports = list(set(HOCKEY_SPORTS + active_sports))
     all_sports.sort()
     print(f"   Budu hledat v: {all_sports}")
+    print()
+
+    # Krok 2: Diagnostika – funguje API vůbec? Zkusíme h2h pro NHL
+    print("🧪 Diagnostika: testuji API s h2h marketem pro NHL...")
+    h2h_test = fetch_odds_h2h_test("icehockey_nhl")
+    if h2h_test:
+        print(f"   ✅ h2h test OK – {len(h2h_test)} zápasů nalezeno")
+        print(f"   Ukázka: {h2h_test[0].get('home_team')} vs {h2h_test[0].get('away_team')}")
+    else:
+        print("   ⚠ h2h test vrátil 0 zápasů – API klíč nebo NHL sezóna?")
     print()
 
     all_candidates = []
