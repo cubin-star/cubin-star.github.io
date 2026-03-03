@@ -12,6 +12,7 @@ Required environment variable:
 import json
 import os
 import sys
+from datetime import datetime, timezone, timedelta
 from pathlib import Path
 
 import requests
@@ -65,8 +66,12 @@ OUTPUT_PATH = Path(__file__).resolve().parent.parent / "tips.json"
 
 
 def fetch_over25_candidates() -> list[dict]:
-    """Return a list of {league, match, odds} for Over 2.5 lines with odds >= MIN_ODDS."""
+    """Return a list of {league, match, odds} for Over 2.5 lines with odds >= MIN_ODDS.
+    Only matches starting within the next 24 hours are included."""
     candidates: list[dict] = []
+    now = datetime.now(timezone.utc)
+    cutoff = now + timedelta(hours=24)
+    print(f"Time window: {now:%Y-%m-%d %H:%M} UTC  →  {cutoff:%Y-%m-%d %H:%M} UTC")
 
     for sport_key in SPORT_KEYS:
         url = f"{BASE_URL}/{sport_key}/odds"
@@ -94,6 +99,17 @@ def fetch_over25_candidates() -> list[dict]:
         league = LEAGUE_NAMES.get(sport_key, sport_key)
 
         for event in events:
+            # Filter: only matches starting within the next 24 hours.
+            commence_str = event.get("commence_time", "")
+            if not commence_str:
+                continue
+            try:
+                commence = datetime.fromisoformat(commence_str.replace("Z", "+00:00"))
+            except ValueError:
+                continue
+            if commence < now or commence > cutoff:
+                continue
+
             home = event.get("home_team", "?")
             away = event.get("away_team", "?")
             match_name = f"{home} vs {away}"
@@ -113,6 +129,7 @@ def fetch_over25_candidates() -> list[dict]:
                                     "league": league,
                                     "match": match_name,
                                     "odds": outcome["price"],
+                                    "commence": commence,
                                 }
                             )
                             break  # one Over 2.5 per bookmaker is enough
@@ -125,7 +142,7 @@ def fetch_over25_candidates() -> list[dict]:
 def pick_best(candidates: list[dict], count: int = PICK_COUNT) -> list[dict]:
     """
     Remove duplicates (same match), keep the highest odds per match,
-    then return *count* matches sorted by odds descending.
+    then return *count* matches sorted by kick-off time (earliest first).
     """
     best_by_match: dict[str, dict] = {}
     for c in candidates:
@@ -133,7 +150,7 @@ def pick_best(candidates: list[dict], count: int = PICK_COUNT) -> list[dict]:
         if key not in best_by_match or c["odds"] > best_by_match[key]["odds"]:
             best_by_match[key] = c
 
-    sorted_candidates = sorted(best_by_match.values(), key=lambda x: x["odds"], reverse=True)
+    sorted_candidates = sorted(best_by_match.values(), key=lambda x: x["commence"])
     return sorted_candidates[:count]
 
 
