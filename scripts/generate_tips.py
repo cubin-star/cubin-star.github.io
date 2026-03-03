@@ -1,9 +1,12 @@
-"""
-Denní generátor hokejových tipů Over 5.5 pro MAUI appku.
+"""Denní generátor hokejových tipů Over 5.5 pro MAUI appku.
 
 Stáhne kurzy z The Odds API pro všechny dostupné hokejové ligy,
-najde Over 5.5 (nebo nejbližší Over ≥5.5) a vybere 2 zápasy,
-jejichž součin kurzů je co nejblíže 3.0.
+najde PŘESNĚ Over 5.5 a vybere 2 zápasy, jejichž součin kurzů
+je MINIMÁLNĚ 3.0 (a co nejblíže k 3.0).
+
+Příklad: zápas A kurz 2.05 × zápas B kurz 1.60 = 3.28 ✅
+Příklad: zápas A kurz 1.78 × zápas B kurz 1.80 = 3.20 ✅
+Příklad: zápas A kurz 1.50 × zápas B kurz 1.90 = 2.85 ❌ (pod 3.0)
 
 Výstup: hokey.json (formát kompatibilní s TodaysTipsPage.xaml.cs)
 """
@@ -16,9 +19,8 @@ import requests
 from datetime import datetime, timezone, timedelta
 
 API_KEY = os.environ.get("ODDS_API_KEY", "")
-TARGET_PRODUCT = 3.0
-MIN_ODDS = 1.30
-MAX_ODDS = 2.50
+MIN_PRODUCT = 3.0          # Součin kurzů MUSÍ být >= 3.0
+REQUIRED_POINT = 5.5       # Vždy Over 5.5 gólů
 OUTPUT_FILE = "hokey.json"
 
 # Hokejové ligy podporované The Odds API
@@ -70,8 +72,8 @@ def fetch_odds(sport_key: str) -> list[dict]:
         return []
 
 
-def extract_over_candidates(matches: list[dict], sport_key: str) -> list[dict]:
-    """Z matchů vytáhne Over 5.5 (nebo nejbližší ≥5.5) kandidáty – pouze zápasy do 24h."""
+def extract_over55_candidates(matches: list[dict], sport_key: str) -> list[dict]:
+    """Z matchů vytáhne PŘESNĚ Over 5.5 kandidáty – pouze zápasy do 24h."""
     candidates = []
     now = datetime.now(timezone.utc)
     cutoff = now + timedelta(hours=24)
@@ -89,7 +91,8 @@ def extract_over_candidates(matches: list[dict], sport_key: str) -> list[dict]:
         except (ValueError, AttributeError):
             continue  # Neplatný čas → přeskočit
 
-        best_over = None
+        # Sbíráme Over 5.5 kurzy od všech bookmakerů, bereme nejvyšší kurz
+        best_price = None
 
         for bookmaker in match.get("bookmakers", []):
             for market in bookmaker.get("markets", []):
@@ -101,43 +104,39 @@ def extract_over_candidates(matches: list[dict], sport_key: str) -> list[dict]:
                     point = outcome.get("point", 0)
                     price = outcome.get("price", 0)
 
-                    # Preferujeme přesně 5.5, ale bereme i blízké hodnoty (5.0, 6.0)
-                    if point < 4.5 or point > 6.5:
+                    # POUZE přesně Over 5.5
+                    if point != REQUIRED_POINT:
                         continue
 
-                    if MIN_ODDS <= price <= MAX_ODDS:
-                        # Priorita: čím blíže 5.5, tím lepší
-                        distance = abs(point - 5.5)
-                        if best_over is None or distance < best_over["_dist"]:
-                            best_over = {
-                                "league": LEAGUE_NAMES.get(sport_key, sport_key),
-                                "match": f"{home} vs {away}",
-                                "tip": f"Over {point}",
-                                "odds": str(round(price, 2)),
-                                "_price": price,
-                                "_dist": distance,
-                                "_commence": commence,
-                            }
+                    if price > 1.0 and (best_price is None or price > best_price):
+                        best_price = price
 
-        if best_over is not None:
-            candidates.append(best_over)
+        if best_price is not None:
+            candidates.append({
+                "league": LEAGUE_NAMES.get(sport_key, sport_key),
+                "match": f"{home} vs {away}",
+                "tip": f"Over {REQUIRED_POINT}",
+                "odds": str(round(best_price, 2)),
+                "_price": best_price,
+                "_commence": commence,
+            })
 
     return candidates
 
 
 def select_best_pair(candidates: list[dict]) -> list[dict] | None:
-    """Vybere 2 zápasy, jejichž součin kurzů je nejblíže TARGET_PRODUCT."""
+    """Vybere 2 zápasy: součin kurzů MUSÍ být >= 3.0, a co nejblíže k 3.0."""
     if len(candidates) < 2:
         return None
 
     best_pair = None
-    best_diff = float("inf")
+    best_product = float("inf")
 
     for a, b in itertools.combinations(candidates, 2):
         product = a["_price"] * b["_price"]
-        diff = abs(product - TARGET_PRODUCT)
-        if diff < best_diff:
-            best_diff = diff
+        # Součin MUSÍ být >= 3.0
+        if product >= MIN_PRODUCT and product < best_product:
+            best_product = product
             best_pair = [a, b]
 
     return best_pair
@@ -157,7 +156,7 @@ def main():
     cutoff = now + timedelta(hours=24)
     print(f"🏒 Generuji hokejové tipy – {now.strftime('%Y-%m-%d %H:%M UTC')}")
     print(f"   Pouze zápasy od teď do {cutoff.strftime('%Y-%m-%d %H:%M UTC')} (24h okno)")
-    print(f"   Cílový součin kurzů: {TARGET_PRODUCT}")
+    print(f"   Pravidla: VŽDY Over {REQUIRED_POINT}, součin kurzů >= {MIN_PRODUCT}")
     print()
 
     all_candidates = []
@@ -169,30 +168,42 @@ def main():
             print(f"   (žádné zápasy)")
             continue
 
-        candidates = extract_over_candidates(matches, sport)
-        print(f"   Nalezeno {len(candidates)} kandidátů (Over ~5.5, kurz {MIN_ODDS}–{MAX_ODDS})")
+        candidates = extract_over55_candidates(matches, sport)
+        if candidates:
+            for c in candidates:
+                print(f"   ✓ {c['match']} → Over {REQUIRED_POINT} @ {c['odds']}")
+        else:
+            print(f"   (žádné zápasy s Over {REQUIRED_POINT})")
         all_candidates.extend(candidates)
 
     print()
-    print(f"📊 Celkem kandidátů: {len(all_candidates)}")
+    print(f"📊 Celkem kandidátů s Over {REQUIRED_POINT}: {len(all_candidates)}")
 
     if len(all_candidates) < 2:
-        print("⚠ Nedostatek zápasů. Zapisuji prázdný JSON.")
+        print("⚠ Nedostatek zápasů s Over 5.5. Zapisuji prázdný JSON.")
         with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
             json.dump([], f, indent=2, ensure_ascii=False)
         return
 
     pair = select_best_pair(all_candidates)
     if pair is None:
-        print("⚠ Nepodařilo se najít vhodný pár.")
+        print(f"⚠ Žádný pár nemá součin kurzů >= {MIN_PRODUCT}. Zapisuji prázdný JSON.")
+        # Ukáž nejlepší dostupný součin pro diagnostiku
+        best = 0
+        for a, b in itertools.combinations(all_candidates, 2):
+            p = a["_price"] * b["_price"]
+            if p > best:
+                best = p
+        print(f"   (Nejlepší dostupný součin: {best:.2f})")
         with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
             json.dump([], f, indent=2, ensure_ascii=False)
         return
 
-    product = float(pair[0]["odds"]) * float(pair[1]["odds"])
-    print(f"✅ Vybraný pár (součin kurzů = {product:.2f}):")
+    product = pair[0]["_price"] * pair[1]["_price"]
+    print(f"✅ Vybraný pár (součin kurzů = {product:.2f}, >= {MIN_PRODUCT} ✓):")
     for t in pair:
         print(f"   {t['league']}: {t['match']} → {t['tip']} @ {t['odds']}")
+    print(f"   {pair[0]['odds']} × {pair[1]['odds']} = {product:.2f}")
 
     result = [clean_tip(t) for t in pair]
 
