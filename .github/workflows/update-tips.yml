@@ -1,0 +1,50 @@
+# Automatická aktualizace hokejových tipů
+# Spouští se každý den v 7:00 UTC (9:00 CET zimní / 8:00 CEST letní čas)
+#
+# SETUP:
+# 1. Tento soubor zkopírujte do repozitáře cubin-star.github.io:
+#    .github/workflows/update-tips.yml
+# 2. Soubor bot/generate_tips.py zkopírujte do kořene repozitáře:
+#    scripts/generate_tips.py
+# 3. Na GitHubu přidejte secret:
+#    Settings → Secrets and variables → Actions → New repository secret
+#    Name: ODDS_API_KEY
+#    Value: (váš klíč z the-odds-api.com)
+# 4. V Settings → Actions → General povolte:
+#    "Read and write permissions" pro GITHUB_TOKEN
+
+name: 🏒 Update Hockey Tips
+
+on:
+  schedule:
+    - cron: '0 7 * * *'    # Každý den v 7:00 UTC
+  workflow_dispatch:         # Ruční spuštění tlačítkem na GitHubu
+
+jobs:
+  update-tips:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Generate tips
+        env:
+          ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
+        run: python scripts/generate_tips.py
+
+      - name: Commit & Push
+        run: |
+          git config user.name "hockey-tips-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add hokey.json
+          git diff --cached --quiet || git commit -m "🏒 Daily tips $(date -u +%Y-%m-%d)"
+          git push
