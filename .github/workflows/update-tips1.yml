@@ -1,0 +1,39 @@
+name: Update Basketball Tips
+
+on:
+  schedule:
+    # Kazdy den v 7:00 CET (6:00 UTC)
+    - cron: "0 6 * * *"
+  workflow_dispatch: # Rucni spusteni z GitHub UI
+
+permissions:
+  contents: write
+
+jobs:
+  update-tips:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repozitar
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Instalace zavislosti
+        run: pip install requests
+
+      - name: Stazeni a vyber tipu
+        env:
+          ODDS_API_KEY2: ${{ secrets.ODDS_API_KEY2 }}
+        run: python scripts/fetch-tips1.py
+
+      - name: Commit a push
+        run: |
+          git config user.name "tips-bot"
+          git config user.email "tips-bot@users.noreply.github.com"
+          git add basketbal.json
+          git diff --cached --quiet || git commit -m "Update tips $(date +'%Y-%m-%d')"
+          git push
