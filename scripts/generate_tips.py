@@ -19,7 +19,6 @@ MIN_ODDS = 1.75            # Minimální kurz
 OUTPUT_FILE = "hokey.json"
 
 # Hokejové ligy podporované The Odds API
-# (API vrátí prázdný seznam, pokud liga zrovna nemá zápasy – žádná chyba)
 HOCKEY_SPORTS = [
     "icehockey_nhl",
     "icehockey_czech_extraliga",
@@ -30,7 +29,6 @@ HOCKEY_SPORTS = [
     "icehockey_world_championship",
 ]
 
-# Mapování sport-key → čitelný název ligy
 LEAGUE_NAMES = {
     "icehockey_nhl": "NHL",
     "icehockey_czech_extraliga": "Česká Extraliga",
@@ -42,33 +40,56 @@ LEAGUE_NAMES = {
 }
 
 
+def discover_hockey_sports() -> list[str]:
+    """Zjistí, které hokejové sporty jsou právě aktivní na API."""
+    url = "https://api.the-odds-api.com/v4/sports"
+    params = {"apiKey": API_KEY}
+    try:
+        resp = requests.get(url, params=params, timeout=20)
+        resp.raise_for_status()
+        sports = resp.json()
+        active = [s["key"] for s in sports if "hockey" in s.get("group", "").lower()
+                  or "ice_hockey" in s.get("key", "")
+                  or "icehockey" in s.get("key", "")]
+        return active
+    except Exception as e:
+        print(f"  ⚠ Chyba při zjišťování sportů: {e}")
+        return []
+
+
 def fetch_odds(sport_key: str) -> list[dict]:
     """Stáhne Over/Under kurzy pro danou ligu (pouze zápasy do 24h)."""
     now = datetime.now(timezone.utc)
     commence_to = (now + timedelta(hours=24)).isoformat()
 
     url = f"https://api.the-odds-api.com/v4/sports/{sport_key}/odds"
+    # Zkusíme eu + us + uk regiony, aby se maximalizoval počet bookmakerů
     params = {
         "apiKey": API_KEY,
-        "regions": "eu",
+        "regions": "eu,us,uk",
         "markets": "totals",
         "oddsFormat": "decimal",
         "commenceTimeTo": commence_to,
     }
     try:
         resp = requests.get(url, params=params, timeout=20)
-        if resp.status_code == 404:
-            # Liga momentálně nemá zápasy
+        remaining = resp.headers.get("x-requests-remaining", "?")
+        print(f"   (API requesty zbývají: {remaining})")
+        if resp.status_code in (404, 422):
             return []
         resp.raise_for_status()
-        return resp.json()
+        data = resp.json()
+        if isinstance(data, dict) and "message" in data:
+            print(f"   ⚠ API zpráva: {data['message']}")
+            return []
+        return data
     except requests.RequestException as e:
         print(f"  ⚠ Chyba při stahování {sport_key}: {e}")
         return []
 
 
-def extract_over55_candidates(matches: list[dict], sport_key: str) -> list[dict]:
-    """Z matchů vytáhne Over 5.5 s kurzem >= 1.75 – pouze zápasy do 24h."""
+def extract_candidates(matches: list[dict], sport_key: str) -> list[dict]:
+    """Z matchů vytáhne Over kandidáty – pouze zápasy do 24h."""
     candidates = []
     now = datetime.now(timezone.utc)
     cutoff = now + timedelta(hours=24)
@@ -77,6 +98,7 @@ def extract_over55_candidates(matches: list[dict], sport_key: str) -> list[dict]
         home = match.get("home_team", "?")
         away = match.get("away_team", "?")
         commence = match.get("commence_time", "")
+        match_label = f"{home} vs {away}"
 
         # Filtr: pouze zápasy začínající od teď do 24h
         try:
@@ -86,11 +108,8 @@ def extract_over55_candidates(matches: list[dict], sport_key: str) -> list[dict]
         except (ValueError, AttributeError):
             continue
 
-        # Sbíráme Over 5.5 kurzy od všech bookmakerů, bereme nejvyšší kurz
-        # Pokud Over 5.5 neexistuje, bereme nejbližší Over >= 5.0 (5.0, 5.5, 6.0)
-        best_price = None
-        best_point = None
-
+        # Diagnostika: vypsat VŠECHNY Over hodnoty pro tento zápas
+        all_overs = []
         for bookmaker in match.get("bookmakers", []):
             for market in bookmaker.get("markets", []):
                 if market.get("key") != "totals":
@@ -100,28 +119,37 @@ def extract_over55_candidates(matches: list[dict], sport_key: str) -> list[dict]
                         continue
                     point = outcome.get("point", 0)
                     price = outcome.get("price", 0)
+                    all_overs.append((point, price, bookmaker.get("key", "?")))
 
-                    # Přesně 5.5 je ideální, ale bereme i 5.0 nebo 6.0
-                    if point < 5.0 or point > 6.5:
-                        continue
-                    if price < MIN_ODDS:
-                        continue
+        if all_overs:
+            # Zobrazit všechny nalezené Over hodnoty
+            points_summary = sorted(set(p for p, _, _ in all_overs))
+            print(f"   📋 {match_label}: Over body = {points_summary}")
+            for pt, pr, bk in sorted(all_overs):
+                print(f"      Over {pt} @ {pr} ({bk})")
 
-                    # Priorita: 5.5 > 5.0 > 6.0 (čím blíže 5.5)
-                    dist = abs(point - REQUIRED_POINT)
-                    if best_point is None:
-                        best_point = point
-                        best_price = price
-                    elif dist < abs(best_point - REQUIRED_POINT):
-                        best_point = point
-                        best_price = price
-                    elif dist == abs(best_point - REQUIRED_POINT) and price > best_price:
-                        best_price = price
+        # Vybrat nejlepší Over: preferujeme 5.5, pak nejbližší (5.0, 6.0, 4.5...)
+        best_price = None
+        best_point = None
+        for pt, pr, _ in all_overs:
+            if pt < 4.5 or pt > 7.5:
+                continue
+            if pr < MIN_ODDS:
+                continue
+            dist = abs(pt - REQUIRED_POINT)
+            if best_point is None:
+                best_point = pt
+                best_price = pr
+            elif dist < abs(best_point - REQUIRED_POINT):
+                best_point = pt
+                best_price = pr
+            elif dist == abs(best_point - REQUIRED_POINT) and pr > best_price:
+                best_price = pr
 
         if best_price is not None:
             candidates.append({
                 "league": LEAGUE_NAMES.get(sport_key, sport_key),
-                "match": f"{home} vs {away}",
+                "match": match_label,
                 "tip": f"Over {best_point}",
                 "odds": str(round(best_price, 2)),
             })
@@ -141,28 +169,40 @@ def main():
     print(f"   Over {REQUIRED_POINT}, kurz >= {MIN_ODDS}")
     print()
 
+    # Krok 1: Zjistit aktivní hokejové sporty
+    print("🔍 Zjišťuji aktivní hokejové ligy na API...")
+    active_sports = discover_hockey_sports()
+    print(f"   Aktivní na API: {active_sports if active_sports else '(žádné nalezeny)'}")
+
+    # Sloučit s naším seznamem
+    all_sports = list(set(HOCKEY_SPORTS + active_sports))
+    all_sports.sort()
+    print(f"   Budu hledat v: {all_sports}")
+    print()
+
     all_candidates = []
 
-    for sport in HOCKEY_SPORTS:
-        print(f"📡 Stahuji: {LEAGUE_NAMES.get(sport, sport)}...")
+    for sport in all_sports:
+        league_name = LEAGUE_NAMES.get(sport, sport)
+        print(f"📡 Stahuji: {league_name}...")
         matches = fetch_odds(sport)
         if not matches:
-            print(f"   (žádné zápasy)")
+            print(f"   (žádné zápasy v příštích 24h)")
             continue
 
-        candidates = extract_over55_candidates(matches, sport)
+        print(f"   Nalezeno {len(matches)} zápasů, hledám Over...")
+        candidates = extract_candidates(matches, sport)
         if candidates:
-            for c in candidates:
-                print(f"   ✓ {c['match']} → Over {REQUIRED_POINT} @ {c['odds']}")
+            print(f"   ✅ {len(candidates)} kandidátů s kurzem >= {MIN_ODDS}")
         else:
-            print(f"   (žádné Over {REQUIRED_POINT} s kurzem >= {MIN_ODDS})")
+            print(f"   ❌ žádný Over >= {MIN_ODDS}")
         all_candidates.extend(candidates)
+        print()
 
-    print()
     print(f"📊 Celkem kandidátů: {len(all_candidates)}")
 
     if len(all_candidates) == 0:
-        print("⚠ Žádné zápasy. Zapisuji prázdný JSON.")
+        print("⚠ Žádné zápasy splňující kritéria. Zapisuji prázdný JSON.")
         with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
             json.dump([], f, indent=2, ensure_ascii=False)
         return
