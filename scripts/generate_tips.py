@@ -167,29 +167,19 @@ def extract_candidates(matches: list[dict], sport_key: str) -> list[dict]:
             for pt, pr, bk in sorted(all_overs):
                 print(f"      Over {pt} @ {pr} ({bk})")
 
-        # Vybrat nejlepší Over: preferujeme 5.5, pak nejbližší (5.0, 6.0, 4.5...)
+        # POUZE Over 5.5 – nic jiného
         best_price = None
-        best_point = None
         for pt, pr, _ in all_overs:
-            if pt < 4.5 or pt > 7.5:
+            if pt != 5.5:
                 continue
-            if pr < MIN_ODDS:
-                continue
-            dist = abs(pt - REQUIRED_POINT)
-            if best_point is None:
-                best_point = pt
-                best_price = pr
-            elif dist < abs(best_point - REQUIRED_POINT):
-                best_point = pt
-                best_price = pr
-            elif dist == abs(best_point - REQUIRED_POINT) and pr > best_price:
+            if pr >= MIN_ODDS and (best_price is None or pr > best_price):
                 best_price = pr
 
         if best_price is not None:
             candidates.append({
                 "league": LEAGUE_NAMES.get(sport_key, sport_key),
                 "match": match_label,
-                "tip": f"Over {best_point}",
+                "tip": "Over 5.5",
                 "odds": str(round(best_price, 2)),
             })
 
