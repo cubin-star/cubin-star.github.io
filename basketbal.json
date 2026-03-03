@@ -1,15 +1,14 @@
 [
   {
-  "league": "Q WC 2027 Asia",
-  "match": "Libanon - Saudi Arabi",
-  "tip": "Over 158.5",
-  "odds": "1,88"
-},
-{
-  "league": "Q EC 2029",
-  "match": "Irsko - Azerbajdzan",
-  "tip": "Over 160.5",
-  "odds": "1,92"
-}
- 
+    "league": "NBA",
+    "match": "Miami Heat vs Brooklyn Nets",
+    "tip": "Over 225.5",
+    "odds": "1.97"
+  },
+  {
+    "league": "NCAAB",
+    "match": "Maine Black Bears vs UMass Lowell River Hawks",
+    "tip": "Over 139.5",
+    "odds": "1.95"
+  }
 ]
