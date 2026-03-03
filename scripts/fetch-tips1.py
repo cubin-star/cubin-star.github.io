@@ -1,7 +1,8 @@
 import os
 import json
 import requests
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
+from zoneinfo import ZoneInfo
 
 API_KEY = os.environ["ODDS_API_KEY2"]
 OUTPUT_FILE = "basketbal.json"
@@ -15,6 +16,8 @@ SPORTS = [
 
 MIN_ODDS = 1.75
 MAX_TIPS = 2
+WINDOW_HOURS = 24
+TZ_CET = ZoneInfo("Europe/Prague")
 
 
 def fetch_over_tips():
@@ -47,11 +50,29 @@ def fetch_over_tips():
         remaining = resp.headers.get("x-requests-remaining", "?")
         print(f"  Nalezeno {len(games)} zapasu. Zbyvajici API requesty: {remaining}")
 
+        # Casove okno: od 8:00 CET dnes do 8:00 CET + 24h
+        now_cet = datetime.now(TZ_CET)
+        window_start = now_cet.replace(hour=8, minute=0, second=0, microsecond=0)
+        if now_cet < window_start:
+            window_start -= timedelta(days=1)
+        window_end = window_start + timedelta(hours=WINDOW_HOURS)
+
         for game in games:
             home = game.get("home_team", "")
             away = game.get("away_team", "")
             league = game.get("sport_title", sport)
             commence = game.get("commence_time", "")
+
+            # Filtr: zapas musi zacinat v okne 8:00 CET .. 8:00 CET + 24h
+            if commence:
+                try:
+                    game_time = datetime.fromisoformat(commence.replace("Z", "+00:00")).astimezone(TZ_CET)
+                except ValueError:
+                    continue
+                if game_time < window_start or game_time >= window_end:
+                    continue
+            else:
+                continue
 
             for bookmaker in game.get("bookmakers", []):
                 for market in bookmaker.get("markets", []):
