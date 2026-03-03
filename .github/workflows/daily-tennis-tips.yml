@@ -18,22 +18,23 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Check if update is needed (skip duplicate run)
+      - name: Check if update is needed (skip duplicate cron run)
         id: check
         run: |
-          # Pokud tenis.json byl aktualizovan v posledni hodine, preskocit
-          if [ -f tenis.json ]; then
+          # Duplicitni kontrola POUZE pro planovane cron behy (ne pro rucni spusteni)
+          if [ "${{ github.event_name }}" = "schedule" ] && [ -f tenis.json ]; then
             last_mod=$(git log -1 --format="%ct" -- tenis.json 2>/dev/null || echo "0")
             now=$(date +%s)
             diff=$((now - last_mod))
             if [ $diff -lt 3600 ]; then
               echo "skip=true" >> $GITHUB_OUTPUT
-              echo "tenis.json byl aktualizovan pred mene nez hodinou, preskakuji."
+              echo "tenis.json byl aktualizovan pred mene nez hodinou (cron duplikat), preskakuji."
             else
               echo "skip=false" >> $GITHUB_OUTPUT
             fi
           else
             echo "skip=false" >> $GITHUB_OUTPUT
+            echo "Rucni spusteni nebo prvni cron - pokracuji."
           fi
 
       - name: Setup Python
