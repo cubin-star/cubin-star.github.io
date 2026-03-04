@@ -12,6 +12,7 @@ Required environment variable:
 import json
 import os
 import sys
+import time
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
 
@@ -21,6 +22,7 @@ API_KEY = os.environ.get("ODDS_API_KEY1", "")
 BASE_URL = "https://api.the-odds-api.com/v4/sports"
 
 # Football (soccer) sport keys to scan – covers major leagues.
+# Verified against https://the-odds-api.com/sports-odds-data/soccer-odds.html
 SPORT_KEYS = [
     "soccer_epl",
     "soccer_spain_la_liga",
@@ -29,14 +31,28 @@ SPORT_KEYS = [
     "soccer_france_ligue_one",
     "soccer_uefa_champs_league",
     "soccer_uefa_europa_league",
+    "soccer_uefa_europa_conference_league",
     "soccer_netherlands_eredivisie",
     "soccer_portugal_primeira_liga",
     "soccer_turkey_super_league",
     "soccer_brazil_campeonato",
     "soccer_efl_champ",
     "soccer_belgium_first_div",
-    "soccer_czech_football_league",
     "soccer_poland_ekstraklasa",
+    "soccer_austria_bundesliga",
+    "soccer_denmark_superliga",
+    "soccer_greece_super_league",
+    "soccer_switzerland_superleague",
+    "soccer_norway_eliteserien",
+    "soccer_sweden_allsvenskan",
+    "soccer_argentina_primera_division",
+    "soccer_usa_mls",
+    "soccer_japan_j_league",
+    "soccer_korea_kleague1",
+    "soccer_australia_aleague",
+    "soccer_china_superleague",
+    "soccer_mexico_ligamx",
+    "soccer_scotland_premiership",
 ]
 
 # Display-friendly league names.
@@ -48,14 +64,28 @@ LEAGUE_NAMES: dict[str, str] = {
     "soccer_france_ligue_one": "France – Ligue 1",
     "soccer_uefa_champs_league": "UEFA Champions League",
     "soccer_uefa_europa_league": "UEFA Europa League",
+    "soccer_uefa_europa_conference_league": "UEFA Conference League",
     "soccer_netherlands_eredivisie": "Netherlands – Eredivisie",
     "soccer_portugal_primeira_liga": "Portugal – Primeira Liga",
     "soccer_turkey_super_league": "Turkey – Super League",
     "soccer_brazil_campeonato": "Brazil – Serie A",
     "soccer_efl_champ": "England – Championship",
     "soccer_belgium_first_div": "Belgium – First Division",
-    "soccer_czech_football_league": "Czech – First League",
     "soccer_poland_ekstraklasa": "Poland – Ekstraklasa",
+    "soccer_austria_bundesliga": "Austria – Bundesliga",
+    "soccer_denmark_superliga": "Denmark – Superliga",
+    "soccer_greece_super_league": "Greece – Super League",
+    "soccer_switzerland_superleague": "Switzerland – Super League",
+    "soccer_norway_eliteserien": "Norway – Eliteserien",
+    "soccer_sweden_allsvenskan": "Sweden – Allsvenskan",
+    "soccer_argentina_primera_division": "Argentina – Primera Division",
+    "soccer_usa_mls": "USA – MLS",
+    "soccer_japan_j_league": "Japan – J-League",
+    "soccer_korea_kleague1": "South Korea – K-League 1",
+    "soccer_australia_aleague": "Australia – A-League",
+    "soccer_china_superleague": "China – Super League",
+    "soccer_mexico_ligamx": "Mexico – Liga MX",
+    "soccer_scotland_premiership": "Scotland – Premiership",
 }
 
 MIN_ODDS = 1.75
@@ -73,7 +103,10 @@ def fetch_over25_candidates() -> list[dict]:
     cutoff = now + timedelta(hours=24)
     print(f"Time window: {now:%Y-%m-%d %H:%M} UTC  →  {cutoff:%Y-%m-%d %H:%M} UTC")
 
-    for sport_key in SPORT_KEYS:
+    for i, sport_key in enumerate(SPORT_KEYS):
+        if i > 0:
+            time.sleep(1.5)  # avoid HTTP 429 rate limiting
+
         url = f"{BASE_URL}/{sport_key}/odds"
         params = {
             "apiKey": API_KEY,
