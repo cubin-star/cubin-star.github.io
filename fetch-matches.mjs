@@ -185,38 +185,38 @@ async function getActiveSports() {
     return active;
 }
 
-async function fetchOdds(sport, fromISO, toISO) {
+async function fetchOdds(sport) {
     const url = new URL(`https://api.the-odds-api.com/v4/sports/${sport}/odds/`);
     url.searchParams.set('apiKey', API_KEY);
-    url.searchParams.set('regions', 'eu,uk');
+    url.searchParams.set('regions', 'eu');
     url.searchParams.set('markets', 'totals');
     url.searchParams.set('oddsFormat', 'decimal');
-    url.searchParams.set('commenceTimeFrom', fromISO);
-    url.searchParams.set('commenceTimeTo', toISO);
 
     const res = await fetch(url);
 
     const remaining = res.headers.get('x-requests-remaining');
-    if (remaining) console.log(`   (API requests remaining: ${remaining})`);
+    if (remaining) console.log(`   (zbývá ${remaining} API req)`);
 
     if (res.status === 429) {
-        console.warn(`  ⚠ ${sport}: Rate limit – čekám 5s…`);
+        console.warn(`  ⚠ Rate limit – čekám 5s…`);
         await sleep(5000);
         const retry = await fetch(url);
-        if (!retry.ok) { console.warn(`  ⚠ ${sport}: Stále 429`); return []; }
+        if (!retry.ok) return [];
         return retry.json();
     }
-    if (!res.ok) {
-        console.warn(`  ⚠ ${sport}: HTTP ${res.status}`);
+    if (res.status === 422 || !res.ok) {
         return [];
     }
     return res.json();
 }
 
-function extractOverPicks(events, sportKey) {
+function extractOverPicks(events, sportKey, now, maxTime) {
     const picks = [];
 
     for (const event of events) {
+        const kickoff = new Date(event.commence_time);
+        if (kickoff < now || kickoff > maxTime) continue;
+
         for (const bookmaker of event.bookmakers) {
             for (const market of bookmaker.markets) {
                 if (market.key !== 'totals') continue;
@@ -247,9 +247,7 @@ async function main() {
 
     const now = new Date();
     const in24h = new Date(now.getTime() + 24 * 60 * 60 * 1000);
-    const fromISO = now.toISOString();
-    const toISO = in24h.toISOString();
-    console.log(`⏰ Časové okno: ${now.toUTCString()} → ${in24h.toUTCString()}\n`);
+    console.log(`⏰ Okno: ${now.toUTCString()} → ${in24h.toUTCString()}\n`);
 
     const activeSports = await getActiveSports();
 
@@ -261,11 +259,10 @@ async function main() {
         const name = LEAGUE_NAMES[sport] || sport.replace('soccer_', '').replace(/_/g, ' ');
         console.log(`📡 ${name}…`);
 
-        const events = await fetchOdds(sport, fromISO, toISO);
+        const events = await fetchOdds(sport);
         queried++;
         if (events.length > 0) {
-            console.log(`   → ${events.length} zápasů v okně`);
-            const picks = extractOverPicks(events, sport);
+            const picks = extractOverPicks(events, sport, now, in24h);
             if (picks.length > 0) console.log(`   → ${picks.length} tipů Over 2.5 >= ${MIN_ODDS}`);
             allPicks.push(...picks);
         }
