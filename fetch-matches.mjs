@@ -23,39 +23,166 @@ const MIN_ODDS = 2.0;
 const PICK_COUNT = 6;
 
 const SOCCER_SPORTS = [
+    // Anglie
     'soccer_epl',
+    'soccer_efl_champ',
+    'soccer_england_league1',
+    'soccer_england_league2',
+    'soccer_fa_cup',
+    'soccer_england_efl_cup',
+    // Německo
     'soccer_germany_bundesliga',
+    'soccer_germany_bundesliga2',
+    'soccer_germany_liga3',
+    'soccer_germany_dfb_pokal',
+    // Španělsko
     'soccer_spain_la_liga',
+    'soccer_spain_segunda_division',
+    'soccer_spain_copa_del_rey',
+    // Itálie
     'soccer_italy_serie_a',
+    'soccer_italy_serie_b',
+    'soccer_italy_coppa_italia',
+    // Francie
     'soccer_france_ligue_one',
+    'soccer_france_ligue_two',
+    'soccer_france_coupe_de_france',
+    // Portugalsko, Nizozemsko, Turecko
+    'soccer_portugal_primeira_liga',
+    'soccer_netherlands_eredivisie',
+    'soccer_turkey_super_league',
+    // Skandinávie
+    'soccer_norway_eliteserien',
+    'soccer_sweden_allsvenskan',
+    'soccer_sweden_superettan',
+    'soccer_denmark_superliga',
+    'soccer_finland_veikkausliiga',
+    // Střední / Východní Evropa
+    'soccer_poland_ekstraklasa',
+    'soccer_austria_bundesliga',
+    'soccer_switzerland_superleague',
+    'soccer_greece_super_league',
+    'soccer_belgium_first_div',
+    'soccer_czech_football_league',
+    'soccer_romania_liga_1',
+    'soccer_serbia_super_league',
+    'soccer_croatia_1_hnl',
+    'soccer_bulgaria_first_league',
+    'soccer_russia_premier_league',
+    // UEFA
     'soccer_uefa_champs_league',
     'soccer_uefa_europa_league',
-    'soccer_efl_champ',
-    'soccer_netherlands_eredivisie',
-    'soccer_portugal_primeira_liga',
-    'soccer_turkey_super_league',
+    'soccer_uefa_europa_conference_league',
+    // Jižní Amerika
     'soccer_brazil_campeonato',
+    'soccer_brazil_serie_b',
+    'soccer_argentina_primera_division',
+    'soccer_colombia_primera_a',
+    'soccer_chile_campeonato',
+    'soccer_conmebol_copa_libertadores',
+    'soccer_conmebol_copa_sudamericana',
+    // Severní Amerika
     'soccer_usa_mls',
+    'soccer_mexico_ligamx',
+    // Asie / Oceánie
+    'soccer_japan_j_league',
+    'soccer_korea_kleague1',
+    'soccer_china_superleague',
+    'soccer_australia_aleague',
+    'soccer_uzbekistan_super_league',
+    'soccer_india_superleague',
+    'soccer_saudi_professional_league',
 ];
 
 const LEAGUE_NAMES = {
+    // Anglie
     soccer_epl: 'Premier League',
+    soccer_efl_champ: '2. England',
+    soccer_england_league1: '3. England',
+    soccer_england_league2: '4. England',
+    soccer_fa_cup: 'FA Cup',
+    soccer_england_efl_cup: 'EFL Cup',
+    // Německo
     soccer_germany_bundesliga: 'Bundesliga',
+    soccer_germany_bundesliga2: '2. Bundesliga',
+    soccer_germany_liga3: '3. Liga',
+    soccer_germany_dfb_pokal: 'DFB Pokal',
+    // Španělsko
     soccer_spain_la_liga: 'La Liga',
+    soccer_spain_segunda_division: 'La Liga 2',
+    soccer_spain_copa_del_rey: 'Copa del Rey',
+    // Itálie
     soccer_italy_serie_a: 'Serie A',
+    soccer_italy_serie_b: 'Serie B',
+    soccer_italy_coppa_italia: 'Coppa Italia',
+    // Francie
     soccer_france_ligue_one: 'Ligue 1',
+    soccer_france_ligue_two: 'Ligue 2',
+    soccer_france_coupe_de_france: 'Coupe de France',
+    // Portugalsko, Nizozemsko, Turecko
+    soccer_portugal_primeira_liga: 'Primeira Liga',
+    soccer_netherlands_eredivisie: 'Eredivisie',
+    soccer_turkey_super_league: 'Turkey Süper Lig',
+    // Skandinávie
+    soccer_norway_eliteserien: 'Eliteserien',
+    soccer_sweden_allsvenskan: 'Allsvenskan',
+    soccer_sweden_superettan: 'Superettan',
+    soccer_denmark_superliga: 'Superliga DK',
+    soccer_finland_veikkausliiga: 'Veikkausliiga',
+    // Střední / Východní Evropa
+    soccer_poland_ekstraklasa: 'Ekstraklasa',
+    soccer_austria_bundesliga: 'Austria BL',
+    soccer_switzerland_superleague: 'Swiss Super League',
+    soccer_greece_super_league: 'Super League GR',
+    soccer_belgium_first_div: 'Jupiler Pro',
+    soccer_czech_football_league: 'Fortuna liga CZ',
+    soccer_romania_liga_1: 'Liga 1 RO',
+    soccer_serbia_super_league: 'SuperLiga RS',
+    soccer_croatia_1_hnl: '1. HNL',
+    soccer_bulgaria_first_league: 'First League BG',
+    soccer_russia_premier_league: 'RPL',
+    // UEFA
     soccer_uefa_champs_league: 'Champions League',
     soccer_uefa_europa_league: 'Europa League',
-    soccer_efl_champ: '2. England',
-    soccer_netherlands_eredivisie: 'Eredivisie',
-    soccer_portugal_primeira_liga: 'Primeira Liga',
-    soccer_turkey_super_league: 'Turkey Super Lig',
+    soccer_uefa_europa_conference_league: 'Conference League',
+    // Jižní Amerika
     soccer_brazil_campeonato: 'Brazil Serie A',
+    soccer_brazil_serie_b: 'Brazil Serie B',
+    soccer_argentina_primera_division: 'Argentina Liga',
+    soccer_colombia_primera_a: 'Colombia Liga',
+    soccer_chile_campeonato: 'Chile Primera',
+    soccer_conmebol_copa_libertadores: 'Copa Libertadores',
+    soccer_conmebol_copa_sudamericana: 'Copa Sudamericana',
+    // Severní Amerika
     soccer_usa_mls: 'MLS',
+    soccer_mexico_ligamx: 'Liga MX',
+    // Asie / Oceánie
+    soccer_japan_j_league: 'J. League',
+    soccer_korea_kleague1: 'K League',
+    soccer_china_superleague: 'China Super League',
+    soccer_australia_aleague: 'A-League',
+    soccer_uzbekistan_super_league: 'Uzbek League',
+    soccer_india_superleague: 'Indian Super League',
+    soccer_saudi_professional_league: 'Saudi Pro League',
 };
 
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function getActiveSports() {
+    const url = `https://api.the-odds-api.com/v4/sports/?apiKey=${API_KEY}`;
+    const res = await fetch(url);
+    if (!res.ok) {
+        console.warn(`⚠ Nepodařilo se načíst seznam sportů: HTTP ${res.status}`);
+        return SOCCER_SPORTS;
+    }
+    const sports = await res.json();
+    const active = sports
+        .filter(s => s.group === 'Soccer' && s.active && !s.has_outrights)
+        .map(s => s.key);
+    console.log(`📋 API má ${active.length} aktivních fotbalových soutěží\n`);
+    return active;
 }
 
 async function fetchOdds(sport, fromISO, toISO) {
@@ -100,7 +227,7 @@ function extractOverPicks(events, sportKey) {
                     if (outcome.price < MIN_ODDS) continue;
 
                     picks.push({
-                        league: LEAGUE_NAMES[sportKey] || sportKey,
+                        league: LEAGUE_NAMES[sportKey] || sportKey.replace('soccer_', '').replace(/_/g, ' '),
                         match: `${event.home_team} - ${event.away_team}`,
                         tip: `Over ${outcome.point}`,
                         odds: outcome.price.toFixed(2),
@@ -124,23 +251,29 @@ async function main() {
     const toISO = in24h.toISOString();
     console.log(`⏰ Časové okno: ${now.toUTCString()} → ${in24h.toUTCString()}\n`);
 
-    let allPicks = [];
+    const activeSports = await getActiveSports();
 
-    for (let i = 0; i < SOCCER_SPORTS.length; i++) {
-        const sport = SOCCER_SPORTS[i];
-        console.log(`📡 ${LEAGUE_NAMES[sport] || sport}…`);
+    let allPicks = [];
+    let queried = 0;
+
+    for (let i = 0; i < activeSports.length; i++) {
+        const sport = activeSports[i];
+        const name = LEAGUE_NAMES[sport] || sport.replace('soccer_', '').replace(/_/g, ' ');
+        console.log(`📡 ${name}…`);
 
         const events = await fetchOdds(sport, fromISO, toISO);
-        console.log(`   → ${events.length} zápasů v časovém okně`);
+        queried++;
+        if (events.length > 0) {
+            console.log(`   → ${events.length} zápasů v okně`);
+            const picks = extractOverPicks(events, sport);
+            if (picks.length > 0) console.log(`   → ${picks.length} tipů Over 2.5 >= ${MIN_ODDS}`);
+            allPicks.push(...picks);
+        }
 
-        const picks = extractOverPicks(events, sport);
-        console.log(`   → ${picks.length} tipů Over 2.5 s kurzem >= ${MIN_ODDS}`);
-        allPicks.push(...picks);
-
-        if (i < SOCCER_SPORTS.length - 1) await sleep(1200);
+        if (i < activeSports.length - 1) await sleep(1200);
     }
 
-    console.log(`\n📊 Celkem nalezeno: ${allPicks.length} tipů ze všech lig`);
+    console.log(`\n📊 Dotazováno ${queried} lig, nalezeno ${allPicks.length} tipů`);
 
     const best = new Map();
     for (const p of allPicks) {
