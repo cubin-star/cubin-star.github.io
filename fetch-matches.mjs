@@ -71,8 +71,13 @@ async function fetchOdds(sport) {
 
 function extractOverPicks(events, sportKey) {
     const picks = [];
+    const now = new Date();
+    const maxTime = new Date(now.getTime() + 24 * 60 * 60 * 1000);
 
     for (const event of events) {
+        const kickoff = new Date(event.commence_time);
+        if (kickoff < now || kickoff > maxTime) continue;
+
         for (const bookmaker of event.bookmakers) {
             for (const market of bookmaker.markets) {
                 if (market.key !== 'totals') continue;
@@ -164,3 +169,4 @@ main().catch((err) => {
     console.error('Chyba:', err);
     process.exit(1);
 });
+
