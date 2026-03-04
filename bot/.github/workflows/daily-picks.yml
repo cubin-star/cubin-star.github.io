@@ -1,0 +1,38 @@
+# Denní aktualizace hot.json – výběr 6 fotbalových zápasů (Over, kurz >= 2.0)
+# Spouští se každý den v 6:00 UTC (= 8:00 CET / 8:00 CEST s mírným posunem)
+
+name: Daily Picks Bot
+
+on:
+  schedule:
+    - cron: '0 6 * * *' # 6:00 UTC = ~8:00 CET
+  workflow_dispatch: # Ruční spuštění
+
+permissions:
+  contents: write
+
+jobs:
+  update-picks:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Run bot
+        env:
+          ODDS_API_KEY4: ${{ secrets.ODDS_API_KEY4 }}
+        run: node fetch-matches.mjs
+
+      - name: Commit & push
+        run: |
+          git config user.name "Kombík Bot"
+          git config user.email "bot@kombik.cz"
+          git add hot.json
+          git diff --cached --quiet || git commit -m "🤖 Denní tipy $(date +%Y-%m-%d)"
+          git push
