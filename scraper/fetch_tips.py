@@ -176,7 +176,7 @@ def fetch_over25_candidates() -> list[dict]:
 def pick_best(candidates: list[dict], count: int = PICK_COUNT) -> list[dict]:
     """
     Remove duplicates (same match), keep the highest odds per match,
-    then randomly pick *count* matches from all qualifying candidates.
+    then randomly pick *count* matches ensuring each is from a different league.
     """
     best_by_match: dict[str, dict] = {}
     for c in candidates:
@@ -190,7 +190,21 @@ def pick_best(candidates: list[dict], count: int = PICK_COUNT) -> list[dict]:
     if len(pool) <= count:
         return pool
 
-    return random.sample(pool, count)
+    # Group matches by league, then pick one random match from each league.
+    by_league: dict[str, list[dict]] = {}
+    for m in pool:
+        by_league.setdefault(m["league"], []).append(m)
+
+    leagues = list(by_league.keys())
+    random.shuffle(leagues)
+
+    picks: list[dict] = []
+    for league in leagues:
+        if len(picks) >= count:
+            break
+        picks.append(random.choice(by_league[league]))
+
+    return picks
 
 
 def main() -> None:
