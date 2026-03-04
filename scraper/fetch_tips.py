@@ -11,6 +11,7 @@ Required environment variable:
 
 import json
 import os
+import random
 import sys
 import time
 from datetime import datetime, timezone, timedelta
@@ -175,7 +176,7 @@ def fetch_over25_candidates() -> list[dict]:
 def pick_best(candidates: list[dict], count: int = PICK_COUNT) -> list[dict]:
     """
     Remove duplicates (same match), keep the highest odds per match,
-    then return *count* matches sorted by kick-off time (earliest first).
+    then randomly pick *count* matches from all qualifying candidates.
     """
     best_by_match: dict[str, dict] = {}
     for c in candidates:
@@ -183,8 +184,13 @@ def pick_best(candidates: list[dict], count: int = PICK_COUNT) -> list[dict]:
         if key not in best_by_match or c["odds"] > best_by_match[key]["odds"]:
             best_by_match[key] = c
 
-    sorted_candidates = sorted(best_by_match.values(), key=lambda x: x["commence"])
-    return sorted_candidates[:count]
+    pool = list(best_by_match.values())
+    print(f"Unique qualifying matches: {len(pool)}")
+
+    if len(pool) <= count:
+        return pool
+
+    return random.sample(pool, count)
 
 
 def main() -> None:
