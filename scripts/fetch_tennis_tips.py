@@ -6,6 +6,7 @@ Spousti se pres GitHub Actions kazdy den v 8:00 CET.
 
 import json
 import os
+import random
 import sys
 from datetime import datetime, timedelta, timezone
 from urllib.request import Request, urlopen
@@ -121,27 +122,48 @@ def find_over_tips(events, sport_title):
 
 def select_best_tips(all_tips, count):
     """
-    Vybere nejlepsi tipy:
-    - Preferuje kurzy blizko 1.85-2.00 (bezpecnejsi, ale stale hodnotne).
-    - Vybere maximalne 'count' tipu z ruznych zapasu.
+    Vybere tipy nahodne s preferencí ruznych turnaju:
+    1. Seskupi tipy podle turnaje (league)
+    2. Nahodne vybere turnaje
+    3. Z kazdeho turnaje nahodne vybere 1 zapas
+    -> Vysledek: kazdy tip je z jineho turnaje (pokud je to mozne)
     """
     if not all_tips:
         return []
 
-    # Seradit podle "idealniho" kurzu (preferujeme ~1.85)
-    ideal_odds = 1.85
-    all_tips.sort(key=lambda t: abs(float(t["odds"]) - ideal_odds))
-
-    # Zajistit ruzne zapasy
-    selected = []
-    seen_matches = set()
-
+    # Seskupit tipy podle turnaje
+    by_league = {}
     for tip in all_tips:
-        if tip["match"] not in seen_matches:
-            selected.append(tip)
-            seen_matches.add(tip["match"])
+        league = tip["league"]
+        if league not in by_league:
+            by_league[league] = []
+        by_league[league].append(tip)
+
+    print(f"  Turnaje s tipy: {list(by_league.keys())}")
+    for league, tips in by_league.items():
+        print(f"    {league}: {len(tips)} tipu")
+
+    selected = []
+    leagues = list(by_league.keys())
+    random.shuffle(leagues)
+
+    # 1. Z kazdeho turnaje vybrat nahodne 1 tip (ruzne turnaje)
+    for league in leagues:
         if len(selected) >= count:
             break
+        tip = random.choice(by_league[league])
+        selected.append(tip)
+        by_league[league].remove(tip)  # Odebrat aby se neopakoval
+
+    # 2. Pokud nemame dost tipu, doplnit z zbyvajicich (i stejny turnaj)
+    if len(selected) < count:
+        remaining = [t for tips in by_league.values() for t in tips]
+        random.shuffle(remaining)
+        for tip in remaining:
+            if tip["match"] not in {s["match"] for s in selected}:
+                selected.append(tip)
+            if len(selected) >= count:
+                break
 
     return selected
 
