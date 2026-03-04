@@ -79,6 +79,7 @@ function extractOverPicks(events, sportKey) {
 
                 for (const outcome of market.outcomes) {
                     if (outcome.name !== 'Over') continue;
+                    if (outcome.point !== 2.5) continue;
                     if (outcome.price < MIN_ODDS) continue;
 
                     picks.push({
