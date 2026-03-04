@@ -1,1 +1,14 @@
-[]
+[
+  {
+    "league": "NBL",
+    "match": "Melbourne United vs Tasmania JackJumpers",
+    "tip": "Over 175.5",
+    "odds": "1.95"
+  },
+  {
+    "league": "NBA",
+    "match": "Philadelphia 76ers vs Utah Jazz",
+    "tip": "Over 240.5",
+    "odds": "2.04"
+  }
+]
