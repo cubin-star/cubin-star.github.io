@@ -1,14 +1,14 @@
 [
   {
-    "league": "icehockey_sweden_allsvenskan",
-    "match": "Modo Hockey vs IK Oskarshamn",
+    "league": "NHL",
+    "match": "New Jersey Devils vs Toronto Maple Leafs",
     "tip": "Over 5.5",
-    "odds": "2.25"
+    "odds": "1.85"
   },
   {
-    "league": "icehockey_sweden_allsvenskan",
-    "match": "Mora IK vs Västerås IK",
+    "league": "icehockey_ahl",
+    "match": "Ontario Reign vs Tucson Roadrunners",
     "tip": "Over 5.5",
-    "odds": "2.25"
+    "odds": "1.83"
   }
 ]
