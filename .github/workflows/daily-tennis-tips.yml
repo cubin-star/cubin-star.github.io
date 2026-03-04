@@ -2,9 +2,8 @@ name: Daily Tennis Tips Bot
 
 on:
   schedule:
-    # Dva casy aby 8:00 sedělo v zimě (CET=UTC+1) i v létě (CEST=UTC+2)
-    - cron: '0 6 * * *'   # 6:00 UTC = 8:00 CEST (letni cas, brezen-rijen)
-    - cron: '0 7 * * *'   # 7:00 UTC = 8:00 CET  (zimni cas, rijen-brezen)
+    # 7:00 UTC = 8:00 CET (zima) / 9:00 CEST (leto)
+    - cron: '0 7 * * *'
   workflow_dispatch: # Moznost rucniho spusteni z GitHub Actions
 
 permissions:
@@ -18,39 +17,17 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Check if update is needed (skip duplicate cron run)
-        id: check
-        run: |
-          # Duplicitni kontrola POUZE pro planovane cron behy (ne pro rucni spusteni)
-          if [ "${{ github.event_name }}" = "schedule" ] && [ -f tenis.json ]; then
-            last_mod=$(git log -1 --format="%ct" -- tenis.json 2>/dev/null || echo "0")
-            now=$(date +%s)
-            diff=$((now - last_mod))
-            if [ $diff -lt 3600 ]; then
-              echo "skip=true" >> $GITHUB_OUTPUT
-              echo "tenis.json byl aktualizovan pred mene nez hodinou (cron duplikat), preskakuji."
-            else
-              echo "skip=false" >> $GITHUB_OUTPUT
-            fi
-          else
-            echo "skip=false" >> $GITHUB_OUTPUT
-            echo "Rucni spusteni nebo prvni cron - pokracuji."
-          fi
-
       - name: Setup Python
-        if: steps.check.outputs.skip != 'true'
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
 
       - name: Fetch tennis tips
-        if: steps.check.outputs.skip != 'true'
         env:
           ODDS_API_KEY3: ${{ secrets.ODDS_API_KEY3 }}
         run: python scripts/fetch_tennis_tips.py
 
       - name: Commit and push updated tenis.json
-        if: steps.check.outputs.skip != 'true'
         run: |
           git config user.name "Tennis Tips Bot"
           git config user.email "bot@github-actions"
