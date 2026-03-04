@@ -1,5 +1,5 @@
 /**
- * Bot pro denní výběr 6 fotbalových zápasů s Over góly a kurzem >= 2.0
+ * Bot pro denní výběr 6 fotbalových zápasů s Over 2.5 góly a kurzem >= 2.0
  *
  * Používá the-odds-api.com (zdarma 500 req/měsíc).
  * Výstup: hot.json ve formátu kompatibilním s Kombík frontendem.
@@ -54,14 +54,31 @@ const LEAGUE_NAMES = {
     soccer_usa_mls: 'MLS',
 };
 
-async function fetchOdds(sport) {
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function fetchOdds(sport, fromISO, toISO) {
     const url = new URL(`https://api.the-odds-api.com/v4/sports/${sport}/odds/`);
     url.searchParams.set('apiKey', API_KEY);
-    url.searchParams.set('regions', 'eu');
+    url.searchParams.set('regions', 'eu,uk');
     url.searchParams.set('markets', 'totals');
     url.searchParams.set('oddsFormat', 'decimal');
+    url.searchParams.set('commenceTimeFrom', fromISO);
+    url.searchParams.set('commenceTimeTo', toISO);
 
     const res = await fetch(url);
+
+    const remaining = res.headers.get('x-requests-remaining');
+    if (remaining) console.log(`   (API requests remaining: ${remaining})`);
+
+    if (res.status === 429) {
+        console.warn(`  ⚠ ${sport}: Rate limit – čekám 5s…`);
+        await sleep(5000);
+        const retry = await fetch(url);
+        if (!retry.ok) { console.warn(`  ⚠ ${sport}: Stále 429`); return []; }
+        return retry.json();
+    }
     if (!res.ok) {
         console.warn(`  ⚠ ${sport}: HTTP ${res.status}`);
         return [];
@@ -71,13 +88,8 @@ async function fetchOdds(sport) {
 
 function extractOverPicks(events, sportKey) {
     const picks = [];
-    const now = new Date();
-    const maxTime = new Date(now.getTime() + 24 * 60 * 60 * 1000);
 
     for (const event of events) {
-        const kickoff = new Date(event.commence_time);
-        if (kickoff < now || kickoff > maxTime) continue;
-
         for (const bookmaker of event.bookmakers) {
             for (const market of bookmaker.markets) {
                 if (market.key !== 'totals') continue;
@@ -106,15 +118,29 @@ function extractOverPicks(events, sportKey) {
 async function main() {
     console.log('🤖 Kombík Bot – stahuji kurzy…\n');
 
+    const now = new Date();
+    const in24h = new Date(now.getTime() + 24 * 60 * 60 * 1000);
+    const fromISO = now.toISOString();
+    const toISO = in24h.toISOString();
+    console.log(`⏰ Časové okno: ${now.toUTCString()} → ${in24h.toUTCString()}\n`);
+
     let allPicks = [];
 
-    for (const sport of SOCCER_SPORTS) {
+    for (let i = 0; i < SOCCER_SPORTS.length; i++) {
+        const sport = SOCCER_SPORTS[i];
         console.log(`📡 ${LEAGUE_NAMES[sport] || sport}…`);
-        const events = await fetchOdds(sport);
+
+        const events = await fetchOdds(sport, fromISO, toISO);
+        console.log(`   → ${events.length} zápasů v časovém okně`);
+
         const picks = extractOverPicks(events, sport);
-        console.log(`   → ${picks.length} tipů s Over a kurzem >= ${MIN_ODDS}`);
+        console.log(`   → ${picks.length} tipů Over 2.5 s kurzem >= ${MIN_ODDS}`);
         allPicks.push(...picks);
+
+        if (i < SOCCER_SPORTS.length - 1) await sleep(1200);
     }
+
+    console.log(`\n📊 Celkem nalezeno: ${allPicks.length} tipů ze všech lig`);
 
     const best = new Map();
     for (const p of allPicks) {
@@ -126,6 +152,8 @@ async function main() {
 
     let unique = [...best.values()];
     unique.sort((a, b) => parseFloat(b.odds) - parseFloat(a.odds));
+
+    console.log(`📊 Unikátní zápasy: ${unique.length}`);
 
     const selected = [];
     const usedLeagues = new Set();
@@ -146,7 +174,8 @@ async function main() {
     }
 
     if (selected.length === 0) {
-        console.warn('\n⚠ Žádné zápasy s Over a kurzem >= 2.0 nenalezeny.');
+        console.warn('\n⚠ Žádné zápasy s Over 2.5 a kurzem >= 2.0 v příštích 24h.');
+        console.warn('   Tip: V některé dny (pondělí, úterý) se hraje méně zápasů.');
         process.exit(0);
     }
 
@@ -169,4 +198,3 @@ main().catch((err) => {
     console.error('Chyba:', err);
     process.exit(1);
 });
-
