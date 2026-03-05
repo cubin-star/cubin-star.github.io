@@ -15,6 +15,24 @@
     "league": "saudi arabia pro league",
     "match": "Damac - Al-Riyadh",
     "tip": "Over 2.5",
-    "odds": "2.32"
+    "odds": "2.36"
+  },
+  {
+    "league": "SHL",
+    "match": "Timrå IK - Brynäs IF",
+    "tip": "Over 5.5",
+    "odds": "2.25"
+  },
+  {
+    "league": "NHL",
+    "match": "Los Angeles Kings - New York Islanders",
+    "tip": "Over 5.5",
+    "odds": "2.01"
+  },
+  {
+    "league": "liiga",
+    "match": "Ässät - KalPa",
+    "tip": "Over 5.5",
+    "odds": "2.00"
   }
 ]
