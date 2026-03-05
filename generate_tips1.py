@@ -1,7 +1,7 @@
 """
 Ultimate Football Overs — Daily Tip Generator v4
 Fetches ALL upcoming matches from The Odds API across 40+ leagues,
-collects every Over 2.5 candidate, then picks the 3 best tips.
+collects every Over 2.5 candidate (odds 1.75–2.20), then picks the 3 best tips.
 
 v4 Strategy:
   - ALWAYS scans ALL leagues (no early stopping)
@@ -9,7 +9,7 @@ v4 Strategy:
   - Smart retry with exponential backoff on rate limits
   - Multiple bookmaker regions (eu + uk + au)
   - 30h time window
-  - Flexible odds threshold with fallback
+  - Odds range 1.75–2.20
 
 Usage:
   python generate_tips1.py
@@ -30,10 +30,10 @@ import urllib.error
 from datetime import datetime, timezone, timedelta
 
 API_KEY = os.environ.get("ODDS_API_KEY5", "")
-IDEAL_MIN_ODDS = 1.75
-FALLBACK_MIN_ODDS = 1.55
+MIN_ODDS = 1.75
+MAX_ODDS = 2.20
 NUM_TIPS = 3
-HOURS_AHEAD = 30
+HOURS_AHEAD = 24
 DELAY_BETWEEN_REQUESTS = 1.8
 MAX_RETRIES = 3
 OUTPUT_FILE = "fotbal.json"
@@ -119,8 +119,8 @@ def fetch_odds(sport_key: str, league_name: str) -> list:
     return []
 
 
-def extract_candidates(events: list, sport_key: str, league_name: str, min_odds: float) -> list:
-    """Extract all Over 2.5 candidates within time window."""
+def extract_candidates(events: list, sport_key: str, league_name: str) -> list:
+    """Extract Over 2.5 candidates with odds between MIN_ODDS and MAX_ODDS."""
     now = datetime.now(timezone.utc)
     cutoff = now + timedelta(hours=HOURS_AHEAD)
     candidates = []
@@ -155,7 +155,8 @@ def extract_candidates(events: list, sport_key: str, league_name: str, min_odds:
         best = max(over25_odds)
         avg = sum(over25_odds) / len(over25_odds)
 
-        if best >= min_odds:
+        # Only accept odds in range [MIN_ODDS, MAX_ODDS]
+        if best >= MIN_ODDS and best <= MAX_ODDS:
             candidates.append({
                 "League": league_name,
                 "Match": f"{home} vs {away}",
@@ -212,7 +213,7 @@ def main():
         return
 
     print(f"🕐 {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M UTC')}")
-    print(f"🔍 Over 2.5 | odds >= {IDEAL_MIN_ODDS} | {HOURS_AHEAD}h window")
+    print(f"🔍 Over 2.5 | odds {MIN_ODDS}–{MAX_ODDS} | {HOURS_AHEAD}h window")
     print(f"📋 Scanning ALL {len(LEAGUES)} leagues — no early stop\n")
 
     # ---- PHASE 1: Collect ALL candidates from ALL leagues ----
@@ -228,7 +229,7 @@ def main():
         events = fetch_odds(sport_key, league_name)
 
         if events:
-            cands = extract_candidates(events, sport_key, league_name, FALLBACK_MIN_ODDS)
+            cands = extract_candidates(events, sport_key, league_name)
             if cands:
                 print(f" ✅ {len(cands)} matches")
                 all_candidates.extend(cands)
@@ -240,13 +241,9 @@ def main():
             print(f" — skip")
 
     # ---- PHASE 2: Summary of ALL candidates ----
-    ideal = [c for c in all_candidates if c["best"] >= IDEAL_MIN_ODDS]
-    fallback = [c for c in all_candidates if c["best"] < IDEAL_MIN_ODDS]
-
     print(f"\n{'='*50}")
-    print(f"📊 COLLECTED: {len(all_candidates)} total candidates from {leagues_hit} leagues")
-    print(f"   🟢 {len(ideal)} with odds >= {IDEAL_MIN_ODDS}")
-    print(f"   🟡 {len(fallback)} with odds {FALLBACK_MIN_ODDS}–{IDEAL_MIN_ODDS}")
+    print(f"📊 COLLECTED: {len(all_candidates)} candidates from {leagues_hit} leagues")
+    print(f"   All with odds {MIN_ODDS}–{MAX_ODDS}")
     print(f"{'='*50}")
 
     if not all_candidates:
@@ -254,9 +251,7 @@ def main():
         return
 
     # ---- PHASE 3: Select best 3 from all candidates ----
-    # Prefer ideal odds candidates, fall back to all if needed
-    pool = ideal if len(ideal) >= NUM_TIPS else all_candidates
-    tips = select_best_tips(pool)
+    tips = select_best_tips(all_candidates)
 
     output = []
     for t in tips:
