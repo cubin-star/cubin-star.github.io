@@ -92,6 +92,13 @@ const SOCCER_SPORTS = [
     'soccer_uzbekistan_super_league',
     'soccer_india_superleague',
     'soccer_saudi_professional_league',
+    // Hokej
+    'icehockey_nhl',
+    'icehockey_sweden_hockey_league',
+    'icehockey_finland_liiga',
+    'icehockey_czech_extraliga',
+    'icehockey_switzerland_nlb',
+    'icehockey_germany_del',
 ];
 
 const LEAGUE_NAMES = {
@@ -164,6 +171,13 @@ const LEAGUE_NAMES = {
     soccer_uzbekistan_super_league: 'Uzbek League',
     soccer_india_superleague: 'Indian Super League',
     soccer_saudi_professional_league: 'Saudi Pro League',
+    // Hokej
+    icehockey_nhl: 'NHL',
+    icehockey_sweden_hockey_league: 'SHL',
+    icehockey_finland_liiga: 'Liiga FI',
+    icehockey_czech_extraliga: 'Extraliga CZ',
+    icehockey_switzerland_nlb: 'NL Hockey CH',
+    icehockey_germany_del: 'DEL',
 };
 
 function sleep(ms) {
@@ -179,9 +193,11 @@ async function getActiveSports() {
     }
     const sports = await res.json();
     const active = sports
-        .filter(s => s.group === 'Soccer' && s.active && !s.has_outrights)
+        .filter(s => (s.group === 'Soccer' || s.group === 'Ice Hockey') && s.active && !s.has_outrights)
         .map(s => s.key);
-    console.log(`📋 API má ${active.length} aktivních fotbalových soutěží\n`);
+    const soccer = active.filter(k => k.startsWith('soccer'));
+    const hockey = active.filter(k => k.startsWith('icehockey'));
+    console.log(`📋 Aktivní: ${soccer.length} fotbal + ${hockey.length} hokej = ${active.length} celkem\n`);
     return active;
 }
 
@@ -210,8 +226,21 @@ async function fetchOdds(sport) {
     return res.json();
 }
 
+function getOverLine(sportKey) {
+    return sportKey.startsWith('icehockey') ? 5.5 : 2.5;
+}
+
+function getLeagueName(sportKey) {
+    if (LEAGUE_NAMES[sportKey]) return LEAGUE_NAMES[sportKey];
+    return sportKey
+        .replace('soccer_', '')
+        .replace('icehockey_', '')
+        .replace(/_/g, ' ');
+}
+
 function extractOverPicks(events, sportKey, now, maxTime) {
     const picks = [];
+    const overLine = getOverLine(sportKey);
 
     for (const event of events) {
         const kickoff = new Date(event.commence_time);
@@ -223,11 +252,11 @@ function extractOverPicks(events, sportKey, now, maxTime) {
 
                 for (const outcome of market.outcomes) {
                     if (outcome.name !== 'Over') continue;
-                    if (outcome.point !== 2.5) continue;
+                    if (outcome.point !== overLine) continue;
                     if (outcome.price < MIN_ODDS) continue;
 
                     picks.push({
-                        league: LEAGUE_NAMES[sportKey] || sportKey.replace('soccer_', '').replace(/_/g, ' '),
+                        league: getLeagueName(sportKey),
                         match: `${event.home_team} - ${event.away_team}`,
                         tip: `Over ${outcome.point}`,
                         odds: outcome.price.toFixed(2),
@@ -262,8 +291,13 @@ async function main() {
         const events = await fetchOdds(sport);
         queried++;
         if (events.length > 0) {
+            const overLine = getOverLine(sport);
             const picks = extractOverPicks(events, sport, now, in24h);
-            if (picks.length > 0) console.log(`   → ${picks.length} tipů Over 2.5 >= ${MIN_ODDS}`);
+            if (picks.length > 0) {
+                console.log(`   → ${picks.length} tipů Over ${overLine} >= ${MIN_ODDS}`);
+            } else {
+                console.log(`   → ${events.length} zápasů, ale žádný Over ${overLine} >= ${MIN_ODDS}`);
+            }
             allPicks.push(...picks);
         }
 
