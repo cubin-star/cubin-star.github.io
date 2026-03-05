@@ -296,12 +296,7 @@ async function main() {
         }
     }
 
-    for (const pick of unique) {
-        if (selected.length >= PICK_COUNT) break;
-        if (!selected.includes(pick)) {
-            selected.push(pick);
-        }
-    }
+    console.log(`📊 Vybráno ${selected.length} zápasů (každý z jiné soutěže)`);
 
     if (selected.length === 0) {
         console.warn('\n⚠ Žádné zápasy s Over 2.5 a kurzem >= 2.0 v příštích 24h.');
