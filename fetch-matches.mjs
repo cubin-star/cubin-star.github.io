@@ -333,24 +333,109 @@ async function main() {
     console.log(`📊 Vybráno ${selected.length} zápasů (každý z jiné soutěže)`);
 
     if (selected.length === 0) {
-        console.warn('\n⚠ Žádné zápasy s Over 2.5 a kurzem >= 2.0 v příštích 24h.');
+        console.warn('\n⚠ Žádné zápasy s Over a kurzem >= 2.0 v příštích 24h.');
         console.warn('   Tip: V některé dny (pondělí, úterý) se hraje méně zápasů.');
         process.exit(0);
     }
 
-    const output = selected.map(({ league, match, tip, odds }) => ({
-        league,
-        match,
-        tip,
-        odds,
+    // Rozdělit do skupin po 2 s co nejrovnoměrnějšími celkovými kurzy
+    const grouped = balanceGroups(selected);
+
+    const output = grouped.map(m => ({
+        league: m.league,
+        match: m.match,
+        tip: m.tip,
+        odds: m.odds,
+        group: m.group,
     }));
 
     writeFileSync('hot.json', JSON.stringify(output, null, 2), 'utf-8');
 
     console.log(`\n✅ Vybráno ${output.length} zápasů → hot.json\n`);
-    for (const m of output) {
-        console.log(`  ⚽ [${m.league}] ${m.match} | ${m.tip} @ ${m.odds}`);
+    const groupCount = Math.ceil(output.length / 2);
+    for (let g = 1; g <= groupCount; g++) {
+        const gm = output.filter(m => m.group === g);
+        const gOdds = gm.reduce((a, m) => a * parseFloat(m.odds), 1);
+        console.log(`  📦 Skupina ${g} (kurz ${gOdds.toFixed(2)}):`);
+        for (const m of gm) {
+            console.log(`     ⚽ [${m.league}] ${m.match} | ${m.tip} @ ${m.odds}`);
+        }
     }
+}
+
+/**
+ * Rozřadí zápasy do skupin po 2 tak, aby součiny kurzů skupin byly co nejbližší.
+ * Zkouší všechny možné kombinace párů a vybere tu s nejmenším rozdílem.
+ */
+function balanceGroups(picks) {
+    const n = picks.length;
+    const groupCount = Math.ceil(n / 2);
+
+    if (n <= 2) {
+        return picks.map((p, i) => ({ ...p, group: 1 }));
+    }
+
+    // Pro 6 zápasů – vyzkoušej všechny možné rozdělení do 3 párů
+    // a vyber to, kde jsou součiny kurzů skupin co nejblíž
+    const indices = picks.map((_, i) => i);
+    const allPairings = generatePairings(indices);
+
+    let bestPairing = null;
+    let bestDiff = Infinity;
+
+    for (const pairing of allPairings) {
+        const groupOdds = pairing.map(pair =>
+            pair.reduce((a, idx) => a * parseFloat(picks[idx].odds), 1)
+        );
+        const max = Math.max(...groupOdds);
+        const min = Math.min(...groupOdds);
+        const diff = max - min;
+
+        if (diff < bestDiff) {
+            bestDiff = diff;
+            bestPairing = pairing;
+        }
+    }
+
+    const result = [];
+    for (let g = 0; g < bestPairing.length; g++) {
+        for (const idx of bestPairing[g]) {
+            result.push({ ...picks[idx], group: g + 1 });
+        }
+    }
+
+    return result;
+}
+
+/**
+ * Generuje všechny způsoby jak rozdělit pole indexů na páry.
+ * Pro [0,1,2,3,4,5] vrátí všechny kombinace 3 párů (15 kombinací).
+ */
+function generatePairings(indices) {
+    const results = [];
+
+    function recurse(remaining, current) {
+        if (remaining.length === 0) {
+            results.push([...current]);
+            return;
+        }
+        if (remaining.length === 1) {
+            results.push([...current, [remaining[0]]]);
+            return;
+        }
+        const first = remaining[0];
+        const rest = remaining.slice(1);
+        for (let i = 0; i < rest.length; i++) {
+            const pair = [first, rest[i]];
+            const nextRemaining = rest.filter((_, j) => j !== i);
+            current.push(pair);
+            recurse(nextRemaining, current);
+            current.pop();
+        }
+    }
+
+    recurse(indices, []);
+    return results;
 }
 
 main().catch((err) => {
