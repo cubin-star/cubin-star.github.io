@@ -1,6 +1,7 @@
 import os
 import json
 import random
+import time
 import requests
 from datetime import datetime, timedelta, timezone
 from zoneinfo import ZoneInfo
@@ -20,12 +21,18 @@ def get_basketball_sports():
     resp = requests.get(url, timeout=30)
     resp.raise_for_status()
 
+    # Preskoc ligy typu "winner"/"championship" - nemaji totals trh
+    skip_keywords = ("winner", "championship", "mvp", "award")
+
     sports = []
     for s in resp.json():
+        key = s.get("key", "")
         if s.get("group", "").lower() == "basketball" and s.get("active", False):
-            sports.append(s["key"])
+            if any(kw in key for kw in skip_keywords):
+                continue
+            sports.append(key)
 
-    print(f"Nalezeno {len(sports)} aktivnich basketbalovych lig:")
+    print(f"Nalezeno {len(sports)} aktivnich basketbalovych lig (bez winner/championship):")
     for s in sports:
         print(f"  - {s}")
     return sports
@@ -45,7 +52,11 @@ def fetch_over_tips():
     window_end = now_cet + timedelta(hours=WINDOW_HOURS)
     print(f"\nCasove okno: {now_cet.strftime('%Y-%m-%d %H:%M')} - {window_end.strftime('%Y-%m-%d %H:%M')} CET")
 
-    for sport in sports:
+    for i, sport in enumerate(sports):
+        # Pauza mezi requesty (ne pred prvnim)
+        if i > 0:
+            time.sleep(1)
+
         url = (
             f"https://api.the-odds-api.com/v4/sports/{sport}/odds/"
             f"?apiKey={API_KEY}"
@@ -65,11 +76,23 @@ def fetch_over_tips():
             print("  Neplatny API klic! Zkontrolujte ODDS_API_KEY2.")
             return candidates
 
+        if resp.status_code == 429:
+            print(f"  Rate limit! Uz mame {len(candidates)} kandidatu, koncime stahovani.")
+            break
+
         resp.raise_for_status()
         games = resp.json()
 
         remaining = resp.headers.get("x-requests-remaining", "?")
         print(f"  Nalezeno {len(games)} zapasu. Zbyvajici API requesty: {remaining}")
+
+        # Pokud zbyva malo requestu, ukonci stahovani
+        try:
+            if int(remaining) <= 2:
+                print(f"  Zbyva malo API requestu ({remaining}), koncime stahovani.")
+                break
+        except (ValueError, TypeError):
+            pass
 
         for game in games:
             home = game.get("home_team", "")
