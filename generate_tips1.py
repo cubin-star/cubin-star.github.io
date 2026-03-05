@@ -1,13 +1,15 @@
 """
-Ultimate Football Overs — Daily Tip Generator v2
-Fetches upcoming matches from The Odds API, selects 3 Over 2.5 tips
-with odds >= 1.75, each from a different league.
+Ultimate Football Overs — Daily Tip Generator v4
+Fetches ALL upcoming matches from The Odds API across 40+ leagues,
+collects every Over 2.5 candidate, then picks the 3 best tips.
 
-Improvements:
-  - Rate-limit aware (delays + retry on 429)
-  - Prioritized leagues (top leagues first)
-  - Stops early when enough candidates found
-  - Smarter selection with randomized variety
+v4 Strategy:
+  - ALWAYS scans ALL leagues (no early stopping)
+  - Collects maximum candidates first, then selects best 3
+  - Smart retry with exponential backoff on rate limits
+  - Multiple bookmaker regions (eu + uk + au)
+  - 30h time window
+  - Flexible odds threshold with fallback
 
 Usage:
   python generate_tips1.py
@@ -28,46 +30,66 @@ import urllib.error
 from datetime import datetime, timezone, timedelta
 
 API_KEY = os.environ.get("ODDS_API_KEY5", "")
-MIN_ODDS = 1.75
+IDEAL_MIN_ODDS = 1.75
+FALLBACK_MIN_ODDS = 1.55
 NUM_TIPS = 3
-MIN_CANDIDATES = 8          # collect at least this many before stopping
-DELAY_BETWEEN_REQUESTS = 2  # seconds between API calls
-MAX_RETRIES = 2             # retry count on 429
+HOURS_AHEAD = 30
+DELAY_BETWEEN_REQUESTS = 1.8
+MAX_RETRIES = 3
 OUTPUT_FILE = "fotbal.json"
 
-# Leagues ordered by priority (top leagues first — most likely to have matches)
 LEAGUES = [
-    ("soccer_epl",                    "Premier League"),
-    ("soccer_spain_la_liga",          "La Liga"),
-    ("soccer_germany_bundesliga",     "Bundesliga"),
-    ("soccer_italy_serie_a",         "Serie A"),
-    ("soccer_france_ligue_one",      "Ligue 1"),
-    ("soccer_uefa_champs_league",    "Champions League"),
-    ("soccer_uefa_europa_league",    "Europa League"),
-    ("soccer_netherlands_eredivisie", "Eredivisie"),
-    ("soccer_portugal_primeira_liga", "Primeira Liga"),
-    ("soccer_turkey_super_league",    "Turkish Süper Lig"),
-    ("soccer_brazil_campeonato",      "Brasileirão"),
-    ("soccer_belgium_first_div",      "Belgian Pro League"),
-    ("soccer_scotland_premiership",   "Scottish Premiership"),
-    ("soccer_epl_cup",                "FA Cup"),
-    ("soccer_austria_bundesliga",     "Austrian Bundesliga"),
-    ("soccer_switzerland_superleague","Swiss Super League"),
-    ("soccer_denmark_superliga",      "Danish Superliga"),
-    ("soccer_sweden_allsvenskan",     "Swedish Allsvenskan"),
-    ("soccer_norway_eliteserien",     "Norwegian Eliteserien"),
-    ("soccer_poland_ekstraklasa",     "Polish Ekstraklasa"),
-    ("soccer_greece_super_league",    "Greek Super League"),
+    ("soccer_epl",                         "Premier League"),
+    ("soccer_spain_la_liga",               "La Liga"),
+    ("soccer_germany_bundesliga",          "Bundesliga"),
+    ("soccer_italy_serie_a",              "Serie A"),
+    ("soccer_france_ligue_one",           "Ligue 1"),
+    ("soccer_uefa_champs_league",         "Champions League"),
+    ("soccer_uefa_europa_league",         "Europa League"),
+    ("soccer_uefa_europa_conference_league","Conference League"),
+    ("soccer_netherlands_eredivisie",      "Eredivisie"),
+    ("soccer_portugal_primeira_liga",      "Primeira Liga"),
+    ("soccer_turkey_super_league",         "Turkish Süper Lig"),
+    ("soccer_belgium_first_div",           "Belgian Pro League"),
+    ("soccer_scotland_premiership",        "Scottish Premiership"),
+    ("soccer_austria_bundesliga",          "Austrian Bundesliga"),
+    ("soccer_switzerland_superleague",     "Swiss Super League"),
+    ("soccer_denmark_superliga",           "Danish Superliga"),
+    ("soccer_sweden_allsvenskan",          "Swedish Allsvenskan"),
+    ("soccer_norway_eliteserien",          "Norwegian Eliteserien"),
+    ("soccer_finland_veikkausliiga",       "Finnish Veikkausliiga"),
+    ("soccer_poland_ekstraklasa",          "Polish Ekstraklasa"),
+    ("soccer_greece_super_league",         "Greek Super League"),
     ("soccer_czech_czech_football_league", "Czech First League"),
+    ("soccer_russia_premier_league",       "Russian Premier League"),
+    ("soccer_romania_liga_1",              "Romanian Liga 1"),
+    ("soccer_efl_champ",                   "EFL Championship"),
+    ("soccer_germany_bundesliga2",         "Bundesliga 2"),
+    ("soccer_spain_segunda_division",      "La Liga 2"),
+    ("soccer_italy_serie_b",              "Serie B"),
+    ("soccer_france_ligue_two",           "Ligue 2"),
+    ("soccer_epl_cup",                     "FA Cup"),
+    ("soccer_fa_cup",                      "FA Cup"),
+    ("soccer_league_cup",                  "League Cup"),
+    ("soccer_brazil_campeonato",           "Brasileirão"),
+    ("soccer_brazil_serie_b",             "Brasileirão Série B"),
+    ("soccer_argentina_primera_division",  "Argentine Liga"),
+    ("soccer_conmebol_copa_libertadores",  "Copa Libertadores"),
+    ("soccer_usa_mls",                     "MLS"),
+    ("soccer_mexico_ligamx",              "Liga MX"),
+    ("soccer_japan_j_league",              "J-League"),
+    ("soccer_korea_kleague1",             "K-League"),
+    ("soccer_australia_aleague",           "A-League"),
+    ("soccer_china_superleague",           "Chinese Super League"),
 ]
 
 
-def fetch_odds_for_sport(sport_key: str, league_name: str) -> list:
-    """Fetch Over/Under odds for a given sport with retry on 429."""
+def fetch_odds(sport_key: str, league_name: str) -> list:
+    """Fetch odds with exponential backoff retry."""
     url = (
         f"https://api.the-odds-api.com/v4/sports/{sport_key}/odds/"
         f"?apiKey={API_KEY}"
-        f"&regions=eu"
+        f"&regions=eu,uk,au"
         f"&markets=totals"
         f"&oddsFormat=decimal"
         f"&dateFormat=iso"
@@ -77,41 +99,30 @@ def fetch_odds_for_sport(sport_key: str, league_name: str) -> list:
         try:
             req = urllib.request.Request(url)
             with urllib.request.urlopen(req, timeout=15) as resp:
-                # Log remaining API quota
                 remaining = resp.headers.get("x-requests-remaining", "?")
-                used = resp.headers.get("x-requests-used", "?")
-                print(f"  📡 API quota: {remaining} remaining, {used} used")
-                data = json.loads(resp.read().decode("utf-8"))
-                return data
+                print(f" 📡{remaining}", end="")
+                return json.loads(resp.read().decode("utf-8"))
         except urllib.error.HTTPError as e:
             if e.code == 429:
-                wait = DELAY_BETWEEN_REQUESTS * attempt * 2
-                print(f"  ⏳ Rate limited on {league_name}, waiting {wait}s (attempt {attempt}/{MAX_RETRIES})...")
+                wait = 3 * (2 ** attempt)  # 6s, 12s, 24s
+                print(f" ⏳{wait}s", end="")
                 time.sleep(wait)
-            elif e.code == 404:
-                print(f"  ⏭ {league_name}: not in season")
+            elif e.code in (404, 422):
                 return []
             elif e.code == 401:
-                print(f"  ❌ Invalid API key!")
+                print(" ❌KEY!")
                 return []
             else:
-                print(f"  ⚠ HTTP {e.code} for {league_name}: {e.reason}")
                 return []
-        except Exception as e:
-            print(f"  ⚠ Failed to fetch {league_name}: {e}")
+        except Exception:
             return []
-
-    print(f"  ❌ {league_name}: all retries failed")
     return []
 
 
-def extract_over25_candidates(events: list, sport_key: str, league_name: str) -> list:
-    """
-    Extract matches with Over 2.5 goals odds >= MIN_ODDS,
-    starting within the next 24 hours.
-    """
+def extract_candidates(events: list, sport_key: str, league_name: str, min_odds: float) -> list:
+    """Extract all Over 2.5 candidates within time window."""
     now = datetime.now(timezone.utc)
-    cutoff = now + timedelta(hours=24)
+    cutoff = now + timedelta(hours=HOURS_AHEAD)
     candidates = []
 
     for event in events:
@@ -127,63 +138,54 @@ def extract_over25_candidates(events: list, sport_key: str, league_name: str) ->
         home = event.get("home_team", "?")
         away = event.get("away_team", "?")
 
-        # Collect Over 2.5 odds from all bookmakers
-        over25_odds_list = []
-        for bookmaker in event.get("bookmakers", []):
-            for market in bookmaker.get("markets", []):
-                if market.get("key") != "totals":
+        over25_odds = []
+        for bm in event.get("bookmakers", []):
+            for mkt in bm.get("markets", []):
+                if mkt.get("key") != "totals":
                     continue
-                for outcome in market.get("outcomes", []):
-                    if (
-                        outcome.get("name") == "Over"
-                        and outcome.get("point") == 2.5
-                    ):
-                        odds = float(outcome.get("price", 0))
-                        if odds > 0:
-                            over25_odds_list.append(odds)
+                for out in mkt.get("outcomes", []):
+                    if out.get("name") == "Over" and out.get("point") == 2.5:
+                        price = float(out.get("price", 0))
+                        if price > 0:
+                            over25_odds.append(price)
 
-        if not over25_odds_list:
+        if not over25_odds:
             continue
 
-        # Use the AVERAGE odds across bookmakers (more stable than max)
-        avg_odds = sum(over25_odds_list) / len(over25_odds_list)
-        best_odds = max(over25_odds_list)
+        best = max(over25_odds)
+        avg = sum(over25_odds) / len(over25_odds)
 
-        if best_odds >= MIN_ODDS:
-            match_time = dt.strftime("%H:%M")
+        if best >= min_odds:
             candidates.append({
                 "League": league_name,
                 "Match": f"{home} vs {away}",
                 "Tip": "Over 2.5",
-                "Odds": f"{best_odds:.2f}",
+                "Odds": f"{best:.2f}",
                 "sport_key": sport_key,
-                "commence": dt,
-                "odds_value": best_odds,
-                "avg_odds": avg_odds,
-                "num_bookmakers": len(over25_odds_list),
-                "match_time": match_time,
+                "best": best,
+                "avg": avg,
+                "bm_count": len(over25_odds),
             })
 
     return candidates
 
 
-def select_tips(all_candidates: list, num: int = NUM_TIPS) -> list:
+def select_best_tips(all_candidates: list, num: int = NUM_TIPS) -> list:
     """
-    Select tips from different leagues.
-    Prefer matches where multiple bookmakers agree on high odds (more reliable).
+    From ALL collected candidates, pick the best 3 from different leagues.
+    Score favors: high average odds + many bookmakers agreeing.
     """
-    # Score = average odds × number of bookmakers agreeing
-    # This favors matches where the market consensus is Over 2.5
     for c in all_candidates:
-        c["score"] = c["avg_odds"] * min(c["num_bookmakers"], 5)
+        # Higher score = better tip
+        # avg odds shows market consensus, bm_count shows confidence
+        c["score"] = c["avg"] * min(c["bm_count"], 8)
 
-    # Sort by score descending
+    # Sort all by score
     all_candidates.sort(key=lambda x: x["score"], reverse=True)
 
+    # First: pick best from each unique league
     selected = []
     used_leagues = set()
-
-    # First pass: one per league, best scored
     for c in all_candidates:
         if c["sport_key"] in used_leagues:
             continue
@@ -192,7 +194,7 @@ def select_tips(all_candidates: list, num: int = NUM_TIPS) -> list:
         if len(selected) >= num:
             break
 
-    # Second pass: fill remaining from any league if needed
+    # Fill if needed (allow same league)
     if len(selected) < num:
         for c in all_candidates:
             if c not in selected:
@@ -200,57 +202,62 @@ def select_tips(all_candidates: list, num: int = NUM_TIPS) -> list:
                 if len(selected) >= num:
                     break
 
-    # Shuffle the final selection for variety
     random.shuffle(selected)
     return selected[:num]
 
 
 def main():
     if not API_KEY:
-        print("❌ ODDS_API_KEY5 environment variable is not set!")
-        print("   Get your free key at https://the-odds-api.com")
+        print("❌ ODDS_API_KEY5 not set!")
         return
 
     print(f"🕐 {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M UTC')}")
-    print(f"🔍 Searching Over 2.5 tips with odds >= {MIN_ODDS}")
-    print(f"📋 Scanning up to {len(LEAGUES)} leagues...\n")
+    print(f"🔍 Over 2.5 | odds >= {IDEAL_MIN_ODDS} | {HOURS_AHEAD}h window")
+    print(f"📋 Scanning ALL {len(LEAGUES)} leagues — no early stop\n")
 
+    # ---- PHASE 1: Collect ALL candidates from ALL leagues ----
     all_candidates = []
-    leagues_with_candidates = 0
+    leagues_hit = 0
+    rate_limited = 0
 
     for i, (sport_key, league_name) in enumerate(LEAGUES):
-        # If we have enough candidates from enough different leagues, stop
-        if len(all_candidates) >= MIN_CANDIDATES and leagues_with_candidates >= NUM_TIPS:
-            print(f"\n  ✅ Enough candidates ({len(all_candidates)}) from {leagues_with_candidates} leagues — skipping remaining")
-            break
-
-        # Rate limit delay (skip before first request)
         if i > 0:
             time.sleep(DELAY_BETWEEN_REQUESTS)
 
-        print(f"  [{i+1}/{len(LEAGUES)}] {league_name}...")
-        events = fetch_odds_for_sport(sport_key, league_name)
+        print(f"  [{i+1:2d}/{len(LEAGUES)}] {league_name:.<30s}", end="")
+        events = fetch_odds(sport_key, league_name)
 
         if events:
-            candidates = extract_over25_candidates(events, sport_key, league_name)
-            if candidates:
-                print(f"       ✅ {len(candidates)} candidates found")
-                all_candidates.extend(candidates)
-                leagues_with_candidates += 1
+            cands = extract_candidates(events, sport_key, league_name, FALLBACK_MIN_ODDS)
+            if cands:
+                print(f" ✅ {len(cands)} matches")
+                all_candidates.extend(cands)
+                leagues_hit += 1
             else:
-                print(f"       ⏭ no qualifying matches in next 24h")
+                print(f" — no matches")
         else:
-            print(f"       ⏭ no data")
+            # Check if it was rate limited (no data could mean that)
+            print(f" — skip")
 
-    print(f"\n📊 Total candidates: {len(all_candidates)} from {leagues_with_candidates} leagues")
+    # ---- PHASE 2: Summary of ALL candidates ----
+    ideal = [c for c in all_candidates if c["best"] >= IDEAL_MIN_ODDS]
+    fallback = [c for c in all_candidates if c["best"] < IDEAL_MIN_ODDS]
 
-    if len(all_candidates) == 0:
-        print("❌ No qualifying matches found. Keeping previous tips.")
+    print(f"\n{'='*50}")
+    print(f"📊 COLLECTED: {len(all_candidates)} total candidates from {leagues_hit} leagues")
+    print(f"   🟢 {len(ideal)} with odds >= {IDEAL_MIN_ODDS}")
+    print(f"   🟡 {len(fallback)} with odds {FALLBACK_MIN_ODDS}–{IDEAL_MIN_ODDS}")
+    print(f"{'='*50}")
+
+    if not all_candidates:
+        print("❌ No matches found at all. Keeping previous tips.")
         return
 
-    tips = select_tips(all_candidates)
+    # ---- PHASE 3: Select best 3 from all candidates ----
+    # Prefer ideal odds candidates, fall back to all if needed
+    pool = ideal if len(ideal) >= NUM_TIPS else all_candidates
+    tips = select_best_tips(pool)
 
-    # Format output for the app
     output = []
     for t in tips:
         output.append({
@@ -260,12 +267,11 @@ def main():
             "Odds": t["Odds"],
         })
 
-    print(f"\n🎯 Selected {len(output)} tips:")
+    print(f"\n🎯 FINAL {len(output)} tips (from {len(all_candidates)} candidates):")
     for i, tip in enumerate(output, 1):
         label = "🔓" if i <= 2 else "🔒 (ad)"
         print(f"  {label} {tip['League']}: {tip['Match']} — {tip['Tip']} @ {tip['Odds']}")
 
-    # Write JSON
     with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
         json.dump(output, f, indent=2, ensure_ascii=False)
 
