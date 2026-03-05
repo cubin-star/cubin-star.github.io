@@ -1,21 +1,20 @@
 [
   {
-  "league": "2.England",
-  "match": "Ipswich - Hull",
-  "tip": "Over 2.5",
-  "odds": "1,7"
-},
-{
-  "league": "Italy Cup",
-  "match": "Como - Inter Milano",
-  "tip": "Over 2.5",
-  "odds": "1,76"
-},
-{
-  "league": "England",
-  "match": "Wolverhampton - Liverpool",
-  "tip": "Over 2.5",
-  "odds": "1,6"
-} 
+    "League": "Polish Ekstraklasa",
+    "Match": "Radomiak Radom vs Arka Gdynia",
+    "Tip": "Over 2.5",
+    "Odds": "1.90"
+  },
+  {
+    "League": "Premier League",
+    "Match": "Tottenham Hotspur vs Crystal Palace",
+    "Tip": "Over 2.5",
+    "Odds": "1.93"
+  },
+  {
+    "League": "Swiss Super League",
+    "Match": "FC Basel vs Grasshopper Zürich",
+    "Tip": "Over 2.5",
+    "Odds": "1.85"
+  }
 ]
-
