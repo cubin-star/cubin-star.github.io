@@ -246,11 +246,27 @@ def main():
             json.dump([], f, indent=2, ensure_ascii=False)
         return
 
-    # Náhodně vyber 2 (nebo 1 pokud je jen 1)
-    count = min(2, len(all_candidates))
-    picked = random.sample(all_candidates, count)
+    # Náhodně vyber 2 z různých soutěží
+    # Seskupit kandidáty podle ligy
+    by_league: dict[str, list[dict]] = {}
+    for c in all_candidates:
+        by_league.setdefault(c["league"], []).append(c)
 
-    print(f"✅ Vybrané tipy ({count}):")
+    print(f"   Ligy s kandidáty: {list(by_league.keys())}")
+
+    picked = []
+    if len(by_league) >= 2:
+        # Vyber 2 náhodné ligy, z každé 1 zápas
+        two_leagues = random.sample(list(by_league.keys()), 2)
+        for lg in two_leagues:
+            picked.append(random.choice(by_league[lg]))
+    else:
+        # Jen 1 liga – vyber 1 zápas (nemůžeme splnit podmínku 2 různých lig)
+        only_league = list(by_league.keys())[0]
+        picked.append(random.choice(by_league[only_league]))
+        print(f"   ⚠ Pouze 1 liga ({only_league}), nelze vybrat ze dvou různých")
+
+    print(f"✅ Vybrané tipy ({len(picked)}):")
     for t in picked:
         print(f"   {t['league']}: {t['match']} → {t['tip']} @ {t['odds']}")
 
