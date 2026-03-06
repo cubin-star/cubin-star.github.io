@@ -1,20 +1,20 @@
 [
   {
-    "League": "Premier League",
-    "Match": "Tottenham Hotspur vs Crystal Palace",
+    "League": "Primeira Liga",
+    "Match": "Famalicão vs Arouca",
+    "Tip": "Over 2.5",
+    "Odds": "2.06"
+  },
+  {
+    "League": "Bundesliga 2",
+    "Match": "FC Schalke 04 vs Arminia Bielefeld",
     "Tip": "Over 2.5",
     "Odds": "1.98"
   },
   {
-    "League": "Ligue 2",
-    "Match": "Rodez AF vs Grenoble",
+    "League": "K-League",
+    "Match": "Ulsan Hyundai FC vs FC Seoul",
     "Tip": "Over 2.5",
-    "Odds": "1.94"
-  },
-  {
-    "League": "Polish Ekstraklasa",
-    "Match": "Radomiak Radom vs Arka Gdynia",
-    "Tip": "Over 2.5",
-    "Odds": "1.89"
+    "Odds": "1.91"
   }
 ]
