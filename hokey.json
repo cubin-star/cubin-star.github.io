@@ -1,14 +1,14 @@
 [
   {
-    "league": "NHL",
-    "match": "Winnipeg Jets vs Tampa Bay Lightning",
+    "league": "icehockey_liiga",
+    "match": "HPK vs Kärpät",
     "tip": "Over 5.5",
-    "odds": "1.88"
+    "odds": "2.25"
   },
   {
-    "league": "NHL",
-    "match": "Los Angeles Kings vs New York Islanders",
+    "league": "icehockey_ahl",
+    "match": "Manitoba Moose vs Toronto Marlies",
     "tip": "Over 5.5",
-    "odds": "1.97"
+    "odds": "1.99"
   }
 ]
