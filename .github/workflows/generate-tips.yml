@@ -14,8 +14,8 @@ name: Daily Tip Generator
 
 on:
   schedule:
-    # Every day at 8:00 AM UTC
-    - cron: '0 8 * * *'
+    # Every day at 7:00 AM UTC
+    - cron: '0 7 * * *'
   workflow_dispatch:
     # Allow manual trigger from GitHub UI
 
