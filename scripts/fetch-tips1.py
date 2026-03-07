@@ -10,6 +10,7 @@ API_KEY = os.environ["ODDS_API_KEY2"]
 OUTPUT_FILE = "basketbal.json"
 
 MIN_ODDS = 1.75
+MAX_ODDS = 2.00
 MAX_TIPS = 2
 WINDOW_HOURS = 24
 TZ_CET = ZoneInfo("Europe/Prague")
@@ -23,6 +24,8 @@ def get_basketball_sports():
 
     # Preskoc ligy typu "winner"/"championship" - nemaji totals trh
     skip_keywords = ("winner", "championship", "mvp", "award")
+    # Z americkych lig nechej jen NBA
+    skip_us = ("ncaab", "nba_g_league", "wncaab", "wnba")
 
     sports = []
     for s in resp.json():
@@ -30,9 +33,11 @@ def get_basketball_sports():
         if s.get("group", "").lower() == "basketball" and s.get("active", False):
             if any(kw in key for kw in skip_keywords):
                 continue
+            if any(kw in key for kw in skip_us):
+                continue
             sports.append(key)
 
-    print(f"Nalezeno {len(sports)} aktivnich basketbalovych lig (bez winner/championship):")
+    print(f"Nalezeno {len(sports)} aktivnich basketbalovych lig (NBA + vsechny mimo US):")
     for s in sports:
         print(f"  - {s}")
     return sports
@@ -126,7 +131,7 @@ def fetch_over_tips():
                             best_odds = odds
                             best_point = point
 
-            if best_odds >= MIN_ODDS:
+            if MIN_ODDS <= best_odds <= MAX_ODDS:
                 candidates.append({
                     "league": league,
                     "match": f"{home} vs {away}",
