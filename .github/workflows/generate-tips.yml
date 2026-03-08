@@ -1,13 +1,13 @@
-# Daily Tip Generator — runs every day at 8:00 AM UTC
-# Fetches odds from The Odds API, selects 3 Over 2.5 tips,
-# and commits fotbal.json to the GitHub Pages repo.
+# Daily Tip Generator — runs every day at 7:00 AM UTC
+# Fetches odds from API-Football, selects 5 Over 2.5 tips,
+# and commits fotbal.json (3 tips) + tips.json (2 tips) to GitHub Pages.
 #
 # SETUP:
 # 1. Copy this file to your GitHub Pages repo:
 #    cubin-star/cubin-star.github.io/.github/workflows/generate-tips.yml
 # 2. Copy tools/generate_tips1.py to the root of that repo
 # 3. In the repo Settings → Secrets → Actions, add:
-#    API_FOOTBALL_KEY = your API key from https://the-odds-api.com (100 req/day)
+#    API_FOOTBALL_KEY1 = your API key from https://www.api-football.com/
 # 4. Enable Actions in the repo
 
 name: Daily Tip Generator
@@ -36,15 +36,16 @@ jobs:
 
       - name: Generate tips
         env:
-          API_FOOTBALL_KEY: ${{ secrets.API_FOOTBALL_KEY }}
+          API_FOOTBALL_KEY1: ${{ secrets.API_FOOTBALL_KEY1 }}
         run: python generate_tips1.py
 
       - name: Commit and push
         run: |
           git config user.name "Tip Bot"
           git config user.email "bot@ultimatefootballovers.app"
-          git add fotbal.json
+          git add fotbal.json tips.json
           # Only commit if there are changes
           git diff --staged --quiet || git commit -m "🎯 Daily tips $(date -u +%Y-%m-%d)"
           git push
+
 
