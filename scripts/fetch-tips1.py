@@ -6,145 +6,207 @@ import requests
 from datetime import datetime, timedelta, timezone
 from zoneinfo import ZoneInfo
 
-API_KEY = os.environ["ODDS_API_KEY2"]
+API_KEY = os.environ["API_BASKETBALL_KEY"]
 OUTPUT_FILE = "basketbal.json"
 
 MIN_ODDS = 1.75
 MAX_ODDS = 2.00
 MAX_TIPS = 2
-WINDOW_HOURS = 24
 TZ_CET = ZoneInfo("Europe/Prague")
 
+HEADERS = {"x-apisports-key": API_KEY}
+BASE = "https://v1.basketball.api-sports.io"
 
-def get_basketball_sports():
-    """Dynamicky stahne vsechny dostupne basketbalove ligy z The Odds API."""
-    url = f"https://api.the-odds-api.com/v4/sports/?apiKey={API_KEY}"
-    resp = requests.get(url, timeout=30)
+# Zeme ze kterych chceme vybirat
+ALLOWED_COUNTRIES = {
+    "Czech Republic", "Italy", "Spain", "Germany", "France",
+    "Turkey", "Greece", "Lithuania", "Serbia", "Croatia",
+    "Poland", "Israel", "Slovenia", "Russia", "USA", "Australia",
+}
+
+# Nazvy lig ktere chceme (Euroleague neni vazana na zemi)
+ALLOWED_LEAGUE_NAMES = {"euroleague", "eurocup"}
+
+# Co preskocit
+SKIP_KEYWORDS = ("amateur", "u18", "u19", "u20", "u21", "women", "w ",
+                 "g league", "g-league", "2nd", "division 2", "division b",
+                 "leb oro", "cup", "pohar")
+
+
+def api_get(endpoint, params):
+    """Wrapper pro API volani s osetrenim chyb."""
+    url = f"{BASE}/{endpoint}"
+    resp = requests.get(url, headers=HEADERS, params=params, timeout=30)
     resp.raise_for_status()
+    data = resp.json()
+    errors = data.get("errors")
+    if errors and isinstance(errors, dict) and errors:
+        print(f"  API error: {errors}")
+        return []
+    results = data.get("response", [])
+    remaining = data.get("results", len(results))
+    print(f"  -> {remaining} vysledku")
+    return results
 
-    skip_keywords = ("winner", "championship", "mvp", "award")
-    skip_us = ("ncaab", "nba_g_league", "wncaab", "wnba")
 
-    sports = []
-    for s in resp.json():
-        key = s.get("key", "")
-        if s.get("group", "").lower() == "basketball" and s.get("active", False):
-            if any(kw in key for kw in skip_keywords):
-                continue
-            if any(kw in key for kw in skip_us):
-                continue
-            sports.append(key)
+def get_todays_games():
+    """Stahne vsechny basketbalove zapasy na dnes."""
+    now = datetime.now(TZ_CET)
+    today = now.strftime("%Y-%m-%d")
 
-    print(f"Nalezeno {len(sports)} aktivnich basketbalovych lig:")
-    for s in sports:
-        print(f"  - {s}")
-    return sports
+    print(f"Stahuji zapasy pro {today}...")
+    return api_get("games", {"date": today})
+
+
+def is_allowed_game(game):
+    """Zkontroluje jestli zapas patri do povolene ligy/zeme."""
+    country = game.get("country", {}).get("name", "")
+    league_name = game.get("league", {}).get("name", "")
+
+    # Euroleague/Eurocup - povol bez ohledu na zemi
+    if any(kw in league_name.lower() for kw in ALLOWED_LEAGUE_NAMES):
+        return True
+
+    # Filtr podle zeme
+    if country not in ALLOWED_COUNTRIES:
+        return False
+
+    # Z USA jen NBA
+    if country == "USA" and "nba" not in league_name.lower():
+        return False
+
+    # Preskoc nezadouci ligy
+    full = f"{country} {league_name}".lower()
+    if any(kw in full for kw in SKIP_KEYWORDS):
+        return False
+
+    return True
 
 
 def fetch_over_tips():
-    """Stahne basketbalove zapasy s over/under trhem a vyfiltruje over tipy."""
-    sports = get_basketball_sports()
-    if not sports:
-        print("Zadne basketbalove ligy nejsou dostupne!")
+    """Hlavni funkce - stahne zapasy, zkontroluje odds, vrati kandidaty."""
+    games = get_todays_games()
+    if not games:
+        print("Zadne zapasy nenalezeny!")
         return []
 
+    now = datetime.now(TZ_CET)
+    window_end = now + timedelta(hours=24)
+    print(f"Casove okno: {now.strftime('%H:%M')} - {window_end.strftime('%d.%m %H:%M')} CET")
+
+    # Filtruj zapasy
+    eligible = []
+    leagues_seen = {}
+
+    for game in games:
+        if game.get("status", {}).get("short") != "NS":
+            continue
+
+        if not is_allowed_game(game):
+            continue
+
+        date_str = game.get("date", "")
+        if not date_str:
+            continue
+        try:
+            gt = datetime.fromisoformat(date_str.replace("Z", "+00:00")).astimezone(TZ_CET)
+        except ValueError:
+            continue
+        if gt < now or gt >= window_end:
+            continue
+
+        country = game.get("country", {}).get("name", "")
+        league_name = game.get("league", {}).get("name", "")
+        home = game.get("teams", {}).get("home", {}).get("name", "")
+        away = game.get("teams", {}).get("away", {}).get("name", "")
+        game_id = game.get("id", 0)
+        display = f"{country} - {league_name}" if country else league_name
+
+        leagues_seen[display] = leagues_seen.get(display, 0) + 1
+
+        eligible.append({
+            "game_id": game_id,
+            "home": home,
+            "away": away,
+            "league": display,
+        })
+
+    print(f"\n{len(eligible)} zapasu z {len(leagues_seen)} lig:")
+    for lg, cnt in sorted(leagues_seen.items()):
+        print(f"  {lg}: {cnt}")
+
+    if not eligible:
+        return []
+
+    # Seskup podle ligy, z kazde vyber max 2
+    by_league = {}
+    for g in eligible:
+        by_league.setdefault(g["league"], []).append(g)
+
+    to_check = []
+    leagues_order = list(by_league.keys())
+    random.shuffle(leagues_order)
+    for lg in leagues_order:
+        picks = by_league[lg]
+        random.shuffle(picks)
+        to_check.extend(picks[:2])
+
+    # Max 40 odds requestu (free plan = 100/den)
+    if len(to_check) > 40:
+        to_check = to_check[:40]
+
+    print(f"\nKontroluji odds pro {len(to_check)} zapasu...")
     candidates = []
 
-    now_cet = datetime.now(TZ_CET)
-    window_end = now_cet + timedelta(hours=WINDOW_HOURS)
-    print(f"\nCasove okno: {now_cet.strftime('%Y-%m-%d %H:%M')} - {window_end.strftime('%Y-%m-%d %H:%M')} CET")
-
-    for i, sport in enumerate(sports):
+    for i, g in enumerate(to_check):
         if i > 0:
-            time.sleep(0.5)
+            time.sleep(0.4)
 
-        url = (
-            f"https://api.the-odds-api.com/v4/sports/{sport}/odds/"
-            f"?apiKey={API_KEY}"
-            f"&regions=eu,us,uk,au"
-            f"&markets=totals"
-            f"&oddsFormat=decimal"
-        )
+        odds_list = api_get("odds", {"game": g["game_id"]})
 
-        print(f"\nStahuji {sport}...")
-        resp = requests.get(url, timeout=30)
+        for bookie in odds_list:
+            found = False
+            for bet in bookie.get("bets", []):
+                name = bet.get("name", "").lower()
+                if "over" not in name and "total" not in name:
+                    continue
 
-        if resp.status_code in (422, 404):
-            print(f"  Liga {sport} momentalne nema dostupne zapasy, preskakuji.")
-            continue
-        if resp.status_code == 401:
-            print("  Neplatny API klic!")
-            return candidates
-        if resp.status_code == 429:
-            print(f"  Rate limit! Uz mame {len(candidates)} kandidatu, koncime.")
-            break
-
-        resp.raise_for_status()
-        games = resp.json()
-
-        remaining = resp.headers.get("x-requests-remaining", "?")
-        print(f"  Nalezeno {len(games)} zapasu. Zbyvajici API requesty: {remaining}")
-
-        try:
-            if int(remaining) <= 0:
-                print("  Vycerpany API requesty, koncime.")
-                break
-        except (ValueError, TypeError):
-            pass
-
-        for game in games:
-            home = game.get("home_team", "")
-            away = game.get("away_team", "")
-            league = game.get("sport_title", sport)
-            commence = game.get("commence_time", "")
-
-            if not commence:
-                continue
-            try:
-                game_time = datetime.fromisoformat(commence.replace("Z", "+00:00")).astimezone(TZ_CET)
-            except ValueError:
-                continue
-            if game_time < now_cet or game_time >= window_end:
-                continue
-
-            best_odds = 0
-            best_point = 0
-            for bookmaker in game.get("bookmakers", []):
-                for market in bookmaker.get("markets", []):
-                    if market.get("key") != "totals":
+                for val in bet.get("values", []):
+                    v = str(val.get("value", "")).lower()
+                    if "over" not in v:
                         continue
-                    for outcome in market.get("outcomes", []):
-                        if outcome.get("name") != "Over":
-                            continue
-                        odds = outcome.get("price", 0)
-                        point = outcome.get("point", 0)
-                        if odds > best_odds:
-                            best_odds = odds
-                            best_point = point
 
-            if MIN_ODDS <= best_odds <= MAX_ODDS:
-                candidates.append({
-                    "league": league,
-                    "match": f"{home} vs {away}",
-                    "tip": f"Over {best_point}",
-                    "odds": f"{best_odds:.2f}",
-                    "odds_value": best_odds,
-                })
-                print(f"  + {league}: {home} vs {away} — Over {best_point} @ {best_odds:.2f}")
-            elif best_odds > 0:
-                print(f"  - {league}: {home} vs {away} — Over {best_point} @ {best_odds:.2f} (mimo {MIN_ODDS}-{MAX_ODDS})")
+                    try:
+                        odds_f = float(val.get("odd", "0"))
+                    except (ValueError, TypeError):
+                        continue
+
+                    if MIN_ODDS <= odds_f <= MAX_ODDS:
+                        point = str(val.get("value", ""))
+                        point = point.replace("Over ", "").replace("over ", "").strip()
+
+                        candidates.append({
+                            "league": g["league"],
+                            "match": f"{g['home']} vs {g['away']}",
+                            "tip": f"Over {point}",
+                            "odds": f"{odds_f:.2f}",
+                            "odds_value": odds_f,
+                        })
+                        print(f"  + {g['league']}: {g['home']} vs {g['away']} — Over {point} @ {odds_f:.2f}")
+                        found = True
+                        break
+                if found:
+                    break
+            if found:
+                break
 
     return candidates
 
 
 def select_best_tips(candidates):
-    """Nahodne vybere MAX_TIPS tipu, VZDY kazdy z jine ligy."""
+    """Vybere MAX_TIPS tipu, VZDY kazdy z jine ligy."""
     seen = set()
-    unique = []
-    for c in candidates:
-        if c["match"] not in seen:
-            seen.add(c["match"])
-            unique.append(c)
+    unique = [c for c in candidates if not (c["match"] in seen or seen.add(c["match"]))]
 
     if len(unique) <= 1:
         return unique
@@ -160,26 +222,25 @@ def select_best_tips(candidates):
     for league in leagues:
         if len(tips) >= MAX_TIPS:
             break
-        pick = random.choice(by_league[league])
-        tips.append(pick)
+        tips.append(random.choice(by_league[league]))
 
     return tips
 
 
 def main():
     candidates = fetch_over_tips()
-    print(f"\nCelkem nalezeno {len(candidates)} kandidatu s kurzem {MIN_ODDS}-{MAX_ODDS}")
+    print(f"\nCelkem {len(candidates)} kandidatu ({MIN_ODDS}-{MAX_ODDS})")
 
     if candidates:
-        league_counts = {}
+        lc = {}
         for c in candidates:
-            league_counts[c["league"]] = league_counts.get(c["league"], 0) + 1
-        print("Kandidati podle lig:")
-        for league, count in sorted(league_counts.items()):
-            print(f"  {league}: {count} zapasu")
+            lc[c["league"]] = lc.get(c["league"], 0) + 1
+        print("Podle lig:")
+        for lg, cnt in sorted(lc.items()):
+            print(f"  {lg}: {cnt}")
 
     if not candidates:
-        print("Zadne vhodne tipy nenalezeny. Zapisuji prazdny soubor.")
+        print("Zadne tipy. Prazdny JSON.")
         tips = []
     else:
         tips = select_best_tips(candidates)
@@ -187,22 +248,12 @@ def main():
         for t in tips:
             print(f"  {t['league']}: {t['match']} - {t['tip']} @ {t['odds']}")
 
-    output = [
-        {
-            "league": t["league"],
-            "match": t["match"],
-            "tip": t["tip"],
-            "odds": t["odds"],
-        }
-        for t in tips
-    ]
+    output = [{"league": t["league"], "match": t["match"], "tip": t["tip"], "odds": t["odds"]} for t in tips]
 
     with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
         json.dump(output, f, ensure_ascii=False, indent=2)
-
-    print(f"\nZapsano do {OUTPUT_FILE}")
+    print(f"Zapsano do {OUTPUT_FILE}")
 
 
 if __name__ == "__main__":
     main()
-       
