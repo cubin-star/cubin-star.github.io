@@ -1,6 +1,9 @@
 """
-Ultimate Football Overs — Daily Tip Generator v6
+Ultimate Football Overs — Daily Tip Generator v7
 Uses API-Football (api-sports.io) to find Over 2.5 goals tips.
+One API call serves TWO apps:
+  - fotbal.json (3 tips) → Ultimate Football Overs
+  - tips.json   (2 tips) → Profi Football Overs
 
 API: https://www.api-football.com/ (100 requests/day free plan)
 Auth: x-apisports-key header
@@ -9,16 +12,15 @@ Strategy:
   1. Fetch today's + tomorrow's fixtures (2 requests)
   2. Fetch Over/Under odds by date with pagination (~10-30 requests)
   3. Match odds to fixtures, filter Over 2.5 @ odds 1.75-2.20
-  4. Select best 3 tips from different leagues
-
-Usage:
-  python generate_tips1.py
+  4. Select best 5 tips from different leagues
+  5. Split: 3 → fotbal.json, 2 → tips.json
 
 Environment variable required:
-  API_FOOTBALL_KEY — API key from https://www.api-football.com/
+  API_FOOTBALL_KEY1 — API key from https://www.api-football.com/
 
 Output:
-  fotbal.json — JSON array consumed by the mobile app
+  fotbal.json — 3 tips for Ultimate Football Overs
+  tips.json   — 2 tips for Profi Football Overs
 """
 
 import os
@@ -29,13 +31,14 @@ import urllib.request
 import urllib.error
 from datetime import datetime, timezone, timedelta
 
-API_KEY = os.environ.get("API_FOOTBALL_KEY", "")
+API_KEY = os.environ.get("API_FOOTBALL_KEY1", "")
 BASE_URL = "https://v3.football.api-sports.io"
 MIN_ODDS = 1.75
 MAX_ODDS = 2.20
-NUM_TIPS = 3
+NUM_TIPS = 5              # 3 for app1 + 2 for app2
 DELAY = 1.2
-OUTPUT_FILE = "fotbal.json"
+OUTPUT_APP1 = "fotbal.json"   # Ultimate Football Overs (3 tips)
+OUTPUT_APP2 = "tips.json"     # Profi Football Overs (2 tips)
 request_count = 0
 
 
@@ -225,7 +228,7 @@ def select_best_tips(all_candidates: list, num: int = NUM_TIPS) -> list:
 
 def main():
     if not API_KEY:
-        print("❌ API_FOOTBALL_KEY not set!")
+        print("❌ API_FOOTBALL_KEY1 not set!")
         return
 
     now = datetime.now(timezone.utc)
@@ -234,7 +237,8 @@ def main():
 
     print(f"🕐 {now.strftime('%Y-%m-%d %H:%M UTC')}")
     print(f"🔍 Over 2.5 | odds {MIN_ODDS}–{MAX_ODDS}")
-    print(f"🔑 API-Football (100 req/day)")
+    print(f"🔑 API-Football KEY1 (100 req/day)")
+    print(f"📦 Output: {OUTPUT_APP1} (3 tips) + {OUTPUT_APP2} (2 tips)")
     print(f"📅 {today} + {tomorrow}\n")
 
     # ---- Phase 1: Get fixtures (for team names) ----
@@ -270,27 +274,40 @@ def main():
         print("❌ No qualifying matches. Keeping previous tips.")
         return
 
-    # ---- Phase 4: Select best 3 ----
+    # ---- Phase 4: Select best 5 (3 for app1 + 2 for app2) ----
     tips = select_best_tips(candidates)
 
-    output = []
+    all_formatted = []
     for t in tips:
-        output.append({
+        all_formatted.append({
             "League": t["League"],
             "Match": t["Match"],
             "Tip": t["Tip"],
             "Odds": t["Odds"],
         })
 
-    print(f"\n🎯 FINAL {len(output)} tips (from {len(candidates)} candidates):")
-    for i, tip in enumerate(output, 1):
+    # Split: first 3 → Ultimate Football Overs, remaining 2 → Profi Football Overs
+    app1_tips = all_formatted[:3]
+    app2_tips = all_formatted[3:5]
+
+    print(f"\n🎯 SELECTED {len(all_formatted)} tips (from {len(candidates)} candidates):")
+    print(f"\n  📱 Ultimate Football Overs ({OUTPUT_APP1}):")
+    for i, tip in enumerate(app1_tips, 1):
         label = "🔓" if i <= 2 else "🔒 (ad)"
-        print(f"  {label} {tip['League']}: {tip['Match']} — {tip['Tip']} @ {tip['Odds']}")
+        print(f"    {label} {tip['League']}: {tip['Match']} — {tip['Tip']} @ {tip['Odds']}")
 
-    with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
-        json.dump(output, f, indent=2, ensure_ascii=False)
+    print(f"\n  📱 Profi Football Overs ({OUTPUT_APP2}):")
+    for i, tip in enumerate(app2_tips, 1):
+        print(f"    🔓 {tip['League']}: {tip['Match']} — {tip['Tip']} @ {tip['Odds']}")
 
-    print(f"\n✅ Written to {OUTPUT_FILE}")
+    with open(OUTPUT_APP1, "w", encoding="utf-8") as f:
+        json.dump(app1_tips, f, indent=2, ensure_ascii=False)
+
+    with open(OUTPUT_APP2, "w", encoding="utf-8") as f:
+        json.dump(app2_tips, f, indent=2, ensure_ascii=False)
+
+    print(f"\n✅ Written {len(app1_tips)} tips to {OUTPUT_APP1}")
+    print(f"✅ Written {len(app2_tips)} tips to {OUTPUT_APP2}")
 
 
 if __name__ == "__main__":
