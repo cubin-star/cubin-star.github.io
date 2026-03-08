@@ -29,7 +29,8 @@ import urllib.request
 import urllib.error
 from datetime import datetime, timezone, timedelta
 
-API_KEY = os.environ.get("ODDS_API_KEY5", "")
+API_KEY_1 = os.environ.get("ODDS_API_KEY5", "")
+API_KEY_2 = os.environ.get("ODDS_API_KEY2", "")
 MIN_ODDS = 1.75
 MAX_ODDS = 2.20
 NUM_TIPS = 3
@@ -84,11 +85,11 @@ LEAGUES = [
 ]
 
 
-def fetch_odds(sport_key: str, league_name: str) -> list:
+def fetch_odds(sport_key: str, league_name: str, api_key: str) -> list:
     """Fetch odds with exponential backoff retry."""
     url = (
         f"https://api.the-odds-api.com/v4/sports/{sport_key}/odds/"
-        f"?apiKey={API_KEY}"
+        f"?apiKey={api_key}"
         f"&regions=eu,uk,au"
         f"&markets=totals"
         f"&oddsFormat=decimal"
@@ -208,25 +209,39 @@ def select_best_tips(all_candidates: list, num: int = NUM_TIPS) -> list:
 
 
 def main():
-    if not API_KEY:
-        print("❌ ODDS_API_KEY5 not set!")
+    if not API_KEY_1 and not API_KEY_2:
+        print("❌ No API keys set! Need ODDS_API_KEY5 and/or ODDS_API_KEY2")
         return
+
+    # Split leagues between two API keys to stay within free tier (500 req/key/month)
+    mid = len(LEAGUES) // 2
+    keys_info = []
+    if API_KEY_1:
+        keys_info.append(("KEY5", API_KEY_1))
+    if API_KEY_2:
+        keys_info.append(("KEY2", API_KEY_2))
 
     print(f"🕐 {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M UTC')}")
     print(f"🔍 Over 2.5 | odds {MIN_ODDS}–{MAX_ODDS} | {HOURS_AHEAD}h window")
+    print(f"🔑 Using {len(keys_info)} API key(s)")
     print(f"📋 Scanning ALL {len(LEAGUES)} leagues — no early stop\n")
 
     # ---- PHASE 1: Collect ALL candidates from ALL leagues ----
     all_candidates = []
     leagues_hit = 0
-    rate_limited = 0
 
     for i, (sport_key, league_name) in enumerate(LEAGUES):
         if i > 0:
             time.sleep(DELAY_BETWEEN_REQUESTS)
 
-        print(f"  [{i+1:2d}/{len(LEAGUES)}] {league_name:.<30s}", end="")
-        events = fetch_odds(sport_key, league_name)
+        # Pick API key: first half → key 1, second half → key 2
+        if len(keys_info) == 2:
+            key_label, api_key = keys_info[0] if i < mid else keys_info[1]
+        else:
+            key_label, api_key = keys_info[0]
+
+        print(f"  [{i+1:2d}/{len(LEAGUES)}] {league_name:.<30s} [{key_label}]", end="")
+        events = fetch_odds(sport_key, league_name, api_key)
 
         if events:
             cands = extract_candidates(events, sport_key, league_name)
