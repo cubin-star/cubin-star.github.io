@@ -149,20 +149,28 @@ def fetch_over_tips():
     for lg in leagues_order:
         picks = by_league[lg]
         random.shuffle(picks)
-        to_check.extend(picks[:2])
+        to_check.extend(picks[:1])  # 1 zapas na ligu = min requestu
 
-    # Max 40 odds requestu (free plan = 100/den)
-    if len(to_check) > 40:
-        to_check = to_check[:40]
+    # Max 20 odds requestu (free plan = 10 req/min)
+    if len(to_check) > 20:
+        random.shuffle(to_check)
+        to_check = to_check[:20]
 
-    print(f"\nKontroluji odds pro {len(to_check)} zapasu...")
+    print(f"\nKontroluji odds pro {len(to_check)} zapasu (max 20, 10 req/min)...")
     candidates = []
 
     for i, g in enumerate(to_check):
         if i > 0:
-            time.sleep(0.4)
+            time.sleep(7)  # Free plan: max 10 req/min
 
+        print(f"  [{i+1}/{len(to_check)}] {g['league']}: {g['home']} vs {g['away']}...")
         odds_list = api_get("odds", {"game": g["game_id"]})
+
+        # Pokud rate limit, pockej a zkus znovu jednou
+        if not odds_list:
+            print("    Rate limit - cekam 60s a zkousim znovu...")
+            time.sleep(60)
+            odds_list = api_get("odds", {"game": g["game_id"]})
 
         for bookie in odds_list:
             found = False
@@ -257,3 +265,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
