@@ -1,44 +1,44 @@
 [
   {
-    "league": "Ligue 1",
-    "match": "Nantes - Angers",
+    "league": "Primeira Liga",
+    "match": "Santa Clara - Vitória SC",
     "tip": "Over 2.5",
-    "odds": "2.61",
-    "group": 1
-  },
-  {
-    "league": "4. England",
-    "match": "Accrington Stanley - Cambridge United",
-    "tip": "Over 2.5",
-    "odds": "2.48",
+    "odds": "2.70",
     "group": 1
   },
   {
     "league": "Super League GR",
-    "match": "Aris Thessaloniki - Atromitos Athens",
+    "match": "Levadiakos - Panathinaikos",
     "tip": "Over 2.5",
-    "odds": "2.60",
+    "odds": "2.33",
+    "group": 1
+  },
+  {
+    "league": "La Liga",
+    "match": "Getafe - Real Betis",
+    "tip": "Over 2.5",
+    "odds": "2.62",
     "group": 2
   },
   {
-    "league": "2. England",
-    "match": "Blackburn Rovers - Portsmouth",
+    "league": "Austria BL",
+    "match": "Sturm Graz - Rheindorf Altach",
     "tip": "Over 2.5",
-    "odds": "2.54",
+    "odds": "2.46",
     "group": 2
   },
   {
-    "league": "3. England",
-    "match": "Burton Albion - Stevenage",
+    "league": "Serie A",
+    "match": "Lecce - Cremonese",
     "tip": "Over 2.5",
-    "odds": "2.56",
+    "odds": "2.58",
     "group": 3
   },
   {
-    "league": "Ligue 2",
-    "match": "Le Mans FC - Annecy FC",
+    "league": "La Liga 2",
+    "match": "Leganés - SD Eibar",
     "tip": "Over 2.5",
-    "odds": "2.54",
+    "odds": "2.48",
     "group": 3
   }
 ]
