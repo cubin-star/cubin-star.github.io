@@ -27,7 +27,7 @@ jobs:
 
       - name: Stazeni a vyber tipu
         env:
-          ODDS_API_KEY2: ${{ secrets.ODDS_API_KEY2 }}
+          API_BASKETBALL_KEY: ${{ secrets.API_BASKETBALL_KEY }}
         run: python scripts/fetch-tips1.py
 
       - name: Commit a push
