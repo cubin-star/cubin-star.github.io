@@ -7,7 +7,7 @@
 #    cubin-star/cubin-star.github.io/.github/workflows/generate-tips.yml
 # 2. Copy tools/generate_tips1.py to the root of that repo
 # 3. In the repo Settings → Secrets → Actions, add:
-#    ODDS_API_KEY5 = your API key from https://the-odds-api.com
+#    API_FOOTBALL_KEY = your API key from https://the-odds-api.com (100 req/day)
 # 4. Enable Actions in the repo
 
 name: Daily Tip Generator
@@ -36,7 +36,7 @@ jobs:
 
       - name: Generate tips
         env:
-          ODDS_API_KEY5: ${{ secrets.ODDS_API_KEY5 }}
+          API_FOOTBALL_KEY: ${{ secrets.API_FOOTBALL_KEY }}
         run: python generate_tips1.py
 
       - name: Commit and push
