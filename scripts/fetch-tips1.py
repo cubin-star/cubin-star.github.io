@@ -197,6 +197,11 @@ def fetch_over_tips():
                         if "over" not in v:
                             continue
 
+                        # Preferuj .5 hodnoty (166.5, 230.5 atd.)
+                        point_raw = v.replace("over ", "").replace("over", "").strip()
+                        if ".5" not in point_raw:
+                            continue
+
                         try:
                             odds_f = float(val.get("odd", "0"))
                         except (ValueError, TypeError):
