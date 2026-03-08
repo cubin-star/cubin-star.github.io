@@ -17,14 +17,12 @@ TZ_CET = ZoneInfo("Europe/Prague")
 
 
 def get_basketball_sports():
-    """Dynamicky stahne VSECHNY dostupne basketbalove ligy z API."""
+    """Dynamicky stahne vsechny dostupne basketbalove ligy z The Odds API."""
     url = f"https://api.the-odds-api.com/v4/sports/?apiKey={API_KEY}"
     resp = requests.get(url, timeout=30)
     resp.raise_for_status()
 
-    # Preskoc ligy typu "winner"/"championship" - nemaji totals trh
     skip_keywords = ("winner", "championship", "mvp", "award")
-    # Z americkych lig nechej jen NBA
     skip_us = ("ncaab", "nba_g_league", "wncaab", "wnba")
 
     sports = []
@@ -37,7 +35,7 @@ def get_basketball_sports():
                 continue
             sports.append(key)
 
-    print(f"Nalezeno {len(sports)} aktivnich basketbalovych lig (NBA + vsechny mimo US):")
+    print(f"Nalezeno {len(sports)} aktivnich basketbalovych lig:")
     for s in sports:
         print(f"  - {s}")
     return sports
@@ -52,13 +50,11 @@ def fetch_over_tips():
 
     candidates = []
 
-    # Casove okno: od ted do +24h (vzdy dopredu)
     now_cet = datetime.now(TZ_CET)
     window_end = now_cet + timedelta(hours=WINDOW_HOURS)
     print(f"\nCasove okno: {now_cet.strftime('%Y-%m-%d %H:%M')} - {window_end.strftime('%Y-%m-%d %H:%M')} CET")
 
     for i, sport in enumerate(sports):
-        # Pauza mezi requesty (ne pred prvnim)
         if i > 0:
             time.sleep(0.5)
 
@@ -76,13 +72,11 @@ def fetch_over_tips():
         if resp.status_code in (422, 404):
             print(f"  Liga {sport} momentalne nema dostupne zapasy, preskakuji.")
             continue
-
         if resp.status_code == 401:
-            print("  Neplatny API klic! Zkontrolujte ODDS_API_KEY2.")
+            print("  Neplatny API klic!")
             return candidates
-
         if resp.status_code == 429:
-            print(f"  Rate limit! Uz mame {len(candidates)} kandidatu, koncime stahovani.")
+            print(f"  Rate limit! Uz mame {len(candidates)} kandidatu, koncime.")
             break
 
         resp.raise_for_status()
@@ -93,15 +87,10 @@ def fetch_over_tips():
 
         try:
             if int(remaining) <= 0:
-                print(f"  Vycerpany API requesty, koncime stahovani.")
+                print("  Vycerpany API requesty, koncime.")
                 break
         except (ValueError, TypeError):
             pass
-
-        total_games = len(games)
-        in_window = 0
-        has_totals = 0
-        in_range = 0
 
         for game in games:
             home = game.get("home_team", "")
@@ -109,7 +98,6 @@ def fetch_over_tips():
             league = game.get("sport_title", sport)
             commence = game.get("commence_time", "")
 
-            # Filtr: zapas musi zacinat v okne ted .. +24h
             if not commence:
                 continue
             try:
@@ -118,9 +106,7 @@ def fetch_over_tips():
                 continue
             if game_time < now_cet or game_time >= window_end:
                 continue
-            in_window += 1
 
-            # Projdi vsechny bookmakers a najdi nejlepsi over kurz
             best_odds = 0
             best_point = 0
             for bookmaker in game.get("bookmakers", []):
@@ -136,31 +122,23 @@ def fetch_over_tips():
                             best_odds = odds
                             best_point = point
 
-            if best_odds > 0:
-                has_totals += 1
-
             if MIN_ODDS <= best_odds <= MAX_ODDS:
-                in_range += 1
                 candidates.append({
                     "league": league,
                     "match": f"{home} vs {away}",
                     "tip": f"Over {best_point}",
                     "odds": f"{best_odds:.2f}",
-                    "commence": commence,
                     "odds_value": best_odds,
                 })
                 print(f"  + {league}: {home} vs {away} — Over {best_point} @ {best_odds:.2f}")
             elif best_odds > 0:
-                print(f"  - {league}: {home} vs {away} — Over {best_point} @ {best_odds:.2f} (mimo rozmezi {MIN_ODDS}-{MAX_ODDS})")
-
-        print(f"  Souhrn {sport}: {total_games} celkem, {in_window} v casovem okne, {has_totals} ma totals, {in_range} v rozmezi kurzu")
+                print(f"  - {league}: {home} vs {away} — Over {best_point} @ {best_odds:.2f} (mimo {MIN_ODDS}-{MAX_ODDS})")
 
     return candidates
 
 
 def select_best_tips(candidates):
     """Nahodne vybere MAX_TIPS tipu, VZDY kazdy z jine ligy."""
-    # Odstran duplicitni zapasy
     seen = set()
     unique = []
     for c in candidates:
@@ -171,7 +149,6 @@ def select_best_tips(candidates):
     if len(unique) <= 1:
         return unique
 
-    # Seskup podle ligy
     by_league = {}
     for c in unique:
         by_league.setdefault(c["league"], []).append(c)
@@ -180,7 +157,6 @@ def select_best_tips(candidates):
     leagues = list(by_league.keys())
     random.shuffle(leagues)
 
-    # Vyber po jednom z ruznych lig - nikdy dva ze stejne
     for league in leagues:
         if len(tips) >= MAX_TIPS:
             break
@@ -194,7 +170,6 @@ def main():
     candidates = fetch_over_tips()
     print(f"\nCelkem nalezeno {len(candidates)} kandidatu s kurzem {MIN_ODDS}-{MAX_ODDS}")
 
-    # Souhrn kandidatu podle lig
     if candidates:
         league_counts = {}
         for c in candidates:
@@ -230,5 +205,4 @@ def main():
 
 if __name__ == "__main__":
     main()
-
        
