@@ -18,6 +18,7 @@ BASE_URL = "https://api.the-odds-api.com/v4"
 MIN_ODDS = 1.75
 MAX_TIPS = 2
 MAX_HOURS_AHEAD = 24  # Zapasy musi zacinat do 24h od spusteni bota
+ALLOWED_POINTS = {18.5, 19.5, 20.5, 21.5, 22.5}  # Povolene hranice pro Over
 OUTPUT_FILE = "tenis.json"
 
 # Cesky cas (CET=UTC+1, CEST=UTC+2)
@@ -102,6 +103,9 @@ def find_over_tips(events, sport_title):
 
                     price = outcome.get("price", 0)
                     point = outcome.get("point", 0)
+
+                    if point not in ALLOWED_POINTS:
+                        continue  # Nesmyslna hranice (6.5, 23.0 atd.)
 
                     if price >= MIN_ODDS and price > best_price:
                         best_price = price
