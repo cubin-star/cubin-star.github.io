@@ -30,7 +30,12 @@ ALLOWED_LEAGUE_NAMES = {"euroleague", "eurocup"}
 # Co preskocit
 SKIP_KEYWORDS = ("amateur", "u18", "u19", "u20", "u21", "women", "w ",
                  "g league", "g-league", "2nd", "division 2", "division b",
-                 "leb oro", "cup", "pohar")
+                 "leb oro", "cup", "pohar",
+                 "segunda", "serie a2", "serie b", "pro b",
+                 "2. liga", "nbl 1", "a2", "b league",
+                 "lega 2", "liga 2", "division 1",
+                 "primera feb", "segunda feb",
+                 "tb2l", "tkbl", "heba")
 
 
 def api_get(endpoint, params):
@@ -281,4 +286,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
