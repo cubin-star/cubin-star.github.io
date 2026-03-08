@@ -151,62 +151,78 @@ def fetch_over_tips():
         random.shuffle(picks)
         to_check.extend(picks[:1])  # 1 zapas na ligu = min requestu
 
-    # Max 20 odds requestu (free plan = 10 req/min)
-    if len(to_check) > 20:
+    # Max 15 odds requestu = ~1.5 min celkem
+    if len(to_check) > 15:
         random.shuffle(to_check)
-        to_check = to_check[:20]
+        to_check = to_check[:15]
 
-    print(f"\nKontroluji odds pro {len(to_check)} zapasu (max 20, 10 req/min)...")
+    print(f"\nKontroluji odds pro {len(to_check)} zapasu (max 15, 10 req/min)...")
     candidates = []
 
     for i, g in enumerate(to_check):
         if i > 0:
-            time.sleep(7)  # Free plan: max 10 req/min
+            time.sleep(6.5)  # Free plan: max 10 req/min
 
         print(f"  [{i+1}/{len(to_check)}] {g['league']}: {g['home']} vs {g['away']}...")
         odds_list = api_get("odds", {"game": g["game_id"]})
 
         # Pokud rate limit, pockej a zkus znovu jednou
         if not odds_list:
-            print("    Rate limit - cekam 60s a zkousim znovu...")
-            time.sleep(60)
+            print("    Prazdna odpoved - cekam 30s a zkousim znovu...")
+            time.sleep(30)
             odds_list = api_get("odds", {"game": g["game_id"]})
 
-        for bookie in odds_list:
-            found = False
-            for bet in bookie.get("bets", []):
-                name = bet.get("name", "").lower()
-                if "over" not in name and "total" not in name:
-                    continue
-
-                for val in bet.get("values", []):
-                    v = str(val.get("value", "")).lower()
-                    if "over" not in v:
-                        continue
-
-                    try:
-                        odds_f = float(val.get("odd", "0"))
-                    except (ValueError, TypeError):
-                        continue
-
-                    if MIN_ODDS <= odds_f <= MAX_ODDS:
-                        point = str(val.get("value", ""))
-                        point = point.replace("Over ", "").replace("over ", "").strip()
-
-                        candidates.append({
-                            "league": g["league"],
-                            "match": f"{g['home']} vs {g['away']}",
-                            "tip": f"Over {point}",
-                            "odds": f"{odds_f:.2f}",
-                            "odds_value": odds_f,
-                        })
-                        print(f"  + {g['league']}: {g['home']} vs {g['away']} — Over {point} @ {odds_f:.2f}")
-                        found = True
-                        break
-                if found:
-                    break
+        # Struktura: response[] -> bookmakers[] -> bets[] -> values[]
+        found = False
+        for resp_item in odds_list:
             if found:
                 break
+            for bookmaker in resp_item.get("bookmakers", []):
+                if found:
+                    break
+                for bet in bookmaker.get("bets", []):
+                    if found:
+                        break
+                    name = bet.get("name", "").lower()
+                    if "over" not in name and "total" not in name:
+                        continue
+
+                    for val in bet.get("values", []):
+                        v = str(val.get("value", "")).lower()
+                        if "over" not in v:
+                            continue
+
+                        try:
+                            odds_f = float(val.get("odd", "0"))
+                        except (ValueError, TypeError):
+                            continue
+
+                        if MIN_ODDS <= odds_f <= MAX_ODDS:
+                            point = str(val.get("value", ""))
+                            point = point.replace("Over ", "").replace("over ", "").strip()
+
+                            candidates.append({
+                                "league": g["league"],
+                                "match": f"{g['home']} vs {g['away']}",
+                                "tip": f"Over {point}",
+                                "odds": f"{odds_f:.2f}",
+                                "odds_value": odds_f,
+                            })
+                            print(f"    + Over {point} @ {odds_f:.2f}")
+                            found = True
+                            break
+
+        if not found and odds_list:
+            # Debug: vypis co API vratilo
+            for resp_item in odds_list[:1]:
+                bms = resp_item.get("bookmakers", [])
+                print(f"    Zadny over v rozmezi. Bookmakers: {len(bms)}")
+                for bm in bms[:1]:
+                    bets = bm.get("bets", [])
+                    print(f"    Bets: {[b.get('name') for b in bets[:5]]}")
+                    for b in bets[:3]:
+                        vals = b.get("values", [])[:4]
+                        print(f"      {b.get('name')}: {vals}")
 
     return candidates
 
