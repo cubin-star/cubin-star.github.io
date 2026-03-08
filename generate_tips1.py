@@ -1,22 +1,21 @@
 """
-Ultimate Football Overs — Daily Tip Generator v5
-Fetches ALL upcoming matches from The Odds API across 80+ leagues,
-collects every Over 2.5 candidate (odds 1.75–2.20), then picks the 3 best tips.
+Ultimate Football Overs — Daily Tip Generator v6
+Uses API-Football (api-sports.io) to find Over 2.5 goals tips.
 
-v5 Changes:
-  - Single API key: API_FOOTBALL_KEY (100 requests/day)
-  - Expanded to 80+ leagues
-  - ALWAYS scans ALL leagues (no early stopping)
-  - Smart retry with exponential backoff on rate limits
-  - Multiple bookmaker regions (eu + uk + au)
-  - 24h time window
-  - Odds range 1.75–2.20
+API: https://www.api-football.com/ (100 requests/day free plan)
+Auth: x-apisports-key header
+
+Strategy:
+  1. Fetch today's + tomorrow's fixtures (2 requests)
+  2. Fetch Over/Under odds by date with pagination (~10-30 requests)
+  3. Match odds to fixtures, filter Over 2.5 @ odds 1.75-2.20
+  4. Select best 3 tips from different leagues
 
 Usage:
   python generate_tips1.py
 
 Environment variable required:
-  API_FOOTBALL_KEY — API key from https://the-odds-api.com (100 req/day plan)
+  API_FOOTBALL_KEY — API key from https://www.api-football.com/
 
 Output:
   fotbal.json — JSON array consumed by the mobile app
@@ -31,176 +30,149 @@ import urllib.error
 from datetime import datetime, timezone, timedelta
 
 API_KEY = os.environ.get("API_FOOTBALL_KEY", "")
+BASE_URL = "https://v3.football.api-sports.io"
 MIN_ODDS = 1.75
 MAX_ODDS = 2.20
 NUM_TIPS = 3
-HOURS_AHEAD = 24
-DELAY_BETWEEN_REQUESTS = 1.0
-MAX_RETRIES = 3
+DELAY = 1.2
 OUTPUT_FILE = "fotbal.json"
-
-# 80+ leagues — with 100 req/day we can afford this
-LEAGUES = [
-    # === TOP 5 EUROPEAN LEAGUES ===
-    ("soccer_epl",                          "Premier League"),
-    ("soccer_spain_la_liga",                "La Liga"),
-    ("soccer_germany_bundesliga",           "Bundesliga"),
-    ("soccer_italy_serie_a",               "Serie A"),
-    ("soccer_france_ligue_one",            "Ligue 1"),
-    # === EUROPEAN CUPS ===
-    ("soccer_uefa_champs_league",          "Champions League"),
-    ("soccer_uefa_europa_league",          "Europa League"),
-    ("soccer_uefa_europa_conference_league","Conference League"),
-    # === STRONG EUROPEAN LEAGUES ===
-    ("soccer_netherlands_eredivisie",       "Eredivisie"),
-    ("soccer_portugal_primeira_liga",       "Primeira Liga"),
-    ("soccer_turkey_super_league",          "Turkish Süper Lig"),
-    ("soccer_belgium_first_div",            "Belgian Pro League"),
-    ("soccer_scotland_premiership",         "Scottish Premiership"),
-    ("soccer_austria_bundesliga",           "Austrian Bundesliga"),
-    ("soccer_switzerland_superleague",      "Swiss Super League"),
-    # === SCANDINAVIA ===
-    ("soccer_denmark_superliga",            "Danish Superliga"),
-    ("soccer_sweden_allsvenskan",           "Swedish Allsvenskan"),
-    ("soccer_norway_eliteserien",           "Norwegian Eliteserien"),
-    ("soccer_finland_veikkausliiga",        "Finnish Veikkausliiga"),
-    ("soccer_iceland_urvalsdeild",          "Icelandic Úrvalsdeild"),
-    # === EASTERN EUROPE ===
-    ("soccer_poland_ekstraklasa",           "Polish Ekstraklasa"),
-    ("soccer_greece_super_league",          "Greek Super League"),
-    ("soccer_czech_czech_football_league",  "Czech First League"),
-    ("soccer_romania_liga_1",               "Romanian Liga 1"),
-    ("soccer_croatia_hnl",                  "Croatian HNL"),
-    ("soccer_serbia_super_liga",            "Serbian Super Liga"),
-    ("soccer_hungary_nb1",                  "Hungarian NB I"),
-    ("soccer_bulgaria_first_league",        "Bulgarian First League"),
-    ("soccer_slovakia_super_liga",          "Slovak Super Liga"),
-    ("soccer_ukraine_premier_league",       "Ukrainian Premier League"),
-    ("soccer_russia_premier_league",        "Russian Premier League"),
-    ("soccer_cyprus_first_division",        "Cypriot First Division"),
-    # === SECOND DIVISIONS ===
-    ("soccer_efl_champ",                    "EFL Championship"),
-    ("soccer_england_league1",              "EFL League One"),
-    ("soccer_england_league2",              "EFL League Two"),
-    ("soccer_germany_bundesliga2",          "Bundesliga 2"),
-    ("soccer_germany_liga3",                "3. Liga"),
-    ("soccer_spain_segunda_division",       "La Liga 2"),
-    ("soccer_italy_serie_b",               "Serie B"),
-    ("soccer_france_ligue_two",            "Ligue 2"),
-    ("soccer_netherlands_eerste_divisie",   "Eerste Divisie"),
-    ("soccer_portugal_segunda_liga",        "Liga Portugal 2"),
-    ("soccer_turkey_1_lig",                "Turkish 1. Lig"),
-    ("soccer_scotland_championship",        "Scottish Championship"),
-    ("soccer_belgium_first_div_b",          "Belgian First Division B"),
-    # === CUPS ===
-    ("soccer_fa_cup",                       "FA Cup"),
-    ("soccer_efl_cup",                      "EFL Cup"),
-    ("soccer_spain_copa_del_rey",           "Copa del Rey"),
-    ("soccer_italy_coppa_italia",           "Coppa Italia"),
-    ("soccer_germany_dfb_pokal",            "DFB-Pokal"),
-    ("soccer_france_coupe_de_france",       "Coupe de France"),
-    # === SOUTH AMERICA ===
-    ("soccer_brazil_campeonato",            "Brasileirão"),
-    ("soccer_brazil_serie_b",              "Brasileirão Série B"),
-    ("soccer_argentina_primera_division",   "Argentine Liga"),
-    ("soccer_conmebol_copa_libertadores",   "Copa Libertadores"),
-    ("soccer_conmebol_copa_sudamericana",   "Copa Sudamericana"),
-    ("soccer_chile_primera_division",       "Chilean Primera"),
-    ("soccer_colombia_primera_a",           "Colombian Primera A"),
-    ("soccer_peru_primera_division",        "Peruvian Primera"),
-    ("soccer_ecuador_serie_a",              "Ecuadorian Serie A"),
-    ("soccer_uruguay_primera_division",     "Uruguayan Primera"),
-    ("soccer_paraguay_primera_division",    "Paraguayan Primera"),
-    # === NORTH & CENTRAL AMERICA ===
-    ("soccer_usa_mls",                      "MLS"),
-    ("soccer_usa_usl_championship",         "USL Championship"),
-    ("soccer_mexico_ligamx",               "Liga MX"),
-    ("soccer_costa_rica_primera_division",  "Costa Rica Primera"),
-    # === ASIA ===
-    ("soccer_japan_j_league",               "J-League"),
-    ("soccer_korea_kleague1",              "K-League"),
-    ("soccer_china_superleague",            "Chinese Super League"),
-    ("soccer_saudi_professional_league",    "Saudi Pro League"),
-    ("soccer_uae_arabian_gulf_league",      "UAE Pro League"),
-    ("soccer_india_super_league",           "Indian Super League"),
-    ("soccer_thailand_thai_league_1",       "Thai League 1"),
-    # === AFRICA ===
-    ("soccer_south_africa_psl",             "South African PSL"),
-    ("soccer_egypt_premier_league",         "Egyptian Premier League"),
-    # === OCEANIA ===
-    ("soccer_australia_aleague",            "A-League"),
-    # === INTERNATIONAL ===
-    ("soccer_fifa_world_cup_qualifier",     "WC Qualifiers"),
-    ("soccer_uefa_european_championship",   "Euro Championship"),
-    ("soccer_conmebol_copa_america",        "Copa América"),
-    ("soccer_africa_cup_of_nations",        "AFCON"),
-]
+request_count = 0
 
 
-def fetch_odds(sport_key: str, league_name: str) -> list:
-    """Fetch odds with exponential backoff retry."""
-    url = (
-        f"https://api.the-odds-api.com/v4/sports/{sport_key}/odds/"
-        f"?apiKey={API_KEY}"
-        f"&regions=eu,uk,au"
-        f"&markets=totals"
-        f"&oddsFormat=decimal"
-        f"&dateFormat=iso"
-    )
+def api_get(endpoint: str, params: dict) -> dict:
+    """Make authenticated GET request to API-Football."""
+    global request_count
+    query = "&".join(f"{k}={v}" for k, v in params.items())
+    url = f"{BASE_URL}/{endpoint}?{query}"
 
-    for attempt in range(1, MAX_RETRIES + 1):
+    req = urllib.request.Request(url)
+    req.add_header("x-apisports-key", API_KEY)
+
+    for attempt in range(1, 4):
         try:
-            req = urllib.request.Request(url)
-            with urllib.request.urlopen(req, timeout=15) as resp:
-                remaining = resp.headers.get("x-requests-remaining", "?")
-                print(f" 📡{remaining}", end="")
+            with urllib.request.urlopen(req, timeout=20) as resp:
+                request_count += 1
+                remaining = resp.headers.get("x-ratelimit-requests-remaining", "?")
+                print(f" 📡{remaining}left", end="")
                 return json.loads(resp.read().decode("utf-8"))
         except urllib.error.HTTPError as e:
             if e.code == 429:
-                wait = 3 * (2 ** attempt)
+                wait = 5 * attempt
                 print(f" ⏳{wait}s", end="")
                 time.sleep(wait)
-            elif e.code in (404, 422):
-                return []
-            elif e.code == 401:
-                print(" ❌KEY!")
-                return []
+            elif e.code == 403:
+                print(f" ❌FORBIDDEN", end="")
+                return {}
             else:
-                return []
-        except Exception:
-            return []
-    return []
+                print(f" ❌HTTP{e.code}", end="")
+                return {}
+        except Exception as e:
+            print(f" ❌err", end="")
+            return {}
+    return {}
 
 
-def extract_candidates(events: list, sport_key: str, league_name: str) -> list:
-    """Extract Over 2.5 candidates with odds between MIN_ODDS and MAX_ODDS."""
-    now = datetime.now(timezone.utc)
-    cutoff = now + timedelta(hours=HOURS_AHEAD)
+def fetch_fixtures(date_str: str) -> dict:
+    """Fetch fixtures for a date. Returns {fixture_id: {home, away, league, league_id}}"""
+    print(f"  📅 Fixtures {date_str}...", end="")
+    data = api_get("fixtures", {"date": date_str, "timezone": "UTC"})
+
+    if data.get("errors"):
+        print(f" ❌ {data['errors']}")
+        return {}
+
+    fixtures = {}
+    for f in data.get("response", []):
+        fid = f.get("fixture", {}).get("id")
+        if not fid:
+            continue
+
+        status = f.get("fixture", {}).get("status", {}).get("short", "")
+        if status not in ("NS", "TBD", ""):
+            continue
+
+        home = f.get("teams", {}).get("home", {}).get("name", "?")
+        away = f.get("teams", {}).get("away", {}).get("name", "?")
+        league = f.get("league", {}).get("name", "?")
+        country = f.get("league", {}).get("country", "?")
+        league_id = f.get("league", {}).get("id", 0)
+
+        fixtures[fid] = {
+            "home": home,
+            "away": away,
+            "league": league,
+            "country": country,
+            "league_id": league_id,
+        }
+
+    print(f" ✅ {len(fixtures)} upcoming")
+    return fixtures
+
+
+def fetch_odds_for_date(date_str: str) -> list:
+    """Fetch Over/Under Goals odds for all fixtures on a date (paginated)."""
+    all_items = []
+    page = 1
+
+    while True:
+        time.sleep(DELAY)
+        print(f"  🎲 Odds {date_str} p{page}...", end="")
+        # bet=5 = Goals Over/Under
+        data = api_get("odds", {"date": date_str, "bet": "5", "page": str(page)})
+
+        if data.get("errors"):
+            print(f" ❌ {data['errors']}")
+            break
+
+        items = data.get("response", [])
+        paging = data.get("paging", {})
+        total_pages = paging.get("total", 1)
+
+        if items:
+            all_items.extend(items)
+            print(f" ✅ {len(items)} fixtures (p{page}/{total_pages})")
+        else:
+            print(f" — empty")
+            break
+
+        if page >= total_pages:
+            break
+        page += 1
+
+    return all_items
+
+
+def extract_candidates(odds_data: list, fixtures: dict) -> list:
+    """Extract Over 2.5 candidates from odds data."""
     candidates = []
 
-    for event in events:
-        commence = event.get("commence_time", "")
-        try:
-            dt = datetime.fromisoformat(commence.replace("Z", "+00:00"))
-        except ValueError:
+    for item in odds_data:
+        fid = item.get("fixture", {}).get("id")
+        league_name = item.get("league", {}).get("name", "?")
+        league_id = item.get("league", {}).get("id", 0)
+
+        # Get team names from fixtures map
+        fix_info = fixtures.get(fid)
+        if not fix_info:
             continue
 
-        if dt < now or dt > cutoff:
-            continue
+        home = fix_info["home"]
+        away = fix_info["away"]
 
-        home = event.get("home_team", "?")
-        away = event.get("away_team", "?")
-
+        # Collect Over 2.5 odds from all bookmakers
         over25_odds = []
-        for bm in event.get("bookmakers", []):
-            for mkt in bm.get("markets", []):
-                if mkt.get("key") != "totals":
+        for bm in item.get("bookmakers", []):
+            for bet in bm.get("bets", []):
+                if bet.get("id") != 5:
                     continue
-                for out in mkt.get("outcomes", []):
-                    if out.get("name") == "Over" and out.get("point") == 2.5:
-                        price = float(out.get("price", 0))
-                        if price > 0:
-                            over25_odds.append(price)
+                for val in bet.get("values", []):
+                    if val.get("value") == "Over 2.5":
+                        try:
+                            odd = float(val.get("odd", 0))
+                            if odd > 0:
+                                over25_odds.append(odd)
+                        except (ValueError, TypeError):
+                            pass
 
         if not over25_odds:
             continue
@@ -208,13 +180,13 @@ def extract_candidates(events: list, sport_key: str, league_name: str) -> list:
         best = max(over25_odds)
         avg = sum(over25_odds) / len(over25_odds)
 
-        if best >= MIN_ODDS and best <= MAX_ODDS:
+        if MIN_ODDS <= best <= MAX_ODDS:
             candidates.append({
                 "League": league_name,
                 "Match": f"{home} vs {away}",
                 "Tip": "Over 2.5",
                 "Odds": f"{best:.2f}",
-                "sport_key": sport_key,
+                "league_id": league_id,
                 "best": best,
                 "avg": avg,
                 "bm_count": len(over25_odds),
@@ -224,7 +196,7 @@ def extract_candidates(events: list, sport_key: str, league_name: str) -> list:
 
 
 def select_best_tips(all_candidates: list, num: int = NUM_TIPS) -> list:
-    """Pick the best 3 from different leagues. Score favors bookmaker consensus."""
+    """Pick best tips from different leagues. Score = avg odds × bookmaker count."""
     for c in all_candidates:
         c["score"] = c["avg"] * min(c["bm_count"], 8)
 
@@ -233,10 +205,10 @@ def select_best_tips(all_candidates: list, num: int = NUM_TIPS) -> list:
     selected = []
     used_leagues = set()
     for c in all_candidates:
-        if c["sport_key"] in used_leagues:
+        if c["league_id"] in used_leagues:
             continue
         selected.append(c)
-        used_leagues.add(c["sport_key"])
+        used_leagues.add(c["league_id"])
         if len(selected) >= num:
             break
 
@@ -256,42 +228,50 @@ def main():
         print("❌ API_FOOTBALL_KEY not set!")
         return
 
-    print(f"🕐 {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M UTC')}")
-    print(f"🔍 Over 2.5 | odds {MIN_ODDS}–{MAX_ODDS} | {HOURS_AHEAD}h window")
-    print(f"🔑 API_FOOTBALL_KEY (100 req/day)")
-    print(f"📋 Scanning ALL {len(LEAGUES)} leagues\n")
+    now = datetime.now(timezone.utc)
+    today = now.strftime("%Y-%m-%d")
+    tomorrow = (now + timedelta(days=1)).strftime("%Y-%m-%d")
 
-    all_candidates = []
-    leagues_hit = 0
+    print(f"🕐 {now.strftime('%Y-%m-%d %H:%M UTC')}")
+    print(f"🔍 Over 2.5 | odds {MIN_ODDS}–{MAX_ODDS}")
+    print(f"🔑 API-Football (100 req/day)")
+    print(f"📅 {today} + {tomorrow}\n")
 
-    for i, (sport_key, league_name) in enumerate(LEAGUES):
-        if i > 0:
-            time.sleep(DELAY_BETWEEN_REQUESTS)
+    # ---- Phase 1: Get fixtures (for team names) ----
+    print("--- FIXTURES ---")
+    fixtures_today = fetch_fixtures(today)
+    time.sleep(DELAY)
+    fixtures_tomorrow = fetch_fixtures(tomorrow)
+    all_fixtures = {**fixtures_today, **fixtures_tomorrow}
+    print(f"  📊 {len(all_fixtures)} total upcoming fixtures\n")
 
-        print(f"  [{i+1:2d}/{len(LEAGUES)}] {league_name:.<35s}", end="")
-        events = fetch_odds(sport_key, league_name)
-
-        if events:
-            cands = extract_candidates(events, sport_key, league_name)
-            if cands:
-                print(f" ✅ {len(cands)} matches")
-                all_candidates.extend(cands)
-                leagues_hit += 1
-            else:
-                print(f" — no matches")
-        else:
-            print(f" — skip")
-
-    print(f"\n{'='*55}")
-    print(f"📊 COLLECTED: {len(all_candidates)} candidates from {leagues_hit} leagues")
-    print(f"   Odds range: {MIN_ODDS}–{MAX_ODDS}")
-    print(f"{'='*55}")
-
-    if not all_candidates:
-        print("❌ No matches found. Keeping previous tips.")
+    if not all_fixtures:
+        print("❌ No fixtures found. Keeping previous tips.")
         return
 
-    tips = select_best_tips(all_candidates)
+    # ---- Phase 2: Get odds (Over/Under goals) ----
+    print("--- ODDS (Over/Under Goals) ---")
+    odds_today = fetch_odds_for_date(today)
+    odds_tomorrow = fetch_odds_for_date(tomorrow)
+    all_odds = odds_today + odds_tomorrow
+    print(f"  📊 {len(all_odds)} fixtures with odds data\n")
+
+    # ---- Phase 3: Extract candidates ----
+    candidates = extract_candidates(all_odds, all_fixtures)
+
+    unique_leagues = len(set(c["league_id"] for c in candidates))
+    print(f"{'='*55}")
+    print(f"📊 COLLECTED: {len(candidates)} candidates from {unique_leagues} leagues")
+    print(f"   Odds range: {MIN_ODDS}–{MAX_ODDS}")
+    print(f"   API requests used: {request_count}")
+    print(f"{'='*55}")
+
+    if not candidates:
+        print("❌ No qualifying matches. Keeping previous tips.")
+        return
+
+    # ---- Phase 4: Select best 3 ----
+    tips = select_best_tips(candidates)
 
     output = []
     for t in tips:
@@ -302,7 +282,7 @@ def main():
             "Odds": t["Odds"],
         })
 
-    print(f"\n🎯 FINAL {len(output)} tips (from {len(all_candidates)} candidates):")
+    print(f"\n🎯 FINAL {len(output)} tips (from {len(candidates)} candidates):")
     for i, tip in enumerate(output, 1):
         label = "🔓" if i <= 2 else "🔒 (ad)"
         print(f"  {label} {tip['League']}: {tip['Match']} — {tip['Tip']} @ {tip['Odds']}")
