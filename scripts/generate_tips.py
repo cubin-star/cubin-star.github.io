@@ -26,7 +26,7 @@ OUTPUT_FILE = "hokey.json"
 BLOCKED_COUNTRIES = {"russia", "belarus"}
 
 # Klíčová slova v názvu ligy → přeskočit
-BLOCKED_LEAGUE_KEYWORDS = {"university", "universiade", "college", "ncaa", "u18", "u20"}
+BLOCKED_LEAGUE_KEYWORDS = {"university", "universiade", "college", "ncaa", "u18", "u20", "ullh"}
 
 
 def api_get(endpoint: str, params: dict | None = None) -> list:
