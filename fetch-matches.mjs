@@ -1,8 +1,7 @@
 /**
- * Bot pro denní výběr 6 zápasů (fotbal + hokej) s Over góly a kurzem >= 2.0
- *   Fotbal: Over 2.5 | Hokej: Over 5.5
+ * Bot pro denní výběr 6 fotbalových zápasů s Over 2.5 góly a kurzem 2.0–3.0
  *
- * Používá API-Football a API-Hockey (api-sports.io) - 7500 req/den.
+ * Používá API-Football (api-sports.io) - 7500 req/den.
  * Výstup: hot.json
  *
  * Env: API_FOOTBALL_KEY1
@@ -15,8 +14,8 @@ const API_KEY = process.env.API_FOOTBALL_KEY1;
 if (!API_KEY) { console.error('Chybí API_FOOTBALL_KEY1 env proměnná.'); process.exit(1); }
 
 const FOOTBALL_API = 'https://v3.football.api-sports.io';
-const HOCKEY_API = 'https://v1.hockey.api-sports.io';
 const MIN_ODDS = 2.0;
+const MAX_ODDS = 3.0;
 const PICK_COUNT = 6;
 const EXCLUDED_COUNTRIES = ['Russia', 'Belarus'];
 const TZ = 'Europe/Prague';
@@ -80,7 +79,7 @@ async function footballPicks(now, maxTime) {
                 const fix = fixtureMap.get(entry.fixture?.id); if (!fix) continue;
                 for (const bm of entry.bookmakers || []) { for (const bet of bm.bets || []) { for (const v of bet.values || []) {
                     if (v.value !== 'Over 2.5') continue;
-                    const odd = parseFloat(v.odd); if (isNaN(odd) || odd < MIN_ODDS) continue;
+                    const odd = parseFloat(v.odd); if (isNaN(odd) || odd < MIN_ODDS || odd > MAX_ODDS) continue;
                     picks.push({ league: lg.name, match: fix.teams.home.name + ' - ' + fix.teams.away.name, tip: 'Over 2.5', odds: odd.toFixed(2), bookmaker: bm.name });
                     lgPicks++;
                 } } }
@@ -89,30 +88,7 @@ async function footballPicks(now, maxTime) {
         }
         if (lgPicks > 0) console.log('   📡 ' + lg.name + ' (' + lg.country + ') → ' + lgPicks + ' tipů');
     }
-    console.log('\n📊 Fotbal: ' + picks.length + ' tipů Over 2.5 >= ' + MIN_ODDS);
-    return picks;
-}
-
-async function hockeyPicks(now, maxTime) {
-    console.log('\n🏒 HOKEJ\n');
-    const today = fmtDate(now), tomorrow = fmtDate(maxTime);
-    const dates = [today]; if (tomorrow !== today) dates.push(tomorrow);
-    let games = [];
-    for (const d of dates) { console.log('📅 Games ' + d + '...'); const data = await apiFetch(HOCKEY_API, '/games?date=' + d + '&timezone=' + TZ); games.push(...(data.response || [])); await sleep(350); }
-    games = games.filter(g => { if (g.status?.short !== 'NS') return false; const t = new Date(g.date); if (t < now || t > maxTime) return false; return !EXCLUDED_COUNTRIES.includes(g.country?.name || ''); });
-    console.log('   ' + games.length + ' zápasů v 24h okně\n');
-    const picks = [];
-    for (let i = 0; i < games.length; i++) {
-        const g = games[i];
-        const data = await apiFetch(HOCKEY_API, '/odds?game=' + g.id);
-        for (const entry of data.response || []) { for (const bm of entry.bookmakers || []) { for (const bet of bm.bets || []) { for (const v of bet.values || []) {
-            if (v.value !== 'Over 5.5') continue;
-            const odd = parseFloat(v.odd); if (isNaN(odd) || odd < MIN_ODDS) continue;
-            picks.push({ league: g.league?.name || 'Hockey', match: (g.teams?.home?.name || '?') + ' - ' + (g.teams?.away?.name || '?'), tip: 'Over 5.5', odds: odd.toFixed(2), bookmaker: bm.name });
-        } } } }
-        if (i < games.length - 1) await sleep(350);
-    }
-    console.log('📊 Hokej: ' + picks.length + ' tipů Over 5.5 >= ' + MIN_ODDS);
+    console.log('\n📊 Fotbal: ' + picks.length + ' tipů Over 2.5 (kurz ' + MIN_ODDS + '–' + MAX_ODDS + ')');
     return picks;
 }
 
@@ -148,9 +124,7 @@ async function main() {
     console.log('🤖 Kombík Bot – API-Sports\n');
     const now = new Date(), maxTime = new Date(now.getTime() + 24 * 60 * 60 * 1000);
     console.log('⏰ ' + now.toUTCString() + ' → ' + maxTime.toUTCString() + '\n');
-    const fP = await footballPicks(now, maxTime);
-    const hP = await hockeyPicks(now, maxTime);
-    let allPicks = [...fP, ...hP];
+    let allPicks = await footballPicks(now, maxTime);
     console.log('\n📊 Celkem ' + allPicks.length + ' tipů (' + reqCount + ' API req)');
     const best = new Map();
     for (const p of allPicks) { if (!best.has(p.match) || parseFloat(p.odds) > parseFloat(best.get(p.match).odds)) best.set(p.match, p); }
@@ -164,7 +138,7 @@ async function main() {
     writeFileSync('hot.json', JSON.stringify(output, null, 2), 'utf-8');
     console.log('\n✅ ' + output.length + ' zápasů → hot.json (' + reqCount + ' API req)\n');
     const gc = Math.ceil(output.length / 2);
-    for (let g = 1; g <= gc; g++) { const gm = output.filter(m => m.group === g); const go = gm.reduce((a, m) => a * parseFloat(m.odds), 1); console.log('  📦 Sk.' + g + ' (' + go.toFixed(2) + '):'); gm.forEach(m => console.log('     ' + (m.tip.includes('5.5') ? '🏒' : '⚽') + ' [' + m.league + '] ' + m.match + ' | ' + m.tip + ' @ ' + m.odds)); }
+    for (let g = 1; g <= gc; g++) { const gm = output.filter(m => m.group === g); const go = gm.reduce((a, m) => a * parseFloat(m.odds), 1); console.log('  📦 Sk.' + g + ' (' + go.toFixed(2) + '):'); gm.forEach(m => console.log('     ⚽ [' + m.league + '] ' + m.match + ' | ' + m.tip + ' @ ' + m.odds)); }
 }
 
 main().catch(err => { console.error('Chyba:', err); process.exit(1); });
