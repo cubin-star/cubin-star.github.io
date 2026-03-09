@@ -1,23 +1,30 @@
 [
   {
-    "league": "Extraliga",
-    "match": "Karlovy Vary - Vitkovice",
-    "tip": "Over 5.5",
-    "odds": "13.50",
-    "group": 1
-  },
-  {
-    "league": "Prva Liga",
-    "match": "Macva - FAP",
+    "league": "Ligue 1",
+    "match": "SONABEL - Rahimo",
     "tip": "Over 2.5",
-    "odds": "2.55",
+    "odds": "3.00",
     "group": 1
   },
   {
-    "league": "Mestis",
-    "match": "K-Vantaa - TUTO",
-    "tip": "Over 5.5",
-    "odds": "8.30",
+    "league": "Premyer Liqa",
+    "match": "Neftchi Baku - Turan",
+    "tip": "Over 2.5",
+    "odds": "2.50",
+    "group": 1
+  },
+  {
+    "league": "Premier League",
+    "match": "Veres Rivne - LNZ Cherkasy",
+    "tip": "Over 2.5",
+    "odds": "2.70",
+    "group": 2
+  },
+  {
+    "league": "Division Profesional - Apertura",
+    "match": "Sportivo Trinidense - Nacional Asuncion",
+    "tip": "Over 2.5",
+    "odds": "2.53",
     "group": 2
   },
   {
@@ -25,20 +32,13 @@
     "match": "Deportivo Pasto - America de Cali",
     "tip": "Over 2.5",
     "odds": "2.60",
-    "group": 2
-  },
-  {
-    "league": "Premier League",
-    "match": "Dire Dawa Kenema - Ethiopia Nigd Bank",
-    "tip": "Over 2.5",
-    "odds": "3.50",
     "group": 3
   },
   {
-    "league": "Ligue 1",
-    "match": "SONABEL - Rahimo",
+    "league": "Prva Liga",
+    "match": "Macva - FAP",
     "tip": "Over 2.5",
-    "odds": "3.00",
+    "odds": "2.55",
     "group": 3
   }
 ]
