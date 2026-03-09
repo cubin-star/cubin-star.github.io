@@ -1,19 +1,21 @@
 """
-Ultimate Football Overs — Daily Tip Generator v7
+Ultimate Football Overs — Daily Tip Generator v8
 Uses API-Football (api-sports.io) to find Over 2.5 goals tips.
 One API call serves TWO apps:
   - fotbal.json (3 tips) → Ultimate Football Overs
   - tips.json   (2 tips) → Profi Football Overs
 
-API: https://www.api-football.com/ (100 requests/day free plan)
+API: https://www.api-football.com/ (7500 requests/day paid plan)
 Auth: x-apisports-key header
+No pagination limits — full access to all leagues & fixtures.
 
 Strategy:
-  1. Fetch today's + tomorrow's fixtures (2 requests)
-  2. Fetch Over/Under odds by date with pagination (~10-30 requests)
-  3. Match odds to fixtures, filter Over 2.5 @ odds 1.75-2.20
-  4. Select best 5 tips from different leagues
-  5. Split: 3 → fotbal.json, 2 → tips.json
+  1. Fetch fixtures for today + tomorrow (2 requests)
+  2. Fetch Over/Under odds — ALL pages per day (~20-40 requests)
+  3. Match odds to fixtures, filter Over 2.5 @ odds 1.75-2.20 within 24h
+  4. Exclude Russia & Belarus (not available for betting in CZ/EU)
+  5. Select best 5 tips from different leagues
+  6. Split: 3 → fotbal.json, 2 → tips.json
 
 Environment variable required:
   API_FOOTBALL_KEY1 — API key from https://www.api-football.com/
@@ -36,7 +38,7 @@ BASE_URL = "https://v3.football.api-sports.io"
 MIN_ODDS = 1.75
 MAX_ODDS = 2.20
 NUM_TIPS = 5              # 3 for app1 + 2 for app2
-DELAY = 1.2
+DELAY = 0.5               # faster with paid plan (7500 req/day)
 OUTPUT_APP1 = "fotbal.json"   # Ultimate Football Overs (3 tips)
 OUTPUT_APP2 = "tips.json"     # Profi Football Overs (2 tips)
 request_count = 0
@@ -100,12 +102,15 @@ def fetch_fixtures(date_str: str) -> dict:
         country = f.get("league", {}).get("country", "?")
         league_id = f.get("league", {}).get("id", 0)
 
+        kickoff = f.get("fixture", {}).get("date", "")
+
         fixtures[fid] = {
             "home": home,
             "away": away,
             "league": league,
             "country": country,
             "league_id": league_id,
+            "kickoff": kickoff,
         }
 
     print(f" ✅ {len(fixtures)} upcoming")
@@ -146,8 +151,11 @@ def fetch_odds_for_date(date_str: str) -> list:
 
 
 def extract_candidates(odds_data: list, fixtures: dict) -> list:
-    """Extract Over 2.5 candidates from odds data."""
+    """Extract Over 2.5 candidates from odds data (only within 24h window)."""
+    now = datetime.now(timezone.utc)
+    cutoff = now + timedelta(hours=24)
     candidates = []
+    skipped_time = 0
 
     for item in odds_data:
         fid = item.get("fixture", {}).get("id")
@@ -157,6 +165,22 @@ def extract_candidates(odds_data: list, fixtures: dict) -> list:
         # Get team names from fixtures map
         fix_info = fixtures.get(fid)
         if not fix_info:
+            continue
+
+        # Filter: only matches starting within 24h
+        kickoff_str = fix_info.get("kickoff", "")
+        if kickoff_str:
+            try:
+                kickoff_dt = datetime.fromisoformat(kickoff_str.replace("Z", "+00:00"))
+                if kickoff_dt < now or kickoff_dt > cutoff:
+                    skipped_time += 1
+                    continue
+            except ValueError:
+                pass
+
+        # Exclude Russia & Belarus (not available for betting in CZ/EU)
+        country = fix_info.get("country", "").lower()
+        if country in ("russia", "belarus"):
             continue
 
         home = fix_info["home"]
@@ -194,6 +218,9 @@ def extract_candidates(odds_data: list, fixtures: dict) -> list:
                 "avg": avg,
                 "bm_count": len(over25_odds),
             })
+
+    if skipped_time:
+        print(f"  ⏭ {skipped_time} matches skipped (outside 24h window)")
 
     return candidates
 
@@ -237,7 +264,7 @@ def main():
 
     print(f"🕐 {now.strftime('%Y-%m-%d %H:%M UTC')}")
     print(f"🔍 Over 2.5 | odds {MIN_ODDS}–{MAX_ODDS}")
-    print(f"🔑 API-Football KEY1 (100 req/day)")
+    print(f"🔑 API-Football KEY1 (7500 req/day paid)")
     print(f"📦 Output: {OUTPUT_APP1} (3 tips) + {OUTPUT_APP2} (2 tips)")
     print(f"📅 {today} + {tomorrow}\n")
 
@@ -253,8 +280,8 @@ def main():
         print("❌ No fixtures found. Keeping previous tips.")
         return
 
-    # ---- Phase 2: Get odds (Over/Under goals) ----
-    print("--- ODDS (Over/Under Goals) ---")
+    # ---- Phase 2: Get odds (Over/Under goals) — ALL pages ----
+    print("--- ODDS (Over/Under Goals) — full scan ---")
     odds_today = fetch_odds_for_date(today)
     odds_tomorrow = fetch_odds_for_date(tomorrow)
     all_odds = odds_today + odds_tomorrow
