@@ -8,8 +8,8 @@
 #    scripts/generate_tips.py
 # 3. Na GitHubu přidejte secret:
 #    Settings → Secrets and variables → Actions → New repository secret
-#    Name: ODDS_API_KEY
-#    Value: (váš klíč z the-odds-api.com)
+#    Name: API_HOCKEY_KEY
+#    Value: (váš klíč z api-sports.io)
 # 4. V Settings → Actions → General povolte:
 #    "Read and write permissions" pro GITHUB_TOKEN
 
@@ -38,7 +38,7 @@ jobs:
 
       - name: Generate tips
         env:
-          ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
+          API_HOCKEY_KEY: ${{ secrets.API_HOCKEY_KEY }}
         run: python scripts/generate_tips.py
 
       - name: Commit & Push
