@@ -1,21 +1,21 @@
 {
-  "updated_at": "08.03.2026 10:02",
+  "updated_at": "09.03.2026 09:42",
   "tips": [
     {
       "league": "WTA Indian Wells",
-      "match": "Coco Gauff vs Alexandra Eala",
-      "tip": "Over19.5",
+      "match": "Jessica Pegula vs Jelena Ostapenko",
+      "tip": "Over20.5",
       "odds": "2.0",
-      "date": "08.03.2026",
-      "time": "03:00"
+      "date": "09.03.2026",
+      "time": "20:00"
     },
     {
       "league": "ATP Indian Wells",
-      "match": "Brandon Nakashima vs Alexander Zverev",
-      "tip": "Over22.5",
-      "odds": "1.97",
-      "date": "08.03.2026",
-      "time": "20:00"
+      "match": "Daniil Medvedev vs Sebastian Baez",
+      "tip": "Over20.5",
+      "odds": "2.02",
+      "date": "09.03.2026",
+      "time": "04:30"
     }
   ]
 }
