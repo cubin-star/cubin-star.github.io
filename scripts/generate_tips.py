@@ -25,6 +25,9 @@ OUTPUT_FILE = "hokey.json"
 # Země, ze kterých se v ČR nedá sázet
 BLOCKED_COUNTRIES = {"russia", "belarus"}
 
+# Klíčová slova v názvu ligy → přeskočit
+BLOCKED_LEAGUE_KEYWORDS = {"university", "universiade", "college", "ncaa", "u18", "u20"}
+
 
 def api_get(endpoint: str, params: dict | None = None) -> list:
     """API-Sports Hockey GET request (max 10 req/min)."""
@@ -83,6 +86,17 @@ def main():
     blocked = before - len(ns_games)
     if blocked:
         print(f"   🚫 Vyřazeno {blocked} zápasů (Rusko/Bělorusko)")
+
+    # Vyřadit univerzitní ligy
+    before = len(ns_games)
+    ns_games = [
+        g for g in ns_games
+        if not any(kw in g.get("league", {}).get("name", "").lower() for kw in BLOCKED_LEAGUE_KEYWORDS)
+    ]
+    blocked = before - len(ns_games)
+    if blocked:
+        print(f"   🚫 Vyřazeno {blocked} zápasů (univerzitní ligy)")
+
     print(f"   Zápasy k analýze: {len(ns_games)}")
     print()
 
