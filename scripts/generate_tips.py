@@ -136,17 +136,23 @@ def main():
                     print(f"         value='{v.get('value')}' odd='{v.get('odd')}'")
 
         # Hledej Over 5.5
-        # API-Sports může vracet různé formáty:
-        #   a) value="Over 5.5", odd="1.85"  (text s Over)
-        #   b) value="5.5", odd="1.85" v betu "Over/Under" (jen číslo)
+        # API-Sports vrací: value='Over 5.5', odd='1.85'
+        # Bereme NEJNIŽŠÍ rozumný kurz (ne Betfair exchange nesmysly)
         best_price = None
         best_bookmaker = None
+
+        # Bookmaři s nespolehlivými kurzy (exchange, ne klasický bookmaker)
+        skip_bookmakers = {"betfair", "betfair exchange", "smarkets", "matchbook"}
 
         for entry in odds_data:
             for bookmaker in entry.get("bookmakers", []):
                 bk_name = bookmaker.get("name", "?")
+
+                # Přeskočit exchange bookery
+                if bk_name.lower() in skip_bookmakers:
+                    continue
+
                 for bet in bookmaker.get("bets", []):
-                    bet_name = bet.get("name", "").lower()
                     for value in bet.get("values", []):
                         val = str(value.get("value", ""))
                         odd_str = str(value.get("odd", "0"))
@@ -156,22 +162,9 @@ def main():
                         except (ValueError, TypeError):
                             continue
 
-                        is_over_55 = False
-
-                        # Formát A: value="Over 5.5"
-                        if val == "Over 5.5":
-                            is_over_55 = True
-
-                        # Formát B: bet obsahuje "over" a value="5.5"
-                        if not is_over_55 and "over" in bet_name and val == "5.5":
-                            is_over_55 = True
-
-                        # Formát C: value="Over" a v bet name je "5.5"
-                        if not is_over_55 and val.lower() == "over" and "5.5" in bet_name:
-                            is_over_55 = True
-
-                        if is_over_55 and 1.01 < price <= 20.0:
-                            if best_price is None or price > best_price:
+                        # Přesně "Over 5.5" + rozumný kurz (1.50–4.00)
+                        if val == "Over 5.5" and 1.50 <= price <= 4.00:
+                            if best_price is None or price < best_price:
                                 best_price = price
                                 best_bookmaker = bk_name
 
