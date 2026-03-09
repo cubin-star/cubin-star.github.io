@@ -1,44 +1,44 @@
 [
   {
-    "league": "Primeira Liga",
-    "match": "Santa Clara - Vitória SC",
-    "tip": "Over 2.5",
-    "odds": "2.70",
+    "league": "Extraliga",
+    "match": "Karlovy Vary - Vitkovice",
+    "tip": "Over 5.5",
+    "odds": "13.50",
     "group": 1
   },
   {
-    "league": "Super League GR",
-    "match": "Levadiakos - Panathinaikos",
+    "league": "Prva Liga",
+    "match": "Macva - FAP",
     "tip": "Over 2.5",
-    "odds": "2.33",
+    "odds": "2.55",
     "group": 1
   },
   {
-    "league": "La Liga",
-    "match": "Getafe - Real Betis",
-    "tip": "Over 2.5",
-    "odds": "2.62",
+    "league": "Mestis",
+    "match": "K-Vantaa - TUTO",
+    "tip": "Over 5.5",
+    "odds": "8.30",
     "group": 2
   },
   {
-    "league": "Austria BL",
-    "match": "Sturm Graz - Rheindorf Altach",
+    "league": "Primera A",
+    "match": "Deportivo Pasto - America de Cali",
     "tip": "Over 2.5",
-    "odds": "2.46",
+    "odds": "2.60",
     "group": 2
   },
   {
-    "league": "Serie A",
-    "match": "Lecce - Cremonese",
+    "league": "Premier League",
+    "match": "Dire Dawa Kenema - Ethiopia Nigd Bank",
     "tip": "Over 2.5",
-    "odds": "2.58",
+    "odds": "3.50",
     "group": 3
   },
   {
-    "league": "La Liga 2",
-    "match": "Leganés - SD Eibar",
+    "league": "Ligue 1",
+    "match": "SONABEL - Rahimo",
     "tip": "Over 2.5",
-    "odds": "2.48",
+    "odds": "3.00",
     "group": 3
   }
 ]
