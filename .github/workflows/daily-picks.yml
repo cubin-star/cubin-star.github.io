@@ -26,7 +26,7 @@ jobs:
 
       - name: Run bot
         env:
-          ODDS_API_KEY4: ${{ secrets.ODDS_API_KEY4 }}
+          API_FOOTBALL_KEY1: ${{ secrets.API_FOOTBALL_KEY1 }}
         run: node fetch-matches.mjs
 
       - name: Commit & push
