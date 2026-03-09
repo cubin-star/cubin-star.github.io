@@ -124,7 +124,21 @@ def main():
             print()
             continue
 
+        # Diagnostika: raw výpis struktury prvního bookmakera
+        first_entry = odds_data[0] if odds_data else {}
+        first_bks = first_entry.get("bookmakers", [])
+        if first_bks:
+            first_bk = first_bks[0]
+            print(f"   🔍 Raw bookmaker: {first_bk.get('name')}")
+            for bet in first_bk.get("bets", [])[:3]:
+                print(f"      bet: id={bet.get('id')} name='{bet.get('name')}'")
+                for v in bet.get("values", [])[:4]:
+                    print(f"         value='{v.get('value')}' odd='{v.get('odd')}'")
+
         # Hledej Over 5.5
+        # API-Sports může vracet různé formáty:
+        #   a) value="Over 5.5", odd="1.85"  (text s Over)
+        #   b) value="5.5", odd="1.85" v betu "Over/Under" (jen číslo)
         best_price = None
         best_bookmaker = None
 
@@ -132,22 +146,36 @@ def main():
             for bookmaker in entry.get("bookmakers", []):
                 bk_name = bookmaker.get("name", "?")
                 for bet in bookmaker.get("bets", []):
+                    bet_name = bet.get("name", "").lower()
                     for value in bet.get("values", []):
                         val = str(value.get("value", ""))
-                        odd = value.get("odd", "0")
+                        odd_str = str(value.get("odd", "0"))
 
                         try:
-                            price = float(odd)
+                            price = float(odd_str)
                         except (ValueError, TypeError):
                             continue
 
-                        # Hledáme přesně "Over 5.5"
-                        if val == "Over 5.5" and price >= MIN_ODDS:
+                        is_over_55 = False
+
+                        # Formát A: value="Over 5.5"
+                        if val == "Over 5.5":
+                            is_over_55 = True
+
+                        # Formát B: bet obsahuje "over" a value="5.5"
+                        if not is_over_55 and "over" in bet_name and val == "5.5":
+                            is_over_55 = True
+
+                        # Formát C: value="Over" a v bet name je "5.5"
+                        if not is_over_55 and val.lower() == "over" and "5.5" in bet_name:
+                            is_over_55 = True
+
+                        if is_over_55 and 1.01 < price <= 20.0:
                             if best_price is None or price > best_price:
                                 best_price = price
                                 best_bookmaker = bk_name
 
-        if best_price is not None:
+        if best_price is not None and best_price >= MIN_ODDS:
             print(f"   ✅ Over 5.5 @ {best_price} ({best_bookmaker})")
             all_candidates.append({
                 "league": league_name,
@@ -155,8 +183,10 @@ def main():
                 "tip": "Over 5.5",
                 "odds": str(round(best_price, 2)),
             })
+        elif best_price is not None:
+            print(f"   ⚠ Over 5.5 nalezen, ale kurz {best_price} < {MIN_ODDS}")
         else:
-            print(f"   ❌ žádný Over 5.5 >= {MIN_ODDS}")
+            print(f"   ❌ žádný Over 5.5")
         print()
 
     print(f"📊 Celkem kandidátů: {len(all_candidates)}")
