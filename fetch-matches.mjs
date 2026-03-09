@@ -17,7 +17,18 @@ const FOOTBALL_API = 'https://v3.football.api-sports.io';
 const MIN_ODDS = 2.0;
 const MAX_ODDS = 3.0;
 const PICK_COUNT = 6;
-const EXCLUDED_COUNTRIES = ['Russia', 'Belarus'];
+const EXCLUDED_COUNTRIES = new Set(['Russia', 'Belarus']);
+const BLOCKED_AFRICAN = new Set([
+    'Algeria', 'Angola', 'Benin', 'Botswana', 'Burkina-Faso', 'Burundi', 'Cameroon',
+    'Cape-Verde', 'Chad', 'Congo', 'Congo-DR', 'Djibouti', 'Equatorial-Guinea',
+    'Eritrea', 'Eswatini', 'Ethiopia', 'Gabon', 'Gambia', 'Ghana', 'Guinea',
+    'Guinea-Bissau', 'Ivory-Coast', 'Kenya', 'Lesotho', 'Liberia', 'Libya',
+    'Madagascar', 'Malawi', 'Mali', 'Mauritania', 'Mauritius', 'Mozambique',
+    'Namibia', 'Niger', 'Nigeria', 'Rwanda', 'Senegal', 'Seychelles',
+    'Sierra-Leone', 'Somalia', 'South-Sudan', 'Sudan', 'Tanzania', 'Togo',
+    'Uganda', 'Zambia', 'Zimbabwe',
+]);
+// Povolené africké: Egypt, Morocco, Tunisia, South-Africa
 const TZ = 'Europe/Prague';
 let reqCount = 0;
 
@@ -60,8 +71,8 @@ async function footballPicks(now, maxTime) {
     let fixtures = [];
     for (const d of dates) { console.log('📅 Fixtures ' + d + '...'); fixtures.push(...await getFootballFixtures(d)); await sleep(350); }
     console.log('   ' + fixtures.length + ' naplánovaných zápasů\n');
-    fixtures = fixtures.filter(f => { const t = new Date(f.fixture.date); return t >= now && t <= maxTime && !EXCLUDED_COUNTRIES.includes(f.league.country); });
-    console.log('   ' + fixtures.length + ' v 24h okně (bez RU/BY)');
+    fixtures = fixtures.filter(f => { const t = new Date(f.fixture.date); const c = f.league.country; return t >= now && t <= maxTime && !EXCLUDED_COUNTRIES.has(c) && !BLOCKED_AFRICAN.has(c); });
+    console.log('   ' + fixtures.length + ' v 24h okně (bez RU/BY/Afrika)');
     const fixtureMap = new Map(), leagueMap = new Map();
     for (const f of fixtures) {
         fixtureMap.set(f.fixture.id, f);
@@ -70,25 +81,36 @@ async function footballPicks(now, maxTime) {
         leagueMap.get(key).dates.add(fmtDate(new Date(f.fixture.date)));
     }
     console.log('   ' + leagueMap.size + ' lig\n');
-    const picks = [];
+    const matchMap = new Map();
     for (const [, lg] of leagueMap) {
-        let lgPicks = 0;
         for (const d of lg.dates) {
             const oddsData = await getFootballLeagueOdds(lg.id, lg.season, d);
             for (const entry of oddsData) {
                 const fix = fixtureMap.get(entry.fixture?.id); if (!fix) continue;
+                const matchKey = fix.fixture.id;
                 for (const bm of entry.bookmakers || []) { for (const bet of bm.bets || []) { for (const v of bet.values || []) {
                     if (v.value !== 'Over 2.5') continue;
                     const odd = parseFloat(v.odd); if (isNaN(odd) || odd < MIN_ODDS || odd > MAX_ODDS) continue;
-                    picks.push({ league: lg.name, match: fix.teams.home.name + ' - ' + fix.teams.away.name, tip: 'Over 2.5', odds: odd.toFixed(2), bookmaker: bm.name });
-                    lgPicks++;
+                    if (!matchMap.has(matchKey)) matchMap.set(matchKey, { league: lg.name, match: fix.teams.home.name + ' - ' + fix.teams.away.name, tip: 'Over 2.5', allOdds: [] });
+                    matchMap.get(matchKey).allOdds.push(odd);
                 } } }
             }
             await sleep(350);
         }
-        if (lgPicks > 0) console.log('   📡 ' + lg.name + ' (' + lg.country + ') → ' + lgPicks + ' tipů');
     }
-    console.log('\n📊 Fotbal: ' + picks.length + ' tipů Over 2.5 (kurz ' + MIN_ODDS + '–' + MAX_ODDS + ')');
+    // Scoring: víc bookmakerů ve shodě + nízký rozptyl = silnější tip
+    const picks = [];
+    for (const [, m] of matchMap) {
+        const n = m.allOdds.length;
+        const avg = m.allOdds.reduce((a, b) => a + b, 0) / n;
+        const variance = m.allOdds.reduce((a, b) => a + (b - avg) ** 2, 0) / n;
+        const score = n / (1 + variance);
+        picks.push({ league: m.league, match: m.match, tip: m.tip, odds: avg.toFixed(2), score: score, bmCount: n });
+    }
+    picks.sort((a, b) => b.score - a.score);
+    console.log('\n📊 ' + picks.length + ' zápasů s Over 2.5 (kurz ' + MIN_ODDS + '–' + MAX_ODDS + ')');
+    if (picks.length > 0) console.log('   Top 10 score:');
+    picks.slice(0, 10).forEach((p, i) => console.log('   ' + (i + 1) + '. [' + p.league + '] ' + p.match + ' → avg ' + p.odds + ', ' + p.bmCount + ' BM, score ' + p.score.toFixed(1)));
     return picks;
 }
 
@@ -125,13 +147,10 @@ async function main() {
     const now = new Date(), maxTime = new Date(now.getTime() + 24 * 60 * 60 * 1000);
     console.log('⏰ ' + now.toUTCString() + ' → ' + maxTime.toUTCString() + '\n');
     let allPicks = await footballPicks(now, maxTime);
-    console.log('\n📊 Celkem ' + allPicks.length + ' tipů (' + reqCount + ' API req)');
-    const best = new Map();
-    for (const p of allPicks) { if (!best.has(p.match) || parseFloat(p.odds) > parseFloat(best.get(p.match).odds)) best.set(p.match, p); }
-    let unique = [...best.values()]; unique.sort((a, b) => parseFloat(b.odds) - parseFloat(a.odds));
-    console.log('📊 Unikátní: ' + unique.length);
+    console.log('\n📊 Celkem ' + allPicks.length + ' zápasů (' + reqCount + ' API req)');
+    // Už seřazeno podle score – vybrat 6 z různých lig
     const selected = [], usedLeagues = new Set();
-    for (const pick of unique) { if (selected.length >= PICK_COUNT) break; if (!usedLeagues.has(pick.league)) { selected.push(pick); usedLeagues.add(pick.league); } }
+    for (const pick of allPicks) { if (selected.length >= PICK_COUNT) break; if (!usedLeagues.has(pick.league)) { selected.push(pick); usedLeagues.add(pick.league); } }
     if (selected.length === 0) { console.warn('\n⚠ Žádné vhodné zápasy nalezeny.'); process.exit(0); }
     const grouped = balanceGroups(selected);
     const output = grouped.map(m => ({ league: m.league, match: m.match, tip: m.tip, odds: m.odds, group: m.group }));
