@@ -13,6 +13,7 @@ import os
 import sys
 import json
 import random
+import time
 import requests
 from datetime import datetime, timezone
 
@@ -21,9 +22,12 @@ BASE_URL = "https://v1.hockey.api-sports.io"
 MIN_ODDS = 1.75
 OUTPUT_FILE = "hokey.json"
 
+# Země, ze kterých se v ČR nedá sázet
+BLOCKED_COUNTRIES = {"russia", "belarus"}
+
 
 def api_get(endpoint: str, params: dict | None = None) -> list:
-    """API-Sports Hockey GET request."""
+    """API-Sports Hockey GET request (max 10 req/min)."""
     url = f"{BASE_URL}/{endpoint}"
     headers = {"x-apisports-key": API_KEY}
     resp = requests.get(url, headers=headers, params=params or {}, timeout=20)
@@ -39,6 +43,9 @@ def api_get(endpoint: str, params: dict | None = None) -> list:
 
     results = data.get("response", [])
     print(f"   → {len(results)} výsledků")
+
+    # Pauza 7s mezi requesty (free plan = max 10 req/min)
+    time.sleep(7)
     return results
 
 
@@ -65,6 +72,18 @@ def main():
     # Filtruj jen nezačaté zápasy
     ns_games = [g for g in games if g.get("status", {}).get("short") == "NS"]
     print(f"   Celkem zápasů: {len(games)}, nezačatých: {len(ns_games)}")
+
+    # Vyřadit Rusko a Bělorusko
+    before = len(ns_games)
+    ns_games = [
+        g for g in ns_games
+        if g.get("country", {}).get("name", "").lower() not in BLOCKED_COUNTRIES
+        and g.get("league", {}).get("country", "").lower() not in BLOCKED_COUNTRIES
+    ]
+    blocked = before - len(ns_games)
+    if blocked:
+        print(f"   🚫 Vyřazeno {blocked} zápasů (Rusko/Bělorusko)")
+    print(f"   Zápasy k analýze: {len(ns_games)}")
     print()
 
     if not ns_games:
