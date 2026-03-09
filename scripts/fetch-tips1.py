@@ -17,11 +17,11 @@ TZ_CET = ZoneInfo("Europe/Prague")
 HEADERS = {"x-apisports-key": API_KEY}
 BASE = "https://v1.basketball.api-sports.io"
 
-# Zeme ze kterych chceme vybirat
+# Zeme dostupne na Tipsport.cz
 ALLOWED_COUNTRIES = {
     "Czech Republic", "Italy", "Spain", "Germany", "France",
-    "Turkey", "Greece", "Lithuania", "Serbia", "Croatia",
-    "Poland", "Israel", "Slovenia", "Russia", "USA", "Australia",
+    "Turkey", "Greece", "Lithuania", "Poland", "Israel",
+    "USA", "Australia",
 }
 
 # Nazvy lig ktere chceme (Euroleague neni vazana na zemi)
@@ -191,6 +191,9 @@ def fetch_over_tips():
                     name = bet.get("name", "").lower()
                     if "over" not in name and "total" not in name:
                         continue
+                    # Preskoc polocasy, ctvrtiny, periody - jen cely zapas
+                    if any(kw in name for kw in ("half", "quarter", "period", "1st", "2nd", "3rd", "4th", "first", "second")):
+                        continue
 
                     for val in bet.get("values", []):
                         v = str(val.get("value", "")).lower()
@@ -200,6 +203,14 @@ def fetch_over_tips():
                         # Preferuj .5 hodnoty (166.5, 230.5 atd.)
                         point_raw = v.replace("over ", "").replace("over", "").strip()
                         if ".5" not in point_raw:
+                            continue
+
+                        # Min 120 bodu - pod tim je to polocas/ctvrtina
+                        try:
+                            point_num = float(point_raw)
+                        except ValueError:
+                            continue
+                        if point_num < 120:
                             continue
 
                         try:
