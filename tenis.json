@@ -1,21 +1,21 @@
 {
-  "updated_at": "09.03.2026 09:42",
+  "updated_at": "10.03.2026 09:32",
   "tips": [
     {
-      "league": "WTA Indian Wells",
-      "match": "Jessica Pegula vs Jelena Ostapenko",
-      "tip": "Over20.5",
-      "odds": "2.0",
-      "date": "09.03.2026",
-      "time": "20:00"
+      "league": "ATP Indian Wells",
+      "match": "Joao Fonseca vs Jannik Sinner",
+      "tip": "Over19.5",
+      "odds": "1.88",
+      "date": "10.03.2026",
+      "time": "03:00"
     },
     {
-      "league": "ATP Indian Wells",
-      "match": "Daniil Medvedev vs Sebastian Baez",
-      "tip": "Over20.5",
-      "odds": "2.02",
-      "date": "09.03.2026",
-      "time": "04:30"
+      "league": "WTA Indian Wells",
+      "match": "Talia Gibson vs Jasmine Paolini",
+      "tip": "Over21.5",
+      "odds": "2.01",
+      "date": "10.03.2026",
+      "time": "22:00"
     }
   ]
 }
