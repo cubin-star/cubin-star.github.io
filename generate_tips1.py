@@ -98,18 +98,24 @@ def fetch_fixtures(date_str: str) -> dict:
 
         home = f.get("teams", {}).get("home", {}).get("name", "?")
         away = f.get("teams", {}).get("away", {}).get("name", "?")
+        home_id = f.get("teams", {}).get("home", {}).get("id", 0)
+        away_id = f.get("teams", {}).get("away", {}).get("id", 0)
         league = f.get("league", {}).get("name", "?")
         country = f.get("league", {}).get("country", "?")
         league_id = f.get("league", {}).get("id", 0)
+        season = f.get("league", {}).get("season", 2025)
 
         kickoff = f.get("fixture", {}).get("date", "")
 
         fixtures[fid] = {
             "home": home,
             "away": away,
+            "home_id": home_id,
+            "away_id": away_id,
             "league": league,
             "country": country,
             "league_id": league_id,
+            "season": season,
             "kickoff": kickoff,
         }
 
@@ -214,6 +220,9 @@ def extract_candidates(odds_data: list, fixtures: dict) -> list:
                 "Tip": "Over 2.5",
                 "Odds": f"{best:.2f}",
                 "league_id": league_id,
+                "home_id": fix_info["home_id"],
+                "away_id": fix_info["away_id"],
+                "season": fix_info["season"],
                 "best": best,
                 "avg": avg,
                 "bm_count": len(over25_odds),
@@ -226,11 +235,8 @@ def extract_candidates(odds_data: list, fixtures: dict) -> list:
 
 
 def select_best_tips(all_candidates: list, num: int = NUM_TIPS) -> list:
-    """Pick best tips from different leagues. Score = avg odds × bookmaker count."""
-    for c in all_candidates:
-        c["score"] = c["avg"] * min(c["bm_count"], 8)
-
-    all_candidates.sort(key=lambda x: x["score"], reverse=True)
+    """Pick best tips by Goal Storm Score (GSS) from different leagues."""
+    all_candidates.sort(key=lambda x: x.get("gss", 0), reverse=True)
 
     selected = []
     used_leagues = set()
@@ -251,6 +257,120 @@ def select_best_tips(all_candidates: list, num: int = NUM_TIPS) -> list:
 
     random.shuffle(selected)
     return selected[:num]
+
+
+# ============================================================
+# GOAL STORM SCORE (GSS) — original statistical method
+# Uses real team performance data, NOT bookmaker opinions.
+# ============================================================
+
+# Cache for team stats to avoid duplicate API calls
+_team_stats_cache = {}
+
+
+def fetch_team_stats(team_id: int, league_id: int, season: int) -> dict:
+    """Fetch team season statistics. Returns avg goals for/against per game."""
+    cache_key = f"{team_id}_{league_id}_{season}"
+    if cache_key in _team_stats_cache:
+        return _team_stats_cache[cache_key]
+
+    # Default fallback (league average ~1.2 goals per team)
+    fallback = {"goals_for": 1.25, "goals_against": 1.25, "played": 0}
+
+    time.sleep(DELAY)
+    data = api_get("teams/statistics", {
+        "team": str(team_id),
+        "league": str(league_id),
+        "season": str(season)
+    })
+
+    resp = data.get("response", {})
+    if not resp:
+        _team_stats_cache[cache_key] = fallback
+        return fallback
+
+    goals = resp.get("goals", {})
+    played = resp.get("fixtures", {}).get("played", {}).get("total", 0) or 0
+
+    gf = goals.get("for", {}).get("average", {}).get("total", None)
+    ga = goals.get("against", {}).get("average", {}).get("total", None)
+
+    try:
+        goals_for = float(gf) if gf else 1.25
+        goals_against = float(ga) if ga else 1.25
+    except (ValueError, TypeError):
+        goals_for, goals_against = 1.25, 1.25
+
+    result = {"goals_for": goals_for, "goals_against": goals_against, "played": played}
+    _team_stats_cache[cache_key] = result
+    return result
+
+
+def calculate_gss(home_stats: dict, away_stats: dict) -> float:
+    """
+    Goal Storm Score (GSS) — original metric for Over 2.5 probability.
+
+    Based on REAL team performance, not bookmaker opinions.
+    Higher GSS = higher probability of Over 2.5 goals.
+
+    Components:
+      1. Expected Goals Home = (home_attack + away_defense_leakiness) / 2
+      2. Expected Goals Away = (away_attack + home_defense_leakiness) / 2
+      3. Total Expected = sum of both
+      4. Balance Bonus = rewards matches where BOTH teams score
+         (balanced matches are more likely to exceed 2.5 total)
+      5. Experience Factor = slight boost for teams with more games played
+         (more reliable data = more confident prediction)
+    """
+    # Expected goals from each team's perspective
+    home_expected = (home_stats["goals_for"] + away_stats["goals_against"]) / 2
+    away_expected = (away_stats["goals_for"] + home_stats["goals_against"]) / 2
+
+    total_expected = home_expected + away_expected
+
+    # Balance factor (0-1): matches where both teams contribute equally
+    # A 2-1 game is more likely Over 2.5 than a 3-0 game style
+    if total_expected > 0:
+        balance = 1.0 - abs(home_expected - away_expected) / total_expected
+    else:
+        balance = 0.5
+
+    # Experience factor: more games played = more reliable stats
+    min_played = min(home_stats["played"], away_stats["played"])
+    experience = min(min_played / 15.0, 1.0)  # caps at 15 games
+
+    # GSS formula: expected goals × balance bonus × experience reliability
+    gss = total_expected * (1.0 + 0.3 * balance) * (0.7 + 0.3 * experience)
+
+    return round(gss, 3)
+
+
+def enrich_candidates_with_gss(candidates: list) -> list:
+    """Fetch team stats for each candidate and calculate Goal Storm Score."""
+    print(f"\n--- GOAL STORM SCORE (team stats analysis) ---")
+    print(f"  Analyzing {len(candidates)} candidates...")
+
+    for i, c in enumerate(candidates):
+        print(f"  [{i+1}/{len(candidates)}] {c['Match'][:40]:.<42s}", end="")
+
+        home_stats = fetch_team_stats(c["home_id"], c["league_id"], c["season"])
+        away_stats = fetch_team_stats(c["away_id"], c["league_id"], c["season"])
+
+        gss = calculate_gss(home_stats, away_stats)
+        c["gss"] = gss
+
+        # Debug info
+        total_exp = (home_stats["goals_for"] + away_stats["goals_against"]) / 2 + \
+                    (away_stats["goals_for"] + home_stats["goals_against"]) / 2
+        print(f" GSS={gss:.2f} (exp={total_exp:.1f}g)")
+
+    # Sort by GSS for display
+    ranked = sorted(candidates, key=lambda x: x["gss"], reverse=True)
+    print(f"\n  🏆 Top 5 by Goal Storm Score:")
+    for i, c in enumerate(ranked[:5], 1):
+        print(f"    {i}. GSS={c['gss']:.2f} | {c['League']}: {c['Match']} @ {c['Odds']}")
+
+    return candidates
 
 
 def main():
@@ -287,21 +407,25 @@ def main():
     all_odds = odds_today + odds_tomorrow
     print(f"  📊 {len(all_odds)} fixtures with odds data\n")
 
-    # ---- Phase 3: Extract candidates ----
+    # ---- Phase 3: Extract candidates (odds filter) ----
     candidates = extract_candidates(all_odds, all_fixtures)
-
-    unique_leagues = len(set(c["league_id"] for c in candidates))
-    print(f"{'='*55}")
-    print(f"📊 COLLECTED: {len(candidates)} candidates from {unique_leagues} leagues")
-    print(f"   Odds range: {MIN_ODDS}–{MAX_ODDS}")
-    print(f"   API requests used: {request_count}")
-    print(f"{'='*55}")
 
     if not candidates:
         print("❌ No qualifying matches. Keeping previous tips.")
         return
 
-    # ---- Phase 4: Select best 5 (3 for app1 + 2 for app2) ----
+    # ---- Phase 4: Goal Storm Score (team stats analysis) ----
+    enrich_candidates_with_gss(candidates)
+
+    unique_leagues = len(set(c["league_id"] for c in candidates))
+    print(f"\n{'='*55}")
+    print(f"📊 COLLECTED: {len(candidates)} candidates from {unique_leagues} leagues")
+    print(f"   Odds filter: {MIN_ODDS}–{MAX_ODDS}")
+    print(f"   Ranked by: Goal Storm Score (GSS)")
+    print(f"   API requests used: {request_count}")
+    print(f"{'='*55}")
+
+    # ---- Phase 5: Select best 5 by GSS (3 for app1 + 2 for app2) ----
     tips = select_best_tips(candidates)
 
     all_formatted = []
