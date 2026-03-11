@@ -156,6 +156,128 @@ def fetch_odds_for_date(date_str: str) -> list:
     return all_items
 
 
+def _get_league_tier(league_id: int, league_name: str, country: str) -> int:
+    """
+    Return league tier (1=top, 2=second div, etc). Returns 0 for unrecognized.
+
+    Known league IDs from API-Football are mapped explicitly.
+    Fallback: heuristic based on league name keywords.
+    """
+    # --- Explicit known league IDs (API-Football) ---
+    KNOWN_TIERS = {
+        # England tiers 1-6
+        39: 1, 40: 2, 41: 3, 42: 4, 43: 5, 44: 5, 45: 1,  # EPL, Championship, L1, L2, National League, National League, FA Cup
+        46: 1, 48: 1, 526: 6, 527: 6,  # EFL Cup, Community Shield, Nat League N, Nat League S
+        # Spain
+        140: 1, 141: 2, 143: 1,  # La Liga, Segunda, Copa del Rey
+        # Germany
+        78: 1, 79: 2, 80: 1, 529: 1,  # Bundesliga, 2.BL, DFB-Pokal, Super Cup
+        # Italy
+        135: 1, 136: 2, 137: 1, 547: 1,  # Serie A, Serie B, Coppa Italia, Super Cup
+        # France
+        61: 1, 62: 2, 66: 1,  # Ligue 1, Ligue 2, Coupe de France
+        # UEFA
+        2: 1, 3: 1, 848: 1, 531: 1, 4: 1,  # UCL, UEL, UECL, Super Cup, Euro
+        # Netherlands
+        88: 1, 89: 2, 90: 1,  # Eredivisie, Eerste Divisie, KNVB Cup
+        # Portugal
+        94: 1, 95: 2, 96: 1,  # Primeira Liga, Segunda, Taça de Portugal
+        # Turkey
+        203: 1, 204: 2, 205: 1,  # Süper Lig, 1. Lig, Cup
+        # Belgium
+        144: 1, 145: 2, 147: 1,  # Pro League, First Div B, Cup
+        # Scotland
+        179: 1, 180: 2, 181: 1,  # Premiership, Championship, Cup
+        # Austria
+        218: 1, 219: 2, 220: 1,  # Bundesliga, 2. Liga, Cup
+        # Switzerland
+        207: 1, 208: 2,  # Super League, Challenge League
+        # Scandinavia
+        119: 1, 120: 2,  # Denmark Superliga, 1. Division
+        113: 1, 114: 2,  # Sweden Allsvenskan, Superettan
+        103: 1, 104: 2,  # Norway Eliteserien, 1. Div
+        244: 1,  # Finland Veikkausliiga
+        271: 1,  # Iceland Úrvalsdeild
+        # Eastern Europe
+        106: 1, 107: 2,  # Poland Ekstraklasa, I Liga
+        197: 1, 198: 2,  # Greece Super League, Super League 2
+        345: 1,  # Czech First League
+        283: 1, 284: 2,  # Romania Liga 1, Liga 2
+        210: 1,  # Croatia HNL
+        286: 1,  # Serbia Super Liga
+        271: 1,  # Hungary NB I
+        172: 1,  # Bulgaria First League
+        332: 1,  # Slovakia Super Liga
+        333: 1,  # Ukraine Premier League
+        318: 1,  # Cyprus First Division
+        # South America
+        71: 1, 72: 2,  # Brazil Serie A, B
+        128: 1,  # Argentina Liga Profesional
+        13: 1, 11: 1,  # Copa Libertadores, Copa Sudamericana
+        # North America
+        253: 1,  # MLS
+        262: 1,  # Liga MX
+        # Asia
+        98: 1,  # J-League
+        292: 1,  # K-League
+        307: 1,  # Saudi Pro League
+        169: 1,  # China Super League
+        # Oceania
+        188: 1,  # A-League
+        # International
+        1: 1, 4: 1, 5: 1, 6: 1, 9: 1, 10: 1,  # World Cup, Euro, Nations League, Africa Cup, Copa America, Friendlies
+    }
+
+    if league_id in KNOWN_TIERS:
+        return KNOWN_TIERS[league_id]
+
+    # --- Heuristic fallback based on league name ---
+    name = league_name.lower()
+
+    # Tier 1 keywords
+    if any(k in name for k in ("premier league", "primera división", "bundesliga",
+            "serie a", "ligue 1", "eredivisie", "primeira liga", "süper lig",
+            "super league", "premiership", "superliga", "allsvenskan",
+            "eliteserien", "ekstraklasa", "pro league", "champions league",
+            "europa league", "conference league", "copa libertadores",
+            "copa sudamericana", "mls", "liga mx", "j1 league",
+            "k league 1", "pro league", "world cup", "euro championship",
+            "nations league", "copa america", "africa cup",
+            "fa cup", "dfb pokal", "copa del rey", "coppa italia",
+            "coupe de france", "efl cup", "league cup")):
+        return 1
+
+    # Tier 2 keywords
+    if any(k in name for k in ("championship", "segunda", "2. bundesliga",
+            "serie b", "ligue 2", "eerste divisie", "segunda liga",
+            "1. lig", "first division b", "2. liga", "challenge league",
+            "1. division", "superettan", "1. divisjon", "i liga",
+            "liga 2", "j2 league", "serie b")):
+        return 2
+
+    # England tiers 3-6
+    if country == "england":
+        if any(k in name for k in ("league one", "league 1")):
+            return 3
+        if any(k in name for k in ("league two", "league 2")):
+            return 4
+        if "national league" in name:
+            if any(k in name for k in ("north", "south")):
+                return 6
+            return 5
+        # Any other recognized English league
+        if any(k in name for k in ("trophy", "community shield")):
+            return 2
+
+    # Cups — recognized if they have "cup", "pokal", "copa", "coupe", "taça"
+    if any(k in name for k in ("cup", "pokal", "copa", "coupe", "taça",
+            "trophée", "trophy", "shield", "supercup", "super cup")):
+        return 1
+
+    # Unrecognized — return 0 to skip
+    return 0
+
+
 def extract_candidates(odds_data: list, fixtures: dict) -> list:
     """Extract Over 2.5 candidates from odds data (only within 24h window)."""
     now = datetime.now(timezone.utc)
@@ -188,6 +310,42 @@ def extract_candidates(odds_data: list, fixtures: dict) -> list:
         country = fix_info.get("country", "").lower()
         if country in ("russia", "belarus"):
             continue
+
+        # Exclude women's leagues/cups
+        league_lower = league_name.lower()
+        if any(w in league_lower for w in ("women", "woman", "feminine", "féminin",
+                "feminin", "frauen", "damer", "kvinner", "naiset", "kobiety",
+                "señoras", "feminino", "w league", "girls")):
+            continue
+
+        # Determine continent/region for priority sorting later
+        european_countries = {
+            "england", "spain", "germany", "italy", "france", "netherlands",
+            "portugal", "turkey", "belgium", "scotland", "austria", "switzerland",
+            "denmark", "sweden", "norway", "finland", "iceland", "poland",
+            "greece", "czech republic", "romania", "croatia", "serbia", "hungary",
+            "bulgaria", "slovakia", "ukraine", "cyprus", "ireland", "wales",
+            "northern ireland", "bosnia and herzegovina", "slovenia", "albania",
+            "montenegro", "north macedonia", "kosovo", "luxembourg", "malta",
+            "georgia", "armenia", "azerbaijan", "moldova", "estonia", "latvia",
+            "lithuania", "faroe islands", "gibraltar", "liechtenstein", "andorra",
+            "san marino", "world",  # UEFA/FIFA international counts as "european"
+        }
+        is_european = country in european_countries
+
+        # League tier filter:
+        # England: allow up to tier 6 (National League South/North)
+        # Others: allow up to tier 2 (second division)
+        # Unknown leagues: skip
+        tier = _get_league_tier(league_id, league_name, country)
+        if tier == 0:
+            continue  # unrecognized league — skip
+        if country == "england":
+            if tier > 6:
+                continue
+        else:
+            if tier > 2:
+                continue
 
         home = fix_info["home"]
         away = fix_info["away"]
@@ -223,6 +381,7 @@ def extract_candidates(odds_data: list, fixtures: dict) -> list:
                 "home_id": fix_info["home_id"],
                 "away_id": fix_info["away_id"],
                 "season": fix_info["season"],
+                "is_european": is_european,
                 "best": best,
                 "avg": avg,
                 "bm_count": len(over25_odds),
@@ -235,12 +394,23 @@ def extract_candidates(odds_data: list, fixtures: dict) -> list:
 
 
 def select_best_tips(all_candidates: list, num: int = NUM_TIPS) -> list:
-    """Pick best tips by Goal Storm Score (GSS) from different leagues."""
-    all_candidates.sort(key=lambda x: x.get("gss", 0), reverse=True)
+    """
+    Pick best tips by Goal Storm Score (GSS) from different leagues.
+    Priority: European leagues first, then rest of world.
+    """
+    # Separate European vs non-European
+    european = [c for c in all_candidates if c.get("is_european")]
+    non_european = [c for c in all_candidates if not c.get("is_european")]
 
+    # Sort each group by GSS
+    european.sort(key=lambda x: x.get("gss", 0), reverse=True)
+    non_european.sort(key=lambda x: x.get("gss", 0), reverse=True)
+
+    # Pick from European first, then fill with non-European
     selected = []
     used_leagues = set()
-    for c in all_candidates:
+
+    for c in european:
         if c["league_id"] in used_leagues:
             continue
         selected.append(c)
@@ -248,8 +418,19 @@ def select_best_tips(all_candidates: list, num: int = NUM_TIPS) -> list:
         if len(selected) >= num:
             break
 
+    # Fill remaining spots from non-European
     if len(selected) < num:
-        for c in all_candidates:
+        for c in non_european:
+            if c["league_id"] in used_leagues:
+                continue
+            selected.append(c)
+            used_leagues.add(c["league_id"])
+            if len(selected) >= num:
+                break
+
+    # Last resort: allow same league
+    if len(selected) < num:
+        for c in european + non_european:
             if c not in selected:
                 selected.append(c)
                 if len(selected) >= num:
