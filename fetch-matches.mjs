@@ -29,6 +29,65 @@ const BLOCKED_AFRICAN = new Set([
     'Uganda', 'Zambia', 'Zimbabwe',
 ]);
 // Povolené africké: Egypt, Morocco, Tunisia, South-Africa
+
+const EUROPEAN_COUNTRIES = new Set([
+    'England', 'Spain', 'Germany', 'Italy', 'France', 'Netherlands', 'Portugal',
+    'Belgium', 'Turkey', 'Austria', 'Switzerland', 'Scotland', 'Czech-Republic',
+    'Denmark', 'Norway', 'Sweden', 'Finland', 'Poland', 'Greece', 'Croatia',
+    'Serbia', 'Romania', 'Bulgaria', 'Hungary', 'Slovakia', 'Slovenia',
+    'Ukraine', 'Ireland', 'Northern-Ireland', 'Wales', 'Iceland', 'Bosnia',
+    'Montenegro', 'Albania', 'North-Macedonia', 'Luxembourg', 'Cyprus',
+    'Malta', 'Estonia', 'Latvia', 'Lithuania', 'Georgia', 'Armenia',
+    'Azerbaijan', 'Kazakhstan', 'Moldova', 'Kosovo', 'Faroe-Islands',
+    'Gibraltar', 'Andorra', 'San-Marino', 'Liechtenstein',
+]);
+
+/** Detekce ženských soutěží podle názvu ligy */
+function isWomenLeague(name) {
+    const n = name.toLowerCase();
+    return /women|feminine|feminin|\bfrauen\b|\bdamer\b|\bkvinner\b|\bžen[yí]?\b|\bladies\b|\bfemenin/i.test(n);
+}
+
+/**
+ * Odhad úrovně (tieru) ligy podle názvu.
+ * 1 = nejvyšší liga, 2 = druhá liga, atd.
+ * Cup/pohárové soutěže a mezinárodní = tier 1.
+ */
+function estimateLeagueTier(leagueName, country) {
+    const name = leagueName.toLowerCase();
+
+    // Mezinárodní / pohárové soutěže
+    if (/champions league|europa league|conference league|euro \d|world cup|super cup|supercup|\bcup\b|\bcopa\b|\bcoupe\b|\bcoppa\b|\bpokal\b|\btaça\b|\bpohár\b|\bkaupa/i.test(leagueName)) return 1;
+
+    // Anglie – specifické názvy
+    if (country === 'England') {
+        if (/premier league/i.test(name)) return 1;
+        if (/championship/i.test(name)) return 2;
+        if (/league one/i.test(name)) return 3;
+        if (/league two/i.test(name)) return 4;
+        if (/national league(?!.*(north|south))/i.test(name)) return 5;
+        if (/national league.*(north|south)/i.test(name)) return 6;
+        if (/isthmian|northern premier|southern league/i.test(name)) return 7;
+    }
+
+    // Obecné vzory pro 2. ligu
+    if (/\b2\.|ligue 2|serie b|segunda|la liga 2|eerste divisie|super league 2|2\. (bundesliga|lig)|division 2|championship|\bii\b|1\. lig/i.test(name)) return 2;
+
+    // Obecné vzory pro 3.+ ligu
+    if (/\b3\.|ligue 3|serie c|tercera|3\. liga|division 3|national 3|regionalliga|\biii\b/i.test(name)) return 3;
+    if (/\b[4-9]\.|serie d|division [4-9]|regional|county/i.test(name)) return 4;
+
+    // Číselný vzor: "X. liga", "Division X", "Liga X"
+    const numMatch = name.match(/(\d+)\s*\.\s*(liga|division|league)/i) || name.match(/(liga|division|league)\s*(\d+)/i);
+    if (numMatch) {
+        const num = parseInt(numMatch[1]) || parseInt(numMatch[2]);
+        if (!isNaN(num) && num >= 2) return num;
+    }
+
+    // Výchozí = 1. liga
+    return 1;
+}
+
 const TZ = 'Europe/Prague';
 let reqCount = 0;
 
@@ -71,8 +130,17 @@ async function footballPicks(now, maxTime) {
     let fixtures = [];
     for (const d of dates) { console.log('📅 Fixtures ' + d + '...'); fixtures.push(...await getFootballFixtures(d)); await sleep(350); }
     console.log('   ' + fixtures.length + ' naplánovaných zápasů\n');
-    fixtures = fixtures.filter(f => { const t = new Date(f.fixture.date); const c = f.league.country; return t >= now && t <= maxTime && !EXCLUDED_COUNTRIES.has(c) && !BLOCKED_AFRICAN.has(c); });
-    console.log('   ' + fixtures.length + ' v 24h okně (bez RU/BY/Afrika)');
+    fixtures = fixtures.filter(f => {
+        const t = new Date(f.fixture.date);
+        const c = f.league.country;
+        if (t < now || t > maxTime) return false;
+        if (EXCLUDED_COUNTRIES.has(c) || BLOCKED_AFRICAN.has(c)) return false;
+        if (isWomenLeague(f.league.name)) return false;
+        const maxTier = c === 'England' ? 6 : 2;
+        if (estimateLeagueTier(f.league.name, c) > maxTier) return false;
+        return true;
+    });
+    console.log('   ' + fixtures.length + ' v 24h okně (bez RU/BY/Afrika/žen, max 2. liga, EN max 6.)');
     const fixtureMap = new Map(), leagueMap = new Map();
     for (const f of fixtures) {
         fixtureMap.set(f.fixture.id, f);
@@ -91,7 +159,7 @@ async function footballPicks(now, maxTime) {
                 for (const bm of entry.bookmakers || []) { for (const bet of bm.bets || []) { for (const v of bet.values || []) {
                     if (v.value !== 'Over 2.5') continue;
                     const odd = parseFloat(v.odd); if (isNaN(odd) || odd < MIN_ODDS || odd > MAX_ODDS) continue;
-                    if (!matchMap.has(matchKey)) matchMap.set(matchKey, { fixtureId: matchKey, league: lg.name, match: fix.teams.home.name + ' - ' + fix.teams.away.name, tip: 'Over 2.5', allOdds: [] });
+                    if (!matchMap.has(matchKey)) matchMap.set(matchKey, { fixtureId: matchKey, league: lg.name, country: lg.country, match: fix.teams.home.name + ' - ' + fix.teams.away.name, tip: 'Over 2.5', allOdds: [] });
                     matchMap.get(matchKey).allOdds.push(odd);
                 } } }
             }
@@ -114,7 +182,7 @@ async function footballPicks(now, maxTime) {
         const pred = await getMatchPrediction(m.fixtureId);
         if (pred) {
             const sc = scoreByTeamStats(pred);
-            picks.push({ league: m.league, match: m.match, tip: m.tip, odds: avg.toFixed(2), score: sc.total, detail: sc.detail });
+            picks.push({ league: m.league, country: m.country, match: m.match, tip: m.tip, odds: avg.toFixed(2), score: sc.total, detail: sc.detail });
         }
         if (i < toAnalyze.length - 1) await sleep(350);
     }
@@ -227,8 +295,11 @@ async function main() {
     console.log('⏰ ' + now.toUTCString() + ' → ' + maxTime.toUTCString() + '\n');
     let allPicks = await footballPicks(now, maxTime);
     console.log('\n📊 Celkem ' + allPicks.length + ' zápasů (' + reqCount + ' API req)');
-    // Už seřazeno podle score – vybrat 6 z různých lig
+    // Už seřazeno podle score – vybrat 6 z různých lig, priorita evropské soutěže
     const selected = [], usedLeagues = new Set();
+    // 1. kolo: evropské ligy
+    for (const pick of allPicks) { if (selected.length >= PICK_COUNT) break; if (EUROPEAN_COUNTRIES.has(pick.country) && !usedLeagues.has(pick.league)) { selected.push(pick); usedLeagues.add(pick.league); } }
+    // 2. kolo: doplnit neevropskými, pokud není dost evropských
     for (const pick of allPicks) { if (selected.length >= PICK_COUNT) break; if (!usedLeagues.has(pick.league)) { selected.push(pick); usedLeagues.add(pick.league); } }
     if (selected.length === 0) { console.warn('\n⚠ Žádné vhodné zápasy nalezeny.'); process.exit(0); }
     const grouped = balanceGroups(selected);
