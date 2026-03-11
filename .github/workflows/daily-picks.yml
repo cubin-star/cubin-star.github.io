@@ -35,4 +35,5 @@ jobs:
           git config user.email "bot@kombik.cz"
           git add hot.json
           git diff --cached --quiet || git commit -m "🤖 Denní tipy $(date +%Y-%m-%d)"
+          git pull --rebase
           git push
