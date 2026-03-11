@@ -91,27 +91,106 @@ async function footballPicks(now, maxTime) {
                 for (const bm of entry.bookmakers || []) { for (const bet of bm.bets || []) { for (const v of bet.values || []) {
                     if (v.value !== 'Over 2.5') continue;
                     const odd = parseFloat(v.odd); if (isNaN(odd) || odd < MIN_ODDS || odd > MAX_ODDS) continue;
-                    if (!matchMap.has(matchKey)) matchMap.set(matchKey, { league: lg.name, match: fix.teams.home.name + ' - ' + fix.teams.away.name, tip: 'Over 2.5', allOdds: [] });
+                    if (!matchMap.has(matchKey)) matchMap.set(matchKey, { fixtureId: matchKey, league: lg.name, match: fix.teams.home.name + ' - ' + fix.teams.away.name, tip: 'Over 2.5', allOdds: [] });
                     matchMap.get(matchKey).allOdds.push(odd);
                 } } }
             }
             await sleep(350);
         }
     }
-    // Scoring: víc bookmakerů ve shodě + nízký rozptyl = silnější tip
+    // Kandidáti = zápasy s Over 2.5 kurzem v rozmezí
+    const candidates = [...matchMap.values()];
+    console.log('\n📊 ' + candidates.length + ' kandidátů s Over 2.5 (kurz ' + MIN_ODDS + '–' + MAX_ODDS + ')');
+
+    // Analýza: pro každého kandidáta stáhni predictions (tým. statistiky, formu, H2H)
+    const MAX_ANALYZE = 50;
+    const toAnalyze = candidates.slice(0, MAX_ANALYZE);
+    console.log('🔍 Analyzuji ' + toAnalyze.length + ' zápasů (predictions)...\n');
+
     const picks = [];
-    for (const [, m] of matchMap) {
-        const n = m.allOdds.length;
-        const avg = m.allOdds.reduce((a, b) => a + b, 0) / n;
-        const variance = m.allOdds.reduce((a, b) => a + (b - avg) ** 2, 0) / n;
-        const score = n / (1 + variance);
-        picks.push({ league: m.league, match: m.match, tip: m.tip, odds: avg.toFixed(2), score: score, bmCount: n });
+    for (let i = 0; i < toAnalyze.length; i++) {
+        const m = toAnalyze[i];
+        const avg = m.allOdds.reduce((a, b) => a + b, 0) / m.allOdds.length;
+        const pred = await getMatchPrediction(m.fixtureId);
+        if (pred) {
+            const sc = scoreByTeamStats(pred);
+            picks.push({ league: m.league, match: m.match, tip: m.tip, odds: avg.toFixed(2), score: sc.total, detail: sc.detail });
+        }
+        if (i < toAnalyze.length - 1) await sleep(350);
     }
     picks.sort((a, b) => b.score - a.score);
-    console.log('\n📊 ' + picks.length + ' zápasů s Over 2.5 (kurz ' + MIN_ODDS + '–' + MAX_ODDS + ')');
-    if (picks.length > 0) console.log('   Top 10 score:');
-    picks.slice(0, 10).forEach((p, i) => console.log('   ' + (i + 1) + '. [' + p.league + '] ' + p.match + ' → avg ' + p.odds + ', ' + p.bmCount + ' BM, score ' + p.score.toFixed(1)));
+
+    console.log('📊 Analyzováno: ' + picks.length + ' zápasů');
+    if (picks.length > 0) console.log('   Top 10 podle týmových statistik:');
+    picks.slice(0, 10).forEach((p, i) => console.log('   ' + (i + 1) + '. [' + p.league + '] ' + p.match + ' | ' + p.detail + ' | score ' + p.score.toFixed(2)));
     return picks;
+}
+
+// ═══════════════════ PREDICTIONS ═══════════════════
+
+async function getMatchPrediction(fixtureId) {
+    const data = await apiFetch(FOOTBALL_API, '/predictions?fixture=' + fixtureId);
+    return (data.response && data.response[0]) || null;
+}
+
+/**
+ * Scoring čistě podle týmových dat – NE podle kurzů bookmakerů.
+ *
+ * Faktory:
+ *  1. Útočná síla: průměr gólů obou týmů za posledních 5 zápasů
+ *  2. Děravá obrana: průměr inkasovaných gólů obou týmů za posledních 5
+ *  3. Celosezonní průměr gólů (for + against) obou týmů
+ *  4. H2H: průměr gólů ve vzájemných zápasech
+ *  5. API prediction: bonus pokud API samo tipuje Over 2.5
+ */
+function scoreByTeamStats(pred) {
+    const home = pred.teams?.home;
+    const away = pred.teams?.away;
+    if (!home || !away) return { total: 0, detail: 'no data' };
+
+    // Last 5 matches
+    const hFor5 = parseFloat(home.last_5?.goals?.for?.average) || 0;
+    const hAgn5 = parseFloat(home.last_5?.goals?.against?.average) || 0;
+    const aFor5 = parseFloat(away.last_5?.goals?.for?.average) || 0;
+    const aAgn5 = parseFloat(away.last_5?.goals?.against?.average) || 0;
+
+    // Season averages
+    const hForS = parseFloat(home.league?.goals?.for?.average?.total) || hFor5;
+    const hAgnS = parseFloat(home.league?.goals?.against?.average?.total) || hAgn5;
+    const aForS = parseFloat(away.league?.goals?.for?.average?.total) || aFor5;
+    const aAgnS = parseFloat(away.league?.goals?.against?.average?.total) || aAgn5;
+
+    // 1. Útočná síla (posledních 5): kolik gólů oba týmy střílejí
+    const recentAttack = hFor5 + aFor5;
+
+    // 2. Děravost obrany (posledních 5): kolik gólů oba týmy inkasují
+    const recentDefWeak = hAgn5 + aAgn5;
+
+    // 3. Sezonní průměr: stabilnější ukazatel
+    const seasonAttack = hForS + aForS;
+    const seasonDefWeak = hAgnS + aAgnS;
+
+    // 4. Odhad celkových gólů (kombinace posledních 5 + sezóna, 60:40)
+    const expectedRecent = (recentAttack + recentDefWeak) / 2;
+    const expectedSeason = (seasonAttack + seasonDefWeak) / 2;
+    const expectedGoals = expectedRecent * 0.6 + expectedSeason * 0.4;
+
+    // 5. H2H bonus
+    let h2hAvg = 0;
+    const h2h = pred.h2h || [];
+    if (h2h.length > 0) {
+        const totalG = h2h.reduce((a, g) => a + (g.goals?.home || 0) + (g.goals?.away || 0), 0);
+        h2hAvg = totalG / h2h.length;
+    }
+    const h2hBonus = h2hAvg > 2.5 ? 0.3 : (h2hAvg > 2.0 ? 0.1 : 0);
+
+    // 6. API prediction bonus
+    const apiTip = pred.predictions?.under_over;
+    const apiBonus = (apiTip === '+2.5' || apiTip === '+3.5') ? 0.4 : 0;
+
+    const total = expectedGoals + h2hBonus + apiBonus;
+    const detail = 'exp ' + expectedGoals.toFixed(1) + 'g, L5atk ' + recentAttack.toFixed(1) + ', H2H ' + h2hAvg.toFixed(1) + (apiTip === '+2.5' ? ', API✓' : '');
+    return { total, detail };
 }
 
 function balanceGroups(picks) {
