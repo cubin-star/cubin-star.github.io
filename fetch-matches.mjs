@@ -52,40 +52,104 @@ function isWomenLeague(name) {
  * Odhad úrovně (tieru) ligy podle názvu.
  * 1 = nejvyšší liga, 2 = druhá liga, atd.
  * Cup/pohárové soutěže a mezinárodní = tier 1.
+ * WHITELIST přístup: co nerozpoznáme → tier 99 (= vyřazeno).
  */
 function estimateLeagueTier(leagueName, country) {
     const name = leagueName.toLowerCase();
 
-    // Mezinárodní / pohárové soutěže
-    if (/champions league|europa league|conference league|euro \d|world cup|super cup|supercup|\bcup\b|\bcopa\b|\bcoupe\b|\bcoppa\b|\bpokal\b|\btaça\b|\bpohár\b|\bkaupa/i.test(leagueName)) return 1;
+    // Mezinárodní / pohárové soutěže → vždy OK
+    if (/champions league|europa league|conference league|euro \d|world cup|super cup|supercup|\bcup\b|\bcopa\b|\bcoupe\b|\bcoppa\b|\bpokal\b|\btaça\b|\bpohár\b|\bkaupa|\btrophy\b|\bshield\b/i.test(leagueName)) return 1;
 
-    // Anglie – specifické názvy
+    // ── Anglie – specifické názvy ──
     if (country === 'England') {
         if (/premier league/i.test(name)) return 1;
         if (/championship/i.test(name)) return 2;
         if (/league one/i.test(name)) return 3;
         if (/league two/i.test(name)) return 4;
-        if (/national league(?!.*(north|south))/i.test(name)) return 5;
+        if (/national league/i.test(name) && !/north|south/i.test(name)) return 5;
         if (/national league.*(north|south)/i.test(name)) return 6;
-        if (/isthmian|northern premier|southern league/i.test(name)) return 7;
+        return 99;
     }
 
-    // Obecné vzory pro 2. ligu
-    if (/\b2\.|ligue 2|serie b|segunda|la liga 2|eerste divisie|super league 2|2\. (bundesliga|lig)|division 2|championship|\bii\b|1\. lig/i.test(name)) return 2;
+    // ── Whitelist 1. ligy (explicitní názvy) ──
+    const TIER1 = [
+        /la liga(?!\s*2)/i,                           // Španělsko
+        /\bbundesliga(?!\s*2)/i,                      // Německo / Rakousko
+        /\bserie a/i,                                 // Itálie
+        /\bligue 1/i,                                 // Francie
+        /\beredivisie/i,                              // Nizozemsko
+        /primeira liga|liga portugal(?!\s*2)/i,        // Portugalsko
+        /jupiler|pro league(?!\s*[2b])/i,             // Belgie
+        /s[uü]per lig(?!\s*[2b])/i,                   // Turecko
+        /super league(?!\s*2)/i,                       // Řecko / Švýcarsko
+        /premiership/i,                                // Skotsko
+        /superliga(?!\s*[2b])/i,                       // Dánsko / Srbsko
+        /eliteserien/i,                                // Norsko
+        /allsvenskan/i,                                // Švédsko
+        /veikkausliiga/i,                              // Finsko
+        /ekstraklasa/i,                                // Polsko
+        /1\.\s*hnl|prva hnl/i,                        // Chorvatsko
+        /liga i(?:\b|$)|liga 1(?:\b|$)/i,             // Rumunsko
+        /first professional league|parva liga/i,       // Bulharsko
+        /nb i(?:\b|$)|otp bank/i,                     // Maďarsko
+        /fortuna liga|niké liga/i,                     // Slovensko / ČR
+        /prvaliga|prva liga(?!\s*[2b])/i,             // Slovinsko
+        /premier league/i,                             // Ukrajina / Irsko (obecný)
+        /premier division/i,                           // Irsko
+        /úrvalsdeild/i,                                // Island
+        /meistaraflokkur/i,                            // Faerské ostrovy
+        /a-league/i,                                   // Austrálie
+        /j1 league|j-league/i,                         // Japonsko
+        /k league 1/i,                                 // Jižní Korea
+        /mls/i,                                        // USA
+        /liga mx/i,                                    // Mexiko
+        /brasileir[aã]o.*s[eé]rie a/i,                // Brazílie
+        /primera divisi[oó]n(?!\s*[2b])/i,            // Argentina aj.
+        /botola pro(?!\s*2)/i,                         // Maroko
+        /ligue 1.*pro/i,                               // Tunisko
+        /egyptian premier/i,                           // Egypt
+        /south african premier/i,                      // Jižní Afrika
+        /1\.\s*liga(?!\s*(fa|2|b))/i,                  // ČR (1. liga)
+        /chance liga|synot liga/i,                      // ČR (sponzorský název)
+    ];
 
-    // Obecné vzory pro 3.+ ligu
-    if (/\b3\.|ligue 3|serie c|tercera|3\. liga|division 3|national 3|regionalliga|\biii\b/i.test(name)) return 3;
-    if (/\b[4-9]\.|serie d|division [4-9]|regional|county/i.test(name)) return 4;
+    // ── Whitelist 2. ligy (explicitní názvy) ──
+    const TIER2 = [
+        /championship/i,                               // Anglie 2
+        /la liga 2|segunda divisi[oó]n|smartbank/i,    // Španělsko
+        /2\.\s*bundesliga/i,                           // Německo
+        /serie b/i,                                    // Itálie
+        /ligue 2/i,                                    // Francie
+        /eerste divisie/i,                             // Nizozemsko
+        /liga portugal 2|segunda liga/i,               // Portugalsko
+        /challenger pro league/i,                      // Belgie
+        /1\.\s*lig(?:i)?(?!\s*a)/i,                   // Turecko (2. úroveň)
+        /super league 2/i,                             // Řecko
+        /challenge league/i,                           // Švýcarsko
+        /superliga 2|srpska liga/i,                    // Srbsko / Dánsko 2
+        /1\.\s*division(?:\b|$)/i,                     // Dánsko / Norsko / Švédsko
+        /obos-ligaen/i,                                // Norsko 2
+        /superettan/i,                                 // Švédsko 2
+        /ykk[oö]nen/i,                                // Finsko 2
+        /i liga/i,                                     // Polsko 2
+        /2\.\s*hnl/i,                                  // Chorvatsko 2
+        /liga ii|liga 2(?:\b|$)/i,                     // Rumunsko 2
+        /nb ii|nb 2/i,                                 // Maďarsko 2
+        /2\.\s*liga/i,                                 // ČR / Slovensko 2
+        /division 2/i,                                 // obecný
+        /fnl|pfl/i,                                    // Rusko 2 (blokováno jinde)
+        /brasileir[aã]o.*s[eé]rie b/i,                // Brazílie 2
+        /k league 2/i,                                 // Jižní Korea 2
+        /usl championship/i,                           // USA 2
+        /liga de expansi[oó]n/i,                       // Mexiko 2
+        /scottish championship/i,                      // Skotsko 2
+    ];
 
-    // Číselný vzor: "X. liga", "Division X", "Liga X"
-    const numMatch = name.match(/(\d+)\s*\.\s*(liga|division|league)/i) || name.match(/(liga|division|league)\s*(\d+)/i);
-    if (numMatch) {
-        const num = parseInt(numMatch[1]) || parseInt(numMatch[2]);
-        if (!isNaN(num) && num >= 2) return num;
-    }
+    for (const re of TIER1) { if (re.test(name)) return 1; }
+    for (const re of TIER2) { if (re.test(name)) return 2; }
 
-    // Výchozí = 1. liga
-    return 1;
+    // Nerozpoznaná liga → tier 99 (vyřazeno)
+    return 99;
 }
 
 const TZ = 'Europe/Prague';
@@ -130,17 +194,20 @@ async function footballPicks(now, maxTime) {
     let fixtures = [];
     for (const d of dates) { console.log('📅 Fixtures ' + d + '...'); fixtures.push(...await getFootballFixtures(d)); await sleep(350); }
     console.log('   ' + fixtures.length + ' naplánovaných zápasů\n');
+    const skippedLeagues = new Set();
     fixtures = fixtures.filter(f => {
         const t = new Date(f.fixture.date);
         const c = f.league.country;
         if (t < now || t > maxTime) return false;
         if (EXCLUDED_COUNTRIES.has(c) || BLOCKED_AFRICAN.has(c)) return false;
-        if (isWomenLeague(f.league.name)) return false;
+        if (isWomenLeague(f.league.name)) { skippedLeagues.add('♀ ' + f.league.name + ' (' + c + ')'); return false; }
         const maxTier = c === 'England' ? 6 : 2;
-        if (estimateLeagueTier(f.league.name, c) > maxTier) return false;
+        const tier = estimateLeagueTier(f.league.name, c);
+        if (tier > maxTier) { skippedLeagues.add('⛔ T' + tier + ' ' + f.league.name + ' (' + c + ')'); return false; }
         return true;
     });
-    console.log('   ' + fixtures.length + ' v 24h okně (bez RU/BY/Afrika/žen, max 2. liga, EN max 6.)');
+    if (skippedLeagues.size > 0) { console.log('   Vyřazeno:'); for (const s of skippedLeagues) console.log('     ' + s); }
+    console.log('   ' + fixtures.length + ' v 24h okně (whitelist 1.+2. liga, EN max 6., poháry OK)');
     const fixtureMap = new Map(), leagueMap = new Map();
     for (const f of fixtures) {
         fixtureMap.set(f.fixture.id, f);
