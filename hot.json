@@ -7,10 +7,10 @@
     "group": 1
   },
   {
-    "league": "First League",
-    "match": "Petrovac - Mladost DG",
+    "league": "Cup",
+    "match": "Velež - FK Sarajevo",
     "tip": "Over 2.5",
-    "odds": "2.03",
+    "odds": "2.23",
     "group": 1
   },
   {
@@ -21,10 +21,10 @@
     "group": 2
   },
   {
-    "league": "Campeonato de Portugal Prio - Group C",
-    "match": "Os Marialvas - Marinhense",
+    "league": "Primera División RFEF - Group 2",
+    "match": "Antequera - Algeciras",
     "tip": "Over 2.5",
-    "odds": "2.31",
+    "odds": "2.52",
     "group": 2
   },
   {
@@ -35,10 +35,10 @@
     "group": 3
   },
   {
-    "league": "Primera División RFEF - Group 2",
-    "match": "Antequera - Algeciras",
+    "league": "Copa Do Brasil",
+    "match": "Manauara - Fortaleza EC",
     "tip": "Over 2.5",
-    "odds": "2.52",
+    "odds": "2.27",
     "group": 3
   }
 ]
