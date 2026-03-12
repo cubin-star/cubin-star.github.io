@@ -1,44 +1,44 @@
 [
   {
-    "league": "League One",
-    "match": "AFC Wimbledon - Blackpool",
+    "league": "Copa Do Brasil",
+    "match": "Tuna Luso - Juventude",
     "tip": "Over 2.5",
-    "odds": "2.19",
+    "odds": "2.12",
     "group": 1
   },
   {
-    "league": "Cup",
-    "match": "Velež - FK Sarajevo",
+    "league": "Pro League",
+    "match": "Al Najma - Damac",
     "tip": "Over 2.5",
-    "odds": "2.23",
+    "odds": "2.04",
     "group": 1
   },
   {
-    "league": "Championship",
-    "match": "West Brom - Southampton",
+    "league": "CONCACAF Champions League",
+    "match": "FC Cincinnati - Tigres UANL",
     "tip": "Over 2.5",
-    "odds": "2.00",
+    "odds": "2.01",
     "group": 2
   },
   {
-    "league": "Primera División RFEF - Group 2",
-    "match": "Antequera - Algeciras",
+    "league": "UEFA Europa Conference League",
+    "match": "Samsunspor - Rayo Vallecano",
     "tip": "Over 2.5",
-    "odds": "2.52",
+    "odds": "2.21",
     "group": 2
   },
   {
-    "league": "Erovnuli Liga",
-    "match": "Gagra - Spaeri",
+    "league": "UEFA Europa League",
+    "match": "VfB Stuttgart - FC Porto",
     "tip": "Over 2.5",
-    "odds": "2.00",
+    "odds": "2.06",
     "group": 3
   },
   {
-    "league": "Copa Do Brasil",
-    "match": "Manauara - Fortaleza EC",
+    "league": "Premier League",
+    "match": "Sitra - Budaiya",
     "tip": "Over 2.5",
-    "odds": "2.27",
+    "odds": "2.06",
     "group": 3
   }
 ]
