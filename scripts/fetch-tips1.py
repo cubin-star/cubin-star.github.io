@@ -17,25 +17,44 @@ TZ_CET = ZoneInfo("Europe/Prague")
 HEADERS = {"x-apisports-key": API_KEY}
 BASE = "https://v1.basketball.api-sports.io"
 
-# Zeme dostupne na Tipsport.cz
-ALLOWED_COUNTRIES = {
-    "Czech Republic", "Italy", "Spain", "Germany", "France",
-    "Turkey", "Greece", "Lithuania", "Poland", "Israel",
-    "USA", "Australia",
+# Hlavni (top) ligy podle zeme – pouze 1. liga v kazde zemi
+# Klic = nazev zeme z API, hodnota = set podretezcu nazvu ligy (lowercase)
+TOP_LEAGUES_BY_COUNTRY = {
+    "USA":              {"nba"},
+    "Czech Republic":   {"nbl"},
+    "Italy":            {"serie a", "lega basket"},
+    "Spain":            {"acb", "liga endesa"},
+    "Germany":          {"bbl", "bundesliga"},
+    "France":           {"pro a", "betclic elite", "lnb"},
+    "Turkey":           {"bsl", "super ligi"},
+    "Greece":           {"a1", "basket league"},
+    "Lithuania":        {"lkl"},
+    "Poland":           {"plk", "energa basket"},
+    "Israel":           {"winner league", "super league"},
+    "Australia":        {"nbl"},
 }
 
-# Nazvy lig ktere chceme (Euroleague neni vazana na zemi)
-ALLOWED_LEAGUE_NAMES = {"euroleague", "eurocup"}
+# Evropske a svetove pohary/souteze – povol bez ohledu na zemi
+EURO_WORLD_CUPS = (
+    "euroleague", "eurocup",
+    "champions league", "basketball champions league",
+    "fiba europe cup", "europe cup",
+    "fiba world cup", "world cup",
+    "eurobasket",
+    "olympic",
+    "intercontinental cup",
+)
 
-# Co preskocit
+# Co preskocit – nizsi souteze, mladez, zeny
 SKIP_KEYWORDS = ("amateur", "u18", "u19", "u20", "u21", "women", "w ",
                  "g league", "g-league", "2nd", "division 2", "division b",
-                 "leb oro", "cup", "pohar",
                  "segunda", "serie a2", "serie b", "pro b",
                  "2. liga", "nbl 1", "a2", "b league",
                  "lega 2", "liga 2", "division 1",
                  "primera feb", "segunda feb",
-                 "tb2l", "tkbl", "heba")
+                 "tb2l", "tkbl", "heba",
+                 "leb oro", "leb plata",
+                 "3x3", "youth", "junior")
 
 
 def api_get(endpoint, params):
@@ -64,28 +83,27 @@ def get_todays_games():
 
 
 def is_allowed_game(game):
-    """Zkontroluje jestli zapas patri do povolene ligy/zeme."""
+    """Zkontroluje jestli zapas patri do hlavni ligy, nebo je to evropsky/svetovy pohar."""
     country = game.get("country", {}).get("name", "")
     league_name = game.get("league", {}).get("name", "")
+    ln = league_name.lower()
 
-    # Euroleague/Eurocup - povol bez ohledu na zemi
-    if any(kw in league_name.lower() for kw in ALLOWED_LEAGUE_NAMES):
-        return True
-
-    # Filtr podle zeme
-    if country not in ALLOWED_COUNTRIES:
-        return False
-
-    # Z USA jen NBA
-    if country == "USA" and "nba" not in league_name.lower():
-        return False
-
-    # Preskoc nezadouci ligy
+    # Preskoc nezadouci ligy (mladez, zeny, nizsi divize)
     full = f"{country} {league_name}".lower()
     if any(kw in full for kw in SKIP_KEYWORDS):
         return False
 
-    return True
+    # Evropske a svetove pohary – povol bez ohledu na zemi
+    if any(kw in ln for kw in EURO_WORLD_CUPS):
+        return True
+
+    # Hlavni liga v dane zemi
+    if country in TOP_LEAGUES_BY_COUNTRY:
+        allowed = TOP_LEAGUES_BY_COUNTRY[country]
+        if any(kw in ln for kw in allowed):
+            return True
+
+    return False
 
 
 def fetch_over_tips():
