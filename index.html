@@ -2,28 +2,159 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-    <title>Kombík</title>
-    <base href="/" />
-    <link rel="stylesheet" href="app.css" />
-    <link rel="stylesheet" href="kombik.Maui.styles.css" />
-    <link rel="icon" href="data:,">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Acca – Accumulator</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎫</text></svg>" />
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+            line-height: 1.5; font-weight: 400; color: #e0e8f0; background-color: #0d1520;
+            text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased;
+        }
+        body {
+            min-height: 100vh;
+            background: radial-gradient(ellipse at 50% 0%, rgba(0,164,81,0.08) 0%, transparent 60%), #0d1520;
+        }
+        .ticket-wrapper { display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 2rem; }
+        .ticket {
+            width: 100%; max-width: 480px; background: #1a2332; border-radius: 16px; overflow: hidden;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.5), 0 0 80px rgba(0,164,81,0.08); border: 1px solid #2a3a4a;
+        }
+        .ticket-header { background: linear-gradient(135deg, #00a451 0%, #007a3d 100%); padding: 1.5rem; text-align: center; }
+        .ticket-logo { font-size: 1.8rem; font-weight: 800; letter-spacing: 3px; color: #fff; }
+        .ticket-type { font-size: 0.75rem; font-weight: 700; letter-spacing: 4px; color: rgba(255,255,255,0.7); margin-top: 0.25rem; text-transform: uppercase; }
+        .ticket-meta { display: flex; justify-content: space-between; margin-top: 1rem; padding-top: 0.75rem; border-top: 1px solid rgba(255,255,255,0.2); font-size: 0.75rem; color: rgba(255,255,255,0.6); }
+        .ticket-groups { padding: 0.5rem 1rem; }
+        .group { margin: 0.75rem 0; border-radius: 10px; overflow: hidden; background: #151e2b; border: 1px solid #2a3a4a; }
+        .group-header { display: flex; justify-content: space-between; align-items: center; padding: 0.6rem 1rem; background: linear-gradient(90deg, #1e3a2a, #1a2332); border-bottom: 1px solid #2a3a4a; }
+        .group-name { font-size: 0.8rem; font-weight: 700; color: #00c85a; text-transform: uppercase; letter-spacing: 1px; }
+        .group-odds { font-size: 0.75rem; color: #ffd700; font-weight: 600; }
+        .group-matches { padding: 0.5rem; }
+        .match { padding: 0.6rem 0.5rem; border-bottom: 1px solid #1e2d3d; }
+        .match:last-child { border-bottom: none; }
+        .match-league { font-size: 0.65rem; color: #5a7a8a; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.3rem; }
+        .match-name { color: #fff; font-weight: 600; font-size: 0.9rem; }
+        .match-pick { display: flex; justify-content: space-between; align-items: center; margin-top: 0.4rem; }
+        .pick-badge { font-size: 0.7rem; padding: 0.2rem 0.6rem; background: rgba(0,164,81,0.15); color: #00c85a; border-radius: 4px; font-weight: 600; }
+        .match-odds { font-size: 0.95rem; font-weight: 800; color: #ffd700; background: rgba(255,215,0,0.08); padding: 0.2rem 0.6rem; border-radius: 4px; }
+        .ticket-summary { margin: 0 1rem; padding: 1rem; border-top: 2px dashed #2a3a4a; }
+        .summary-row { display: flex; justify-content: space-between; padding: 0.4rem 0; font-size: 0.85rem; color: #7a8a9a; }
+        .summary-value { color: #c0d0e0; font-weight: 600; }
+        .summary-row.highlight { margin-top: 0.5rem; padding-top: 0.75rem; border-top: 1px solid #2a3a4a; font-size: 1rem; color: #fff; font-weight: 700; }
+        .summary-row.highlight .win { color: #ffd700; font-size: 1.1rem; font-weight: 800; }
+        .ticket-footer { padding: 1rem 1.5rem; text-align: center; border-top: 1px solid #2a3a4a; }
+        .barcode { font-size: 1.2rem; letter-spacing: 2px; color: #3a4a5a; line-height: 1; overflow: hidden; }
+        .footer-text { margin-top: 0.5rem; font-size: 0.7rem; color: #4a5a6a; letter-spacing: 2px; }
+        .ticket-loading { display: flex; flex-direction: column; align-items: center; gap: 1rem; padding: 3rem 1rem; color: #7a8a9a; font-size: 0.9rem; }
+        .spinner { width: 32px; height: 32px; border: 3px solid #2a3a4a; border-top-color: #00c85a; border-radius: 50%; animation: spin 0.8s linear infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .ticket-error { padding: 2rem 1rem; text-align: center; color: #ff6b6b; font-size: 0.85rem; }
+    </style>
 </head>
-
 <body>
-
-    <div class="status-bar-safe-area"></div>
-
-    <div id="app">Loading...</div>
-
-    <div id="blazor-error-ui" data-nosnippet>
-        An unhandled error has occurred.
-        <a href="." class="reload">Reload</a>
-        <span class="dismiss">🗙</span>
+    <div class="ticket-wrapper">
+        <div class="ticket">
+            <div class="ticket-header">
+                <div class="ticket-logo">🎫 ACCA</div>
+                <div class="ticket-type">ACCUMULATOR</div>
+                <div class="ticket-meta">
+                    <span>Daily Ticket</span>
+                    <span id="today"></span>
+                </div>
+            </div>
+            <div class="ticket-loading" id="loading">
+                <div class="spinner"></div>
+                <span>Loading matches…</span>
+            </div>
+            <div class="ticket-error" id="error" style="display:none"></div>
+            <div id="content" style="display:none">
+                <div class="ticket-groups" id="groups"></div>
+                <div class="ticket-summary" id="summary"></div>
+            </div>
+            <div class="ticket-footer">
+                <div class="barcode">║║║║║║║║║║║║║║║║║║║║║║║║║║║║║║</div>
+                <div class="footer-text">www.kombik.cz</div>
+            </div>
+        </div>
     </div>
 
-    <script src="_framework/blazor.webview.js" autostart="false"></script>
+    <script>
+        var HOT_JSON_URL = 'https://raw.githubusercontent.com/cubin-star/cubin-star.github.io/main/hot.json';
+        var STAKE = 200;
 
+        document.getElementById('today').textContent = new Date().toLocaleDateString('en-GB');
+
+        function parseOdds(val) {
+            if (typeof val === 'number') return val;
+            return parseFloat(String(val).replace(',', '.')) || 0;
+        }
+
+        function buildGroups(matches) {
+            var map = new Map();
+            matches.forEach(function(m) {
+                var g = m.group || (Math.floor(map.size / 2) + 1);
+                if (!map.has(g)) map.set(g, []);
+                map.get(g).push({ league: m.league, teams: m.match, tip: m.tip, odds: parseOdds(m.odds) });
+            });
+            var result = [];
+            map.forEach(function(ms, g) {
+                result.push({ name: 'Group ' + g, matches: ms });
+            });
+            return result;
+        }
+
+        function render(groups) {
+            var groupOdds = groups.map(function(g) {
+                return g.matches.reduce(function(a, m) { return a * m.odds; }, 1);
+            });
+            var totalMax = groupOdds.reduce(function(a, o) { return a * o; }, 1);
+            var minCombo = Math.min.apply(null, groupOdds);
+
+            var html = '';
+            groups.forEach(function(group, gi) {
+                html += '<div class="group"><div class="group-header">';
+                html += '<span class="group-name">' + group.name + '</span>';
+                html += '<span class="group-odds">Odds: ' + groupOdds[gi].toFixed(2) + '</span>';
+                html += '</div><div class="group-matches">';
+                group.matches.forEach(function(m) {
+                    html += '<div class="match">';
+                    html += '<div class="match-league">' + m.league + '</div>';
+                    html += '<div><span class="match-name">' + m.teams + '</span></div>';
+                    html += '<div class="match-pick">';
+                    html += '<span class="pick-badge">' + m.tip + '</span>';
+                    html += '<span class="match-odds">' + m.odds.toFixed(2) + '</span>';
+                    html += '</div></div>';
+                });
+                html += '</div></div>';
+            });
+            document.getElementById('groups').innerHTML = html;
+
+            var s = '';
+            s += '<div class="summary-row"><span>Stake</span><span class="summary-value">$' + STAKE + '</span></div>';
+            s += '<div class="summary-row"><span>Groups</span><span class="summary-value">' + groups.length + '</span></div>';
+            s += '<div class="summary-row"><span>Total Odds (min\u2013max)</span><span class="summary-value">' + minCombo.toFixed(2) + ' \u2013 ' + totalMax.toFixed(2) + '</span></div>';
+            s += '<div class="summary-row highlight"><span>Potential Win</span><span class="summary-value win">$' + (STAKE * minCombo).toFixed(0) + ' \u2013 $' + (STAKE * totalMax).toFixed(0) + '</span></div>';
+            document.getElementById('summary').innerHTML = s;
+
+            document.getElementById('content').style.display = '';
+        }
+
+        fetch(HOT_JSON_URL, { cache: 'no-store' })
+            .then(function(r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.text(); })
+            .then(function(text) {
+                var fixed = text.replace(/\}[\s\r\n]*\{/g, '},{');
+                var data = JSON.parse(fixed);
+                var groups = buildGroups(data);
+                document.getElementById('loading').style.display = 'none';
+                render(groups);
+            })
+            .catch(function(e) {
+                document.getElementById('loading').style.display = 'none';
+                var el = document.getElementById('error');
+                el.style.display = '';
+                el.textContent = '\u26a0\ufe0f Failed to load matches: ' + e.message;
+            });
+    </script>
 </body>
-
 </html>
