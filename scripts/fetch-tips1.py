@@ -54,7 +54,8 @@ SKIP_KEYWORDS = ("amateur", "u18", "u19", "u20", "u21", "women", "w ",
                  "primera feb", "segunda feb",
                  "tb2l", "tkbl", "heba",
                  "leb oro", "leb plata",
-                 "3x3", "youth", "junior")
+                 "3x3", "youth", "junior",
+                 "champions league americas")
 
 
 def api_get(endpoint, params):
@@ -320,3 +321,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
