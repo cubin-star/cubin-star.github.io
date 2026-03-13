@@ -4,11 +4,13 @@ Stáhne kurzy z API-Sports Hockey API pro všechny dostupné hokejové ligy,
 najde Over 5.5 gólů s kurzem >= 1.75 a vybere 2 zápasy z různých lig
 s NEJVYŠŠÍ pravděpodobností překročení Over 5.5 (na základě statistik týmů).
 
-Metoda výběru (Goal Scoring Index):
-  1. Pro každý kandidátský zápas stáhne posledních 5 zápasů obou týmů
-  2. Spočítá průměr celkových gólů na zápas pro každý tým
-  3. Odhadne očekávaný počet gólů v zápase
-  4. Vybere zápasy s nejvyšším GSI (= největší šance na Over 5.5)
+Metoda výběru (Goal Scoring Index – normalizovaný 0–10):
+  1. Pro každý kandidátský zápas stáhne posledních 15 zápasů obou týmů
+  2. Vyřadí kandidáty s průměrem gólů < 5.0 nebo Over 5.5 rate < 25 %
+  3. Spočítá GSI s důrazem na Over 5.5 historii (40 %), matchup (30 %),
+     historický průměr gólů (20 %) a trend (10 %)
+  4. Penalizuje zápasy s malým vzorkem dat (< 8 zápasů)
+  5. Vybere zápasy s nejvyšším GSI (= největší šance na Over 5.5)
 
 API: https://v1.hockey.api-sports.io
 Free plan: 100 requestů/den
@@ -27,7 +29,9 @@ API_KEY = os.environ.get("API_HOCKEY_KEY", "")
 BASE_URL = "https://v1.hockey.api-sports.io"
 MIN_ODDS = 1.75
 OUTPUT_FILE = "hokey.json"
-LAST_N_GAMES = 10  # Kolik posledních zápasů analyzovat pro každý tým
+LAST_N_GAMES = 15  # Kolik posledních zápasů analyzovat pro každý tým
+MIN_AVG_TOTAL = 5.0  # Minimální průměr celkových gólů (oba týmy) pro kandidáta
+MIN_OVER55_RATE = 0.25  # Minimální průměrná Over 5.5 rate obou týmů
 
 # Země, ze kterých se v ČR nedá sázet
 BLOCKED_COUNTRIES = {"russia", "belarus"}
@@ -136,41 +140,57 @@ def fetch_team_stats(team_id: int, team_name: str) -> dict | None:
 def calculate_match_gsi(home: dict, away: dict) -> tuple[float, str]:
     """Výpočet Goal Scoring Indexu pro zápas.
 
+    Optimalizováno pro maximální úspěšnost Over 5.5.
+    Všechny faktory normalizovány na škálu 0–10.
+
     Kombinuje 4 faktory:
-      1. Matchup (40 %) – útok domácích vs obrana hostů a naopak
-      2. Historický průměr (25 %) – celkové góly ze zápasů obou týmů
-      3. Over 5.5 spolehlivost (25 %) – jak často týmy překračují 5.5
+      1. Over 5.5 historie (40 %) – jak často týmy překračují 5.5
+      2. Matchup (30 %) – útok domácích vs obrana hostů a naopak
+      3. Historický průměr (20 %) – celkové góly ze zápasů obou týmů
       4. Trend (10 %) – stoupající forma = bonus
+
+    Penalizace za malý vzorek dat (< 8 zápasů).
 
     Vrátí (gsi_score, breakdown_text).
     """
-    # Faktor 1: MATCHUP – útok jednoho týmu vs obrana druhého
-    # "Kolik gólů očekáváme když domácí útočí na hosty a naopak"
-    matchup = (home["avg_scored"] + away["avg_conceded"]
-               + away["avg_scored"] + home["avg_conceded"]) / 2
-
-    # Faktor 2: HISTORICKÝ PRŮMĚR – jak brankově náročné jsou zápasy obou týmů
-    historical = (home["avg_total"] + away["avg_total"]) / 2
-
-    # Faktor 3: OVER 5.5 SPOLEHLIVOST – jak často oba týmy překračují 5.5
-    # Přepočteno na škálu gólů: 100% rate → +2.0, 50% → +1.0, 0% → 0
+    # Faktor 1 (DOMINANTNÍ): OVER 5.5 HISTORIE – přímý prediktor
+    # 100% rate → 10, 50% → 5, 0% → 0
     avg_rate = (home["over55_rate"] + away["over55_rate"]) / 2
-    reliability = avg_rate * 2.0  # max +2.0
+    over55_score = avg_rate * 10.0
+
+    # Faktor 2: MATCHUP – útok jednoho týmu vs obrana druhého
+    # Typický rozsah 3–9 gólů → normalizujeme na 0–10
+    matchup_raw = (home["avg_scored"] + away["avg_conceded"]
+                   + away["avg_scored"] + home["avg_conceded"]) / 2
+    matchup_score = max(0.0, min((matchup_raw - 3.0) / 6.0 * 10.0, 10.0))
+
+    # Faktor 3: HISTORICKÝ PRŮMĚR – jak brankově náročné jsou zápasy obou týmů
+    # Typický rozsah 3–9 gólů → normalizujeme na 0–10
+    historical_raw = (home["avg_total"] + away["avg_total"]) / 2
+    historical_score = max(0.0, min((historical_raw - 3.0) / 6.0 * 10.0, 10.0))
 
     # Faktor 4: TREND – stoupající forma = bonus, klesající = malus
     trend = (home["trend"] + away["trend"]) / 2
-    trend_bonus = max(-0.5, min(trend * 0.3, 0.5))  # omezeno na -0.5 až +0.5
+    trend_score = max(0.0, min(5.0 + trend * 1.5, 10.0))
 
-    # Kompozitní GSI
-    gsi = (matchup * 0.40
-           + historical * 0.25
-           + reliability * 0.25
-           + trend_bonus)
+    # Penalizace za malý vzorek (méně než 8 zápasů → snížení důvěry)
+    min_games = min(home["games"], away["games"])
+    sample_factor = min(min_games / 8.0, 1.0)
 
-    breakdown = (f"matchup={matchup:.1f} hist={historical:.1f}"
-                 f" over55={avg_rate:.0%} trend={trend:+.1f}")
+    # Kompozitní GSI (normalizovaný 0–10)
+    gsi_raw = (over55_score * 0.40
+               + matchup_score * 0.30
+               + historical_score * 0.20
+               + trend_score * 0.10)
+    gsi = round(gsi_raw * sample_factor, 2)
 
-    return round(gsi, 2), breakdown
+    breakdown = (f"over55={avg_rate:.0%}({over55_score:.1f})"
+                 f" matchup={matchup_raw:.1f}({matchup_score:.1f})"
+                 f" hist={historical_raw:.1f}({historical_score:.1f})"
+                 f" trend={trend:+.1f}({trend_score:.1f})"
+                 f" sample={min_games}")
+
+    return gsi, breakdown
 
 
 def clean_candidate(c: dict) -> dict:
@@ -310,7 +330,7 @@ def main():
     #   - kolik % zápasů překročilo Over 5.5
     #   - trend (stoupají/klesají góly v posledních zápasech)
     print()
-    print("📈 Hloubková analýza kandidátů (posl. 10 zápasů / tým)...")
+    print("📈 Hloubková analýza kandidátů (posl. 15 zápasů / tým)...")
     print()
 
     team_cache: dict[int, dict | None] = {}
@@ -330,20 +350,40 @@ def main():
         away_stats = team_cache[away_id]
 
         if home_stats and away_stats:
-            gsi, breakdown = calculate_match_gsi(home_stats, away_stats)
-            c["_gsi"] = gsi
-            print(f"      → GSI = {gsi:.1f} ({breakdown})")
+            # Kontrola minimálních prahů
+            combined_avg = (home_stats["avg_total"] + away_stats["avg_total"]) / 2
+            combined_rate = (home_stats["over55_rate"] + away_stats["over55_rate"]) / 2
+
+            if combined_avg < MIN_AVG_TOTAL:
+                c["_gsi"] = -1.0
+                print(f"      ⛔ Vyřazen: průměr gólů {combined_avg:.1f} < {MIN_AVG_TOTAL}")
+            elif combined_rate < MIN_OVER55_RATE:
+                c["_gsi"] = -1.0
+                print(f"      ⛔ Vyřazen: Over 5.5 rate {combined_rate:.0%} < {MIN_OVER55_RATE:.0%}")
+            else:
+                gsi, breakdown = calculate_match_gsi(home_stats, away_stats)
+                c["_gsi"] = gsi
+                print(f"      → GSI = {gsi:.1f} ({breakdown})")
         else:
-            c["_gsi"] = 0.0
-            print(f"      → GSI = 0.0 (nedostatek dat)")
+            c["_gsi"] = -1.0
+            print(f"      ⛔ Vyřazen: nedostatek dat")
         print()
+
+    # Odfiltrovat vyřazené kandidáty
+    all_candidates = [c for c in all_candidates if c["_gsi"] >= 0]
+
+    if not all_candidates:
+        print("⚠ Žádné zápasy prošly statistickým filtrem. Zapisuji prázdný JSON.")
+        with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
+            json.dump([], f, indent=2, ensure_ascii=False)
+        return
 
     # Seřadit podle GSI sestupně
     all_candidates.sort(key=lambda x: x["_gsi"], reverse=True)
 
-    print("🏆 Pořadí podle GSI (Goal Scoring Index):")
+    print(f"🏆 Pořadí podle GSI – prošlo {len(all_candidates)} kandidátů:")
     for i, c in enumerate(all_candidates, 1):
-        marker = "⭐" if c["_gsi"] >= 4.0 else "  "
+        marker = "⭐" if c["_gsi"] >= 5.0 else "  "
         print(f"   {marker} {i}. GSI={c['_gsi']:.1f} | {c['league']}: {c['match']} @ {c['odds']}")
 
     # ─── Krok 4: Vyber TOP 2 z různých soutěží ───
