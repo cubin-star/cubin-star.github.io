@@ -1,20 +1,20 @@
 [
   {
+    "League": "NB I",
+    "Match": "Diosgyori VTK vs Kazincbarcikai",
+    "Tip": "Over 2.5",
+    "Odds": "1.81"
+  },
+  {
+    "League": "Ligue 2",
+    "Match": "Guingamp vs Amiens",
+    "Tip": "Over 2.5",
+    "Odds": "1.75"
+  },
+  {
     "League": "II Liga - East",
-    "Match": "ŁKS Łódź II vs Kalisz",
+    "Match": "Rekord Bielsko-Biała vs Unia Skierniewice",
     "Tip": "Over 2.5",
-    "Odds": "1.85"
-  },
-  {
-    "League": "UEFA Europa Conference League",
-    "Match": "Celje vs AEK Athens FC",
-    "Tip": "Over 2.5",
-    "Odds": "1.77"
-  },
-  {
-    "League": "CONCACAF Champions League",
-    "Match": "FC Cincinnati vs Tigres UANL",
-    "Tip": "Over 2.5",
-    "Odds": "2.02"
+    "Odds": "1.75"
   }
 ]
