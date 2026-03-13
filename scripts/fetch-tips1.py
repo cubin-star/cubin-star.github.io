@@ -1,6 +1,7 @@
 import os
 import json
 import random
+import statistics as stats_mod
 import time
 import requests
 from datetime import datetime, timedelta, timezone
@@ -141,8 +142,12 @@ def fetch_over_tips():
 
         country = game.get("country", {}).get("name", "")
         league_name = game.get("league", {}).get("name", "")
+        league_id = game.get("league", {}).get("id", 0)
+        season = game.get("league", {}).get("season", "")
         home = game.get("teams", {}).get("home", {}).get("name", "")
         away = game.get("teams", {}).get("away", {}).get("name", "")
+        home_id = game.get("teams", {}).get("home", {}).get("id", 0)
+        away_id = game.get("teams", {}).get("away", {}).get("id", 0)
         game_id = game.get("id", 0)
         display = f"{country} - {league_name}" if country else league_name
 
@@ -152,6 +157,10 @@ def fetch_over_tips():
             "game_id": game_id,
             "home": home,
             "away": away,
+            "home_id": home_id,
+            "away_id": away_id,
+            "league_id": league_id,
+            "season": season,
             "league": display,
         })
 
@@ -247,6 +256,11 @@ def fetch_over_tips():
                                 "tip": f"Over {point}",
                                 "odds": f"{odds_f:.2f}",
                                 "odds_value": odds_f,
+                                "home_id": g["home_id"],
+                                "away_id": g["away_id"],
+                                "league_id": g["league_id"],
+                                "season": g["season"],
+                                "over_line": point_num,
                             })
                             print(f"    + Over {point} @ {odds_f:.2f}")
                             found = True
@@ -267,26 +281,135 @@ def fetch_over_tips():
     return candidates
 
 
+# ---------------------------------------------------------------------------
+#  Scoring – vlastni metoda pro vyber zapasu s nejvetsi pravdepodobnosti OVER
+#  Nepouziva bookmakerske kurzy; analyzuje historicke vysledky obou tymu.
+# ---------------------------------------------------------------------------
+
+def _fetch_team_totals(team_id, league_id, season, cache):
+    """Stahne odehrane zapasy tymu v dane lize/sezone a vrati seznam celkovych bodu."""
+    key = (team_id, league_id, season)
+    if key in cache:
+        return cache[key]
+
+    time.sleep(6.5)  # Rate limit (10 req/min)
+    games = api_get("games", {
+        "team": team_id,
+        "league": league_id,
+        "season": season,
+    })
+
+    totals = []
+    for g in games:
+        status = g.get("status", {}).get("short", "")
+        if status not in ("FT", "AOT"):  # Finished / After Overtime
+            continue
+        hs = g.get("scores", {}).get("home", {}).get("total")
+        aws = g.get("scores", {}).get("away", {}).get("total")
+        if hs is not None and aws is not None:
+            try:
+                totals.append(int(hs) + int(aws))
+            except (ValueError, TypeError):
+                continue
+
+    cache[key] = totals
+    return totals
+
+
+def _compute_over_score(home_totals, away_totals, over_line):
+    """Vypocita skore pravdepodobnosti OVER na zaklade historickych dat.
+
+    Slozky:
+      1. hit_rate   (35 %) – kolik % minulych zapasu obou tymu presahlo linku
+      2. margin     (30 %) – jak daleko je prumer nad linkou
+      3. consistency(20 %) – nizsi rozptyl = predvidatelnejsi vysledky
+      4. trend      (15 %) – poslednich 5 zapasu vs celkovy prumer (stoupajici = bonus)
+    """
+    if not home_totals and not away_totals:
+        return 0.0
+
+    all_totals = home_totals + away_totals
+    if not all_totals:
+        return 0.0
+
+    avg = stats_mod.mean(all_totals)
+
+    # 1) Hit rate
+    hits = sum(1 for t in all_totals if t > over_line)
+    hit_rate = hits / len(all_totals)
+
+    # 2) Margin – normalizovany do <0,1>
+    margin = (avg - over_line) / over_line if over_line else 0
+    margin_norm = max(0.0, min(1.0, 0.5 + margin * 5))
+
+    # 3) Consistency (1 - koeficient variace)
+    if len(all_totals) >= 2:
+        sd = stats_mod.stdev(all_totals)
+        cv = sd / avg if avg > 0 else 1
+        consistency = max(0.0, 1.0 - cv)
+    else:
+        consistency = 0.5
+
+    # 4) Trend – poslednich 5 zapasu kazdeho tymu vs celkovy prumer
+    recent = home_totals[-5:] + away_totals[-5:]
+    if recent:
+        recent_avg = stats_mod.mean(recent)
+        trend = (recent_avg - avg) / avg if avg > 0 else 0
+    else:
+        trend = 0
+    trend_norm = max(0.0, min(1.0, 0.5 + trend * 5))
+
+    score = (
+        0.35 * hit_rate
+        + 0.30 * margin_norm
+        + 0.20 * consistency
+        + 0.15 * trend_norm
+    )
+    return round(score, 4)
+
+
+def _score_candidates(candidates):
+    """Pro kazdeho kandidata stahne historii obou tymu a vypocita over-skore."""
+    cache = {}  # (team_id, league_id, season) -> [totals]
+
+    print(f"\nScoruji {len(candidates)} kandidatu podle historickych dat...")
+    for c in candidates:
+        home_totals = _fetch_team_totals(
+            c["home_id"], c["league_id"], c["season"], cache)
+        away_totals = _fetch_team_totals(
+            c["away_id"], c["league_id"], c["season"], cache)
+
+        score = _compute_over_score(home_totals, away_totals, c["over_line"])
+        c["score"] = score
+
+        n = len(home_totals) + len(away_totals)
+        avg = stats_mod.mean(home_totals + away_totals) if n else 0
+        print(f"  {c['match']} | linka {c['over_line']} | "
+              f"prumer {avg:.1f} | zapasu {n} | skore {score:.4f}")
+
+    return candidates
+
+
 def select_best_tips(candidates):
-    """Vybere MAX_TIPS tipu, VZDY kazdy z jine ligy."""
+    """Vybere MAX_TIPS tipu s nejvyssim over-skore, kazdy z jine ligy."""
     seen = set()
     unique = [c for c in candidates if not (c["match"] in seen or seen.add(c["match"]))]
 
-    if len(unique) <= 1:
-        return unique
+    if not unique:
+        return []
 
-    by_league = {}
-    for c in unique:
-        by_league.setdefault(c["league"], []).append(c)
+    scored = _score_candidates(unique)
+    scored.sort(key=lambda x: x.get("score", 0), reverse=True)
 
     tips = []
-    leagues = list(by_league.keys())
-    random.shuffle(leagues)
+    used_leagues = set()
 
-    for league in leagues:
+    for c in scored:
         if len(tips) >= MAX_TIPS:
             break
-        tips.append(random.choice(by_league[league]))
+        if c["league"] not in used_leagues:
+            tips.append(c)
+            used_leagues.add(c["league"])
 
     return tips
 
@@ -310,7 +433,8 @@ def main():
         tips = select_best_tips(candidates)
         print(f"\nVybrano {len(tips)} tipu:")
         for t in tips:
-            print(f"  {t['league']}: {t['match']} - {t['tip']} @ {t['odds']}")
+            s = t.get('score', 0)
+            print(f"  {t['league']}: {t['match']} - {t['tip']} @ {t['odds']} (skore {s:.4f})")
 
     output = [{"league": t["league"], "match": t["match"], "tip": t["tip"], "odds": t["odds"]} for t in tips]
 
@@ -321,4 +445,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
