@@ -498,9 +498,9 @@ def calculate_gss(home_stats: dict, away_stats: dict) -> float:
       1. Expected Goals Home = (home_attack + away_defense_leakiness) / 2
       2. Expected Goals Away = (away_attack + home_defense_leakiness) / 2
       3. Total Expected = sum of both
-      4. Balance Bonus = rewards matches where BOTH teams score
-         (balanced matches are more likely to exceed 2.5 total)
-      5. Experience Factor = slight boost for teams with more games played
+      4. Offensive Boost = extra bonus for teams averaging >1.5 goals
+      5. High-scoring bonus = exponential boost for expected goals >2.8
+      6. Experience Factor = slight boost for teams with more games played
          (more reliable data = more confident prediction)
     """
     # Expected goals from each team's perspective
@@ -509,8 +509,26 @@ def calculate_gss(home_stats: dict, away_stats: dict) -> float:
 
     total_expected = home_expected + away_expected
 
-    # Balance factor (0-1): matches where both teams contribute equally
-    # A 2-1 game is more likely Over 2.5 than a 3-0 game style
+    # NEW: Strong offensive bonus — reward teams that score a lot
+    offensive_factor = 1.0
+    if home_stats["goals_for"] > 1.5:
+        offensive_factor += 0.2
+    if away_stats["goals_for"] > 1.5:
+        offensive_factor += 0.2
+    if home_stats["goals_for"] > 2.0:
+        offensive_factor += 0.2
+    if away_stats["goals_for"] > 2.0:
+        offensive_factor += 0.2
+
+    # NEW: High-scoring game boost (exponential for games expected >2.8)
+    if total_expected > 2.8:
+        high_scoring_boost = 1.0 + (total_expected - 2.8) * 0.4
+    elif total_expected > 2.5:
+        high_scoring_boost = 1.0 + (total_expected - 2.5) * 0.2
+    else:
+        high_scoring_boost = 1.0
+
+    # Balance factor (0-1): matches where both teams contribute
     if total_expected > 0:
         balance = 1.0 - abs(home_expected - away_expected) / total_expected
     else:
@@ -520,8 +538,8 @@ def calculate_gss(home_stats: dict, away_stats: dict) -> float:
     min_played = min(home_stats["played"], away_stats["played"])
     experience = min(min_played / 15.0, 1.0)  # caps at 15 games
 
-    # GSS formula: expected goals × balance bonus × experience reliability
-    gss = total_expected * (1.0 + 0.3 * balance) * (0.7 + 0.3 * experience)
+    # GSS formula: expected goals × offensive bonus × high-scoring boost × balance × experience
+    gss = total_expected * offensive_factor * high_scoring_boost * (1.0 + 0.2 * balance) * (0.7 + 0.3 * experience)
 
     return round(gss, 3)
 
@@ -531,27 +549,56 @@ def enrich_candidates_with_gss(candidates: list) -> list:
     print(f"\n--- GOAL STORM SCORE (team stats analysis) ---")
     print(f"  Analyzing {len(candidates)} candidates...")
 
+    filtered = []
     for i, c in enumerate(candidates):
         print(f"  [{i+1}/{len(candidates)}] {c['Match'][:40]:.<42s}", end="")
 
         home_stats = fetch_team_stats(c["home_id"], c["league_id"], c["season"])
         away_stats = fetch_team_stats(c["away_id"], c["league_id"], c["season"])
 
+        # Calculate expected goals
+        home_expected = (home_stats["goals_for"] + away_stats["goals_against"]) / 2
+        away_expected = (away_stats["goals_for"] + home_stats["goals_against"]) / 2
+        total_expected = home_expected + away_expected
+
+        # NEW: Skip matches with low expected goals (<2.3)
+        if total_expected < 2.3:
+            print(f" ❌SKIP (exp={total_expected:.1f}g < 2.3)")
+            continue
+
+        # NEW: Prefer matches where at least one team scores >1.3 avg
+        if home_stats["goals_for"] < 1.0 and away_stats["goals_for"] < 1.0:
+            print(f" ❌SKIP (both teams low-scoring)")
+            continue
+
         gss = calculate_gss(home_stats, away_stats)
         c["gss"] = gss
+        c["expected_goals"] = total_expected
 
-        # Debug info
-        total_exp = (home_stats["goals_for"] + away_stats["goals_against"]) / 2 + \
-                    (away_stats["goals_for"] + home_stats["goals_against"]) / 2
-        print(f" GSS={gss:.2f} (exp={total_exp:.1f}g)")
+        print(f" ✅GSS={gss:.2f} (exp={total_expected:.1f}g)")
+        filtered.append(c)
+
+    if not filtered:
+        print(f"\n  ⚠️ All candidates filtered out! Using original set with looser filter...")
+        # Fallback: use all candidates but still calculate GSS
+        for c in candidates:
+            home_stats = fetch_team_stats(c["home_id"], c["league_id"], c["season"])
+            away_stats = fetch_team_stats(c["away_id"], c["league_id"], c["season"])
+            gss = calculate_gss(home_stats, away_stats)
+            c["gss"] = gss
+            home_expected = (home_stats["goals_for"] + away_stats["goals_against"]) / 2
+            away_expected = (away_stats["goals_for"] + home_stats["goals_against"]) / 2
+            c["expected_goals"] = home_expected + away_expected
+        filtered = candidates
 
     # Sort by GSS for display
-    ranked = sorted(candidates, key=lambda x: x["gss"], reverse=True)
+    ranked = sorted(filtered, key=lambda x: x["gss"], reverse=True)
     print(f"\n  🏆 Top 5 by Goal Storm Score:")
     for i, c in enumerate(ranked[:5], 1):
-        print(f"    {i}. GSS={c['gss']:.2f} | {c['League']}: {c['Match']} @ {c['Odds']}")
+        exp_g = c.get("expected_goals", 0)
+        print(f"    {i}. GSS={c['gss']:.2f} (exp={exp_g:.1f}g) | {c['League']}: {c['Match']} @ {c['Odds']}")
 
-    return candidates
+    return filtered
 
 
 def main():
