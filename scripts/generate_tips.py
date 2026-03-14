@@ -6,11 +6,10 @@ s NEJVYŠŠÍ pravděpodobností překročení Over 5.5 (na základě statistik 
 
 Metoda výběru (Goal Scoring Index – normalizovaný 0–10):
   1. Pro každý kandidátský zápas stáhne posledních 15 zápasů obou týmů
-  2. Vyřadí kandidáty s průměrem gólů < 5.0 nebo Over 5.5 rate < 25 %
-  3. Spočítá GSI s důrazem na Over 5.5 historii (40 %), matchup (30 %),
+  2. Spočítá GSI s důrazem na Over 5.5 historii (40 %), matchup (30 %),
      historický průměr gólů (20 %) a trend (10 %)
-  4. Penalizuje zápasy s malým vzorkem dat (< 8 zápasů)
-  5. Vybere zápasy s nejvyšším GSI (= největší šance na Over 5.5)
+  3. Penalizuje zápasy s malým vzorkem dat (< 8 zápasů)
+  4. Seřadí všechny kandidáty podle GSI a vybere TOP 2 z různých lig
 
 API: https://v1.hockey.api-sports.io
 Free plan: 100 requestů/den
@@ -30,8 +29,6 @@ BASE_URL = "https://v1.hockey.api-sports.io"
 MIN_ODDS = 1.75
 OUTPUT_FILE = "hokey.json"
 LAST_N_GAMES = 15  # Kolik posledních zápasů analyzovat pro každý tým
-MIN_AVG_TOTAL = 5.0  # Minimální průměr celkových gólů (oba týmy) pro kandidáta
-MIN_OVER55_RATE = 0.25  # Minimální průměrná Over 5.5 rate obou týmů
 
 # Země, ze kterých se v ČR nedá sázet
 BLOCKED_COUNTRIES = {"russia", "belarus"}
@@ -350,38 +347,19 @@ def main():
         away_stats = team_cache[away_id]
 
         if home_stats and away_stats:
-            # Kontrola minimálních prahů
-            combined_avg = (home_stats["avg_total"] + away_stats["avg_total"]) / 2
-            combined_rate = (home_stats["over55_rate"] + away_stats["over55_rate"]) / 2
-
-            if combined_avg < MIN_AVG_TOTAL:
-                c["_gsi"] = -1.0
-                print(f"      ⛔ Vyřazen: průměr gólů {combined_avg:.1f} < {MIN_AVG_TOTAL}")
-            elif combined_rate < MIN_OVER55_RATE:
-                c["_gsi"] = -1.0
-                print(f"      ⛔ Vyřazen: Over 5.5 rate {combined_rate:.0%} < {MIN_OVER55_RATE:.0%}")
-            else:
-                gsi, breakdown = calculate_match_gsi(home_stats, away_stats)
-                c["_gsi"] = gsi
-                print(f"      → GSI = {gsi:.1f} ({breakdown})")
+            gsi, breakdown = calculate_match_gsi(home_stats, away_stats)
+            c["_gsi"] = gsi
+            print(f"      → GSI = {gsi:.1f} ({breakdown})")
         else:
-            c["_gsi"] = -1.0
-            print(f"      ⛔ Vyřazen: nedostatek dat")
+            # Bez statistik nastavíme GSI na 0 – kandidát slouží jako fallback
+            c["_gsi"] = 0.0
+            print(f"      → GSI = 0.0 (nedostatek dat, fallback)")
         print()
-
-    # Odfiltrovat vyřazené kandidáty
-    all_candidates = [c for c in all_candidates if c["_gsi"] >= 0]
-
-    if not all_candidates:
-        print("⚠ Žádné zápasy prošly statistickým filtrem. Zapisuji prázdný JSON.")
-        with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
-            json.dump([], f, indent=2, ensure_ascii=False)
-        return
 
     # Seřadit podle GSI sestupně
     all_candidates.sort(key=lambda x: x["_gsi"], reverse=True)
 
-    print(f"🏆 Pořadí podle GSI – prošlo {len(all_candidates)} kandidátů:")
+    print(f"🏆 Pořadí podle GSI – {len(all_candidates)} kandidátů:")
     for i, c in enumerate(all_candidates, 1):
         marker = "⭐" if c["_gsi"] >= 5.0 else "  "
         print(f"   {marker} {i}. GSI={c['_gsi']:.1f} | {c['league']}: {c['match']} @ {c['odds']}")
@@ -399,7 +377,15 @@ def main():
         if len(picked) >= 2:
             break
 
-    # Pokud jen 1 liga, vezmeme alespoň 1 zápas
+    # Pokud jen 1 liga, vezmeme top 2 z té samé ligy
+    if len(picked) < 2 and len(all_candidates) >= 2:
+        for c in all_candidates:
+            if c not in picked:
+                picked.append(c)
+                if len(picked) >= 2:
+                    break
+
+    # Pokud stále jen 1 kandidát, vezmeme ho
     if not picked and all_candidates:
         picked.append(all_candidates[0])
 
