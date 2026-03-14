@@ -1,20 +1,20 @@
 [
   {
-    "League": "NB I",
-    "Match": "Diosgyori VTK vs Kazincbarcikai",
-    "Tip": "Over 2.5",
-    "Odds": "1.81"
-  },
-  {
-    "League": "Ligue 2",
-    "Match": "Guingamp vs Amiens",
+    "League": "Ekstraklasa",
+    "Match": "GKS Katowice vs Lechia Gdansk",
     "Tip": "Over 2.5",
     "Odds": "1.75"
   },
   {
-    "League": "II Liga - East",
-    "Match": "Rekord Bielsko-Biała vs Unia Skierniewice",
+    "League": "2. liga",
+    "Match": "Považská Bystrica vs Zlaté Moravce",
     "Tip": "Over 2.5",
-    "Odds": "1.75"
+    "Odds": "1.80"
+  },
+  {
+    "League": "Svenska Cupen",
+    "Match": "Gais vs AIK Stockholm",
+    "Tip": "Over 2.5",
+    "Odds": "1.86"
   }
 ]
