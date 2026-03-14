@@ -90,11 +90,68 @@
             return parseFloat(String(val).replace(',', '.')) || 0;
         }
 
+        function scoreOver25(m) {
+            var odds = parseOdds(m.odds);
+            var tip = (m.tip || '').toLowerCase();
+            var league = (m.league || '').toLowerCase();
+            var score = 0;
+
+            // Implied probability: lower odds = higher confidence
+            if (odds > 0) score += (1 / odds) * 50;
+
+            // Odds sweet-spot bonus (ideal range for confident Over 2.5)
+            if (odds >= 1.25 && odds <= 1.55) score += 18;
+            else if (odds > 1.55 && odds <= 1.70) score += 12;
+            else if (odds > 1.70 && odds <= 1.80) score += 6;
+            // Penalise risky odds
+            if (odds > 1.90) score -= 8;
+            if (odds > 2.10) score -= 8;
+
+            // League profile – historically high-scoring
+            var hi = ['eredivisie','bundesliga','austria','swiss super','allsvenskan',
+                       'eliteserien','j1 league','j-league','j.league','k league',
+                       'mls','a-league','eerste divisie','super lig','jupiler'];
+            var med = ['premier league','la liga','serie a','ligue 1',
+                       'champions league','europa league','championship',
+                       'liga portugal','segunda','super league','premiership'];
+            var lo = ['ligue 2','serie c','national league','league one','league two'];
+
+            if (hi.some(function(l) { return league.indexOf(l) !== -1; })) score += 10;
+            else if (med.some(function(l) { return league.indexOf(l) !== -1; })) score += 4;
+            if (lo.some(function(l) { return league.indexOf(l) !== -1; })) score -= 6;
+
+            // Tip relevance
+            if (/over\s*2[.,]5/i.test(tip) || /ov\s*2[.,]5/i.test(tip)) score += 6;
+            else if (/btts|gg|oba.*sk[oó]r/i.test(tip)) score += 4;
+
+            return score;
+        }
+
+        function selectBestOver25(matches, maxCount) {
+            maxCount = maxCount || 6;
+            var scored = matches.map(function(m) {
+                return { m: m, s: scoreOver25(m) };
+            });
+            scored.sort(function(a, b) { return b.s - a.s; });
+
+            // Confidence threshold – keep only reasonably safe picks
+            var minScore = 30;
+            var selected = scored.filter(function(x) { return x.s >= minScore; });
+            if (selected.length > maxCount) selected = selected.slice(0, maxCount);
+            // Fallback: if too few pass, take the top N anyway
+            if (selected.length < maxCount && scored.length > selected.length) {
+                selected = scored.slice(0, Math.min(maxCount, scored.length));
+            }
+            return selected.map(function(x) { return x.m; });
+        }
+
         function buildGroups(matches) {
+            matches = selectBestOver25(matches, 6);
             var map = new Map();
-            matches.forEach(function(m) {
-                var g = m.group || (Math.floor(map.size / 2) + 1);
-                if (!map.has(g)) map.set(g, []);
+            var groupId = 0;
+            matches.forEach(function(m, idx) {
+                var g = m.group || (Math.floor(idx / 2) + 1);
+                if (!map.has(g)) { map.set(g, []); groupId++; }
                 map.get(g).push({ league: m.league, teams: m.match, tip: m.tip, odds: parseOdds(m.odds) });
             });
             var result = [];
