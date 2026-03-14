@@ -27,7 +27,6 @@ Output:
 
 import os
 import json
-import random
 import time
 import urllib.request
 import urllib.error
@@ -335,12 +334,16 @@ def extract_candidates(odds_data: list, fixtures: dict) -> list:
 
         # League tier filter:
         # England: allow up to tier 6 (National League South/North)
+        # Turkey: only tier 1 (Süper Lig) — lower divisions unreliable
         # Others: allow up to tier 2 (second division)
         # Unknown leagues: skip
         tier = _get_league_tier(league_id, league_name, country)
         if tier == 0:
             continue  # unrecognized league — skip
-        if country == "england":
+        if country == "turkey":
+            if tier > 1:
+                continue  # Turkey: only Süper Lig
+        elif country == "england":
             if tier > 6:
                 continue
         else:
@@ -393,10 +396,13 @@ def extract_candidates(odds_data: list, fixtures: dict) -> list:
     return candidates
 
 
-def select_best_tips(all_candidates: list, num: int = NUM_TIPS) -> list:
+def select_best_tips(all_candidates: list, num: int = NUM_TIPS) -> tuple:
     """
     Pick best tips by Goal Storm Score (GSS) from different leagues.
     Priority: European leagues first, then rest of world.
+
+    Returns (app1_tips, app2_tips) — interleaved by GSS rank so BOTH
+    apps get high-quality tips instead of random split.
     """
     # Separate European vs non-European
     european = [c for c in all_candidates if c.get("is_european")]
@@ -436,8 +442,27 @@ def select_best_tips(all_candidates: list, num: int = NUM_TIPS) -> list:
                 if len(selected) >= num:
                     break
 
-    random.shuffle(selected)
-    return selected[:num]
+    selected = selected[:num]
+
+    # Sort by GSS descending (best first)
+    selected.sort(key=lambda x: x.get("gss", 0), reverse=True)
+
+    # Interleave by GSS rank so both apps get quality tips:
+    #   #1 (best)  → app1
+    #   #2         → app2
+    #   #3         → app1
+    #   #4         → app2
+    #   #5         → app1
+    # Result: app1 gets ranks 1,3,5 — app2 gets ranks 2,4
+    app1 = []
+    app2 = []
+    for i, tip in enumerate(selected):
+        if i % 2 == 0:
+            app1.append(tip)
+        else:
+            app2.append(tip)
+
+    return app1, app2
 
 
 # ============================================================
@@ -643,41 +668,38 @@ def main():
         return
 
     # ---- Phase 4: Goal Storm Score (team stats analysis) ----
-    enrich_candidates_with_gss(candidates)
+    candidates = enrich_candidates_with_gss(candidates)
 
     unique_leagues = len(set(c["league_id"] for c in candidates))
     print(f"\n{'='*55}")
     print(f"📊 COLLECTED: {len(candidates)} candidates from {unique_leagues} leagues")
     print(f"   Odds filter: {MIN_ODDS}–{MAX_ODDS}")
     print(f"   Ranked by: Goal Storm Score (GSS)")
+    print(f"   Distribution: interleaved by GSS rank (both apps get top tips)")
     print(f"   API requests used: {request_count}")
     print(f"{'='*55}")
 
-    # ---- Phase 5: Select best 5 by GSS (3 for app1 + 2 for app2) ----
-    tips = select_best_tips(candidates)
+    # ---- Phase 5: Select best tips by GSS, interleaved for both apps ----
+    app1_raw, app2_raw = select_best_tips(candidates)
 
-    all_formatted = []
-    for t in tips:
-        all_formatted.append({
-            "League": t["League"],
-            "Match": t["Match"],
-            "Tip": t["Tip"],
-            "Odds": t["Odds"],
-        })
+    def format_tips(tips_list):
+        return [{"League": t["League"], "Match": t["Match"],
+                 "Tip": t["Tip"], "Odds": t["Odds"]} for t in tips_list]
 
-    # Split: first 3 → Ultimate Football Overs, remaining 2 → Profi Football Overs
-    app1_tips = all_formatted[:3]
-    app2_tips = all_formatted[3:5]
+    app1_tips = format_tips(app1_raw)
+    app2_tips = format_tips(app2_raw)
 
-    print(f"\n🎯 SELECTED {len(all_formatted)} tips (from {len(candidates)} candidates):")
-    print(f"\n  📱 Ultimate Football Overs ({OUTPUT_APP1}):")
+    print(f"\n🎯 SELECTED {len(app1_tips) + len(app2_tips)} tips (from {len(candidates)} candidates):")
+    print(f"\n  📱 Ultimate Football Overs ({OUTPUT_APP1}) — GSS ranks #1, #3, #5:")
     for i, tip in enumerate(app1_tips, 1):
         label = "🔓" if i <= 2 else "🔒 (ad)"
-        print(f"    {label} {tip['League']}: {tip['Match']} — {tip['Tip']} @ {tip['Odds']}")
+        gss_info = f" GSS={app1_raw[i-1].get('gss', 0):.2f}" if i <= len(app1_raw) else ""
+        print(f"    {label} {tip['League']}: {tip['Match']} — {tip['Tip']} @ {tip['Odds']}{gss_info}")
 
-    print(f"\n  📱 Profi Football Overs ({OUTPUT_APP2}):")
+    print(f"\n  📱 Profi Football Overs ({OUTPUT_APP2}) — GSS ranks #2, #4:")
     for i, tip in enumerate(app2_tips, 1):
-        print(f"    🔓 {tip['League']}: {tip['Match']} — {tip['Tip']} @ {tip['Odds']}")
+        gss_info = f" GSS={app2_raw[i-1].get('gss', 0):.2f}" if i <= len(app2_raw) else ""
+        print(f"    🔓 {tip['League']}: {tip['Match']} — {tip['Tip']} @ {tip['Odds']}{gss_info}")
 
     with open(OUTPUT_APP1, "w", encoding="utf-8") as f:
         json.dump(app1_tips, f, indent=2, ensure_ascii=False)
