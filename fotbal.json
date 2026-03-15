@@ -1,20 +1,20 @@
 [
   {
+    "League": "2. Lig",
+    "Match": "Ankaraspor vs Elazığspor",
+    "Tip": "Over 2.5",
+    "Odds": "2.00"
+  },
+  {
     "League": "Ekstraklasa",
-    "Match": "GKS Katowice vs Lechia Gdansk",
+    "Match": "Zaglebie Lubin vs Lech Poznan",
     "Tip": "Over 2.5",
-    "Odds": "1.75"
+    "Odds": "1.76"
   },
   {
-    "League": "2. liga",
-    "Match": "Považská Bystrica vs Zlaté Moravce",
+    "League": "1. Division",
+    "Match": "Aris vs Apoel Nicosia",
     "Tip": "Over 2.5",
-    "Odds": "1.80"
-  },
-  {
-    "League": "Svenska Cupen",
-    "Match": "Gais vs AIK Stockholm",
-    "Tip": "Over 2.5",
-    "Odds": "1.86"
+    "Odds": "1.88"
   }
 ]
