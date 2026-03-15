@@ -20,8 +20,9 @@ MAX_HOURS_AHEAD = 24
 ALLOWED_POINTS = {18.5, 19.5, 20.5, 21.5, 22.5}
 OUTPUT_FILE = "tenis.json"
 
-# Bookmakers pro dotaz na kurzy (maji Totals Games pro tenis)
-BOOKMAKERS = ["1xbet", "pinnacle", "bet365"]
+# Free plan: 100 requestu/hodinu. 1 request na events + max 90 na odds = bezpecne.
+MAX_ODDS_REQUESTS = 90
+BOOKMAKER = "1xbet"
 
 # Cesky cas (CET=UTC+1, CEST=UTC+2)
 CET = timezone(timedelta(hours=1))
@@ -116,34 +117,54 @@ def get_tennis_events():
 
 
 def get_odds_for_event(event_id):
-    """Ziska kurzy pro konkretni zapas od vice bookmakeru."""
-    for bk in BOOKMAKERS:
-        data = api_get(f"odds?eventId={event_id}&bookmakers={bk}")
-        if not data:
-            continue
+    """Ziska kurzy pro konkretni zapas (1 request = 1 bookmaker)."""
+    data = api_get(f"odds?eventId={event_id}&bookmakers={BOOKMAKER}")
+    if not data:
+        return [], ""
 
-        bookmaker_data = data.get("bookmakers", {})
-        if not bookmaker_data:
-            continue
+    bookmaker_data = data.get("bookmakers", {})
+    if not bookmaker_data:
+        return [], ""
 
-        # bookmakers muze byt dict s klicem = jmeno bookmakera
-        for bk_name, bk_markets in bookmaker_data.items():
-            markets = bk_markets if isinstance(bk_markets, list) else bk_markets.get("markets", [])
-            for market in markets:
-                market_name = market.get("name", "")
-                if "totals" in market_name.lower() and "games" in market_name.lower():
-                    return market.get("odds", []), bk_name
+    for bk_name, bk_markets in bookmaker_data.items():
+        markets = bk_markets if isinstance(bk_markets, list) else bk_markets.get("markets", [])
+        for market in markets:
+            market_name = market.get("name", "")
+            if "totals" in market_name.lower() and "games" in market_name.lower():
+                return market.get("odds", []), bk_name
 
     return [], ""
 
 
 def find_over_tips(events):
-    """Pro kazdy zapas najde Over tipy s povolenymi hranicemi a kurzem >= MIN_ODDS."""
+    """Pro kazdy zapas najde Over tipy. Omezeno na MAX_ODDS_REQUESTS kvuli free planu."""
     tips = []
     checked = 0
     with_odds = 0
+    api_calls = 0
 
-    for event in events:
+    # Seradit zapasy tak, aby se stridaly turnaje (ruznorodejsi vyber)
+    by_league = {}
+    for e in events:
+        lg = e.get("league", {}).get("name", "")
+        if lg not in by_league:
+            by_league[lg] = []
+        by_league[lg].append(e)
+
+    # Round-robin: 1 zapas z kazdeho turnaje, pak dalsi kolo
+    ordered_events = []
+    league_lists = list(by_league.values())
+    max_len = max(len(lst) for lst in league_lists) if league_lists else 0
+    for i in range(max_len):
+        for lst in league_lists:
+            if i < len(lst):
+                ordered_events.append(lst[i])
+
+    for event in ordered_events:
+        if api_calls >= MAX_ODDS_REQUESTS:
+            print(f"  Dosazeno limitu {MAX_ODDS_REQUESTS} API volani, koncim hledani.")
+            break
+
         event_id = event.get("id")
         home = event.get("home", "N/A")
         away = event.get("away", "N/A")
@@ -151,8 +172,10 @@ def find_over_tips(events):
         date_str = event.get("date", "")
 
         checked += 1
+        api_calls += 1
+
         if checked % 20 == 0:
-            print(f"  Kontroluji zapas {checked}/{len(events)}...")
+            print(f"  Kontroluji zapas {checked}/{len(ordered_events)} (API: {api_calls}/{MAX_ODDS_REQUESTS})...")
 
         odds_list, bookmaker = get_odds_for_event(event_id)
         if not odds_list:
@@ -190,7 +213,7 @@ def find_over_tips(events):
             "_bet_point": best_point,
         })
 
-    print(f"  Zkontrolovano: {checked}, s kurzy: {with_odds}, s Over tipy: {len(tips)}")
+    print(f"  Zkontrolovano: {checked}, API volani: {api_calls}, s kurzy: {with_odds}, s Over tipy: {len(tips)}")
     return tips
 
 
