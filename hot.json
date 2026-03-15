@@ -1,42 +1,42 @@
 [
   {
-    "league": "La Liga",
-    "match": "Mallorca - Espanyol",
+    "league": "Segunda División RFEF - Group 2",
+    "match": "UD Logroñés - Real Unión",
     "tip": "Over 2.5",
     "odds": "2.36",
     "group": 1
   },
   {
-    "league": "Serie A",
-    "match": "Sassuolo - Bologna",
+    "league": "FNL",
+    "match": "Baník Ostrava II - Táborsko",
     "tip": "Over 2.5",
-    "odds": "2.05",
+    "odds": "2.01",
     "group": 1
   },
   {
-    "league": "Primera División RFEF - Group 1",
-    "match": "CF Talavera - Real Avilés",
+    "league": "Segunda División RFEF - Group 5",
+    "match": "Navalcarnero - Elche II",
+    "tip": "Over 2.5",
+    "odds": "2.04",
+    "group": 2
+  },
+  {
+    "league": "Segunda Liga",
+    "match": "União de Leiria - Maritimo",
     "tip": "Over 2.5",
     "odds": "2.14",
     "group": 2
   },
   {
-    "league": "Segunda División",
-    "match": "AD Ceuta FC - Deportivo La Coruna",
+    "league": "Segunda División RFEF - Group 1",
+    "match": "Real Oviedo II - Real Ávila",
     "tip": "Over 2.5",
-    "odds": "2.07",
-    "group": 2
-  },
-  {
-    "league": "Premier League",
-    "match": "Crystal Palace - Leeds",
-    "tip": "Over 2.5",
-    "odds": "2.11",
+    "odds": "2.04",
     "group": 3
   },
   {
-    "league": "Ligue 1",
-    "match": "Le Havre - Lyon",
+    "league": "I Liga",
+    "match": "ŁKS Łódź - Odra Opole",
     "tip": "Over 2.5",
     "odds": "2.13",
     "group": 3
