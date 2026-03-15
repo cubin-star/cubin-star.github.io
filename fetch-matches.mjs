@@ -71,6 +71,17 @@ function estimateLeagueTier(leagueName, country) {
         return 99;
     }
 
+    // ── Španělsko – pouze La Liga a La Liga 2 (Segunda División) ──
+    // Blokuje Segunda División RFEF, Tercera, Primera Federación atd.
+    if (country === 'Spain') {
+        if (/la liga(?!\s*2)/i.test(name)) return 1;
+        if (/la liga 2/i.test(name)) return 2;
+        if (/segunda divisi[oó]n(?!.*rfef)/i.test(name)) return 2;
+        if (/smartbank/i.test(name)) return 2;
+        // Copa del Rey je zachycena výše generickým cup regexem
+        return 99;
+    }
+
     // ── Whitelist 1. ligy (explicitní názvy) ──
     const TIER1 = [
         /la liga(?!\s*2)/i,                           // Španělsko
