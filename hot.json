@@ -1,23 +1,23 @@
 [
   {
-    "league": "2. Bundesliga",
-    "match": "Dynamo Dresden - Preußen Münster",
+    "league": "Premier League",
+    "match": "Zhenys - Ordabasy",
+    "tip": "Over 2.5",
+    "odds": "2.05",
+    "group": 1
+  },
+  {
+    "league": "La Liga",
+    "match": "Real Sociedad - Osasuna",
     "tip": "Over 2.5",
     "odds": "2.00",
     "group": 1
   },
   {
-    "league": "Segunda Liga",
-    "match": "União de Leiria - Maritimo",
+    "league": "Super League 1",
+    "match": "Panathinaikos - Panetolikos",
     "tip": "Over 2.5",
-    "odds": "2.14",
-    "group": 1
-  },
-  {
-    "league": "La Liga",
-    "match": "Mallorca - Espanyol",
-    "tip": "Over 2.5",
-    "odds": "2.33",
+    "odds": "2.05",
     "group": 2
   },
   {
@@ -28,17 +28,17 @@
     "group": 2
   },
   {
-    "league": "Super League 1",
-    "match": "Panathinaikos - Panetolikos",
+    "league": "Jupiler Pro League",
+    "match": "Cercle Brugge - RAAL La Louvière",
     "tip": "Over 2.5",
-    "odds": "2.04",
+    "odds": "2.00",
     "group": 3
   },
   {
-    "league": "I Liga",
-    "match": "ŁKS Łódź - Odra Opole",
+    "league": "Serie A",
+    "match": "Lazio - AC Milan",
     "tip": "Over 2.5",
-    "odds": "2.13",
+    "odds": "2.10",
     "group": 3
   }
 ]
