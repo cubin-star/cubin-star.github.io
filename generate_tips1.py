@@ -334,15 +334,15 @@ def extract_candidates(odds_data: list, fixtures: dict) -> list:
 
         # League tier filter:
         # England: allow up to tier 6 (National League South/North)
-        # Turkey: only tier 1 (Süper Lig) — lower divisions unreliable
+        # Turkey: allow tier 1 (Süper Lig) + tier 2 (1. Lig) + cups (tier 1)
         # Others: allow up to tier 2 (second division)
         # Unknown leagues: skip
         tier = _get_league_tier(league_id, league_name, country)
         if tier == 0:
             continue  # unrecognized league — skip
         if country == "turkey":
-            if tier > 1:
-                continue  # Turkey: only Süper Lig
+            if tier > 2:
+                continue  # Turkey: Süper Lig + 1. Lig + Cup only
         elif country == "england":
             if tier > 6:
                 continue
