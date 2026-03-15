@@ -34,8 +34,9 @@ from datetime import datetime, timezone, timedelta
 
 API_KEY = os.environ.get("API_FOOTBALL_KEY1", "")
 BASE_URL = "https://v3.football.api-sports.io"
-MIN_ODDS = 1.75
+MIN_ODDS = 1.80
 MAX_ODDS = 2.20
+MIN_EXPECTED_GOALS = 2.7  # Bezpečnostní polštář – nechceme hraniční 2.5, chceme jasné Over
 NUM_TIPS = 5              # 3 for app1 + 2 for app2
 DELAY = 0.5               # faster with paid plan (7500 req/day)
 OUTPUT_APP1 = "fotbal.json"   # Ultimate Football Overs (3 tips)
@@ -233,6 +234,12 @@ def _get_league_tier(league_id: int, league_name: str, country: str) -> int:
     # --- Heuristic fallback based on league name ---
     name = league_name.lower()
 
+    # Španělsko – blokovat nižší soutěže (RFEF, Tercera, Primera Federación)
+    if country.lower() == "spain":
+        if any(k in name for k in ("rfef", "tercera", "federación", "federacion",
+                "primera federaci", "segunda b")):
+            return 0
+
     # Tier 1 keywords
     if any(k in name for k in ("premier league", "primera división", "bundesliga",
             "serie a", "ligue 1", "eredivisie", "primeira liga", "süper lig",
@@ -380,6 +387,7 @@ def extract_candidates(odds_data: list, fixtures: dict) -> list:
                 "Match": f"{home} vs {away}",
                 "Tip": "Over 2.5",
                 "Odds": f"{best:.2f}",
+                "fixture_id": fid,
                 "league_id": league_id,
                 "home_id": fix_info["home_id"],
                 "away_id": fix_info["away_id"],
@@ -569,43 +577,185 @@ def calculate_gss(home_stats: dict, away_stats: dict) -> float:
     return round(gss, 3)
 
 
+# ============================================================
+# KOMBIK PREDICTIONS SCORING — L5, H2H, BTTS, API tip, DRY
+# Uses /predictions endpoint for richer data per match.
+# ============================================================
+
+_prediction_cache = {}
+
+
+def _safe_float(val, default=0.0):
+    try:
+        return float(val) if val is not None else default
+    except (ValueError, TypeError):
+        return default
+
+
+def _safe_int(val, default=0):
+    try:
+        return int(val) if val is not None else default
+    except (ValueError, TypeError):
+        return default
+
+
+def fetch_prediction(fixture_id: int) -> dict:
+    """Fetch API-Football prediction data for a fixture (L5, H2H, API tip)."""
+    if fixture_id in _prediction_cache:
+        return _prediction_cache[fixture_id]
+
+    time.sleep(DELAY)
+    data = api_get("predictions", {"fixture": str(fixture_id)})
+    resp = data.get("response", [])
+    result = resp[0] if resp else {}
+    _prediction_cache[fixture_id] = result
+    return result
+
+
+def score_by_predictions(pred: dict) -> dict:
+    """
+    Kombik-style scoring based on predictions data.
+
+    Factors:
+      1. Home/away split – přesnější než celkové průměry
+      2. H2H bonus – vzájemné zápasy s mnoha góly
+      3. API prediction bonus – API samo tipuje Over 2.5/3.5
+      4. BTTS signál – oba týmy pravidelně skórují
+      5. Low-scorer penalty – tým co často neskóruje = riziko
+    """
+    home = pred.get("teams", {}).get("home", {})
+    away = pred.get("teams", {}).get("away", {})
+    if not home or not away:
+        return {"bonus": 0, "expected_goals": 0, "h2h_avg": 0, "flags": ""}
+
+    # Last 5 matches
+    h_for5 = _safe_float(home.get("last_5", {}).get("goals", {}).get("for", {}).get("average"))
+    h_agn5 = _safe_float(home.get("last_5", {}).get("goals", {}).get("against", {}).get("average"))
+    a_for5 = _safe_float(away.get("last_5", {}).get("goals", {}).get("for", {}).get("average"))
+    a_agn5 = _safe_float(away.get("last_5", {}).get("goals", {}).get("against", {}).get("average"))
+
+    # Season averages
+    h_for_s = _safe_float(home.get("league", {}).get("goals", {}).get("for", {}).get("average", {}).get("total")) or h_for5
+    h_agn_s = _safe_float(home.get("league", {}).get("goals", {}).get("against", {}).get("average", {}).get("total")) or h_agn5
+    a_for_s = _safe_float(away.get("league", {}).get("goals", {}).get("for", {}).get("average", {}).get("total")) or a_for5
+    a_agn_s = _safe_float(away.get("league", {}).get("goals", {}).get("against", {}).get("average", {}).get("total")) or a_agn5
+
+    # Home/away split – jak domácí skórují DOMA, jak hosté skórují VENKU
+    h_for_home = _safe_float(home.get("league", {}).get("goals", {}).get("for", {}).get("average", {}).get("home")) or h_for_s
+    h_agn_home = _safe_float(home.get("league", {}).get("goals", {}).get("against", {}).get("average", {}).get("home")) or h_agn_s
+    a_for_away = _safe_float(away.get("league", {}).get("goals", {}).get("for", {}).get("average", {}).get("away")) or a_for_s
+    a_agn_away = _safe_float(away.get("league", {}).get("goals", {}).get("against", {}).get("average", {}).get("away")) or a_agn_s
+
+    recent_attack = h_for5 + a_for5
+    recent_def = h_agn5 + a_agn5
+    season_attack = h_for_s + a_for_s
+    season_def = h_agn_s + a_agn_s
+    home_away_exp = (h_for_home + a_for_away + h_agn_home + a_agn_away) / 2
+
+    exp_recent = (recent_attack + recent_def) / 2
+    exp_season = (season_attack + season_def) / 2
+    expected_goals = exp_recent * 0.4 + exp_season * 0.3 + home_away_exp * 0.3
+
+    # H2H bonus
+    h2h = pred.get("h2h", []) or []
+    h2h_avg = 0.0
+    if h2h:
+        total_g = sum((g.get("goals", {}).get("home", 0) or 0) +
+                      (g.get("goals", {}).get("away", 0) or 0) for g in h2h)
+        h2h_avg = total_g / len(h2h)
+    h2h_bonus = 0.4 if h2h_avg > 3.0 else (0.25 if h2h_avg > 2.5 else (0.1 if h2h_avg > 2.0 else 0))
+
+    # API prediction bonus
+    api_tip = pred.get("predictions", {}).get("under_over", "") or ""
+    api_bonus = 0.5 if api_tip == "+3.5" else (0.35 if api_tip == "+2.5" else 0)
+
+    # BTTS signál – oba týmy pravidelně skórují → víc gólů
+    h_fail = _safe_int(home.get("league", {}).get("failed_to_score", {}).get("home"))
+    h_played = _safe_int(home.get("league", {}).get("fixtures", {}).get("played", {}).get("home")) or 1
+    a_fail = _safe_int(away.get("league", {}).get("failed_to_score", {}).get("away"))
+    a_played = _safe_int(away.get("league", {}).get("fixtures", {}).get("played", {}).get("away")) or 1
+    h_score_rate = 1 - (h_fail / h_played)
+    a_score_rate = 1 - (a_fail / a_played)
+    btts_bonus = (0.4 if (h_score_rate >= 0.75 and a_score_rate >= 0.75)
+                  else (0.2 if (h_score_rate >= 0.65 and a_score_rate >= 0.65) else 0))
+
+    # Low-scorer penalty – tým co střílí < 0.8 za zápas je riziko
+    low_penalty = (-0.5 if (h_for5 < 0.8 or a_for5 < 0.8)
+                   else (-0.2 if (h_for5 < 1.0 or a_for5 < 1.0) else 0))
+
+    total_bonus = h2h_bonus + api_bonus + btts_bonus + low_penalty
+
+    flags = []
+    if api_tip in ("+2.5", "+3.5"):
+        flags.append("API✓")
+    if btts_bonus > 0:
+        flags.append("BTTS✓")
+    if low_penalty < 0:
+        flags.append("DRY⚠")
+
+    return {
+        "bonus": total_bonus,
+        "expected_goals": expected_goals,
+        "h2h_avg": h2h_avg,
+        "flags": " ".join(flags),
+    }
+
+
 def enrich_candidates_with_gss(candidates: list) -> list:
-    """Fetch team stats for each candidate and calculate Goal Storm Score."""
-    print(f"\n--- GOAL STORM SCORE (team stats analysis) ---")
-    print(f"  Analyzing {len(candidates)} candidates...")
+    """Fetch team stats + predictions for each candidate. Combined GSS + prediction scoring."""
+    print(f"\n--- GOAL STORM SCORE + PREDICTIONS ANALYSIS ---")
+    print(f"  Analyzing {len(candidates)} candidates (min exp. goals: {MIN_EXPECTED_GOALS})...")
 
     filtered = []
+    skipped_low = 0
     for i, c in enumerate(candidates):
         print(f"  [{i+1}/{len(candidates)}] {c['Match'][:40]:.<42s}", end="")
 
         home_stats = fetch_team_stats(c["home_id"], c["league_id"], c["season"])
         away_stats = fetch_team_stats(c["away_id"], c["league_id"], c["season"])
 
-        # Calculate expected goals
+        # Calculate expected goals from team stats
         home_expected = (home_stats["goals_for"] + away_stats["goals_against"]) / 2
         away_expected = (away_stats["goals_for"] + home_stats["goals_against"]) / 2
         total_expected = home_expected + away_expected
 
-        # NEW: Skip matches with low expected goals (<2.3)
-        if total_expected < 2.3:
-            print(f" ❌SKIP (exp={total_expected:.1f}g < 2.3)")
+        # Bezpečnostní polštář: přeskočit zápasy kde model čeká málo gólů
+        if total_expected < MIN_EXPECTED_GOALS:
+            print(f" ❌SKIP (exp={total_expected:.1f}g < {MIN_EXPECTED_GOALS})")
+            skipped_low += 1
             continue
 
-        # NEW: Prefer matches where at least one team scores >1.3 avg
+        # Skip matches where both teams score < 1.0 avg
         if home_stats["goals_for"] < 1.0 and away_stats["goals_for"] < 1.0:
             print(f" ❌SKIP (both teams low-scoring)")
+            skipped_low += 1
             continue
 
         gss = calculate_gss(home_stats, away_stats)
-        c["gss"] = gss
-        c["expected_goals"] = total_expected
 
-        print(f" ✅GSS={gss:.2f} (exp={total_expected:.1f}g)")
+        # Fetch predictions for additional signals (L5, H2H, API tip, BTTS)
+        pred_score = {"bonus": 0, "expected_goals": 0, "h2h_avg": 0, "flags": ""}
+        fid = c.get("fixture_id")
+        if fid:
+            pred = fetch_prediction(fid)
+            if pred:
+                pred_score = score_by_predictions(pred)
+
+        # Combined score: GSS + prediction bonuses
+        combined = gss + pred_score["bonus"]
+        c["gss"] = combined
+        c["gss_raw"] = gss
+        c["expected_goals"] = total_expected
+        c["pred_flags"] = pred_score.get("flags", "")
+
+        flags = pred_score.get("flags", "")
+        print(f" ✅Score={combined:.2f} (GSS={gss:.2f}, exp={total_expected:.1f}g{', ' + flags if flags else ''})")
         filtered.append(c)
+
+    print(f"\n  📊 {skipped_low} vyřazeno (exp. gólů < {MIN_EXPECTED_GOALS})")
 
     if not filtered:
         print(f"\n  ⚠️ All candidates filtered out! Using original set with looser filter...")
-        # Fallback: use all candidates but still calculate GSS
         for c in candidates:
             home_stats = fetch_team_stats(c["home_id"], c["league_id"], c["season"])
             away_stats = fetch_team_stats(c["away_id"], c["league_id"], c["season"])
@@ -616,12 +766,13 @@ def enrich_candidates_with_gss(candidates: list) -> list:
             c["expected_goals"] = home_expected + away_expected
         filtered = candidates
 
-    # Sort by GSS for display
+    # Sort by combined score for display
     ranked = sorted(filtered, key=lambda x: x["gss"], reverse=True)
-    print(f"\n  🏆 Top 5 by Goal Storm Score:")
+    print(f"\n  🏆 Top 5 by Combined Score (GSS + Predictions):")
     for i, c in enumerate(ranked[:5], 1):
         exp_g = c.get("expected_goals", 0)
-        print(f"    {i}. GSS={c['gss']:.2f} (exp={exp_g:.1f}g) | {c['League']}: {c['Match']} @ {c['Odds']}")
+        flags = c.get("pred_flags", "")
+        print(f"    {i}. Score={c['gss']:.2f} (exp={exp_g:.1f}g{', ' + flags if flags else ''}) | {c['League']}: {c['Match']} @ {c['Odds']}")
 
     return filtered
 
