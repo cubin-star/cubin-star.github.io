@@ -92,22 +92,26 @@
 
         function isLeagueAllowed(m) {
             var league = (m.league || '').toLowerCase();
-            // Spain: only La Liga and La Liga 2 (Segunda) allowed
-            var esBlocked = ['segunda b','segunda rfef','tercera','primera rfef',
-                             'segunda division b','primera federacion','segunda federacion',
-                             'rfef','tercera division','spain 3','spain 4','copa del rey'];
-            var esAllowed = ['la liga','laliga','primera','segunda'];
+            // Detect any Spanish league
             var isSpanish = league.indexOf('spain') !== -1 || league.indexOf('espa') !== -1
                          || league.indexOf('la liga') !== -1 || league.indexOf('laliga') !== -1
                          || league.indexOf('primera') !== -1 || league.indexOf('segunda') !== -1
-                         || league.indexOf('copa del rey') !== -1 || league.indexOf('rfef') !== -1;
-            if (isSpanish) {
-                if (esBlocked.some(function(b) { return league.indexOf(b) !== -1; })) return false;
-                if (esAllowed.some(function(a) { return league.indexOf(a) !== -1; })) return true;
-                // Unknown Spanish league – block by default
-                return false;
-            }
-            return true;
+                         || league.indexOf('copa del rey') !== -1 || league.indexOf('rfef') !== -1
+                         || league.indexOf('tercera') !== -1 || league.indexOf('federaci') !== -1;
+            if (!isSpanish) return true;
+            // Block anything containing these terms
+            if (league.indexOf('rfef') !== -1) return false;
+            if (league.indexOf('federaci') !== -1) return false;
+            if (league.indexOf('tercera') !== -1) return false;
+            if (league.indexOf('segunda b') !== -1) return false;
+            // Allow only La Liga, La Liga 2 (Segunda División) and Copa del Rey
+            if (league.indexOf('copa del rey') !== -1) return true;
+            if (league.indexOf('la liga') !== -1 || league.indexOf('laliga') !== -1) return true;
+            if (league.indexOf('primera div') !== -1) return true;
+            if (league.indexOf('segunda div') !== -1) return true;
+            if (/segunda(?!.*rfef|.*federaci|.*\bb\b)/.test(league)) return true;
+            // Unknown Spanish league – block
+            return false;
         }
 
         function scoreOver25(m) {
