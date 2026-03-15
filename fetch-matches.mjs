@@ -218,7 +218,7 @@ async function footballPicks(now, maxTime) {
         return true;
     });
     if (skippedLeagues.size > 0) { console.log('   Vyřazeno:'); for (const s of skippedLeagues) console.log('     ' + s); }
-    console.log('   ' + fixtures.length + ' v 24h okně (whitelist 1.+2. liga, EN max 6., poháry OK)');
+    console.log('   ' + fixtures.length + ' v 12h okně (whitelist 1.+2. liga, EN max 6., poháry OK)');
     const fixtureMap = new Map(), leagueMap = new Map();
     for (const f of fixtures) {
         fixtureMap.set(f.fixture.id, f);
