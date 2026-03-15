@@ -1,164 +1,211 @@
 """
 Bot pro automaticke vyhledavani tenisovych tipu (Over games).
-Pouziva The Odds API (https://the-odds-api.com/).
+Pouziva odds-api.io (ATP, WTA, Challengery).
 Spousti se pres GitHub Actions kazdy den v 8:00 CET.
 """
 
 import json
 import os
-import random
 import sys
 from datetime import datetime, timedelta, timezone
 from urllib.request import Request, urlopen
-from urllib.error import URLError
+from urllib.error import URLError, HTTPError
 
-API_KEY = os.environ.get("ODDS_API_KEY3", "")
-BASE_URL = "https://api.the-odds-api.com/v4"
+API_KEY = os.environ.get("TENIS_API_KEY", "")
+BASE_URL = "https://api.odds-api.io/v3"
 
 MIN_ODDS = 1.75
 MAX_TIPS = 2
-MAX_HOURS_AHEAD = 24  # Zapasy musi zacinat do 24h od spusteni bota
-ALLOWED_POINTS = {18.5, 19.5, 20.5, 21.5, 22.5}  # Povolene hranice pro Over
+MAX_HOURS_AHEAD = 24
+ALLOWED_POINTS = {18.5, 19.5, 20.5, 21.5, 22.5}
 OUTPUT_FILE = "tenis.json"
+
+# Bookmakers pro dotaz na kurzy (maji Totals Games pro tenis)
+BOOKMAKERS = ["1xbet", "pinnacle", "bet365"]
 
 # Cesky cas (CET=UTC+1, CEST=UTC+2)
 CET = timezone(timedelta(hours=1))
 CEST = timezone(timedelta(hours=2))
 
+# Filtry turnaju: povolene kategorie (bez ITF a UTR)
+ALLOWED_LEAGUE_PREFIXES = ("ATP", "WTA", "Challenger")
+BLOCKED_LEAGUE_KEYWORDS = ("ITF", "UTR")
 
-def get_available_tennis_sports():
-    """Ziska seznam aktualne dostupnych tenisovych sportu/turnaju."""
-    url = f"{BASE_URL}/sports/?apiKey={API_KEY}"
+
+def api_get(endpoint):
+    """Univerzalni GET pozadavek na odds-api.io."""
+    url = f"{BASE_URL}/{endpoint}"
+    if "?" in url:
+        url += f"&apiKey={API_KEY}"
+    else:
+        url += f"?apiKey={API_KEY}"
     try:
         req = Request(url, headers={"Accept": "application/json"})
-        with urlopen(req) as resp:
-            sports = json.loads(resp.read().decode())
-            return [
-                s for s in sports
-                if "tennis" in s.get("key", "").lower() and s.get("active", False)
-            ]
-    except URLError as e:
-        print(f"Chyba pri nacitani sportu: {e}")
-        return []
-
-
-def get_odds_for_sport(sport_key):
-    """Ziska kurzy pro dany tenisovy sport/turnaj (totals = over/under)."""
-    url = (
-        f"{BASE_URL}/sports/{sport_key}/odds/"
-        f"?apiKey={API_KEY}"
-        f"&regions=eu"
-        f"&markets=totals"
-        f"&oddsFormat=decimal"
-    )
-    try:
-        req = Request(url, headers={"Accept": "application/json"})
-        with urlopen(req) as resp:
+        with urlopen(req, timeout=30) as resp:
             return json.loads(resp.read().decode())
+    except HTTPError as e:
+        print(f"  HTTP {e.code} pro {endpoint}")
+        return None
     except URLError as e:
-        print(f"  Chyba pri nacitani kurzu pro {sport_key}: {e}")
+        print(f"  Chyba: {e}")
+        return None
+
+
+def is_allowed_league(league_name):
+    """Kontrola, ze turnaj je povoleny (ATP/WTA/Challenger, ne ITF/UTR/Doubles)."""
+    for blocked in BLOCKED_LEAGUE_KEYWORDS:
+        if blocked.lower() in league_name.lower():
+            return False
+    for prefix in ALLOWED_LEAGUE_PREFIXES:
+        if prefix.lower() in league_name.lower():
+            return True
+    return False
+
+
+def get_tennis_events():
+    """Ziska vsechny tenisove zapasy a filtruje podle turnaje a casu."""
+    print("Nacitam tenisove zapasy z odds-api.io...")
+    data = api_get("events?sport=tennis")
+    if not data:
         return []
 
-
-def find_over_tips(events, sport_title):
-    """Najde Over tipy s kurzem >= MIN_ODDS, pouze zapasy do 24h.
-    Sbira data od VSECH bookmakeru pro pozdejsi analyzu."""
-    tips = []
     now = datetime.now(timezone.utc)
     deadline = now + timedelta(hours=MAX_HOURS_AHEAD)
 
-    for event in events:
-        home = event.get("home_team", "N/A")
-        away = event.get("away_team", "N/A")
-        commence = event.get("commence_time", "")
+    events = []
+    skipped_leagues = set()
+    allowed_leagues = set()
 
-        # Kontrola casoveho okna: zapas musi byt v budoucnu A do 24h
-        if commence:
-            try:
-                match_time = datetime.fromisoformat(commence.replace("Z", "+00:00"))
-                if match_time < now:
-                    continue
-                if match_time > deadline:
-                    continue
-            except ValueError:
+    for event in data:
+        league_name = event.get("league", {}).get("name", "")
+        status = event.get("status", "")
+
+        # Pouze pending zapasy
+        if status != "pending":
+            continue
+
+        # Filtr turnaju
+        if not is_allowed_league(league_name):
+            skipped_leagues.add(league_name)
+            continue
+
+        # Filtr casu: zapas musi byt v budoucnu a do 24h
+        date_str = event.get("date", "")
+        if not date_str:
+            continue
+        try:
+            match_time = datetime.fromisoformat(date_str.replace("Z", "+00:00"))
+            if match_time < now or match_time > deadline:
                 continue
-        else:
+        except ValueError:
             continue
 
-        bookmakers = event.get("bookmakers", [])
-        if not bookmakers:
+        allowed_leagues.add(league_name)
+        events.append(event)
+
+    print(f"  Celkem zapasu z API: {len(data)}")
+    print(f"  Zapasu do 24h (povolene turnaje): {len(events)}")
+    print(f"  Povolene turnaje ({len(allowed_leagues)}):")
+    for lg in sorted(allowed_leagues):
+        count = sum(1 for e in events if e.get("league", {}).get("name") == lg)
+        print(f"    {lg} ({count} zapasu)")
+    if skipped_leagues:
+        print(f"  Preskocene turnaje: {len(skipped_leagues)} (ITF, UTR, Doubles...)")
+
+    return events
+
+
+def get_odds_for_event(event_id):
+    """Ziska kurzy pro konkretni zapas od vice bookmakeru."""
+    for bk in BOOKMAKERS:
+        data = api_get(f"odds?eventId={event_id}&bookmakers={bk}")
+        if not data:
             continue
 
-        # Sebrat VSECHNY Over nabidky od vsech bookmakeru
-        all_over_lines = []   # [(point, price, bookmaker_name), ...]
-        all_under_lines = []  # [(point, price, bookmaker_name), ...]
+        bookmaker_data = data.get("bookmakers", {})
+        if not bookmaker_data:
+            continue
 
-        for bookmaker in bookmakers:
-            bk_name = bookmaker.get("title", "N/A")
-            for market in bookmaker.get("markets", []):
-                if market.get("key") != "totals":
-                    continue
-                for outcome in market.get("outcomes", []):
-                    point = outcome.get("point", 0)
-                    price = outcome.get("price", 0)
-                    name = outcome.get("name", "").lower()
+        # bookmakers muze byt dict s klicem = jmeno bookmakera
+        for bk_name, bk_markets in bookmaker_data.items():
+            markets = bk_markets if isinstance(bk_markets, list) else bk_markets.get("markets", [])
+            for market in markets:
+                market_name = market.get("name", "")
+                if "totals" in market_name.lower() and "games" in market_name.lower():
+                    return market.get("odds", []), bk_name
 
-                    if name == "over":
-                        all_over_lines.append((point, price, bk_name))
-                    elif name == "under":
-                        all_under_lines.append((point, price, bk_name))
+    return [], ""
+
+
+def find_over_tips(events):
+    """Pro kazdy zapas najde Over tipy s povolenymi hranicemi a kurzem >= MIN_ODDS."""
+    tips = []
+    checked = 0
+    with_odds = 0
+
+    for event in events:
+        event_id = event.get("id")
+        home = event.get("home", "N/A")
+        away = event.get("away", "N/A")
+        league_name = event.get("league", {}).get("name", "")
+        date_str = event.get("date", "")
+
+        checked += 1
+        if checked % 20 == 0:
+            print(f"  Kontroluji zapas {checked}/{len(events)}...")
+
+        odds_list, bookmaker = get_odds_for_event(event_id)
+        if not odds_list:
+            continue
+
+        with_odds += 1
+
+        # Najit vsechny povolene Over nabidky
+        all_over_lines = []
+        for odds_item in odds_list:
+            point = float(odds_item.get("hdp", 0))
+            over_price = float(odds_item.get("over", 0))
+
+            if point in ALLOWED_POINTS and over_price >= MIN_ODDS:
+                all_over_lines.append((point, over_price, bookmaker))
 
         if not all_over_lines:
             continue
 
-        # Najit nejlepsi povolenou nabidku (pro zobrazeni v JSON)
-        valid_offers = [
-            (pt, pr, bk) for pt, pr, bk in all_over_lines
-            if pt in ALLOWED_POINTS and pr >= MIN_ODDS
-        ]
+        # Vybrat nejnizsi hranici (nejsnazsi Over)
+        all_over_lines.sort(key=lambda x: x[0])
+        best_point, best_price, best_bk = all_over_lines[0]
 
-        if not valid_offers:
-            continue
-
-        # Vybrat nabidku s nejnizsi hranici (nejsnazsi Over)
-        valid_offers.sort(key=lambda x: x[0])
-        best_point, best_price, best_bk = valid_offers[0]
+        # Sebrat vsechny linky pro analyzu
+        all_points_for_analysis = [(float(o.get("hdp", 0)), float(o.get("over", 0)), bookmaker) for o in odds_list]
 
         tips.append({
-            "league": sport_title,
+            "league": league_name,
             "match": f"{home} vs {away}",
             "tip": f"Over{best_point}",
             "odds": str(round(best_price, 2)),
-            "commence_time": commence,
+            "commence_time": date_str,
             "bookmaker": best_bk,
-            # Data pro analyzu
-            "_all_over_lines": all_over_lines,
-            "_all_under_lines": all_under_lines,
+            "_all_over_lines": all_points_for_analysis,
             "_bet_point": best_point,
         })
 
+    print(f"  Zkontrolovano: {checked}, s kurzy: {with_odds}, s Over tipy: {len(tips)}")
     return tips
 
 
 def calculate_over_score(tip):
     """
     Vlastni metoda pro odhad pravdepodobnosti Over.
-    NEPOUZIVA kurzy jako indikator pravdepodobnosti.
-
-    Analyzuje TRZNI STRUKTURU - kam bookmakeri umistuji linku
-    (= ocekavany pocet gamu), ne jake daji kurzy.
+    Analyzuje trzni strukturu, ne kurzy.
 
     Skore 0-100. Vyssi = vetsi sance ze Over vyjde.
 
     Faktory:
-    1. Buffer (0-40b): Rozdil mezi ocekavanym totalem a nasi hranici.
-       Cim vyse bookmakeri nastavuji linku NAD nasi hranici, tim spis Over projde.
-    2. Shoda trhu (0-25b): Souhlasi bookmakeri kde linka je?
-       Maly rozptyl = jisty odhad, velky rozptyl = nejistota.
-    3. Hloubka trhu (0-15b): Kolik bookmakeru nabizi trh.
-       Vic bookmakeru = lepe analyzovany zapas.
-    4. Pozice hranice (0-20b): Nizsi hranice = prirozene snazsi Over.
-       Over 18.5 je snazsi nez Over 22.5.
+    1. Buffer (0-40b): Rozdil mezi medianem linek a nasi hranici.
+    2. Shoda trhu (0-25b): Maly rozptyl = jistejsi predikce.
+    3. Pocet linek (0-15b): Vic dat = spolehlivejsi.
+    4. Pozice hranice (0-20b): Nizsi hranice = snazsi Over.
     """
     all_over = tip.get("_all_over_lines", [])
     bet_point = tip.get("_bet_point", 22.5)
@@ -166,10 +213,9 @@ def calculate_over_score(tip):
     if not all_over:
         return 0
 
-    # -- Vsechny linky (points) od bookmakeru --
     all_points = [pt for pt, _, _ in all_over]
 
-    # Median = nejlepsi odhad "ocekavaneho totalu"
+    # Median
     sorted_points = sorted(all_points)
     n = len(sorted_points)
     if n % 2 == 1:
@@ -177,74 +223,52 @@ def calculate_over_score(tip):
     else:
         market_median = (sorted_points[n // 2 - 1] + sorted_points[n // 2]) / 2
 
-    # --- FAKTOR 1: Buffer (0-40 bodu) ---
-    # Rozdil mezi medianem trhu a nasi sazkou
-    # Priklad: median=22.5, sazime Over 20.5 -> buffer=2.0 -> vysoke skore
-    # Priklad: median=20.5, sazime Over 22.5 -> buffer=-2.0 -> nizke skore
+    # Buffer (0-40)
     buffer = market_median - bet_point
-    # Normalizace: buffer -2..+4 -> 0..40
     buffer_score = max(0, min(40, (buffer + 2) * (40 / 6)))
 
-    # --- FAKTOR 2: Shoda trhu (0-25 bodu) ---
-    # Rozptyl linek - maly rozptyl = bookmakeri se shoduji = jistejsi predikce
+    # Shoda trhu (0-25)
     if n >= 2:
         mean_pt = sum(all_points) / n
         variance = sum((p - mean_pt) ** 2 for p in all_points) / n
         std_dev = variance ** 0.5
-        # std_dev 0 = perfektni shoda (25b), std_dev >= 2.5 = velka nejistota (0b)
         agreement_score = max(0, min(25, 25 * (1 - std_dev / 2.5)))
     else:
-        agreement_score = 5  # Jen 1 bookmaker = malo dat
+        agreement_score = 10
 
-    # --- FAKTOR 3: Hloubka trhu (0-15 bodu) ---
-    # Pocet unikatnich bookmakeru nabizejicich Over
-    unique_bookmakers = len(set(bk for _, _, bk in all_over))
-    # 1 bookmaker = 3b, 5+ = 15b
-    depth_score = min(15, unique_bookmakers * 3)
+    # Pocet linek (0-15)
+    depth_score = min(15, n * 2)
 
-    # --- FAKTOR 4: Pozice hranice (0-20 bodu) ---
-    # Nizsi hranice = snazsi Over (v tenise je prumer ~22 gamu)
-    # 18.5 -> 20b, 19.5 -> 16b, 20.5 -> 12b, 21.5 -> 8b, 22.5 -> 4b
+    # Pozice hranice (0-20)
     point_bonus = {18.5: 20, 19.5: 16, 20.5: 12, 21.5: 8, 22.5: 4}
     position_score = point_bonus.get(bet_point, 0)
 
     total_score = buffer_score + agreement_score + depth_score + position_score
-
     return round(total_score, 1)
 
 
 def select_best_tips(all_tips, count):
     """
     Vybere tipy s nejvyssim over-skore, preferuje ruzne turnaje.
-    1. Spocita over-skore pro kazdy tip
-    2. Seradi podle skore (sestupne)
-    3. Vybere nejlepsi tipy z ruznych turnaju
     """
     if not all_tips:
         return []
 
-    # Spocitat skore pro kazdy tip
     for tip in all_tips:
         tip["_score"] = calculate_over_score(tip)
 
-    # Seradit podle skore (nejvyssi prvni)
     all_tips.sort(key=lambda t: t["_score"], reverse=True)
 
     print()
     print("  === Analyza Over pravdepodobnosti ===")
-    for tip in all_tips:
-        over_lines = tip.get("_all_over_lines", [])
-        points = [pt for pt, _, _ in over_lines]
-        print(f"  {tip['match']}")
-        print(f"    Tip: {tip['tip']} | Skore: {tip['_score']}/100")
-        print(f"    Linky bookmakeru: {sorted(points)}")
-        print(f"    Pocet bookmakeru: {len(set(bk for _, _, bk in over_lines))}")
+    for tip in all_tips[:10]:
+        print(f"  {tip['league']}: {tip['match']}")
+        print(f"    Tip: {tip['tip']} | Skore: {tip['_score']}/100 | Kurz: {tip['odds']}")
 
-    # Vybrat nejlepsi s preferencí ruznych turnaju
+    # 1. pruchod: z kazdeho turnaje vzit nejlepsi tip
     selected = []
     used_leagues = set()
 
-    # 1. pruchod: z kazdeho turnaje vzit nejlepsi tip
     for tip in all_tips:
         if len(selected) >= count:
             break
@@ -267,10 +291,9 @@ def select_best_tips(all_tips, count):
 
 
 def get_czech_now():
-    """Vrati aktualni cesky cas (CET nebo CEST podle mesice)."""
+    """Vrati aktualni cesky cas."""
     now_utc = datetime.now(timezone.utc)
     month = now_utc.month
-    # Zjednodusene: CEST platí zhruba brezen-rijen
     if 3 <= month <= 10:
         return now_utc.astimezone(CEST)
     return now_utc.astimezone(CET)
@@ -309,22 +332,23 @@ def format_tips_for_json(tips):
 
 def main():
     if not API_KEY:
-        print("ERROR: ODDS_API_KEY3 neni nastaveny!")
+        print("ERROR: TENIS_API_KEY neni nastaveny!")
         sys.exit(1)
 
     print(f"=== Tennis Over Tips Bot ({datetime.now().strftime('%d.%m.%Y %H:%M')}) ===")
+    print(f"API: odds-api.io")
     print(f"Minimalni kurz: {MIN_ODDS}")
     print(f"Pocet tipu: {MAX_TIPS}")
-    print(f"Casove okno: zapasy do {MAX_HOURS_AHEAD}h od ted")
+    print(f"Casove okno: zapasy do {MAX_HOURS_AHEAD}h")
+    print(f"Povolene hranice: {sorted(ALLOWED_POINTS)}")
+    print(f"Turnaje: ATP, WTA, Challenger (bez ITF, UTR)")
     print()
 
-    # 1. Ziskat dostupne tenisove turnaje
-    print("Hledam dostupne tenisove turnaje...")
-    available_sports = get_available_tennis_sports()
+    # 1. Ziskat zapasy
+    events = get_tennis_events()
 
-    if not available_sports:
-        print("Zadne tenisove turnaje nejsou aktualne dostupne.")
-        print("Zapisuji prazdny JSON...")
+    if not events:
+        print("Zadne vhodne zapasy nenalezeny.")
         czech_now = get_czech_now()
         empty_json = {
             "updated_at": czech_now.strftime("%d.%m.%Y %H:%M"),
@@ -334,27 +358,15 @@ def main():
             json.dump(empty_json, f, ensure_ascii=False, indent=2)
         return
 
-    print(f"Nalezeno {len(available_sports)} aktivnich turnaju:")
-    for sport in available_sports:
-        print(f"  - {sport['title']} ({sport['key']})")
+    # 2. Najit Over tipy
     print()
-
-    # 2. Ziskat kurzy pro kazdy turnaj
-    all_tips = []
-
-    for sport in available_sports:
-        print(f"Nacitam kurzy pro: {sport['title']}...")
-        events = get_odds_for_sport(sport["key"])
-        print(f"  Nalezeno {len(events)} zapasu")
-
-        tips = find_over_tips(events, sport["title"])
-        print(f"  Nalezeno {len(tips)} Over tipu s kurzem >= {MIN_ODDS}")
-        all_tips.extend(tips)
+    print("Hledam Over tipy s kurzem >= 1.75...")
+    all_tips = find_over_tips(events)
 
     print()
-    print(f"Celkem nalezeno {len(all_tips)} tipu.")
+    print(f"Celkem nalezeno {len(all_tips)} Over tipu.")
 
-    # 3. Vybrat nejlepsi tipy
+    # 3. Vybrat nejlepsi
     best_tips = select_best_tips(all_tips, MAX_TIPS)
 
     if not best_tips:
@@ -368,10 +380,9 @@ def main():
     print("Vybrane tipy:")
     for tip in output:
         print(f"  {tip['league']}: {tip['match']}")
-        print(f"    {tip['tip']} @ {tip['odds']}")
+        print(f"    {tip['tip']} @ {tip['odds']} (start: {tip['time']})")
     print()
 
-    # Obalit do objektu s updated_at casovym razitkem
     czech_now = get_czech_now()
     final_json = {
         "updated_at": czech_now.strftime("%d.%m.%Y %H:%M"),
@@ -387,4 +398,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
