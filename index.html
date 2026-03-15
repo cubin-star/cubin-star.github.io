@@ -90,6 +90,26 @@
             return parseFloat(String(val).replace(',', '.')) || 0;
         }
 
+        function isLeagueAllowed(m) {
+            var league = (m.league || '').toLowerCase();
+            // Spain: only La Liga and La Liga 2 (Segunda) allowed
+            var esBlocked = ['segunda b','segunda rfef','tercera','primera rfef',
+                             'segunda division b','primera federacion','segunda federacion',
+                             'rfef','tercera division','spain 3','spain 4','copa del rey'];
+            var esAllowed = ['la liga','laliga','primera','segunda'];
+            var isSpanish = league.indexOf('spain') !== -1 || league.indexOf('espa') !== -1
+                         || league.indexOf('la liga') !== -1 || league.indexOf('laliga') !== -1
+                         || league.indexOf('primera') !== -1 || league.indexOf('segunda') !== -1
+                         || league.indexOf('copa del rey') !== -1 || league.indexOf('rfef') !== -1;
+            if (isSpanish) {
+                if (esBlocked.some(function(b) { return league.indexOf(b) !== -1; })) return false;
+                if (esAllowed.some(function(a) { return league.indexOf(a) !== -1; })) return true;
+                // Unknown Spanish league – block by default
+                return false;
+            }
+            return true;
+        }
+
         function scoreOver25(m) {
             var odds = parseOdds(m.odds);
             var tip = (m.tip || '').toLowerCase();
@@ -129,6 +149,7 @@
 
         function selectBestOver25(matches, maxCount) {
             maxCount = maxCount || 6;
+            matches = matches.filter(isLeagueAllowed);
             var scored = matches.map(function(m) {
                 return { m: m, s: scoreOver25(m) };
             });
