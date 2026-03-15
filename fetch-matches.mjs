@@ -1,5 +1,5 @@
 /**
- * Bot pro denní výběr 6 fotbalových zápasů s Over 2.5 góly a kurzem 2.0–3.0
+ * Bot pro denní výběr 6 fotbalových zápasů s Over 2.5 góly a kurzem 2.2–3.0
  *
  * Používá API-Football (api-sports.io) - 7500 req/den.
  * Výstup: hot.json
@@ -14,8 +14,9 @@ const API_KEY = process.env.API_FOOTBALL_KEY1;
 if (!API_KEY) { console.error('Chybí API_FOOTBALL_KEY1 env proměnná.'); process.exit(1); }
 
 const FOOTBALL_API = 'https://v3.football.api-sports.io';
-const MIN_ODDS = 2.0;
+const MIN_ODDS = 2.2;
 const MAX_ODDS = 3.0;
+const MIN_EXPECTED_GOALS = 2.7;  // Bezpečnostní polštář – nechceme hraniční 2.5, chceme jasné Over
 const PICK_COUNT = 6;
 const EXCLUDED_COUNTRIES = new Set(['Russia', 'Belarus']);
 const BLOCKED_AFRICAN = new Set([
@@ -254,19 +255,25 @@ async function footballPicks(now, maxTime) {
     console.log('🔍 Analyzuji ' + toAnalyze.length + ' zápasů (predictions)...\n');
 
     const picks = [];
+    let skippedLow = 0;
     for (let i = 0; i < toAnalyze.length; i++) {
         const m = toAnalyze[i];
         const avg = m.allOdds.reduce((a, b) => a + b, 0) / m.allOdds.length;
         const pred = await getMatchPrediction(m.fixtureId);
         if (pred) {
             const sc = scoreByTeamStats(pred);
+            // Bezpečnostní polštář: přeskočit zápasy kde model čeká málo gólů
+            if (sc.expectedGoals < MIN_EXPECTED_GOALS) {
+                skippedLow++;
+                continue;
+            }
             picks.push({ league: m.league, country: m.country, match: m.match, tip: m.tip, odds: avg.toFixed(2), score: sc.total, detail: sc.detail });
         }
         if (i < toAnalyze.length - 1) await sleep(350);
     }
     picks.sort((a, b) => b.score - a.score);
 
-    console.log('📊 Analyzováno: ' + picks.length + ' zápasů');
+    console.log('📊 Analyzováno: ' + (picks.length + skippedLow) + ' zápasů (' + skippedLow + ' vyřazeno – exp. gólů < ' + MIN_EXPECTED_GOALS + ')');
     if (picks.length > 0) console.log('   Top 10 podle týmových statistik:');
     picks.slice(0, 10).forEach((p, i) => console.log('   ' + (i + 1) + '. [' + p.league + '] ' + p.match + ' | ' + p.detail + ' | score ' + p.score.toFixed(2)));
     return picks;
@@ -286,13 +293,16 @@ async function getMatchPrediction(fixtureId) {
  *  1. Útočná síla: průměr gólů obou týmů za posledních 5 zápasů
  *  2. Děravá obrana: průměr inkasovaných gólů obou týmů za posledních 5
  *  3. Celosezonní průměr gólů (for + against) obou týmů
- *  4. H2H: průměr gólů ve vzájemných zápasech
- *  5. API prediction: bonus pokud API samo tipuje Over 2.5
+ *  4. Domácí/venkovní split – přesnější odhad než celkové průměry
+ *  5. H2H: průměr gólů ve vzájemných zápasech
+ *  6. API prediction: bonus pokud API samo tipuje Over 2.5
+ *  7. BTTS signál: oba týmy pravidelně skórují → větší šance na 3+ gólů
+ *  8. Penalizace suchých týmů: tým co často neskóruje = riziko
  */
 function scoreByTeamStats(pred) {
     const home = pred.teams?.home;
     const away = pred.teams?.away;
-    if (!home || !away) return { total: 0, detail: 'no data' };
+    if (!home || !away) return { total: 0, detail: 'no data', expectedGoals: 0 };
 
     // Last 5 matches
     const hFor5 = parseFloat(home.last_5?.goals?.for?.average) || 0;
@@ -300,11 +310,17 @@ function scoreByTeamStats(pred) {
     const aFor5 = parseFloat(away.last_5?.goals?.for?.average) || 0;
     const aAgn5 = parseFloat(away.last_5?.goals?.against?.average) || 0;
 
-    // Season averages
+    // Season averages (celkové)
     const hForS = parseFloat(home.league?.goals?.for?.average?.total) || hFor5;
     const hAgnS = parseFloat(home.league?.goals?.against?.average?.total) || hAgn5;
     const aForS = parseFloat(away.league?.goals?.for?.average?.total) || aFor5;
     const aAgnS = parseFloat(away.league?.goals?.against?.average?.total) || aAgn5;
+
+    // Domácí/venkovní split – přesnější: jak domácí skórují DOMA, jak hosté skórují VENKU
+    const hForHome = parseFloat(home.league?.goals?.for?.average?.home) || hForS;
+    const hAgnHome = parseFloat(home.league?.goals?.against?.average?.home) || hAgnS;
+    const aForAway = parseFloat(away.league?.goals?.for?.average?.away) || aForS;
+    const aAgnAway = parseFloat(away.league?.goals?.against?.average?.away) || aAgnS;
 
     // 1. Útočná síla (posledních 5): kolik gólů oba týmy střílejí
     const recentAttack = hFor5 + aFor5;
@@ -316,10 +332,13 @@ function scoreByTeamStats(pred) {
     const seasonAttack = hForS + aForS;
     const seasonDefWeak = hAgnS + aAgnS;
 
-    // 4. Odhad celkových gólů (kombinace posledních 5 + sezóna, 60:40)
+    // 4. Domácí/venkovní odhad: nejpřesnější prediktor
+    const homeAwayExpected = (hForHome + aForAway + hAgnHome + aAgnAway) / 2;
+
+    // Kombinovaný odhad gólů (posledních 5: 40%, sezóna: 30%, domácí/venkovní: 30%)
     const expectedRecent = (recentAttack + recentDefWeak) / 2;
     const expectedSeason = (seasonAttack + seasonDefWeak) / 2;
-    const expectedGoals = expectedRecent * 0.6 + expectedSeason * 0.4;
+    const expectedGoals = expectedRecent * 0.4 + expectedSeason * 0.3 + homeAwayExpected * 0.3;
 
     // 5. H2H bonus
     let h2hAvg = 0;
@@ -328,15 +347,32 @@ function scoreByTeamStats(pred) {
         const totalG = h2h.reduce((a, g) => a + (g.goals?.home || 0) + (g.goals?.away || 0), 0);
         h2hAvg = totalG / h2h.length;
     }
-    const h2hBonus = h2hAvg > 2.5 ? 0.3 : (h2hAvg > 2.0 ? 0.1 : 0);
+    const h2hBonus = h2hAvg > 3.0 ? 0.4 : (h2hAvg > 2.5 ? 0.25 : (h2hAvg > 2.0 ? 0.1 : 0));
 
     // 6. API prediction bonus
     const apiTip = pred.predictions?.under_over;
-    const apiBonus = (apiTip === '+2.5' || apiTip === '+3.5') ? 0.4 : 0;
+    const apiBonus = (apiTip === '+3.5') ? 0.5 : (apiTip === '+2.5') ? 0.35 : 0;
 
-    const total = expectedGoals + h2hBonus + apiBonus;
-    const detail = 'exp ' + expectedGoals.toFixed(1) + 'g, L5atk ' + recentAttack.toFixed(1) + ', H2H ' + h2hAvg.toFixed(1) + (apiTip === '+2.5' ? ', API✓' : '');
-    return { total, detail };
+    // 7. BTTS signál – oba týmy pravidelně skórují → víc gólů
+    const hFailHome = parseInt(home.league?.failed_to_score?.home) || 0;
+    const hPlayedHome = parseInt(home.league?.fixtures?.played?.home) || 1;
+    const aFailAway = parseInt(away.league?.failed_to_score?.away) || 0;
+    const aPlayedAway = parseInt(away.league?.fixtures?.played?.away) || 1;
+    const hScoreRate = 1 - (hFailHome / hPlayedHome);
+    const aScoreRate = 1 - (aFailAway / aPlayedAway);
+    const bttsBonus = (hScoreRate >= 0.75 && aScoreRate >= 0.75) ? 0.4
+                    : (hScoreRate >= 0.65 && aScoreRate >= 0.65) ? 0.2 : 0;
+
+    // 8. Penalizace suchých týmů – tým co střílí < 0.8 za zápas je riziko
+    const lowScorerPenalty = (hFor5 < 0.8 || aFor5 < 0.8) ? -0.5
+                           : (hFor5 < 1.0 || aFor5 < 1.0) ? -0.2 : 0;
+
+    const total = expectedGoals + h2hBonus + apiBonus + bttsBonus + lowScorerPenalty;
+    const flags = [apiTip === '+2.5' || apiTip === '+3.5' ? 'API✓' : '',
+                   bttsBonus > 0 ? 'BTTS✓' : '',
+                   lowScorerPenalty < 0 ? 'DRY⚠' : ''].filter(Boolean).join(' ');
+    const detail = 'exp ' + expectedGoals.toFixed(1) + 'g, L5atk ' + recentAttack.toFixed(1) + ', H2H ' + h2hAvg.toFixed(1) + (flags ? ', ' + flags : '');
+    return { total, detail, expectedGoals };
 }
 
 function balanceGroups(picks) {
