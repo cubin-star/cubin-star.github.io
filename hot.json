@@ -3,42 +3,35 @@
     "league": "Premier League",
     "match": "Zhenys - Ordabasy",
     "tip": "Over 2.5",
-    "odds": "2.05",
+    "odds": "2.20",
     "group": 1
   },
   {
-    "league": "La Liga",
-    "match": "Real Sociedad - Osasuna",
+    "league": "Liga I",
+    "match": "Universitatea Cluj - CFR 1907 Cluj",
     "tip": "Over 2.5",
-    "odds": "2.00",
+    "odds": "2.27",
     "group": 1
   },
   {
-    "league": "Super League 1",
-    "match": "Panathinaikos - Panetolikos",
+    "league": "Premier Division",
+    "match": "Drogheda United - Shamrock Rovers",
     "tip": "Over 2.5",
-    "odds": "2.05",
+    "odds": "2.21",
     "group": 2
   },
   {
-    "league": "Super Liga",
-    "match": "Radnicki 1923 - Vojvodina",
+    "league": "Primera División",
+    "match": "Union La Calera - O'Higgins",
     "tip": "Over 2.5",
-    "odds": "2.00",
+    "odds": "2.23",
     "group": 2
   },
   {
-    "league": "Jupiler Pro League",
-    "match": "Cercle Brugge - RAAL La Louvière",
+    "league": "Primera División - Apertura",
+    "match": "Danubio - Juventud",
     "tip": "Over 2.5",
-    "odds": "2.00",
-    "group": 3
-  },
-  {
-    "league": "Serie A",
-    "match": "Lazio - AC Milan",
-    "tip": "Over 2.5",
-    "odds": "2.10",
+    "odds": "2.37",
     "group": 3
   }
 ]
