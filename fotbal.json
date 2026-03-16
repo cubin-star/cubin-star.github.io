@@ -1,20 +1,20 @@
 [
   {
-    "League": "2. Lig",
-    "Match": "Ankaraspor vs Elazığspor",
+    "League": "Premier League",
+    "Match": "FK Tobol Kostanay vs Zhetysu",
     "Tip": "Over 2.5",
-    "Odds": "2.00"
+    "Odds": "1.83"
   },
   {
-    "League": "Ekstraklasa",
-    "Match": "Zaglebie Lubin vs Lech Poznan",
-    "Tip": "Over 2.5",
-    "Odds": "1.76"
-  },
-  {
-    "League": "1. Division",
-    "Match": "Aris vs Apoel Nicosia",
+    "League": "1. Lig",
+    "Match": "Çorum FK vs Esenler Erokspor",
     "Tip": "Over 2.5",
     "Odds": "1.88"
+  },
+  {
+    "League": "Super Liga",
+    "Match": "Napredak vs OFK Beograd",
+    "Tip": "Over 2.5",
+    "Odds": "2.03"
   }
 ]
