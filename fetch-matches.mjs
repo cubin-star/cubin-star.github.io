@@ -238,7 +238,7 @@ async function footballPicks(now, maxTime) {
                 for (const bm of entry.bookmakers || []) { for (const bet of bm.bets || []) { for (const v of bet.values || []) {
                     if (v.value !== 'Over 2.5') continue;
                     const odd = parseFloat(v.odd); if (isNaN(odd) || odd < MIN_ODDS || odd > MAX_ODDS) continue;
-                    if (!matchMap.has(matchKey)) matchMap.set(matchKey, { fixtureId: matchKey, league: lg.name, country: lg.country, match: fix.teams.home.name + ' - ' + fix.teams.away.name, tip: 'Over 2.5', allOdds: [] });
+                    if (!matchMap.has(matchKey)) matchMap.set(matchKey, { fixtureId: matchKey, league: lg.name, country: lg.country, match: fix.teams.home.name + ' - ' + fix.teams.away.name, tip: 'Over 2.5', kickoff: fix.fixture.date, allOdds: [] });
                     matchMap.get(matchKey).allOdds.push(odd);
                 } } }
             }
@@ -267,7 +267,7 @@ async function footballPicks(now, maxTime) {
                 skippedLow++;
                 continue;
             }
-            picks.push({ league: m.league, country: m.country, match: m.match, tip: m.tip, odds: avg.toFixed(2), score: sc.total, detail: sc.detail });
+            picks.push({ league: m.league, country: m.country, match: m.match, tip: m.tip, odds: avg.toFixed(2), score: sc.total, detail: sc.detail, kickoff: m.kickoff });
         }
         if (i < toAnalyze.length - 1) await sleep(350);
     }
@@ -415,9 +415,47 @@ async function main() {
     for (const pick of allPicks) { if (selected.length >= PICK_COUNT) break; if (EUROPEAN_COUNTRIES.has(pick.country) && !usedLeagues.has(pick.league)) { selected.push(pick); usedLeagues.add(pick.league); } }
     // 2. kolo: doplnit neevropskými, pokud není dost evropských
     for (const pick of allPicks) { if (selected.length >= PICK_COUNT) break; if (!usedLeagues.has(pick.league)) { selected.push(pick); usedLeagues.add(pick.league); } }
+
+    // ═══════════════════ BACKFILL: doplnění z dalších 12h oken ═══════════════════
+    const BACKFILL_WINDOW_MS = 12 * 60 * 60 * 1000;
+    const MAX_BACKFILL_ROUNDS = 3;  // max 3 × 12h = +36h nad rámec 24h
+    let backfillStart = maxTime;
+    let backfillRound = 0;
+    while (selected.length < PICK_COUNT && backfillRound < MAX_BACKFILL_ROUNDS) {
+        backfillRound++;
+        const backfillEnd = new Date(backfillStart.getTime() + BACKFILL_WINDOW_MS);
+        const missing = PICK_COUNT - selected.length;
+        console.log('\n🔄 Chybí ' + missing + ' zápas(ů) – prohledávám +12h okno #' + backfillRound + ' (' + backfillStart.toUTCString() + ' → ' + backfillEnd.toUTCString() + ')');
+        const extraPicks = await footballPicks(backfillStart, backfillEnd);
+        if (extraPicks.length === 0) {
+            console.warn('   ⚠ Žádné vhodné zápasy v tomto okně.');
+            backfillStart = backfillEnd;
+            continue;
+        }
+        // Seřadit podle nejbližšího výkopu (při shodě upřednostnit vyšší score)
+        extraPicks.sort((a, b) => {
+            const td = new Date(a.kickoff) - new Date(b.kickoff);
+            return td !== 0 ? td : b.score - a.score;
+        });
+        // 1. kolo backfillu: evropské ligy (dosud nepoužité)
+        for (const pick of extraPicks) {
+            if (selected.length >= PICK_COUNT) break;
+            if (EUROPEAN_COUNTRIES.has(pick.country) && !usedLeagues.has(pick.league)) { selected.push(pick); usedLeagues.add(pick.league); }
+        }
+        // 2. kolo backfillu: ostatní ligy
+        for (const pick of extraPicks) {
+            if (selected.length >= PICK_COUNT) break;
+            if (!usedLeagues.has(pick.league)) { selected.push(pick); usedLeagues.add(pick.league); }
+        }
+        backfillStart = backfillEnd;
+    }
+    if (selected.length < PICK_COUNT) {
+        console.warn('\n⚠ Po backfillu stále chybí ' + (PICK_COUNT - selected.length) + ' zápas(ů). Pokračuji s ' + selected.length + '.');
+    }
+
     if (selected.length === 0) { console.warn('\n⚠ Žádné vhodné zápasy nalezeny.'); process.exit(0); }
     const grouped = balanceGroups(selected);
-    const output = grouped.map(m => ({ league: m.league, match: m.match, tip: m.tip, odds: m.odds, group: m.group }));
+    const output = grouped.map(m => ({ league: m.league, match: m.match, tip: m.tip, odds: m.odds, group: m.group, kickoff: m.kickoff }));
     writeFileSync('hot.json', JSON.stringify(output, null, 2), 'utf-8');
     console.log('\n✅ ' + output.length + ' zápasů → hot.json (' + reqCount + ' API req)\n');
     const gc = Math.ceil(output.length / 2);
