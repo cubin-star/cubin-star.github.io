@@ -1,20 +1,20 @@
 [
   {
-    "League": "Premier League",
-    "Match": "FK Tobol Kostanay vs Zhetysu",
+    "League": "Cup",
+    "Match": "Tatran Prešov vs FK Košice",
     "Tip": "Over 2.5",
-    "Odds": "1.83"
+    "Odds": "1.95"
   },
   {
-    "League": "1. Lig",
-    "Match": "Çorum FK vs Esenler Erokspor",
+    "League": "League One",
+    "Match": "Barnsley vs Wigan",
     "Tip": "Over 2.5",
-    "Odds": "1.88"
+    "Odds": "1.86"
   },
   {
-    "League": "Super Liga",
-    "Match": "Napredak vs OFK Beograd",
+    "League": "National League - North",
+    "Match": "Chorley vs Kidderminster Harriers",
     "Tip": "Over 2.5",
-    "Odds": "2.03"
+    "Odds": "2.16"
   }
 ]
