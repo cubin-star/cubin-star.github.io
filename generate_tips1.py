@@ -612,6 +612,24 @@ def fetch_prediction(fixture_id: int) -> dict:
     return result
 
 
+def fetch_team_last_fixtures(team_id: int, count: int = 3) -> list:
+    """Fetch last N completed fixtures for a team."""
+    time.sleep(DELAY)
+    data = api_get("fixtures", {"team": str(team_id), "last": str(count), "status": "FT"})
+    return data.get("response", [])
+
+
+def count_recent_under25(fixtures: list) -> int:
+    """Count how many of the recent fixtures had Under 2.5 (less than 3 goals)."""
+    under = 0
+    for f in fixtures:
+        goals = f.get("goals", {})
+        total = (goals.get("home", 0) or 0) + (goals.get("away", 0) or 0)
+        if total < 3:
+            under += 1
+    return under
+
+
 def score_by_predictions(pred: dict) -> dict:
     """
     Kombik-style scoring based on predictions data.
@@ -683,13 +701,26 @@ def score_by_predictions(pred: dict) -> dict:
     low_penalty = (-0.5 if (h_for5 < 0.8 or a_for5 < 0.8)
                    else (-0.2 if (h_for5 < 1.0 or a_for5 < 1.0) else 0))
 
-    total_bonus = h2h_bonus + api_bonus + btts_bonus + low_penalty
+    # 9. Regresní bonus – tým má sezónní parametry na Over 2.5, ale nedávno neprodukoval
+    #    Porovnání: sezónní domácí/venkovní capability vs průměr posledních 5 zápasů
+    #    Pokud sezóna říká Over 2.5, ale last5 je nižší → tým je "dlužník" (regrese ke středu)
+    capability_goals = (h_for_home + a_agn_away + a_for_away + h_agn_home) / 2
+    recent_avg_goals = (h_for5 + h_agn5 + a_for5 + a_agn5) / 2
+    param_gap = capability_goals - recent_avg_goals
+    regression_bonus = 0.0
+    if capability_goals >= 2.7 and param_gap >= 0.3:
+        # Velký rozdíl (> 0.5) = silný signál, menší (0.3–0.5) = mírný
+        regression_bonus = 0.5 if param_gap >= 0.6 else (0.35 if param_gap >= 0.4 else 0.2)
+
+    total_bonus = h2h_bonus + api_bonus + btts_bonus + low_penalty + regression_bonus
 
     flags = []
     if api_tip in ("+2.5", "+3.5"):
         flags.append("API✓")
     if btts_bonus > 0:
         flags.append("BTTS✓")
+    if regression_bonus > 0:
+        flags.append("REG🔄")
     if low_penalty < 0:
         flags.append("DRY⚠")
 
@@ -697,6 +728,7 @@ def score_by_predictions(pred: dict) -> dict:
         "bonus": total_bonus,
         "expected_goals": expected_goals,
         "h2h_avg": h2h_avg,
+        "capability_goals": capability_goals,
         "flags": " ".join(flags),
     }
 
@@ -747,12 +779,46 @@ def enrich_candidates_with_gss(candidates: list) -> list:
         c["gss_raw"] = gss
         c["expected_goals"] = total_expected
         c["pred_flags"] = pred_score.get("flags", "")
+        c["capability_goals"] = pred_score.get("capability_goals", 0)
 
         flags = pred_score.get("flags", "")
-        print(f" ✅Score={combined:.2f} (GSS={gss:.2f}, exp={total_expected:.1f}g{', ' + flags if flags else ''})")
+        print(f' ✅Score={combined:.2f} (GSS={gss:.2f}, exp={total_expected:.1f}g, cap={c["capability_goals"]:.1f}{", " + flags if flags else ""})')
         filtered.append(c)
 
     print(f"\n  📊 {skipped_low} vyřazeno (exp. gólů < {MIN_EXPECTED_GOALS})")
+
+    # ═══════════ 2. průchod: Regresní filtr – ověření posledních zápasů ═══════════
+    # Pro top kandidáty s capability_goals >= 2.7 stáhni poslední 3 zápasy obou týmů
+    # a ověř, kolik z nich bylo Under 2.5. Pokud 1–2 → tým je "due" (dlužník).
+    VERIFY_TOP = 20
+    to_verify = [c for c in sorted(filtered, key=lambda x: x["gss"], reverse=True)[:VERIFY_TOP]
+                 if c.get("capability_goals", 0) >= 2.7]
+    if to_verify:
+        print(f'\n  🔬 Regresní filtr: ověřuji posledních 3 zápasů pro {len(to_verify)} kandidátů...')
+        due_count = 0
+        for c in to_verify:
+            home_fix = fetch_team_last_fixtures(c["home_id"], 3)
+            away_fix = fetch_team_last_fixtures(c["away_id"], 3)
+            home_under = count_recent_under25(home_fix)
+            away_under = count_recent_under25(away_fix)
+            # Tým s parametry na Over 2.5, ale 1–2 z posledních 3 pod 2.5 → dlužník
+            due_home = 1 <= home_under <= 2
+            due_away = 1 <= away_under <= 2
+            if due_home or due_away:
+                due_bonus = 0.6 if (due_home and due_away) else 0.35
+                c["gss"] += due_bonus
+                due_tag = ""
+                if due_home:
+                    due_tag += f"H{home_under}/3u"
+                if due_home and due_away:
+                    due_tag += "+"
+                if due_away:
+                    due_tag += f"A{away_under}/3u"
+                old_flags = c.get("pred_flags", "")
+                c["pred_flags"] = (old_flags + " " if old_flags else "") + f"DUE🔄({due_tag})"
+                due_count += 1
+                print(f'    🔄 {c["Match"][:35]} DUE({due_tag}) +{due_bonus}')
+        print(f'    {due_count}/{len(to_verify)} kandidátů označeno jako DUE🔄 (dlužník)')
 
     if not filtered:
         print(f"\n  ⚠️ All candidates filtered out! Using original set with looser filter...")
