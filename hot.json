@@ -1,37 +1,50 @@
 [
   {
-    "league": "Premier League",
-    "match": "Zhenys - Ordabasy",
+    "league": "Serie B",
+    "match": "Spezia - Empoli",
     "tip": "Over 2.5",
-    "odds": "2.20",
-    "group": 1
-  },
-  {
-    "league": "Liga I",
-    "match": "Universitatea Cluj - CFR 1907 Cluj",
-    "tip": "Over 2.5",
-    "odds": "2.27",
-    "group": 1
-  },
-  {
-    "league": "Premier Division",
-    "match": "Drogheda United - Shamrock Rovers",
-    "tip": "Over 2.5",
-    "odds": "2.21",
-    "group": 2
+    "odds": "2.26",
+    "group": 1,
+    "kickoff": "2026-03-17T20:00:00+01:00"
   },
   {
     "league": "Primera División",
-    "match": "Union La Calera - O'Higgins",
+    "match": "Puerto Cabello - UCV",
     "tip": "Over 2.5",
-    "odds": "2.23",
-    "group": 2
+    "odds": "2.26",
+    "group": 1,
+    "kickoff": "2026-03-17T23:30:00+01:00"
   },
   {
-    "league": "Primera División - Apertura",
-    "match": "Danubio - Juventud",
+    "league": "League One",
+    "match": "Plymouth - Stevenage",
+    "tip": "Over 2.5",
+    "odds": "2.24",
+    "group": 2,
+    "kickoff": "2026-03-17T20:45:00+01:00"
+  },
+  {
+    "league": "K League 1",
+    "match": "Bucheon FC 1995 - Gangwon FC",
+    "tip": "Over 2.5",
+    "odds": "2.28",
+    "group": 2,
+    "kickoff": "2026-03-18T11:30:00+01:00"
+  },
+  {
+    "league": "Copa Do Brasil",
+    "match": "Nova Iguaçu - Fortaleza EC",
     "tip": "Over 2.5",
     "odds": "2.37",
-    "group": 3
+    "group": 3,
+    "kickoff": "2026-03-17T23:00:00+01:00"
+  },
+  {
+    "league": "J1 League",
+    "match": "Mito Hollyhock - Yokohama F. Marinos",
+    "tip": "Over 2.5",
+    "odds": "2.20",
+    "group": 3,
+    "kickoff": "2026-03-18T11:00:00+01:00"
   }
 ]
