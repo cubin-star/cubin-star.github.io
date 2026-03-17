@@ -199,6 +199,20 @@ async function getFootballLeagueOdds(leagueId, season, date) {
     return all;
 }
 
+async function getTeamLastFixtures(teamId, count = 3) {
+    const data = await apiFetch(FOOTBALL_API, '/fixtures?team=' + teamId + '&last=' + count + '&status=FT');
+    return data.response || [];
+}
+
+function countRecentUnder25(fixtures) {
+    let under = 0;
+    for (const f of fixtures) {
+        const total = (f.goals?.home || 0) + (f.goals?.away || 0);
+        if (total < 3) under++;  // Under 2.5 = méně než 3 góly
+    }
+    return under;
+}
+
 async function footballPicks(now, maxTime) {
     console.log('⚽ FOTBAL\n');
     const today = fmtDate(now), tomorrow = fmtDate(maxTime);
@@ -238,7 +252,7 @@ async function footballPicks(now, maxTime) {
                 for (const bm of entry.bookmakers || []) { for (const bet of bm.bets || []) { for (const v of bet.values || []) {
                     if (v.value !== 'Over 2.5') continue;
                     const odd = parseFloat(v.odd); if (isNaN(odd) || odd < MIN_ODDS || odd > MAX_ODDS) continue;
-                    if (!matchMap.has(matchKey)) matchMap.set(matchKey, { fixtureId: matchKey, league: lg.name, country: lg.country, match: fix.teams.home.name + ' - ' + fix.teams.away.name, tip: 'Over 2.5', kickoff: fix.fixture.date, allOdds: [] });
+                    if (!matchMap.has(matchKey)) matchMap.set(matchKey, { fixtureId: matchKey, homeId: fix.teams.home.id, awayId: fix.teams.away.id, league: lg.name, country: lg.country, match: fix.teams.home.name + ' - ' + fix.teams.away.name, tip: 'Over 2.5', kickoff: fix.fixture.date, allOdds: [] });
                     matchMap.get(matchKey).allOdds.push(odd);
                 } } }
             }
@@ -267,11 +281,41 @@ async function footballPicks(now, maxTime) {
                 skippedLow++;
                 continue;
             }
-            picks.push({ league: m.league, country: m.country, match: m.match, tip: m.tip, odds: avg.toFixed(2), score: sc.total, detail: sc.detail, kickoff: m.kickoff });
+            picks.push({ league: m.league, country: m.country, match: m.match, tip: m.tip, odds: avg.toFixed(2), score: sc.total, detail: sc.detail, kickoff: m.kickoff, homeId: m.homeId, awayId: m.awayId, capabilityGoals: sc.capabilityGoals });
         }
         if (i < toAnalyze.length - 1) await sleep(350);
     }
     picks.sort((a, b) => b.score - a.score);
+
+    // ═══════════ 2. průchod: Regresní filtr – ověření posledních zápasů ═══════════
+    // Pro top kandidáty s capabilityGoals >= 2.7 stáhni poslední 3 zápasy obou týmů
+    // a ověř, kolik z nich bylo Under 2.5. Pokud 1–2 → tým je "due" (dlužník).
+    const VERIFY_TOP = 20;
+    const toVerify = picks.slice(0, VERIFY_TOP).filter(p => p.capabilityGoals >= 2.7);
+    if (toVerify.length > 0) {
+        console.log('\n🔬 Regresní filtr: ověřuji posledních 3 zápasů pro ' + toVerify.length + ' kandidátů...');
+        let dueCount = 0;
+        for (const pick of toVerify) {
+            const homeFix = await getTeamLastFixtures(pick.homeId, 3);
+            await sleep(350);
+            const awayFix = await getTeamLastFixtures(pick.awayId, 3);
+            await sleep(350);
+            const homeUnder = countRecentUnder25(homeFix);
+            const awayUnder = countRecentUnder25(awayFix);
+            // Tým s parametry na Over 2.5, ale 1–2 z posledních 3 zápasů pod 2.5 → dlužník
+            const dueHome = homeUnder >= 1 && homeUnder <= 2;
+            const dueAway = awayUnder >= 1 && awayUnder <= 2;
+            if (dueHome || dueAway) {
+                const dueBonus = (dueHome && dueAway) ? 0.6 : 0.35;
+                pick.score += dueBonus;
+                const dueTag = (dueHome ? 'H' + homeUnder + '/3u' : '') + (dueHome && dueAway ? '+' : '') + (dueAway ? 'A' + awayUnder + '/3u' : '');
+                pick.detail += ', DUE🔄(' + dueTag + ')';
+                dueCount++;
+            }
+        }
+        console.log('   ' + dueCount + '/' + toVerify.length + ' kandidátů označeno jako DUE🔄 (dlužník)');
+        picks.sort((a, b) => b.score - a.score);
+    }
 
     console.log('📊 Analyzováno: ' + (picks.length + skippedLow) + ' zápasů (' + skippedLow + ' vyřazeno – exp. gólů < ' + MIN_EXPECTED_GOALS + ')');
     if (picks.length > 0) console.log('   Top 10 podle týmových statistik:');
@@ -298,11 +342,13 @@ async function getMatchPrediction(fixtureId) {
  *  6. API prediction: bonus pokud API samo tipuje Over 2.5
  *  7. BTTS signál: oba týmy pravidelně skórují → větší šance na 3+ gólů
  *  8. Penalizace suchých týmů: tým co často neskóruje = riziko
+ *  9. Regresní bonus: tým má sezónní parametry na Over 2.5, ale nedávno neprodukoval
+ *     → regrese ke středu = pravděpodobný návrat k vyšším skóre
  */
 function scoreByTeamStats(pred) {
     const home = pred.teams?.home;
     const away = pred.teams?.away;
-    if (!home || !away) return { total: 0, detail: 'no data', expectedGoals: 0 };
+    if (!home || !away) return { total: 0, detail: 'no data', expectedGoals: 0, capabilityGoals: 0 };
 
     // Last 5 matches
     const hFor5 = parseFloat(home.last_5?.goals?.for?.average) || 0;
@@ -367,12 +413,25 @@ function scoreByTeamStats(pred) {
     const lowScorerPenalty = (hFor5 < 0.8 || aFor5 < 0.8) ? -0.5
                            : (hFor5 < 1.0 || aFor5 < 1.0) ? -0.2 : 0;
 
-    const total = expectedGoals + h2hBonus + apiBonus + bttsBonus + lowScorerPenalty;
+    // 9. Regresní bonus – tým má sezónní parametry na Over 2.5, ale nedávno neprodukoval
+    //    Porovnání: sezónní domácí/venkovní capability vs průměr posledních 5 zápasů
+    //    Pokud sezóna říká Over 2.5, ale last5 je nižší → tým je "dlužník" (regrese ke středu)
+    const capabilityGoals = (hForHome + aAgnAway + aForAway + hAgnHome) / 2;
+    const recentAvgGoals = (hFor5 + hAgn5 + aFor5 + aAgn5) / 2;
+    const paramGap = capabilityGoals - recentAvgGoals;
+    let regressionBonus = 0;
+    if (capabilityGoals >= 2.7 && paramGap >= 0.3) {
+        // Velký rozdíl (> 0.5) = silný signál, menší (0.3–0.5) = mírný
+        regressionBonus = paramGap >= 0.6 ? 0.5 : (paramGap >= 0.4 ? 0.35 : 0.2);
+    }
+
+    const total = expectedGoals + h2hBonus + apiBonus + bttsBonus + lowScorerPenalty + regressionBonus;
     const flags = [apiTip === '+2.5' || apiTip === '+3.5' ? 'API✓' : '',
                    bttsBonus > 0 ? 'BTTS✓' : '',
+                   regressionBonus > 0 ? 'REG🔄' : '',
                    lowScorerPenalty < 0 ? 'DRY⚠' : ''].filter(Boolean).join(' ');
-    const detail = 'exp ' + expectedGoals.toFixed(1) + 'g, L5atk ' + recentAttack.toFixed(1) + ', H2H ' + h2hAvg.toFixed(1) + (flags ? ', ' + flags : '');
-    return { total, detail, expectedGoals };
+    const detail = 'exp ' + expectedGoals.toFixed(1) + 'g, cap ' + capabilityGoals.toFixed(1) + ', L5 ' + recentAvgGoals.toFixed(1) + ', L5atk ' + recentAttack.toFixed(1) + ', H2H ' + h2hAvg.toFixed(1) + (flags ? ', ' + flags : '');
+    return { total, detail, expectedGoals, capabilityGoals };
 }
 
 function balanceGroups(picks) {
