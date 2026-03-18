@@ -1,4 +1,21 @@
 {
-  "updated_at": "18.03.2026 09:43",
-  "tips": []
+  "updated_at": "18.03.2026 15:04",
+  "tips": [
+    {
+      "league": "Challenger - ATP Challenger Asuncion, Paraguay Men Singles",
+      "match": "Saraiva Dos Santos, Paulo Andre vs Reis Da Silva, Joao Lucas",
+      "tip": "Over18.5",
+      "odds": "1.75",
+      "date": "18.03.2026",
+      "time": "20:10"
+    },
+    {
+      "league": "Challenger - ATP Challenger Morelos, Mexico Men Singles",
+      "match": "Hayen, Alejandro vs Martin, Andres",
+      "tip": "Over19.5",
+      "odds": "1.95",
+      "date": "18.03.2026",
+      "time": "20:00"
+    }
+  ]
 }
