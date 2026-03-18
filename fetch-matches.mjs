@@ -217,8 +217,8 @@ function countRecentUnder25(fixtures) {
     return under;
 }
 
-async function footballPicks(now, maxTime) {
-    console.log('⚽ FOTBAL\n');
+async function footballPicks(now, maxTime, allowUnrankedEuropean = false) {
+    console.log('⚽ FOTBAL' + (allowUnrankedEuropean ? ' [RELAXED TIER]' : '') + '\n');
     const today = fmtDate(now), tomorrow = fmtDate(maxTime);
     const dates = [today]; if (tomorrow !== today) dates.push(tomorrow);
     let fixtures = [];
@@ -233,7 +233,14 @@ async function footballPicks(now, maxTime) {
         if (isWomenLeague(f.league.name)) { skippedLeagues.add('♀ ' + f.league.name + ' (' + c + ')'); return false; }
         const maxTier = c === 'England' ? 6 : 2;
         const tier = estimateLeagueTier(f.league.name, c);
-        if (tier > maxTier) { skippedLeagues.add('⛔ T' + tier + ' ' + f.league.name + ' (' + c + ')'); return false; }
+        if (tier > maxTier) {
+            if (allowUnrankedEuropean && EUROPEAN_COUNTRIES.has(c)) {
+                skippedLeagues.add('🟡 T' + tier + ' ' + f.league.name + ' (' + c + ') [RELAXED]');
+            } else {
+                skippedLeagues.add('⛔ T' + tier + ' ' + f.league.name + ' (' + c + ')');
+                return false;
+            }
+        }
         return true;
     });
     if (skippedLeagues.size > 0) { console.log('   Vyřazeno:'); for (const s of skippedLeagues) console.log('     ' + s); }
@@ -481,10 +488,8 @@ async function main() {
     for (const pick of allPicks) { if (selected.length >= PICK_COUNT) break; if (EUROPEAN_COUNTRIES.has(pick.country) && !usedLeagues.has(pick.league)) { selected.push(pick); usedLeagues.add(pick.league); } }
     // 2. kolo: doplnit neevropskými, pokud není dost evropských
     for (const pick of allPicks) { if (selected.length >= PICK_COUNT) break; if (!usedLeagues.has(pick.league)) { selected.push(pick); usedLeagues.add(pick.league); } }
-    // 3. kolo: povolit duplicitní ligy
-    for (const pick of allPicks) { if (selected.length >= PICK_COUNT) break; if (!selected.some(s => s.match === pick.match)) { selected.push(pick); } }
 
-    // ═══════════════════ BACKFILL: doplnění z dalších 12h oken ═══════════════════
+    // ═══════════════════ BACKFILL:
     const BACKFILL_WINDOW_MS = 12 * 60 * 60 * 1000;
     const MAX_BACKFILL_ROUNDS = 3;  // max 3 × 12h = +36h nad rámec 24h
     let backfillStart = maxTime;
@@ -516,11 +521,6 @@ async function main() {
             if (selected.length >= PICK_COUNT) break;
             if (!usedLeagues.has(pick.league)) { selected.push(pick); usedLeagues.add(pick.league); }
         }
-        // 3. kolo backfillu: duplicitní ligy
-        for (const pick of extraPicks) {
-            if (selected.length >= PICK_COUNT) break;
-            if (!selected.some(s => s.match === pick.match)) { selected.push(pick); }
-        }
         backfillStart = backfillEnd;
     }
     // ═══════════ RELAXATION: doplnění z rezervy (nižší exp. gólů) ═══════════
@@ -534,13 +534,26 @@ async function main() {
                 selected.push(pick); usedLeagues.add(pick.league);
             }
         }
-        for (const pick of allReserve) {
+        console.log('   → ' + selected.length + '/' + PICK_COUNT + ' zápasů po doplnění z rezervy');
+    }
+    // ═══════════ RELAXED TIER: nižší/nerozpoznané evropské ligy ═══════════
+    if (selected.length < PICK_COUNT) {
+        const missing = PICK_COUNT - selected.length;
+        console.log('\n🔓 Chybí ' + missing + ' zápas(ů) – hledám v nižších/nerozpoznaných evropských ligách...');
+        const { picks: relaxedPicks, reserve: relaxedReserve } = await footballPicks(now, maxTime, true);
+        for (const pick of relaxedPicks) {
             if (selected.length >= PICK_COUNT) break;
-            if (!selected.some(s => s.match === pick.match)) {
-                selected.push(pick);
+            if (!usedLeagues.has(pick.league) && !selected.some(s => s.match === pick.match)) {
+                selected.push(pick); usedLeagues.add(pick.league);
             }
         }
-        console.log('   → ' + selected.length + '/' + PICK_COUNT + ' zápasů po doplnění z rezervy');
+        for (const pick of relaxedReserve) {
+            if (selected.length >= PICK_COUNT) break;
+            if (!usedLeagues.has(pick.league) && !selected.some(s => s.match === pick.match)) {
+                selected.push(pick); usedLeagues.add(pick.league);
+            }
+        }
+        console.log('   → ' + selected.length + '/' + PICK_COUNT + ' zápasů po doplnění z nižších lig');
     }
     if (selected.length < PICK_COUNT) {
         console.error('\n❌ I po všech relaxacích pouze ' + selected.length + '/' + PICK_COUNT + ' zápasů!');
