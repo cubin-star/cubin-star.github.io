@@ -25,6 +25,7 @@ jobs:
       - name: Fetch tennis tips
         env:
           TENIS_API_KEY: ${{ secrets.TENIS_API_KEY }}
+          ODDS_API_KEY3: ${{ secrets.ODDS_API_KEY3 }}
         run: python scripts/fetch_tennis_tips.py
 
       - name: Commit and push updated tenis.json
@@ -38,4 +39,3 @@ jobs:
             git commit -m "🎾 Aktualizace tipu $(date +'%d.%m.%Y %H:%M UTC')"
             git push
           fi
-
