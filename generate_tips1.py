@@ -199,7 +199,7 @@ def _get_league_tier(league_id: int, league_name: str, country: str) -> int:
         244: 1,  # Finland Veikkausliiga
         271: 1,  # Iceland Úrvalsdeild
         # Eastern Europe
-        106: 1, 107: 2,  # Poland Ekstraklasa, I Liga
+        106: 1, 107: 2, 108: 3, 109: 1,  # Poland Ekstraklasa, I Liga, II Liga, Cup
         197: 1, 198: 2,  # Greece Super League, Super League 2
         345: 1,  # Czech First League
         283: 1, 284: 2,  # Romania Liga 1, Liga 2
@@ -252,6 +252,12 @@ def _get_league_tier(league_id: int, league_name: str, country: str) -> int:
             "fa cup", "dfb pokal", "copa del rey", "coppa italia",
             "coupe de france", "efl cup", "league cup")):
         return 1
+
+    # Tier 3 keywords (must check BEFORE tier 2 to avoid substring matches)
+    if any(k in name for k in ("ii liga", "iii liga", "3. liga",
+            "league one", "league 1")):
+        if country != "england":  # England tiers handled separately below
+            return 3
 
     # Tier 2 keywords
     if any(k in name for k in ("championship", "segunda", "2. bundesliga",
@@ -350,6 +356,9 @@ def extract_candidates(odds_data: list, fixtures: dict) -> list:
         if country == "turkey":
             if tier > 2:
                 continue  # Turkey: Süper Lig + 1. Lig + Cup only
+        elif country == "poland":
+            if tier > 2:
+                continue  # Poland: Ekstraklasa + I Liga + Cup only
         elif country == "england":
             if tier > 6:
                 continue
