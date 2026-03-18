@@ -7,12 +7,15 @@ Spousti se pres GitHub Actions kazdy den v 8:00 CET.
 import json
 import os
 import sys
+import time
 from datetime import datetime, timedelta, timezone
 from urllib.request import Request, urlopen
 from urllib.error import URLError, HTTPError
 
 API_KEY = os.environ.get("TENIS_API_KEY", "")
+FALLBACK_API_KEY = os.environ.get("ODDS_API_KEY3", "")
 BASE_URL = "https://api.odds-api.io/v3"
+FALLBACK_BASE_URL = "https://api.the-odds-api.com/v4"
 
 MIN_ODDS = 1.75
 MAX_TIPS = 2
@@ -33,23 +36,114 @@ ALLOWED_LEAGUE_PREFIXES = ("ATP", "WTA", "Challenger")
 BLOCKED_LEAGUE_KEYWORDS = ("ITF", "UTR")
 
 
-def api_get(endpoint):
-    """Univerzalni GET pozadavek na odds-api.io."""
+def api_get(endpoint, retries=3, delay=5):
+    """Univerzalni GET pozadavek na odds-api.io s retry logikou."""
     url = f"{BASE_URL}/{endpoint}"
     if "?" in url:
         url += f"&apiKey={API_KEY}"
     else:
         url += f"?apiKey={API_KEY}"
+
+    for attempt in range(1, retries + 1):
+        try:
+            req = Request(url, headers={"Accept": "application/json"})
+            with urlopen(req, timeout=30) as resp:
+                return json.loads(resp.read().decode())
+        except HTTPError as e:
+            print(f"  HTTP {e.code} pro {endpoint} (pokus {attempt}/{retries})")
+            if attempt < retries and e.code >= 500:
+                print(f"  Cekam {delay}s pred dalsim pokusem...")
+                time.sleep(delay)
+                delay *= 2
+            elif e.code < 500:
+                return None
+        except URLError as e:
+            print(f"  Chyba: {e} (pokus {attempt}/{retries})")
+            if attempt < retries:
+                time.sleep(delay)
+                delay *= 2
+
+    return None
+
+
+# ===== FALLBACK: The Odds API (stare API) =====
+
+def fallback_get_events():
+    """Fallback: ziska zapasy z The Odds API pokud odds-api.io nefunguje."""
+    if not FALLBACK_API_KEY:
+        return []
+
+    print("Pouzivam fallback: The Odds API...")
+    url = f"{FALLBACK_BASE_URL}/sports/?apiKey={FALLBACK_API_KEY}&all=true"
     try:
         req = Request(url, headers={"Accept": "application/json"})
         with urlopen(req, timeout=30) as resp:
-            return json.loads(resp.read().decode())
-    except HTTPError as e:
-        print(f"  HTTP {e.code} pro {endpoint}")
-        return None
-    except URLError as e:
-        print(f"  Chyba: {e}")
-        return None
+            sports = json.loads(resp.read().decode())
+            tennis = [
+                s for s in sports
+                if "tennis" in s.get("key", "").lower() and s.get("active", False)
+            ]
+    except (URLError, HTTPError) as e:
+        print(f"  Fallback chyba (sports): {e}")
+        return []
+
+    print(f"  Nalezeno {len(tennis)} aktivnich turnaju")
+
+    all_tips = []
+    now = datetime.now(timezone.utc)
+    deadline = now + timedelta(hours=MAX_HOURS_AHEAD)
+
+    for sport in tennis:
+        odds_url = (
+            f"{FALLBACK_BASE_URL}/sports/{sport['key']}/odds/"
+            f"?apiKey={FALLBACK_API_KEY}"
+            f"&regions=eu"
+            f"&markets=totals"
+            f"&oddsFormat=decimal"
+        )
+        try:
+            req = Request(odds_url, headers={"Accept": "application/json"})
+            with urlopen(req, timeout=30) as resp:
+                events = json.loads(resp.read().decode())
+        except (URLError, HTTPError):
+            continue
+
+        for event in events:
+            commence = event.get("commence_time", "")
+            if not commence:
+                continue
+            try:
+                match_time = datetime.fromisoformat(commence.replace("Z", "+00:00"))
+                if match_time < now or match_time > deadline:
+                    continue
+            except ValueError:
+                continue
+
+            for bookmaker in event.get("bookmakers", []):
+                for market in bookmaker.get("markets", []):
+                    if market.get("key") != "totals":
+                        continue
+                    for outcome in market.get("outcomes", []):
+                        if outcome.get("name", "").lower() != "over":
+                            continue
+                        point = outcome.get("point", 0)
+                        price = outcome.get("price", 0)
+                        if point in ALLOWED_POINTS and price >= MIN_ODDS:
+                            all_tips.append({
+                                "league": sport.get("title", ""),
+                                "match": f"{event.get('home_team', 'N/A')} vs {event.get('away_team', 'N/A')}",
+                                "tip": f"Over{point}",
+                                "odds": str(round(price, 2)),
+                                "commence_time": commence,
+                                "bookmaker": bookmaker.get("title", "N/A"),
+                                "_all_over_lines": [(point, price, bookmaker.get("title", ""))],
+                                "_bet_point": point,
+                            })
+                            break
+                    break
+
+    print(f"  Fallback nalezl {len(all_tips)} tipu")
+    return all_tips
 
 
 def is_allowed_league(league_name):
@@ -354,12 +448,12 @@ def format_tips_for_json(tips):
 
 
 def main():
-    if not API_KEY:
-        print("ERROR: TENIS_API_KEY neni nastaveny!")
+    if not API_KEY and not FALLBACK_API_KEY:
+        print("ERROR: TENIS_API_KEY ani ODDS_API_KEY3 neni nastaveny!")
         sys.exit(1)
 
     print(f"=== Tennis Over Tips Bot ({datetime.now().strftime('%d.%m.%Y %H:%M')}) ===")
-    print(f"API: odds-api.io")
+    print(f"API: odds-api.io (fallback: The Odds API)")
     print(f"Minimalni kurz: {MIN_ODDS}")
     print(f"Pocet tipu: {MAX_TIPS}")
     print(f"Casove okno: zapasy do {MAX_HOURS_AHEAD}h")
@@ -367,11 +461,26 @@ def main():
     print(f"Turnaje: ATP, WTA, Challenger (bez ITF, UTR)")
     print()
 
-    # 1. Ziskat zapasy
-    events = get_tennis_events()
+    all_tips = []
 
-    if not events:
-        print("Zadne vhodne zapasy nenalezeny.")
+    # 1. Zkusit primarni API (odds-api.io)
+    if API_KEY:
+        events = get_tennis_events()
+        if events:
+            print()
+            print("Hledam Over tipy s kurzem >= 1.75...")
+            all_tips = find_over_tips(events)
+            print()
+            print(f"Celkem nalezeno {len(all_tips)} Over tipu.")
+
+    # 2. Fallback na The Odds API pokud primarni selhalo
+    if not all_tips and FALLBACK_API_KEY:
+        print()
+        print("Primarni API nenaslo tipy, zkousim fallback...")
+        all_tips = fallback_get_events()
+
+    if not all_tips:
+        print("Zadne vhodne zapasy nenalezeny ani z fallbacku.")
         czech_now = get_czech_now()
         empty_json = {
             "updated_at": czech_now.strftime("%d.%m.%Y %H:%M"),
@@ -380,14 +489,6 @@ def main():
         with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
             json.dump(empty_json, f, ensure_ascii=False, indent=2)
         return
-
-    # 2. Najit Over tipy
-    print()
-    print("Hledam Over tipy s kurzem >= 1.75...")
-    all_tips = find_over_tips(events)
-
-    print()
-    print(f"Celkem nalezeno {len(all_tips)} Over tipu.")
 
     # 3. Vybrat nejlepsi
     best_tips = select_best_tips(all_tips, MAX_TIPS)
