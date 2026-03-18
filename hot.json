@@ -3,40 +3,54 @@
     "league": "Copa Do Brasil",
     "match": "CRB - Figueirense",
     "tip": "Over 2.5",
-    "odds": "2.31",
+    "odds": "2.28",
     "group": 1,
-    "kickoff": "2026-03-19T01:00:00+01:00"
+    "kickoff": "2026-03-19T01:00:00+01:00",
+    "time": "19. 03. 01:00"
   },
   {
-    "league": "Ofc Pro League",
-    "match": "Hekari United - Tahiti United",
+    "league": "Primera Division",
+    "match": "Fuerte San Francisco - Inter",
     "tip": "Over 2.5",
     "odds": "2.22",
     "group": 1,
-    "kickoff": "2026-03-18T09:00:00+01:00"
+    "kickoff": "2026-03-18T22:30:00+01:00",
+    "time": "18. 03. 22:30"
   },
   {
     "league": "J1 League",
     "match": "Machida Zelvia - Kashima",
     "tip": "Over 2.5",
-    "odds": "2.28",
+    "odds": "2.41",
     "group": 2,
-    "kickoff": "2026-03-18T11:30:00+01:00"
+    "kickoff": "2026-03-18T11:30:00+01:00",
+    "time": "18. 03. 11:30"
   },
   {
-    "league": "Serie A",
-    "match": "Chapecoense-sc - Corinthians",
+    "league": "J1 League",
+    "match": "Avispa Fukuoka - Shimizu S-pulse",
     "tip": "Over 2.5",
-    "odds": "2.22",
+    "odds": "2.21",
     "group": 2,
-    "kickoff": "2026-03-20T01:30:00+01:00"
+    "kickoff": "2026-03-18T11:00:00+01:00",
+    "time": "18. 03. 11:00"
   },
   {
     "league": "K League 1",
     "match": "Bucheon FC 1995 - Gangwon FC",
     "tip": "Over 2.5",
-    "odds": "2.27",
+    "odds": "2.25",
     "group": 3,
-    "kickoff": "2026-03-18T11:30:00+01:00"
+    "kickoff": "2026-03-18T11:30:00+01:00",
+    "time": "18. 03. 11:30"
+  },
+  {
+    "league": "J1 League",
+    "match": "Mito Hollyhock - Yokohama F. Marinos",
+    "tip": "Over 2.5",
+    "odds": "2.23",
+    "group": 3,
+    "kickoff": "2026-03-18T11:00:00+01:00",
+    "time": "18. 03. 11:00"
   }
 ]
