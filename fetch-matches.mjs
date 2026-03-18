@@ -169,6 +169,10 @@ let reqCount = 0;
 
 function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 function fmtDate(d) { return d.toISOString().split('T')[0]; }
+function fmtKickoff(iso) {
+    const d = new Date(iso);
+    return d.toLocaleDateString('cs-CZ', { timeZone: TZ, day: '2-digit', month: '2-digit' }) + ' ' + d.toLocaleTimeString('cs-CZ', { timeZone: TZ, hour: '2-digit', minute: '2-digit' });
+}
 
 async function apiFetch(baseUrl, path) {
     const url = baseUrl + path;
@@ -269,6 +273,7 @@ async function footballPicks(now, maxTime) {
     console.log('🔍 Analyzuji ' + toAnalyze.length + ' zápasů (predictions)...\n');
 
     const picks = [];
+    const reserve = [];
     let skippedLow = 0;
     for (let i = 0; i < toAnalyze.length; i++) {
         const m = toAnalyze[i];
@@ -276,12 +281,13 @@ async function footballPicks(now, maxTime) {
         const pred = await getMatchPrediction(m.fixtureId);
         if (pred) {
             const sc = scoreByTeamStats(pred);
-            // Bezpečnostní polštář: přeskočit zápasy kde model čeká málo gólů
+            const entry = { league: m.league, country: m.country, match: m.match, tip: m.tip, odds: avg.toFixed(2), score: sc.total, detail: sc.detail, kickoff: m.kickoff, homeId: m.homeId, awayId: m.awayId, capabilityGoals: sc.capabilityGoals };
             if (sc.expectedGoals < MIN_EXPECTED_GOALS) {
                 skippedLow++;
+                reserve.push(entry);
                 continue;
             }
-            picks.push({ league: m.league, country: m.country, match: m.match, tip: m.tip, odds: avg.toFixed(2), score: sc.total, detail: sc.detail, kickoff: m.kickoff, homeId: m.homeId, awayId: m.awayId, capabilityGoals: sc.capabilityGoals });
+            picks.push(entry);
         }
         if (i < toAnalyze.length - 1) await sleep(350);
     }
@@ -320,7 +326,8 @@ async function footballPicks(now, maxTime) {
     console.log('📊 Analyzováno: ' + (picks.length + skippedLow) + ' zápasů (' + skippedLow + ' vyřazeno – exp. gólů < ' + MIN_EXPECTED_GOALS + ')');
     if (picks.length > 0) console.log('   Top 10 podle týmových statistik:');
     picks.slice(0, 10).forEach((p, i) => console.log('   ' + (i + 1) + '. [' + p.league + '] ' + p.match + ' | ' + p.detail + ' | score ' + p.score.toFixed(2)));
-    return picks;
+    reserve.sort((a, b) => b.score - a.score);
+    return { picks, reserve };
 }
 
 // ═══════════════════ PREDICTIONS ═══════════════════
@@ -466,14 +473,16 @@ async function main() {
     console.log('🤖 Kombík Bot – API-Sports\n');
     const now = new Date(), maxTime = new Date(now.getTime() + 24 * 60 * 60 * 1000);
     console.log('⏰ ' + now.toUTCString() + ' → ' + maxTime.toUTCString() + '\n');
-    let allPicks = await footballPicks(now, maxTime);
-    console.log('\n📊 Celkem ' + allPicks.length + ' zápasů (' + reqCount + ' API req)');
+    let { picks: allPicks, reserve: allReserve } = await footballPicks(now, maxTime);
+    console.log('\n📊 Celkem ' + allPicks.length + ' zápasů + ' + allReserve.length + ' v rezervě (' + reqCount + ' API req)');
     // Už seřazeno podle score – vybrat 6 z různých lig, priorita evropské soutěže
     const selected = [], usedLeagues = new Set();
     // 1. kolo: evropské ligy
     for (const pick of allPicks) { if (selected.length >= PICK_COUNT) break; if (EUROPEAN_COUNTRIES.has(pick.country) && !usedLeagues.has(pick.league)) { selected.push(pick); usedLeagues.add(pick.league); } }
     // 2. kolo: doplnit neevropskými, pokud není dost evropských
     for (const pick of allPicks) { if (selected.length >= PICK_COUNT) break; if (!usedLeagues.has(pick.league)) { selected.push(pick); usedLeagues.add(pick.league); } }
+    // 3. kolo: povolit duplicitní ligy
+    for (const pick of allPicks) { if (selected.length >= PICK_COUNT) break; if (!selected.some(s => s.match === pick.match)) { selected.push(pick); } }
 
     // ═══════════════════ BACKFILL: doplnění z dalších 12h oken ═══════════════════
     const BACKFILL_WINDOW_MS = 12 * 60 * 60 * 1000;
@@ -485,7 +494,8 @@ async function main() {
         const backfillEnd = new Date(backfillStart.getTime() + BACKFILL_WINDOW_MS);
         const missing = PICK_COUNT - selected.length;
         console.log('\n🔄 Chybí ' + missing + ' zápas(ů) – prohledávám +12h okno #' + backfillRound + ' (' + backfillStart.toUTCString() + ' → ' + backfillEnd.toUTCString() + ')');
-        const extraPicks = await footballPicks(backfillStart, backfillEnd);
+        const { picks: extraPicks, reserve: extraReserve } = await footballPicks(backfillStart, backfillEnd);
+        allReserve.push(...extraReserve);
         if (extraPicks.length === 0) {
             console.warn('   ⚠ Žádné vhodné zápasy v tomto okně.');
             backfillStart = backfillEnd;
@@ -506,19 +516,43 @@ async function main() {
             if (selected.length >= PICK_COUNT) break;
             if (!usedLeagues.has(pick.league)) { selected.push(pick); usedLeagues.add(pick.league); }
         }
+        // 3. kolo backfillu: duplicitní ligy
+        for (const pick of extraPicks) {
+            if (selected.length >= PICK_COUNT) break;
+            if (!selected.some(s => s.match === pick.match)) { selected.push(pick); }
+        }
         backfillStart = backfillEnd;
     }
+    // ═══════════ RELAXATION: doplnění z rezervy (nižší exp. gólů) ═══════════
+    if (selected.length < PICK_COUNT && allReserve.length > 0) {
+        const missing = PICK_COUNT - selected.length;
+        console.log('\n🔓 Chybí ' + missing + ' zápas(ů) – doplňuji z rezervy (uvolněný práh exp. gólů)...');
+        allReserve.sort((a, b) => b.score - a.score);
+        for (const pick of allReserve) {
+            if (selected.length >= PICK_COUNT) break;
+            if (!usedLeagues.has(pick.league) && !selected.some(s => s.match === pick.match)) {
+                selected.push(pick); usedLeagues.add(pick.league);
+            }
+        }
+        for (const pick of allReserve) {
+            if (selected.length >= PICK_COUNT) break;
+            if (!selected.some(s => s.match === pick.match)) {
+                selected.push(pick);
+            }
+        }
+        console.log('   → ' + selected.length + '/' + PICK_COUNT + ' zápasů po doplnění z rezervy');
+    }
     if (selected.length < PICK_COUNT) {
-        console.warn('\n⚠ Po backfillu stále chybí ' + (PICK_COUNT - selected.length) + ' zápas(ů). Pokračuji s ' + selected.length + '.');
+        console.error('\n❌ I po všech relaxacích pouze ' + selected.length + '/' + PICK_COUNT + ' zápasů!');
     }
 
     if (selected.length === 0) { console.warn('\n⚠ Žádné vhodné zápasy nalezeny.'); process.exit(0); }
     const grouped = balanceGroups(selected);
-    const output = grouped.map(m => ({ league: m.league, match: m.match, tip: m.tip, odds: m.odds, group: m.group, kickoff: m.kickoff }));
+    const output = grouped.map(m => ({ league: m.league, match: m.match, tip: m.tip, odds: m.odds, group: m.group, kickoff: m.kickoff, time: fmtKickoff(m.kickoff) }));
     writeFileSync('hot.json', JSON.stringify(output, null, 2), 'utf-8');
     console.log('\n✅ ' + output.length + ' zápasů → hot.json (' + reqCount + ' API req)\n');
     const gc = Math.ceil(output.length / 2);
-    for (let g = 1; g <= gc; g++) { const gm = output.filter(m => m.group === g); const go = gm.reduce((a, m) => a * parseFloat(m.odds), 1); console.log('  📦 Sk.' + g + ' (' + go.toFixed(2) + '):'); gm.forEach(m => console.log('     ⚽ [' + m.league + '] ' + m.match + ' | ' + m.tip + ' @ ' + m.odds)); }
+    for (let g = 1; g <= gc; g++) { const gm = output.filter(m => m.group === g); const go = gm.reduce((a, m) => a * parseFloat(m.odds), 1); console.log('  📦 Sk.' + g + ' (' + go.toFixed(2) + '):'); gm.forEach(m => console.log('     ⚽ [' + m.league + '] ' + m.match + ' | ' + m.tip + ' @ ' + m.odds + ' | 🕐 ' + m.time)); }
 }
 
 main().catch(err => { console.error('Chyba:', err); process.exit(1); });
