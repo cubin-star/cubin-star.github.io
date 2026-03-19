@@ -1,8 +1,7 @@
 """Denní generátor hokejových tipů Over 5.5 pro MAUI appku.
 
 Stáhne kurzy z API-Sports Hockey API pro všechny dostupné hokejové ligy,
-najde Over 5.5 gólů s kurzem >= 1.75 a vybere 2 zápasy z různých lig
-s NEJVYŠŠÍ pravděpodobností překročení Over 5.5.
+najde Over 5.5 gólů s kurzem >= 1.75 a náhodně vybere 2 zápasy z různých lig.
 
 Metoda výběru (Goal Scoring Index – normalizovaný 0–10, 6 faktorů):
   1. Pro každý kandidátský zápas stáhne posledních 20 zápasů obou týmů
@@ -15,7 +14,7 @@ Metoda výběru (Goal Scoring Index – normalizovaný 0–10, 6 faktorů):
        Home/Away kontext (10 %) – výkon doma vs venku
        Trend (5 %)              – stoupající/klesající forma
   4. Penalizuje zápasy s malým vzorkem dat
-  5. Seřadí kandidáty a vybere TOP 2 z různých lig
+  5. Seřadí kandidáty a náhodně vybere 2 z různých lig
 
 API: https://v1.hockey.api-sports.io
 Premium plan: 7 500 requestů/den, 300 req/min
@@ -27,6 +26,7 @@ import os
 import sys
 import json
 import time
+import random
 import requests
 from datetime import datetime, timezone
 
@@ -488,30 +488,26 @@ def main():
         marker = "⭐" if c["_gsi"] >= 5.0 else "  "
         print(f"   {marker} {i}. GSI={c['_gsi']:.1f} | {c['league']}: {c['match']} @ {c['odds']}")
 
-    # ─── Krok 4: Vyber TOP 2 z různých soutěží ───
-    # Bereme nejlepší GSI, ale každý z jiné ligy
+    # ─── Krok 4: Vyber náhodně 2 z různých soutěží ───
+    # Ze všech kandidátů vybereme náhodně 2 z různých lig
     picked = []
-    used_leagues = set()
 
+    # Seskupíme kandidáty podle ligy
+    by_league: dict[str, list[dict]] = {}
     for c in all_candidates:
-        if c["league"] in used_leagues:
-            continue
-        picked.append(c)
-        used_leagues.add(c["league"])
-        if len(picked) >= 2:
-            break
+        by_league.setdefault(c["league"], []).append(c)
 
-    # Pokud jen 1 liga, vezmeme top 2 z té samé ligy
-    if len(picked) < 2 and len(all_candidates) >= 2:
-        for c in all_candidates:
-            if c not in picked:
-                picked.append(c)
-                if len(picked) >= 2:
-                    break
-
-    # Pokud stále jen 1 kandidát, vezmeme ho
-    if not picked and all_candidates:
-        picked.append(all_candidates[0])
+    if len(by_league) >= 2:
+        # Náhodně vybereme 2 různé ligy a z každé náhodného kandidáta
+        chosen_leagues = random.sample(list(by_league.keys()), 2)
+        for lg in chosen_leagues:
+            picked.append(random.choice(by_league[lg]))
+    elif len(by_league) == 1:
+        # Jen 1 liga – vybereme náhodně až 2 kandidáty z ní
+        only_league = list(by_league.values())[0]
+        picked = random.sample(only_league, min(2, len(only_league)))
+    elif all_candidates:
+        picked.append(random.choice(all_candidates))
 
     print()
     print(f"✅ Vybrané tipy ({len(picked)}):")
