@@ -1,13 +1,16 @@
 """
-Ultimate Football Overs - Daily Tip Generator v9 (simplified)
+Ultimate Football Overs - Daily Tip Generator v10 (simplified scoring)
 
 Logika:
-  1. Blacklist (youth/reserve/amateur/women/esports) + detekce nizsich lig
-     - Anglie max tier 6, ostatni max tier 2, nezname = tier 2 (projdou)
+  1. Blacklist (youth/reserve/amateur/women/esports)
   2. Kurzy Over 2.5 v rozmezi 1.80-2.20
-  3. Scoring z predictions API: ocekavane goly (L5 40% + sezona 30% + split 30%)
-     + H2H, BTTS, API tip, kvalita ligy, penalizace suchych strelcu
+  3. Scoring z predictions API:
+     expectedGoals = (recentAttack+recentDefWeak)/2 * 0.6
+                   + (seasonAttack+seasonDefWeak)/2 * 0.4
+     + h2hBonus (>2.5 -> +0.3, >2.0 -> +0.1)
+     + apiBonus (under_over == +2.5/+3.5 -> +0.4)
   4. Vyber top 5 z ruznych lig, split 3+2 pro dve appky
+  5. Fallback: vzdy 5 zapasu (uvolni filtr pokud chybi)
 
 API: https://www.api-football.com/ (7500 req/day)
 Env: API_FOOTBALL_KEY1
@@ -31,7 +34,7 @@ MIN_ODDS = 1.80
 MAX_ODDS = 2.20
 NUM_TIPS = 5
 DELAY = 0.5
-MAX_ANALYZE = 60
+MAX_ANALYZE = 50
 OUTPUT_APP1 = "fotbal.json"
 OUTPUT_APP2 = "tips.json"
 request_count = 0
@@ -102,8 +105,6 @@ def fetch_fixtures(date_str):
         fixtures[fid] = {
             "home": f.get("teams", {}).get("home", {}).get("name", "?"),
             "away": f.get("teams", {}).get("away", {}).get("name", "?"),
-            "home_id": f.get("teams", {}).get("home", {}).get("id", 0),
-            "away_id": f.get("teams", {}).get("away", {}).get("id", 0),
             "league": f.get("league", {}).get("name", "?"),
             "country": f.get("league", {}).get("country", "?"),
             "league_id": f.get("league", {}).get("id", 0),
@@ -149,45 +150,10 @@ def is_blocked_league(name):
     return bool(re.search(
         r"\b(u1[0-9]|u2[0-3]|youth|juniors?|reserves?|amateur|friendl|simulation|esports?|cyber|women|feminine|feminin|frauen|damer|kvinner|ladies|femenin|naiset|kobiety|feminino|girls)\b",
         name, re.IGNORECASE
-    )) or bool(re.search(r"žen[yí]?", name, re.IGNORECASE))
+    ))
 
 
-def estimate_league_tier(league_name, country):
-    name = league_name.lower()
-    c = country.lower()
-
-    # Cups / international
-    if re.search(r"champions league|europa league|conference league|euro \d|world cup|super cup|supercup|\bcup\b|\bcopa\b|\bcoupe\b|\bcoppa\b|\bpokal\b|\btrophy\b|\bshield\b", name, re.IGNORECASE):
-        return 1
-
-    # Explicit 3+ tier detection
-    if re.search(r"\b(tercera|3\. liga|3\. hnl|liga 3|serie c|ligue 3|national league.*(north|south)|regional|provincial|landesliga|oberliga|verbandsliga|kreisliga|bezirksliga|divisione|division 3|4\. liga|5\. liga|isthmian|southern league|northern league|step [3-6]|rfef|primera federaci|segunda b)\b", name, re.IGNORECASE):
-        return 3
-
-    # England specific tiers
-    if c == "england":
-        if "premier league" in name: return 1
-        if "championship" in name: return 2
-        if "league one" in name: return 3
-        if "league two" in name: return 4
-        if "national league" in name:
-            if "north" in name or "south" in name: return 6
-            return 5
-        return 2
-
-    # Known 1st divisions
-    if re.search(r"premier league|la liga(?!\s*2)|\bbundesliga(?!\s*2)|\bserie a|\bligue 1|\beredivisie|primeira liga|liga portugal(?!\s*2)|jupiler|pro league(?!\s*[2b])|super lig(?!\s*[2b])|super league(?!\s*2)|premiership|superliga(?!\s*[2b])|eliteserien|allsvenskan|veikkausliiga|ekstraklasa|1\.\s*hnl|prva hnl|fortuna liga|chance liga|a-league|j1 league|j-league|k league 1|mls|liga mx|brasileir.*serie a|primera divisi|botola pro(?!\s*2)|egyptian premier|south african premier", name, re.IGNORECASE):
-        return 1
-
-    # Known 2nd divisions
-    if re.search(r"la liga 2|segunda divisi|2\.\s*bundesliga|serie b|ligue 2|eerste divisie|segunda liga|liga portugal 2|challenger|super league 2|challenge league|obos|superettan|ykk|i liga|2\.\s*hnl|liga ii|liga 2|nb ii|nb 2|2\.\s*liga|brasileir.*serie b|k league 2|usl championship|scottish championship|division 2|league one|league two", name, re.IGNORECASE):
-        return 2
-
-    # Unknown = tier 2 (give benefit of doubt)
-    return 2
-
-
-# ===== SCORING =====
+# ===== SCORING (simplified - same as fetch-matches.mjs) =====
 
 def _sf(val, default=0.0):
     try:
@@ -196,29 +162,12 @@ def _sf(val, default=0.0):
         return default
 
 
-def league_quality_bonus(league_name, country):
-    name = league_name.lower()
-    c = country.lower()
-    if re.search(r"champions league|europa league|conference league|euro \d|world cup", name, re.IGNORECASE): return 0.5
-    if re.search(r"\bcup\b|\bcopa\b|\bcoupe\b|\bcoppa\b|\bpokal\b|\btrophy\b|\bshield\b", name, re.IGNORECASE): return 0.25
-    if "premier league" in name and c == "england": return 0.5
-    if "la liga" in name and c == "spain": return 0.5
-    if "bundesliga" in name and c == "germany": return 0.5
-    if "serie a" in name and c == "italy": return 0.5
-    if "ligue 1" in name and c == "france": return 0.5
-    if re.search(r"eredivisie|primeira liga|liga portugal|jupiler|pro league|super lig|premiership|superliga|eliteserien|allsvenskan|ekstraklasa|fortuna liga|chance liga|a-league|j1 league|j-league|k league 1|mls|liga mx|brasileir", name, re.IGNORECASE): return 0.35
-    if re.search(r"championship|2\.\s*bundesliga|serie b|ligue 2|segunda|eerste divisie|challenger|superettan|2\.\s*liga|league one|league two|obos", name, re.IGNORECASE): return 0.2
-    if c in EUROPEAN_COUNTRIES: return 0.1
-    return 0
-
-
-def score_match(pred, avg_odds, league_name, country):
+def score_by_team_stats(pred):
     home = pred.get("teams", {}).get("home", {})
     away = pred.get("teams", {}).get("away", {})
     if not home or not away:
-        return {"total": 0, "detail": "no data", "expected_goals": 0}
+        return {"total": 0, "detail": "no data"}
 
-    # Expected goals
     h_for5 = _sf(home.get("last_5", {}).get("goals", {}).get("for", {}).get("average"))
     h_agn5 = _sf(home.get("last_5", {}).get("goals", {}).get("against", {}).get("average"))
     a_for5 = _sf(away.get("last_5", {}).get("goals", {}).get("for", {}).get("average"))
@@ -229,62 +178,36 @@ def score_match(pred, avg_odds, league_name, country):
     a_for_s = _sf(away.get("league", {}).get("goals", {}).get("for", {}).get("average", {}).get("total")) or a_for5
     a_agn_s = _sf(away.get("league", {}).get("goals", {}).get("against", {}).get("average", {}).get("total")) or a_agn5
 
-    h_for_home = _sf(home.get("league", {}).get("goals", {}).get("for", {}).get("average", {}).get("home")) or h_for_s
-    h_agn_home = _sf(home.get("league", {}).get("goals", {}).get("against", {}).get("average", {}).get("home")) or h_agn_s
-    a_for_away = _sf(away.get("league", {}).get("goals", {}).get("for", {}).get("average", {}).get("away")) or a_for_s
-    a_agn_away = _sf(away.get("league", {}).get("goals", {}).get("against", {}).get("average", {}).get("away")) or a_agn_s
+    recent_attack = h_for5 + a_for5
+    recent_def_weak = h_agn5 + a_agn5
+    season_attack = h_for_s + a_for_s
+    season_def_weak = h_agn_s + a_agn_s
 
-    recent_avg = (h_for5 + h_agn5 + a_for5 + a_agn5) / 2
-    season_avg = (h_for_s + h_agn_s + a_for_s + a_agn_s) / 2
-    split_avg = (h_for_home + a_for_away + h_agn_home + a_agn_away) / 2
-    expected_goals = recent_avg * 0.4 + season_avg * 0.3 + split_avg * 0.3
+    expected_recent = (recent_attack + recent_def_weak) / 2
+    expected_season = (season_attack + season_def_weak) / 2
+    expected_goals = expected_recent * 0.6 + expected_season * 0.4
 
-    # H2H
     h2h = pred.get("h2h") or []
     h2h_avg = 0.0
     if h2h:
         total_g = sum((g.get("goals", {}).get("home", 0) or 0) + (g.get("goals", {}).get("away", 0) or 0) for g in h2h)
         h2h_avg = total_g / len(h2h)
-    h2h_bonus = 0.4 if h2h_avg > 3.5 else (0.3 if h2h_avg > 3.0 else (0.2 if h2h_avg > 2.5 else (0.1 if h2h_avg > 2.0 else 0)))
+    h2h_bonus = 0.3 if h2h_avg > 2.5 else (0.1 if h2h_avg > 2.0 else 0)
 
-    # API prediction
     api_tip = pred.get("predictions", {}).get("under_over", "") or ""
-    api_bonus = 0.5 if api_tip == "+3.5" else (0.3 if api_tip == "+2.5" else 0)
+    api_bonus = 0.4 if api_tip in ("+2.5", "+3.5") else 0
 
-    # BTTS
-    h_fail = int(home.get("league", {}).get("failed_to_score", {}).get("home", 0) or 0)
-    h_played = int(home.get("league", {}).get("fixtures", {}).get("played", {}).get("home", 1) or 1)
-    a_fail = int(away.get("league", {}).get("failed_to_score", {}).get("away", 0) or 0)
-    a_played = int(away.get("league", {}).get("fixtures", {}).get("played", {}).get("away", 1) or 1)
-    h_rate = 1 - (h_fail / h_played)
-    a_rate = 1 - (a_fail / a_played)
-    btts_bonus = 0.35 if (h_rate >= 0.75 and a_rate >= 0.75) else (0.15 if (h_rate >= 0.60 and a_rate >= 0.60) else 0)
+    total = expected_goals + h2h_bonus + api_bonus
+    detail = f"exp {expected_goals:.1f}g, L5atk {recent_attack:.1f}, H2H {h2h_avg:.1f}"
+    if api_tip in ("+2.5", "+3.5"):
+        detail += ", API"
 
-    # Dry penalty
-    dry_penalty = -0.4 if (h_for5 < 0.6 or a_for5 < 0.6) else (-0.2 if (h_for5 < 0.8 or a_for5 < 0.8) else 0)
-
-    # League + odds bonuses
-    lg_bonus = league_quality_bonus(league_name, country)
-    odds_bonus = 0.3 if avg_odds <= 2.0 else 0.15
-
-    total = expected_goals + h2h_bonus + api_bonus + btts_bonus + dry_penalty + lg_bonus + odds_bonus
-
-    flags = []
-    if api_tip in ("+2.5", "+3.5"): flags.append("API")
-    if btts_bonus > 0: flags.append("BTTS")
-    if dry_penalty < 0: flags.append("DRY")
-    if lg_bonus >= 0.35: flags.append("TOP")
-
-    detail = f"exp {expected_goals:.1f}g, L5 {recent_avg:.1f}, H2H {h2h_avg:.1f}, odds {avg_odds:.2f}"
-    if flags:
-        detail += ", " + " ".join(flags)
-
-    return {"total": total, "detail": detail, "expected_goals": expected_goals}
+    return {"total": total, "detail": detail}
 
 
 # ===== KANDIDATI + VYBER =====
 
-def extract_candidates(odds_data, fixtures):
+def extract_candidates(odds_data, fixtures, min_odds=MIN_ODDS, max_odds=MAX_ODDS):
     now = datetime.now(timezone.utc)
     cutoff = now + timedelta(hours=24)
     candidates = []
@@ -295,7 +218,6 @@ def extract_candidates(odds_data, fixtures):
         if not fix:
             continue
 
-        # Time window
         kickoff_str = fix.get("kickoff", "")
         if kickoff_str:
             try:
@@ -308,19 +230,11 @@ def extract_candidates(odds_data, fixtures):
         country = fix.get("country", "").lower()
         league_name = fix.get("league", "?")
 
-        # Hard blocks
         if country in EXCLUDED_COUNTRIES or country in BLOCKED_AFRICAN:
             continue
         if is_blocked_league(league_name):
             continue
 
-        # Tier filter: England max 6, others max 2
-        max_tier = 6 if country == "england" else 2
-        tier = estimate_league_tier(league_name, country)
-        if tier > max_tier:
-            continue
-
-        # Over 2.5 odds
         over25_odds = []
         for bm in item.get("bookmakers", []):
             for bet in bm.get("bets", []):
@@ -328,25 +242,23 @@ def extract_candidates(odds_data, fixtures):
                     if val.get("value") == "Over 2.5":
                         try:
                             odd = float(val.get("odd", 0))
-                            if MIN_ODDS <= odd <= MAX_ODDS:
+                            if min_odds <= odd <= max_odds:
                                 over25_odds.append(odd)
                         except (ValueError, TypeError):
                             pass
         if not over25_odds:
             continue
 
-        best = max(over25_odds)
         avg = sum(over25_odds) / len(over25_odds)
         candidates.append({
             "League": league_name,
             "Match": f"{fix['home']} vs {fix['away']}",
             "Tip": "Over 2.5",
-            "Odds": f"{best:.2f}",
+            "Odds": f"{avg:.2f}",
             "fixture_id": fid,
             "league_id": fix["league_id"],
             "country": country,
             "is_european": country in EUROPEAN_COUNTRIES,
-            "best": best,
             "avg": avg,
         })
 
@@ -355,16 +267,15 @@ def extract_candidates(odds_data, fixtures):
 
 def enrich_and_score(candidates):
     print(f"\n  Scoring {len(candidates)} candidates (predictions)...")
-    to_analyze = sorted(candidates, key=lambda c: abs(c["avg"] - 2.0))[:MAX_ANALYZE]
+    to_analyze = candidates[:MAX_ANALYZE]
     scored = []
     for i, c in enumerate(to_analyze):
         print(f"  [{i+1}/{len(to_analyze)}] {c['Match'][:40]:.<42s}", end="")
         pred = fetch_prediction(c["fixture_id"])
         if pred:
-            sc = score_match(pred, c["avg"], c["League"], c["country"])
+            sc = score_by_team_stats(pred)
             c["score"] = sc["total"]
             c["detail"] = sc["detail"]
-            c["expected_goals"] = sc["expected_goals"]
             print(f' score={sc["total"]:.2f} ({sc["detail"]})')
             scored.append(c)
         else:
@@ -372,30 +283,88 @@ def enrich_and_score(candidates):
     return scored
 
 
-def select_best_tips(scored, num=NUM_TIPS):
+def select_best_tips(scored, all_odds, fixtures, num=NUM_TIPS):
     european = sorted([c for c in scored if c.get("is_european")], key=lambda x: x.get("score", 0), reverse=True)
     non_european = sorted([c for c in scored if not c.get("is_european")], key=lambda x: x.get("score", 0), reverse=True)
 
     selected = []
     used_leagues = set()
+    used_matches = set()
 
     # European first, unique leagues
     for c in european:
-        if c["league_id"] in used_leagues: continue
+        if c["league_id"] in used_leagues:
+            continue
         selected.append(c)
         used_leagues.add(c["league_id"])
-        if len(selected) >= num: break
+        used_matches.add(c["Match"])
+        if len(selected) >= num:
+            break
 
     # Fill from non-European
     for c in non_european:
-        if len(selected) >= num: break
-        if c["league_id"] in used_leagues: continue
+        if len(selected) >= num:
+            break
+        if c["league_id"] in used_leagues:
+            continue
         selected.append(c)
         used_leagues.add(c["league_id"])
+        used_matches.add(c["Match"])
+
+    # Fallback 1: allow multiple from same league
+    if len(selected) < num:
+        print(f"  Fallback 1: allowing multiple from same league...")
+        all_scored = sorted(scored, key=lambda x: x.get("score", 0), reverse=True)
+        for c in all_scored:
+            if len(selected) >= num:
+                break
+            if c["Match"] not in used_matches:
+                selected.append(c)
+                used_matches.add(c["Match"])
+
+    # Fallback 2: widen odds to 1.50-3.00
+    if len(selected) < num:
+        print(f"  Fallback 2: widening odds to 1.50-3.00...")
+        wide_candidates = extract_candidates(all_odds, fixtures, min_odds=1.50, max_odds=3.00)
+        wide_candidates = [c for c in wide_candidates if c["Match"] not in used_matches]
+        wide_scored = enrich_and_score(wide_candidates[:20])
+        wide_scored.sort(key=lambda x: x.get("score", 0), reverse=True)
+        for c in wide_scored:
+            if len(selected) >= num:
+                break
+            if c["Match"] not in used_matches:
+                selected.append(c)
+                used_matches.add(c["Match"])
+
+    # Fallback 3: any fixture from 24h window
+    if len(selected) < num:
+        print(f"  Fallback 3: taking any fixture...")
+        for fid, fix in fixtures.items():
+            if len(selected) >= num:
+                break
+            match_name = f"{fix['home']} vs {fix['away']}"
+            if match_name in used_matches:
+                continue
+            country = fix.get("country", "").lower()
+            if country in EXCLUDED_COUNTRIES or country in BLOCKED_AFRICAN:
+                continue
+            selected.append({
+                "League": fix["league"],
+                "Match": match_name,
+                "Tip": "Over 2.5",
+                "Odds": "2.00",
+                "fixture_id": fid,
+                "league_id": fix["league_id"],
+                "country": country,
+                "is_european": country in EUROPEAN_COUNTRIES,
+                "score": 0,
+                "detail": "fallback",
+            })
+            used_matches.add(match_name)
 
     selected.sort(key=lambda x: x.get("score", 0), reverse=True)
 
-    # Interleave: app1 gets #1,#3,#5 — app2 gets #2,#4
+    # Interleave: app1 gets #1,#3,#5 - app2 gets #2,#4
     app1, app2 = [], []
     for i, tip in enumerate(selected):
         if i % 2 == 0:
@@ -416,7 +385,7 @@ def main():
     today = now.strftime("%Y-%m-%d")
     tomorrow = (now + timedelta(days=1)).strftime("%Y-%m-%d")
 
-    print(f"== generate_tips1 v9 ==")
+    print(f"== generate_tips1 v10 ==")
     print(f"Time: {now.strftime('%Y-%m-%d %H:%M UTC')}")
     print(f"Over 2.5 | odds {MIN_ODDS}-{MAX_ODDS}")
     print(f"Output: {OUTPUT_APP1} (3) + {OUTPUT_APP2} (2)\n")
@@ -444,7 +413,12 @@ def main():
     print(f"  {len(candidates)} candidates (Over 2.5 @ {MIN_ODDS}-{MAX_ODDS})")
 
     if not candidates:
-        print("No qualifying matches.")
+        print("No qualifying matches - trying fallback...")
+        candidates = extract_candidates(all_odds, all_fixtures, min_odds=1.50, max_odds=3.00)
+        print(f"  {len(candidates)} candidates (widened 1.50-3.00)")
+
+    if not candidates:
+        print("No matches at all.")
         return
 
     # Score
@@ -459,8 +433,8 @@ def main():
     for i, c in enumerate(ranked[:10], 1):
         print(f"    {i}. [{c['League']}] {c['Match']} | {c['detail']} | score {c['score']:.2f}")
 
-    # Select
-    app1_raw, app2_raw = select_best_tips(scored)
+    # Select (with fallbacks for always 5 tips)
+    app1_raw, app2_raw = select_best_tips(scored, all_odds, all_fixtures)
 
     def fmt(tips):
         return [{"League": t["League"], "Match": t["Match"], "Tip": t["Tip"], "Odds": t["Odds"]} for t in tips]
