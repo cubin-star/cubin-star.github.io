@@ -1,15 +1,15 @@
 """
-Ultimate Football Overs - Daily Tip Generator v10 (simplified scoring)
+Ultimate Football Overs - Daily Tip Generator v11 (random selection)
 
 Logika:
   1. Blacklist (youth/reserve/amateur/women/esports)
   2. Kurzy Over 2.5 v rozmezi 1.80-2.20
-  3. Scoring z predictions API:
+  3. Scoring z predictions API (pro info/log):
      expectedGoals = (recentAttack+recentDefWeak)/2 * 0.6
                    + (seasonAttack+seasonDefWeak)/2 * 0.4
      + h2hBonus (>2.5 -> +0.3, >2.0 -> +0.1)
      + apiBonus (under_over == +2.5/+3.5 -> +0.4)
-  4. Vyber top 5 z ruznych lig, split 3+2 pro dve appky
+  4. Nahodny vyber 5 zapasu z cele kvalifikovane mnoziny, split 3+2
   5. Fallback: vzdy 5 zapasu (uvolni filtr pokud chybi)
 
 API: https://www.api-football.com/ (7500 req/day)
@@ -24,6 +24,7 @@ import os
 import json
 import time
 import re
+import random
 import urllib.request
 import urllib.error
 from datetime import datetime, timezone, timedelta
@@ -284,93 +285,66 @@ def enrich_and_score(candidates):
 
 
 def select_best_tips(scored, all_odds, fixtures, num=NUM_TIPS):
-    european = sorted([c for c in scored if c.get("is_european")], key=lambda x: x.get("score", 0), reverse=True)
-    non_european = sorted([c for c in scored if not c.get("is_european")], key=lambda x: x.get("score", 0), reverse=True)
-
-    selected = []
-    used_leagues = set()
+    pool = list(scored)
     used_matches = set()
 
-    # European first, unique leagues
-    for c in european:
-        if c["league_id"] in used_leagues:
-            continue
-        selected.append(c)
-        used_leagues.add(c["league_id"])
-        used_matches.add(c["Match"])
-        if len(selected) >= num:
-            break
+    # Random selection from the qualified pool
+    if len(pool) >= num:
+        selected = random.sample(pool, num)
+        print(f"  Random pick: {num} from {len(pool)} qualified candidates")
+    else:
+        selected = list(pool)
+        used_matches = {c["Match"] for c in selected}
+        print(f"  Pool has only {len(pool)}, need {num} - using fallbacks...")
 
-    # Fill from non-European
-    for c in non_european:
-        if len(selected) >= num:
-            break
-        if c["league_id"] in used_leagues:
-            continue
-        selected.append(c)
-        used_leagues.add(c["league_id"])
-        used_matches.add(c["Match"])
-
-    # Fallback 1: allow multiple from same league
-    if len(selected) < num:
-        print(f"  Fallback 1: allowing multiple from same league...")
-        all_scored = sorted(scored, key=lambda x: x.get("score", 0), reverse=True)
-        for c in all_scored:
-            if len(selected) >= num:
-                break
-            if c["Match"] not in used_matches:
+        # Fallback 1: widen odds to 1.50-3.00
+        if len(selected) < num:
+            print(f"  Fallback 1: widening odds to 1.50-3.00...")
+            wide_candidates = extract_candidates(all_odds, fixtures, min_odds=1.50, max_odds=3.00)
+            wide_candidates = [c for c in wide_candidates if c["Match"] not in used_matches]
+            wide_scored = enrich_and_score(wide_candidates[:20])
+            extra = [c for c in wide_scored if c["Match"] not in used_matches]
+            need = num - len(selected)
+            pick = random.sample(extra, min(need, len(extra))) if extra else []
+            for c in pick:
                 selected.append(c)
                 used_matches.add(c["Match"])
 
-    # Fallback 2: widen odds to 1.50-3.00
-    if len(selected) < num:
-        print(f"  Fallback 2: widening odds to 1.50-3.00...")
-        wide_candidates = extract_candidates(all_odds, fixtures, min_odds=1.50, max_odds=3.00)
-        wide_candidates = [c for c in wide_candidates if c["Match"] not in used_matches]
-        wide_scored = enrich_and_score(wide_candidates[:20])
-        wide_scored.sort(key=lambda x: x.get("score", 0), reverse=True)
-        for c in wide_scored:
-            if len(selected) >= num:
-                break
-            if c["Match"] not in used_matches:
+        # Fallback 2: any fixture from 24h window
+        if len(selected) < num:
+            print(f"  Fallback 2: taking any fixture...")
+            available = []
+            for fid, fix in fixtures.items():
+                match_name = f"{fix['home']} vs {fix['away']}"
+                if match_name in used_matches:
+                    continue
+                country = fix.get("country", "").lower()
+                if country in EXCLUDED_COUNTRIES or country in BLOCKED_AFRICAN:
+                    continue
+                available.append({
+                    "League": fix["league"],
+                    "Match": match_name,
+                    "Tip": "Over 2.5",
+                    "Odds": "2.00",
+                    "fixture_id": fid,
+                    "league_id": fix["league_id"],
+                    "country": country,
+                    "is_european": country in EUROPEAN_COUNTRIES,
+                    "score": 0,
+                    "detail": "fallback",
+                })
+            need = num - len(selected)
+            pick = random.sample(available, min(need, len(available))) if available else []
+            for c in pick:
                 selected.append(c)
                 used_matches.add(c["Match"])
 
-    # Fallback 3: any fixture from 24h window
-    if len(selected) < num:
-        print(f"  Fallback 3: taking any fixture...")
-        for fid, fix in fixtures.items():
-            if len(selected) >= num:
-                break
-            match_name = f"{fix['home']} vs {fix['away']}"
-            if match_name in used_matches:
-                continue
-            country = fix.get("country", "").lower()
-            if country in EXCLUDED_COUNTRIES or country in BLOCKED_AFRICAN:
-                continue
-            selected.append({
-                "League": fix["league"],
-                "Match": match_name,
-                "Tip": "Over 2.5",
-                "Odds": "2.00",
-                "fixture_id": fid,
-                "league_id": fix["league_id"],
-                "country": country,
-                "is_european": country in EUROPEAN_COUNTRIES,
-                "score": 0,
-                "detail": "fallback",
-            })
-            used_matches.add(match_name)
+    # Shuffle before split so app assignment is also random
+    random.shuffle(selected)
 
-    selected.sort(key=lambda x: x.get("score", 0), reverse=True)
-
-    # Interleave: app1 gets #1,#3,#5 - app2 gets #2,#4
-    app1, app2 = [], []
-    for i, tip in enumerate(selected):
-        if i % 2 == 0:
-            app1.append(tip)
-        else:
-            app2.append(tip)
+    # Split: app1 gets 3 tips, app2 gets 2 tips
+    app1 = selected[:3]
+    app2 = selected[3:5]
     return app1, app2
 
 
@@ -385,7 +359,7 @@ def main():
     today = now.strftime("%Y-%m-%d")
     tomorrow = (now + timedelta(days=1)).strftime("%Y-%m-%d")
 
-    print(f"== generate_tips1 v10 ==")
+    print(f"== generate_tips1 v11 (random) ==")
     print(f"Time: {now.strftime('%Y-%m-%d %H:%M UTC')}")
     print(f"Over 2.5 | odds {MIN_ODDS}-{MAX_ODDS}")
     print(f"Output: {OUTPUT_APP1} (3) + {OUTPUT_APP2} (2)\n")
