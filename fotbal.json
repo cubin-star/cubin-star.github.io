@@ -1,20 +1,20 @@
 [
   {
+    "League": "UEFA Europa League",
+    "Match": "Real Betis vs Panathinaikos",
+    "Tip": "Over 2.5",
+    "Odds": "1.88"
+  },
+  {
+    "League": "Liga Nacional",
+    "Match": "Xelajú vs Municipal",
+    "Tip": "Over 2.5",
+    "Odds": "2.15"
+  },
+  {
     "League": "Birinci Dasta",
     "Match": "Difai Ağsu vs Cəbrayıl",
     "Tip": "Over 2.5",
     "Odds": "1.82"
-  },
-  {
-    "League": "Tercera División RFEF - Group 15",
-    "Match": "Huarte vs Ardoi",
-    "Tip": "Over 2.5",
-    "Odds": "1.82"
-  },
-  {
-    "League": "UEFA Europa League",
-    "Match": "FC Porto vs VfB Stuttgart",
-    "Tip": "Over 2.5",
-    "Odds": "1.87"
   }
 ]
