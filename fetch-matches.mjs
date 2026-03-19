@@ -37,6 +37,7 @@ function isBlockedLeague(name) {
 }
 
 function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+function shuffle(arr) { for (let i = arr.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [arr[i], arr[j]] = [arr[j], arr[i]]; } return arr; }
 function fmtDate(d) { return d.toISOString().split('T')[0]; }
 
 async function apiFetch(baseUrl, path) {
@@ -189,6 +190,7 @@ async function main() {
     const candidates = [...matchMap.values()];
     console.log('Kandidatu: ' + candidates.length + ' s Over 2.5 (kurz ' + MIN_ODDS + '-' + MAX_ODDS + ')');
 
+    shuffle(candidates);
     const toAnalyze = candidates.slice(0, MAX_ANALYZE);
     console.log('Analyzuji ' + toAnalyze.length + ' zapasu (predictions)...\n');
 
@@ -203,7 +205,7 @@ async function main() {
         }
         if (i < toAnalyze.length - 1) await sleep(350);
     }
-    picks.sort((a, b) => b.score - a.score);
+    shuffle(picks);
 
     console.log('Analyzovano: ' + picks.length + ' zapasu');
     if (picks.length > 0) { console.log('   Top 10:'); picks.slice(0, 10).forEach((p, i) => console.log('   ' + (i + 1) + '. [' + p.league + '] ' + p.match + ' | ' + p.detail + ' | score ' + p.score.toFixed(2))); }
