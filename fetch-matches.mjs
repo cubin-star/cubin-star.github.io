@@ -210,7 +210,62 @@ async function main() {
 
     const selected = [], usedLeagues = new Set();
     for (const pick of picks) { if (selected.length >= PICK_COUNT) break; if (!usedLeagues.has(pick.league)) { selected.push(pick); usedLeagues.add(pick.league); } }
-    if (selected.length === 0) { console.warn('\nZadne vhodne zapasy nalezeny.'); process.exit(0); }
+
+    // Fallback 1: pokud < 6, povol vice zapasu ze stejne ligy
+    if (selected.length < PICK_COUNT) {
+        console.log('   Fallback 1: povoluju vice zapasu ze stejne ligy...');
+        for (const pick of picks) { if (selected.length >= PICK_COUNT) break; if (!selected.some(s => s.match === pick.match)) { selected.push(pick); } }
+    }
+
+    // Fallback 2: pokud < 6, rozsir kurzy na 1.8-3.5 a analyzuj dalsi
+    if (selected.length < PICK_COUNT) {
+        console.log('   Fallback 2: rozsiruji kurzy na 1.8-3.5...');
+        const wideMap = new Map();
+        for (const [, lg] of leagueMap) {
+            for (const d of lg.dates) {
+                const oddsData = await getFootballLeagueOdds(lg.id, lg.season, d);
+                for (const entry of oddsData) {
+                    const fix = fixtureMap.get(entry.fixture?.id); if (!fix) continue;
+                    const mk = fix.fixture.id;
+                    if (matchMap.has(mk)) continue;
+                    for (const bm of entry.bookmakers || []) { for (const bet of bm.bets || []) { for (const v of bet.values || []) {
+                        if (v.value !== 'Over 2.5') continue;
+                        const odd = parseFloat(v.odd); if (isNaN(odd) || odd < 1.8 || odd > 3.5) continue;
+                        if (!wideMap.has(mk)) wideMap.set(mk, { fixtureId: mk, league: lg.name, match: fix.teams.home.name + ' - ' + fix.teams.away.name, tip: 'Over 2.5', allOdds: [] });
+                        wideMap.get(mk).allOdds.push(odd);
+                    } } }
+                }
+                await sleep(350);
+            }
+        }
+        const wideCandidates = [...wideMap.values()].slice(0, 20);
+        for (let i = 0; i < wideCandidates.length && selected.length < PICK_COUNT; i++) {
+            const m = wideCandidates[i];
+            const avg = m.allOdds.reduce((a, b) => a + b, 0) / m.allOdds.length;
+            const pred = await getMatchPrediction(m.fixtureId);
+            if (pred) {
+                const sc = scoreByTeamStats(pred);
+                if (!selected.some(s => s.match === m.match)) {
+                    selected.push({ league: m.league, match: m.match, tip: m.tip, odds: avg.toFixed(2), score: sc.total, detail: sc.detail });
+                }
+            }
+            if (i < wideCandidates.length - 1) await sleep(350);
+        }
+    }
+
+    // Fallback 3: pokud stale < 6, vezmi jakykoliv fixture s Over 2.5 kurzem
+    if (selected.length < PICK_COUNT) {
+        console.log('   Fallback 3: beru jakykoliv Over 2.5 zapas...');
+        for (const f of fixtures) {
+            if (selected.length >= PICK_COUNT) break;
+            const name = f.teams.home.name + ' - ' + f.teams.away.name;
+            if (selected.some(s => s.match === name)) continue;
+            selected.push({ league: f.league.name, match: name, tip: 'Over 2.5', odds: '2.50', score: 0, detail: 'fallback' });
+        }
+    }
+
+    if (selected.length === 0) { console.warn('\nZadne zapasy nalezeny.'); process.exit(0); }
+    console.log('Vybrano: ' + selected.length + ' zapasu');
 
     const grouped = balanceGroups(selected);
     const output = grouped.map(m => ({ league: m.league, match: m.match, tip: m.tip, odds: m.odds, group: m.group }));
