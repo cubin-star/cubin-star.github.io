@@ -33,6 +33,18 @@ const BLOCKED_AFRICAN = new Set([
 const TZ = 'Europe/Prague';
 let reqCount = 0;
 
+const EUROPEAN_COUNTRIES = new Set([
+    'England', 'Spain', 'Germany', 'Italy', 'France', 'Netherlands', 'Portugal',
+    'Belgium', 'Turkey', 'Austria', 'Switzerland', 'Scotland', 'Czech-Republic',
+    'Poland', 'Denmark', 'Norway', 'Sweden', 'Greece', 'Croatia', 'Serbia',
+    'Romania', 'Hungary', 'Ukraine', 'Slovakia', 'Bulgaria', 'Finland',
+    'Ireland', 'Northern-Ireland', 'Wales', 'Iceland', 'Slovenia', 'Cyprus',
+]);
+
+function isSecondTier(name) {
+    return /\b(2|II|segunda|championship|league two|league one|serie b|ligue 2|2\. liga|2\. bundesliga|eerste divisie|second|third|cup|pokal|coupe|copa|taca)\b/i.test(name);
+}
+
 function isBlockedLeague(name) {
     return /\b(u1[0-9]|u2[0-3]|youth|juniors?|reserves?|amateur|friendl|simulation|esports?|cyber|women|feminine|feminin|frauen|damer|kvinner|ladies|femenin|naiset|kobiety|feminino|girls)\b/i.test(name);
 }
@@ -116,7 +128,7 @@ async function getTeamShootingStats(teamId) {
     return result;
 }
 
-// Oba tymy daji 1.3+ golu/zapas && aspon jeden inkasuje 1.5+ golu/zapas
+// Oba tymy daji 1.3+ golu/zapas && aspon jeden inkasuje 1.3+ golu/zapas
 function meetsGoalCriteria(pred) {
     const home = pred.teams?.home;
     const away = pred.teams?.away;
@@ -133,11 +145,16 @@ function meetsGoalCriteria(pred) {
 }
 
 // Vazeny nahodny vyber bez opakovani; vaha = prumer golu ligy * prumer xG zapasu
+// Kazdy zapas z jine ligy
 function weightedPick(items, leagueStats, count) {
     const result = [];
+    const usedLeagues = new Set();
     const remaining = [...items];
     for (let i = 0; i < count && remaining.length > 0; i++) {
-        const weights = remaining.map(m => {
+        // odfiltruj uz pouzite ligy
+        const available = remaining.filter(m => !usedLeagues.has(m.league));
+        if (available.length === 0) break;
+        const weights = available.map(m => {
             const lgAvg = leagueStats.has(m.league) ? leagueStats.get(m.league).total / leagueStats.get(m.league).count : 1;
             const xgAvg = ((m.homeStats?.xg || 0) + (m.awayStats?.xg || 0)) || 1;
             return lgAvg * xgAvg;
@@ -149,8 +166,10 @@ function weightedPick(items, leagueStats, count) {
             r -= weights[idx];
             if (r <= 0) break;
         }
-        result.push(remaining[idx]);
-        remaining.splice(idx, 1);
+        const pick = available[idx];
+        result.push(pick);
+        usedLeagues.add(pick.league);
+        remaining.splice(remaining.indexOf(pick), 1);
     }
     return result;
 }
@@ -298,16 +317,36 @@ async function main() {
     // Vazeny nahodny vyber z qualified
     const selected = weightedPick(qualified, leagueStats, PICK_COUNT);
 
-    // Fallback: pokud neni 6, doplnit nahodne z poolu (jen kurz, bez dalsich filtru)
+    // Fallback: pokud neni 6, doplnit z evropskych prvnich lig, pak z poolu
     if (selected.length < PICK_COUNT) {
         const usedIds = new Set(selected.map(s => s.fixtureId));
-        const fallbackPool = pool.filter(m => !usedIds.has(m.fixtureId));
-        shuffle(fallbackPool);
-        for (const m of fallbackPool) {
+        const usedLeagues = new Set(selected.map(s => s.league));
+        const remaining = pool.filter(m => !usedIds.has(m.fixtureId) && !usedLeagues.has(m.league));
+
+        // 1) preferuj evropske prvni ligy
+        const euroTop = remaining.filter(m => EUROPEAN_COUNTRIES.has(m.country) && !isSecondTier(m.league));
+        shuffle(euroTop);
+        for (const m of euroTop) {
             if (selected.length >= PICK_COUNT) break;
+            if (usedLeagues.has(m.league)) continue;
             selected.push(m);
+            usedLeagues.add(m.league);
+            usedIds.add(m.fixtureId);
         }
-        console.log('Fallback: doplneno na ' + selected.length + ' (nahodne z poolu, jen kurz ' + MIN_ODDS + '-' + MAX_ODDS + ')');
+
+        // 2) pokud stale < 6, jakykoli zbyvajici z poolu (unikatni liga)
+        if (selected.length < PICK_COUNT) {
+            const rest = remaining.filter(m => !usedIds.has(m.fixtureId) && !usedLeagues.has(m.league));
+            shuffle(rest);
+            for (const m of rest) {
+                if (selected.length >= PICK_COUNT) break;
+                if (usedLeagues.has(m.league)) continue;
+                selected.push(m);
+                usedLeagues.add(m.league);
+            }
+        }
+
+        console.log('Fallback: doplneno na ' + selected.length + ' (evropske 1. ligy, pak pool, unikatni ligy)');
     }
 
     console.log('\nVybrano: ' + selected.length + ' zapasu\n');
