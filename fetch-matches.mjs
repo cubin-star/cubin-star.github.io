@@ -245,7 +245,7 @@ async function main() {
                 for (const bm of entry.bookmakers || []) { for (const bet of bm.bets || []) { for (const v of bet.values || []) {
                     if (v.value !== 'Over 2.5') continue;
                     const odd = parseFloat(v.odd); if (isNaN(odd) || odd < MIN_ODDS || odd > MAX_ODDS) continue;
-                    if (!candidates.has(matchKey)) candidates.set(matchKey, { fixtureId: matchKey, league: lg.name, country: lg.country, match: fix.teams.home.name + ' - ' + fix.teams.away.name, tip: 'Over 2.5', allOdds: [] });
+                    if (!candidates.has(matchKey)) candidates.set(matchKey, { fixtureId: matchKey, league: lg.name, country: lg.country, match: fix.teams.home.name + ' - ' + fix.teams.away.name, tip: 'Over 2.5', allOdds: [], kickoff: fix.fixture.date });
                     candidates.get(matchKey).allOdds.push(odd);
                 } } }
             }
@@ -356,7 +356,7 @@ async function main() {
 
     // Rozdeleni do 3 kurzove vyrovnanych skupin po 2
     const grouped = balanceGroups(selected);
-    const output = grouped.map(m => ({ league: m.league, match: m.match, tip: m.tip, odds: m.odds, group: m.group, qualified: !!m._qualified }));
+    const output = grouped.map(m => ({ league: m.league, match: m.match, tip: m.tip, odds: m.odds, group: m.group, qualified: !!m._qualified, kickoff: m.kickoff }));
     writeFileSync('hot.json', JSON.stringify(output, null, 2), 'utf-8');
 
     console.log(output.length + ' zapasu -> hot.json (' + reqCount + ' API req)\n');
