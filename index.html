@@ -1,51 +1,105 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="cs">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>Acca – Accumulator</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kombík – Tipsport Kombinátor</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎫</text></svg>" />
     <style>
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-        :root {
-            font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
-            line-height: 1.5; font-weight: 400; color: #e0e8f0; background-color: #0d1520;
-            text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased;
-        }
+
         body {
-            min-height: 100vh;
+            font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+            line-height: 1.5;
+            color: #e0e8f0;
             background: radial-gradient(ellipse at 50% 0%, rgba(0,164,81,0.08) 0%, transparent 60%), #0d1520;
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
         }
-        .ticket-wrapper { display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 2rem; }
+
+        .ticket-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
         .ticket {
-            width: 100%; max-width: 480px; background: #1a2332; border-radius: 16px; overflow: hidden;
-            box-shadow: 0 8px 40px rgba(0,0,0,0.5), 0 0 80px rgba(0,164,81,0.08); border: 1px solid #2a3a4a;
+            width: 100%;
+            max-width: 480px;
+            background: #1a2332;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.5), 0 0 80px rgba(0,164,81,0.08);
+            border: 1px solid #2a3a4a;
         }
-        .ticket-header { background: linear-gradient(135deg, #00a451 0%, #007a3d 100%); padding: 1.5rem; text-align: center; }
+
+        .ticket-header {
+            background: linear-gradient(135deg, #00a451 0%, #007a3d 100%);
+            padding: 1.5rem;
+            text-align: center;
+        }
+
         .ticket-logo { font-size: 1.8rem; font-weight: 800; letter-spacing: 3px; color: #fff; }
         .ticket-type { font-size: 0.75rem; font-weight: 700; letter-spacing: 4px; color: rgba(255,255,255,0.7); margin-top: 0.25rem; text-transform: uppercase; }
-        .ticket-meta { display: flex; justify-content: space-between; margin-top: 1rem; padding-top: 0.75rem; border-top: 1px solid rgba(255,255,255,0.2); font-size: 0.75rem; color: rgba(255,255,255,0.6); }
+
+        .ticket-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1rem;
+            padding-top: 0.75rem;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.6);
+        }
+
         .ticket-groups { padding: 0.5rem 1rem; }
-        .group { margin: 0.75rem 0; border-radius: 10px; overflow: hidden; background: #151e2b; border: 1px solid #2a3a4a; }
-        .group-header { display: flex; justify-content: space-between; align-items: center; padding: 0.6rem 1rem; background: linear-gradient(90deg, #1e3a2a, #1a2332); border-bottom: 1px solid #2a3a4a; }
+
+        .group {
+            margin: 0.75rem 0;
+            border-radius: 10px;
+            overflow: hidden;
+            background: #151e2b;
+            border: 1px solid #2a3a4a;
+        }
+
+        .group-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.6rem 1rem;
+            background: linear-gradient(90deg, #1e3a2a, #1a2332);
+            border-bottom: 1px solid #2a3a4a;
+        }
+
         .group-name { font-size: 0.8rem; font-weight: 700; color: #00c85a; text-transform: uppercase; letter-spacing: 1px; }
         .group-odds { font-size: 0.75rem; color: #ffd700; font-weight: 600; }
+
         .group-matches { padding: 0.5rem; }
+
         .match { padding: 0.6rem 0.5rem; border-bottom: 1px solid #1e2d3d; }
         .match:last-child { border-bottom: none; }
+
         .match-league { font-size: 0.65rem; color: #5a7a8a; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.3rem; }
-        .match-name { color: #fff; font-weight: 600; font-size: 0.9rem; }
+        .match-name { font-size: 0.9rem; font-weight: 600; color: #fff; }
+
         .match-pick { display: flex; justify-content: space-between; align-items: center; margin-top: 0.4rem; }
         .pick-badge { font-size: 0.7rem; padding: 0.2rem 0.6rem; background: rgba(0,164,81,0.15); color: #00c85a; border-radius: 4px; font-weight: 600; }
         .match-odds { font-size: 0.95rem; font-weight: 800; color: #ffd700; background: rgba(255,215,0,0.08); padding: 0.2rem 0.6rem; border-radius: 4px; }
+
         .ticket-summary { margin: 0 1rem; padding: 1rem; border-top: 2px dashed #2a3a4a; }
-        .summary-row { display: flex; justify-content: space-between; padding: 0.4rem 0; font-size: 0.85rem; color: #7a8a9a; }
+        .summary-section { margin-bottom: 0.75rem; }
+        .summary-title { font-size: 0.7rem; font-weight: 700; color: #00c85a; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 0.4rem; }
+        .summary-row { display: flex; justify-content: space-between; padding: 0.25rem 0; font-size: 0.8rem; color: #7a8a9a; }
         .summary-value { color: #c0d0e0; font-weight: 600; }
-        .summary-row.highlight { margin-top: 0.5rem; padding-top: 0.75rem; border-top: 1px solid #2a3a4a; font-size: 1rem; color: #fff; font-weight: 700; }
-        .summary-row.highlight .win { color: #ffd700; font-size: 1.1rem; font-weight: 800; }
+        .summary-row.total { margin-top: 0.5rem; padding-top: 0.75rem; border-top: 1px solid #2a3a4a; font-size: 1rem; color: #fff; font-weight: 700; }
+        .summary-row.total .win { color: #ffd700; font-size: 1.1rem; font-weight: 800; }
+
         .ticket-footer { padding: 1rem 1.5rem; text-align: center; border-top: 1px solid #2a3a4a; }
         .barcode { font-size: 1.2rem; letter-spacing: 2px; color: #3a4a5a; line-height: 1; overflow: hidden; }
         .footer-text { margin-top: 0.5rem; font-size: 0.7rem; color: #4a5a6a; letter-spacing: 2px; }
+
         .ticket-loading { display: flex; flex-direction: column; align-items: center; gap: 1rem; padding: 3rem 1rem; color: #7a8a9a; font-size: 0.9rem; }
         .spinner { width: 32px; height: 32px; border: 3px solid #2a3a4a; border-top-color: #00c85a; border-radius: 50%; animation: spin 0.8s linear infinite; }
         @keyframes spin { to { transform: rotate(360deg); } }
@@ -54,23 +108,20 @@
 </head>
 <body>
     <div class="ticket-wrapper">
-        <div class="ticket">
+        <div class="ticket" id="ticket">
             <div class="ticket-header">
-                <div class="ticket-logo">🎫 ACCA</div>
-                <div class="ticket-type">ACCUMULATOR</div>
+                <div class="ticket-logo">🎫 KOMBÍK</div>
+                <div class="ticket-type">KOMBINÁTOR</div>
                 <div class="ticket-meta">
-                    <span>Daily Ticket</span>
-                    <span id="today"></span>
+                    <span>Denní tiket</span>
+                    <span id="date"></span>
                 </div>
             </div>
-            <div class="ticket-loading" id="loading">
-                <div class="spinner"></div>
-                <span>Loading matches…</span>
-            </div>
-            <div class="ticket-error" id="error" style="display:none"></div>
-            <div id="content" style="display:none">
-                <div class="ticket-groups" id="groups"></div>
-                <div class="ticket-summary" id="summary"></div>
+            <div id="content">
+                <div class="ticket-loading">
+                    <div class="spinner"></div>
+                    <span>Načítám zápasy…</span>
+                </div>
             </div>
             <div class="ticket-footer">
                 <div class="barcode">║║║║║║║║║║║║║║║║║║║║║║║║║║║║║║</div>
@@ -80,163 +131,107 @@
     </div>
 
     <script>
-        var HOT_JSON_URL = 'https://raw.githubusercontent.com/cubin-star/cubin-star.github.io/main/hot.json';
-        var STAKE = 200;
+        const STAKE_2AKO = 15; // $15 za kazdou 2Ako kombinaci (3 kombi = $45)
+        const STAKE_3AKO = 5;  // $5 za 3Ako kombinaci (1 kombi = $5)
 
-        document.getElementById('today').textContent = new Date().toLocaleDateString('en-GB');
+        document.getElementById('date').textContent =
+            new Date().toLocaleDateString('cs-CZ');
 
         function parseOdds(val) {
             if (typeof val === 'number') return val;
             return parseFloat(String(val).replace(',', '.')) || 0;
         }
 
-        function isLeagueAllowed(m) {
-            var league = (m.league || '').toLowerCase();
-            // Detect any Spanish league
-            var isSpanish = league.indexOf('spain') !== -1 || league.indexOf('espa') !== -1
-                         || league.indexOf('la liga') !== -1 || league.indexOf('laliga') !== -1
-                         || league.indexOf('primera') !== -1 || league.indexOf('segunda') !== -1
-                         || league.indexOf('copa del rey') !== -1 || league.indexOf('rfef') !== -1
-                         || league.indexOf('tercera') !== -1 || league.indexOf('federaci') !== -1;
-            if (!isSpanish) return true;
-            // Block anything containing these terms
-            if (league.indexOf('rfef') !== -1) return false;
-            if (league.indexOf('federaci') !== -1) return false;
-            if (league.indexOf('tercera') !== -1) return false;
-            if (league.indexOf('segunda b') !== -1) return false;
-            // Allow only La Liga, La Liga 2 (Segunda División) and Copa del Rey
-            if (league.indexOf('copa del rey') !== -1) return true;
-            if (league.indexOf('la liga') !== -1 || league.indexOf('laliga') !== -1) return true;
-            if (league.indexOf('primera div') !== -1) return true;
-            if (league.indexOf('segunda div') !== -1) return true;
-            if (/segunda(?!.*rfef|.*federaci|.*\bb\b)/.test(league)) return true;
-            // Unknown Spanish league – block
-            return false;
-        }
+        async function load() {
+            const content = document.getElementById('content');
+            try {
+                const res = await fetch('hot.json?t=' + Date.now());
+                if (!res.ok) throw new Error('HTTP ' + res.status);
+                let text = await res.text();
+                text = text.replace(/\}[\s\r\n]*\{/g, '},{');
+                const matches = JSON.parse(text);
 
-        function scoreOver25(m) {
-            var odds = parseOdds(m.odds);
-            var tip = (m.tip || '').toLowerCase();
-            var league = (m.league || '').toLowerCase();
-            var score = 0;
+                const groupMap = new Map();
+                matches.forEach(m => {
+                    const g = m.group || (Math.floor(groupMap.size / 2) + 1);
+                    if (!groupMap.has(g)) groupMap.set(g, []);
+                    groupMap.get(g).push({ league: m.league, teams: m.match, tip: m.tip, odds: parseOdds(m.odds) });
+                });
+                const groups = [...groupMap.entries()].map(([g, ms]) => ({
+                    name: 'Skupina ' + g, matches: ms
+                }));
 
-            // Implied probability: lower odds = higher confidence
-            if (odds > 0) score += (1 / odds) * 50;
+                // Kurzy skupin
+                const gOdds = groups.map(g =>
+                    g.matches.reduce((a, m) => a * m.odds, 1));
 
-            // Odds sweet-spot bonus (ideal range for confident Over 2.5)
-            if (odds >= 1.25 && odds <= 1.55) score += 18;
-            else if (odds > 1.55 && odds <= 1.70) score += 12;
-            else if (odds > 1.70 && odds <= 1.80) score += 6;
-            // Penalise risky odds
-            if (odds > 1.90) score -= 8;
-            if (odds > 2.10) score -= 8;
+                // 2Ako: C(3,2) = 3 kombinace
+                const combos2 = [];
+                for (let i = 0; i < gOdds.length; i++) {
+                    for (let j = i + 1; j < gOdds.length; j++) {
+                        combos2.push({ a: i + 1, b: j + 1, odds: gOdds[i] * gOdds[j] });
+                    }
+                }
+                // 3Ako: 1 kombinace
+                const odds3 = gOdds.reduce((a, o) => a * o, 1);
 
-            // League profile – historically high-scoring
-            var hi = ['eredivisie','bundesliga','austria','swiss super','allsvenskan',
-                       'eliteserien','j1 league','j-league','j.league','k league',
-                       'mls','a-league','eerste divisie','super lig','jupiler'];
-            var med = ['premier league','la liga','serie a','ligue 1',
-                       'champions league','europa league','championship',
-                       'liga portugal','segunda','super league','premiership'];
-            var lo = ['ligue 2','serie c','national league','league one','league two'];
-
-            if (hi.some(function(l) { return league.indexOf(l) !== -1; })) score += 10;
-            else if (med.some(function(l) { return league.indexOf(l) !== -1; })) score += 4;
-            if (lo.some(function(l) { return league.indexOf(l) !== -1; })) score -= 6;
-
-            // Tip relevance
-            if (/over\s*2[.,]5/i.test(tip) || /ov\s*2[.,]5/i.test(tip)) score += 6;
-            else if (/btts|gg|oba.*sk[oó]r/i.test(tip)) score += 4;
-
-            return score;
-        }
-
-        function selectBestOver25(matches, maxCount) {
-            maxCount = maxCount || 6;
-            matches = matches.filter(isLeagueAllowed);
-            var scored = matches.map(function(m) {
-                return { m: m, s: scoreOver25(m) };
-            });
-            scored.sort(function(a, b) { return b.s - a.s; });
-
-            // Confidence threshold – keep only reasonably safe picks
-            var minScore = 30;
-            var selected = scored.filter(function(x) { return x.s >= minScore; });
-            if (selected.length > maxCount) selected = selected.slice(0, maxCount);
-            // Fallback: if too few pass, take the top N anyway
-            if (selected.length < maxCount && scored.length > selected.length) {
-                selected = scored.slice(0, Math.min(maxCount, scored.length));
-            }
-            return selected.map(function(x) { return x.m; });
-        }
-
-        function buildGroups(matches) {
-            matches = selectBestOver25(matches, 6);
-            var map = new Map();
-            var groupId = 0;
-            matches.forEach(function(m, idx) {
-                var g = m.group || (Math.floor(idx / 2) + 1);
-                if (!map.has(g)) { map.set(g, []); groupId++; }
-                map.get(g).push({ league: m.league, teams: m.match, tip: m.tip, odds: parseOdds(m.odds) });
-            });
-            var result = [];
-            map.forEach(function(ms, g) {
-                result.push({ name: 'Group ' + g, matches: ms });
-            });
-            return result;
-        }
-
-        function render(groups) {
-            var groupOdds = groups.map(function(g) {
-                return g.matches.reduce(function(a, m) { return a * m.odds; }, 1);
-            });
-            var totalMax = groupOdds.reduce(function(a, o) { return a * o; }, 1);
-            var minCombo = Math.min.apply(null, groupOdds);
-
-            var html = '';
-            groups.forEach(function(group, gi) {
-                html += '<div class="group"><div class="group-header">';
-                html += '<span class="group-name">' + group.name + '</span>';
-                html += '<span class="group-odds">Odds: ' + groupOdds[gi].toFixed(2) + '</span>';
-                html += '</div><div class="group-matches">';
-                group.matches.forEach(function(m) {
-                    html += '<div class="match">';
-                    html += '<div class="match-league">' + m.league + '</div>';
-                    html += '<div><span class="match-name">' + m.teams + '</span></div>';
-                    html += '<div class="match-pick">';
-                    html += '<span class="pick-badge">' + m.tip + '</span>';
-                    html += '<span class="match-odds">' + m.odds.toFixed(2) + '</span>';
+                // Render skupin
+                let html = '<div class="ticket-groups">';
+                groups.forEach((g, gi) => {
+                    html += '<div class="group">';
+                    html += '<div class="group-header">';
+                    html += '<span class="group-name">' + g.name + '</span>';
+                    html += '<span class="group-odds">Kurz: ' + gOdds[gi].toFixed(2) + '</span>';
+                    html += '</div><div class="group-matches">';
+                    g.matches.forEach(m => {
+                        html += '<div class="match">';
+                        html += '<div class="match-league">' + m.league + '</div>';
+                        html += '<div class="match-name">' + m.teams + '</div>';
+                        html += '<div class="match-pick">';
+                        html += '<span class="pick-badge">' + m.tip + '</span>';
+                        html += '<span class="match-odds">' + m.odds.toFixed(2) + '</span>';
+                        html += '</div></div>';
+                    });
                     html += '</div></div>';
                 });
-                html += '</div></div>';
-            });
-            document.getElementById('groups').innerHTML = html;
+                html += '</div>';
 
-            var s = '';
-            s += '<div class="summary-row"><span>Stake</span><span class="summary-value">$' + STAKE + '</span></div>';
-            s += '<div class="summary-row"><span>Groups</span><span class="summary-value">' + groups.length + '</span></div>';
-            s += '<div class="summary-row"><span>Total Odds (min\u2013max)</span><span class="summary-value">' + minCombo.toFixed(2) + ' \u2013 ' + totalMax.toFixed(2) + '</span></div>';
-            s += '<div class="summary-row highlight"><span>Potential Win</span><span class="summary-value win">$' + (STAKE * minCombo).toFixed(0) + ' \u2013 $' + (STAKE * totalMax).toFixed(0) + '</span></div>';
-            document.getElementById('summary').innerHTML = s;
+                // Kalkulacka
+                html += '<div class="ticket-summary">';
 
-            document.getElementById('content').style.display = '';
+                // 2Ako sekce
+                html += '<div class="summary-section">';
+                html += '<div class="summary-title">2Ako – ' + combos2.length + '× $' + STAKE_2AKO + ' = $' + (combos2.length * STAKE_2AKO) + '</div>';
+                combos2.forEach(c => {
+                    const win = (STAKE_2AKO * c.odds).toFixed(2);
+                    html += '<div class="summary-row"><span>Sk.' + c.a + ' + Sk.' + c.b + ' (kurz ' + c.odds.toFixed(2) + ')</span><span class="summary-value">$' + win + '</span></div>';
+                });
+                const max2Win = combos2.reduce((a, c) => a + STAKE_2AKO * c.odds, 0);
+                html += '<div class="summary-row"><span>Pokud všechny 3 sk. ✓</span><span class="summary-value">$' + max2Win.toFixed(2) + '</span></div>';
+                html += '</div>';
+
+                // 3Ako sekce
+                html += '<div class="summary-section">';
+                html += '<div class="summary-title">3Ako – vklad $' + STAKE_3AKO + '</div>';
+                const win3 = (STAKE_3AKO * odds3).toFixed(2);
+                html += '<div class="summary-row"><span>Sk.1 + Sk.2 + Sk.3 (kurz ' + odds3.toFixed(2) + ')</span><span class="summary-value">$' + win3 + '</span></div>';
+                html += '</div>';
+
+                // Celkem
+                const totalStake = combos2.length * STAKE_2AKO + STAKE_3AKO;
+                const totalMaxWin = max2Win + STAKE_3AKO * odds3;
+                html += '<div class="summary-row total"><span>Celkový vklad</span><span class="summary-value">$' + totalStake.toFixed(0) + '</span></div>';
+                html += '<div class="summary-row total"><span>Max. výhra (vše ✓)</span><span class="summary-value win">$' + totalMaxWin.toFixed(2) + '</span></div>';
+
+                html += '</div>';
+
+                content.innerHTML = html;
+            } catch (e) {
+                content.innerHTML = '<div class="ticket-error">⚠️ Nepodařilo se načíst zápasy: ' + e.message + '</div>';
+            }
         }
 
-        fetch(HOT_JSON_URL, { cache: 'no-store' })
-            .then(function(r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.text(); })
-            .then(function(text) {
-                var fixed = text.replace(/\}[\s\r\n]*\{/g, '},{');
-                var data = JSON.parse(fixed);
-                var groups = buildGroups(data);
-                document.getElementById('loading').style.display = 'none';
-                render(groups);
-            })
-            .catch(function(e) {
-                document.getElementById('loading').style.display = 'none';
-                var el = document.getElementById('error');
-                el.style.display = '';
-                el.textContent = '\u26a0\ufe0f Failed to load matches: ' + e.message;
-            });
+        load();
     </script>
 </body>
 </html>
