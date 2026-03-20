@@ -14,11 +14,11 @@ const API_KEY = process.env.API_FOOTBALL_KEY1;
 if (!API_KEY) { console.error('Chybi API_FOOTBALL_KEY1 env promenna.'); process.exit(1); }
 
 const FOOTBALL_API = 'https://v3.football.api-sports.io';
-const MIN_ODDS = 2.2;
+const MIN_ODDS = 2.0;
 const MAX_ODDS = 3.0;
 const PICK_COUNT = 6;
 const MIN_SCORED = 1.3;
-const MIN_CONCEDED = 1.5;
+const MIN_CONCEDED = 1.3;
 const EXCLUDED_COUNTRIES = new Set(['Russia', 'Belarus']);
 const BLOCKED_AFRICAN = new Set([
     'Algeria', 'Angola', 'Benin', 'Botswana', 'Burkina-Faso', 'Burundi', 'Cameroon',
