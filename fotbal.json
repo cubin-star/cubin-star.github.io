@@ -1,20 +1,20 @@
 [
   {
-    "League": "UEFA Europa League",
-    "Match": "Real Betis vs Panathinaikos",
+    "League": "Segunda División",
+    "Match": "Huesca vs Almeria",
     "Tip": "Over 2.5",
-    "Odds": "1.88"
+    "Odds": "1.99"
   },
   {
-    "League": "Liga Nacional",
-    "Match": "Xelajú vs Municipal",
+    "League": "National 1",
+    "Match": "Versailles vs Fleury 91",
     "Tip": "Over 2.5",
-    "Odds": "2.15"
+    "Odds": "1.99"
   },
   {
-    "League": "Birinci Dasta",
-    "Match": "Difai Ağsu vs Cəbrayıl",
+    "League": "Championship",
+    "Match": "Partick vs ST Johnstone",
     "Tip": "Over 2.5",
-    "Odds": "1.82"
+    "Odds": "1.87"
   }
 ]
