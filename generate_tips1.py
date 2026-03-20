@@ -1,16 +1,15 @@
 """
-Ultimate Football Overs - Daily Tip Generator v11 (random selection)
+Ultimate Football Overs - Daily Tip Generator v12 (weighted selection)
 
-Logika:
+Logika (portovano z fetch-matches.mjs):
   1. Blacklist (youth/reserve/amateur/women/esports)
-  2. Kurzy Over 2.5 v rozmezi 1.80-2.20
-  3. Scoring z predictions API (pro info/log):
-     expectedGoals = (recentAttack+recentDefWeak)/2 * 0.6
-                   + (seasonAttack+seasonDefWeak)/2 * 0.4
-     + h2hBonus (>2.5 -> +0.3, >2.0 -> +0.1)
-     + apiBonus (under_over == +2.5/+3.5 -> +0.4)
-  4. Nahodny vyber 5 zapasu z cele kvalifikovane mnoziny, split 3+2
-  5. Fallback: vzdy 5 zapasu (uvolni filtr pokud chybi)
+  2. Kurzy Over 2.5 v rozmezi 1.80-2.00
+  3. Goal criteria: oba tymy 1.3+ golu/zapas, aspon jeden inkasuje 1.3+
+  4. Strely a xG z poslednich 10 zapasu
+  5. Vazeny nahodny vyber: vaha = prumer golu ligy * prumer xG zapasu
+     - kazdy zapas z jine ligy
+  6. Fallback: evropske prvni ligy, pak pool (unikatni ligy)
+  7. 5 zapasu -> split 3+2
 
 API: https://www.api-football.com/ (7500 req/day)
 Env: API_FOOTBALL_KEY1
@@ -32,13 +31,16 @@ from datetime import datetime, timezone, timedelta
 API_KEY = os.environ.get("API_FOOTBALL_KEY1", "")
 BASE_URL = "https://v3.football.api-sports.io"
 MIN_ODDS = 1.80
-MAX_ODDS = 2.20
+MAX_ODDS = 2.00
+MIN_SCORED = 1.3
+MIN_CONCEDED = 1.3
 NUM_TIPS = 5
 DELAY = 0.5
 MAX_ANALYZE = 50
 OUTPUT_APP1 = "fotbal.json"
 OUTPUT_APP2 = "tips.json"
 request_count = 0
+team_stats_cache = {}
 
 EXCLUDED_COUNTRIES = {"russia", "belarus"}
 BLOCKED_AFRICAN = {
@@ -106,6 +108,8 @@ def fetch_fixtures(date_str):
         fixtures[fid] = {
             "home": f.get("teams", {}).get("home", {}).get("name", "?"),
             "away": f.get("teams", {}).get("away", {}).get("name", "?"),
+            "home_id": f.get("teams", {}).get("home", {}).get("id", 0),
+            "away_id": f.get("teams", {}).get("away", {}).get("id", 0),
             "league": f.get("league", {}).get("name", "?"),
             "country": f.get("league", {}).get("country", "?"),
             "league_id": f.get("league", {}).get("id", 0),
@@ -145,6 +149,56 @@ def fetch_prediction(fixture_id):
     return resp[0] if resp else {}
 
 
+def fetch_team_last_fixtures(team_id, count=10):
+    time.sleep(DELAY)
+    data = api_get("fixtures", {"team": str(team_id), "last": str(count), "status": "FT"})
+    return data.get("response", [])
+
+
+def fetch_fixture_stats(fixture_id):
+    time.sleep(DELAY)
+    data = api_get("fixtures/statistics", {"fixture": str(fixture_id)})
+    return data.get("response", [])
+
+
+def get_team_shooting_stats(team_id):
+    if team_id in team_stats_cache:
+        return team_stats_cache[team_id]
+    last_fixtures = fetch_team_last_fixtures(team_id, 10)
+    total_shots = 0
+    total_shots_on = 0
+    total_xg = 0
+    games = 0
+    for fix in last_fixtures:
+        stats = fetch_fixture_stats(fix["fixture"]["id"])
+        team_stats = None
+        for s in stats:
+            if s.get("team", {}).get("id") == team_id:
+                team_stats = s
+                break
+        if not team_stats:
+            continue
+        vals = team_stats.get("statistics", [])
+        def get_stat(stat_type):
+            for v in vals:
+                if v.get("type") == stat_type:
+                    try:
+                        return float(v.get("value", 0) or 0)
+                    except (ValueError, TypeError):
+                        return 0.0
+            return 0.0
+        total_shots += get_stat("Total Shots")
+        total_shots_on += get_stat("Shots on Goal")
+        total_xg += get_stat("Expected Goals")
+        games += 1
+    if games > 0:
+        result = {"shots": total_shots / games, "shotsOn": total_shots_on / games, "xg": total_xg / games, "games": games}
+    else:
+        result = {"shots": 0, "shotsOn": 0, "xg": 0, "games": 0}
+    team_stats_cache[team_id] = result
+    return result
+
+
 # ===== FILTRY =====
 
 def is_blocked_league(name):
@@ -154,7 +208,14 @@ def is_blocked_league(name):
     ))
 
 
-# ===== SCORING (simplified - same as fetch-matches.mjs) =====
+def is_second_tier(name):
+    return bool(re.search(
+        r"\b(2|II|segunda|championship|league two|league one|serie b|ligue 2|2\. liga|2\. bundesliga|eerste divisie|second|third|cup|pokal|coupe|copa|taca)\b",
+        name, re.IGNORECASE
+    ))
+
+
+# ===== GOAL CRITERIA (from fetch-matches.mjs) =====
 
 def _sf(val, default=0.0):
     try:
@@ -163,47 +224,31 @@ def _sf(val, default=0.0):
         return default
 
 
-def score_by_team_stats(pred):
+def meets_goal_criteria(pred):
+    """Both teams score >=1.3 g/match AND at least one concedes >=1.3 g/match."""
     home = pred.get("teams", {}).get("home", {})
     away = pred.get("teams", {}).get("away", {})
     if not home or not away:
-        return {"total": 0, "detail": "no data"}
+        return False, {}
 
-    h_for5 = _sf(home.get("last_5", {}).get("goals", {}).get("for", {}).get("average"))
-    h_agn5 = _sf(home.get("last_5", {}).get("goals", {}).get("against", {}).get("average"))
-    a_for5 = _sf(away.get("last_5", {}).get("goals", {}).get("for", {}).get("average"))
-    a_agn5 = _sf(away.get("last_5", {}).get("goals", {}).get("against", {}).get("average"))
+    h_for = _sf(home.get("league", {}).get("goals", {}).get("for", {}).get("average", {}).get("total")) or \
+            _sf(home.get("last_5", {}).get("goals", {}).get("for", {}).get("average"))
+    a_for = _sf(away.get("league", {}).get("goals", {}).get("for", {}).get("average", {}).get("total")) or \
+            _sf(away.get("last_5", {}).get("goals", {}).get("for", {}).get("average"))
+    h_agn = _sf(home.get("league", {}).get("goals", {}).get("against", {}).get("average", {}).get("total")) or \
+            _sf(home.get("last_5", {}).get("goals", {}).get("against", {}).get("average"))
+    a_agn = _sf(away.get("league", {}).get("goals", {}).get("against", {}).get("average", {}).get("total")) or \
+            _sf(away.get("last_5", {}).get("goals", {}).get("against", {}).get("average"))
 
-    h_for_s = _sf(home.get("league", {}).get("goals", {}).get("for", {}).get("average", {}).get("total")) or h_for5
-    h_agn_s = _sf(home.get("league", {}).get("goals", {}).get("against", {}).get("average", {}).get("total")) or h_agn5
-    a_for_s = _sf(away.get("league", {}).get("goals", {}).get("for", {}).get("average", {}).get("total")) or a_for5
-    a_agn_s = _sf(away.get("league", {}).get("goals", {}).get("against", {}).get("average", {}).get("total")) or a_agn5
+    if h_for < MIN_SCORED or a_for < MIN_SCORED:
+        return False, {}
+    if h_agn < MIN_CONCEDED and a_agn < MIN_CONCEDED:
+        return False, {}
 
-    recent_attack = h_for5 + a_for5
-    recent_def_weak = h_agn5 + a_agn5
-    season_attack = h_for_s + a_for_s
-    season_def_weak = h_agn_s + a_agn_s
-
-    expected_recent = (recent_attack + recent_def_weak) / 2
-    expected_season = (season_attack + season_def_weak) / 2
-    expected_goals = expected_recent * 0.6 + expected_season * 0.4
-
-    h2h = pred.get("h2h") or []
-    h2h_avg = 0.0
-    if h2h:
-        total_g = sum((g.get("goals", {}).get("home", 0) or 0) + (g.get("goals", {}).get("away", 0) or 0) for g in h2h)
-        h2h_avg = total_g / len(h2h)
-    h2h_bonus = 0.3 if h2h_avg > 2.5 else (0.1 if h2h_avg > 2.0 else 0)
-
-    api_tip = pred.get("predictions", {}).get("under_over", "") or ""
-    api_bonus = 0.4 if api_tip in ("+2.5", "+3.5") else 0
-
-    total = expected_goals + h2h_bonus + api_bonus
-    detail = f"exp {expected_goals:.1f}g, L5atk {recent_attack:.1f}, H2H {h2h_avg:.1f}"
-    if api_tip in ("+2.5", "+3.5"):
-        detail += ", API"
-
-    return {"total": total, "detail": detail}
+    expected_goals = (h_for + a_for + h_agn + a_agn) / 2
+    detail = f"scored {h_for:.1f}/{a_for:.1f}, conceded {h_agn:.1f}/{a_agn:.1f} => {expected_goals:.2f}g"
+    return True, {"expectedGoals": expected_goals, "detail": detail,
+                  "h_for": h_for, "a_for": a_for, "h_agn": h_agn, "a_agn": a_agn}
 
 
 # ===== KANDIDATI + VYBER =====
@@ -266,78 +311,138 @@ def extract_candidates(odds_data, fixtures, min_odds=MIN_ODDS, max_odds=MAX_ODDS
     return candidates
 
 
-def enrich_and_score(candidates):
-    print(f"\n  Scoring {len(candidates)} candidates (predictions)...")
+def filter_by_goal_criteria(candidates):
+    """Filter candidates via predictions API: goal criteria from fetch-matches.mjs."""
+    print(f"\n  Analyza tymu (predictions) - {len(candidates)} candidates...")
     to_analyze = candidates[:MAX_ANALYZE]
-    scored = []
+    random.shuffle(to_analyze)
+    qualified = []
     for i, c in enumerate(to_analyze):
         print(f"  [{i+1}/{len(to_analyze)}] {c['Match'][:40]:.<42s}", end="")
         pred = fetch_prediction(c["fixture_id"])
         if pred:
-            sc = score_by_team_stats(pred)
-            c["score"] = sc["total"]
-            c["detail"] = sc["detail"]
-            print(f' score={sc["total"]:.2f} ({sc["detail"]})')
-            scored.append(c)
+            ok, info = meets_goal_criteria(pred)
+            if ok:
+                c["expectedGoals"] = info["expectedGoals"]
+                c["detail"] = info["detail"]
+                print(f" OK {info['detail']}")
+                qualified.append(c)
+            else:
+                print(" fail criteria")
         else:
             print(" no data")
-    return scored
+    return qualified
 
 
-def select_best_tips(scored, all_odds, fixtures, num=NUM_TIPS):
-    pool = list(scored)
-    used_matches = set()
+def enrich_shooting_stats(qualified, all_fixtures):
+    """Fetch xG and shots from last 10 games for each qualified match."""
+    if not qualified:
+        return
+    print(f"\n  Strely a xG (posledni zapasy)...")
+    for c in qualified:
+        fix = all_fixtures.get(c["fixture_id"])
+        if not fix:
+            continue
+        home_id = fix.get("home_id", 0)
+        away_id = fix.get("away_id", 0)
+        if not home_id or not away_id:
+            continue
+        hs = get_team_shooting_stats(home_id)
+        as_ = get_team_shooting_stats(away_id)
+        c["homeStats"] = hs
+        c["awayStats"] = as_
+        print(f"    {c['Match']}")
+        print(f"      {fix['home']}: {hs['shots']:.1f} strel, {hs['shotsOn']:.1f} na branu, xG {hs['xg']:.2f} ({hs['games']} zapasu)")
+        print(f"      {fix['away']}: {as_['shots']:.1f} strel, {as_['shotsOn']:.1f} na branu, xG {as_['xg']:.2f} ({as_['games']} zapasu)")
 
-    # Random selection from the qualified pool
-    if len(pool) >= num:
-        selected = random.sample(pool, num)
-        print(f"  Random pick: {num} from {len(pool)} qualified candidates")
-    else:
-        selected = list(pool)
-        used_matches = {c["Match"] for c in selected}
-        print(f"  Pool has only {len(pool)}, need {num} - using fallbacks...")
 
-        # Fallback 1: widen odds to 1.50-3.00
+def weighted_pick(items, league_stats, count):
+    """Weighted random selection without replacement; weight = league avg goals * avg xG.
+    Each match from a different league."""
+    result = []
+    used_leagues = set()
+    remaining = list(items)
+    for _ in range(count):
+        if not remaining:
+            break
+        available = [m for m in remaining if m["League"] not in used_leagues]
+        if not available:
+            break
+        weights = []
+        for m in available:
+            lg_avg = (league_stats[m["League"]]["total"] / league_stats[m["League"]]["count"]
+                      if m["League"] in league_stats else 1.0)
+            xg_avg = ((m.get("homeStats", {}).get("xg", 0) + m.get("awayStats", {}).get("xg", 0)) or 1.0)
+            weights.append(lg_avg * xg_avg)
+        total_w = sum(weights)
+        if total_w <= 0:
+            total_w = 1.0
+        r = random.random() * total_w
+        idx = 0
+        for idx in range(len(weights)):
+            r -= weights[idx]
+            if r <= 0:
+                break
+        pick = available[idx]
+        result.append(pick)
+        used_leagues.add(pick["League"])
+        remaining.remove(pick)
+    return result
+
+
+def select_best_tips(qualified, pool, all_odds, fixtures, num=NUM_TIPS):
+    # League stats - average goals per match
+    league_stats = {}
+    for m in qualified:
+        lg = m["League"]
+        if lg not in league_stats:
+            league_stats[lg] = {"total": 0, "count": 0}
+        league_stats[lg]["total"] += m.get("expectedGoals", 0)
+        league_stats[lg]["count"] += 1
+
+    if league_stats:
+        ranking = sorted(league_stats.items(), key=lambda x: x[1]["total"] / x[1]["count"], reverse=True)
+        print(f"\n  Ligy podle prumeru golu:")
+        for name, s in ranking:
+            print(f"    {s['total']/s['count']:.2f} g/z  {name} ({s['count']} zapasu)")
+
+    # Weighted random selection from qualified
+    selected = weighted_pick(qualified, league_stats, num)
+    for m in selected:
+        m["_qualified"] = True
+    print(f"\n  Weighted pick: {len(selected)} from {len(qualified)} qualified")
+
+    # Fallback: fill remaining from pool (European top leagues first, unique leagues)
+    if len(selected) < num:
+        used_ids = {s["fixture_id"] for s in selected}
+        used_leagues = {s["League"] for s in selected}
+        remaining = [m for m in pool if m["fixture_id"] not in used_ids and m["League"] not in used_leagues]
+
+        # 1) European top leagues (not second tier)
+        euro_top = [m for m in remaining if m.get("is_european") and not is_second_tier(m["League"])]
+        random.shuffle(euro_top)
+        for m in euro_top:
+            if len(selected) >= num:
+                break
+            if m["League"] in used_leagues:
+                continue
+            selected.append(m)
+            used_leagues.add(m["League"])
+            used_ids.add(m["fixture_id"])
+
+        # 2) Any remaining from pool (unique league)
         if len(selected) < num:
-            print(f"  Fallback 1: widening odds to 1.50-3.00...")
-            wide_candidates = extract_candidates(all_odds, fixtures, min_odds=1.50, max_odds=3.00)
-            wide_candidates = [c for c in wide_candidates if c["Match"] not in used_matches]
-            wide_scored = enrich_and_score(wide_candidates[:20])
-            extra = [c for c in wide_scored if c["Match"] not in used_matches]
-            need = num - len(selected)
-            pick = random.sample(extra, min(need, len(extra))) if extra else []
-            for c in pick:
-                selected.append(c)
-                used_matches.add(c["Match"])
+            rest = [m for m in remaining if m["fixture_id"] not in used_ids and m["League"] not in used_leagues]
+            random.shuffle(rest)
+            for m in rest:
+                if len(selected) >= num:
+                    break
+                if m["League"] in used_leagues:
+                    continue
+                selected.append(m)
+                used_leagues.add(m["League"])
 
-        # Fallback 2: any fixture from 24h window
-        if len(selected) < num:
-            print(f"  Fallback 2: taking any fixture...")
-            available = []
-            for fid, fix in fixtures.items():
-                match_name = f"{fix['home']} vs {fix['away']}"
-                if match_name in used_matches:
-                    continue
-                country = fix.get("country", "").lower()
-                if country in EXCLUDED_COUNTRIES or country in BLOCKED_AFRICAN:
-                    continue
-                available.append({
-                    "League": fix["league"],
-                    "Match": match_name,
-                    "Tip": "Over 2.5",
-                    "Odds": "2.00",
-                    "fixture_id": fid,
-                    "league_id": fix["league_id"],
-                    "country": country,
-                    "is_european": country in EUROPEAN_COUNTRIES,
-                    "score": 0,
-                    "detail": "fallback",
-                })
-            need = num - len(selected)
-            pick = random.sample(available, min(need, len(available))) if available else []
-            for c in pick:
-                selected.append(c)
-                used_matches.add(c["Match"])
+        print(f"  Fallback: doplneno na {len(selected)} (evropske 1. ligy, pak pool, unikatni ligy)")
 
     # Shuffle before split so app assignment is also random
     random.shuffle(selected)
@@ -359,9 +464,9 @@ def main():
     today = now.strftime("%Y-%m-%d")
     tomorrow = (now + timedelta(days=1)).strftime("%Y-%m-%d")
 
-    print(f"== generate_tips1 v11 (random) ==")
+    print(f"== generate_tips1 v12 (weighted) ==")
     print(f"Time: {now.strftime('%Y-%m-%d %H:%M UTC')}")
-    print(f"Over 2.5 | odds {MIN_ODDS}-{MAX_ODDS}")
+    print(f"Over 2.5 | odds {MIN_ODDS}-{MAX_ODDS} | scored>={MIN_SCORED} conceded>={MIN_CONCEDED}")
     print(f"Output: {OUTPUT_APP1} (3) + {OUTPUT_APP2} (2)\n")
 
     # Fixtures
@@ -395,20 +500,16 @@ def main():
         print("No matches at all.")
         return
 
-    # Score
-    scored = enrich_and_score(candidates)
-    if not scored:
-        print("No matches scored.")
-        return
+    # Filter by goal criteria (predictions)
+    qualified = filter_by_goal_criteria(candidates)
+    print(f"\n  Splnuje kriteria: {len(qualified)}/{len(candidates)}")
 
-    # Top 10
-    ranked = sorted(scored, key=lambda x: x.get("score", 0), reverse=True)
-    print(f"\n  Top 10:")
-    for i, c in enumerate(ranked[:10], 1):
-        print(f"    {i}. [{c['League']}] {c['Match']} | {c['detail']} | score {c['score']:.2f}")
+    # Fetch xG and shots for qualified matches
+    if qualified:
+        enrich_shooting_stats(qualified, all_fixtures)
 
-    # Select (with fallbacks for always 5 tips)
-    app1_raw, app2_raw = select_best_tips(scored, all_odds, all_fixtures)
+    # Select (weighted pick + fallbacks for always 5 tips)
+    app1_raw, app2_raw = select_best_tips(qualified, candidates, all_odds, all_fixtures)
 
     def fmt(tips):
         return [{"League": t["League"], "Match": t["Match"], "Tip": t["Tip"], "Odds": t["Odds"]} for t in tips]
