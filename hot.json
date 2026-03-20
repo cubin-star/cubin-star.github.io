@@ -1,44 +1,50 @@
 [
   {
-    "league": "Liga I",
-    "match": "CFR 1907 Cluj - Rapid",
+    "league": "K League 2",
+    "match": "Cheonan City - Seoul E-Land FC",
     "tip": "Over 2.5",
-    "odds": "2.11",
-    "group": 1
-  },
-  {
-    "league": "2. Division",
-    "match": "Vendsyssel FF - Thisted FC",
-    "tip": "Over 2.5",
-    "odds": "2.08",
-    "group": 1
-  },
-  {
-    "league": "Premier Division",
-    "match": "Bohemians - Dundalk",
-    "tip": "Over 2.5",
-    "odds": "2.00",
-    "group": 2
-  },
-  {
-    "league": "National 1",
-    "match": "Gobelins - Rouen",
-    "tip": "Over 2.5",
-    "odds": "2.36",
-    "group": 2
+    "odds": "2.01",
+    "group": 1,
+    "qualified": true
   },
   {
     "league": "Primera B",
     "match": "Union Espanola - D. Puerto Montt",
     "tip": "Over 2.5",
-    "odds": "2.13",
-    "group": 3
+    "odds": "2.11",
+    "group": 1,
+    "qualified": true
   },
   {
-    "league": "Ekstraklasa",
-    "match": "Piast Gliwice - Radomiak Radom",
+    "league": "K3 League",
+    "match": "Jeonbuk Motors II - Siheung Citizen",
     "tip": "Over 2.5",
-    "odds": "2.06",
-    "group": 3
+    "odds": "2.02",
+    "group": 2,
+    "qualified": true
+  },
+  {
+    "league": "Liga I",
+    "match": "CFR 1907 Cluj - Rapid",
+    "tip": "Over 2.5",
+    "odds": "2.10",
+    "group": 2,
+    "qualified": true
+  },
+  {
+    "league": "J1 League",
+    "match": "Fagiano Okayama - V-varen Nagasaki",
+    "tip": "Over 2.5",
+    "odds": "2.04",
+    "group": 3,
+    "qualified": true
+  },
+  {
+    "league": "J2/J3 League",
+    "match": "Sagamihara - Yokohama FC",
+    "tip": "Over 2.5",
+    "odds": "2.09",
+    "group": 3,
+    "qualified": true
   }
 ]
