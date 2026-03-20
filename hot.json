@@ -1,44 +1,44 @@
 [
   {
+    "league": "2. Division",
+    "match": "Vendsyssel FF - Thisted FC",
+    "tip": "Over 2.5",
+    "odds": "2.08",
+    "group": 1
+  },
+  {
+    "league": "1st Division",
+    "match": "Highbury - Black Leopards",
+    "tip": "Over 2.5",
+    "odds": "2.45",
+    "group": 1
+  },
+  {
     "league": "Primera B",
     "match": "Union Espanola - D. Puerto Montt",
     "tip": "Over 2.5",
-    "odds": "2.23",
-    "group": 1
-  },
-  {
-    "league": "Premier League",
-    "match": "Kyzyl-Zhar - Irtysh",
-    "tip": "Over 2.5",
-    "odds": "2.24",
-    "group": 1
-  },
-  {
-    "league": "Torneo Federal A",
-    "match": "Sportivo Belgrano - 9 de Julio Rafaela",
-    "tip": "Over 2.5",
-    "odds": "2.43",
+    "odds": "2.13",
     "group": 2
   },
   {
-    "league": "Primera B",
-    "match": "Leones FC - Internacional Palmira",
+    "league": "Liga I",
+    "match": "CFR 1907 Cluj - Rapid",
     "tip": "Over 2.5",
-    "odds": "2.21",
+    "odds": "2.10",
     "group": 2
   },
   {
-    "league": "Serie C - Girone A",
-    "match": "Virtus Verona - Albinoleffe",
+    "league": "Premier Division",
+    "match": "Bohemians - Dundalk",
     "tip": "Over 2.5",
-    "odds": "2.23",
+    "odds": "2.00",
     "group": 3
   },
   {
-    "league": "Primera División - Apertura",
-    "match": "Cerro Largo - Deportivo Maldonado",
+    "league": "Primera B Metropolitana",
+    "match": "Ituzaingó - Talleres Remedios",
     "tip": "Over 2.5",
-    "odds": "2.28",
+    "odds": "2.83",
     "group": 3
   }
 ]
