@@ -316,6 +316,7 @@ async function main() {
 
     // Vazeny nahodny vyber z qualified
     const selected = weightedPick(qualified, leagueStats, PICK_COUNT);
+    for (const m of selected) m._qualified = true;
 
     // Fallback: pokud neni 6, doplnit z evropskych prvnich lig, pak z poolu
     if (selected.length < PICK_COUNT) {
@@ -355,7 +356,7 @@ async function main() {
 
     // Rozdeleni do 3 kurzove vyrovnanych skupin po 2
     const grouped = balanceGroups(selected);
-    const output = grouped.map(m => ({ league: m.league, match: m.match, tip: m.tip, odds: m.odds, group: m.group }));
+    const output = grouped.map(m => ({ league: m.league, match: m.match, tip: m.tip, odds: m.odds, group: m.group, qualified: !!m._qualified }));
     writeFileSync('hot.json', JSON.stringify(output, null, 2), 'utf-8');
 
     console.log(output.length + ' zapasu -> hot.json (' + reqCount + ' API req)\n');
