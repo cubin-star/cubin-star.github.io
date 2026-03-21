@@ -294,8 +294,8 @@ function generatePairings(indices) {
 async function main() {
     console.log('Kombik Bot - fetch-matches\n');
     const now = new Date();
-    const maxTime = new Date(now.getTime() + 12 * 60 * 60 * 1000);
-    console.log('Okno: ' + now.toUTCString() + ' -> ' + maxTime.toUTCString() + ' (12h)\n');
+    const maxTime = new Date(now.getTime() + 24 * 60 * 60 * 1000);
+    console.log('Okno: ' + now.toUTCString() + ' -> ' + maxTime.toUTCString() + ' (24h)\n');
 
     const today = fmtDate(now), tomorrow = fmtDate(maxTime);
     const dates = [today]; if (tomorrow !== today) dates.push(tomorrow);
