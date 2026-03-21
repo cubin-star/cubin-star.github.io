@@ -20,6 +20,7 @@ const PICK_COUNT = 6;
 const MAX_SCORED = 1.0;
 const MIN_CONCEDED_STRICT = 1.5;
 const MIN_CONCEDED_RELAXED = 1.3;
+const MIN_PLAYED = 5;
 const EXCLUDED_COUNTRIES = new Set(['Russia', 'Belarus']);
 const BLOCKED_AFRICAN = new Set([
     'Algeria', 'Angola', 'Benin', 'Botswana', 'Burkina-Faso', 'Burundi', 'Cameroon',
@@ -293,8 +294,8 @@ function generatePairings(indices) {
 async function main() {
     console.log('Kombik Bot - fetch-matches\n');
     const now = new Date();
-    const maxTime = new Date(now.getTime() + 12 * 60 * 60 * 1000);
-    console.log('Okno: ' + now.toUTCString() + ' -> ' + maxTime.toUTCString() + ' (12h)\n');
+    const maxTime = new Date(now.getTime() + 24 * 60 * 60 * 1000);
+    console.log('Okno: ' + now.toUTCString() + ' -> ' + maxTime.toUTCString() + ' (24h)\n');
 
     const today = fmtDate(now), tomorrow = fmtDate(maxTime);
     const dates = [today]; if (tomorrow !== today) dates.push(tomorrow);
@@ -358,6 +359,12 @@ async function main() {
             const home = pred.teams?.home;
             const away = pred.teams?.away;
             if (home && away) {
+                const hPlayed = parseInt(home.league?.fixtures?.played?.total) || 0;
+                const aPlayed = parseInt(away.league?.fixtures?.played?.total) || 0;
+                if (hPlayed < MIN_PLAYED || aPlayed < MIN_PLAYED) {
+                    console.log('   [SKIP] ' + m.match + ' | malo zapasu: ' + hPlayed + '/' + aPlayed);
+                    continue;
+                }
                 const hFor = parseFloat(home.league?.goals?.for?.average?.total) || parseFloat(home.last_5?.goals?.for?.average) || 0;
                 const aFor = parseFloat(away.league?.goals?.for?.average?.total) || parseFloat(away.last_5?.goals?.for?.average) || 0;
                 if (hFor < MAX_SCORED || aFor < MAX_SCORED) {
