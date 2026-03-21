@@ -18,7 +18,8 @@ const MIN_ODDS = 2.0;
 const MAX_ODDS = 3.0;
 const PICK_COUNT = 6;
 const MIN_SCORED = 1.3;
-const MIN_CONCEDED = 1.3;
+const MIN_CONCEDED_STRICT = 1.5;
+const MIN_CONCEDED_RELAXED = 1.3;
 const EXCLUDED_COUNTRIES = new Set(['Russia', 'Belarus']);
 const BLOCKED_AFRICAN = new Set([
     'Algeria', 'Angola', 'Benin', 'Botswana', 'Burkina-Faso', 'Burundi', 'Cameroon',
@@ -128,8 +129,8 @@ async function getTeamShootingStats(teamId) {
     return result;
 }
 
-// Oba tymy daji 1.3+ golu/zapas && aspon jeden inkasuje 1.3+ golu/zapas
-function meetsGoalCriteria(pred) {
+// Oba tymy daji 1.3+ golu/zapas && aspon jeden inkasuje minConceded+ golu/zapas
+function meetsGoalCriteria(pred, minConceded) {
     const home = pred.teams?.home;
     const away = pred.teams?.away;
     if (!home || !away) return false;
@@ -140,7 +141,7 @@ function meetsGoalCriteria(pred) {
     const aAgn = parseFloat(away.league?.goals?.against?.average?.total) || parseFloat(away.last_5?.goals?.against?.average) || 0;
 
     if (hFor < MIN_SCORED || aFor < MIN_SCORED) return false;
-    if (hAgn < MIN_CONCEDED && aAgn < MIN_CONCEDED) return false;
+    if (hAgn < minConceded && aAgn < minConceded) return false;
     return true;
 }
 
@@ -245,7 +246,7 @@ async function main() {
                 for (const bm of entry.bookmakers || []) { for (const bet of bm.bets || []) { for (const v of bet.values || []) {
                     if (v.value !== 'Over 2.5') continue;
                     const odd = parseFloat(v.odd); if (isNaN(odd) || odd < MIN_ODDS || odd > MAX_ODDS) continue;
-                    if (!candidates.has(matchKey)) candidates.set(matchKey, { fixtureId: matchKey, league: lg.name, country: lg.country, match: fix.teams.home.name + ' - ' + fix.teams.away.name, tip: 'Over 2.5', allOdds: [], kickoff: fix.fixture.date });
+                    if (!candidates.has(matchKey)) candidates.set(matchKey, { fixtureId: matchKey, league: lg.name, country: lg.country, match: fix.teams.home.name + ' - ' + fix.teams.away.name, tip: 'Over 2.5', allOdds: [] });
                     candidates.get(matchKey).allOdds.push(odd);
                 } } }
             }
@@ -258,32 +259,45 @@ async function main() {
     }));
     console.log('Kandidatu: ' + pool.length + ' s Over 2.5 (kurz ' + MIN_ODDS + '-' + MAX_ODDS + ')');
 
-    // Filtrace pres predictions: oba tymy 1.3+ golu, aspon jeden 1.5+ inkasovanych
+    // Filtrace pres predictions: 1. kolo >= 1.5 obdrzenych, 2. kolo >= 1.3
     shuffle(pool);
     console.log('Analyza tymu (predictions)...\n');
-    const qualified = [];
+    const qualified15 = [];
+    const qualified13 = [];
     for (const m of pool) {
         const pred = await getPrediction(m.fixtureId);
-        if (pred && meetsGoalCriteria(pred)) {
-            const home = pred.teams.home;
-            const away = pred.teams.away;
-            const hFor = parseFloat(home.league?.goals?.for?.average?.total) || parseFloat(home.last_5?.goals?.for?.average) || 0;
-            const aFor = parseFloat(away.league?.goals?.for?.average?.total) || parseFloat(away.last_5?.goals?.for?.average) || 0;
-            const hAgn = parseFloat(home.league?.goals?.against?.average?.total) || parseFloat(home.last_5?.goals?.against?.average) || 0;
-            const aAgn = parseFloat(away.league?.goals?.against?.average?.total) || parseFloat(away.last_5?.goals?.against?.average) || 0;
-            const expG = (hFor + aFor + hAgn + aAgn) / 2;
-            console.log('   OK ' + m.match + ' | scored ' + hFor.toFixed(1) + '/' + aFor.toFixed(1) + ', conceded ' + hAgn.toFixed(1) + '/' + aAgn.toFixed(1) + ' => ' + expG.toFixed(2) + 'g');
-            qualified.push({ ...m, expectedGoals: expG });
+        if (pred) {
+            const home = pred.teams?.home;
+            const away = pred.teams?.away;
+            if (home && away) {
+                const hFor = parseFloat(home.league?.goals?.for?.average?.total) || parseFloat(home.last_5?.goals?.for?.average) || 0;
+                const aFor = parseFloat(away.league?.goals?.for?.average?.total) || parseFloat(away.last_5?.goals?.for?.average) || 0;
+                if (hFor >= MIN_SCORED && aFor >= MIN_SCORED) {
+                    const hAgn = parseFloat(home.league?.goals?.against?.average?.total) || parseFloat(home.last_5?.goals?.against?.average) || 0;
+                    const aAgn = parseFloat(away.league?.goals?.against?.average?.total) || parseFloat(away.last_5?.goals?.against?.average) || 0;
+                    const expG = (hFor + aFor + hAgn + aAgn) / 2;
+                    const entry = { ...m, expectedGoals: expG };
+                    if (hAgn >= MIN_CONCEDED_STRICT || aAgn >= MIN_CONCEDED_STRICT) {
+                        console.log('   [1.5] ' + m.match + ' | scored ' + hFor.toFixed(1) + '/' + aFor.toFixed(1) + ', conceded ' + hAgn.toFixed(1) + '/' + aAgn.toFixed(1) + ' => ' + expG.toFixed(2) + 'g');
+                        qualified15.push(entry);
+                    } else if (hAgn >= MIN_CONCEDED_RELAXED || aAgn >= MIN_CONCEDED_RELAXED) {
+                        console.log('   [1.3] ' + m.match + ' | scored ' + hFor.toFixed(1) + '/' + aFor.toFixed(1) + ', conceded ' + hAgn.toFixed(1) + '/' + aAgn.toFixed(1) + ' => ' + expG.toFixed(2) + 'g');
+                        qualified13.push(entry);
+                    }
+                }
+            }
         }
         await sleep(350);
     }
-    console.log('\nSplnuje kriteria: ' + qualified.length + '/' + pool.length);
+    console.log('\n1. kolo (>= 1.5 obdrzenych): ' + qualified15.length + '/' + pool.length);
+    console.log('2. kolo (>= 1.3 obdrzenych): ' + qualified13.length + '/' + pool.length);
 
     // Stazeni xG a strel z poslednich 10 zapasu pro kazdy kvalifikovany tym
-    if (qualified.length > 0) {
+    const allQualified = [...qualified15, ...qualified13];
+    if (allQualified.length > 0) {
         console.log('\nStrely a xG (posledni zapasy)...\n');
 
-        for (const m of qualified) {
+        for (const m of allQualified) {
             const fix = fixtureMap.get(m.fixtureId);
             if (!fix) continue;
             const homeId = fix.teams.home.id;
@@ -300,7 +314,7 @@ async function main() {
 
     // Statistiky lig - prumerne goly na zapas
     const leagueStats = new Map();
-    for (const m of qualified) {
+    for (const m of allQualified) {
         if (!leagueStats.has(m.league)) leagueStats.set(m.league, { total: 0, count: 0 });
         const s = leagueStats.get(m.league);
         s.total += m.expectedGoals;
@@ -314,9 +328,22 @@ async function main() {
         leagueRanking.forEach(l => console.log('   ' + l.avg.toFixed(2) + ' g/z  ' + l.name + ' (' + l.count + ' zapasu)'));
     }
 
-    // Vazeny nahodny vyber z qualified
-    const selected = weightedPick(qualified, leagueStats, PICK_COUNT);
-    for (const m of selected) m._qualified = true;
+    // 1. kolo vyberu: z qualified15 (obdrzene >= 1.5)
+    const selected = [];
+    console.log('\n--- 1. kolo vyberu (obdrzene >= 1.5) ---');
+    const picked15 = weightedPick(qualified15, leagueStats, PICK_COUNT);
+    for (const m of picked15) { m._qualified15 = true; selected.push(m); }
+    console.log('Vybrano z 1. kola: ' + selected.length + ' zapasu');
+
+    // 2. kolo vyberu: pokud < 6, doplnit z qualified13 (obdrzene >= 1.3)
+    if (selected.length < PICK_COUNT && qualified13.length > 0) {
+        console.log('\n--- 2. kolo vyberu (obdrzene >= 1.3) ---');
+        const usedLeagues2 = new Set(selected.map(s => s.league));
+        const available13 = qualified13.filter(m => !usedLeagues2.has(m.league));
+        const picked13 = weightedPick(available13, leagueStats, PICK_COUNT - selected.length);
+        for (const m of picked13) { m._qualified13 = true; selected.push(m); }
+        console.log('Doplneno z 2. kola: ' + picked13.length + ', celkem: ' + selected.length);
+    }
 
     // Fallback: pokud neni 6, doplnit z evropskych prvnich lig, pak z poolu
     if (selected.length < PICK_COUNT) {
@@ -356,7 +383,7 @@ async function main() {
 
     // Rozdeleni do 3 kurzove vyrovnanych skupin po 2
     const grouped = balanceGroups(selected);
-    const output = grouped.map(m => ({ league: m.league, match: m.match, tip: m.tip, odds: m.odds, group: m.group, qualified: !!m._qualified, kickoff: m.kickoff }));
+    const output = grouped.map(m => ({ league: m.league, match: m.match, tip: m.tip, odds: m.odds, group: m.group, qualified15: !!m._qualified15, qualified13: !!m._qualified13 }));
     writeFileSync('hot.json', JSON.stringify(output, null, 2), 'utf-8');
 
     console.log(output.length + ' zapasu -> hot.json (' + reqCount + ' API req)\n');
