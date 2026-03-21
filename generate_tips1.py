@@ -1,18 +1,24 @@
 """
-Ultimate Football Overs - Daily Tip Generator v12 (weighted selection)
+Ultimate Football Overs - Daily Tip Generator v13 (two-round selection)
 
 Logika (portovano z fetch-matches.mjs):
   1. Blacklist (youth/reserve/amateur/women/esports)
   2. Kurzy Over 2.5 v rozmezi 1.80-2.00
-  3. Goal criteria: oba tymy 1.3+ golu/zapas, aspon jeden inkasuje 1.3+
-  4. Strely a xG z poslednich 10 zapasu
-  5. Vazeny nahodny vyber: vaha = prumer golu ligy * prumer xG zapasu
+  3. Goal criteria: oba tymy 1.3+ vstrelenych golu/zapas
+  4. Strely a xG z poslednich 10 zapasu (cache fixture stats)
+  5. Dvoukolovy vyber (podle obdrzenych golu):
+     a) 1. kolo: zapasy kde aspon jeden tym inkasuje >= 1.5 g/z
+        - pokud >= 5: vyber 5 (vazenym nahodnym vyberem), konec
+     b) 2. kolo: zapasy kde aspon jeden tym inkasuje >= 1.3 g/z
+        - doplni zbyvajici mista do 5
+     c) Fallback: evropske prvni ligy, pak pool (unikatni ligy)
+  6. Vazeny nahodny vyber: vaha = prumer golu ligy * prumer xG zapasu
      - kazdy zapas z jine ligy
-  6. Fallback: evropske prvni ligy, pak pool (unikatni ligy)
   7. 5 zapasu -> split 3+2
 
-API: https://www.api-football.com/ (7500 req/day)
+API: https://www.api-football.com/ (7500 req/day, ~1500 pouzito)
 Env: API_FOOTBALL_KEY1
+Analyza: az 200 kandidatu, delay 0.3s, fixture stats cache
 
 Output:
   fotbal.json - 3 tips (Ultimate Football Overs)
@@ -33,14 +39,16 @@ BASE_URL = "https://v3.football.api-sports.io"
 MIN_ODDS = 1.80
 MAX_ODDS = 2.00
 MIN_SCORED = 1.3
-MIN_CONCEDED = 1.3
+MIN_CONCEDED_R1 = 1.5
+MIN_CONCEDED_R2 = 1.3
 NUM_TIPS = 5
-DELAY = 0.5
-MAX_ANALYZE = 50
+DELAY = 0.3
+MAX_ANALYZE = 200
 OUTPUT_APP1 = "fotbal.json"
 OUTPUT_APP2 = "tips.json"
 request_count = 0
 team_stats_cache = {}
+fixture_stats_cache = {}
 
 EXCLUDED_COUNTRIES = {"russia", "belarus"}
 BLOCKED_AFRICAN = {
@@ -156,9 +164,13 @@ def fetch_team_last_fixtures(team_id, count=10):
 
 
 def fetch_fixture_stats(fixture_id):
+    if fixture_id in fixture_stats_cache:
+        return fixture_stats_cache[fixture_id]
     time.sleep(DELAY)
     data = api_get("fixtures/statistics", {"fixture": str(fixture_id)})
-    return data.get("response", [])
+    result = data.get("response", [])
+    fixture_stats_cache[fixture_id] = result
+    return result
 
 
 def get_team_shooting_stats(team_id):
@@ -225,7 +237,7 @@ def _sf(val, default=0.0):
 
 
 def meets_goal_criteria(pred):
-    """Both teams score >=1.3 g/match AND at least one concedes >=1.3 g/match."""
+    """Both teams score >=1.3 g/match. Conceded stats are returned for two-round selection."""
     home = pred.get("teams", {}).get("home", {})
     away = pred.get("teams", {}).get("away", {})
     if not home or not away:
@@ -241,8 +253,6 @@ def meets_goal_criteria(pred):
             _sf(away.get("last_5", {}).get("goals", {}).get("against", {}).get("average"))
 
     if h_for < MIN_SCORED or a_for < MIN_SCORED:
-        return False, {}
-    if h_agn < MIN_CONCEDED and a_agn < MIN_CONCEDED:
         return False, {}
 
     expected_goals = (h_for + a_for + h_agn + a_agn) / 2
@@ -313,9 +323,10 @@ def extract_candidates(odds_data, fixtures, min_odds=MIN_ODDS, max_odds=MAX_ODDS
 
 def filter_by_goal_criteria(candidates):
     """Filter candidates via predictions API: goal criteria from fetch-matches.mjs."""
-    print(f"\n  Analyza tymu (predictions) - {len(candidates)} candidates...")
-    to_analyze = candidates[:MAX_ANALYZE]
-    random.shuffle(to_analyze)
+    print(f"\n  Analyza tymu (predictions) - {len(candidates)} candidates (max {MAX_ANALYZE})...")
+    shuffled = list(candidates)
+    random.shuffle(shuffled)
+    to_analyze = shuffled[:MAX_ANALYZE]
     qualified = []
     for i, c in enumerate(to_analyze):
         print(f"  [{i+1}/{len(to_analyze)}] {c['Match'][:40]:.<42s}", end="")
@@ -325,6 +336,8 @@ def filter_by_goal_criteria(candidates):
             if ok:
                 c["expectedGoals"] = info["expectedGoals"]
                 c["detail"] = info["detail"]
+                c["h_agn"] = info["h_agn"]
+                c["a_agn"] = info["a_agn"]
                 print(f" OK {info['detail']}")
                 qualified.append(c)
             else:
@@ -406,11 +419,43 @@ def select_best_tips(qualified, pool, all_odds, fixtures, num=NUM_TIPS):
         for name, s in ranking:
             print(f"    {s['total']/s['count']:.2f} g/z  {name} ({s['count']} zapasu)")
 
-    # Weighted random selection from qualified
-    selected = weighted_pick(qualified, league_stats, num)
-    for m in selected:
-        m["_qualified"] = True
-    print(f"\n  Weighted pick: {len(selected)} from {len(qualified)} qualified")
+    # --- Round 1: matches where at least one team concedes >= 1.5 g/match ---
+    round1 = [m for m in qualified
+              if max(m.get("h_agn", 0), m.get("a_agn", 0)) >= MIN_CONCEDED_R1]
+    print(f"\n  1. kolo (inkasovane >= {MIN_CONCEDED_R1}): {len(round1)} zapasu")
+
+    selected = []
+    if len(round1) >= num:
+        # Round 1 has enough – pick only from round 1
+        selected = weighted_pick(round1, league_stats, num)
+        for m in selected:
+            m["_qualified"] = True
+            m["_round"] = 1
+        print(f"  Weighted pick (1. kolo): {len(selected)} from {len(round1)}")
+    else:
+        # Take all round 1 picks first
+        selected = weighted_pick(round1, league_stats, min(len(round1), num))
+        for m in selected:
+            m["_qualified"] = True
+            m["_round"] = 1
+        print(f"  Weighted pick (1. kolo): {len(selected)} from {len(round1)}")
+
+        # --- Round 2: remaining qualified with conceded >= 1.3 (excluding round 1 picks) ---
+        if len(selected) < num:
+            used_ids_r = {s["fixture_id"] for s in selected}
+            used_leagues_r = {s["League"] for s in selected}
+            round2 = [m for m in qualified
+                      if m["fixture_id"] not in used_ids_r
+                      and m["League"] not in used_leagues_r
+                      and max(m.get("h_agn", 0), m.get("a_agn", 0)) >= MIN_CONCEDED_R2]
+            need = num - len(selected)
+            print(f"  2. kolo (inkasovane >= {MIN_CONCEDED_R2}): {len(round2)} zapasu, doplnuji {need}")
+            r2_picks = weighted_pick(round2, league_stats, need)
+            for m in r2_picks:
+                m["_qualified"] = True
+                m["_round"] = 2
+            selected.extend(r2_picks)
+            print(f"  Weighted pick (2. kolo): {len(r2_picks)} doplneno, celkem {len(selected)}")
 
     # Fallback: fill remaining from pool (European top leagues first, unique leagues)
     if len(selected) < num:
@@ -464,9 +509,9 @@ def main():
     today = now.strftime("%Y-%m-%d")
     tomorrow = (now + timedelta(days=1)).strftime("%Y-%m-%d")
 
-    print(f"== generate_tips1 v12 (weighted) ==")
+    print(f"== generate_tips1 v13 (two-round selection) ==")
     print(f"Time: {now.strftime('%Y-%m-%d %H:%M UTC')}")
-    print(f"Over 2.5 | odds {MIN_ODDS}-{MAX_ODDS} | scored>={MIN_SCORED} conceded>={MIN_CONCEDED}")
+    print(f"Over 2.5 | odds {MIN_ODDS}-{MAX_ODDS} | scored>={MIN_SCORED} | conceded R1>={MIN_CONCEDED_R1} R2>={MIN_CONCEDED_R2}")
     print(f"Output: {OUTPUT_APP1} (3) + {OUTPUT_APP2} (2)\n")
 
     # Fixtures
@@ -530,7 +575,8 @@ def main():
         json.dump(app2_tips, f, indent=2, ensure_ascii=False)
 
     print(f"\n  Written: {OUTPUT_APP1} ({len(app1_tips)}), {OUTPUT_APP2} ({len(app2_tips)})")
-    print(f"  API requests: {request_count}")
+    print(f"  API requests: {request_count} / 7500 ({request_count*100//7500}%)")
+    print(f"  Cache hits: {len(team_stats_cache)} teams, {len(fixture_stats_cache)} fixture stats")
 
 
 if __name__ == "__main__":
