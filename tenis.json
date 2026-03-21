@@ -1,21 +1,21 @@
 {
-  "updated_at": "20.03.2026 09:38",
+  "updated_at": "21.03.2026 09:25",
   "tips": [
     {
       "league": "WTA - WTA Miami, USA Women Singles",
-      "match": "Blinkova, Anna vs Mboko, Victoria",
+      "match": "Zheng, Qinwen vs Stephens, Sloane",
       "tip": "Over18.5",
-      "odds": "2.09",
-      "date": "20.03.2026",
-      "time": "16:00"
+      "odds": "1.84",
+      "date": "21.03.2026",
+      "time": "18:10"
     },
     {
       "league": "ATP - ATP Miami, USA Men Singles",
-      "match": "Fils, Arthur vs Blanch, Darwin",
-      "tip": "Over20.5",
+      "match": "Sakamoto, Rei vs Medvedev, Daniil",
+      "tip": "Over19.5",
       "odds": "1.86",
-      "date": "20.03.2026",
-      "time": "18:20"
+      "date": "21.03.2026",
+      "time": "20:20"
     }
   ]
 }
