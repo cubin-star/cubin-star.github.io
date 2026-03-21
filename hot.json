@@ -1,7 +1,7 @@
 [
   {
-    "league": "Segunda Liga",
-    "match": "Lusitânia Lourosa - Academico Viseu",
+    "league": "La Liga",
+    "match": "Levante - Oviedo",
     "tip": "Over 2.5",
     "odds": "2.15",
     "group": 1,
@@ -9,46 +9,46 @@
     "qualified13": false
   },
   {
-    "league": "First League",
-    "match": "Sutjeska - Mladost DG",
+    "league": "National 1",
+    "match": "Bourg-en-bresse 01 - Stade Briochin",
     "tip": "Over 2.5",
-    "odds": "2.05",
+    "odds": "2.19",
     "group": 1,
     "qualified15": true,
     "qualified13": false
   },
   {
-    "league": "League One",
-    "match": "Leyton Orient - Wycombe",
+    "league": "Primera División RFEF - Group 2",
+    "match": "Juventud Torremolinos - Sanluqueño",
     "tip": "Over 2.5",
-    "odds": "2.00",
+    "odds": "2.06",
     "group": 2,
     "qualified15": true,
     "qualified13": false
   },
   {
-    "league": "Primera C",
-    "match": "Leandro N. Alem - Canuelas",
+    "league": "Primera B Metropolitana",
+    "match": "Flandria - Villa Dalmine",
     "tip": "Over 2.5",
-    "odds": "2.73",
+    "odds": "2.69",
     "group": 2,
     "qualified15": true,
     "qualified13": false
   },
   {
-    "league": "Liga II",
-    "match": "CS Afumati - Viitorul Şelimbăr",
+    "league": "Premier League",
+    "match": "Bala Town - Haverfordwest County AFC",
     "tip": "Over 2.5",
-    "odds": "2.03",
+    "odds": "2.11",
     "group": 3,
     "qualified15": true,
     "qualified13": false
   },
   {
-    "league": "Primera División",
-    "match": "Comerciantes Unidos - Universitario",
+    "league": "Primera C",
+    "match": "Central Ballester - Deportivo Paraguayo",
     "tip": "Over 2.5",
-    "odds": "2.17",
+    "odds": "2.61",
     "group": 3,
     "qualified15": true,
     "qualified13": false
