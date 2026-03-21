@@ -50,6 +50,153 @@ function isBlockedLeague(name) {
     return /\b(u1[0-9]|u2[0-3]|youth|juniors?|reserves?|amateur|friendl|simulation|esports?|cyber|women|feminine|feminin|frauen|damer|kvinner|ladies|femenin|naiset|kobiety|feminino|girls)\b/i.test(name);
 }
 
+// Blokuje ligy 4. urovne a nize (vyjma Anglie, kde povolujeme az 6. uroven).
+// Kazda zeme ma jiny system pojmenovani lig, proto resime per-country.
+function isLowTierLeague(leagueName, country) {
+    const name = leagueName;
+
+    // === Anglie: povolujeme az do 6. urovne ===
+    // 1: Premier League, 2: Championship, 3: League One, 4: League Two
+    // 5: National League, 6: National League North/South
+    // Block: 7+ (Southern League, Northern Premier, Isthmian, atd.)
+    if (country === 'England') {
+        return /\b(southern.*league|northern.*premier|isthmian|combined counties|eastern.*league|western.*league|midland.*league|hellenic|spartan|essex|kent.*league|sussex|lancashire)\b/i.test(name);
+    }
+
+    // === Skotsko: az do 3. urovne ===
+    // 1: Premiership, 2: Championship, 3: League One
+    // Block: League Two (4), Highland/Lowland League (5)
+    if (country === 'Scotland') {
+        return /\b(league two|highland|lowland)\b/i.test(name);
+    }
+
+    // === Nemecko ===
+    // 1: Bundesliga, 2: 2. Bundesliga, 3: 3. Liga
+    // Block: Regionalliga (4), Oberliga (5)+
+    if (country === 'Germany') {
+        return /\b(regionalliga|oberliga|landesliga|verbandsliga|bezirksliga)\b/i.test(name);
+    }
+
+    // === Rakousko ===
+    // 1: Bundesliga, 2: 2. Liga, 3: Regionalliga
+    // Pozor: Rakouska Regionalliga je 3. uroven (povolena!)
+    // Block: Landesliga (4)+
+    if (country === 'Austria') {
+        return /\b(landesliga|gebietsliga)\b/i.test(name);
+    }
+
+    // === Italie ===
+    // 1: Serie A, 2: Serie B, 3: Serie C
+    // Block: Serie D (4), Eccellenza (5)+
+    if (/\bserie\s*d\b/i.test(name) || /\b(eccellenza|promozione)\b/i.test(name)) return true;
+
+    // === Francie ===
+    // 1: Ligue 1, 2: Ligue 2, 3: National / National 1
+    // Block: National 2 (4), National 3 (5)+
+    if (/\bnational\s*[2-9]\b/i.test(name)) return true;
+
+    // === Spanelsko ===
+    // 1: La Liga, 2: Segunda División, 3: Primera Federación / Primera RFEF
+    // Block: Segunda Federación/RFEF (4), Tercera (5)+
+    if (/\b(segunda\s*(federaci[oó]n|rfef)|tercera)\b/i.test(name)) return true;
+
+    // === Nizozemsko ===
+    // 1: Eredivisie, 2: Eerste Divisie, 3: Tweede Divisie
+    // Block: Derde Divisie (4)+
+    if (/\b(derde|vierde)\b/i.test(name)) return true;
+
+    // === Polsko ===
+    // 1: Ekstraklasa, 2: I Liga (= 2. uroven), 3: II Liga (= 3. uroven)
+    // Block: III Liga (= 4. uroven)+
+    if (country === 'Poland' && /\b(iii\s*liga|3\.\s*liga)\b/i.test(name)) return true;
+
+    // === Turecko ===
+    // 1: Süper Lig, 2: 1. Lig, 3: 2. Lig
+    // Block: 3. Lig (= 4. uroven)
+    if (country === 'Turkey' && /\b3\.\s*lig\b/i.test(name)) return true;
+
+    // === Cesko ===
+    // 1: First League / Chance Liga, 2: FNL, 3: CFL/MSFL
+    // Block: Divize (4)+
+    if (country === 'Czech-Republic' && /\b(divize)\b/i.test(name)) return true;
+
+    // === Slovensko ===
+    // 1: Super Liga / Niké Liga, 2: 2. Liga, 3: 3. Liga
+    // Block: 4. Liga+
+    if (country === 'Slovakia' && /\b(4\.\s*liga|regionalna)\b/i.test(name)) return true;
+
+    // === Portugalsko ===
+    // 1: Primeira Liga, 2: Segunda Liga, 3: Liga 3
+    // Block: Campeonato de Portugal (4)+
+    if (country === 'Portugal' && /\b(campeonato de portugal)\b/i.test(name)) return true;
+
+    // === Dansko ===
+    // 1: Superliga, 2: 1st Division, 3: 2nd Division
+    // Block: Denmark Series / 3rd Division (4)+
+    if (country === 'Denmark' && /\b(3rd division|denmark series)\b/i.test(name)) return true;
+
+    // === Norsko ===
+    // 1: Eliteserien, 2: OBOS-ligaen / 1st Division, 3: 2nd Division
+    // Block: 3rd Division / 3. divisjon (4)+
+    if (country === 'Norway' && /\b(3rd division|3\.\s*divisjon)\b/i.test(name)) return true;
+
+    // === Svedsko ===
+    // 1: Allsvenskan, 2: Superettan, 3: Ettan
+    // Block: Division 2 (= 4. uroven ve Svedsku!)+
+    if (country === 'Sweden' && /\b(division\s*[2-9])\b/i.test(name)) return true;
+
+    // === Finsko ===
+    // 1: Veikkausliiga, 2: Ykkönen, 3: Kakkonen
+    // Block: Kolmonen (4)+
+    if (country === 'Finland' && /\b(kolmonen|nelonen)\b/i.test(name)) return true;
+
+    // === Recko ===
+    // 1: Super League 1, 2: Super League 2, 3: Gamma Ethniki
+    // Block: Delta Ethniki (4)+
+    if (country === 'Greece' && /\b(delta ethniki)\b/i.test(name)) return true;
+
+    // === Rumunsko ===
+    // 1: Liga I, 2: Liga II, 3: Liga III
+    // Block: Liga IV (4)+
+    if (country === 'Romania' && /\b(liga\s*(iv|4))\b/i.test(name)) return true;
+
+    // === Madarsko ===
+    // 1: NB I, 2: NB II, 3: NB III
+    // Block: Megyei (county leagues, 4)+
+    if (country === 'Hungary' && /\b(megyei|county)\b/i.test(name)) return true;
+
+    // === Srbsko ===
+    // 1: Super Liga, 2: Prva Liga, 3: Srpska Liga
+    // Block: Zona (4)+
+    if (country === 'Serbia' && /\b(zona)\b/i.test(name)) return true;
+
+    // === Chorvatsko ===
+    // 1: HNL / Prva HNL, 2: Druga HNL, 3: Prva NL
+    // Block: Druga NL / zupanijska liga (4)+
+    if (country === 'Croatia' && /\b(druga nl|zupanijska|county)\b/i.test(name)) return true;
+
+    // === Belgie ===
+    // 1: Pro League / Jupiler, 2: Challenger Pro League, 3: National 1 / 1st Amateur
+    // Block: 2nd Amateur / National 2 (4)+
+    if (country === 'Belgium' && /\b(2nd amateur|national\s*[2-9]|3rd amateur)\b/i.test(name)) return true;
+
+    // === Svycarsko ===
+    // 1: Super League, 2: Challenge League, 3: Promotion League
+    // Block: 1. Liga (= 4. uroven ve Svycarsku!)+
+    if (country === 'Switzerland' && /\b(1\.\s*liga)\b/i.test(name)) return true;
+
+    // === Genericke vzory pro 4+ uroven (funguje pro ostatni zeme) ===
+    if (/\bdivision\s*[4-9]\b/i.test(name)) return true;
+    if (/\b[4-9]\.\s*(division|divisjon|divisie|liga)\b/i.test(name)) return true;
+    if (/\b(4th|5th|6th|7th|8th|9th|10th)\b/i.test(name)) return true;
+    if (/\b(fourth|fifth|sixth|seventh|eighth|ninth|tenth)\s*(division|league|tier)?\b/i.test(name)) return true;
+    if (/\b(district|parish|provincial|cantonal)\b/i.test(name)) return true;
+    // Regionalliga je u vetsiny zemi 4+ (Rakousko a dalsi vyjimky reseny vyse)
+    if (/\b(regionalliga)\b/i.test(name)) return true;
+
+    return false;
+}
+
 function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 function shuffle(arr) { for (let i = arr.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [arr[i], arr[j]] = [arr[j], arr[i]]; } return arr; }
 function fmtDate(d) { return d.toISOString().split('T')[0]; }
@@ -221,9 +368,10 @@ async function main() {
         return t >= now && t <= maxTime
             && !EXCLUDED_COUNTRIES.has(c)
             && !BLOCKED_AFRICAN.has(c)
-            && !isBlockedLeague(f.league.name);
+            && !isBlockedLeague(f.league.name)
+            && !isLowTierLeague(f.league.name, c);
     });
-    console.log('   ' + fixtures.length + ' v 24h okne (bez RU/BY/Afrika/zen/mladez/esport)');
+    console.log('   ' + fixtures.length + ' v 24h okne (bez RU/BY/Afrika/zen/mladez/esport/nizkych soutezi)');
 
     // Mapovani fixtures a lig
     const fixtureMap = new Map(), leagueMap = new Map();
