@@ -294,8 +294,8 @@ function generatePairings(indices) {
 async function main() {
     console.log('Kombik Bot - fetch-matches\n');
     const now = new Date();
-    const maxTime = new Date(now.getTime() + 24 * 60 * 60 * 1000);
-    console.log('Okno: ' + now.toUTCString() + ' -> ' + maxTime.toUTCString() + ' (24h)\n');
+    const maxTime = new Date(now.getTime() + 12 * 60 * 60 * 1000);
+    console.log('Okno: ' + now.toUTCString() + ' -> ' + maxTime.toUTCString() + ' (12h)\n');
 
     const today = fmtDate(now), tomorrow = fmtDate(maxTime);
     const dates = [today]; if (tomorrow !== today) dates.push(tomorrow);
@@ -348,7 +348,7 @@ async function main() {
     }));
     console.log('Kandidatu: ' + pool.length + ' s Over 2.5 (kurz ' + MIN_ODDS + '-' + MAX_ODDS + ')');
 
-    // Filtrace pres predictions: scored < 1.0 + obdrzene >= 1.5 / 1.3
+    // Filtrace pres predictions: scored < 1.0 + obdrzene > 1.5 pro OBA tymy
     shuffle(pool);
     console.log('Analyza tymu (predictions)...\n');
     const qualified15 = [];
@@ -367,25 +367,30 @@ async function main() {
                 }
                 const hFor = parseFloat(home.league?.goals?.for?.average?.total) || parseFloat(home.last_5?.goals?.for?.average) || 0;
                 const aFor = parseFloat(away.league?.goals?.for?.average?.total) || parseFloat(away.last_5?.goals?.for?.average) || 0;
-                if (hFor < MAX_SCORED || aFor < MAX_SCORED) {
-                    const hAgn = parseFloat(home.league?.goals?.against?.average?.total) || parseFloat(home.last_5?.goals?.against?.average) || 0;
-                    const aAgn = parseFloat(away.league?.goals?.against?.average?.total) || parseFloat(away.last_5?.goals?.against?.average) || 0;
-                    const expG = (hFor + aFor + hAgn + aAgn) / 2;
-                    const entry = { ...m, expectedGoals: expG };
-                    if (hAgn >= MIN_CONCEDED_STRICT || aAgn >= MIN_CONCEDED_STRICT) {
-                        console.log('   [1.5] ' + m.match + ' | scored ' + hFor.toFixed(1) + '/' + aFor.toFixed(1) + ', conceded ' + hAgn.toFixed(1) + '/' + aAgn.toFixed(1) + ' => ' + expG.toFixed(2) + 'g');
-                        qualified15.push(entry);
-                    } else if (hAgn >= MIN_CONCEDED_RELAXED || aAgn >= MIN_CONCEDED_RELAXED) {
-                        console.log('   [1.3] ' + m.match + ' | scored ' + hFor.toFixed(1) + '/' + aFor.toFixed(1) + ', conceded ' + hAgn.toFixed(1) + '/' + aAgn.toFixed(1) + ' => ' + expG.toFixed(2) + 'g');
-                        qualified13.push(entry);
-                    }
+                const hAgn = parseFloat(home.league?.goals?.against?.average?.total) || parseFloat(home.last_5?.goals?.against?.average) || 0;
+                const aAgn = parseFloat(away.league?.goals?.against?.average?.total) || parseFloat(away.last_5?.goals?.against?.average) || 0;
+                const expG = (hFor + aFor + hAgn + aAgn) / 2;
+                const entry = { ...m, expectedGoals: expG };
+
+                // 1. kolo: oba tymy inkasuj >= 1.5 a ne oba presne 1.5 (min. 1.5+1.6)
+                //          + aspon jeden scored < 1.0
+                if (hAgn >= MIN_CONCEDED_STRICT && aAgn >= MIN_CONCEDED_STRICT
+                    && (hAgn > MIN_CONCEDED_STRICT || aAgn > MIN_CONCEDED_STRICT)
+                    && (hFor < MAX_SCORED || aFor < MAX_SCORED)) {
+                    console.log('   [Q15] ' + m.match + ' | scored ' + hFor.toFixed(1) + '/' + aFor.toFixed(1) + ', conceded ' + hAgn.toFixed(1) + '/' + aAgn.toFixed(1) + ' => ' + expG.toFixed(2) + 'g');
+                    qualified15.push(entry);
+                // 2. kolo (fallback): puvodní volnejsi kriteria
+                } else if ((hAgn >= MIN_CONCEDED_RELAXED || aAgn >= MIN_CONCEDED_RELAXED)
+                    && (hFor < MAX_SCORED || aFor < MAX_SCORED)) {
+                    console.log('   [Q13] ' + m.match + ' | scored ' + hFor.toFixed(1) + '/' + aFor.toFixed(1) + ', conceded ' + hAgn.toFixed(1) + '/' + aAgn.toFixed(1) + ' => ' + expG.toFixed(2) + 'g');
+                    qualified13.push(entry);
                 }
             }
         }
         await sleep(350);
     }
-    console.log('\n1. kolo (scored < ' + MAX_SCORED + ' + obdrzene >= 1.5): ' + qualified15.length + '/' + pool.length);
-    console.log('2. kolo (scored < ' + MAX_SCORED + ' + obdrzene >= 1.3): ' + qualified13.length + '/' + pool.length);
+    console.log('\n1. kolo (oba conceded > 1.5 + scored < ' + MAX_SCORED + '): ' + qualified15.length + '/' + pool.length);
+    console.log('2. kolo (fallback conceded >= 1.3 + scored < ' + MAX_SCORED + '): ' + qualified13.length + '/' + pool.length);
 
     // 1. kolo vyberu: z qualified15 (obdrzene >= 1.5)
     const selected = [];
