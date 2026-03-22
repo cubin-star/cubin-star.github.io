@@ -9,7 +9,7 @@ Logika:
   5. Dvoukolovy vyber (podle obdrzenych golu):
      a) 1. kolo: OBA tymy inkasuje >= 1.5 g/z, min jeden > 1.5
         - pokud >= 5: vyber 5 (nahodnym vyberem), konec
-     b) 2. kolo: aspon jeden tym inkasuje >= 1.3 g/z
+     b) 2. kolo: OBA tymy inkasuje >= 1.3 g/z
         - doplni zbyvajici mista do 5
      c) Fallback: evropske prvni ligy, pak pool (unikatni ligy)
   6. Nahodny vyber: vaha = expectedGoals z predictions
@@ -259,7 +259,7 @@ def meets_goal_criteria(pred):
     expected_goals = (h_for + a_for + h_agn + a_agn) / 2
     detail = f"scored {h_for:.1f}/{a_for:.1f}, conceded {h_agn:.1f}/{a_agn:.1f} => {expected_goals:.2f}g (played {h_played}/{a_played})"
     return True, {"expectedGoals": expected_goals, "detail": detail,
-                  "h_for": h_for, "a_for": a_for, "h_agn": h_agn, "a_agn": a_agn}
+                  "h_for": h_for, "a_for": a_for, "h_agn": h_agn, "a_gn": a_agn}
 
 
 # ===== KANDIDATI + VYBER =====
@@ -400,16 +400,16 @@ def select_best_tips(qualified, pool, all_odds, fixtures, num=NUM_TIPS):
             m["_round"] = 1
         print(f"  Vyber (1. kolo): {len(selected)} from {len(round1)}")
 
-        # --- Round 2: remaining qualified with conceded >= 1.3 (excluding round 1 picks) ---
+        # --- Round 2: remaining qualified with BOTH teams conceded >= 1.3 ---
         if len(selected) < num:
             used_ids_r = {s["fixture_id"] for s in selected}
             used_leagues_r = {s["League"] for s in selected}
             round2 = [m for m in qualified
                       if m["fixture_id"] not in used_ids_r
                       and m["League"] not in used_leagues_r
-                      and max(m.get("h_agn", 0), m.get("a_agn", 0)) >= MIN_CONCEDED_R2]
+                      and min(m.get("h_agn", 0), m.get("a_agn", 0)) >= MIN_CONCEDED_R2]
             need = num - len(selected)
-            print(f"  2. kolo (inkasovane >= {MIN_CONCEDED_R2}): {len(round2)} zapasu, doplnuji {need}")
+            print(f"  2. kolo (oba inkasovane >= {MIN_CONCEDED_R2}): {len(round2)} zapasu, doplnuji {need}")
             r2_picks = weighted_pick(round2, need)
             for m in r2_picks:
                 m["_qualified"] = True
