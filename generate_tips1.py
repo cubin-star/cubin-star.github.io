@@ -259,7 +259,7 @@ def meets_goal_criteria(pred):
     expected_goals = (h_for + a_for + h_agn + a_agn) / 2
     detail = f"scored {h_for:.1f}/{a_for:.1f}, conceded {h_agn:.1f}/{a_agn:.1f} => {expected_goals:.2f}g (played {h_played}/{a_played})"
     return True, {"expectedGoals": expected_goals, "detail": detail,
-                  "h_for": h_for, "a_for": a_for, "h_agn": h_agn, "a_gn": a_agn}
+                  "h_for": h_for, "a_for": a_for, "h_agn": h_agn, "a_agn": a_agn}
 
 
 # ===== KANDIDATI + VYBER =====
