@@ -14,7 +14,7 @@ const API_KEY = process.env.API_FOOTBALL_KEY1;
 if (!API_KEY) { console.error('Chybi API_FOOTBALL_KEY1 env promenna.'); process.exit(1); }
 
 const FOOTBALL_API = 'https://v3.football.api-sports.io';
-const MIN_ODDS = 2.0;
+const MIN_ODDS = 2.05;
 const MAX_ODDS = 3.0;
 const PICK_COUNT = 6;
 const MAX_SCORED = 1.0;
@@ -373,16 +373,26 @@ async function main() {
                 const expG = (hFor + aFor + hAgn + aAgn) / 2;
                 const entry = { ...m, expectedGoals: expG };
 
-                // 1. kolo: oba tymy inkasuj >= 1.5 a ne oba presne 1.5 (min. 1.5+1.6)
-                //          + aspon jeden tym scored >= 1.3
-                if (hAgn >= MIN_CONCEDED_STRICT && aAgn >= MIN_CONCEDED_STRICT
-                    && (hAgn > MIN_CONCEDED_STRICT || aAgn > MIN_CONCEDED_STRICT)
-                    && (hFor >= MIN_SCORED || aFor >= MIN_SCORED)) {
+                // Pomocne podminky
+                const oneLowOneHighScored = (hFor < MAX_SCORED && aFor >= MIN_SCORED) || (aFor < MAX_SCORED && hFor >= MIN_SCORED);
+                const oneLowOneHighConceded = (hAgn < MAX_SCORED && aAgn >= MIN_SCORED) || (aAgn < MAX_SCORED && hAgn >= MIN_SCORED);
+                const bothStrictScored = hFor >= MIN_CONCEDED_STRICT && aFor >= MIN_CONCEDED_STRICT && (hFor > MIN_CONCEDED_STRICT || aFor > MIN_CONCEDED_STRICT);
+                const bothStrictConceded = hAgn >= MIN_CONCEDED_STRICT && aAgn >= MIN_CONCEDED_STRICT && (hAgn > MIN_CONCEDED_STRICT || aAgn > MIN_CONCEDED_STRICT);
+                const bothRelaxedScored = hFor >= MIN_CONCEDED_RELAXED && aFor >= MIN_CONCEDED_RELAXED;
+                const bothRelaxedConceded = hAgn >= MIN_CONCEDED_RELAXED && aAgn >= MIN_CONCEDED_RELAXED;
+
+                // 1. kolo:
+                //   A) scored: jeden < 1.0 + druhy >= 1.3, conceded: oba >= 1.5 (min jeden >= 1.6)
+                //   B) scored: oba >= 1.5 (min jeden >= 1.6), conceded: jeden >= 1.3 + druhy < 1.0
+                if ((oneLowOneHighScored && bothStrictConceded)
+                    || (bothStrictScored && oneLowOneHighConceded)) {
                     console.log('   [Q15] ' + m.match + ' | scored ' + hFor.toFixed(1) + '/' + aFor.toFixed(1) + ', conceded ' + hAgn.toFixed(1) + '/' + aAgn.toFixed(1) + ' => ' + expG.toFixed(2) + 'g');
                     qualified15.push(entry);
-                // 2. kolo (fallback): oba tymy obdrzene >= 1.3 + aspon jeden scored >= 1.3
-                } else if (hAgn >= MIN_CONCEDED_RELAXED && aAgn >= MIN_CONCEDED_RELAXED
-                    && (hFor >= MIN_SCORED || aFor >= MIN_SCORED)) {
+                // 2. kolo:
+                //   A) scored: jeden < 1.0 + druhy >= 1.3, conceded: oba >= 1.3
+                //   B) scored: oba >= 1.3, conceded: jeden < 1.0 + druhy >= 1.3
+                } else if ((oneLowOneHighScored && bothRelaxedConceded)
+                    || (bothRelaxedScored && oneLowOneHighConceded)) {
                     console.log('   [Q13] ' + m.match + ' | scored ' + hFor.toFixed(1) + '/' + aFor.toFixed(1) + ', conceded ' + hAgn.toFixed(1) + '/' + aAgn.toFixed(1) + ' => ' + expG.toFixed(2) + 'g');
                     qualified13.push(entry);
                 }
@@ -390,8 +400,8 @@ async function main() {
         }
         await sleep(350);
     }
-    console.log('\n1. kolo (oba conceded > 1.5): ' + qualified15.length + '/' + pool.length);
-    console.log('2. kolo (oba conceded >= 1.3 + scored >= ' + MIN_SCORED + '): ' + qualified13.length + '/' + pool.length);
+    console.log('\n1. kolo (scored<1+>=1.3 & conceded>=1.5+1.6 NEBO scored>=1.5+1.6 & conceded<1+>=1.3): ' + qualified15.length + '/' + pool.length);
+    console.log('2. kolo (scored<1+>=1.3 & conceded>=1.3+1.3 NEBO scored>=1.3+1.3 & conceded<1+>=1.3): ' + qualified13.length + '/' + pool.length);
 
     // 1. kolo vyberu: z qualified15 (obdrzene >= 1.5)
     const selected = [];
