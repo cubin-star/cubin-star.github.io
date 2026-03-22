@@ -1,7 +1,6 @@
 import os
 import json
 import random
-import statistics as stats_mod
 import time
 import requests
 from datetime import datetime, timedelta, timezone
@@ -13,7 +12,16 @@ OUTPUT_FILE = "basketbal.json"
 MIN_ODDS = 1.75
 MAX_ODDS = 2.00
 MAX_TIPS = 2
+MIN_PLAYED = 5
 TZ_CET = ZoneInfo("Europe/Prague")
+
+# Pomery pro vicestupnovy vyber (proporcionalni k dynamicke over lince)
+# Ve fotbale: conceded >= 1.5 pro linku 2.5 = kazdy tym inkasuje 1.20x (line/2)
+#             V basketu je rozptyl proporcionalne nizsi, proto pouzivame mensi pomery.
+STRICT_EXP_RATIO = 1.03       # Ocekavany total >= 103 % linky
+RELAXED_EXP_RATIO = 1.005     # Ocekavany total >= 100.5 % linky
+STRICT_CONC_RATIO = 1.03      # Oba tymy inkasi >= 103 % (line/2) = slaba obrana
+RELAXED_CONC_RATIO = 1.00     # Oba tymy inkasi >= 100 % (line/2)
 
 HEADERS = {"x-apisports-key": API_KEY}
 BASE = "https://v1.basketball.api-sports.io"
@@ -171,7 +179,7 @@ def fetch_over_tips():
     if not eligible:
         return []
 
-    # Seskup podle ligy, z kazde vyber max 2
+    # Seskup podle ligy, z kazde vyber max 3 (vice kandidatu pro vicestupnovy vyber)
     by_league = {}
     for g in eligible:
         by_league.setdefault(g["league"], []).append(g)
@@ -182,14 +190,14 @@ def fetch_over_tips():
     for lg in leagues_order:
         picks = by_league[lg]
         random.shuffle(picks)
-        to_check.extend(picks[:1])  # 1 zapas na ligu = min requestu
+        to_check.extend(picks[:3])
 
-    # Max 15 odds requestu = ~1.5 min celkem
-    if len(to_check) > 15:
+    # Max 20 odds requestu
+    if len(to_check) > 20:
         random.shuffle(to_check)
-        to_check = to_check[:15]
+        to_check = to_check[:20]
 
-    print(f"\nKontroluji odds pro {len(to_check)} zapasu (max 15, 10 req/min)...")
+    print(f"\nKontroluji odds pro {len(to_check)} zapasu (max 20, 10 req/min)...")
     candidates = []
 
     for i, g in enumerate(to_check):
@@ -282,136 +290,210 @@ def fetch_over_tips():
 
 
 # ---------------------------------------------------------------------------
-#  Scoring – vlastni metoda pro vyber zapasu s nejvetsi pravdepodobnosti OVER
-#  Nepouziva bookmakerske kurzy; analyzuje historicke vysledky obou tymu.
+#  Statistiky tymu a vicestupnovy vyber (inspirovano fetch-matches.mjs)
+#  Pouziva sezonni statistiky z /statistics endpointu, NE bookmakerske kurzy.
+#
+#  Princip:
+#   - Ve fotbale je pevna hranice Over 2.5 a pozaduji oba tymy conceded >= 1.5
+#     (= 1.20x pulku linky). V basketu je linka dynamicka a rozptyl proporcionalne
+#     mensi, proto pouzivame mensi pomery (viz konstanty nahore).
+#   - exp_total = (home_scored + away_conceded)/2 + (away_scored + home_conceded)/2
+#   - Kolo 1 (striktni): exp_total >= line * 1.03, oba conceded >= (line/2) * 1.03
+#   - Kolo 2 (uvolnene): exp_total >= line * 1.005, oba conceded >= (line/2) * 1.00
+#   - Fallback: zbyvajici kandidati serazeni podle marginu
 # ---------------------------------------------------------------------------
 
-def _fetch_team_totals(team_id, league_id, season, cache):
-    """Stahne odehrane zapasy tymu v dane lize/sezone a vrati seznam celkovych bodu."""
+def _get_team_stats(team_id, league_id, season, cache):
+    """Stahne sezonni statistiky tymu (prumer bodu strelene/obdrzene, pocet zapasu).
+
+    Pouziva endpoint /statistics (1 request na tym), NE jednotlive zapasy.
+    """
     key = (team_id, league_id, season)
     if key in cache:
         return cache[key]
 
     time.sleep(6.5)  # Rate limit (10 req/min)
-    games = api_get("games", {
+    data = api_get("statistics", {
         "team": team_id,
         "league": league_id,
         "season": season,
     })
 
-    totals = []
-    for g in games:
-        status = g.get("status", {}).get("short", "")
-        if status not in ("FT", "AOT"):  # Finished / After Overtime
-            continue
-        hs = g.get("scores", {}).get("home", {}).get("total")
-        aws = g.get("scores", {}).get("away", {}).get("total")
-        if hs is not None and aws is not None:
-            try:
-                totals.append(int(hs) + int(aws))
-            except (ValueError, TypeError):
-                continue
+    result = None
+    if data:
+        entry = data[0] if isinstance(data, list) else data
+        try:
+            played = int(entry.get("games", {}).get("played", {}).get("all", 0))
+            scored = float(
+                entry.get("points", {}).get("for", {}).get("average", {}).get("all", 0))
+            conceded = float(
+                entry.get("points", {}).get("against", {}).get("average", {}).get("all", 0))
+            result = {"played": played, "scored": scored, "conceded": conceded}
+        except (ValueError, TypeError, AttributeError):
+            pass
 
-    cache[key] = totals
-    return totals
-
-
-def _compute_over_score(home_totals, away_totals, over_line):
-    """Vypocita skore pravdepodobnosti OVER na zaklade historickych dat.
-
-    Slozky:
-      1. hit_rate   (35 %) – kolik % minulych zapasu obou tymu presahlo linku
-      2. margin     (30 %) – jak daleko je prumer nad linkou
-      3. consistency(20 %) – nizsi rozptyl = predvidatelnejsi vysledky
-      4. trend      (15 %) – poslednich 5 zapasu vs celkovy prumer (stoupajici = bonus)
-    """
-    if not home_totals and not away_totals:
-        return 0.0
-
-    all_totals = home_totals + away_totals
-    if not all_totals:
-        return 0.0
-
-    avg = stats_mod.mean(all_totals)
-
-    # 1) Hit rate
-    hits = sum(1 for t in all_totals if t > over_line)
-    hit_rate = hits / len(all_totals)
-
-    # 2) Margin – normalizovany do <0,1>
-    margin = (avg - over_line) / over_line if over_line else 0
-    margin_norm = max(0.0, min(1.0, 0.5 + margin * 5))
-
-    # 3) Consistency (1 - koeficient variace)
-    if len(all_totals) >= 2:
-        sd = stats_mod.stdev(all_totals)
-        cv = sd / avg if avg > 0 else 1
-        consistency = max(0.0, 1.0 - cv)
-    else:
-        consistency = 0.5
-
-    # 4) Trend – poslednich 5 zapasu kazdeho tymu vs celkovy prumer
-    recent = home_totals[-5:] + away_totals[-5:]
-    if recent:
-        recent_avg = stats_mod.mean(recent)
-        trend = (recent_avg - avg) / avg if avg > 0 else 0
-    else:
-        trend = 0
-    trend_norm = max(0.0, min(1.0, 0.5 + trend * 5))
-
-    score = (
-        0.35 * hit_rate
-        + 0.30 * margin_norm
-        + 0.20 * consistency
-        + 0.15 * trend_norm
-    )
-    return round(score, 4)
+    cache[key] = result
+    return result
 
 
-def _score_candidates(candidates):
-    """Pro kazdeho kandidata stahne historii obou tymu a vypocita over-skore."""
-    cache = {}  # (team_id, league_id, season) -> [totals]
+def _analyze_candidates(candidates):
+    """Obohati kandidaty o sezonni statistiky obou tymu a ocekavany total."""
+    cache = {}  # (team_id, league_id, season) -> stats dict
+    print(f"\nAnalyzuji tymy ({len(candidates)} kandidatu)...\n")
 
-    print(f"\nScoruji {len(candidates)} kandidatu podle historickych dat...")
+    analyzed = []
     for c in candidates:
-        home_totals = _fetch_team_totals(
-            c["home_id"], c["league_id"], c["season"], cache)
-        away_totals = _fetch_team_totals(
-            c["away_id"], c["league_id"], c["season"], cache)
+        h = _get_team_stats(c["home_id"], c["league_id"], c["season"], cache)
+        a = _get_team_stats(c["away_id"], c["league_id"], c["season"], cache)
 
-        score = _compute_over_score(home_totals, away_totals, c["over_line"])
-        c["score"] = score
+        if not h or not a:
+            print(f"  [SKIP] {c['match']} | chybi statistiky")
+            continue
 
-        n = len(home_totals) + len(away_totals)
-        avg = stats_mod.mean(home_totals + away_totals) if n else 0
-        print(f"  {c['match']} | linka {c['over_line']} | "
-              f"prumer {avg:.1f} | zapasu {n} | skore {score:.4f}")
+        if h["played"] < MIN_PLAYED or a["played"] < MIN_PLAYED:
+            print(f"  [SKIP] {c['match']} | malo zapasu: {h['played']}/{a['played']}")
+            continue
 
-    return candidates
+        # Ocekavany total (stejny vzorec jako fotbal):
+        # home_exp = (home_scored_avg + away_conceded_avg) / 2
+        # away_exp = (away_scored_avg + home_conceded_avg) / 2
+        # total    = home_exp + away_exp
+        exp_total = (h["scored"] + a["conceded"]) / 2 + (a["scored"] + h["conceded"]) / 2
+        line = c["over_line"]
+        margin = exp_total / line if line else 0
+
+        c.update({
+            "h_scored": h["scored"],
+            "h_conceded": h["conceded"],
+            "h_played": h["played"],
+            "a_scored": a["scored"],
+            "a_conceded": a["conceded"],
+            "a_played": a["played"],
+            "exp_total": exp_total,
+            "margin": margin,
+        })
+        analyzed.append(c)
+
+        print(f"  {c['match']} | scored {h['scored']:.1f}/{a['scored']:.1f}, "
+              f"conceded {h['conceded']:.1f}/{a['conceded']:.1f} | "
+              f"exp {exp_total:.1f} vs linka {line} (margin {margin:.3f})")
+
+    return analyzed
+
+
+def _weighted_pick(items, count):
+    """Vazeny nahodny vyber bez opakovani – vaha = margin (exp_total / line).
+
+    Kazdy zapas z jine ligy (stejne jako fotbalovy weightedPick).
+    """
+    result = []
+    used_leagues = set()
+    remaining = list(items)
+
+    for _ in range(count):
+        available = [m for m in remaining if m["league"] not in used_leagues]
+        if not available:
+            break
+
+        weights = [max(m.get("margin", 1) - 0.95, 0.01) for m in available]
+        total_w = sum(weights)
+        r = random.random() * total_w
+        cumul = 0
+        idx = 0
+        for i, w in enumerate(weights):
+            cumul += w
+            if cumul >= r:
+                idx = i
+                break
+
+        pick = available[idx]
+        result.append(pick)
+        used_leagues.add(pick["league"])
+        remaining.remove(pick)
+
+    return result
 
 
 def select_best_tips(candidates):
-    """Vybere MAX_TIPS tipu s nejvyssim over-skore, kazdy z jine ligy."""
+    """Vicestupnovy vyber tipu podle sezonních statistik tymu.
+
+    Kolo 1 (striktni): exp_total >= line * STRICT_EXP_RATIO,
+                       oba tymy inkasi >= (line/2) * STRICT_CONC_RATIO
+    Kolo 2 (uvolnene): exp_total >= line * RELAXED_EXP_RATIO,
+                       oba tymy inkasi >= (line/2) * RELAXED_CONC_RATIO
+    Fallback:          zbyvajici kandidati serazeni podle marginu
+    """
     seen = set()
     unique = [c for c in candidates if not (c["match"] in seen or seen.add(c["match"]))]
 
     if not unique:
         return []
 
-    scored = _score_candidates(unique)
-    scored.sort(key=lambda x: x.get("score", 0), reverse=True)
+    analyzed = _analyze_candidates(unique)
+    if not analyzed:
+        return []
 
-    tips = []
-    used_leagues = set()
+    # Rozrazeni do kol (stejny princip jako qualified15 / qualified13 ve fotbale)
+    q_strict = []
+    q_relaxed = []
 
-    for c in scored:
-        if len(tips) >= MAX_TIPS:
-            break
-        if c["league"] not in used_leagues:
-            tips.append(c)
-            used_leagues.add(c["league"])
+    for c in analyzed:
+        line = c["over_line"]
+        half = line / 2
+        exp = c["exp_total"]
+        h_conc = c["h_conceded"]
+        a_conc = c["a_conceded"]
 
-    return tips
+        is_strict = (
+            exp >= line * STRICT_EXP_RATIO
+            and h_conc >= half * STRICT_CONC_RATIO
+            and a_conc >= half * STRICT_CONC_RATIO
+        )
+        is_relaxed = (
+            exp >= line * RELAXED_EXP_RATIO
+            and h_conc >= half * RELAXED_CONC_RATIO
+            and a_conc >= half * RELAXED_CONC_RATIO
+        )
+
+        if is_strict:
+            print(f"  [Q1] {c['match']} | margin {c['margin']:.3f}")
+            q_strict.append(c)
+        elif is_relaxed:
+            print(f"  [Q2] {c['match']} | margin {c['margin']:.3f}")
+            q_relaxed.append(c)
+
+    print(f"\n1. kolo (striktni, exp >= line*{STRICT_EXP_RATIO}, "
+          f"conceded >= half*{STRICT_CONC_RATIO}): {len(q_strict)}")
+    print(f"2. kolo (uvolnene, exp >= line*{RELAXED_EXP_RATIO}, "
+          f"conceded >= half*{RELAXED_CONC_RATIO}): {len(q_relaxed)}")
+
+    # Kolo 1: vazeny vyber ze striktnich
+    selected = _weighted_pick(q_strict, MAX_TIPS)
+    print(f"\nVybrano z 1. kola: {len(selected)}")
+
+    # Kolo 2: doplneni z uvolnenych (jine ligy)
+    if len(selected) < MAX_TIPS and q_relaxed:
+        used_lg = set(s["league"] for s in selected)
+        avail = [c for c in q_relaxed if c["league"] not in used_lg]
+        extra = _weighted_pick(avail, MAX_TIPS - len(selected))
+        selected.extend(extra)
+        print(f"Doplneno z 2. kola: {len(extra)}, celkem: {len(selected)}")
+
+    # Fallback: zbyvajici kandidati serazeni podle marginu
+    if len(selected) < MAX_TIPS:
+        used_ids = set(s["match"] for s in selected)
+        used_lg = set(s["league"] for s in selected)
+        rest = [c for c in analyzed
+                if c["match"] not in used_ids and c["league"] not in used_lg]
+        rest.sort(key=lambda x: x.get("margin", 0), reverse=True)
+        for c in rest:
+            if len(selected) >= MAX_TIPS:
+                break
+            selected.append(c)
+        if rest:
+            print(f"Fallback: doplneno na {len(selected)}")
+
+    return selected
 
 
 def main():
@@ -433,8 +515,8 @@ def main():
         tips = select_best_tips(candidates)
         print(f"\nVybrano {len(tips)} tipu:")
         for t in tips:
-            s = t.get('score', 0)
-            print(f"  {t['league']}: {t['match']} - {t['tip']} @ {t['odds']} (skore {s:.4f})")
+            m = t.get('margin', 0)
+            print(f"  {t['league']}: {t['match']} - {t['tip']} @ {t['odds']} (margin {m:.3f})")
 
     output = [{"league": t["league"], "match": t["match"], "tip": t["tip"], "odds": t["odds"]} for t in tips]
 
