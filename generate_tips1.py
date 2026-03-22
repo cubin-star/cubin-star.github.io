@@ -4,12 +4,14 @@ Ultimate Football Overs - Daily Tip Generator v14 (experiment)
 Logika:
   1. Blacklist (youth/reserve/amateur/women/esports)
   2. Liga filter: max 3. liga (Anglie: az 6. liga)
-  3. Kurzy Over 2.5 v rozmezi 1.80-2.00
+  3. Kurzy Over 2.5 v rozmezi 1.75-1.95
   4. Goal criteria: min. jeden tym >= 1.3 vstrelenych golu/zapas, oba tymy min 5 odehranych
-  5. Dvoukolovy vyber (podle obdrzenych golu):
-     a) 1. kolo: OBA tymy inkasuje >= 1.5 g/z, min jeden > 1.5
+  5. Dvoukolovy vyber:
+     a) 1. kolo: Varianta A: scored(jeden<1, druhy>=1.3) + conceded(jeden>=1.5, druhy>=1.6)
+                Varianta B: scored(jeden>=1.5, druhy>=1.6) + conceded(jeden<1, druhy>=1.3)
         - pokud >= 5: vyber 5 (nahodnym vyberem), konec
-     b) 2. kolo: OBA tymy inkasuje >= 1.3 g/z
+     b) 2. kolo: Varianta A: scored(jeden<1, druhy>=1.3) + conceded(oba>=1.3)
+                Varianta B: scored(oba>=1.3) + conceded(jeden<1, druhy>=1.3)
         - doplni zbyvajici mista do 5
      c) Fallback: evropske prvni ligy, pak pool (unikatni ligy)
   6. Nahodny vyber: vaha = expectedGoals z predictions
@@ -36,8 +38,8 @@ from datetime import datetime, timezone, timedelta
 
 API_KEY = os.environ.get("API_FOOTBALL_KEY1", "")
 BASE_URL = "https://v3.football.api-sports.io"
-MIN_ODDS = 1.80
-MAX_ODDS = 2.00
+MIN_ODDS = 1.75
+MAX_ODDS = 1.95
 MIN_SCORED_ONE = 1.3
 MIN_CONCEDED_R1 = 1.5
 MIN_CONCEDED_R2 = 1.3
@@ -339,6 +341,8 @@ def filter_by_goal_criteria(candidates):
             if ok:
                 c["expectedGoals"] = info["expectedGoals"]
                 c["detail"] = info["detail"]
+                c["h_for"] = info["h_for"]
+                c["a_for"] = info["a_for"]
                 c["h_agn"] = info["h_agn"]
                 c["a_agn"] = info["a_agn"]
                 print(f" OK {info['detail']}")
@@ -377,12 +381,44 @@ def weighted_pick(items, count):
     return result
 
 
+def _qualifies_round1(m):
+    """Round 1: Varianta A nebo B.
+    A: vstrelene (jeden < 1, druhy >= 1.3) + obdrzene (jeden >= 1.5, druhy >= 1.6)
+    B: vstrelene (jeden >= 1.5, druhy >= 1.6) + obdrzene (jeden < 1, druhy >= 1.3)"""
+    h_for = m.get("h_for", 0)
+    a_for = m.get("a_for", 0)
+    h_agn = m.get("h_agn", 0)
+    a_agn = m.get("a_agn", 0)
+    min_for = min(h_for, a_for)
+    max_for = max(h_for, a_for)
+    min_agn = min(h_agn, a_agn)
+    max_agn = max(h_agn, a_agn)
+    option_a = (min_for < 1 and max_for >= 1.3) and (min_agn >= 1.5 and max_agn >= 1.6)
+    option_b = (min_for >= 1.5 and max_for >= 1.6) and (min_agn < 1 and max_agn >= 1.3)
+    return option_a or option_b
+
+
+def _qualifies_round2(m):
+    """Round 2: Varianta A nebo B.
+    A: vstrelene (jeden < 1, druhy >= 1.3) + obdrzene (oba >= 1.3)
+    B: vstrelene (oba >= 1.3) + obdrzene (jeden < 1, druhy >= 1.3)"""
+    h_for = m.get("h_for", 0)
+    a_for = m.get("a_for", 0)
+    h_agn = m.get("h_agn", 0)
+    a_agn = m.get("a_agn", 0)
+    min_for = min(h_for, a_for)
+    max_for = max(h_for, a_for)
+    min_agn = min(h_agn, a_agn)
+    max_agn = max(h_agn, a_agn)
+    option_a = (min_for < 1 and max_for >= 1.3) and (min_agn >= 1.3)
+    option_b = (min_for >= 1.3) and (min_agn < 1 and max_agn >= 1.3)
+    return option_a or option_b
+
+
 def select_best_tips(qualified, pool, all_odds, fixtures, num=NUM_TIPS):
-    # --- Round 1: BOTH teams concede >= 1.5, at least one strictly > 1.5 ---
-    round1 = [m for m in qualified
-              if min(m.get("h_agn", 0), m.get("a_agn", 0)) >= MIN_CONCEDED_R1
-              and max(m.get("h_agn", 0), m.get("a_agn", 0)) > MIN_CONCEDED_R1]
-    print(f"\n  1. kolo (oba inkasovane >= {MIN_CONCEDED_R1}, min jeden > {MIN_CONCEDED_R1}): {len(round1)} zapasu")
+    # --- Round 1: scored (one<1, other>=1.3) + conceded (one>=1.5, other>=1.6) OR opposite ---
+    round1 = [m for m in qualified if _qualifies_round1(m)]
+    print(f"\n  1. kolo (scored/conceded varianta A|B): {len(round1)} zapasu")
 
     selected = []
     if len(round1) >= num:
@@ -407,9 +443,9 @@ def select_best_tips(qualified, pool, all_odds, fixtures, num=NUM_TIPS):
             round2 = [m for m in qualified
                       if m["fixture_id"] not in used_ids_r
                       and m["League"] not in used_leagues_r
-                      and min(m.get("h_agn", 0), m.get("a_agn", 0)) >= MIN_CONCEDED_R2]
+                      and _qualifies_round2(m)]
             need = num - len(selected)
-            print(f"  2. kolo (oba inkasovane >= {MIN_CONCEDED_R2}): {len(round2)} zapasu, doplnuji {need}")
+            print(f"  2. kolo (scored/conceded varianta A|B): {len(round2)} zapasu, doplnuji {need}")
             r2_picks = weighted_pick(round2, need)
             for m in r2_picks:
                 m["_qualified"] = True
