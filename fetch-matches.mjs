@@ -18,6 +18,7 @@ const MIN_ODDS = 2.0;
 const MAX_ODDS = 3.0;
 const PICK_COUNT = 6;
 const MAX_SCORED = 1.0;
+const MIN_SCORED = 1.3;
 const MIN_CONCEDED_STRICT = 1.5;
 const MIN_CONCEDED_RELAXED = 1.3;
 const MIN_PLAYED = 5;
@@ -373,15 +374,17 @@ async function main() {
                 const entry = { ...m, expectedGoals: expG };
 
                 // 1. kolo: oba tymy inkasuj >= 1.5 a ne oba presne 1.5 (min. 1.5+1.6)
-                //          + aspon jeden scored < 1.0
+                //          + aspon jeden scored < 1.0 + aspon jeden scored >= 1.3
                 if (hAgn >= MIN_CONCEDED_STRICT && aAgn >= MIN_CONCEDED_STRICT
                     && (hAgn > MIN_CONCEDED_STRICT || aAgn > MIN_CONCEDED_STRICT)
-                    && (hFor < MAX_SCORED || aFor < MAX_SCORED)) {
+                    && (hFor < MAX_SCORED || aFor < MAX_SCORED)
+                    && (hFor >= MIN_SCORED || aFor >= MIN_SCORED)) {
                     console.log('   [Q15] ' + m.match + ' | scored ' + hFor.toFixed(1) + '/' + aFor.toFixed(1) + ', conceded ' + hAgn.toFixed(1) + '/' + aAgn.toFixed(1) + ' => ' + expG.toFixed(2) + 'g');
                     qualified15.push(entry);
                 // 2. kolo (fallback): puvodní volnejsi kriteria
                 } else if ((hAgn >= MIN_CONCEDED_RELAXED || aAgn >= MIN_CONCEDED_RELAXED)
-                    && (hFor < MAX_SCORED || aFor < MAX_SCORED)) {
+                    && (hFor < MAX_SCORED || aFor < MAX_SCORED)
+                    && (hFor >= MIN_SCORED || aFor >= MIN_SCORED)) {
                     console.log('   [Q13] ' + m.match + ' | scored ' + hFor.toFixed(1) + '/' + aFor.toFixed(1) + ', conceded ' + hAgn.toFixed(1) + '/' + aAgn.toFixed(1) + ' => ' + expG.toFixed(2) + 'g');
                     qualified13.push(entry);
                 }
@@ -389,8 +392,8 @@ async function main() {
         }
         await sleep(350);
     }
-    console.log('\n1. kolo (oba conceded > 1.5 + scored < ' + MAX_SCORED + '): ' + qualified15.length + '/' + pool.length);
-    console.log('2. kolo (fallback conceded >= 1.3 + scored < ' + MAX_SCORED + '): ' + qualified13.length + '/' + pool.length);
+    console.log('\n1. kolo (oba conceded > 1.5 + scored < ' + MAX_SCORED + ' + scored >= ' + MIN_SCORED + '): ' + qualified15.length + '/' + pool.length);
+    console.log('2. kolo (fallback conceded >= 1.3 + scored < ' + MAX_SCORED + ' + scored >= ' + MIN_SCORED + '): ' + qualified13.length + '/' + pool.length);
 
     // 1. kolo vyberu: z qualified15 (obdrzene >= 1.5)
     const selected = [];
