@@ -5,7 +5,7 @@ Logika:
   1. Blacklist (youth/reserve/amateur/women/esports)
   2. Liga filter: max 3. liga (Anglie: az 6. liga)
   3. Kurzy Over 2.5 v rozmezi 1.80-2.00
-  4. Goal criteria: min. jeden tym < 1.0 vstrelenych golu/zapas, oba tymy min 5 odehranych
+  4. Goal criteria: min. jeden tym >= 1.3 vstrelenych golu/zapas, oba tymy min 5 odehranych
   5. Dvoukolovy vyber (podle obdrzenych golu):
      a) 1. kolo: OBA tymy inkasuje >= 1.5 g/z, min jeden > 1.5
         - pokud >= 5: vyber 5 (nahodnym vyberem), konec
@@ -38,7 +38,7 @@ API_KEY = os.environ.get("API_FOOTBALL_KEY1", "")
 BASE_URL = "https://v3.football.api-sports.io"
 MIN_ODDS = 1.80
 MAX_ODDS = 2.00
-MAX_SCORED_ONE = 1.0
+MIN_SCORED_ONE = 1.3
 MIN_CONCEDED_R1 = 1.5
 MIN_CONCEDED_R2 = 1.3
 MIN_GAMES = 5
@@ -232,7 +232,7 @@ def _sf(val, default=0.0):
 
 
 def meets_goal_criteria(pred):
-    """At least one team scores < MAX_SCORED_ONE. Both teams must have >= MIN_GAMES played.
+    """At least one team scores >= MIN_SCORED_ONE. Both teams must have >= MIN_GAMES played.
     Conceded stats returned for two-round selection."""
     home = pred.get("teams", {}).get("home", {})
     away = pred.get("teams", {}).get("away", {})
@@ -253,7 +253,7 @@ def meets_goal_criteria(pred):
     a_agn = _sf(away.get("league", {}).get("goals", {}).get("against", {}).get("average", {}).get("total")) or \
             _sf(away.get("last_5", {}).get("goals", {}).get("against", {}).get("average"))
 
-    if h_for >= MAX_SCORED_ONE and a_for >= MAX_SCORED_ONE:
+    if h_for < MIN_SCORED_ONE and a_for < MIN_SCORED_ONE:
         return False, {}
 
     expected_goals = (h_for + a_for + h_agn + a_agn) / 2
@@ -471,7 +471,7 @@ def main():
 
     print(f"== generate_tips1 v14 (experiment) ==")
     print(f"Time: {now.strftime('%Y-%m-%d %H:%M UTC')}")
-    print(f"Over 2.5 | odds {MIN_ODDS}-{MAX_ODDS} | min 1 tym scored<{MAX_SCORED_ONE} | conceded R1>={MIN_CONCEDED_R1} R2>={MIN_CONCEDED_R2} | min {MIN_GAMES} zapasu")
+    print(f"Over 2.5 | odds {MIN_ODDS}-{MAX_ODDS} | min 1 tym scored>={MIN_SCORED_ONE} | conceded R1>={MIN_CONCEDED_R1} R2>={MIN_CONCEDED_R2} | min {MIN_GAMES} zapasu")
     print(f"Output: {OUTPUT_APP1} (3) + {OUTPUT_APP2} (2)\n")
 
     # Fixtures
