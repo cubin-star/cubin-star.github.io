@@ -374,16 +374,14 @@ async function main() {
                 const entry = { ...m, expectedGoals: expG };
 
                 // 1. kolo: oba tymy inkasuj >= 1.5 a ne oba presne 1.5 (min. 1.5+1.6)
-                //          + aspon jeden scored < 1.0 + aspon jeden scored >= 1.3
+                //          + aspon jeden tym scored >= 1.3
                 if (hAgn >= MIN_CONCEDED_STRICT && aAgn >= MIN_CONCEDED_STRICT
                     && (hAgn > MIN_CONCEDED_STRICT || aAgn > MIN_CONCEDED_STRICT)
-                    && (hFor < MAX_SCORED || aFor < MAX_SCORED)
                     && (hFor >= MIN_SCORED || aFor >= MIN_SCORED)) {
                     console.log('   [Q15] ' + m.match + ' | scored ' + hFor.toFixed(1) + '/' + aFor.toFixed(1) + ', conceded ' + hAgn.toFixed(1) + '/' + aAgn.toFixed(1) + ' => ' + expG.toFixed(2) + 'g');
                     qualified15.push(entry);
-                // 2. kolo (fallback): puvodní volnejsi kriteria
-                } else if ((hAgn >= MIN_CONCEDED_RELAXED || aAgn >= MIN_CONCEDED_RELAXED)
-                    && (hFor < MAX_SCORED || aFor < MAX_SCORED)
+                // 2. kolo (fallback): oba tymy obdrzene >= 1.3 + aspon jeden scored >= 1.3
+                } else if (hAgn >= MIN_CONCEDED_RELAXED && aAgn >= MIN_CONCEDED_RELAXED
                     && (hFor >= MIN_SCORED || aFor >= MIN_SCORED)) {
                     console.log('   [Q13] ' + m.match + ' | scored ' + hFor.toFixed(1) + '/' + aFor.toFixed(1) + ', conceded ' + hAgn.toFixed(1) + '/' + aAgn.toFixed(1) + ' => ' + expG.toFixed(2) + 'g');
                     qualified13.push(entry);
@@ -392,8 +390,8 @@ async function main() {
         }
         await sleep(350);
     }
-    console.log('\n1. kolo (oba conceded > 1.5 + scored < ' + MAX_SCORED + ' + scored >= ' + MIN_SCORED + '): ' + qualified15.length + '/' + pool.length);
-    console.log('2. kolo (fallback conceded >= 1.3 + scored < ' + MAX_SCORED + ' + scored >= ' + MIN_SCORED + '): ' + qualified13.length + '/' + pool.length);
+    console.log('\n1. kolo (oba conceded > 1.5): ' + qualified15.length + '/' + pool.length);
+    console.log('2. kolo (oba conceded >= 1.3 + scored >= ' + MIN_SCORED + '): ' + qualified13.length + '/' + pool.length);
 
     // 1. kolo vyberu: z qualified15 (obdrzene >= 1.5)
     const selected = [];
