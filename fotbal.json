@@ -1,20 +1,20 @@
 [
   {
-    "League": "Bundesliga",
-    "Match": "FSV Mainz 05 vs Eintracht Frankfurt",
+    "League": "Primera B",
+    "Match": "Cobreloa vs Magallanes",
     "Tip": "Over 2.5",
-    "Odds": "1.81"
+    "Odds": "1.92"
   },
   {
-    "League": "Serie B",
-    "Match": "Empoli vs Pescara",
+    "League": "Liga Nacional",
+    "Match": "Antigua GFC vs Marquense",
     "Tip": "Over 2.5",
-    "Odds": "1.82"
+    "Odds": "1.78"
   },
   {
-    "League": "II Liga - East",
-    "Match": "Kalisz vs Rekord Bielsko-Biała",
+    "League": "Cup",
+    "Match": "AS Agareb vs Stade Gabesien",
     "Tip": "Over 2.5",
-    "Odds": "1.85"
+    "Odds": "1.90"
   }
 ]
