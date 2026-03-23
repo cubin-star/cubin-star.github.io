@@ -12,8 +12,7 @@ OUTPUT_FILE = "basketbal.json"
 MIN_ODDS = 1.75
 MAX_ODDS = 2.00
 MAX_TIPS = 2
-MIN_PLAYED = 3
-HISTORY_DAYS = 10
+MIN_PLAYED = 5
 TZ_CET = ZoneInfo("Europe/Prague")
 
 # Pomery pro vicestupnovy vyber (proporcionalni k dynamicke over lince)
@@ -293,10 +292,10 @@ def fetch_over_tips():
 # ---------------------------------------------------------------------------
 #  Statistiky tymu a vicestupnovy vyber (inspirovano fetch-matches.mjs)
 #
-#  /statistics endpoint vyzaduje placeny plan pro aktualni sezonu,
-#  proto pouzivame /games?date=X (poslednich HISTORY_DAYS dni)
-#  a prumery pocitame z dokončenych zapasu. Tento endpoint funguje
-#  na free planu.
+#  Pouziva /statistics endpoint (placeny plan, 7500 req/den).
+#  Pro kazdy tym stahne sezonni prumery (scored/conceded) jednim volanim.
+#  Vysledky se cachuji - pokud se stejny tym objevi ve vice kandidatech,
+#  stahne se jen jednou.
 #
 #  Princip:
 #   - exp_total = (home_scored + away_conceded)/2 + (away_scored + home_conceded)/2
@@ -305,71 +304,80 @@ def fetch_over_tips():
 #   - Fallback: zbyvajici kandidati serazeni podle marginu
 # ---------------------------------------------------------------------------
 
-def _build_team_stats():
-    """Stahne poslednich HISTORY_DAYS dni zapasu a spocita prumery pro kazdy tym.
+def _get_team_stats(team_id, league_id, season, cache):
+    """Stahne sezonni statistiky tymu z /statistics endpointu.
 
-    Pouziva endpoint /games?date=X, ktery funguje na free planu.
-    Vraci dict: team_id -> {"played": N, "scored": avg, "conceded": avg}
+    Vraci: {"played": N, "scored": avg, "conceded": avg} nebo None.
     """
-    now = datetime.now(TZ_CET)
-    raw = {}  # team_id -> {"scored": [int], "conceded": [int]}
+    key = (team_id, league_id, season)
+    if key in cache:
+        return cache[key]
 
-    print(f"Stahuji historii poslednich {HISTORY_DAYS} dni (pro statistiky tymu)...")
-    for day in range(1, HISTORY_DAYS + 1):
-        date_str = (now - timedelta(days=day)).strftime("%Y-%m-%d")
-        if day > 1:
-            time.sleep(6.5)
-        games = api_get("games", {"date": date_str})
+    time.sleep(6.5)  # Rate limit
+    data = api_get("statistics", {
+        "team": team_id,
+        "league": league_id,
+        "season": season,
+    })
 
-        for g in games:
-            if g.get("status", {}).get("short") not in ("FT", "AOT"):
-                continue
+    result = None
+    if data:
+        entry = data[0] if isinstance(data, list) else data
+        try:
+            games = entry.get("games", {})
+            points = entry.get("points", {})
 
-            home_id = g.get("teams", {}).get("home", {}).get("id")
-            away_id = g.get("teams", {}).get("away", {}).get("id")
-            hs = g.get("scores", {}).get("home", {}).get("total")
-            aws = g.get("scores", {}).get("away", {}).get("total")
+            # Zkusime ruzne struktury odpovedi (API muze vracet nested i flat)
+            if isinstance(games.get("played"), dict):
+                played = int(games["played"].get("all", 0))
+            else:
+                played = int(games.get("played", 0))
 
-            if not home_id or not away_id or hs is None or aws is None:
-                continue
-            try:
-                hs_int, aws_int = int(hs), int(aws)
-            except (ValueError, TypeError):
-                continue
+            pts_for = points.get("for", {})
+            pts_against = points.get("against", {})
 
-            raw.setdefault(home_id, {"scored": [], "conceded": []})
-            raw[home_id]["scored"].append(hs_int)
-            raw[home_id]["conceded"].append(aws_int)
+            # Prumery - mohou byt v "average.all" nebo primo v "average"
+            if isinstance(pts_for.get("average"), dict):
+                scored = float(pts_for["average"].get("all", 0))
+            else:
+                scored = float(pts_for.get("average", 0))
 
-            raw.setdefault(away_id, {"scored": [], "conceded": []})
-            raw[away_id]["scored"].append(aws_int)
-            raw[away_id]["conceded"].append(hs_int)
+            if isinstance(pts_against.get("average"), dict):
+                conceded = float(pts_against["average"].get("all", 0))
+            else:
+                conceded = float(pts_against.get("average", 0))
 
-    stats = {}
-    for tid, d in raw.items():
-        n = len(d["scored"])
-        if n > 0:
-            stats[tid] = {
-                "played": n,
-                "scored": sum(d["scored"]) / n,
-                "conceded": sum(d["conceded"]) / n,
-            }
+            # Fallback: pokud average neni, spocitame z total/played
+            if scored == 0 and played > 0:
+                total_for = pts_for.get("total", {})
+                tf = int(total_for.get("all", total_for) if isinstance(total_for, dict) else total_for or 0)
+                if tf > 0:
+                    scored = tf / played
 
-    print(f"  -> statistiky pro {len(stats)} tymu ({HISTORY_DAYS} dni)\n")
-    return stats
+            if conceded == 0 and played > 0:
+                total_against = pts_against.get("total", {})
+                ta = int(total_against.get("all", total_against) if isinstance(total_against, dict) else total_against or 0)
+                if ta > 0:
+                    conceded = ta / played
+
+            if played > 0 and (scored > 0 or conceded > 0):
+                result = {"played": played, "scored": scored, "conceded": conceded}
+        except (ValueError, TypeError, AttributeError) as e:
+            print(f"    [WARN] Nelze parsovat statistiky: {e}")
+
+    cache[key] = result
+    return result
 
 
-def _analyze_candidates(candidates, team_stats):
-    """Obohati kandidaty o statistiky obou tymu a ocekavany total.
-
-    Pouziva predem nactene statistiky z _build_team_stats() (zadne API volani).
-    """
+def _analyze_candidates(candidates):
+    """Obohati kandidaty o sezonni statistiky obou tymu a ocekavany total."""
+    cache = {}  # (team_id, league_id, season) -> stats dict
     print(f"\nAnalyzuji tymy ({len(candidates)} kandidatu)...\n")
 
     analyzed = []
     for c in candidates:
-        h = team_stats.get(c["home_id"])
-        a = team_stats.get(c["away_id"])
+        h = _get_team_stats(c["home_id"], c["league_id"], c["season"], cache)
+        a = _get_team_stats(c["away_id"], c["league_id"], c["season"], cache)
 
         if not h or not a:
             print(f"  [SKIP] {c['match']} | chybi statistiky")
@@ -439,8 +447,8 @@ def _weighted_pick(items, count):
     return result
 
 
-def select_best_tips(candidates, team_stats):
-    """Vicestupnovy vyber tipu podle statistik tymu.
+def select_best_tips(candidates):
+    """Vicestupnovy vyber tipu podle sezonních statistik tymu.
 
     Kolo 1 (striktni): exp_total >= line * STRICT_EXP_RATIO,
                        oba tymy inkasi >= (line/2) * STRICT_CONC_RATIO
@@ -454,7 +462,7 @@ def select_best_tips(candidates, team_stats):
     if not unique:
         return []
 
-    analyzed = _analyze_candidates(unique, team_stats)
+    analyzed = _analyze_candidates(unique)
     if not analyzed:
         return []
 
@@ -522,11 +530,6 @@ def select_best_tips(candidates, team_stats):
 
 
 def main():
-    # Nejprve stahneme historicke vysledky pro statistiky tymu
-    # Pouziva /games?date=X (funguje na free planu)
-    team_stats = _build_team_stats()
-    time.sleep(6.5)  # Rate limit pred dalsimi requesty
-
     candidates = fetch_over_tips()
     print(f"\nCelkem {len(candidates)} kandidatu ({MIN_ODDS}-{MAX_ODDS})")
 
@@ -542,7 +545,7 @@ def main():
         print("Zadne tipy. Prazdny JSON.")
         tips = []
     else:
-        tips = select_best_tips(candidates, team_stats)
+        tips = select_best_tips(candidates)
         print(f"\nVybrano {len(tips)} tipu:")
         for t in tips:
             m = t.get('margin', 0)
@@ -557,4 +560,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
