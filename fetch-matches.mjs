@@ -49,7 +49,7 @@ function isSecondTier(name) {
 }
 
 function isBlockedLeague(name) {
-    return /\b(u1[0-9]|u2[0-3]|youth|juniors?|reserves?|amateur|friendl|simulation|esports?|cyber|women|feminine|feminin|frauen|damer|kvinner|ladies|femenin|naiset|kobiety|feminino|girls)\b/i.test(name);
+    return /\b(u1[0-9]|u2[0-3]|youth|juniors?|reserves?|amateur|friendl|simulation|esports?|cyber|women|feminine|feminin|frauen|damer|kvinner|ladies|femenin[ao]?|naiset|kobiety|feminino|girls)\b/i.test(name);
 }
 
 // Blokuje ligy 4. urovne a nize (vyjma Anglie, kde povolujeme az 6. uroven).
@@ -307,10 +307,14 @@ async function main() {
     fixtures = fixtures.filter(f => {
         const t = new Date(f.fixture.date);
         const c = f.league.country;
+        const homeName = f.teams?.home?.name || '';
+        const awayName = f.teams?.away?.name || '';
+        const isWomenTeam = /\bW$/.test(homeName) || /\bW$/.test(awayName);
         return t >= now && t <= maxTime
             && !EXCLUDED_COUNTRIES.has(c)
             && !BLOCKED_AFRICAN.has(c)
             && !isBlockedLeague(f.league.name)
+            && !isWomenTeam
             && !isLowTierLeague(f.league.name, c);
     });
     console.log('   ' + fixtures.length + ' v 24h okne (bez RU/BY/Afrika/zen/mladez/esport/nizkych soutezi)');
