@@ -21,6 +21,7 @@ const MAX_SCORED = 1.0;
 const MIN_SCORED = 1.3;
 const MIN_CONCEDED_STRICT = 1.5;
 const MIN_CONCEDED_RELAXED = 1.3;
+const MIN_CONCEDED_LOOSE = 1.0;
 const MIN_PLAYED = 5;
 const EXCLUDED_COUNTRIES = new Set(['Russia', 'Belarus']);
 const BLOCKED_AFRICAN = new Set([
@@ -358,6 +359,7 @@ async function main() {
     console.log('Analyza tymu (predictions)...\n');
     const qualified15 = [];
     const qualified13 = [];
+    const qualified10 = [];
     for (const m of pool) {
         const pred = await getPrediction(m.fixtureId);
         if (pred) {
@@ -384,6 +386,8 @@ async function main() {
                 const bothStrictConceded = hAgn >= MIN_CONCEDED_STRICT && aAgn >= MIN_CONCEDED_STRICT && (hAgn > MIN_CONCEDED_STRICT || aAgn > MIN_CONCEDED_STRICT);
                 const bothRelaxedScored = hFor >= MIN_CONCEDED_RELAXED && aFor >= MIN_CONCEDED_RELAXED;
                 const bothRelaxedConceded = hAgn >= MIN_CONCEDED_RELAXED && aAgn >= MIN_CONCEDED_RELAXED;
+                const bothLooseScored = hFor > MIN_CONCEDED_LOOSE && aFor > MIN_CONCEDED_LOOSE;
+                const bothLooseConceded = hAgn > MIN_CONCEDED_LOOSE && aAgn > MIN_CONCEDED_LOOSE;
 
                 // 1. kolo:
                 //   A) scored: jeden < 1.0 + druhy >= 1.3, conceded: oba >= 1.5 (min jeden >= 1.6)
@@ -399,6 +403,13 @@ async function main() {
                     || (bothRelaxedScored && oneLowOneHighConceded)) {
                     console.log('   [Q13] ' + m.match + ' | scored ' + hFor.toFixed(1) + '/' + aFor.toFixed(1) + ', conceded ' + hAgn.toFixed(1) + '/' + aAgn.toFixed(1) + ' => ' + expG.toFixed(2) + 'g');
                     qualified13.push(entry);
+                // 3. kolo:
+                //   A) scored: jeden < 1.0 + druhy >= 1.3, conceded: oba > 1.0
+                //   B) scored: oba > 1.0, conceded: jeden < 1.0 + druhy >= 1.3
+                } else if ((oneLowOneHighScored && bothLooseConceded)
+                    || (bothLooseScored && oneLowOneHighConceded)) {
+                    console.log('   [Q10] ' + m.match + ' | scored ' + hFor.toFixed(1) + '/' + aFor.toFixed(1) + ', conceded ' + hAgn.toFixed(1) + '/' + aAgn.toFixed(1) + ' => ' + expG.toFixed(2) + 'g');
+                    qualified10.push(entry);
                 }
             }
         }
@@ -406,6 +417,7 @@ async function main() {
     }
     console.log('\n1. kolo (scored<1+>=1.3 & conceded>=1.5+1.6 NEBO scored>=1.5+1.6 & conceded<1+>=1.3): ' + qualified15.length + '/' + pool.length);
     console.log('2. kolo (scored<1+>=1.3 & conceded>=1.3+1.3 NEBO scored>=1.3+1.3 & conceded<1+>=1.3): ' + qualified13.length + '/' + pool.length);
+    console.log('3. kolo (scored<1+>=1.3 & conceded>1.0+1.0 NEBO scored>1.0+1.0 & conceded<1+>=1.3): ' + qualified10.length + '/' + pool.length);
 
     // 1. kolo vyberu: z qualified15 (obdrzene >= 1.5)
     const selected = [];
@@ -424,7 +436,17 @@ async function main() {
         console.log('Doplneno z 2. kola: ' + picked13.length + ', celkem: ' + selected.length);
     }
 
-    // Fallback: pokud neni 6, doplnit z evropskych prvnich lig, pak z poolu
+    // 3. kolo vyberu: pokud < 6, doplnit z qualified10 (obdrzene/vstrelene > 1.0)
+    if (selected.length < PICK_COUNT && qualified10.length > 0) {
+        console.log('\n--- 3. kolo vyberu (obdrzene/vstrelene > 1.0) ---');
+        const usedLeagues3 = new Set(selected.map(s => s.league));
+        const available10 = qualified10.filter(m => !usedLeagues3.has(m.league));
+        const picked10 = weightedPick(available10, PICK_COUNT - selected.length);
+        for (const m of picked10) { m._qualified10 = true; selected.push(m); }
+        console.log('Doplneno z 3. kola: ' + picked10.length + ', celkem: ' + selected.length);
+    }
+
+    // 4. kolo (fallback): pokud neni 6, doplnit z evropskych prvnich lig, pak z poolu
     if (selected.length < PICK_COUNT) {
         const usedIds = new Set(selected.map(s => s.fixtureId));
         const usedLeagues = new Set(selected.map(s => s.league));
@@ -462,7 +484,7 @@ async function main() {
 
     // Rozdeleni do 3 kurzove vyrovnanych skupin po 2
     const grouped = balanceGroups(selected);
-    const output = grouped.map(m => ({ league: m.league, match: m.match, kickoff: m.kickoff, tip: m.tip, odds: m.odds, group: m.group, qualified15: !!m._qualified15, qualified13: !!m._qualified13 }));
+    const output = grouped.map(m => ({ league: m.league, match: m.match, kickoff: m.kickoff, tip: m.tip, odds: m.odds, group: m.group, qualified15: !!m._qualified15, qualified13: !!m._qualified13, qualified10: !!m._qualified10 }));
     writeFileSync('hot.json', JSON.stringify(output, null, 2), 'utf-8');
 
     console.log(output.length + ' zapasu -> hot.json (' + reqCount + ' API req)\n');
