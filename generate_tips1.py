@@ -6,14 +6,17 @@ Logika:
   2. Liga filter: max 3. liga (Anglie: az 6. liga)
   3. Kurzy Over 2.5 v rozmezi 1.75-1.95
   4. Goal criteria: min. jeden tym >= 1.3 vstrelenych golu/zapas, oba tymy min 5 odehranych
-  5. Dvoukolovy vyber:
+  5. Vickolovy vyber:
      a) 1. kolo: Varianta A: scored(jeden<1, druhy>=1.3) + conceded(jeden>=1.5, druhy>=1.6)
                 Varianta B: scored(jeden>=1.5, druhy>=1.6) + conceded(jeden<1, druhy>=1.3)
         - pokud >= 5: vyber 5 (nahodnym vyberem), konec
      b) 2. kolo: Varianta A: scored(jeden<1, druhy>=1.3) + conceded(oba>=1.3)
                 Varianta B: scored(oba>=1.3) + conceded(jeden<1, druhy>=1.3)
         - doplni zbyvajici mista do 5
-     c) Fallback: evropske prvni ligy, pak pool (unikatni ligy)
+     c) 3. kolo: Varianta A: conceded(oba>1) + scored(jeden>=1.3, druhy<1)
+                Varianta B: scored(oba>1) + conceded(jeden>=1.3, druhy<1)
+        - doplni zbyvajici mista do 5
+     d) Fallback: evropske prvni ligy, pak pool (unikatni ligy)
   6. Nahodny vyber: vaha = expectedGoals z predictions
      - kazdy zapas z jine ligy
   7. 5 zapasu -> split 3+2
@@ -425,6 +428,23 @@ def _qualifies_round2(m):
     return option_a or option_b
 
 
+def _qualifies_round3(m):
+    """Round 3: Varianta A nebo B.
+    A: obdrzene (oba > 1) + vstrelene (jeden >= 1.3, druhy < 1)
+    B: vstrelene (oba > 1) + obdrzene (jeden >= 1.3, druhy < 1)"""
+    h_for = m.get("h_for", 0)
+    a_for = m.get("a_for", 0)
+    h_agn = m.get("h_agn", 0)
+    a_agn = m.get("a_agn", 0)
+    min_for = min(h_for, a_for)
+    max_for = max(h_for, a_for)
+    min_agn = min(h_agn, a_agn)
+    max_agn = max(h_agn, a_agn)
+    option_a = (min_agn > 1) and (min_for < 1 and max_for >= 1.3)
+    option_b = (min_for > 1) and (min_agn < 1 and max_agn >= 1.3)
+    return option_a or option_b
+
+
 def select_best_tips(qualified, pool, all_odds, fixtures, num=NUM_TIPS):
     # --- Round 1: scored (one<1, other>=1.3) + conceded (one>=1.5, other>=1.6) OR opposite ---
     round1 = [m for m in qualified if _qualifies_round1(m)]
@@ -463,7 +483,24 @@ def select_best_tips(qualified, pool, all_odds, fixtures, num=NUM_TIPS):
             selected.extend(r2_picks)
             print(f"  Vyber (2. kolo): {len(r2_picks)} doplneno, celkem {len(selected)}")
 
-    # Fallback: fill remaining from pool (European top leagues first, unique leagues)
+    # --- Round 3: conceded(oba>1) + scored(jeden>=1.3, druhy<1) OR scored(oba>1) + conceded(jeden>=1.3, druhy<1) ---
+    if len(selected) < num:
+        used_ids_r3 = {s["fixture_id"] for s in selected}
+        used_leagues_r3 = {s["League"] for s in selected}
+        round3 = [m for m in qualified
+                  if m["fixture_id"] not in used_ids_r3
+                  and m["League"] not in used_leagues_r3
+                  and _qualifies_round3(m)]
+        need = num - len(selected)
+        print(f"  3. kolo (scored/conceded varianta A|B): {len(round3)} zapasu, doplnuji {need}")
+        r3_picks = weighted_pick(round3, need)
+        for m in r3_picks:
+            m["_qualified"] = True
+            m["_round"] = 3
+        selected.extend(r3_picks)
+        print(f"  Vyber (3. kolo): {len(r3_picks)} doplneno, celkem {len(selected)}")
+
+    # Fallback (4. kolo): fill remaining from pool (European top leagues first, unique leagues)
     if len(selected) < num:
         used_ids = {s["fixture_id"] for s in selected}
         used_leagues = {s["League"] for s in selected}
@@ -493,7 +530,7 @@ def select_best_tips(qualified, pool, all_odds, fixtures, num=NUM_TIPS):
                 selected.append(m)
                 used_leagues.add(m["League"])
 
-        print(f"  Fallback: doplneno na {len(selected)} (evropske 1. ligy, pak pool, unikatni ligy)")
+        print(f"  Fallback (4. kolo): doplneno na {len(selected)} (evropske 1. ligy, pak pool, unikatni ligy)")
 
     # Shuffle before split so app assignment is also random
     random.shuffle(selected)
