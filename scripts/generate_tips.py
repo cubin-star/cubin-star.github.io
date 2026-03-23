@@ -1,22 +1,23 @@
 """Denní generátor hokejových tipů Over 5.5 pro MAUI appku.
 
 Stáhne kurzy z API-Sports Hockey API, najde Over 5.5 gólů s kurzem >= 1.75
-a vybere 2 zápasy z různých lig na základě statistik týmů (scored/conceded).
+a vybere 2 zápasy z různých lig na základě sezónních statistik týmů.
 
-Metoda výběru (3 kola, inspirováno fotbalovým Kombik Botem):
+Používá endpoint /teams/statistics, který vrací:
+  - goals.for.average  (home / away / all)  … avg vstřelených
+  - goals.against.average (home / away / all) … avg obdržených
+  - games.played, wins/loses s procenty
+
+Metoda výběru (3 kola):
   1. Stáhne dnešní zápasy, odfiltruje blokované země/ligy
   2. Pro každý zápas stáhne kurzy, hledá Over 5.5 >= 1.75
-  3. Pro kandidáty stáhne posledních 10 zápasů obou týmů
-  4. Spočítá avg scored / avg conceded pro oba týmy
-  5. Výběr ve 3 kolech:
-       1. kolo (strict): oba conceded >= 3.0  + min. jeden scored >= 2.5
-       2. kolo (relaxed): oba conceded >= 2.5 + min. jeden scored >= 2.5
+  3. Pro kandidáty stáhne sezónní statistiky obou týmů
+     (domácí: home split, hosté: away split)
+  4. Výběr ve 3 kolech:
+       1. kolo (strict): oba conceded >= 3.0, min. jeden scored >= 2.8
+       2. kolo (relaxed): oba conceded >= 2.5, min. jeden scored >= 2.5
        3. kolo (fallback): zbývající kandidáti
-  6. Vážený náhodný výběr 2 zápasů z různých lig (váha = expectedGoals)
-
-Poměr prahů fotbal → hokej (×2.0–2.2):
-  Fotbal: conceded 1.5/1.3, scored 1.3, celkem ~2.5 g/z
-  Hokej:  conceded 3.0/2.5, scored 2.5, celkem ~5.5 g/z
+  5. Vážený náhodný výběr 2 zápasů z různých lig (váha = expectedGoals)
 
 API: https://v1.hockey.api-sports.io
 Premium plan: 7 500 requestů/den, 300 req/min
@@ -36,13 +37,13 @@ API_KEY = os.environ.get("API_HOCKEY_KEY", "")
 BASE_URL = "https://v1.hockey.api-sports.io"
 MIN_ODDS = 1.75
 OUTPUT_FILE = "hokey.json"
-LAST_N_GAMES = 10
 PICK_COUNT = 2
 
-# Prahy pro výběr (proporcionálně z fotbalu: ×2.0–2.2)
+# Prahy pro výběr (sezónní průměry, home/away split)
 MIN_CONCEDED_STRICT = 3.0    # 1. kolo: oba týmy inkasují >= 3.0 g/z
 MIN_CONCEDED_RELAXED = 2.5   # 2. kolo: oba týmy inkasují >= 2.5 g/z
-MIN_SCORED = 2.5             # Alespoň jeden tým střílí >= 2.5 g/z
+MIN_SCORED_STRICT = 2.8      # 1. kolo: min. jeden tým střílí >= 2.8 g/z
+MIN_SCORED_RELAXED = 2.5     # 2. kolo: min. jeden tým střílí >= 2.5 g/z
 MIN_PLAYED = 5               # Minimum odehraných zápasů
 
 # Země, ze kterých se v ČR nedá sázet
@@ -64,8 +65,11 @@ SKIP_BOOKMAKERS = {"betfair", "betfair exchange", "smarkets", "matchbook"}
 _request_count = 0
 
 
-def api_get(endpoint: str, params: dict | None = None) -> list:
-    """API-Sports Hockey GET request (Premium: 300 req/min)."""
+def api_get(endpoint: str, params: dict | None = None):
+    """API-Sports Hockey GET request (Premium: 300 req/min).
+
+    Vrací response z API — list nebo dict (záleží na endpointu).
+    """
     global _request_count
     url = f"{BASE_URL}/{endpoint}"
     headers = {"x-apisports-key": API_KEY}
@@ -83,68 +87,85 @@ def api_get(endpoint: str, params: dict | None = None) -> list:
         return []
 
     results = data.get("response", [])
-    print(f"   → {len(results)} výsledků")
+    if isinstance(results, list):
+        print(f"   → {len(results)} výsledků")
+    else:
+        print(f"   → statistiky načteny")
 
     # Premium plan: 300 req/min → pauza 0.3s (bezpečná rezerva)
     time.sleep(0.3)
     return results
 
 
-def fetch_team_stats(team_id: int, team_name: str) -> dict | None:
-    """Stáhne posledních N zápasů týmu a spočítá avg scored/conceded.
+def fetch_team_season_stats(team_id: int, league_id: int, season: int,
+                           team_name: str, date: str) -> dict | None:
+    """Stáhne sezónní statistiky týmu přes /teams/statistics.
 
     Vrátí:
-      avg_scored   – průměr vstřelených gólů
-      avg_conceded – průměr obdržených gólů
-      avg_total    – průměr celkových gólů na zápas
-      games        – počet analyzovaných zápasů
+      avg_scored_home  – průměr vstřelených doma
+      avg_scored_away  – průměr vstřelených venku
+      avg_scored_all   – průměr vstřelených celkem
+      avg_conceded_home – průměr obdržených doma
+      avg_conceded_away – průměr obdržených venku
+      avg_conceded_all  – průměr obdržených celkem
+      games            – počet odehraných zápasů
+      win_pct          – procento výher
     """
-    print(f"      📊 {team_name} (id={team_id})...")
-    games = api_get("games", {"team": team_id, "last": LAST_N_GAMES})
+    print(f"      📊 {team_name} (id={team_id}, league={league_id}, season={season})...")
+    data = api_get("teams/statistics", {
+        "team": team_id,
+        "league": league_id,
+        "season": season,
+        "date": date,
+    })
 
-    if not games:
+    # /teams/statistics vrací objekt (ne list), api_get ho zabalí do []
+    # nebo může vrátit přímo dict v response
+    if not data:
         return None
 
-    scored_list = []
-    conceded_list = []
-    total_list = []
-
-    for g in games:
-        home_id = g.get("teams", {}).get("home", {}).get("id")
-        scores = g.get("scores", {})
-        h = scores.get("home")
-        a = scores.get("away")
-
-        if h is None or a is None:
-            continue
-
-        h, a = int(h), int(a)
-        total = h + a
-        total_list.append(total)
-
-        if team_id == home_id:
-            scored_list.append(h)
-            conceded_list.append(a)
-        else:
-            scored_list.append(a)
-            conceded_list.append(h)
-
-    n = len(total_list)
-    if n == 0:
+    # API vrací response jako dict (ne list)
+    stats = data if isinstance(data, dict) else data[0] if data else None
+    if not stats:
         return None
 
-    avg_scored = sum(scored_list) / n
-    avg_conceded = sum(conceded_list) / n
-    avg_total = sum(total_list) / n
+    try:
+        games_played = int(stats.get("games", {}).get("played", {}).get("all", 0))
+        goals_for = stats.get("goals", {}).get("for", {})
+        goals_against = stats.get("goals", {}).get("against", {})
 
-    print(f"         → {n} zápasů | scored={avg_scored:.1f}"
-          f" conceded={avg_conceded:.1f} total={avg_total:.1f}")
+        avg_scored_home = float(goals_for.get("average", {}).get("home", 0))
+        avg_scored_away = float(goals_for.get("average", {}).get("away", 0))
+        avg_scored_all = float(goals_for.get("average", {}).get("all", 0))
+
+        avg_conceded_home = float(goals_against.get("average", {}).get("home", 0))
+        avg_conceded_away = float(goals_against.get("average", {}).get("away", 0))
+        avg_conceded_all = float(goals_against.get("average", {}).get("all", 0))
+
+        win_pct = float(stats.get("games", {}).get("wins", {})
+                        .get("all", {}).get("percentage", 0))
+    except (ValueError, TypeError, AttributeError):
+        print(f"         → chyba parsování statistik")
+        return None
+
+    if games_played == 0:
+        return None
+
+    print(f"         → {games_played} zápasů | scored(h/a/all)="
+          f"{avg_scored_home:.1f}/{avg_scored_away:.1f}/{avg_scored_all:.1f}"
+          f" conceded(h/a/all)="
+          f"{avg_conceded_home:.1f}/{avg_conceded_away:.1f}/{avg_conceded_all:.1f}"
+          f" win%={win_pct:.1%}")
 
     return {
-        "avg_scored": avg_scored,
-        "avg_conceded": avg_conceded,
-        "avg_total": avg_total,
-        "games": n,
+        "avg_scored_home": avg_scored_home,
+        "avg_scored_away": avg_scored_away,
+        "avg_scored_all": avg_scored_all,
+        "avg_conceded_home": avg_conceded_home,
+        "avg_conceded_away": avg_conceded_away,
+        "avg_conceded_all": avg_conceded_all,
+        "games": games_played,
+        "win_pct": win_pct,
     }
 
 
@@ -246,7 +267,10 @@ def main():
         away_name = game.get("teams", {}).get("away", {}).get("name", "?")
         home_id = game.get("teams", {}).get("home", {}).get("id")
         away_id = game.get("teams", {}).get("away", {}).get("id")
-        league_name = game.get("league", {}).get("name", "?")
+        league_info = game.get("league", {})
+        league_name = league_info.get("name", "?")
+        league_id = league_info.get("id")
+        season = league_info.get("season")
         match_label = f"{home_name} vs {away_name}"
 
         print(f"📋 {league_name}: {match_label}")
@@ -293,6 +317,8 @@ def main():
                 "_away_id": away_id,
                 "_home_name": home_name,
                 "_away_name": away_name,
+                "_league_id": league_id,
+                "_season": season,
             })
         elif best_price is not None:
             print(f"   ⚠ Over 5.5 nalezen, ale kurz {best_price} < {MIN_ODDS}")
@@ -308,14 +334,15 @@ def main():
             json.dump([], f, indent=2, ensure_ascii=False)
         return
 
-    # ─── Krok 3: Statistiky týmů (scored/conceded) ───
+    # ─── Krok 3: Sezónní statistiky týmů (/teams/statistics) ───
     print()
-    print(f"📈 Analýza týmů (posledních {LAST_N_GAMES} zápasů)...")
+    print("📈 Analýza týmů (sezónní statistiky, home/away split)...")
     print()
 
     random.shuffle(all_candidates)
 
-    team_cache: dict[int, dict | None] = {}
+    # Cache klíč = (team_id, league_id, season)
+    team_cache: dict[tuple, dict | None] = {}
     qualified_strict: list[dict] = []
     qualified_relaxed: list[dict] = []
     rest_candidates: list[dict] = []
@@ -323,17 +350,29 @@ def main():
     for c in all_candidates:
         home_id = c["_home_id"]
         away_id = c["_away_id"]
+        league_id = c["_league_id"]
+        season = c["_season"]
 
         print(f"   ⚔ {c['match']} ({c['league']})")
 
-        # Team stats (s cache)
-        if home_id not in team_cache:
-            team_cache[home_id] = fetch_team_stats(home_id, c["_home_name"])
-        if away_id not in team_cache:
-            team_cache[away_id] = fetch_team_stats(away_id, c["_away_name"])
+        if not league_id or not season:
+            print(f"      → SKIP (chybí league_id nebo season)")
+            rest_candidates.append(c)
+            print()
+            continue
 
-        hs = team_cache[home_id]
-        as_ = team_cache[away_id]
+        # Team stats (s cache per team+league+season)
+        hk = (home_id, league_id, season)
+        ak = (away_id, league_id, season)
+        if hk not in team_cache:
+            team_cache[hk] = fetch_team_season_stats(
+                home_id, league_id, season, c["_home_name"], today)
+        if ak not in team_cache:
+            team_cache[ak] = fetch_team_season_stats(
+                away_id, league_id, season, c["_away_name"], today)
+
+        hs = team_cache[hk]
+        as_ = team_cache[ak]
 
         if not hs or not as_:
             print(f"      → SKIP (nedostatek dat)")
@@ -347,29 +386,32 @@ def main():
             print()
             continue
 
-        expected_goals = (hs["avg_scored"] + as_["avg_scored"]
-                          + hs["avg_conceded"] + as_["avg_conceded"]) / 2
+        # Home/away split: domácí tým → domácí statistiky, hosté → venkovní
+        h_scored = hs["avg_scored_home"]
+        h_conceded = hs["avg_conceded_home"]
+        a_scored = as_["avg_scored_away"]
+        a_conceded = as_["avg_conceded_away"]
+
+        # Expected goals = (home scored + away conceded + away scored + home conceded) / 2
+        expected_goals = (h_scored + a_conceded + a_scored + h_conceded) / 2
         c["_expected_goals"] = expected_goals
 
-        h_scored = hs["avg_scored"]
-        a_scored = as_["avg_scored"]
-        h_conceded = hs["avg_conceded"]
-        a_conceded = as_["avg_conceded"]
-
         # 1. kolo (strict): oba conceded >= 3.0, min. jeden > 3.0,
-        #                    min. jeden scored >= 2.5
+        #                    min. jeden scored >= 2.8
         if (h_conceded >= MIN_CONCEDED_STRICT
                 and a_conceded >= MIN_CONCEDED_STRICT
                 and (h_conceded > MIN_CONCEDED_STRICT
                      or a_conceded > MIN_CONCEDED_STRICT)
-                and (h_scored >= MIN_SCORED or a_scored >= MIN_SCORED)):
+                and (h_scored >= MIN_SCORED_STRICT
+                     or a_scored >= MIN_SCORED_STRICT)):
             tag = "Q-STRICT"
             qualified_strict.append(c)
 
         # 2. kolo (relaxed): oba conceded >= 2.5, min. jeden scored >= 2.5
         elif (h_conceded >= MIN_CONCEDED_RELAXED
                 and a_conceded >= MIN_CONCEDED_RELAXED
-                and (h_scored >= MIN_SCORED or a_scored >= MIN_SCORED)):
+                and (h_scored >= MIN_SCORED_RELAXED
+                     or a_scored >= MIN_SCORED_RELAXED)):
             tag = "Q-RELAX"
             qualified_relaxed.append(c)
 
@@ -377,8 +419,8 @@ def main():
             tag = "---"
             rest_candidates.append(c)
 
-        print(f"      → [{tag}] scored={h_scored:.1f}/{a_scored:.1f}"
-              f" conceded={h_conceded:.1f}/{a_conceded:.1f}"
+        print(f"      → [{tag}] home: scored={h_scored:.1f} conc={h_conceded:.1f}"
+              f" | away: scored={a_scored:.1f} conc={a_conceded:.1f}"
               f" => expG={expected_goals:.1f}")
         print()
 
@@ -447,3 +489,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
