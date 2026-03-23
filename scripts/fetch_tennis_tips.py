@@ -272,9 +272,12 @@ def analyze_match(odds_list):
     valid_overs = []
 
     for item in odds_list:
-        hdp = float(item.get("hdp", 0))
-        over = float(item.get("over", 0))
-        under = float(item.get("under", 0))
+        try:
+            hdp = float(item.get("hdp", 0))
+            over = float(item.get("over", 0))
+            under = float(item.get("under", 0))
+        except (ValueError, TypeError):
+            continue
 
         all_lines.append(hdp)
 
