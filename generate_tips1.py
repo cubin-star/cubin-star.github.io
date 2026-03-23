@@ -167,6 +167,14 @@ def is_blocked_league(name):
     ))
 
 
+def is_blocked_team(team_name):
+    """Detect women/youth/reserve markers in team names (e.g. 'Santa Fe W', 'Team (W)')."""
+    return bool(re.search(
+        r"(?:\s|\()W(?:\)|\s|$)|\b(u1[0-9]|u2[0-3]|youth|juniors?|reserves?|women|feminine|feminin|frauen|damer|kvinner|ladies|femenin|naiset|kobiety|feminino|girls)\b",
+        team_name, re.IGNORECASE
+    ))
+
+
 def is_second_tier(name):
     return bool(re.search(
         r"\b(2|II|segunda|championship|league two|league one|serie b|ligue 2|2\. liga|2\. bundesliga|eerste divisie|second|third|cup|pokal|coupe|copa|taca)\b",
@@ -292,6 +300,8 @@ def extract_candidates(odds_data, fixtures, min_odds=MIN_ODDS, max_odds=MAX_ODDS
         if country in EXCLUDED_COUNTRIES or country in BLOCKED_AFRICAN:
             continue
         if is_blocked_league(league_name):
+            continue
+        if is_blocked_team(fix.get("home", "")) or is_blocked_team(fix.get("away", "")):
             continue
         if is_low_tier_league(league_name, country):
             continue
