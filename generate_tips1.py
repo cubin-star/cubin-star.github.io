@@ -596,7 +596,18 @@ def main():
     app1_raw, app2_raw = select_best_tips(qualified, candidates, all_odds, all_fixtures)
 
     def fmt(tips):
-        return [{"League": t["League"], "Match": t["Match"], "Tip": t["Tip"], "Odds": t["Odds"]} for t in tips]
+        out = []
+        for t in tips:
+            entry = {"League": t["League"], "Match": t["Match"], "Tip": t["Tip"], "Odds": t["Odds"]}
+            rnd = t.get("_round")
+            if rnd == 1:
+                entry["qualified15"] = True
+            elif rnd == 2:
+                entry["qualified13"] = True
+            elif rnd == 3:
+                entry["qualified10"] = True
+            out.append(entry)
+        return out
 
     app1_tips = fmt(app1_raw)
     app2_tips = fmt(app2_raw)
