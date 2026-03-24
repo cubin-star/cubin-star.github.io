@@ -1,14 +1,15 @@
 [
   {
-    "League": "Primera División Femenina",
-    "Match": "Granada vs Deportivo de La Coruña W",
+    "League": "Non League Premier - Southern Central",
+    "Match": "Stratford Town vs Stamford",
     "Tip": "Over 2.5",
-    "Odds": "1.82"
+    "Odds": "1.82",
+    "qualified13": true
   },
   {
-    "League": "Serie C - Girone C",
-    "Match": "Catania vs Casarano",
+    "League": "National League",
+    "Match": "FC Halifax Town vs Carlisle",
     "Tip": "Over 2.5",
-    "Odds": "1.84"
+    "Odds": "1.76"
   }
 ]
