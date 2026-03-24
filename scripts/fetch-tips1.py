@@ -179,25 +179,15 @@ def fetch_over_tips():
     if not eligible:
         return []
 
-    # Seskup podle ligy, z kazde vyber max 3 (vice kandidatu pro vicestupnovy vyber)
-    by_league = {}
-    for g in eligible:
-        by_league.setdefault(g["league"], []).append(g)
+    # Vsechny zapasy ze vsech lig (mame 7500 req/den, neni duvod se skrtit)
+    to_check = list(eligible)
+    random.shuffle(to_check)
 
-    to_check = []
-    leagues_order = list(by_league.keys())
-    random.shuffle(leagues_order)
-    for lg in leagues_order:
-        picks = by_league[lg]
-        random.shuffle(picks)
-        to_check.extend(picks[:3])
+    # Max 60 odds requestu (bezpecna rezerva z 7500 req/den)
+    if len(to_check) > 60:
+        to_check = to_check[:60]
 
-    # Max 20 odds requestu
-    if len(to_check) > 20:
-        random.shuffle(to_check)
-        to_check = to_check[:20]
-
-    print(f"\nKontroluji odds pro {len(to_check)} zapasu (max 20, 10 req/min)...")
+    print(f"\nKontroluji odds pro {len(to_check)} zapasu (max 60, 10 req/min)...")
     candidates = []
 
     for i, g in enumerate(to_check):
@@ -560,5 +550,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
