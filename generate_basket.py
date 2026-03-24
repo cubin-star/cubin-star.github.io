@@ -284,6 +284,7 @@ def main():
                 "sel_odds": sel["odd_str"],
                 "out_label": out["label"],
                 "out_odds": out["odd_str"],
+                "timestamp": g["timestamp"],
             })
         else:
             print(" no lines found")
@@ -307,11 +308,13 @@ def main():
         if ok:
             print(f" ★ {detail}")
             print(f"       → {c['sel_label']}@{c['sel_odds']} → OUTPUT: {c['out_label']}@{c['out_odds']}")
+            kickoff = datetime.fromtimestamp(c["timestamp"], tz=timezone.utc).strftime("%Y-%m-%dT%H:%M:%S+00:00")
             results.append({
                 "league": c["league"],
                 "match": c["match"],
                 "tip": c["out_label"],
                 "odds": c["out_odds"],
+                "date": kickoff,
             })
         else:
             print(" fail")
