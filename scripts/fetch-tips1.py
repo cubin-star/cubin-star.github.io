@@ -15,13 +15,16 @@ MAX_TIPS = 2
 MIN_PLAYED = 5
 TZ_CET = ZoneInfo("Europe/Prague")
 
-# Pomery pro vicestupnovy vyber (proporcionalni k dynamicke over lince)
-# Ve fotbale: conceded >= 1.5 pro linku 2.5 = kazdy tym inkasuje 1.20x (line/2)
-#             V basketu je rozptyl proporcionalne nizsi, proto pouzivame mensi pomery.
-STRICT_EXP_RATIO = 1.03       # Ocekavany total >= 103 % linky
-RELAXED_EXP_RATIO = 1.005     # Ocekavany total >= 100.5 % linky
-STRICT_CONC_RATIO = 1.03      # Oba tymy inkasi >= 103 % (line/2) = slaba obrana
-RELAXED_CONC_RATIO = 1.00     # Oba tymy inkasi >= 100 % (line/2)
+# Proporcionalni prahy pro vicestupnovy vyber (pomery k half = line/2)
+# Prevod z fotbalu (linka 2.5, half 1.25):
+#   < 1 gol   = < 0.80 * half   (slaby utok/obrana)
+#   >= 1.3    = >= 1.04 * half   (slusny)
+#   >= 1.5    = >= 1.20 * half   (vysoka propustnost)
+#   >= 1.6    = >= 1.28 * half   (velmi vysoka propustnost)
+R_LOW = 0.80          # Slaby prah (fotbal: < 1 gol)
+R_DECENT = 1.04       # Slusny prah (fotbal: >= 1.3 golu)
+R_HIGH = 1.20         # Vysoky prah (fotbal: >= 1.5 golu)
+R_VERY_HIGH = 1.28    # Velmi vysoky prah (fotbal: >= 1.6 golu)
 
 HEADERS = {"x-apisports-key": API_KEY}
 BASE = "https://v1.basketball.api-sports.io"
@@ -287,11 +290,22 @@ def fetch_over_tips():
 #  Vysledky se cachuji - pokud se stejny tym objevi ve vice kandidatech,
 #  stahne se jen jednou.
 #
-#  Princip:
-#   - exp_total = (home_scored + away_conceded)/2 + (away_scored + home_conceded)/2
-#   - Kolo 1 (striktni): exp_total >= line * 1.03, oba conceded >= (line/2) * 1.03
-#   - Kolo 2 (uvolnene): exp_total >= line * 1.005, oba conceded >= (line/2) * 1.00
-#   - Fallback: zbyvajici kandidati serazeni podle marginu
+#  Princip (prevod z fotbaloveho vicekoloveho vyberu):
+#   half = line / 2
+#   Kolo 1 (qualified15):
+#     Var A: scored(jeden < R_LOW*half, druhy >= R_DECENT*half)
+#            + conceded(jeden >= R_HIGH*half, druhy >= R_VERY_HIGH*half)
+#     Var B: scored(jeden >= R_HIGH*half, druhy >= R_VERY_HIGH*half)
+#            + conceded(jeden < R_LOW*half, druhy >= R_DECENT*half)
+#   Kolo 2 (qualified13):
+#     Var A: scored(jeden < R_LOW*half, druhy >= R_DECENT*half)
+#            + conceded(oba >= R_DECENT*half)
+#     Var B: scored(oba >= R_DECENT*half)
+#            + conceded(jeden < R_LOW*half, druhy >= R_DECENT*half)
+#   Kolo 3 (qualified10):
+#     Var A: conceded(oba > R_LOW*half) + scored(jeden >= R_DECENT*half, druhy < R_LOW*half)
+#     Var B: scored(oba > R_LOW*half) + conceded(jeden >= R_DECENT*half, druhy < R_LOW*half)
+#   Fallback: zbyvajici kandidati serazeni podle marginu
 # ---------------------------------------------------------------------------
 
 def _get_team_stats(team_id, league_id, season, cache):
@@ -437,14 +451,45 @@ def _weighted_pick(items, count):
     return result
 
 
+def _pair_asym(val1, val2, half):
+    """Jeden < R_LOW*half, druhy >= R_DECENT*half (libovolne poradi)."""
+    lo, decent = R_LOW * half, R_DECENT * half
+    return ((val1 < lo and val2 >= decent)
+            or (val2 < lo and val1 >= decent))
+
+
+def _pair_both_high(val1, val2, half):
+    """Jeden >= R_HIGH*half, druhy >= R_VERY_HIGH*half (libovolne poradi)."""
+    h, vh = R_HIGH * half, R_VERY_HIGH * half
+    return ((val1 >= h and val2 >= vh)
+            or (val1 >= vh and val2 >= h))
+
+
+def _pair_both_decent(val1, val2, half):
+    """Oba >= R_DECENT*half."""
+    d = R_DECENT * half
+    return val1 >= d and val2 >= d
+
+
+def _pair_both_above_low(val1, val2, half):
+    """Oba striktne > R_LOW*half."""
+    lo = R_LOW * half
+    return val1 > lo and val2 > lo
+
+
 def select_best_tips(candidates):
     """Vicestupnovy vyber tipu podle sezonních statistik tymu.
 
-    Kolo 1 (striktni): exp_total >= line * STRICT_EXP_RATIO,
-                       oba tymy inkasi >= (line/2) * STRICT_CONC_RATIO
-    Kolo 2 (uvolnene): exp_total >= line * RELAXED_EXP_RATIO,
-                       oba tymy inkasi >= (line/2) * RELAXED_CONC_RATIO
-    Fallback:          zbyvajici kandidati serazeni podle marginu
+    Kolo 1 (qualified15):
+      Var A: scored(asym) + conceded(oba high/very_high)
+      Var B: scored(oba high/very_high) + conceded(asym)
+    Kolo 2 (qualified13):
+      Var A: scored(asym) + conceded(oba decent)
+      Var B: scored(oba decent) + conceded(asym)
+    Kolo 3 (qualified10):
+      Var A: conceded(oba > low) + scored(asym)
+      Var B: scored(oba > low) + conceded(asym)
+    Fallback: zbyvajici kandidati serazeni podle marginu
     """
     seen = set()
     unique = [c for c in candidates if not (c["match"] in seen or seen.add(c["match"]))]
@@ -456,51 +501,67 @@ def select_best_tips(candidates):
     if not analyzed:
         return []
 
-    # Rozrazeni do kol (stejny princip jako qualified15 / qualified13 ve fotbale)
-    q_strict = []
-    q_relaxed = []
+    q15 = []  # Kolo 1 - qualified15
+    q13 = []  # Kolo 2 - qualified13
+    q10 = []  # Kolo 3 - qualified10
 
     for c in analyzed:
         line = c["over_line"]
         half = line / 2
-        exp = c["exp_total"]
-        h_conc = c["h_conceded"]
-        a_conc = c["a_conceded"]
+        hs, hc = c["h_scored"], c["h_conceded"]
+        a_s, ac = c["a_scored"], c["a_conceded"]
 
-        is_strict = (
-            exp >= line * STRICT_EXP_RATIO
-            and h_conc >= half * STRICT_CONC_RATIO
-            and a_conc >= half * STRICT_CONC_RATIO
-        )
-        is_relaxed = (
-            exp >= line * RELAXED_EXP_RATIO
-            and h_conc >= half * RELAXED_CONC_RATIO
-            and a_conc >= half * RELAXED_CONC_RATIO
-        )
+        # Kolo 1: scored asym + conceded oba vysoke / scored oba vysoke + conceded asym
+        r1_A = _pair_asym(hs, a_s, half) and _pair_both_high(hc, ac, half)
+        r1_B = _pair_both_high(hs, a_s, half) and _pair_asym(hc, ac, half)
 
-        if is_strict:
-            print(f"  [Q1] {c['match']} | margin {c['margin']:.3f}")
-            q_strict.append(c)
-        elif is_relaxed:
-            print(f"  [Q2] {c['match']} | margin {c['margin']:.3f}")
-            q_relaxed.append(c)
+        # Kolo 2: scored asym + conceded oba slusne / scored oba slusne + conceded asym
+        r2_A = _pair_asym(hs, a_s, half) and _pair_both_decent(hc, ac, half)
+        r2_B = _pair_both_decent(hs, a_s, half) and _pair_asym(hc, ac, half)
 
-    print(f"\n1. kolo (striktni, exp >= line*{STRICT_EXP_RATIO}, "
-          f"conceded >= half*{STRICT_CONC_RATIO}): {len(q_strict)}")
-    print(f"2. kolo (uvolnene, exp >= line*{RELAXED_EXP_RATIO}, "
-          f"conceded >= half*{RELAXED_CONC_RATIO}): {len(q_relaxed)}")
+        # Kolo 3: conceded oba > low + scored asym / scored oba > low + conceded asym
+        r3_A = _pair_both_above_low(hc, ac, half) and _pair_asym(hs, a_s, half)
+        r3_B = _pair_both_above_low(hs, a_s, half) and _pair_asym(hc, ac, half)
 
-    # Kolo 1: vazeny vyber ze striktnich
-    selected = _weighted_pick(q_strict, MAX_TIPS)
+        if r1_A or r1_B:
+            c["qualified15"] = True
+            q15.append(c)
+            vr = "A" if r1_A else "B"
+            print(f"  [Q15/{vr}] {c['match']} | margin {c['margin']:.3f}")
+        elif r2_A or r2_B:
+            c["qualified13"] = True
+            q13.append(c)
+            vr = "A" if r2_A else "B"
+            print(f"  [Q13/{vr}] {c['match']} | margin {c['margin']:.3f}")
+        elif r3_A or r3_B:
+            c["qualified10"] = True
+            q10.append(c)
+            vr = "A" if r3_A else "B"
+            print(f"  [Q10/{vr}] {c['match']} | margin {c['margin']:.3f}")
+
+    print(f"\n1. kolo (qualified15): {len(q15)}")
+    print(f"2. kolo (qualified13): {len(q13)}")
+    print(f"3. kolo (qualified10): {len(q10)}")
+
+    # Kolo 1: vazeny vyber
+    selected = _weighted_pick(q15, MAX_TIPS)
     print(f"\nVybrano z 1. kola: {len(selected)}")
 
-    # Kolo 2: doplneni z uvolnenych (jine ligy)
-    if len(selected) < MAX_TIPS and q_relaxed:
+    # Kolo 2: doplneni (jine ligy)
+    if len(selected) < MAX_TIPS and q13:
         used_lg = set(s["league"] for s in selected)
-        avail = [c for c in q_relaxed if c["league"] not in used_lg]
+        avail = [c for c in q13 if c["league"] not in used_lg]
         extra = _weighted_pick(avail, MAX_TIPS - len(selected))
         selected.extend(extra)
         print(f"Doplneno z 2. kola: {len(extra)}, celkem: {len(selected)}")
+
+    # Kolo 3: doplneni (jine ligy)
+    if len(selected) < MAX_TIPS and q10:
+        used_lg = set(s["league"] for s in selected)
+        avail = [c for c in q10 if c["league"] not in used_lg]
+        extra = _weighted_pick(avail, MAX_TIPS - len(selected))
+        selected.extend(extra)
+        print(f"Doplneno z 3. kola: {len(extra)}, celkem: {len(selected)}")
 
     # Fallback: zbyvajici kandidati serazeni podle marginu
     if len(selected) < MAX_TIPS:
@@ -541,7 +602,16 @@ def main():
             m = t.get('margin', 0)
             print(f"  {t['league']}: {t['match']} - {t['tip']} @ {t['odds']} (margin {m:.3f})")
 
-    output = [{"league": t["league"], "match": t["match"], "tip": t["tip"], "odds": t["odds"]} for t in tips]
+    output = []
+    for t in tips:
+        entry = {"league": t["league"], "match": t["match"], "tip": t["tip"], "odds": t["odds"]}
+        if t.get("qualified15"):
+            entry["qualified15"] = True
+        elif t.get("qualified13"):
+            entry["qualified13"] = True
+        elif t.get("qualified10"):
+            entry["qualified10"] = True
+        output.append(entry)
 
     with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
         json.dump(output, f, ensure_ascii=False, indent=2)
