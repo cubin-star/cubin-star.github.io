@@ -1,0 +1,50 @@
+# SureBets Daily Basketball Tips – runs every day at 7:00 AM UTC
+# Each game has its own Over/Under line. The bot:
+# 1. Finds the "selection line" (Over @ ~1.80 odds)
+# 2. Applies Variant A/B with dynamic thresholds
+# 3. Outputs the "safe line" (Over @ ~1.45 odds)
+#
+# SETUP:
+# 1. Copy this file to your GitHub Pages repo:
+#    cubin-star/cubin-star.github.io/.github/workflows/surebets-basket.yml
+# 2. Copy tools/generate_basket.py to the root of that repo
+# 3. In repo Settings → Secrets → Actions, add:
+#    API_BASKETBALL_KEY = your basketball API key from api-sports.io
+# 4. Enable Actions in the repo
+
+name: SureBets Daily Basketball Tips
+
+on:
+  schedule:
+    # Every day at 7:00 AM UTC
+    - cron: '0 7 * * *'
+  workflow_dispatch:
+    # Allow manual trigger from GitHub UI
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Generate tips
+        env:
+          API_BASKETBALL_KEY: ${{ secrets.API_BASKETBALL_KEY }}
+        run: python generate_basket.py
+
+      - name: Commit and push
+        run: |
+          git config user.name "SureBets Bot"
+          git config user.email "bot@surebets.app"
+          git add baskets.json
+          git diff --staged --quiet || git commit -m "🏀 SureBets basketball tips $(date -u +%Y-%m-%d)"
+          git push
