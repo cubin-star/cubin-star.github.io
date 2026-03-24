@@ -28,6 +28,7 @@ OUTPUT = "fotbals.json"
 MIN_ODDS = 1.75
 MAX_ODDS = 3.00
 MAX_ANALYZE = 80
+MIN_GAMES = 5
 
 EXCLUDED_COUNTRIES = {"russia", "belarus"}
 
@@ -131,6 +132,11 @@ def meets_criteria(pred):
     if not home or not away:
         return False, ""
 
+    h_played = int(_sf(home.get("league", {}).get("fixtures", {}).get("played", {}).get("total", 0)))
+    a_played = int(_sf(away.get("league", {}).get("fixtures", {}).get("played", {}).get("total", 0)))
+    if h_played < MIN_GAMES or a_played < MIN_GAMES:
+        return False, ""
+
     h_for = _sf(home.get("league", {}).get("goals", {}).get("for", {}).get("average", {}).get("total"))
     a_for = _sf(away.get("league", {}).get("goals", {}).get("for", {}).get("average", {}).get("total"))
     h_agn = _sf(home.get("league", {}).get("goals", {}).get("against", {}).get("average", {}).get("total"))
@@ -214,6 +220,7 @@ def extract_candidates(odds_data, fixtures):
             "Match": f"{fix['home']} vs {fix['away']}",
             "Odds_25": f"{over25_odd:.2f}",
             "Odds_15": over15_odd,
+            "kickoff": fix["kickoff"],
         })
 
     return candidates
@@ -282,6 +289,7 @@ def main():
                     "Match": c["Match"],
                     "Tip": "Over 1.5",
                     "Odds": c["Odds_15"],
+                    "Date": c["kickoff"],
                 })
             else:
                 print(" fail")
