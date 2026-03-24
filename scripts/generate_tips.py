@@ -9,15 +9,19 @@ Používá endpoint /teams/statistics, který vrací:
   - games.played, wins/loses s procenty
 
 Metoda výběru (3 kola):
-  1. Stáhne dnešní zápasy, odfiltruje blokované země/ligy
-  2. Pro každý zápas stáhne kurzy, hledá Over 5.5 >= 1.75
-  3. Pro kandidáty stáhne sezónní statistiky obou týmů
-     (domácí: home split, hosté: away split)
-  4. Výběr ve 3 kolech:
-       1. kolo (strict): oba conceded >= 3.0, min. jeden scored >= 2.8
-       2. kolo (relaxed): oba conceded >= 2.5, min. jeden scored >= 2.5
-       3. kolo (fallback): zbývající kandidáti
-  5. Vážený náhodný výběr 2 zápasů z různých lig (váha = expectedGoals)
+   1. Stáhne dnešní zápasy, odfiltruje blokované země/ligy
+   2. Pro každý zápas stáhne kurzy, hledá Over 5.5 >= 1.75
+   3. Pro kandidáty stáhne sezónní statistiky obou týmů
+      (domácí: home split, hosté: away split)
+   4. Výběr ve 3 kolech:
+        1. kolo (strict):
+           A) oba conceded >= 3.0, jeden scored >= 2.8 + druhý < 2.0
+           B) oba scored >= 3.0, jeden conceded >= 2.8 + druhý < 2.0
+        2. kolo (relaxed):
+           A) oba conceded >= 2.5, jeden scored >= 2.5 + druhý < 2.0
+           B) oba scored >= 2.5, jeden conceded >= 2.5 + druhý < 2.0
+        3. kolo (fallback): zbývající kandidáti
+   5. Vážený náhodný výběr 2 zápasů z různých lig (váha = expectedGoals)
 
 API: https://v1.hockey.api-sports.io
 Premium plan: 7 500 requestů/den, 300 req/min
@@ -40,10 +44,11 @@ OUTPUT_FILE = "hokey.json"
 PICK_COUNT = 2
 
 # Prahy pro výběr (sezónní průměry, home/away split)
-MIN_CONCEDED_STRICT = 3.0    # 1. kolo: oba týmy inkasují >= 3.0 g/z
-MIN_CONCEDED_RELAXED = 2.5   # 2. kolo: oba týmy inkasují >= 2.5 g/z
-MIN_SCORED_STRICT = 2.8      # 1. kolo: min. jeden tým střílí >= 2.8 g/z
-MIN_SCORED_RELAXED = 2.5     # 2. kolo: min. jeden tým střílí >= 2.5 g/z
+MIN_CONCEDED_STRICT = 3.0    # 1. kolo: oba >= 3.0 (conceded nebo scored)
+MIN_CONCEDED_RELAXED = 2.5   # 2. kolo: oba >= 2.5 (conceded nebo scored)
+MIN_SCORED_STRICT = 2.8      # 1. kolo: min. jeden >= 2.8 (scored nebo conceded)
+MIN_SCORED_RELAXED = 2.5     # 2. kolo: min. jeden >= 2.5 (scored nebo conceded)
+MAX_OTHER_LOW = 2.0          # druhý tým musí mít < 2.0
 MIN_PLAYED = 5               # Minimum odehraných zápasů
 
 # Země, ze kterých se v ČR nedá sázet
@@ -396,28 +401,46 @@ def main():
         expected_goals = (h_scored + a_conceded + a_scored + h_conceded) / 2
         c["_expected_goals"] = expected_goals
 
-        # 1. kolo (strict): oba conceded >= 3.0, min. jeden > 3.0,
-        #                    min. jeden scored >= 2.8
-        if (h_conceded >= MIN_CONCEDED_STRICT
-                and a_conceded >= MIN_CONCEDED_STRICT
-                and (h_conceded > MIN_CONCEDED_STRICT
-                     or a_conceded > MIN_CONCEDED_STRICT)
-                and (h_scored >= MIN_SCORED_STRICT
-                     or a_scored >= MIN_SCORED_STRICT)):
+        # 1. kolo (strict):
+        #   A) oba conceded >= 3.0, jeden scored >= 2.8 + druhý < 2.0
+        #   B) oba scored >= 3.0, jeden conceded >= 2.8 + druhý < 2.0
+        strict_a = (
+            h_conceded >= MIN_CONCEDED_STRICT
+            and a_conceded >= MIN_CONCEDED_STRICT
+            and ((h_scored >= MIN_SCORED_STRICT and a_scored < MAX_OTHER_LOW)
+                 or (a_scored >= MIN_SCORED_STRICT and h_scored < MAX_OTHER_LOW))
+        )
+        strict_b = (
+            h_scored >= MIN_CONCEDED_STRICT
+            and a_scored >= MIN_CONCEDED_STRICT
+            and ((h_conceded >= MIN_SCORED_STRICT and a_conceded < MAX_OTHER_LOW)
+                 or (a_conceded >= MIN_SCORED_STRICT and h_conceded < MAX_OTHER_LOW))
+        )
+        if strict_a or strict_b:
             tag = "Q-STRICT"
             qualified_strict.append(c)
-
-        # 2. kolo (relaxed): oba conceded >= 2.5, min. jeden scored >= 2.5
-        elif (h_conceded >= MIN_CONCEDED_RELAXED
-                and a_conceded >= MIN_CONCEDED_RELAXED
-                and (h_scored >= MIN_SCORED_RELAXED
-                     or a_scored >= MIN_SCORED_RELAXED)):
-            tag = "Q-RELAX"
-            qualified_relaxed.append(c)
-
         else:
-            tag = "---"
-            rest_candidates.append(c)
+            # 2. kolo (relaxed):
+            #   A) oba conceded >= 2.5, jeden scored >= 2.5 + druhý < 2.0
+            #   B) oba scored >= 2.5, jeden conceded >= 2.5 + druhý < 2.0
+            relax_a = (
+                h_conceded >= MIN_CONCEDED_RELAXED
+                and a_conceded >= MIN_CONCEDED_RELAXED
+                and ((h_scored >= MIN_SCORED_RELAXED and a_scored < MAX_OTHER_LOW)
+                     or (a_scored >= MIN_SCORED_RELAXED and h_scored < MAX_OTHER_LOW))
+            )
+            relax_b = (
+                h_scored >= MIN_CONCEDED_RELAXED
+                and a_scored >= MIN_CONCEDED_RELAXED
+                and ((h_conceded >= MIN_SCORED_RELAXED and a_conceded < MAX_OTHER_LOW)
+                     or (a_conceded >= MIN_SCORED_RELAXED and h_conceded < MAX_OTHER_LOW))
+            )
+            if relax_a or relax_b:
+                tag = "Q-RELAX"
+                qualified_relaxed.append(c)
+            else:
+                tag = "---"
+                rest_candidates.append(c)
 
         print(f"      → [{tag}] home: scored={h_scored:.1f} conc={h_conceded:.1f}"
               f" | away: scored={a_scored:.1f} conc={a_conceded:.1f}"
@@ -436,6 +459,8 @@ def main():
     # 1. kolo
     print(f"\n--- 1. kolo výběru (strict: conceded >= {MIN_CONCEDED_STRICT}) ---")
     picked1 = weighted_pick(qualified_strict, PICK_COUNT)
+    for m in picked1:
+        m["qualified15"] = True
     selected.extend(picked1)
     print(f"   Vybráno: {len(picked1)}")
 
@@ -445,6 +470,8 @@ def main():
         used_leagues = {m["league"] for m in selected}
         avail = [m for m in qualified_relaxed if m["league"] not in used_leagues]
         picked2 = weighted_pick(avail, PICK_COUNT - len(selected))
+        for m in picked2:
+            m["qualified13"] = True
         selected.extend(picked2)
         print(f"   Doplněno: {len(picked2)}, celkem: {len(selected)}")
 
@@ -489,4 +516,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
