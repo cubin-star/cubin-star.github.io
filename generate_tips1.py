@@ -358,7 +358,17 @@ def filter_by_goal_criteria(candidates):
                 c["a_for"] = info["a_for"]
                 c["h_agn"] = info["h_agn"]
                 c["a_agn"] = info["a_agn"]
-                print(f" OK {info['detail']}")
+                # Determine round qualifications for this match
+                rounds_tag = ""
+                if _qualifies_round1(c):
+                    rounds_tag += "[R1]"
+                if _qualifies_round2(c):
+                    rounds_tag += "[R2]"
+                if _qualifies_round3(c):
+                    rounds_tag += "[R3]"
+                if not rounds_tag:
+                    rounds_tag = "[--]"
+                print(f" OK {rounds_tag} {info['detail']}")
                 qualified.append(c)
             else:
                 print(" fail criteria")
@@ -458,6 +468,8 @@ def select_best_tips(qualified, pool, all_odds, fixtures, num=NUM_TIPS):
             m["_qualified"] = True
             m["_round"] = 1
         print(f"  Vyber (1. kolo): {len(selected)} from {len(round1)}")
+        for m in selected:
+            print(f"    >>> [VYBRAN R1] {m['Match']} ({m['League']}) - {m.get('detail','')}")
     else:
         # Take all round 1 picks first
         selected = weighted_pick(round1, min(len(round1), num))
@@ -465,6 +477,8 @@ def select_best_tips(qualified, pool, all_odds, fixtures, num=NUM_TIPS):
             m["_qualified"] = True
             m["_round"] = 1
         print(f"  Vyber (1. kolo): {len(selected)} from {len(round1)}")
+        for m in selected:
+            print(f"    >>> [VYBRAN R1] {m['Match']} ({m['League']}) - {m.get('detail','')}")
 
         # --- Round 2: remaining qualified with BOTH teams conceded >= 1.3 ---
         if len(selected) < num:
@@ -482,6 +496,8 @@ def select_best_tips(qualified, pool, all_odds, fixtures, num=NUM_TIPS):
                 m["_round"] = 2
             selected.extend(r2_picks)
             print(f"  Vyber (2. kolo): {len(r2_picks)} doplneno, celkem {len(selected)}")
+            for m in r2_picks:
+                print(f"    >>> [VYBRAN R2] {m['Match']} ({m['League']}) - {m.get('detail','')}")
 
     # --- Round 3: conceded(oba>1) + scored(jeden>=1.3, druhy<1) OR scored(oba>1) + conceded(jeden>=1.3, druhy<1) ---
     if len(selected) < num:
@@ -499,6 +515,8 @@ def select_best_tips(qualified, pool, all_odds, fixtures, num=NUM_TIPS):
             m["_round"] = 3
         selected.extend(r3_picks)
         print(f"  Vyber (3. kolo): {len(r3_picks)} doplneno, celkem {len(selected)}")
+        for m in r3_picks:
+            print(f"    >>> [VYBRAN R3] {m['Match']} ({m['League']}) - {m.get('detail','')}")
 
     # Fallback (4. kolo): fill remaining from pool (European top leagues first, unique leagues)
     if len(selected) < num:
@@ -530,7 +548,11 @@ def select_best_tips(qualified, pool, all_odds, fixtures, num=NUM_TIPS):
                 selected.append(m)
                 used_leagues.add(m["League"])
 
+        # Print all fallback picks
+        fallback_picks = [m for m in selected if not m.get("_round")]
         print(f"  Fallback (4. kolo): doplneno na {len(selected)} (evropske 1. ligy, pak pool, unikatni ligy)")
+        for m in fallback_picks:
+            print(f"    >>> [VYBRAN FALLBACK] {m['Match']} ({m['League']}) - {m.get('detail','N/A')}")
 
     # Shuffle before split so app assignment is also random
     random.shuffle(selected)
@@ -612,12 +634,22 @@ def main():
     app1_tips = fmt(app1_raw)
     app2_tips = fmt(app2_raw)
 
+    def _round_label(t):
+        if t.get("qualified15"):
+            return "[Kolo 1]"
+        elif t.get("qualified13"):
+            return "[Kolo 2]"
+        elif t.get("qualified10"):
+            return "[Kolo 3]"
+        else:
+            return "[Fallback]"
+
     print(f"\n  {OUTPUT_APP1} ({len(app1_tips)} tips):")
     for t in app1_tips:
-        print(f"    {t['League']}: {t['Match']} - {t['Tip']} @ {t['Odds']}")
+        print(f"    {_round_label(t)} {t['League']}: {t['Match']} - {t['Tip']} @ {t['Odds']}")
     print(f"  {OUTPUT_APP2} ({len(app2_tips)} tips):")
     for t in app2_tips:
-        print(f"    {t['League']}: {t['Match']} - {t['Tip']} @ {t['Odds']}")
+        print(f"    {_round_label(t)} {t['League']}: {t['Match']} - {t['Tip']} @ {t['Odds']}")
 
     with open(OUTPUT_APP1, "w", encoding="utf-8") as f:
         json.dump(app1_tips, f, indent=2, ensure_ascii=False)
