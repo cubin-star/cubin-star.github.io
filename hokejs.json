@@ -1,20 +1,15 @@
 [
   {
-    "League": "National League - South",
-    "Match": "Chesham United vs AFC Hornchurch",
-    "Tip": "Over 2.5",
-    "Odds": "1.81"
+    "league": "DEL 2",
+    "match": "Landshut vs Krefeld Pinguine",
+    "tip": "Over 5.5",
+    "odds": "1.8",
+    "qualified13": true
   },
   {
-    "League": "Non League Premier - Northern",
-    "Match": "United of Manchester vs Stockton Town",
-    "Tip": "Over 2.5",
-    "Odds": "1.81"
-  },
-  {
-    "League": "National League - North",
-    "Match": "Leamington vs King's Lynn Town",
-    "Tip": "Over 2.5",
-    "Odds": "1.91"
+    "league": "Liiga",
+    "match": "Hameenlinna vs Lukko",
+    "tip": "Over 5.5",
+    "odds": "2.95"
   }
 ]
