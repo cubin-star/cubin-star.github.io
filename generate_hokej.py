@@ -28,6 +28,7 @@ OUTPUT = "hokejs.json"
 
 MIN_ODDS = 1.75
 MAX_ODDS = 3.00
+MIN_GAMES = 5
 
 EXCLUDED_COUNTRIES = {"russia", "belarus"}
 
@@ -127,6 +128,11 @@ def meets_criteria(home_stats, away_stats):
     Variant B: scored(one >= 3.3, other >= 3.5)  + conceded(one < 2.2, other >= 2.9)
     """
     if not home_stats or not away_stats:
+        return False, ""
+
+    h_played = int(_sf(home_stats.get("games", {}).get("played", {}).get("all", 0)))
+    a_played = int(_sf(away_stats.get("games", {}).get("played", {}).get("all", 0)))
+    if h_played < MIN_GAMES or a_played < MIN_GAMES:
         return False, ""
 
     h_for = _sf(home_stats.get("goals", {}).get("for", {}).get("average", {}).get("all"))
@@ -240,6 +246,7 @@ def main():
                 "away_id": g["away_id"],
                 "odds_55": over55,
                 "odds_45": over45,
+                "timestamp": g["timestamp"],
             })
         else:
             print(" no O5.5+O4.5 in range")
@@ -262,11 +269,13 @@ def main():
         ok, detail = meets_criteria(home_stats, away_stats)
         if ok:
             print(f" ★ {detail} | O5.5={c['odds_55']} → O4.5={c['odds_45']}")
+            kickoff = datetime.fromtimestamp(c["timestamp"], tz=timezone.utc).strftime("%Y-%m-%dT%H:%M:%S+00:00")
             results.append({
                 "league": c["league"],
                 "match": c["match"],
                 "tip": "Over 4.5",
                 "odds": c["odds_45"],
+                "date": kickoff,
             })
         else:
             print(" fail")
