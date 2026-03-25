@@ -1,20 +1,22 @@
 [
   {
-    "League": "National League - South",
-    "Match": "Chesham United vs AFC Hornchurch",
+    "League": "3. Lig - Group 1",
+    "Match": "Çorluspor 1947 vs Bursa Yıldırımspor",
     "Tip": "Over 2.5",
-    "Odds": "1.81"
+    "Odds": "1.86"
   },
   {
-    "League": "Non League Premier - Northern",
-    "Match": "United of Manchester vs Stockton Town",
+    "League": "Thai League 2",
+    "Match": "Kasetsart FC vs Sisaket United",
     "Tip": "Over 2.5",
-    "Odds": "1.81"
+    "Odds": "1.89",
+    "qualified13": true
   },
   {
-    "League": "National League - North",
-    "Match": "Leamington vs King's Lynn Town",
+    "League": "Campeonato de Portugal Prio - Group A",
+    "Match": "Os Limianos vs Ribeira Brava",
     "Tip": "Over 2.5",
-    "Odds": "1.91"
+    "Odds": "1.79",
+    "qualified10": true
   }
 ]

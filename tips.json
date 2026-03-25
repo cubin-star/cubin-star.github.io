@@ -1,15 +1,16 @@
 [
   {
-    "League": "Non League Premier - Southern Central",
-    "Match": "Stratford Town vs Stamford",
+    "League": "2. Lig",
+    "Match": "Menemen Belediyespor vs Mardin BB",
     "Tip": "Over 2.5",
-    "Odds": "1.82",
-    "qualified13": true
+    "Odds": "1.85",
+    "qualified15": true
   },
   {
     "League": "National League",
-    "Match": "FC Halifax Town vs Carlisle",
+    "Match": "Scunthorpe vs Rochdale",
     "Tip": "Over 2.5",
-    "Odds": "1.76"
+    "Odds": "1.78",
+    "qualified15": true
   }
 ]
