@@ -1,0 +1,53 @@
+# SureBets History Evaluator – runs every day at 6:50 AM UTC
+# Evaluates yesterday's predictions (fotbals.json, hokejs.json, baskets.json)
+# by checking final scores via API, then writes history.json.
+# Must run BEFORE the generators (which overwrite prediction files at 7:00).
+#
+# SETUP:
+# 1. Copy this file to your GitHub Pages repo:
+#    cubin-star/cubin-star.github.io/.github/workflows/surebets-history.yml
+# 2. Copy tools/generate_history.py to the root of that repo
+# 3. In the repo Settings → Secrets → Actions, ensure these exist:
+#    API_FOOTBALL_KEY1   = your football API key
+#    API_HOCKEY_KEY      = your hockey API key
+#    API_BASKETBALL_KEY  = your basketball API key
+# 4. Enable Actions in the repo
+
+name: SureBets History Evaluator
+
+on:
+  schedule:
+    # Every day at 6:50 AM UTC (10 min before generators)
+    - cron: '50 6 * * *'
+  workflow_dispatch:
+    # Allow manual trigger from GitHub UI
+
+permissions:
+  contents: write
+
+jobs:
+  evaluate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Evaluate history
+        env:
+          API_FOOTBALL_KEY1: ${{ secrets.API_FOOTBALL_KEY1 }}
+          API_HOCKEY_KEY: ${{ secrets.API_HOCKEY_KEY }}
+          API_BASKETBALL_KEY: ${{ secrets.API_BASKETBALL_KEY }}
+        run: python generate_history.py
+
+      - name: Commit and push
+        run: |
+          git config user.name "SureBets Bot"
+          git config user.email "bot@surebets.app"
+          git add history.json pending.json
+          git diff --staged --quiet || git commit -m "📊 History update $(date -u +%Y-%m-%d)"
+          git push
