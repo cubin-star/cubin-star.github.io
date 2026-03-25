@@ -38,7 +38,7 @@ HOCKEY_URL = "https://v1.hockey.api-sports.io"
 BASKETBALL_URL = "https://v1.basketball.api-sports.io"
 
 # Wait this long after kickoff before trying to evaluate
-MATCH_BUFFER = timedelta(hours=3)
+MATCH_BUFFER = timedelta(hours=2)
 
 request_count = 0
 
