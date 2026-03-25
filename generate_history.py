@@ -37,6 +37,9 @@ FOOTBALL_URL = "https://v3.football.api-sports.io"
 HOCKEY_URL = "https://v1.hockey.api-sports.io"
 BASKETBALL_URL = "https://v1.basketball.api-sports.io"
 
+# Wait this long after kickoff before trying to evaluate
+MATCH_BUFFER = timedelta(hours=3)
+
 request_count = 0
 
 
@@ -113,12 +116,22 @@ def parse_match_teams(match_str):
 
 
 def parse_date(date_str):
-    """Parse ISO date string → date object."""
+    """Parse ISO date string → date object (for API queries)."""
     if not date_str:
         return None
     try:
         dt = datetime.fromisoformat(date_str.replace("Z", "+00:00"))
         return dt.date()
+    except ValueError:
+        return None
+
+
+def parse_kickoff(date_str):
+    """Parse ISO date string → full datetime with timezone."""
+    if not date_str:
+        return None
+    try:
+        return datetime.fromisoformat(date_str.replace("Z", "+00:00"))
     except ValueError:
         return None
 
@@ -363,9 +376,9 @@ def main():
             print(f"  SKIP (no date): {match_str}")
             continue
 
-        # Skip items whose date is still in the future
-        d = parse_date(date_str)
-        if d and d >= now.date():
+        # Skip items whose kickoff + buffer is still in the future
+        kickoff = parse_kickoff(date_str)
+        if kickoff and (kickoff + MATCH_BUFFER) > now:
             still_pending.append(item)
             continue
 
