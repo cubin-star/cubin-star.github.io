@@ -1,1 +1,22 @@
-[]
+[
+  {
+    "sport": "basketball",
+    "league": "NBL",
+    "match": "Pardubice vs Opava",
+    "tip": "Over 166",
+    "odds": "1.55",
+    "date": "2026-03-25T16:30:00+00:00",
+    "score": "79:75",
+    "result": "✗"
+  },
+  {
+    "sport": "basketball",
+    "league": "1 Liga",
+    "match": "Lancut vs Bydgoszcz",
+    "tip": "Over 164.5",
+    "odds": "1.60",
+    "date": "2026-03-25T16:00:00+00:00",
+    "score": "79:71",
+    "result": "✗"
+  }
+]
