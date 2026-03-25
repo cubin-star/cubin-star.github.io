@@ -31,22 +31,21 @@ DELAY = 0.3
 OUTPUT = "baskets.json"
 
 EXCLUDED_COUNTRIES = {"russia", "belarus"}
-MIN_GAMES = 5
+MIN_GAMES = 10
 
 # Target odds for line selection
 SELECTION_ODDS = 1.80   # find the Over line near this odds (≈ "Over 2.5" equivalent)
-OUTPUT_ODDS = 1.45       # find the safer Over line near this odds (≈ "Over 1.5" equivalent)
-ODDS_TOLERANCE = 0.35    # max deviation from target
+OUTPUT_ODDS = 1.35       # find the safer Over line near this odds (lower = safer line)
+ODDS_TOLERANCE = 0.25    # max deviation from target
 
 # Variant A/B ratios (relative to half_line = selection_line / 2)
-# Proportionally derived from football, compressed for basketball:
-#   Football: scored <1/>=1.3 → ratios 0.80/1.04 of half-line
-#   Football: conceded >=1.5/>=1.6 → ratios 1.20/1.28 of half-line
-#   Basketball: compressed because scoring variance is ~7× tighter
-SCORED_LOW_R = 0.96          # scores < 96% of expected → weak offense
-SCORED_DECENT_R = 1.02       # scores >= 102% of expected → solid offense
-CONCEDED_HIGH_R = 1.04       # concedes >= 104% of expected → weak defense
-CONCEDED_VERY_HIGH_R = 1.06  # concedes >= 106% of expected → very weak defense
+# Stricter thresholds for better Over selection quality:
+#   Wider spread between low/decent scored → must clearly differ
+#   Higher conceded thresholds → must clearly concede a lot
+SCORED_LOW_R = 0.93          # scores < 93% of expected → clearly weak offense
+SCORED_DECENT_R = 1.05       # scores >= 105% of expected → clearly strong offense
+CONCEDED_HIGH_R = 1.07       # concedes >= 107% of expected → clearly leaky defense
+CONCEDED_VERY_HIGH_R = 1.09  # concedes >= 109% of expected → very leaky defense
 
 request_count = 0
 
