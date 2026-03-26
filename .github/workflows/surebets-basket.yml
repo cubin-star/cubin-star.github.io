@@ -47,4 +47,5 @@ jobs:
           git config user.email "bot@surebets.app"
           git add baskets.json
           git diff --staged --quiet || git commit -m "🏀 SureBets basketball tips $(date -u +%Y-%m-%d)"
+          git pull --rebase
           git push
