@@ -26,7 +26,7 @@ BASE_URL = "https://v1.hockey.api-sports.io"
 DELAY = 0.3
 OUTPUT = "hokejs.json"
 
-MIN_ODDS = 1.60
+MIN_ODDS = 1.55
 MAX_ODDS = 3.00
 MIN_GAMES = 5
 
@@ -291,3 +291,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
