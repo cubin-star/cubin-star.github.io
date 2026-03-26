@@ -1,5 +1,5 @@
 """
-Ultimate Football Overs - Daily Tip Generator v14 (experiment)
+Ultimate Football Overs - Daily Tip Generator v15
 
 Logika:
   1. Blacklist (youth/reserve/amateur/women/esports)
@@ -9,17 +9,16 @@ Logika:
   5. Vickolovy vyber:
      a) 1. kolo: Varianta A: scored(jeden<1, druhy>=1.3) + conceded(jeden>=1.5, druhy>=1.6)
                 Varianta B: scored(jeden>=1.5, druhy>=1.6) + conceded(jeden<1, druhy>=1.3)
-        - pokud >= 5: vyber 5 (nahodnym vyberem), konec
+        - pokud >= 3: vyber 3 (nahodnym vyberem), konec
      b) 2. kolo: Varianta A: scored(jeden<1, druhy>=1.3) + conceded(oba>=1.3)
                 Varianta B: scored(oba>=1.3) + conceded(jeden<1, druhy>=1.3)
-        - doplni zbyvajici mista do 5
+        - doplni zbyvajici mista do 3
      c) 3. kolo: Varianta A: conceded(oba>1) + scored(jeden>=1.3, druhy<1)
                 Varianta B: scored(oba>1) + conceded(jeden>=1.3, druhy<1)
-        - doplni zbyvajici mista do 5
+        - doplni zbyvajici mista do 3
      d) Fallback: evropske prvni ligy, pak pool (unikatni ligy)
   6. Nahodny vyber: vaha = expectedGoals z predictions
      - kazdy zapas z jine ligy
-  7. 5 zapasu -> split 3+2
 
 API: https://www.api-football.com/ (7500 req/day)
 Env: API_FOOTBALL_KEY1
@@ -27,7 +26,6 @@ Analyza: az 200 kandidatu, delay 0.3s
 
 Output:
   fotbal.json - 3 tips (Ultimate Football Overs)
-  tips.json   - 2 tips (Profi Football Overs)
 """
 
 import os
@@ -47,11 +45,10 @@ MIN_SCORED_ONE = 1.3
 MIN_CONCEDED_R1 = 1.5
 MIN_CONCEDED_R2 = 1.3
 MIN_GAMES = 5
-NUM_TIPS = 5
+NUM_TIPS = 3
 DELAY = 0.3
 MAX_ANALYZE = 200
 OUTPUT_APP1 = "fotbal.json"
-OUTPUT_APP2 = "tips.json"
 request_count = 0
 
 EXCLUDED_COUNTRIES = {"russia", "belarus"}
@@ -554,13 +551,8 @@ def select_best_tips(qualified, pool, all_odds, fixtures, num=NUM_TIPS):
         for m in fallback_picks:
             print(f"    >>> [VYBRAN FALLBACK] {m['Match']} ({m['League']}) - {m.get('detail','N/A')}")
 
-    # Shuffle before split so app assignment is also random
     random.shuffle(selected)
-
-    # Split: app1 gets 3 tips, app2 gets 2 tips
-    app1 = selected[:3]
-    app2 = selected[3:5]
-    return app1, app2
+    return selected[:num]
 
 
 # ===== MAIN =====
@@ -574,10 +566,10 @@ def main():
     today = now.strftime("%Y-%m-%d")
     tomorrow = (now + timedelta(days=1)).strftime("%Y-%m-%d")
 
-    print(f"== generate_tips1 v14 (experiment) ==")
+    print(f"== generate_tips1 v15 ==")
     print(f"Time: {now.strftime('%Y-%m-%d %H:%M UTC')}")
     print(f"Over 2.5 | odds {MIN_ODDS}-{MAX_ODDS} | min 1 tym scored>={MIN_SCORED_ONE} | conceded R1>={MIN_CONCEDED_R1} R2>={MIN_CONCEDED_R2} | min {MIN_GAMES} zapasu")
-    print(f"Output: {OUTPUT_APP1} (3) + {OUTPUT_APP2} (2)\n")
+    print(f"Output: {OUTPUT_APP1} (3)\n")
 
     # Fixtures
     fixtures_today = fetch_fixtures(today)
@@ -614,8 +606,8 @@ def main():
     qualified = filter_by_goal_criteria(candidates)
     print(f"\n  Splnuje kriteria: {len(qualified)}/{len(candidates)}")
 
-    # Select (weighted pick + fallbacks for always 5 tips)
-    app1_raw, app2_raw = select_best_tips(qualified, candidates, all_odds, all_fixtures)
+    # Select (weighted pick + fallbacks for 3 tips)
+    selected_raw = select_best_tips(qualified, candidates, all_odds, all_fixtures)
 
     def fmt(tips):
         out = []
@@ -631,8 +623,7 @@ def main():
             out.append(entry)
         return out
 
-    app1_tips = fmt(app1_raw)
-    app2_tips = fmt(app2_raw)
+    app1_tips = fmt(selected_raw)
 
     def _round_label(t):
         if t.get("qualified15"):
@@ -647,16 +638,11 @@ def main():
     print(f"\n  {OUTPUT_APP1} ({len(app1_tips)} tips):")
     for t in app1_tips:
         print(f"    {_round_label(t)} {t['League']}: {t['Match']} - {t['Tip']} @ {t['Odds']}")
-    print(f"  {OUTPUT_APP2} ({len(app2_tips)} tips):")
-    for t in app2_tips:
-        print(f"    {_round_label(t)} {t['League']}: {t['Match']} - {t['Tip']} @ {t['Odds']}")
 
     with open(OUTPUT_APP1, "w", encoding="utf-8") as f:
         json.dump(app1_tips, f, indent=2, ensure_ascii=False)
-    with open(OUTPUT_APP2, "w", encoding="utf-8") as f:
-        json.dump(app2_tips, f, indent=2, ensure_ascii=False)
 
-    print(f"\n  Written: {OUTPUT_APP1} ({len(app1_tips)}), {OUTPUT_APP2} ({len(app2_tips)})")
+    print(f"\n  Written: {OUTPUT_APP1} ({len(app1_tips)})")
     print(f"  API requests: {request_count} / 7500 ({request_count*100//7500}%)")
 
 
