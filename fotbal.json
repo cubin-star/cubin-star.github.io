@@ -1,22 +1,20 @@
 [
   {
-    "League": "3. Lig - Group 1",
-    "Match": "Çorluspor 1947 vs Bursa Yıldırımspor",
+    "League": "Copa Norte",
+    "Match": "Porto Velho vs Remo",
     "Tip": "Over 2.5",
-    "Odds": "1.86"
+    "Odds": "1.91"
   },
   {
-    "League": "Thai League 2",
-    "Match": "Kasetsart FC vs Sisaket United",
+    "League": "Friendlies",
+    "Match": "Brazil vs France",
     "Tip": "Over 2.5",
-    "Odds": "1.89",
-    "qualified13": true
+    "Odds": "1.75"
   },
   {
-    "League": "Campeonato de Portugal Prio - Group A",
-    "Match": "Os Limianos vs Ribeira Brava",
+    "League": "FIFA Series",
+    "Match": "Aruba vs Mação",
     "Tip": "Over 2.5",
-    "Odds": "1.79",
-    "qualified10": true
+    "Odds": "1.85"
   }
 ]
