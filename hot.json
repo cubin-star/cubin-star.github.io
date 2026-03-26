@@ -11,12 +11,34 @@
     "qualified10": false
   },
   {
+    "league": "Second League",
+    "match": "Maleyet Kafr El Zayiat - Abu Qair Semad",
+    "kickoff": "2026-03-26T14:30:00+01:00",
+    "tip": "Over 2.5",
+    "odds": "2.78",
+    "group": 1,
+    "qualified15": false,
+    "qualified13": false,
+    "qualified10": false
+  },
+  {
+    "league": "World Cup - Qualification Europe",
+    "match": "Ukraine - Sweden",
+    "kickoff": "2026-03-26T20:45:00+01:00",
+    "tip": "Over 2.5",
+    "odds": "2.12",
+    "group": 2,
+    "qualified15": true,
+    "qualified13": false,
+    "qualified10": false
+  },
+  {
     "league": "Liga Profesional Argentina",
     "match": "Argentinos JRS - Lanus",
     "kickoff": "2026-03-27T01:00:00+01:00",
     "tip": "Over 2.5",
     "odds": "2.72",
-    "group": 1,
+    "group": 2,
     "qualified15": false,
     "qualified13": false,
     "qualified10": false
@@ -27,28 +49,6 @@
     "kickoff": "2026-03-26T18:00:00+01:00",
     "tip": "Over 2.5",
     "odds": "2.15",
-    "group": 2,
-    "qualified15": false,
-    "qualified13": false,
-    "qualified10": false
-  },
-  {
-    "league": "UEFA Nations League",
-    "match": "Malta - Luxembourg",
-    "kickoff": "2026-03-26T18:00:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.53",
-    "group": 2,
-    "qualified15": false,
-    "qualified13": false,
-    "qualified10": false
-  },
-  {
-    "league": "Asian Cup - Qualification",
-    "match": "Afghanistan - Myanmar",
-    "kickoff": "2026-03-26T11:30:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.18",
     "group": 3,
     "qualified15": false,
     "qualified13": false,
@@ -56,10 +56,10 @@
   },
   {
     "league": "Primera División - Apertura",
-    "match": "Danubio - Defensor Sporting",
-    "kickoff": "2026-03-26T20:00:00+01:00",
+    "match": "Racing Montevideo - Progreso",
+    "kickoff": "2026-03-26T17:00:00+01:00",
     "tip": "Over 2.5",
-    "odds": "2.35",
+    "odds": "2.25",
     "group": 3,
     "qualified15": false,
     "qualified13": false,
