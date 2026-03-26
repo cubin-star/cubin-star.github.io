@@ -241,13 +241,14 @@ async function getPrediction(fixtureId) {
 
 
 // Vazeny nahodny vyber bez opakovani; vaha = ocekavane goly zapasu
-// Kazdy zapas z jine ligy
-function weightedPick(items, count) {
+// allowSameLeague = true: povoli vice zapasu ze stejne ligy (max 1 na skupinu)
+function weightedPick(items, count, allowSameLeague = false) {
     const result = [];
-    const usedLeagues = new Set();
+    const leagueCounts = new Map();
+    const maxPerLeague = allowSameLeague ? Math.ceil(count / 2) : 1;
     const remaining = [...items];
     for (let i = 0; i < count && remaining.length > 0; i++) {
-        const available = remaining.filter(m => !usedLeagues.has(m.league));
+        const available = remaining.filter(m => (leagueCounts.get(m.league) || 0) < maxPerLeague);
         if (available.length === 0) break;
         const weights = available.map(m => m.expectedGoals || 1);
         const totalW = weights.reduce((a, b) => a + b, 0);
@@ -259,7 +260,7 @@ function weightedPick(items, count) {
         }
         const pick = available[idx];
         result.push(pick);
-        usedLeagues.add(pick.league);
+        leagueCounts.set(pick.league, (leagueCounts.get(pick.league) || 0) + 1);
         remaining.splice(remaining.indexOf(pick), 1);
     }
     return result;
@@ -270,12 +271,32 @@ function balanceGroups(picks) {
     if (n <= 2) return picks.map(p => ({ ...p, group: 1 }));
     const indices = picks.map((_, i) => i);
     const allP = generatePairings(indices);
+
+    // Pomocna fce: ma pairing konflikt (stejna liga ve stejne skupine)?
+    function hasLeagueConflict(pairing) {
+        return pairing.some(pair => {
+            const leagues = pair.map(idx => picks[idx].league);
+            return new Set(leagues).size < leagues.length;
+        });
+    }
+
+    // Preferuj rozdeleni bez konfliktu lig ve skupine
     let bestP = null, bestD = Infinity;
     for (const pairing of allP) {
+        if (hasLeagueConflict(pairing)) continue;
         const gO = pairing.map(pair => pair.reduce((a, idx) => a * parseFloat(picks[idx].odds), 1));
         const diff = Math.max(...gO) - Math.min(...gO);
         if (diff < bestD) { bestD = diff; bestP = pairing; }
     }
+    // Fallback: pokud zadne rozdeleni bez konfliktu neexistuje, pouzij nejlepsi kurzove
+    if (!bestP) {
+        for (const pairing of allP) {
+            const gO = pairing.map(pair => pair.reduce((a, idx) => a * parseFloat(picks[idx].odds), 1));
+            const diff = Math.max(...gO) - Math.min(...gO);
+            if (diff < bestD) { bestD = diff; bestP = pairing; }
+        }
+    }
+
     const result = [];
     for (let g = 0; g < bestP.length; g++) { for (const idx of bestP[g]) result.push({ ...picks[idx], group: g + 1 }); }
     return result;
@@ -422,7 +443,7 @@ async function main() {
     // 1. kolo vyberu: z qualified15 (obdrzene >= 1.5)
     const selected = [];
     console.log('\n--- 1. kolo vyberu (obdrzene >= 1.5) ---');
-    const picked15 = weightedPick(qualified15, PICK_COUNT);
+    const picked15 = weightedPick(qualified15, PICK_COUNT, true);
     for (const m of picked15) { m._qualified15 = true; selected.push(m); }
     console.log('Vybrano z 1. kola: ' + selected.length + ' zapasu');
 
