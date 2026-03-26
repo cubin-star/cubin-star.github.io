@@ -3,9 +3,9 @@
 SureBets Hockey Bot – generates hokejs.json
 Runs daily at 7:00 UTC via GitHub Actions.
 
-Selection: Over 5.5 odds (1.75–3.00) + Variant A/B criteria
-(thresholds scaled ×2.2 from football for hockey goal rates)
-Output: Over 4.5 with odds from API
+Selection: Over 4.5 odds (1.60–3.00) + Variant A/B criteria
+(thresholds scaled ×1.8 from football for hockey goal rates)
+Output: Over 3.5 with odds from API
 
 SETUP:
   1. Copy this file to the root of cubin-star/cubin-star.github.io
@@ -26,19 +26,19 @@ BASE_URL = "https://v1.hockey.api-sports.io"
 DELAY = 0.3
 OUTPUT = "hokejs.json"
 
-MIN_ODDS = 1.75
+MIN_ODDS = 1.60
 MAX_ODDS = 3.00
 MIN_GAMES = 5
 
 EXCLUDED_COUNTRIES = {"russia", "belarus"}
 
-# Hockey criteria (football thresholds × 2.2 for Over 5.5)
+# Hockey criteria (football thresholds × 1.8 for Over 4.5)
 #   Football: scored <1 / >=1.3, conceded >=1.5 / >=1.6
-#   Hockey:   scored <2.2 / >=2.9, conceded >=3.3 / >=3.5
-SCORED_LOW = 2.2
-SCORED_DECENT = 2.9
-CONCEDED_HIGH = 3.3
-CONCEDED_VERY_HIGH = 3.5
+#   Hockey:   scored <1.8 / >=2.4, conceded >=2.7 / >=2.9
+SCORED_LOW = 1.8
+SCORED_DECENT = 2.4
+CONCEDED_HIGH = 2.7
+CONCEDED_VERY_HIGH = 2.9
 
 request_count = 0
 
@@ -124,8 +124,8 @@ def _sf(val, default=0.0):
 
 def meets_criteria(home_stats, away_stats):
     """
-    Variant A: scored(one < 2.2, other >= 2.9)  + conceded(one >= 3.3, other >= 3.5)
-    Variant B: scored(one >= 3.3, other >= 3.5)  + conceded(one < 2.2, other >= 2.9)
+    Variant A: scored(one < 1.8, other >= 2.4)  + conceded(one >= 2.7, other >= 2.9)
+    Variant B: scored(one >= 2.7, other >= 2.9)  + conceded(one < 1.8, other >= 2.4)
     """
     if not home_stats or not away_stats:
         return False, ""
@@ -159,12 +159,12 @@ def meets_criteria(home_stats, away_stats):
 
 
 def find_odds(odds_data):
-    """Find Over 5.5 odds (for selection) and Over 4.5 odds (for output).
-    Returns (over55_odd, over45_odd) or (None, None)."""
+    """Find Over 4.5 odds (for selection) and Over 3.5 odds (for output).
+    Returns (over45_odd, over35_odd) or (None, None)."""
     for resp in odds_data:
         for bk in resp.get("bookmakers", []):
-            over55 = None
             over45 = None
+            over35 = None
             for bet in bk.get("bets", []):
                 # Bet 4 = Over/Under (full game), Bet 52 = Over/Under (Reg Time)
                 if bet.get("id") not in (4, 52) and "over/under" not in bet.get("name", "").lower():
@@ -178,12 +178,12 @@ def find_odds(odds_data):
                         odd_val = float(val.get("odd", "0"))
                     except ValueError:
                         continue
-                    if v == "over 5.5" and MIN_ODDS <= odd_val <= MAX_ODDS:
-                        over55 = str(val.get("odd"))
-                    if v == "over 4.5":
+                    if v == "over 4.5" and MIN_ODDS <= odd_val <= MAX_ODDS:
                         over45 = str(val.get("odd"))
-            if over55 and over45:
-                return over55, over45
+                    if v == "over 3.5":
+                        over35 = str(val.get("odd"))
+            if over45 and over35:
+                return over45, over35
     return None, None
 
 
@@ -201,7 +201,7 @@ def main():
 
     print("== SureBets Hockey Bot ==")
     print(f"Time: {now.strftime('%Y-%m-%d %H:%M UTC')}")
-    print(f"Select: Over 5.5 odds {MIN_ODDS}–{MAX_ODDS} + Variant A/B → Output: Over 4.5")
+    print(f"Select: Over 4.5 odds {MIN_ODDS}–{MAX_ODDS} + Variant A/B → Output: Over 3.5")
     print(f"Thresholds: scored <{SCORED_LOW}/{SCORED_DECENT}+, conceded {CONCEDED_HIGH}+/{CONCEDED_VERY_HIGH}+\n")
 
     # 1. Fetch games
@@ -233,9 +233,9 @@ def main():
         label = f"{g['home']} vs {g['away']}"
         print(f"  [{i+1}/{len(filtered)}] {label[:45]:.<47s}", end="")
         odds_data = fetch_odds(gid)
-        over55, over45 = find_odds(odds_data)
-        if over55 and over45:
-            print(f" O5.5={over55} → O4.5={over45} ✓")
+        over45, over35 = find_odds(odds_data)
+        if over45 and over35:
+            print(f" O4.5={over45} → O3.5={over35} ✓")
             candidates.append({
                 "game_id": gid,
                 "league": g["league"],
@@ -244,14 +244,14 @@ def main():
                 "match": f"{g['home']} vs {g['away']}",
                 "home_id": g["home_id"],
                 "away_id": g["away_id"],
-                "odds_55": over55,
                 "odds_45": over45,
+                "odds_35": over35,
                 "timestamp": g["timestamp"],
             })
         else:
-            print(" no O5.5+O4.5 in range")
+            print(" no O4.5+O3.5 in range")
 
-    print(f"\n  {len(candidates)} candidates (Over 5.5 @ {MIN_ODDS}–{MAX_ODDS})\n")
+    print(f"\n  {len(candidates)} candidates (Over 4.5 @ {MIN_ODDS}–{MAX_ODDS})\n")
 
     if not candidates:
         print("No qualifying matches.")
@@ -268,13 +268,13 @@ def main():
         away_stats = fetch_team_stats(c["league_id"], c["season"], c["away_id"])
         ok, detail = meets_criteria(home_stats, away_stats)
         if ok:
-            print(f" ★ {detail} | O5.5={c['odds_55']} → O4.5={c['odds_45']}")
+            print(f" ★ {detail} | O4.5={c['odds_45']} → O3.5={c['odds_35']}")
             kickoff = datetime.fromtimestamp(c["timestamp"], tz=timezone.utc).strftime("%Y-%m-%dT%H:%M:%S+00:00")
             results.append({
                 "league": c["league"],
                 "match": c["match"],
-                "tip": "Over 4.5",
-                "odds": c["odds_45"],
+                "tip": "Over 3.5",
+                "odds": c["odds_35"],
                 "date": kickoff,
             })
         else:
