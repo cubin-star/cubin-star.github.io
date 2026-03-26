@@ -50,4 +50,5 @@ jobs:
           git config user.email "bot@surebets.app"
           git add history.json pending.json
           git diff --staged --quiet || git commit -m "📊 History update $(date -u +%Y-%m-%d)"
+          git pull --rebase
           git push
