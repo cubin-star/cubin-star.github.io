@@ -15,6 +15,7 @@ SETUP:
 
 import json
 import os
+import random
 import time
 import urllib.request
 from datetime import datetime, timedelta, timezone
@@ -24,6 +25,8 @@ API_KEY = os.environ.get("API_FOOTBALL_KEY1", "")
 BASE_URL = "https://v3.football.api-sports.io"
 DELAY = 0.3
 OUTPUT = "fotbals.json"
+OUTPUT_TIPS = "tips.json"
+MAX_TIPS = 2
 
 MIN_ODDS = 1.75
 MAX_ODDS = 3.00
@@ -253,6 +256,8 @@ def main():
         print("No fixtures found.")
         with open(OUTPUT, "w", encoding="utf-8") as f:
             json.dump([], f)
+        with open(OUTPUT_TIPS, "w", encoding="utf-8") as f:
+            json.dump([], f)
         return
 
     # 2. Odds (bet=5 = Goals Over/Under, paginated)
@@ -269,6 +274,8 @@ def main():
     if not candidates:
         print("No qualifying matches.")
         with open(OUTPUT, "w", encoding="utf-8") as f:
+            json.dump([], f)
+        with open(OUTPUT_TIPS, "w", encoding="utf-8") as f:
             json.dump([], f)
         return
 
@@ -300,8 +307,32 @@ def main():
     with open(OUTPUT, "w", encoding="utf-8") as f:
         json.dump(results, f, indent=2, ensure_ascii=False)
 
+    # 6. Write tips.json – max 2 random tips with Over 2.5
+    if results:
+        pool = [c for c in to_analyze if any(
+            r["Match"] == c["Match"] and r["Date"] == c["kickoff"]
+            for r in results
+        )]
+        selected = random.sample(pool, min(MAX_TIPS, len(pool)))
+        tips = []
+        for c in selected:
+            tips.append({
+                "League": c["League"],
+                "Match": c["Match"],
+                "Tip": "Over 2.5",
+                "Odds": c["Odds_25"],
+                "Date": c["kickoff"],
+            })
+        print(f"  Tips: {len(tips)} match(es) \u2192 {OUTPUT_TIPS}")
+    else:
+        tips = []
+
+    with open(OUTPUT_TIPS, "w", encoding="utf-8") as f:
+        json.dump(tips, f, indent=2, ensure_ascii=False)
+
     print(f"\n{'='*50}")
     print(f"  Results: {len(results)} match(es) → {OUTPUT}")
+    print(f"  Tips:    {len(tips)} match(es) → {OUTPUT_TIPS}")
     print(f"  API requests: {request_count} / 7500 ({request_count * 100 // 7500}%)")
 
 
