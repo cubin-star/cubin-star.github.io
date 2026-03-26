@@ -46,4 +46,6 @@ jobs:
           git add fotbals.json
           # Only commit if there are changes
           git diff --staged --quiet || git commit -m "⚽ SureBets tips $(date -u +%Y-%m-%d)"
+          git pull --rebase
           git push
+
