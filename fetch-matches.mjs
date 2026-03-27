@@ -256,25 +256,22 @@ async function main() {
     console.log('\nSelected: ' + selected.length + ' matches\n');
 
     if (selected.length === 0) {
-        const output = { error: true, matches: [], message: 'No qualifying matches found in the 48h window.' };
-        writeFileSync('hot.json', JSON.stringify(output, null, 2), 'utf-8');
-        console.log(output.message);
-        console.log('Written to hot.json (' + reqCount + ' API req)');
+        writeFileSync('hot.json', JSON.stringify([], null, 2), 'utf-8');
+        console.log('No qualifying matches found in the 48h window.');
+        console.log('Written empty array to hot.json (' + reqCount + ' API req)');
         process.exit(0);
     }
 
-    // Balance into groups and write output
+    // Balance into groups and write output (plain array)
     const grouped = balanceGroups(selected);
-    const matches = grouped.map(m => ({ league: m.league, match: m.match, kickoff: m.kickoff, tip: m.tip, odds: m.odds, group: m.group }));
-    const output = { fullAccumulator: fullAccumulator, matches: matches };
-    if (!fullAccumulator) output.message = "Today's accumulator could not be assembled - only " + matches.length + ' of ' + PICK_COUNT + ' matches found.';
+    const output = grouped.map(m => ({ league: m.league, match: m.match, kickoff: m.kickoff, tip: m.tip, odds: m.odds, group: m.group }));
     writeFileSync('hot.json', JSON.stringify(output, null, 2), 'utf-8');
 
-    if (!fullAccumulator) console.log('NOTE: ' + output.message);
-    console.log(matches.length + ' matches -> hot.json (' + reqCount + ' API req)\n');
-    const gc = Math.ceil(matches.length / 2);
+    if (!fullAccumulator) console.log('NOTE: Today\'s accumulator could not be assembled - only ' + output.length + ' of ' + PICK_COUNT + ' matches found.');
+    console.log(output.length + ' matches -> hot.json (' + reqCount + ' API req)\n');
+    const gc = Math.ceil(output.length / 2);
     for (let g = 1; g <= gc; g++) {
-        const gm = matches.filter(m => m.group === g);
+        const gm = output.filter(m => m.group === g);
         const go = gm.reduce((a, m) => a * parseFloat(m.odds), 1);
         console.log('  Gr.' + g + ' (' + go.toFixed(2) + '):');
         gm.forEach(m => console.log('     [' + m.league + '] ' + m.match + ' | ' + m.tip + ' @ ' + m.odds + ' | ' + m.kickoff));
