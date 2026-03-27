@@ -3,18 +3,10 @@
   "matches": [
     {
       "league": "J2/J3 League",
-      "match": "Thespakusatsu Gunma - Tochigi SC",
+      "match": "Yokohama FC - Shonan Bellmare",
       "kickoff": "2026-03-28T06:00:00+01:00",
       "tip": "Over 2.5",
-      "odds": "2.25",
-      "group": 1
-    },
-    {
-      "league": "National League",
-      "match": "Brackley Town - Tamworth",
-      "kickoff": "2026-03-28T16:00:00+01:00",
-      "tip": "Over 2.5",
-      "odds": "1.77",
+      "odds": "2.13",
       "group": 1
     },
     {
@@ -23,14 +15,22 @@
       "kickoff": "2026-03-28T16:00:00+01:00",
       "tip": "Over 2.5",
       "odds": "1.79",
+      "group": 1
+    },
+    {
+      "league": "National League",
+      "match": "Brackley Town - Tamworth",
+      "kickoff": "2026-03-28T16:00:00+01:00",
+      "tip": "Over 2.5",
+      "odds": "1.77",
       "group": 2
     },
     {
       "league": "J2/J3 League",
-      "match": "Yokohama FC - Shonan Bellmare",
+      "match": "Thespakusatsu Gunma - Tochigi SC",
       "kickoff": "2026-03-28T06:00:00+01:00",
       "tip": "Over 2.5",
-      "odds": "2.13",
+      "odds": "2.25",
       "group": 2
     },
     {
