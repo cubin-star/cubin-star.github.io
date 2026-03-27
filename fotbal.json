@@ -1,20 +1,23 @@
 [
   {
-    "League": "Friendlies",
-    "Match": "Colombia vs Croatia",
+    "League": "Liga 2",
+    "Match": "Persikad Depok FC vs Persekat",
     "Tip": "Over 2.5",
-    "Odds": "1.93"
+    "Odds": "1.87",
+    "qualified10": true
   },
   {
-    "League": "Africa Cup of Nations - Qualification",
-    "Match": "Seychelles vs Lesotho",
+    "League": "League One",
+    "Match": "Inverness CT vs Queen of the South",
     "Tip": "Over 2.5",
-    "Odds": "1.84"
+    "Odds": "1.87",
+    "qualified15": true
   },
   {
-    "League": "FIFA Series",
-    "Match": "Aruba vs Mação",
+    "League": "2. Division",
+    "Match": "FC Helsingor vs Vendsyssel FF",
     "Tip": "Over 2.5",
-    "Odds": "1.85"
+    "Odds": "1.86",
+    "qualified13": true
   }
 ]
