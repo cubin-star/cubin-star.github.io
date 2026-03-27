@@ -1,6 +1,26 @@
 [
   {
     "sport": "football",
+    "league": "World Cup - Qualification Europe",
+    "match": "Ukraine vs Sweden",
+    "tip": "Over 1.5",
+    "odds": "1.38",
+    "date": "2026-03-26T19:45:00+00:00",
+    "score": "1:3",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "World Cup - Qualification Europe",
+    "match": "Wales vs Bosnia & Herzegovina",
+    "tip": "Over 1.5",
+    "odds": "1.38",
+    "date": "2026-03-26T19:45:00+00:00",
+    "score": "1:1",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
     "league": "UEFA Champions League Women",
     "match": "Manchester United W vs Bayern Munich W",
     "tip": "Over 1.5",
