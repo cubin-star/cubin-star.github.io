@@ -205,46 +205,76 @@ async function main() {
     }
     console.log('\nQualified (strict): ' + qualified.length + '/' + pool.length);
 
-    // Not enough matches - cannot assemble accumulator
-    if (qualified.length < PICK_COUNT) {
-        const output = { error: true, message: "Today's accumulator could not be assembled - fewer than " + PICK_COUNT + ' qualifying matches found in the 48h window.' };
-        writeFileSync('hot.json', JSON.stringify(output, null, 2), 'utf-8');
-        console.log('\n' + output.message);
-        console.log('Written to hot.json (' + reqCount + ' API req)');
-        process.exit(0);
+    const fullAccumulator = qualified.length >= PICK_COUNT;
+    if (!fullAccumulator) {
+        console.log('\nWARNING: Only ' + qualified.length + ' qualifying matches found (need ' + PICK_COUNT + ' for full accumulator).');
     }
 
     // Prefer matches within 24h, pick by highest odds
+    // Same league is allowed, but cap per league = number of groups so each lands in a different group
+    const targetCount = fullAccumulator ? PICK_COUNT : qualified.length;
+    const numGroups = Math.ceil(targetCount / 2);
     const within24h = qualified.filter(m => new Date(m.kickoff) <= max24h);
     const beyond24h = qualified.filter(m => new Date(m.kickoff) > max24h);
     console.log('Within 24h: ' + within24h.length + ', beyond 24h: ' + beyond24h.length);
 
     let selected;
-    if (within24h.length >= PICK_COUNT) {
-        // Pick 6 with highest odds from 24h pool
+    if (within24h.length >= targetCount) {
+        // Pick by highest odds from 24h pool (max numGroups per league)
         within24h.sort((a, b) => parseFloat(b.odds) - parseFloat(a.odds));
-        selected = within24h.slice(0, PICK_COUNT);
-        console.log('Selected ' + PICK_COUNT + ' matches with highest odds from 24h window');
+        selected = [];
+        const lc = new Map();
+        for (const m of within24h) {
+            if (selected.length >= targetCount) break;
+            const cnt = lc.get(m.league) || 0;
+            if (cnt >= numGroups) continue;
+            selected.push(m);
+            lc.set(m.league, cnt + 1);
+        }
+        console.log('Selected ' + selected.length + ' matches with highest odds from 24h window');
     } else {
         // Take all from 24h + fill from beyond 24h (earliest kickoff first)
-        selected = [...within24h];
+        selected = [];
+        const lc = new Map();
+        for (const m of within24h) {
+            const cnt = lc.get(m.league) || 0;
+            if (cnt >= numGroups) continue;
+            selected.push(m);
+            lc.set(m.league, cnt + 1);
+        }
         beyond24h.sort((a, b) => new Date(a.kickoff) - new Date(b.kickoff));
-        const needed = PICK_COUNT - selected.length;
-        selected.push(...beyond24h.slice(0, needed));
-        console.log('Selected ' + within24h.length + ' from 24h + ' + Math.min(needed, beyond24h.length) + ' earliest from next day');
+        for (const m of beyond24h) {
+            if (selected.length >= targetCount) break;
+            const cnt = lc.get(m.league) || 0;
+            if (cnt >= numGroups) continue;
+            selected.push(m);
+            lc.set(m.league, cnt + 1);
+        }
+        console.log('Selected ' + selected.length + ' matches (' + within24h.length + ' candidates from 24h window)');
     }
 
     console.log('\nSelected: ' + selected.length + ' matches\n');
 
+    if (selected.length === 0) {
+        const output = { error: true, matches: [], message: 'No qualifying matches found in the 48h window.' };
+        writeFileSync('hot.json', JSON.stringify(output, null, 2), 'utf-8');
+        console.log(output.message);
+        console.log('Written to hot.json (' + reqCount + ' API req)');
+        process.exit(0);
+    }
+
     // Balance into groups and write output
     const grouped = balanceGroups(selected);
-    const output = grouped.map(m => ({ league: m.league, match: m.match, kickoff: m.kickoff, tip: m.tip, odds: m.odds, group: m.group }));
+    const matches = grouped.map(m => ({ league: m.league, match: m.match, kickoff: m.kickoff, tip: m.tip, odds: m.odds, group: m.group }));
+    const output = { fullAccumulator: fullAccumulator, matches: matches };
+    if (!fullAccumulator) output.message = "Today's accumulator could not be assembled - only " + matches.length + ' of ' + PICK_COUNT + ' matches found.';
     writeFileSync('hot.json', JSON.stringify(output, null, 2), 'utf-8');
 
-    console.log(output.length + ' matches -> hot.json (' + reqCount + ' API req)\n');
-    const gc = Math.ceil(output.length / 2);
+    if (!fullAccumulator) console.log('NOTE: ' + output.message);
+    console.log(matches.length + ' matches -> hot.json (' + reqCount + ' API req)\n');
+    const gc = Math.ceil(matches.length / 2);
     for (let g = 1; g <= gc; g++) {
-        const gm = output.filter(m => m.group === g);
+        const gm = matches.filter(m => m.group === g);
         const go = gm.reduce((a, m) => a * parseFloat(m.odds), 1);
         console.log('  Gr.' + g + ' (' + go.toFixed(2) + '):');
         gm.forEach(m => console.log('     [' + m.league + '] ' + m.match + ' | ' + m.tip + ' @ ' + m.odds + ' | ' + m.kickoff));
