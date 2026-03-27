@@ -1,15 +1,16 @@
 [
   {
-    "league": "Extraliga",
-    "match": "Plzen vs Sparta Prague",
+    "league": "Elite League",
+    "match": "Belfast vs Nottingham",
     "tip": "Over 5.5",
-    "odds": "2.7",
+    "odds": "1.77",
     "qualified13": true
   },
   {
-    "league": "NHL",
-    "match": "Philadelphia Flyers vs Chicago Blackhawks",
+    "league": "Ligue Magnus",
+    "match": "Rouen vs Bordeaux",
     "tip": "Over 5.5",
-    "odds": "1.76"
+    "odds": "2.02",
+    "qualified13": true
   }
 ]
