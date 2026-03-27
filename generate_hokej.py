@@ -32,13 +32,12 @@ MIN_GAMES = 5
 
 EXCLUDED_COUNTRIES = {"russia", "belarus"}
 
-# Hockey criteria (football thresholds × 1.8 for Over 4.5)
-#   Football: scored <1 / >=1.3, conceded >=1.5 / >=1.6
-#   Hockey:   scored <1.8 / >=2.4, conceded >=2.7 / >=2.9
-SCORED_LOW = 1.8
-SCORED_DECENT = 2.4
-CONCEDED_HIGH = 2.7
-CONCEDED_VERY_HIGH = 2.9
+# Hockey criteria
+#   scored <1.6 / >=2.2, conceded >=2.5 / >=2.7
+SCORED_LOW = 1.6
+SCORED_DECENT = 2.2
+CONCEDED_HIGH = 2.5
+CONCEDED_VERY_HIGH = 2.7
 
 request_count = 0
 
@@ -124,8 +123,8 @@ def _sf(val, default=0.0):
 
 def meets_criteria(home_stats, away_stats):
     """
-    Variant A: scored(one < 1.8, other >= 2.4)  + conceded(one >= 2.7, other >= 2.9)
-    Variant B: scored(one >= 2.7, other >= 2.9)  + conceded(one < 1.8, other >= 2.4)
+    Variant A: scored(one < 1.6, other >= 2.2)  + conceded(one >= 2.5, other >= 2.7)
+    Variant B: scored(one >= 2.5, other >= 2.7)  + conceded(one < 1.6, other >= 2.2)
     """
     if not home_stats or not away_stats:
         return False, ""
@@ -291,4 +290,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
