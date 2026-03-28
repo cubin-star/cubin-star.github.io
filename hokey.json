@@ -1,16 +1,15 @@
 [
   {
-    "league": "Elite League",
-    "match": "Belfast vs Nottingham",
+    "league": "AHL",
+    "match": "Grand Rapids Griffins vs Chicago Wolves",
     "tip": "Over 5.5",
-    "odds": "1.77",
-    "qualified13": true
+    "odds": "1.85",
+    "qualified15": true
   },
   {
-    "league": "Ligue Magnus",
-    "match": "Rouen vs Bordeaux",
+    "league": "Elite League",
+    "match": "Sheffield vs Dundee",
     "tip": "Over 5.5",
-    "odds": "2.02",
-    "qualified13": true
+    "odds": "1.79"
   }
 ]
