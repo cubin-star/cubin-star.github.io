@@ -161,11 +161,11 @@ def meets_criteria(home_stats, away_stats):
 
 def find_odds(odds_data):
     """Find Over 4.5 odds (for selection) and Over 3.5 odds (for output).
-    Returns (over45_odd, over35_odd) or (None, None)."""
+    Searches across all bookmakers. Returns (over45_odd, over35_odd) or (None, None)."""
+    best_over45 = None
+    best_over35 = None
     for resp in odds_data:
         for bk in resp.get("bookmakers", []):
-            over45 = None
-            over35 = None
             for bet in bk.get("bets", []):
                 # Bet 4 = Over/Under (full game), Bet 52 = Over/Under (Reg Time)
                 if bet.get("id") not in (4, 52) and "over/under" not in bet.get("name", "").lower():
@@ -180,11 +180,13 @@ def find_odds(odds_data):
                     except ValueError:
                         continue
                     if v == "over 4.5" and MIN_ODDS <= odd_val <= MAX_ODDS:
-                        over45 = str(val.get("odd"))
+                        if best_over45 is None:
+                            best_over45 = str(val.get("odd"))
                     if v == "over 3.5":
-                        over35 = str(val.get("odd"))
-            if over45 and over35:
-                return over45, over35
+                        if best_over35 is None:
+                            best_over35 = str(val.get("odd"))
+    if best_over45 and best_over35:
+        return best_over45, best_over35
     return None, None
 
 
@@ -279,7 +281,17 @@ def main():
                 "date": kickoff,
             })
         else:
-            print(" fail")
+            # Print stats for debugging even on fail
+            if home_stats and away_stats:
+                h_for = _sf(home_stats.get("goals", {}).get("for", {}).get("average", {}).get("home"))
+                a_for = _sf(away_stats.get("goals", {}).get("for", {}).get("average", {}).get("away"))
+                h_agn = _sf(home_stats.get("goals", {}).get("against", {}).get("average", {}).get("home"))
+                a_agn = _sf(away_stats.get("goals", {}).get("against", {}).get("average", {}).get("away"))
+                print(f" fail | h_sc={h_for:.1f} h_cn={h_agn:.1f} a_sc={a_for:.1f} a_cn={a_agn:.1f}")
+            elif not home_stats:
+                print(" fail (no home stats)")
+            else:
+                print(" fail (no away stats)")
 
     # 5. Write output
     with open(OUTPUT, "w", encoding="utf-8") as f:
@@ -292,4 +304,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
