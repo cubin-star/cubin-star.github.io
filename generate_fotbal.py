@@ -30,7 +30,6 @@ MAX_TIPS = 2
 
 MIN_ODDS = 1.75
 MAX_ODDS = 3.00
-MAX_ANALYZE = 300
 MIN_GAMES = 5
 
 EXCLUDED_COUNTRIES = {"russia", "belarus"}
@@ -303,12 +302,11 @@ def main():
         return
 
     # 6. Analyze with predictions (1 API call = both teams)
-    to_analyze = candidates[:MAX_ANALYZE]
     results = []
 
-    print(f"  Analyzing {len(to_analyze)} candidates...")
-    for i, c in enumerate(to_analyze):
-        print(f"  [{i+1}/{len(to_analyze)}] {c['Match'][:45]:.<47s}", end="")
+    print(f"  Analyzing {len(candidates)} candidates...")
+    for i, c in enumerate(candidates):
+        print(f"  [{i+1}/{len(candidates)}] {c['Match'][:45]:.<47s}", end="")
         pred = fetch_prediction(c["fixture_id"])
         if pred:
             ok, detail = meets_criteria(pred)
@@ -332,7 +330,7 @@ def main():
 
     # 8. Write tips.json – max 2 random tips with Over 2.5
     if results:
-        pool = [c for c in to_analyze if any(
+        pool = [c for c in candidates if any(
             r["Match"] == c["Match"] and r["Date"] == c["kickoff"]
             for r in results
         )]
