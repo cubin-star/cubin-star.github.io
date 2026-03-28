@@ -1,23 +1,23 @@
 [
   {
-    "League": "Liga 2",
-    "Match": "Persikad Depok FC vs Persekat",
+    "League": "National League",
+    "Match": "Brackley Town vs Tamworth",
     "Tip": "Over 2.5",
-    "Odds": "1.87",
-    "qualified10": true
-  },
-  {
-    "League": "League One",
-    "Match": "Inverness CT vs Queen of the South",
-    "Tip": "Over 2.5",
-    "Odds": "1.87",
+    "Odds": "1.75",
     "qualified15": true
   },
   {
-    "League": "2. Division",
-    "Match": "FC Helsingor vs Vendsyssel FF",
+    "League": "J2/J3 League",
+    "Match": "Kitakyushu vs FC Ryukyu",
     "Tip": "Over 2.5",
-    "Odds": "1.86",
-    "qualified13": true
+    "Odds": "1.93",
+    "qualified15": true
+  },
+  {
+    "League": "Non League Premier - Southern Central",
+    "Match": "Stamford vs Bishop's Stortford",
+    "Tip": "Over 2.5",
+    "Odds": "1.80",
+    "qualified15": true
   }
 ]
