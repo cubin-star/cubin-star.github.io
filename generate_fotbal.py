@@ -111,6 +111,18 @@ def fetch_odds_for_date(date_str):
     return all_items
 
 
+def fetch_league_odds(league_id, season, date_str):
+    """Fetch odds for a specific league/season/date. Used to fill gaps."""
+    time.sleep(DELAY)
+    data = api_get("odds", {
+        "league": str(league_id),
+        "season": str(season),
+        "date": date_str,
+        "bet": "5",
+    })
+    return data.get("response", [])
+
+
 def fetch_prediction(fixture_id):
     """Single API call returns stats for BOTH teams."""
     time.sleep(DELAY)
@@ -263,11 +275,63 @@ def main():
             json.dump([], f)
         return
 
-    # 2. Odds (bet=5 = Goals Over/Under, paginated, all leagues)
-    print("  Fetching odds...")
+    # 2. Odds – Phase A: global fetch (covers most leagues)
+    print("  Phase A: Global odds fetch...")
     odds_today = fetch_odds_for_date(today)
     odds_tomorrow = fetch_odds_for_date(tomorrow)
     all_odds = odds_today + odds_tomorrow
+    print(f"  Global odds: {len(all_odds)} entries")
+
+    # Identify which fixture IDs already have odds
+    covered_fids = set()
+    for item in all_odds:
+        fid = item.get("fixture", {}).get("id")
+        if fid:
+            covered_fids.add(fid)
+
+    # 2b. Odds – Phase B: per-league fetch for missing fixtures
+    #     Group uncovered fixtures by league+date, then fetch odds per league
+    now2 = datetime.now(timezone.utc)
+    cutoff = now2 + timedelta(hours=24)
+    missing_leagues = {}
+    for fid, fix in all_fixtures.items():
+        if fid in covered_fids:
+            continue
+        # Only bother with fixtures in 24h window
+        kickoff_str = fix.get("kickoff", "")
+        if kickoff_str:
+            try:
+                kickoff_dt = datetime.fromisoformat(kickoff_str.replace("Z", "+00:00"))
+                if kickoff_dt < now2 or kickoff_dt > cutoff:
+                    continue
+            except ValueError:
+                pass
+        country = fix.get("country", "").lower()
+        if country in EXCLUDED_COUNTRIES:
+            continue
+        lid = fix.get("league_id", 0)
+        season = fix.get("season", 2025)
+        date_part = kickoff_str[:10] if kickoff_str else today
+        key = f"{lid}_{season}_{date_part}"
+        if key not in missing_leagues:
+            missing_leagues[key] = {
+                "league_id": lid, "season": season,
+                "date": date_part, "name": fix.get("league", "?"),
+            }
+
+    if missing_leagues:
+        print(f"  Phase B: {len(missing_leagues)} leagues missing odds, fetching per-league...")
+        extra = 0
+        for i, (key, lg) in enumerate(missing_leagues.items()):
+            print(f"    [{i+1}/{len(missing_leagues)}] {lg['name'][:40]} ({lg['date']})...", end="")
+            items = fetch_league_odds(lg["league_id"], lg["season"], lg["date"])
+            if items:
+                all_odds.extend(items)
+                extra += len(items)
+                print(f" +{len(items)}")
+            else:
+                print(" 0")
+        print(f"  Phase B added: {extra} entries")
     print(f"  Total odds entries: {len(all_odds)}\n")
 
     # 3. Filter by 24h window + country, then extract candidates
