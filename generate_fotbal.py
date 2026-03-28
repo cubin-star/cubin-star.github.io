@@ -88,25 +88,24 @@ def fetch_fixtures(date_str):
     return fixtures
 
 
-def fetch_league_odds(league_id, season, date_str):
-    """Fetch odds for a specific league/season/date (paginated)."""
+def fetch_odds_for_date(date_str):
+    """Fetch all Over/Under odds for a date (paginated, global)."""
     all_items = []
     page = 1
     while True:
         time.sleep(DELAY)
-        data = api_get("odds", {
-            "league": str(league_id),
-            "season": str(season),
-            "date": date_str,
-            "bet": "5",
-            "page": str(page),
-        })
+        print(f"  Odds {date_str} p{page}...", end="")
+        data = api_get("odds", {"date": date_str, "bet": "5", "page": str(page)})
         items = data.get("response", [])
         paging = data.get("paging", {})
         total_pages = paging.get("total", 1)
         if items:
             all_items.extend(items)
-        if page >= total_pages or not items:
+            print(f" {len(items)} (p{page}/{total_pages})")
+        else:
+            print(" empty")
+            break
+        if page >= total_pages:
             break
         page += 1
     return all_items
@@ -168,13 +167,31 @@ def meets_criteria(pred):
 # ===== CANDIDATES =====
 
 def extract_candidates(odds_data, fixtures):
-    """Find fixtures with Over 2.5 odds in range and Over 1.5 odds available."""
+    """Find fixtures with Over 2.5 odds in range 1.75-3.00 within 24h, excluding RU/BY.
+    Also capture Over 1.5 odds for output."""
+    now = datetime.now(timezone.utc)
+    cutoff = now + timedelta(hours=24)
     candidates = []
 
     for item in odds_data:
         fid = item.get("fixture", {}).get("id")
         fix = fixtures.get(fid)
         if not fix:
+            continue
+
+        # Time filter
+        kickoff_str = fix.get("kickoff", "")
+        if kickoff_str:
+            try:
+                kickoff_dt = datetime.fromisoformat(kickoff_str.replace("Z", "+00:00"))
+                if kickoff_dt < now or kickoff_dt > cutoff:
+                    continue
+            except ValueError:
+                pass
+
+        # Country filter
+        country = fix.get("country", "").lower()
+        if country in EXCLUDED_COUNTRIES:
             continue
 
         # Parse all Over/Under values from the first bookmaker
@@ -246,53 +263,15 @@ def main():
             json.dump([], f)
         return
 
-    # 2. Filter fixtures by 24h window + country
-    now2 = datetime.now(timezone.utc)
-    cutoff = now2 + timedelta(hours=24)
-    filtered = {}
-    for fid, fix in all_fixtures.items():
-        kickoff_str = fix.get("kickoff", "")
-        if kickoff_str:
-            try:
-                kickoff_dt = datetime.fromisoformat(kickoff_str.replace("Z", "+00:00"))
-                if kickoff_dt < now2 or kickoff_dt > cutoff:
-                    continue
-            except ValueError:
-                pass
-        country = fix.get("country", "").lower()
-        if country in EXCLUDED_COUNTRIES:
-            continue
-        filtered[fid] = fix
-    print(f"  After filter (24h, no RU/BY): {len(filtered)} fixtures")
-
-    # 3. Group filtered fixtures by league
-    league_map = {}
-    for fid, fix in filtered.items():
-        key = f"{fix['league_id']}_{fix['season']}"
-        if key not in league_map:
-            league_map[key] = {
-                "league_id": fix["league_id"],
-                "season": fix["season"],
-                "name": fix["league"],
-                "dates": set(),
-            }
-        date_part = fix["kickoff"][:10] if fix["kickoff"] else today
-        league_map[key]["dates"].add(date_part)
-    print(f"  Leagues to query: {len(league_map)}")
-
-    # 4. Fetch odds per league (ensures all leagues are covered)
-    print("  Fetching odds per league...")
-    all_odds = []
-    for i, (key, lg) in enumerate(league_map.items()):
-        for d in sorted(lg["dates"]):
-            print(f"  [{i+1}/{len(league_map)}] {lg['name'][:40]} ({d})...", end="")
-            items = fetch_league_odds(lg["league_id"], lg["season"], d)
-            all_odds.extend(items)
-            print(f" {len(items)} entries")
+    # 2. Odds (bet=5 = Goals Over/Under, paginated, all leagues)
+    print("  Fetching odds...")
+    odds_today = fetch_odds_for_date(today)
+    odds_tomorrow = fetch_odds_for_date(tomorrow)
+    all_odds = odds_today + odds_tomorrow
     print(f"  Total odds entries: {len(all_odds)}\n")
 
-    # 5. Extract candidates from odds
-    candidates = extract_candidates(all_odds, filtered)
+    # 3. Filter by 24h window + country, then extract candidates
+    candidates = extract_candidates(all_odds, all_fixtures)
     print(f"  {len(candidates)} candidates (Over 2.5 @ {MIN_ODDS}–{MAX_ODDS})\n")
 
     if not candidates:
@@ -303,7 +282,7 @@ def main():
             json.dump([], f)
         return
 
-    # 6. Analyze with predictions (1 API call = both teams)
+    # 4. Analyze with predictions (1 API call = both teams)
     to_analyze = candidates[:MAX_ANALYZE]
     results = []
 
@@ -327,11 +306,11 @@ def main():
         else:
             print(" no data")
 
-    # 7. Write output
+    # 5. Write output
     with open(OUTPUT, "w", encoding="utf-8") as f:
         json.dump(results, f, indent=2, ensure_ascii=False)
 
-    # 8. Write tips.json – max 2 random tips with Over 2.5
+    # 6. Write tips.json – max 2 random tips with Over 2.5
     if results:
         pool = [c for c in to_analyze if any(
             r["Match"] == c["Match"] and r["Date"] == c["kickoff"]
