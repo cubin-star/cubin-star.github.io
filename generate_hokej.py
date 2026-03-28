@@ -123,8 +123,9 @@ def _sf(val, default=0.0):
 
 def meets_criteria(home_stats, away_stats):
     """
-    Variant A: scored(one < 1.6, other >= 2.2)  + conceded(one >= 2.5, other >= 2.7)
-    Variant B: scored(one >= 2.5, other >= 2.7)  + conceded(one < 1.6, other >= 2.2)
+    Variant A: scored(one < 1.5, other >= 2.1)  + conceded(one >= 2.4, other >= 2.6)
+    Variant B: scored(one >= 2.4, other >= 2.6)  + conceded(one < 1.5, other >= 2.1)
+    Uses home/away split: home team → home stats, away team → away stats.
     """
     if not home_stats or not away_stats:
         return False, ""
@@ -134,10 +135,11 @@ def meets_criteria(home_stats, away_stats):
     if h_played < MIN_GAMES or a_played < MIN_GAMES:
         return False, ""
 
-    h_for = _sf(home_stats.get("goals", {}).get("for", {}).get("average", {}).get("all"))
-    a_for = _sf(away_stats.get("goals", {}).get("for", {}).get("average", {}).get("all"))
-    h_agn = _sf(home_stats.get("goals", {}).get("against", {}).get("average", {}).get("all"))
-    a_agn = _sf(away_stats.get("goals", {}).get("against", {}).get("average", {}).get("all"))
+    # Home team → home split, Away team → away split
+    h_for = _sf(home_stats.get("goals", {}).get("for", {}).get("average", {}).get("home"))
+    a_for = _sf(away_stats.get("goals", {}).get("for", {}).get("average", {}).get("away"))
+    h_agn = _sf(home_stats.get("goals", {}).get("against", {}).get("average", {}).get("home"))
+    a_agn = _sf(away_stats.get("goals", {}).get("against", {}).get("average", {}).get("away"))
 
     min_for = min(h_for, a_for)
     max_for = max(h_for, a_for)
@@ -290,3 +292,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
