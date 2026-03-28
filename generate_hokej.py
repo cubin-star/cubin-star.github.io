@@ -33,11 +33,11 @@ MIN_GAMES = 5
 EXCLUDED_COUNTRIES = {"russia", "belarus"}
 
 # Hockey criteria
-#   scored <1.6 / >=2.2, conceded >=2.5 / >=2.7
-SCORED_LOW = 1.6
-SCORED_DECENT = 2.2
-CONCEDED_HIGH = 2.5
-CONCEDED_VERY_HIGH = 2.7
+#   scored <1.5 / >=2.1, conceded >=2.4 / >=2.6
+SCORED_LOW = 1.5
+SCORED_DECENT = 2.1
+CONCEDED_HIGH = 2.4
+CONCEDED_VERY_HIGH = 2.6
 
 request_count = 0
 
@@ -290,3 +290,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
