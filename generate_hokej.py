@@ -33,11 +33,11 @@ MIN_GAMES = 5
 EXCLUDED_COUNTRIES = {"russia", "belarus"}
 
 # Hockey criteria (relaxed from Hockey.slnx Q-STRICT)
-#   A) oba conceded >= 2.8, jeden scored >= 2.6 + druhy < 2.0
-#   B) oba scored >= 2.8, jeden conceded >= 2.6 + druhy < 2.0
+#   A) oba conceded >= 2.8, jeden scored >= 2.6 + druhy < 2.2
+#   B) oba scored >= 2.8, jeden conceded >= 2.6 + druhy < 2.2
 BOTH_HIGH = 2.8
 ONE_HIGH = 2.6
-OTHER_LOW = 2.0
+OTHER_LOW = 2.2
 
 request_count = 0
 
