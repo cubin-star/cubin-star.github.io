@@ -32,12 +32,12 @@ MIN_GAMES = 5
 
 EXCLUDED_COUNTRIES = {"russia", "belarus"}
 
-# Hockey criteria
-#   scored <1.5 / >=2.1, conceded >=2.4 / >=2.6
-SCORED_LOW = 1.5
-SCORED_DECENT = 2.1
-CONCEDED_HIGH = 2.4
-CONCEDED_VERY_HIGH = 2.6
+# Hockey criteria (same as Hockey.slnx 1st round Q-STRICT)
+#   A) oba conceded >= 3.0, jeden scored >= 2.8 + druhy < 2.0
+#   B) oba scored >= 3.0, jeden conceded >= 2.8 + druhy < 2.0
+BOTH_HIGH = 3.0
+ONE_HIGH = 2.8
+OTHER_LOW = 2.0
 
 request_count = 0
 
@@ -123,8 +123,9 @@ def _sf(val, default=0.0):
 
 def meets_criteria(home_stats, away_stats):
     """
-    Variant A: scored(one < 1.5, other >= 2.1)  + conceded(one >= 2.4, other >= 2.6)
-    Variant B: scored(one >= 2.4, other >= 2.6)  + conceded(one < 1.5, other >= 2.1)
+    Hockey.slnx 1st round (Q-STRICT):
+    A) oba conceded >= 3.0  AND  (jeden scored >= 2.8 + druhy < 2.0)
+    B) oba scored >= 3.0    AND  (jeden conceded >= 2.8 + druhy < 2.0)
     Uses home/away split: home team → home stats, away team → away stats.
     """
     if not home_stats or not away_stats:
@@ -141,15 +142,19 @@ def meets_criteria(home_stats, away_stats):
     h_agn = _sf(home_stats.get("goals", {}).get("against", {}).get("average", {}).get("home"))
     a_agn = _sf(away_stats.get("goals", {}).get("against", {}).get("average", {}).get("away"))
 
-    min_for = min(h_for, a_for)
-    max_for = max(h_for, a_for)
-    min_agn = min(h_agn, a_agn)
-    max_agn = max(h_agn, a_agn)
+    # A) oba conceded >= 3.0 AND (jeden scored >= 2.8 + druhy < 2.0)
+    variant_a = (
+        h_agn >= BOTH_HIGH and a_agn >= BOTH_HIGH
+        and ((h_for >= ONE_HIGH and a_for < OTHER_LOW)
+             or (a_for >= ONE_HIGH and h_for < OTHER_LOW))
+    )
 
-    variant_a = (min_for < SCORED_LOW and max_for >= SCORED_DECENT) and \
-                (min_agn >= CONCEDED_HIGH and max_agn >= CONCEDED_VERY_HIGH)
-    variant_b = (min_for >= CONCEDED_HIGH and max_for >= CONCEDED_VERY_HIGH) and \
-                (min_agn < SCORED_LOW and max_agn >= SCORED_DECENT)
+    # B) oba scored >= 3.0 AND (jeden conceded >= 2.8 + druhy < 2.0)
+    variant_b = (
+        h_for >= BOTH_HIGH and a_for >= BOTH_HIGH
+        and ((h_agn >= ONE_HIGH and a_agn < OTHER_LOW)
+             or (a_agn >= ONE_HIGH and h_agn < OTHER_LOW))
+    )
 
     if variant_a or variant_b:
         tag = "A" if variant_a else "B"
@@ -205,7 +210,7 @@ def main():
     print("== SureBets Hockey Bot ==")
     print(f"Time: {now.strftime('%Y-%m-%d %H:%M UTC')}")
     print(f"Select: Over 4.5 odds {MIN_ODDS}–{MAX_ODDS} + Variant A/B → Output: Over 3.5")
-    print(f"Thresholds: scored <{SCORED_LOW}/{SCORED_DECENT}+, conceded {CONCEDED_HIGH}+/{CONCEDED_VERY_HIGH}+\n")
+    print(f"Thresholds: A) both conc>={BOTH_HIGH}, one scored>={ONE_HIGH} + other<{OTHER_LOW} | B) both scored>={BOTH_HIGH}, one conc>={ONE_HIGH} + other<{OTHER_LOW}\n")
 
     # 1. Fetch games
     games_today = fetch_games(today)
