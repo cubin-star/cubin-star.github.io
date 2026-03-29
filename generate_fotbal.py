@@ -29,7 +29,7 @@ OUTPUT_TIPS = "tips.json"
 MAX_TIPS = 2
 
 MIN_ODDS = 1.75
-MAX_ODDS = 3.10
+MAX_ODDS = 3.00
 MIN_GAMES = 5
 
 EXCLUDED_COUNTRIES = {"russia", "belarus"}
@@ -167,7 +167,8 @@ def meets_criteria(pred):
 # ===== CANDIDATES =====
 
 def extract_candidates(odds_data, fixtures):
-    """Find fixtures with Over 2.5 odds in range and Over 1.5 odds available."""
+    """Find fixtures with Over 2.5 odds in range (avg across all bookmakers)
+    and Over 1.5 odds available.  Same logic as Kombik fetch-matches.mjs."""
     candidates = []
 
     for item in odds_data:
@@ -176,37 +177,34 @@ def extract_candidates(odds_data, fixtures):
         if not fix:
             continue
 
-        # Parse Over/Under values from the first bookmaker that has Over 2.5 in range
-        over25_odd = None
-        over15_odd = None
+        # Collect ALL in-range Over 2.5 odds from every bookmaker (like Kombik)
+        all_over25 = []
+        all_over15 = []
         for bk in item.get("bookmakers", []):
             for bet in bk.get("bets", []):
-                if bet.get("id") != 5 and "over/under" not in bet.get("name", "").lower():
-                    continue
                 for val in bet.get("values", []):
-                    v = str(val.get("value", "")).lower()
+                    v = str(val.get("value", ""))
                     try:
                         odd_val = float(val.get("odd", "0"))
-                    except ValueError:
+                    except (ValueError, TypeError):
                         continue
-                    if v == "over 2.5" and MIN_ODDS <= odd_val <= MAX_ODDS:
-                        over25_odd = odd_val
-                    if v == "over 1.5":
-                        over15_odd = str(val.get("odd"))
-                if over25_odd is not None:
-                    break
-            if over25_odd is not None:
-                break
+                    if v == "Over 2.5" and MIN_ODDS <= odd_val <= MAX_ODDS:
+                        all_over25.append(odd_val)
+                    if v == "Over 1.5" and odd_val > 0:
+                        all_over15.append(odd_val)
 
-        if over25_odd is None or over15_odd is None:
+        if not all_over25 or not all_over15:
             continue
+
+        avg_over25 = sum(all_over25) / len(all_over25)
+        avg_over15 = sum(all_over15) / len(all_over15)
 
         candidates.append({
             "fixture_id": fid,
             "League": fix["league"],
             "Match": f"{fix['home']} vs {fix['away']}",
-            "Odds_25": f"{over25_odd:.2f}",
-            "Odds_15": over15_odd,
+            "Odds_25": f"{avg_over25:.2f}",
+            "Odds_15": f"{avg_over15:.2f}",
             "kickoff": fix["kickoff"],
         })
 
@@ -317,48 +315,7 @@ def main():
         else:
             print(" no data")
 
-    # 7. Safety net — check ALL fixtures that didn't become candidates
-    #    Catches: missing from league odds, different bookmaker data,
-    #    missing Over 1.5, bet parsing issues, etc.
-    candidate_fids = {c["fixture_id"] for c in candidates}
-    uncovered = {fid: fix for fid, fix in filtered.items() if fid not in candidate_fids}
-    if uncovered:
-        print(f"\n  Safety net: {len(uncovered)} non-candidate fixtures, checking stats first...")
-        extra = 0
-        for i, (fid, fix) in enumerate(uncovered.items()):
-            label = f"{fix['home']} vs {fix['away']}"
-            print(f"  [+{i+1}/{len(uncovered)}] {label[:45]:.<47s}", end="")
-            pred = fetch_prediction(fid)
-            if not pred:
-                print(" no data")
-                continue
-            ok, detail = meets_criteria(pred)
-            if not ok:
-                print(f" fail ({detail})")
-                continue
-            # Passed criteria → fetch per-fixture odds
-            print(f" ★ {detail}", end="")
-            time.sleep(DELAY)
-            odds_resp = api_get("odds", {"fixture": str(fid), "bet": "5"})
-            fix_odds = odds_resp.get("response", [])
-            found = extract_candidates(fix_odds, {fid: fix})
-            if found:
-                c2 = found[0]
-                print(f" | O2.5={c2['Odds_25']} → O1.5={c2['Odds_15']}")
-                results.append({
-                    "League": c2["League"],
-                    "Match": c2["Match"],
-                    "Tip": "Over 1.5",
-                    "Odds": c2["Odds_15"],
-                    "Date": c2["kickoff"],
-                })
-                candidates.append(c2)
-                extra += 1
-            else:
-                print(" | no O2.5 in range")
-        print(f"  Safety net found: {extra} extra match(es)\n")
-
-    # 8. Write output
+    # 7. Write output
     with open(OUTPUT, "w", encoding="utf-8") as f:
         json.dump(results, f, indent=2, ensure_ascii=False)
 
@@ -389,8 +346,6 @@ def main():
     print(f"  Results: {len(results)} match(es) → {OUTPUT}")
     print(f"  Tips:    {len(tips)} match(es) → {OUTPUT_TIPS}")
     print(f"  API requests: {request_count} / 7500 ({request_count * 100 // 7500}%)")
-    if uncovered:
-        print(f"  Safety net checked: {len(uncovered)} extra fixtures")
 
 
 if __name__ == "__main__":
