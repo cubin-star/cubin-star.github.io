@@ -1,50 +1,18 @@
 [
   {
-    "league": "Primera A",
-    "match": "Cucuta - Chico",
-    "kickoff": "2026-03-28T22:00:00+01:00",
+    "league": "Segunda División RFEF - Group 2",
+    "match": "Utebo - Real Unión",
+    "kickoff": "2026-03-29T18:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.07",
+    "odds": "1.97",
     "group": 1
   },
   {
-    "league": "National League",
-    "match": "Brackley Town - Tamworth",
-    "kickoff": "2026-03-28T16:00:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "1.76",
-    "group": 1
-  },
-  {
-    "league": "J2/J3 League",
-    "match": "Kitakyushu - FC Ryukyu",
-    "kickoff": "2026-03-29T07:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "1.99",
-    "group": 2
-  },
-  {
-    "league": "Premiership",
-    "match": "Larne - Cliftonville FC",
-    "kickoff": "2026-03-28T16:00:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "1.79",
-    "group": 2
-  },
-  {
-    "league": "J2/J3 League",
-    "match": "Tokushima Vortis - Kochi United",
-    "kickoff": "2026-03-29T07:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "1.87",
-    "group": 3
-  },
-  {
-    "league": "Non League Premier - Southern Central",
-    "match": "Stamford - Bishop's Stortford",
-    "kickoff": "2026-03-28T16:00:00+01:00",
+    "league": "First Amateur Division",
+    "match": "Habay-la-Neuve - Tubize",
+    "kickoff": "2026-03-29T15:00:00+02:00",
     "tip": "Over 2.5",
     "odds": "1.80",
-    "group": 3
+    "group": 1
   }
 ]
