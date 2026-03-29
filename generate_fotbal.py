@@ -29,7 +29,7 @@ OUTPUT_TIPS = "tips.json"
 MAX_TIPS = 2
 
 MIN_ODDS = 1.75
-MAX_ODDS = 3.00
+MAX_ODDS = 3.10
 MIN_GAMES = 5
 
 EXCLUDED_COUNTRIES = {"russia", "belarus"}
@@ -141,7 +141,7 @@ def meets_criteria(pred):
     h_played = int(_sf(home.get("league", {}).get("fixtures", {}).get("played", {}).get("total", 0)))
     a_played = int(_sf(away.get("league", {}).get("fixtures", {}).get("played", {}).get("total", 0)))
     if h_played < MIN_GAMES or a_played < MIN_GAMES:
-        return False, ""
+        return False, f"too few games: {h_played}/{a_played}"
 
     h_for = _sf(home.get("league", {}).get("goals", {}).get("for", {}).get("average", {}).get("total"))
     a_for = _sf(away.get("league", {}).get("goals", {}).get("for", {}).get("average", {}).get("total"))
@@ -161,7 +161,7 @@ def meets_criteria(pred):
         detail = f"[{tag}] scored {h_for:.1f}/{a_for:.1f}, conceded {h_agn:.1f}/{a_agn:.1f}"
         return True, detail
 
-    return False, ""
+    return False, f"stats fail: scored {h_for:.1f}/{a_for:.1f}, conceded {h_agn:.1f}/{a_agn:.1f}"
 
 
 # ===== CANDIDATES =====
@@ -313,20 +313,17 @@ def main():
                     "Date": c["kickoff"],
                 })
             else:
-                print(" fail")
+                print(f" fail ({detail})")
         else:
             print(" no data")
 
-    # 7. Safety net — check fixtures not covered by league odds
-    covered_fids = set()
-    for item in all_odds:
-        fid = item.get("fixture", {}).get("id")
-        if fid:
-            covered_fids.add(fid)
-
-    uncovered = {fid: fix for fid, fix in filtered.items() if fid not in covered_fids}
+    # 7. Safety net — check ALL fixtures that didn't become candidates
+    #    Catches: missing from league odds, different bookmaker data,
+    #    missing Over 1.5, bet parsing issues, etc.
+    candidate_fids = {c["fixture_id"] for c in candidates}
+    uncovered = {fid: fix for fid, fix in filtered.items() if fid not in candidate_fids}
     if uncovered:
-        print(f"\n  Safety net: {len(uncovered)} fixtures had no league odds, checking stats...")
+        print(f"\n  Safety net: {len(uncovered)} non-candidate fixtures, checking stats first...")
         extra = 0
         for i, (fid, fix) in enumerate(uncovered.items()):
             label = f"{fix['home']} vs {fix['away']}"
@@ -337,7 +334,7 @@ def main():
                 continue
             ok, detail = meets_criteria(pred)
             if not ok:
-                print(" fail")
+                print(f" fail ({detail})")
                 continue
             # Passed criteria → fetch per-fixture odds
             print(f" ★ {detail}", end="")
