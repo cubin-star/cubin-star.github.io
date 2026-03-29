@@ -293,18 +293,11 @@ def main():
     candidates = extract_candidates(all_odds, filtered)
     print(f"  {len(candidates)} candidates (Over 2.5 @ {MIN_ODDS}–{MAX_ODDS})\n")
 
-    if not candidates:
-        print("No qualifying matches.")
-        with open(OUTPUT, "w", encoding="utf-8") as f:
-            json.dump([], f)
-        with open(OUTPUT_TIPS, "w", encoding="utf-8") as f:
-            json.dump([], f)
-        return
-
-    # 6. Analyze with predictions (1 API call = both teams)
+    # 6. Analyze candidates with predictions (1 API call = both teams)
     results = []
 
-    print(f"  Analyzing {len(candidates)} candidates...")
+    if candidates:
+        print(f"  Analyzing {len(candidates)} candidates...")
     for i, c in enumerate(candidates):
         print(f"  [{i+1}/{len(candidates)}] {c['Match'][:45]:.<47s}", end="")
         pred = fetch_prediction(c["fixture_id"])
@@ -324,11 +317,55 @@ def main():
         else:
             print(" no data")
 
-    # 7. Write output
+    # 7. Safety net — check fixtures not covered by league odds
+    covered_fids = set()
+    for item in all_odds:
+        fid = item.get("fixture", {}).get("id")
+        if fid:
+            covered_fids.add(fid)
+
+    uncovered = {fid: fix for fid, fix in filtered.items() if fid not in covered_fids}
+    if uncovered:
+        print(f"\n  Safety net: {len(uncovered)} fixtures had no league odds, checking stats...")
+        extra = 0
+        for i, (fid, fix) in enumerate(uncovered.items()):
+            label = f"{fix['home']} vs {fix['away']}"
+            print(f"  [+{i+1}/{len(uncovered)}] {label[:45]:.<47s}", end="")
+            pred = fetch_prediction(fid)
+            if not pred:
+                print(" no data")
+                continue
+            ok, detail = meets_criteria(pred)
+            if not ok:
+                print(" fail")
+                continue
+            # Passed criteria → fetch per-fixture odds
+            print(f" ★ {detail}", end="")
+            time.sleep(DELAY)
+            odds_resp = api_get("odds", {"fixture": str(fid), "bet": "5"})
+            fix_odds = odds_resp.get("response", [])
+            found = extract_candidates(fix_odds, {fid: fix})
+            if found:
+                c2 = found[0]
+                print(f" | O2.5={c2['Odds_25']} → O1.5={c2['Odds_15']}")
+                results.append({
+                    "League": c2["League"],
+                    "Match": c2["Match"],
+                    "Tip": "Over 1.5",
+                    "Odds": c2["Odds_15"],
+                    "Date": c2["kickoff"],
+                })
+                candidates.append(c2)
+                extra += 1
+            else:
+                print(" | no O2.5 in range")
+        print(f"  Safety net found: {extra} extra match(es)\n")
+
+    # 8. Write output
     with open(OUTPUT, "w", encoding="utf-8") as f:
         json.dump(results, f, indent=2, ensure_ascii=False)
 
-    # 8. Write tips.json – max 2 random tips with Over 2.5
+    # 9. Write tips.json – max 2 random tips with Over 2.5
     if results:
         pool = [c for c in candidates if any(
             r["Match"] == c["Match"] and r["Date"] == c["kickoff"]
@@ -355,6 +392,8 @@ def main():
     print(f"  Results: {len(results)} match(es) → {OUTPUT}")
     print(f"  Tips:    {len(tips)} match(es) → {OUTPUT_TIPS}")
     print(f"  API requests: {request_count} / 7500 ({request_count * 100 // 7500}%)")
+    if uncovered:
+        print(f"  Safety net checked: {len(uncovered)} extra fixtures")
 
 
 if __name__ == "__main__":
