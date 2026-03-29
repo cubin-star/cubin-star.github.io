@@ -1,15 +1,15 @@
 [
   {
-    "league": "AHL",
-    "match": "Grand Rapids Griffins vs Chicago Wolves",
+    "league": "DEL",
+    "match": "Straubing Tigers vs Eisbaren Berlin",
     "tip": "Over 5.5",
-    "odds": "1.85",
-    "qualified15": true
+    "odds": "1.75",
+    "qualified13": true
   },
   {
-    "league": "Elite League",
-    "match": "Sheffield vs Dundee",
+    "league": "OHL",
+    "match": "Brantford Bulldogs vs Sudbury Wolves",
     "tip": "Over 5.5",
-    "odds": "1.79"
+    "odds": "2.75"
   }
 ]
