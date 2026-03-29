@@ -1,6 +1,86 @@
 [
   {
     "sport": "football",
+    "league": "J2/J3 League",
+    "match": "Tokushima Vortis vs Kochi United",
+    "tip": "Over 1.5",
+    "odds": "1.28",
+    "date": "2026-03-29T05:00:00+00:00",
+    "score": "3:0",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "J2/J3 League",
+    "match": "Kitakyushu vs FC Ryukyu",
+    "tip": "Over 1.5",
+    "odds": "1.33",
+    "date": "2026-03-29T05:00:00+00:00",
+    "score": "1:0",
+    "result": "✗"
+  },
+  {
+    "sport": "hockey",
+    "league": "AHL",
+    "match": "Syracuse Crunch vs Rochester Americans",
+    "tip": "Over 4.5",
+    "odds": "1.40",
+    "date": "2026-03-28T23:00:00+00:00",
+    "score": "5:3",
+    "result": "✓"
+  },
+  {
+    "sport": "hockey",
+    "league": "AHL",
+    "match": "Grand Rapids Griffins vs Chicago Wolves",
+    "tip": "Over 4.5",
+    "odds": "1.44",
+    "date": "2026-03-28T23:00:00+00:00",
+    "score": "3:2",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "Primera A",
+    "match": "Cucuta vs Chico",
+    "tip": "Over 1.5",
+    "odds": "1.36",
+    "date": "2026-03-28T21:00:00+00:00",
+    "score": "1:0",
+    "result": "✗"
+  },
+  {
+    "sport": "basketball",
+    "league": "Extraliga",
+    "match": "Kosice Wolves vs BKM Lucenec",
+    "tip": "Over 161",
+    "odds": "1.55",
+    "date": "2026-03-28T17:00:00+00:00",
+    "score": "75:92",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "National League",
+    "match": "Brackley Town vs Tamworth",
+    "tip": "Over 1.5",
+    "odds": "1.25",
+    "date": "2026-03-28T15:00:00+00:00",
+    "score": "0:1",
+    "result": "✗"
+  },
+  {
+    "sport": "football",
+    "league": "Premiership",
+    "match": "Larne vs Cliftonville FC",
+    "tip": "Over 1.5",
+    "odds": "1.25",
+    "date": "2026-03-28T15:00:00+00:00",
+    "score": "2:0",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
     "league": "League One",
     "match": "Inverness CT vs Queen of the South",
     "tip": "Over 1.5",
