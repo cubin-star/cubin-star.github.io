@@ -316,10 +316,15 @@ def main():
             print(" no data")
 
     # 7. Write output
-    with open(OUTPUT, "w", encoding="utf-8") as f:
-        json.dump(results, f, indent=2, ensure_ascii=False)
+    if results:
+        with open(OUTPUT, "w", encoding="utf-8") as f:
+            json.dump(results, f, indent=2, ensure_ascii=False)
+    else:
+        no_picks = [{"League": "-", "Match": "No picks available today.", "Tip": "-", "Odds": "-", "Date": now.isoformat()}]
+        with open(OUTPUT, "w", encoding="utf-8") as f:
+            json.dump(no_picks, f, indent=2, ensure_ascii=False)
 
-    # 9. Write tips.json – max 2 random tips with Over 2.5
+    # 8. Write tips.json – max 2 random tips with Over 2.5
     if results:
         pool = [c for c in candidates if any(
             r["Match"] == c["Match"] and r["Date"] == c["kickoff"]
@@ -337,7 +342,8 @@ def main():
             })
         print(f"  Tips: {len(tips)} match(es) \u2192 {OUTPUT_TIPS}")
     else:
-        tips = []
+        tips = [{"League": "-", "Match": "No tips available today.", "Tip": "-", "Odds": "-", "Date": now.isoformat()}]
+        print(f"  Tips: no qualifying matches → placeholder \u2192 {OUTPUT_TIPS}")
 
     with open(OUTPUT_TIPS, "w", encoding="utf-8") as f:
         json.dump(tips, f, indent=2, ensure_ascii=False)
