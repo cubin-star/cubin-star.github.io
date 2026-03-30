@@ -315,14 +315,9 @@ def main():
         else:
             print(" no data")
 
-    # 7. Write output
-    if results:
-        with open(OUTPUT, "w", encoding="utf-8") as f:
-            json.dump(results, f, indent=2, ensure_ascii=False)
-    else:
-        no_picks = [{"League": "-", "Match": "No picks available today.", "Tip": "-", "Odds": "-", "Date": now.isoformat()}]
-        with open(OUTPUT, "w", encoding="utf-8") as f:
-            json.dump(no_picks, f, indent=2, ensure_ascii=False)
+    # 7. Write fotbals.json (empty array when no results → SureBets app shows FootballEmpty label)
+    with open(OUTPUT, "w", encoding="utf-8") as f:
+        json.dump(results, f, indent=2, ensure_ascii=False)
 
     # 8. Write tips.json – max 2 random tips with Over 2.5
     if results:
