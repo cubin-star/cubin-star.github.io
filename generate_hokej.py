@@ -33,11 +33,11 @@ MIN_GAMES = 5
 EXCLUDED_COUNTRIES = {"russia", "belarus"}
 
 # Hockey criteria (relaxed from Hockey.slnx Q-STRICT)
-#   A) oba conceded >= 2.8, jeden scored >= 2.6 + druhy < 2.2
-#   B) oba scored >= 2.8, jeden conceded >= 2.6 + druhy < 2.2
-BOTH_HIGH = 2.8
-ONE_HIGH = 2.6
-OTHER_LOW = 2.2
+#   A) oba conceded >= 2.7, jeden scored >= 2.5 + druhy < 2.3
+#   B) oba scored >= 2.7, jeden conceded >= 2.5 + druhy < 2.3
+BOTH_HIGH = 2.7
+ONE_HIGH = 2.5
+OTHER_LOW = 2.3
 
 request_count = 0
 
@@ -123,9 +123,9 @@ def _sf(val, default=0.0):
 
 def meets_criteria(home_stats, away_stats):
     """
-    Hockey.slnx 1st round (Q-STRICT):
-    A) oba conceded >= 3.0  AND  (jeden scored >= 2.8 + druhy < 2.0)
-    B) oba scored >= 3.0    AND  (jeden conceded >= 2.8 + druhy < 2.0)
+    Hockey criteria:
+    A) oba conceded >= 2.7  AND  (jeden scored >= 2.5 + druhy < 2.3)
+    B) oba scored >= 2.7    AND  (jeden conceded >= 2.5 + druhy < 2.3)
     Uses home/away split: home team → home stats, away team → away stats.
     """
     if not home_stats or not away_stats:
