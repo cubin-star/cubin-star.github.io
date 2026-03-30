@@ -39,10 +39,10 @@ OUTPUT_ODDS = 1.35       # find the safer Over line near this odds (lower = safe
 ODDS_TOLERANCE = 0.25    # max deviation from target
 
 # Variant A/B ratios (relative to half_line = selection_line / 2)
-SCORED_LOW_R = 0.91          # scores < 91% of expected → clearly weak offense
-SCORED_DECENT_R = 1.03       # scores >= 103% of expected → clearly strong offense
-CONCEDED_HIGH_R = 1.05       # concedes >= 105% of expected → clearly leaky defense
-CONCEDED_VERY_HIGH_R = 1.07  # concedes >= 107% of expected → very leaky defense
+SCORED_LOW_R = 0.93          # scores < 93% of expected → clearly weak offense
+SCORED_DECENT_R = 1.01       # scores >= 101% of expected → clearly strong offense
+CONCEDED_HIGH_R = 1.03       # concedes >= 103% of expected → clearly leaky defense
+CONCEDED_VERY_HIGH_R = 1.05  # concedes >= 105% of expected → very leaky defense
 
 request_count = 0
 
