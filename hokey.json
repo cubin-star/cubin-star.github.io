@@ -1,15 +1,14 @@
 [
   {
-    "league": "ELJ",
-    "match": "Karlovy Vary U20 vs Pardubice U20",
+    "league": "Hockey Allsvenskan",
+    "match": "IF Bjorkloven vs Södertälje",
     "tip": "Over 5.5",
-    "odds": "1.85",
-    "qualified13": true
+    "odds": "2.2"
   },
   {
-    "league": "HockeyEttan Norra",
-    "match": "Lindloven vs Boden",
+    "league": "Liiga",
+    "match": "KalPa vs Ilves",
     "tip": "Over 5.5",
-    "odds": "1.93"
+    "odds": "2.0"
   }
 ]
