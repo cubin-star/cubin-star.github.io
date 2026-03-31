@@ -1,21 +1,21 @@
 [
   {
-    "League": "Second NL",
-    "Match": "Hrvatski Dragovoljac vs Uljanik",
+    "League": "National League - North",
+    "Match": "Alfreton Town vs Chorley",
     "Tip": "Over 2.5",
-    "Odds": "1.91",
-    "qualified10": true
+    "Odds": "1.88",
+    "qualified15": true
   },
   {
-    "League": "Serie C - Girone C",
-    "Match": "Casertana vs Sorrento",
+    "League": "UEFA Nations League",
+    "Match": "Latvia vs Gibraltar",
     "Tip": "Over 2.5",
-    "Odds": "1.79"
+    "Odds": "1.92"
   },
   {
-    "League": "FIFA Series",
-    "Match": "Grenada vs Kenya",
+    "League": "Friendlies",
+    "Match": "Serbia vs Saudi Arabia",
     "Tip": "Over 2.5",
-    "Odds": "1.79"
+    "Odds": "1.80"
   }
 ]
