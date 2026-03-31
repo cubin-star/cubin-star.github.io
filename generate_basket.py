@@ -38,11 +38,10 @@ SELECTION_ODDS = 1.80   # find the Over line near this odds (≈ "Over 2.5" equi
 OUTPUT_ODDS = 1.35       # find the safer Over line near this odds (lower = safer line)
 ODDS_TOLERANCE = 0.25    # max deviation from target
 
-# Variant A/B ratios (relative to half_line = selection_line / 2)
-SCORED_LOW_R = 0.93          # scores < 93% of expected → clearly weak offense
-SCORED_DECENT_R = 1.01       # scores >= 101% of expected → clearly strong offense
-CONCEDED_HIGH_R = 1.03       # concedes >= 103% of expected → clearly leaky defense
-CONCEDED_VERY_HIGH_R = 1.05  # concedes >= 105% of expected → very leaky defense
+# Variant A/B ratios – contrast-based (relative to half_line = selection_line / 2)
+BOTH_FLOOR_R = 0.98      # oba týmy alespoň 98% of half-line (mírně pod průměr → snadno projde)
+STRONG_MIN_R = 1.04      # "výrazný" tým musí být 104%+ (jasně nad průměrem)
+CONTRAST_MAX_R = 1.00    # protějšek pod 100% (pod očekávaný průměr → kontrast ≥ 4%)
 
 request_count = 0
 
@@ -169,10 +168,10 @@ def _sf(val, default=0.0):
 
 
 def meets_criteria(home_stats, away_stats, selection_line):
-    """Dynamic Variant A/B – thresholds derived from the game's selection line.
+    """Contrast-based Variant A/B – thresholds derived from the game's selection line.
 
-    Variant A: scored(one < LOW, other >= DECENT) + conceded(one >= HIGH, other >= VERY_HIGH)
-    Variant B: scored(one >= HIGH, other >= VERY_HIGH) + conceded(one < LOW, other >= DECENT)
+    Variant A: both concede >= FLOOR + offensive contrast (one >= STRONG, other < CONTRAST)
+    Variant B: both score  >= FLOOR + defensive contrast (one >= STRONG, other < CONTRAST)
     """
     if not home_stats or not away_stats:
         return False, ""
@@ -192,26 +191,27 @@ def meets_criteria(home_stats, away_stats, selection_line):
 
     # Dynamic thresholds from the game's line
     half = selection_line / 2
-    scored_low = half * SCORED_LOW_R
-    scored_decent = half * SCORED_DECENT_R
-    conceded_high = half * CONCEDED_HIGH_R
-    conceded_very_high = half * CONCEDED_VERY_HIGH_R
+    both_floor = half * BOTH_FLOOR_R
+    strong_min = half * STRONG_MIN_R
+    contrast_max = half * CONTRAST_MAX_R
 
     min_for = min(h_for, a_for)
     max_for = max(h_for, a_for)
     min_agn = min(h_agn, a_agn)
     max_agn = max(h_agn, a_agn)
 
-    variant_a = (min_for < scored_low and max_for >= scored_decent) and \
-                (min_agn >= conceded_high and max_agn >= conceded_very_high)
-    variant_b = (min_for >= conceded_high and max_for >= conceded_very_high) and \
-                (min_agn < scored_low and max_agn >= scored_decent)
+    # A) oba inkasují >= floor + ofenzivní kontrast (jeden >= strong, druhý < contrast)
+    variant_a = (min_agn >= both_floor) and \
+                (max_for >= strong_min and min_for < contrast_max)
+
+    # B) oba střílí >= floor + defenzivní kontrast (jeden >= strong, druhý < contrast)
+    variant_b = (min_for >= both_floor) and \
+                (max_agn >= strong_min and min_agn < contrast_max)
 
     if variant_a or variant_b:
         tag = "A" if variant_a else "B"
         detail = (f"[{tag}] scored {h_for:.1f}/{a_for:.1f}, conceded {h_agn:.1f}/{a_agn:.1f} "
-                  f"(half={half:.0f}, thresholds: <{scored_low:.0f}/{scored_decent:.0f}+, "
-                  f"{conceded_high:.0f}+/{conceded_very_high:.0f}+)")
+                  f"(half={half:.0f}, floor={both_floor:.0f}, strong={strong_min:.0f}, contrast<{contrast_max:.0f})")
         return True, detail
 
     return False, ""
@@ -232,8 +232,7 @@ def main():
     print("== SureBets Basketball Bot ==")
     print(f"Time: {now.strftime('%Y-%m-%d %H:%M UTC')}")
     print(f"Select: Over @ ~{SELECTION_ODDS} odds + Variant A/B → Output: Over @ ~{OUTPUT_ODDS} odds")
-    print(f"Ratios: scored <{SCORED_LOW_R}/{SCORED_DECENT_R}+, "
-          f"conceded {CONCEDED_HIGH_R}+/{CONCEDED_VERY_HIGH_R}+ of half-line\n")
+    print(f"Ratios: FLOOR={BOTH_FLOOR_R}, STRONG={STRONG_MIN_R}, CONTRAST<{CONTRAST_MAX_R} of half-line\n")
 
     # 1. Fetch games
     games_today = fetch_games(today)
