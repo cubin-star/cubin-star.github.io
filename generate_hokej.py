@@ -32,12 +32,12 @@ MIN_GAMES = 5
 
 EXCLUDED_COUNTRIES = {"russia", "belarus"}
 
-# Hockey criteria (relaxed from Hockey.slnx Q-STRICT)
-#   A) oba conceded >= 2.7, jeden scored >= 2.5 + druhy < 2.3
-#   B) oba scored >= 2.7, jeden conceded >= 2.5 + druhy < 2.3
-BOTH_HIGH = 2.7
-ONE_HIGH = 2.5
-OTHER_LOW = 2.3
+# Hockey criteria – contrast-based
+#   A) oba conceded >= FLOOR + (jeden scored >= STRONG, druhy < CONTRAST)
+#   B) oba scored >= FLOOR  + (jeden conceded >= STRONG, druhy < CONTRAST)
+BOTH_FLOOR = 2.4     # oba musí alespoň toto (mírně pod průměr → hodně týmů projde)
+STRONG_MIN = 2.8     # "výrazný" tým musí být jasně nad průměrem
+CONTRAST_MAX = 2.6   # protějšek pod tímto (kontrast ≥ 0.2 se STRONG)
 
 request_count = 0
 
@@ -123,10 +123,9 @@ def _sf(val, default=0.0):
 
 def meets_criteria(home_stats, away_stats):
     """
-    Hockey criteria:
-    A) oba conceded >= 2.7  AND  (jeden scored >= 2.5 + druhy < 2.3)
-    B) oba scored >= 2.7    AND  (jeden conceded >= 2.5 + druhy < 2.3)
-    Uses home/away split: home team → home stats, away team → away stats.
+    Hockey contrast-based criteria (home/away split):
+    A) oba conceded >= FLOOR  AND  (jeden scored >= STRONG + druhy < CONTRAST)
+    B) oba scored  >= FLOOR  AND  (jeden conceded >= STRONG + druhy < CONTRAST)
     """
     if not home_stats or not away_stats:
         return False, ""
@@ -142,18 +141,18 @@ def meets_criteria(home_stats, away_stats):
     h_agn = _sf(home_stats.get("goals", {}).get("against", {}).get("average", {}).get("home"))
     a_agn = _sf(away_stats.get("goals", {}).get("against", {}).get("average", {}).get("away"))
 
-    # A) oba conceded >= 3.0 AND (jeden scored >= 2.8 + druhy < 2.0)
+    # A) oba inkasují >= FLOOR + ofenzivní kontrast (jeden >= STRONG, druhý < CONTRAST)
     variant_a = (
-        h_agn >= BOTH_HIGH and a_agn >= BOTH_HIGH
-        and ((h_for >= ONE_HIGH and a_for < OTHER_LOW)
-             or (a_for >= ONE_HIGH and h_for < OTHER_LOW))
+        h_agn >= BOTH_FLOOR and a_agn >= BOTH_FLOOR
+        and ((h_for >= STRONG_MIN and a_for < CONTRAST_MAX)
+             or (a_for >= STRONG_MIN and h_for < CONTRAST_MAX))
     )
 
-    # B) oba scored >= 3.0 AND (jeden conceded >= 2.8 + druhy < 2.0)
+    # B) oba střílí >= FLOOR + defenzivní kontrast (jeden >= STRONG, druhý < CONTRAST)
     variant_b = (
-        h_for >= BOTH_HIGH and a_for >= BOTH_HIGH
-        and ((h_agn >= ONE_HIGH and a_agn < OTHER_LOW)
-             or (a_agn >= ONE_HIGH and h_agn < OTHER_LOW))
+        h_for >= BOTH_FLOOR and a_for >= BOTH_FLOOR
+        and ((h_agn >= STRONG_MIN and a_agn < CONTRAST_MAX)
+             or (a_agn >= STRONG_MIN and h_agn < CONTRAST_MAX))
     )
 
     if variant_a or variant_b:
@@ -201,7 +200,9 @@ def main():
     print("== SureBets Hockey Bot ==")
     print(f"Time: {now.strftime('%Y-%m-%d %H:%M UTC')}")
     print(f"Select: Over 4.5 odds {MIN_ODDS}–{MAX_ODDS} + Variant A/B → Output: Over 4.5")
-    print(f"Thresholds: A) both conc>={BOTH_HIGH}, one scored>={ONE_HIGH} + other<{OTHER_LOW} | B) both scored>={BOTH_HIGH}, one conc>={ONE_HIGH} + other<{OTHER_LOW}\n")
+    print(f"Thresholds: FLOOR={BOTH_FLOOR}, STRONG={STRONG_MIN}, CONTRAST<{CONTRAST_MAX}")
+    print(f"  A) both conc>={BOTH_FLOOR} + one scored>={STRONG_MIN}, other<{CONTRAST_MAX}")
+    print(f"  B) both scored>={BOTH_FLOOR} + one conc>={STRONG_MIN}, other<{CONTRAST_MAX}\n")
 
     # 1. Fetch games
     games_today = fetch_games(today)
