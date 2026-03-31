@@ -1,1 +1,30 @@
-[]
+[
+  {
+    "league": "CBA",
+    "match": "Guangdong vs Jiangsu Dragons",
+    "tip": "Over 170.5",
+    "odds": "1.40",
+    "date": "2026-03-31T11:35:00+00:00"
+  },
+  {
+    "league": "I Divisioona A",
+    "match": "Jyvaskyla vs Raholan Pyrkiva",
+    "tip": "Over 153.5",
+    "odds": "1.60",
+    "date": "2026-03-31T15:30:00+00:00"
+  },
+  {
+    "league": "ZBL W",
+    "match": "Trutnov W vs Zabiny Brno W",
+    "tip": "Over 144.5",
+    "odds": "1.51",
+    "date": "2026-03-31T16:30:00+00:00"
+  },
+  {
+    "league": "NBA",
+    "match": "Brooklyn Nets vs Charlotte Hornets",
+    "tip": "Over 210.5",
+    "odds": "1.38",
+    "date": "2026-03-31T23:30:00+00:00"
+  }
+]
