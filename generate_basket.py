@@ -210,11 +210,16 @@ def meets_criteria(home_stats, away_stats, selection_line):
 
     if variant_a or variant_b:
         tag = "A" if variant_a else "B"
+        if variant_a:
+            s = sorted([h_for, a_for])
+        else:
+            s = sorted([h_agn, a_agn])
+        score = s[1] / s[0] if s[0] > 0 else 99.0
         detail = (f"[{tag}] scored {h_for:.1f}/{a_for:.1f}, conceded {h_agn:.1f}/{a_agn:.1f} "
-                  f"(half={half:.0f}, floor={both_floor:.0f}, strong={strong_min:.0f}, contrast<{contrast_max:.0f})")
-        return True, detail
+                  f"(half={half:.0f}, score={score:.2f})")
+        return True, detail, score
 
-    return False, ""
+    return False, "", 0.0
 
 
 # ===== MAIN =====
@@ -299,7 +304,7 @@ def main():
         print(f"  [{i+1}/{len(candidates)}] {c['match'][:45]:.<47s}", end="")
         home_stats = fetch_team_stats(c["league_id"], c["season"], c["home_id"])
         away_stats = fetch_team_stats(c["league_id"], c["season"], c["away_id"])
-        ok, detail = meets_criteria(home_stats, away_stats, c["sel_line"])
+        ok, detail, score = meets_criteria(home_stats, away_stats, c["sel_line"])
         if ok:
             print(f" ★ {detail}")
             print(f"       → {c['sel_label']}@{c['sel_odds']} → OUTPUT: {c['out_label']}@{c['out_odds']}")
@@ -310,11 +315,25 @@ def main():
                 "tip": c["out_label"],
                 "odds": c["out_odds"],
                 "date": kickoff,
+                "_score": score,
             })
         else:
             print(" fail")
 
-    # 5. Write output
+    # 5. Best per league – keep only the top match from each league
+    before = len(results)
+    best_per_league = {}
+    for r in results:
+        lg = r["league"]
+        if lg not in best_per_league or r["_score"] > best_per_league[lg]["_score"]:
+            best_per_league[lg] = r
+    results = list(best_per_league.values())
+    for r in results:
+        r.pop("_score", None)
+    if before > len(results):
+        print(f"\n  Dedup: {before} → {len(results)} (best per league)")
+
+    # 6. Write output
     with open(OUTPUT, "w", encoding="utf-8") as f:
         json.dump(results, f, indent=2, ensure_ascii=False)
 
@@ -325,3 +344,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
