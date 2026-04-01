@@ -39,9 +39,9 @@ OUTPUT_ODDS = 1.35       # find the safer Over line near this odds (lower = safe
 ODDS_TOLERANCE = 0.25    # max deviation from target
 
 # Variant A/B ratios – contrast-based (relative to half_line = selection_line / 2)
-BOTH_FLOOR_R = 0.98      # oba týmy alespoň 98% of half-line (mírně pod průměr → snadno projde)
-STRONG_MIN_R = 1.04      # "výrazný" tým musí být 104%+ (jasně nad průměrem)
-CONTRAST_MAX_R = 1.00    # protějšek pod 100% (pod očekávaný průměr → kontrast ≥ 4%)
+BOTH_FLOOR_R = 1.01      # oba týmy alespoň 101% of half-line (oba NAD průměrem → reálný Over)
+STRONG_MIN_R = 1.05      # "výrazný" tým musí být 105%+ (jasně nad průměrem)
+CONTRAST_MAX_R = 1.03    # protějšek pod 103% (stále nad průměrem, ale kontrast ≥ 2% se STRONG)
 
 request_count = 0
 
