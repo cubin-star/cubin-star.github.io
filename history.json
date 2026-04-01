@@ -1,5 +1,85 @@
 [
   {
+    "sport": "basketball",
+    "league": "NBA",
+    "match": "Brooklyn Nets vs Charlotte Hornets",
+    "tip": "Over 210.5",
+    "odds": "1.38",
+    "date": "2026-03-31T23:30:00+00:00",
+    "score": "86:117",
+    "result": "✗"
+  },
+  {
+    "sport": "hockey",
+    "league": "AHL",
+    "match": "Toronto Marlies vs Manitoba Moose",
+    "tip": "Over 4.5",
+    "odds": "1.50",
+    "date": "2026-03-31T23:00:00+00:00",
+    "score": "1:5",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "National League - North",
+    "match": "Alfreton Town vs Chorley",
+    "tip": "Over 1.5",
+    "odds": "1.27",
+    "date": "2026-03-31T18:45:00+00:00",
+    "score": "1:0",
+    "result": "✗"
+  },
+  {
+    "sport": "football",
+    "league": "World Cup - Qualification Europe",
+    "match": "Bosnia & Herzegovina vs Italy",
+    "tip": "Over 1.5",
+    "odds": "1.34",
+    "date": "2026-03-31T18:45:00+00:00",
+    "score": "1:1",
+    "result": "✓"
+  },
+  {
+    "sport": "basketball",
+    "league": "ZBL W",
+    "match": "Trutnov W vs Zabiny Brno W",
+    "tip": "Over 144.5",
+    "odds": "1.51",
+    "date": "2026-03-31T16:30:00+00:00",
+    "score": "50:75",
+    "result": "✗"
+  },
+  {
+    "sport": "football",
+    "league": "UEFA U19 Championship - Qualification",
+    "match": "Slovenia U19 vs Finland U19",
+    "tip": "Over 1.5",
+    "odds": "1.21",
+    "date": "2026-03-31T16:00:00+00:00",
+    "score": "0:1",
+    "result": "✗"
+  },
+  {
+    "sport": "basketball",
+    "league": "I Divisioona A",
+    "match": "Jyvaskyla vs Raholan Pyrkiva",
+    "tip": "Over 153.5",
+    "odds": "1.60",
+    "date": "2026-03-31T15:30:00+00:00",
+    "score": "65:60",
+    "result": "✗"
+  },
+  {
+    "sport": "basketball",
+    "league": "CBA",
+    "match": "Guangdong vs Jiangsu Dragons",
+    "tip": "Over 170.5",
+    "odds": "1.40",
+    "date": "2026-03-31T11:35:00+00:00",
+    "score": "101:92",
+    "result": "✓"
+  },
+  {
     "sport": "football",
     "league": "Segunda División RFEF - Group 2",
     "match": "Utebo vs Real Unión",
