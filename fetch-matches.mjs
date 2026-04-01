@@ -17,10 +17,13 @@ const FOOTBALL_API = 'https://v3.football.api-sports.io';
 const MIN_ODDS = 1.75;
 const MAX_ODDS = 3.0;
 const PICK_COUNT = 6;
-const MAX_SCORED = 1.0;
-const MIN_SCORED = 1.3;
-const MIN_CONCEDED_STRICT = 1.5;
 const MIN_PLAYED = 5;
+
+// League-relative criteria (ratios of game baseline)
+// Baseline = avg(h_for, a_for, h_agn, a_agn) → auto-scales to any league
+const BOTH_FLOOR_R = 0.85;      // oba alespoň 85% baseline
+const STRONG_MIN_R = 1.10;      // "výrazný" tým 110%+ baseline
+const CONTRAST_MAX_R = 0.95;    // protějšek pod 95% baseline (kontrast ≥ 15%)
 const EXCLUDED_COUNTRIES = new Set(['Russia', 'Belarus']);
 const TZ = 'Europe/Prague';
 let reqCount = 0;
@@ -183,21 +186,36 @@ async function main() {
                     console.log('   [SKIP] ' + m.match + ' | too few games: ' + hPlayed + '/' + aPlayed);
                     continue;
                 }
-                const hFor = parseFloat(home.league?.goals?.for?.average?.total) || parseFloat(home.last_5?.goals?.for?.average) || 0;
-                const aFor = parseFloat(away.league?.goals?.for?.average?.total) || parseFloat(away.last_5?.goals?.for?.average) || 0;
-                const hAgn = parseFloat(home.league?.goals?.against?.average?.total) || parseFloat(home.last_5?.goals?.against?.average) || 0;
-                const aAgn = parseFloat(away.league?.goals?.against?.average?.total) || parseFloat(away.last_5?.goals?.against?.average) || 0;
-                const expG = (hFor + aFor + hAgn + aAgn) / 2;
+                // Home/away split: domácí → home stats, hosté → away stats
+                const hFor = parseFloat(home.league?.goals?.for?.average?.home) || 0;
+                const aFor = parseFloat(away.league?.goals?.for?.average?.away) || 0;
+                const hAgn = parseFloat(home.league?.goals?.against?.average?.home) || 0;
+                const aAgn = parseFloat(away.league?.goals?.against?.average?.away) || 0;
 
-                const oneLowOneHighScored = (hFor < MAX_SCORED && aFor >= MIN_SCORED) || (aFor < MAX_SCORED && hFor >= MIN_SCORED);
-                const oneLowOneHighConceded = (hAgn < MAX_SCORED && aAgn >= MIN_SCORED) || (aAgn < MAX_SCORED && hAgn >= MIN_SCORED);
-                const bothStrictScored = hFor >= MIN_CONCEDED_STRICT && aFor >= MIN_CONCEDED_STRICT && (hFor > MIN_CONCEDED_STRICT || aFor > MIN_CONCEDED_STRICT);
-                const bothStrictConceded = hAgn >= MIN_CONCEDED_STRICT && aAgn >= MIN_CONCEDED_STRICT && (hAgn > MIN_CONCEDED_STRICT || aAgn > MIN_CONCEDED_STRICT);
+                if (hFor === 0 && aFor === 0) continue;
 
-                if ((oneLowOneHighScored && bothStrictConceded)
-                    || (bothStrictScored && oneLowOneHighConceded)) {
-                    console.log('   [Q] ' + m.match + ' | scored ' + hFor.toFixed(1) + '/' + aFor.toFixed(1) + ', conceded ' + hAgn.toFixed(1) + '/' + aAgn.toFixed(1) + ' => ' + expG.toFixed(2) + 'g');
-                    qualified.push({ ...m, expectedGoals: expG });
+                // League-relative baseline
+                const baseline = (hFor + aFor + hAgn + aAgn) / 4;
+                if (baseline === 0) continue;
+
+                const bothFloor = baseline * BOTH_FLOOR_R;
+                const strongMin = baseline * STRONG_MIN_R;
+                const contrastMax = baseline * CONTRAST_MAX_R;
+
+                // A) oba inkasují >= floor + ofenzivní kontrast
+                const variantA = (hAgn >= bothFloor && aAgn >= bothFloor)
+                    && ((hFor >= strongMin && aFor < contrastMax) || (aFor >= strongMin && hFor < contrastMax));
+
+                // B) oba střílí >= floor + defenzivní kontrast
+                const variantB = (hFor >= bothFloor && aFor >= bothFloor)
+                    && ((hAgn >= strongMin && aAgn < contrastMax) || (aAgn >= strongMin && hAgn < contrastMax));
+
+                if (variantA || variantB) {
+                    const tag = variantA ? 'A' : 'B';
+                    const s = variantA ? [hFor, aFor].sort((a, b) => a - b) : [hAgn, aAgn].sort((a, b) => a - b);
+                    const score = s[0] > 0 ? s[1] / s[0] : 99;
+                    console.log('   [Q' + tag + '] ' + m.match + ' | scored ' + hFor.toFixed(1) + '/' + aFor.toFixed(1) + ', conceded ' + hAgn.toFixed(1) + '/' + aAgn.toFixed(1) + ' (base=' + baseline.toFixed(2) + ', score=' + score.toFixed(2) + ')');
+                    qualified.push({ ...m, contrastScore: score });
                 }
             }
         }
@@ -205,23 +223,32 @@ async function main() {
     }
     console.log('\nQualified (strict): ' + qualified.length + '/' + pool.length);
 
-    const fullAccumulator = qualified.length >= PICK_COUNT;
+    // Best per league: keep only the match with highest contrastScore from each league
+    const bestByLeague = new Map();
+    for (const m of qualified) {
+        const prev = bestByLeague.get(m.league);
+        if (!prev || m.contrastScore > prev.contrastScore) bestByLeague.set(m.league, m);
+    }
+    const deduped = [...bestByLeague.values()];
+    if (deduped.length < qualified.length) console.log('Dedup: ' + qualified.length + ' → ' + deduped.length + ' (best per league)');
+
+    const fullAccumulator = deduped.length >= PICK_COUNT;
     if (!fullAccumulator) {
-        console.log('\nWARNING: Only ' + qualified.length + ' qualifying matches found (need ' + PICK_COUNT + ' for full accumulator).');
+        console.log('\nWARNING: Only ' + deduped.length + ' qualifying matches found (need ' + PICK_COUNT + ' for full accumulator).');
     }
 
-    // Prefer matches within 24h, pick by highest odds
+    // Prefer matches within 24h, pick by highest contrastScore
     // Same league is allowed, but cap per league = number of groups so each lands in a different group
-    const targetCount = fullAccumulator ? PICK_COUNT : qualified.length;
+    const targetCount = fullAccumulator ? PICK_COUNT : deduped.length;
     const numGroups = Math.ceil(targetCount / 2);
-    const within24h = qualified.filter(m => new Date(m.kickoff) <= max24h);
-    const beyond24h = qualified.filter(m => new Date(m.kickoff) > max24h);
+    const within24h = deduped.filter(m => new Date(m.kickoff) <= max24h);
+    const beyond24h = deduped.filter(m => new Date(m.kickoff) > max24h);
     console.log('Within 24h: ' + within24h.length + ', beyond 24h: ' + beyond24h.length);
 
     let selected;
     if (within24h.length >= targetCount) {
-        // Pick by highest odds from 24h pool (max numGroups per league)
-        within24h.sort((a, b) => parseFloat(b.odds) - parseFloat(a.odds));
+        // Pick by highest contrastScore from 24h pool (max numGroups per league)
+        within24h.sort((a, b) => b.contrastScore - a.contrastScore);
         selected = [];
         const lc = new Map();
         for (const m of within24h) {
@@ -231,18 +258,19 @@ async function main() {
             selected.push(m);
             lc.set(m.league, cnt + 1);
         }
-        console.log('Selected ' + selected.length + ' matches with highest odds from 24h window');
+        console.log('Selected ' + selected.length + ' matches with highest contrastScore from 24h window');
     } else {
-        // Take all from 24h + fill from beyond 24h (earliest kickoff first)
+        // Take all from 24h + fill from beyond 24h (by contrastScore desc)
         selected = [];
         const lc = new Map();
+        within24h.sort((a, b) => b.contrastScore - a.contrastScore);
         for (const m of within24h) {
             const cnt = lc.get(m.league) || 0;
             if (cnt >= numGroups) continue;
             selected.push(m);
             lc.set(m.league, cnt + 1);
         }
-        beyond24h.sort((a, b) => new Date(a.kickoff) - new Date(b.kickoff));
+        beyond24h.sort((a, b) => b.contrastScore - a.contrastScore);
         for (const m of beyond24h) {
             if (selected.length >= targetCount) break;
             const cnt = lc.get(m.league) || 0;
