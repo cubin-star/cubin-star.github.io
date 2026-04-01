@@ -174,12 +174,12 @@ def meets_criteria(home_stats, away_stats, selection_line):
     Variant B: both score  >= FLOOR + defensive contrast (one >= STRONG, other < CONTRAST)
     """
     if not home_stats or not away_stats:
-        return False, ""
+        return False, "", 0.0
 
     h_played = int(_sf(home_stats.get("games", {}).get("played", {}).get("all", 0)))
     a_played = int(_sf(away_stats.get("games", {}).get("played", {}).get("all", 0)))
     if h_played < MIN_GAMES or a_played < MIN_GAMES:
-        return False, ""
+        return False, "", 0.0
 
     h_for = _sf(home_stats.get("points", {}).get("for", {}).get("average", {}).get("all"))
     a_for = _sf(away_stats.get("points", {}).get("for", {}).get("average", {}).get("all"))
@@ -187,7 +187,7 @@ def meets_criteria(home_stats, away_stats, selection_line):
     a_agn = _sf(away_stats.get("points", {}).get("against", {}).get("average", {}).get("all"))
 
     if h_for == 0 or a_for == 0:
-        return False, ""
+        return False, "", 0.0
 
     # Dynamic thresholds from the game's line
     half = selection_line / 2
@@ -302,23 +302,26 @@ def main():
     print(f"  Analyzing {len(candidates)} candidates...")
     for i, c in enumerate(candidates):
         print(f"  [{i+1}/{len(candidates)}] {c['match'][:45]:.<47s}", end="")
-        home_stats = fetch_team_stats(c["league_id"], c["season"], c["home_id"])
-        away_stats = fetch_team_stats(c["league_id"], c["season"], c["away_id"])
-        ok, detail, score = meets_criteria(home_stats, away_stats, c["sel_line"])
-        if ok:
-            print(f" ★ {detail}")
-            print(f"       → {c['sel_label']}@{c['sel_odds']} → OUTPUT: {c['out_label']}@{c['out_odds']}")
-            kickoff = datetime.fromtimestamp(c["timestamp"], tz=timezone.utc).strftime("%Y-%m-%dT%H:%M:%S+00:00")
-            results.append({
-                "league": c["league"],
-                "match": c["match"],
-                "tip": c["out_label"],
-                "odds": c["out_odds"],
-                "date": kickoff,
-                "_score": score,
-            })
-        else:
-            print(" fail")
+        try:
+            home_stats = fetch_team_stats(c["league_id"], c["season"], c["home_id"])
+            away_stats = fetch_team_stats(c["league_id"], c["season"], c["away_id"])
+            ok, detail, score = meets_criteria(home_stats, away_stats, c["sel_line"])
+            if ok:
+                print(f" ★ {detail}")
+                print(f"       → {c['sel_label']}@{c['sel_odds']} → OUTPUT: {c['out_label']}@{c['out_odds']}")
+                kickoff = datetime.fromtimestamp(c["timestamp"], tz=timezone.utc).strftime("%Y-%m-%dT%H:%M:%S+00:00")
+                results.append({
+                    "league": c["league"],
+                    "match": c["match"],
+                    "tip": c["out_label"],
+                    "odds": c["out_odds"],
+                    "date": kickoff,
+                    "_score": score,
+                })
+            else:
+                print(" fail")
+        except Exception as exc:
+            print(f" ERROR: {exc}")
 
     # 5. Best per league – keep only the top match from each league
     before = len(results)
@@ -344,4 +347,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
