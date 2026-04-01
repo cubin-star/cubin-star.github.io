@@ -129,12 +129,12 @@ def meets_criteria(home_stats, away_stats):
     B) oba scored  >= FLOOR_R * base  AND  (jeden conceded >= STRONG_R * base + druhy < CONTRAST_R * base)
     """
     if not home_stats or not away_stats:
-        return False, ""
+        return False, "", 0.0
 
     h_played = int(_sf(home_stats.get("games", {}).get("played", {}).get("all", 0)))
     a_played = int(_sf(away_stats.get("games", {}).get("played", {}).get("all", 0)))
     if h_played < MIN_GAMES or a_played < MIN_GAMES:
-        return False, ""
+        return False, "", 0.0
 
     # Home team → home split, Away team → away split
     h_for = _sf(home_stats.get("goals", {}).get("for", {}).get("average", {}).get("home"))
@@ -143,12 +143,12 @@ def meets_criteria(home_stats, away_stats):
     a_agn = _sf(away_stats.get("goals", {}).get("against", {}).get("average", {}).get("away"))
 
     if h_for == 0 and a_for == 0:
-        return False, ""
+        return False, "", 0.0
 
     # Game baseline = průměrná per-team úroveň scoringu v tomto matchupu
     baseline = (h_for + a_for + h_agn + a_agn) / 4
     if baseline == 0:
-        return False, ""
+        return False, "", 0.0
 
     both_floor = baseline * BOTH_FLOOR_R
     strong_min = baseline * STRONG_MIN_R
@@ -283,33 +283,36 @@ def main():
     print(f"  Analyzing {len(candidates)} candidates...")
     for i, c in enumerate(candidates):
         print(f"  [{i+1}/{len(candidates)}] {c['match'][:45]:.<47s}", end="")
-        home_stats = fetch_team_stats(c["league_id"], c["season"], c["home_id"])
-        away_stats = fetch_team_stats(c["league_id"], c["season"], c["away_id"])
-        ok, detail, score = meets_criteria(home_stats, away_stats)
-        if ok:
-            print(f" ★ {detail} | O4.5={c['odds']}")
-            kickoff = datetime.fromtimestamp(c["timestamp"], tz=timezone.utc).strftime("%Y-%m-%dT%H:%M:%S+00:00")
-            results.append({
-                "league": c["league"],
-                "match": c["match"],
-                "tip": "Over 4.5",
-                "odds": c["odds"],
-                "date": kickoff,
-                "_score": score,
-            })
-        else:
-            # Print stats for debugging even on fail
-            if home_stats and away_stats:
-                h_for = _sf(home_stats.get("goals", {}).get("for", {}).get("average", {}).get("home"))
-                a_for = _sf(away_stats.get("goals", {}).get("for", {}).get("average", {}).get("away"))
-                h_agn = _sf(home_stats.get("goals", {}).get("against", {}).get("average", {}).get("home"))
-                a_agn = _sf(away_stats.get("goals", {}).get("against", {}).get("average", {}).get("away"))
-                base = (h_for + a_for + h_agn + a_agn) / 4 if (h_for + a_for + h_agn + a_agn) > 0 else 0
-                print(f" fail | h_sc={h_for:.1f} h_cn={h_agn:.1f} a_sc={a_for:.1f} a_cn={a_agn:.1f} base={base:.2f}")
-            elif not home_stats:
-                print(" fail (no home stats)")
+        try:
+            home_stats = fetch_team_stats(c["league_id"], c["season"], c["home_id"])
+            away_stats = fetch_team_stats(c["league_id"], c["season"], c["away_id"])
+            ok, detail, score = meets_criteria(home_stats, away_stats)
+            if ok:
+                print(f" ★ {detail} | O4.5={c['odds']}")
+                kickoff = datetime.fromtimestamp(c["timestamp"], tz=timezone.utc).strftime("%Y-%m-%dT%H:%M:%S+00:00")
+                results.append({
+                    "league": c["league"],
+                    "match": c["match"],
+                    "tip": "Over 4.5",
+                    "odds": c["odds"],
+                    "date": kickoff,
+                    "_score": score,
+                })
             else:
-                print(" fail (no away stats)")
+                # Print stats for debugging even on fail
+                if home_stats and away_stats:
+                    h_for = _sf(home_stats.get("goals", {}).get("for", {}).get("average", {}).get("home"))
+                    a_for = _sf(away_stats.get("goals", {}).get("for", {}).get("average", {}).get("away"))
+                    h_agn = _sf(home_stats.get("goals", {}).get("against", {}).get("average", {}).get("home"))
+                    a_agn = _sf(away_stats.get("goals", {}).get("against", {}).get("average", {}).get("away"))
+                    base = (h_for + a_for + h_agn + a_agn) / 4 if (h_for + a_for + h_agn + a_agn) > 0 else 0
+                    print(f" fail | h_sc={h_for:.1f} h_cn={h_agn:.1f} a_sc={a_for:.1f} a_cn={a_agn:.1f} base={base:.2f}")
+                elif not home_stats:
+                    print(" fail (no home stats)")
+                else:
+                    print(" fail (no away stats)")
+        except Exception as exc:
+            print(f" ERROR: {exc}")
 
     # 5. Best per league – keep only the top match from each league
     before = len(results)
