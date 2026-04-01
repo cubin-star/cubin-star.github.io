@@ -1,21 +1,22 @@
 [
   {
-    "League": "National League - North",
-    "Match": "Alfreton Town vs Chorley",
+    "League": "Tercera División RFEF - Group 11",
+    "Match": "Constància vs Santanyí",
     "Tip": "Over 2.5",
-    "Odds": "1.88",
-    "qualified15": true
+    "Odds": "1.78"
   },
   {
-    "League": "UEFA Nations League",
-    "Match": "Latvia vs Gibraltar",
+    "League": "1st League - FBiH",
+    "Match": "Čelik vs Sloboda Tuzla",
     "Tip": "Over 2.5",
-    "Odds": "1.92"
+    "Odds": "1.95",
+    "qualified13": true
   },
   {
-    "League": "Friendlies",
-    "Match": "Serbia vs Saudi Arabia",
+    "League": "Primera Division",
+    "Match": "Águila vs Fuerte San Francisco",
     "Tip": "Over 2.5",
-    "Odds": "1.80"
+    "Odds": "1.83",
+    "qualified10": true
   }
 ]
