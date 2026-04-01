@@ -34,6 +34,13 @@ MIN_GAMES = 5
 
 EXCLUDED_COUNTRIES = {"russia", "belarus"}
 
+# Football criteria – league-relative (ratios of game baseline)
+# Baseline = průměr 4 per-team hodnot (h_for, a_for, h_agn, a_agn)
+# → automaticky se přizpůsobí úrovni ligy (Eredivisie ~1.6, Ligue 1 ~1.2, atd.)
+BOTH_FLOOR_R = 0.85      # oba alespoň 85% baseline
+STRONG_MIN_R = 1.10      # "výrazný" tým 110%+ baseline
+CONTRAST_MAX_R = 0.95    # protějšek pod 95% baseline (kontrast ≥ 15%)
+
 request_count = 0
 
 
@@ -130,9 +137,10 @@ def _sf(val, default=0.0):
 
 def meets_criteria(pred):
     """
-    Home/away split: home team → home stats, away team → away stats.
-    Variant A: scored(one < 1, other >= 1.4)  + conceded(one >= 1.5, other >= 1.6)
-    Variant B: scored(one >= 1.5, other >= 1.6) + conceded(one < 1, other >= 1.4)
+    League-relative football criteria (home/away split).
+    Baseline = avg of h_for, a_for, h_agn, a_agn → adapts to any league.
+    A) oba conceded >= FLOOR_R * base  AND  (jeden scored >= STRONG_R * base + druhy < CONTRAST_R * base)
+    B) oba scored  >= FLOOR_R * base  AND  (jeden conceded >= STRONG_R * base + druhy < CONTRAST_R * base)
     """
     home = pred.get("teams", {}).get("home", {})
     away = pred.get("teams", {}).get("away", {})
@@ -150,20 +158,39 @@ def meets_criteria(pred):
     h_agn = _sf(home.get("league", {}).get("goals", {}).get("against", {}).get("average", {}).get("home"))
     a_agn = _sf(away.get("league", {}).get("goals", {}).get("against", {}).get("average", {}).get("away"))
 
-    min_for = min(h_for, a_for)
-    max_for = max(h_for, a_for)
-    min_agn = min(h_agn, a_agn)
-    max_agn = max(h_agn, a_agn)
+    if h_for == 0 and a_for == 0:
+        return False, ""
 
-    variant_a = (min_for < 1 and max_for >= 1.4) and (min_agn >= 1.5 and max_agn >= 1.6)
-    variant_b = (min_for >= 1.5 and max_for >= 1.6) and (min_agn < 1 and max_agn >= 1.4)
+    # Game baseline = průměrná per-team úroveň scoringu v tomto matchupu
+    baseline = (h_for + a_for + h_agn + a_agn) / 4
+    if baseline == 0:
+        return False, ""
+
+    both_floor = baseline * BOTH_FLOOR_R
+    strong_min = baseline * STRONG_MIN_R
+    contrast_max = baseline * CONTRAST_MAX_R
+
+    # A) oba inkasují >= floor + ofenzivní kontrast (jeden >= strong, druhý < contrast)
+    variant_a = (
+        h_agn >= both_floor and a_agn >= both_floor
+        and ((h_for >= strong_min and a_for < contrast_max)
+             or (a_for >= strong_min and h_for < contrast_max))
+    )
+
+    # B) oba střílí >= floor + defenzivní kontrast (jeden >= strong, druhý < contrast)
+    variant_b = (
+        h_for >= both_floor and a_for >= both_floor
+        and ((h_agn >= strong_min and a_agn < contrast_max)
+             or (a_agn >= strong_min and h_agn < contrast_max))
+    )
 
     if variant_a or variant_b:
         tag = "A" if variant_a else "B"
-        detail = f"[{tag}] scored {h_for:.1f}/{a_for:.1f}, conceded {h_agn:.1f}/{a_agn:.1f} (h/a split)"
+        detail = (f"[{tag}] scored {h_for:.1f}/{a_for:.1f}, conceded {h_agn:.1f}/{a_agn:.1f} "
+                  f"(base={baseline:.2f}, floor={both_floor:.2f}, strong={strong_min:.2f}, contrast<{contrast_max:.2f})")
         return True, detail
 
-    return False, f"stats fail: scored {h_for:.1f}/{a_for:.1f}, conceded {h_agn:.1f}/{a_agn:.1f}"
+    return False, f"stats fail: scored {h_for:.1f}/{a_for:.1f}, conceded {h_agn:.1f}/{a_agn:.1f} (base={baseline:.2f})"
 
 
 # ===== CANDIDATES =====
@@ -226,7 +253,8 @@ def main():
 
     print("== SureBets Football Bot ==")
     print(f"Time: {now.strftime('%Y-%m-%d %H:%M UTC')}")
-    print(f"Select: Over 2.5 odds {MIN_ODDS}–{MAX_ODDS} + Variant A/B criteria")
+    print(f"Select: Over 2.5 odds {MIN_ODDS}–{MAX_ODDS} + Variant A/B (league-relative)")
+    print(f"Ratios (× game baseline): FLOOR={BOTH_FLOOR_R}, STRONG={STRONG_MIN_R}, CONTRAST<{CONTRAST_MAX_R}")
     print(f"Output: Over 1.5 with odds from API\n")
 
     # 1. Fixtures
@@ -353,4 +381,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
