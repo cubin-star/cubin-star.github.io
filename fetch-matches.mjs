@@ -24,6 +24,7 @@ const MIN_PLAYED = 5;
 const BOTH_FLOOR_R = 0.85;      // oba alespoň 85% baseline
 const STRONG_MIN_R = 1.10;      // "výrazný" tým 110%+ baseline
 const CONTRAST_MAX_R = 0.95;    // protějšek pod 95% baseline (kontrast ≥ 15%)
+const MIN_BASELINE = 1.25;      // minimum avg per-team stat → expected ~2.5+ gólů celkem
 const EXCLUDED_COUNTRIES = new Set(['Russia', 'Belarus']);
 const TZ = 'Europe/Prague';
 let reqCount = 0;
@@ -197,6 +198,10 @@ async function main() {
                 // League-relative baseline
                 const baseline = (hFor + aFor + hAgn + aAgn) / 4;
                 if (baseline === 0) continue;
+                if (baseline < MIN_BASELINE) {
+                    console.log('   [LOW] ' + m.match + ' | baseline ' + baseline.toFixed(2) + ' < ' + MIN_BASELINE);
+                    continue;
+                }
 
                 const bothFloor = baseline * BOTH_FLOOR_R;
                 const strongMin = baseline * STRONG_MIN_R;
