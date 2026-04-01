@@ -40,6 +40,7 @@ EXCLUDED_COUNTRIES = {"russia", "belarus"}
 BOTH_FLOOR_R = 0.85      # oba alespoň 85% baseline
 STRONG_MIN_R = 1.10      # "výrazný" tým 110%+ baseline
 CONTRAST_MAX_R = 0.95    # protějšek pod 95% baseline (kontrast ≥ 15%)
+MIN_BASELINE = 1.25      # minimum avg per-team stat → expected ~2.5+ gólů celkem
 
 request_count = 0
 
@@ -165,6 +166,8 @@ def meets_criteria(pred):
     baseline = (h_for + a_for + h_agn + a_agn) / 4
     if baseline == 0:
         return False, "", 0.0
+    if baseline < MIN_BASELINE:
+        return False, f"baseline too low: {baseline:.2f} < {MIN_BASELINE}", 0.0
 
     both_floor = baseline * BOTH_FLOOR_R
     strong_min = baseline * STRONG_MIN_R
