@@ -1,10 +1,17 @@
 [
   {
-    "league": "AHL",
-    "match": "Iowa Wild vs Chicago Wolves",
+    "league": "SHL",
+    "match": "Vaxjo vs Brynas",
     "tip": "Over 4.5",
-    "odds": "1.45",
-    "date": "2026-04-02T00:00:00+00:00"
+    "odds": "1.67",
+    "date": "2026-04-01T17:00:00+00:00"
+  },
+  {
+    "league": "SHL",
+    "match": "Rögle vs Farjestad",
+    "tip": "Over 4.5",
+    "odds": "1.53",
+    "date": "2026-04-01T17:00:00+00:00"
   },
   {
     "league": "AHL",
@@ -12,5 +19,12 @@
     "tip": "Over 4.5",
     "odds": "1.45",
     "date": "2026-04-02T00:00:00+00:00"
+  },
+  {
+    "league": "ELJ",
+    "match": "Pardubice U20 vs Karlovy Vary U20",
+    "tip": "Over 4.5",
+    "odds": "1.42",
+    "date": "2026-04-02T15:45:00+00:00"
   }
 ]
