@@ -145,12 +145,12 @@ def meets_criteria(pred):
     home = pred.get("teams", {}).get("home", {})
     away = pred.get("teams", {}).get("away", {})
     if not home or not away:
-        return False, ""
+        return False, "", 0.0
 
     h_played = int(_sf(home.get("league", {}).get("fixtures", {}).get("played", {}).get("total", 0)))
     a_played = int(_sf(away.get("league", {}).get("fixtures", {}).get("played", {}).get("total", 0)))
     if h_played < MIN_GAMES or a_played < MIN_GAMES:
-        return False, f"too few games: {h_played}/{a_played}"
+        return False, f"too few games: {h_played}/{a_played}", 0.0
 
     # Home team → home split, Away team → away split
     h_for = _sf(home.get("league", {}).get("goals", {}).get("for", {}).get("average", {}).get("home"))
@@ -159,12 +159,12 @@ def meets_criteria(pred):
     a_agn = _sf(away.get("league", {}).get("goals", {}).get("against", {}).get("average", {}).get("away"))
 
     if h_for == 0 and a_for == 0:
-        return False, ""
+        return False, "", 0.0
 
     # Game baseline = průměrná per-team úroveň scoringu v tomto matchupu
     baseline = (h_for + a_for + h_agn + a_agn) / 4
     if baseline == 0:
-        return False, ""
+        return False, "", 0.0
 
     both_floor = baseline * BOTH_FLOOR_R
     strong_min = baseline * STRONG_MIN_R
@@ -333,23 +333,26 @@ def main():
         print(f"  Analyzing {len(candidates)} candidates...")
     for i, c in enumerate(candidates):
         print(f"  [{i+1}/{len(candidates)}] {c['Match'][:45]:.<47s}", end="")
-        pred = fetch_prediction(c["fixture_id"])
-        if pred:
-            ok, detail, score = meets_criteria(pred)
-            if ok:
-                print(f" ★ {detail} | O2.5={c['Odds_25']} → O1.5={c['Odds_15']}")
-                results.append({
-                    "League": c["League"],
-                    "Match": c["Match"],
-                    "Tip": "Over 1.5",
-                    "Odds": c["Odds_15"],
-                    "Date": c["kickoff"],
-                    "_score": score,
-                })
+        try:
+            pred = fetch_prediction(c["fixture_id"])
+            if pred:
+                ok, detail, score = meets_criteria(pred)
+                if ok:
+                    print(f" ★ {detail} | O2.5={c['Odds_25']} → O1.5={c['Odds_15']}")
+                    results.append({
+                        "League": c["League"],
+                        "Match": c["Match"],
+                        "Tip": "Over 1.5",
+                        "Odds": c["Odds_15"],
+                        "Date": c["kickoff"],
+                        "_score": score,
+                    })
+                else:
+                    print(f" fail ({detail})")
             else:
-                print(f" fail ({detail})")
-        else:
-            print(" no data")
+                print(" no data")
+        except Exception as exc:
+            print(f" ERROR: {exc}")
 
     # 7. Best per league – keep only the top match from each league
     before = len(results)
