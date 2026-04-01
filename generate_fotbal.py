@@ -186,11 +186,16 @@ def meets_criteria(pred):
 
     if variant_a or variant_b:
         tag = "A" if variant_a else "B"
+        if variant_a:
+            s = sorted([h_for, a_for])
+        else:
+            s = sorted([h_agn, a_agn])
+        score = s[1] / s[0] if s[0] > 0 else 99.0
         detail = (f"[{tag}] scored {h_for:.1f}/{a_for:.1f}, conceded {h_agn:.1f}/{a_agn:.1f} "
-                  f"(base={baseline:.2f}, floor={both_floor:.2f}, strong={strong_min:.2f}, contrast<{contrast_max:.2f})")
-        return True, detail
+                  f"(base={baseline:.2f}, score={score:.2f})")
+        return True, detail, score
 
-    return False, f"stats fail: scored {h_for:.1f}/{a_for:.1f}, conceded {h_agn:.1f}/{a_agn:.1f} (base={baseline:.2f})"
+    return False, f"stats fail: scored {h_for:.1f}/{a_for:.1f}, conceded {h_agn:.1f}/{a_agn:.1f} (base={baseline:.2f})", 0.0
 
 
 # ===== CANDIDATES =====
@@ -330,7 +335,7 @@ def main():
         print(f"  [{i+1}/{len(candidates)}] {c['Match'][:45]:.<47s}", end="")
         pred = fetch_prediction(c["fixture_id"])
         if pred:
-            ok, detail = meets_criteria(pred)
+            ok, detail, score = meets_criteria(pred)
             if ok:
                 print(f" ★ {detail} | O2.5={c['Odds_25']} → O1.5={c['Odds_15']}")
                 results.append({
@@ -339,17 +344,31 @@ def main():
                     "Tip": "Over 1.5",
                     "Odds": c["Odds_15"],
                     "Date": c["kickoff"],
+                    "_score": score,
                 })
             else:
                 print(f" fail ({detail})")
         else:
             print(" no data")
 
-    # 7. Write fotbals.json (empty array when no results → SureBets app shows FootballEmpty label)
+    # 7. Best per league – keep only the top match from each league
+    before = len(results)
+    best_per_league = {}
+    for r in results:
+        lg = r["League"]
+        if lg not in best_per_league or r["_score"] > best_per_league[lg]["_score"]:
+            best_per_league[lg] = r
+    results = list(best_per_league.values())
+    for r in results:
+        r.pop("_score", None)
+    if before > len(results):
+        print(f"\n  Dedup: {before} → {len(results)} (best per league)")
+
+    # 8. Write fotbals.json (empty array when no results → SureBets app shows FootballEmpty label)
     with open(OUTPUT, "w", encoding="utf-8") as f:
         json.dump(results, f, indent=2, ensure_ascii=False)
 
-    # 8. Write tips.json – max 2 random tips with Over 2.5
+    # 9. Write tips.json – max 2 random tips with Over 2.5
     if results:
         pool = [c for c in candidates if any(
             r["Match"] == c["Match"] and r["Date"] == c["kickoff"]
