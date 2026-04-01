@@ -130,8 +130,9 @@ def _sf(val, default=0.0):
 
 def meets_criteria(pred):
     """
-    Variant A: scored(one < 1, other >= 1.3)  + conceded(one >= 1.5, other >= 1.6)
-    Variant B: scored(one >= 1.5, other >= 1.6) + conceded(one < 1, other >= 1.3)
+    Home/away split: home team → home stats, away team → away stats.
+    Variant A: scored(one < 1, other >= 1.4)  + conceded(one >= 1.5, other >= 1.6)
+    Variant B: scored(one >= 1.5, other >= 1.6) + conceded(one < 1, other >= 1.4)
     """
     home = pred.get("teams", {}).get("home", {})
     away = pred.get("teams", {}).get("away", {})
@@ -143,22 +144,23 @@ def meets_criteria(pred):
     if h_played < MIN_GAMES or a_played < MIN_GAMES:
         return False, f"too few games: {h_played}/{a_played}"
 
-    h_for = _sf(home.get("league", {}).get("goals", {}).get("for", {}).get("average", {}).get("total"))
-    a_for = _sf(away.get("league", {}).get("goals", {}).get("for", {}).get("average", {}).get("total"))
-    h_agn = _sf(home.get("league", {}).get("goals", {}).get("against", {}).get("average", {}).get("total"))
-    a_agn = _sf(away.get("league", {}).get("goals", {}).get("against", {}).get("average", {}).get("total"))
+    # Home team → home split, Away team → away split
+    h_for = _sf(home.get("league", {}).get("goals", {}).get("for", {}).get("average", {}).get("home"))
+    a_for = _sf(away.get("league", {}).get("goals", {}).get("for", {}).get("average", {}).get("away"))
+    h_agn = _sf(home.get("league", {}).get("goals", {}).get("against", {}).get("average", {}).get("home"))
+    a_agn = _sf(away.get("league", {}).get("goals", {}).get("against", {}).get("average", {}).get("away"))
 
     min_for = min(h_for, a_for)
     max_for = max(h_for, a_for)
     min_agn = min(h_agn, a_agn)
     max_agn = max(h_agn, a_agn)
 
-    variant_a = (min_for < 1 and max_for >= 1.3) and (min_agn >= 1.5 and max_agn >= 1.6)
-    variant_b = (min_for >= 1.5 and max_for >= 1.6) and (min_agn < 1 and max_agn >= 1.3)
+    variant_a = (min_for < 1 and max_for >= 1.4) and (min_agn >= 1.5 and max_agn >= 1.6)
+    variant_b = (min_for >= 1.5 and max_for >= 1.6) and (min_agn < 1 and max_agn >= 1.4)
 
     if variant_a or variant_b:
         tag = "A" if variant_a else "B"
-        detail = f"[{tag}] scored {h_for:.1f}/{a_for:.1f}, conceded {h_agn:.1f}/{a_agn:.1f}"
+        detail = f"[{tag}] scored {h_for:.1f}/{a_for:.1f}, conceded {h_agn:.1f}/{a_agn:.1f} (h/a split)"
         return True, detail
 
     return False, f"stats fail: scored {h_for:.1f}/{a_for:.1f}, conceded {h_agn:.1f}/{a_agn:.1f}"
@@ -351,3 +353,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
