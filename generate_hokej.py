@@ -170,11 +170,17 @@ def meets_criteria(home_stats, away_stats):
 
     if variant_a or variant_b:
         tag = "A" if variant_a else "B"
+        # Contrast score: ratio of strong stat to weak stat (higher = more asymmetry)
+        if variant_a:
+            s = sorted([h_for, a_for])
+        else:
+            s = sorted([h_agn, a_agn])
+        score = s[1] / s[0] if s[0] > 0 else 99.0
         detail = (f"[{tag}] scored {h_for:.1f}/{a_for:.1f}, conceded {h_agn:.1f}/{a_agn:.1f} "
-                  f"(base={baseline:.2f}, floor={both_floor:.2f}, strong={strong_min:.2f}, contrast<{contrast_max:.2f})")
-        return True, detail
+                  f"(base={baseline:.2f}, score={score:.2f})")
+        return True, detail, score
 
-    return False, ""
+    return False, "", 0.0
 
 
 def find_odds(odds_data):
@@ -279,7 +285,7 @@ def main():
         print(f"  [{i+1}/{len(candidates)}] {c['match'][:45]:.<47s}", end="")
         home_stats = fetch_team_stats(c["league_id"], c["season"], c["home_id"])
         away_stats = fetch_team_stats(c["league_id"], c["season"], c["away_id"])
-        ok, detail = meets_criteria(home_stats, away_stats)
+        ok, detail, score = meets_criteria(home_stats, away_stats)
         if ok:
             print(f" ★ {detail} | O4.5={c['odds']}")
             kickoff = datetime.fromtimestamp(c["timestamp"], tz=timezone.utc).strftime("%Y-%m-%dT%H:%M:%S+00:00")
@@ -289,6 +295,7 @@ def main():
                 "tip": "Over 4.5",
                 "odds": c["odds"],
                 "date": kickoff,
+                "_score": score,
             })
         else:
             # Print stats for debugging even on fail
@@ -304,7 +311,20 @@ def main():
             else:
                 print(" fail (no away stats)")
 
-    # 5. Write output
+    # 5. Best per league – keep only the top match from each league
+    before = len(results)
+    best_per_league = {}
+    for r in results:
+        lg = r["league"]
+        if lg not in best_per_league or r["_score"] > best_per_league[lg]["_score"]:
+            best_per_league[lg] = r
+    results = list(best_per_league.values())
+    for r in results:
+        r.pop("_score", None)
+    if before > len(results):
+        print(f"\n  Dedup: {before} → {len(results)} (best per league)")
+
+    # 6. Write output
     with open(OUTPUT, "w", encoding="utf-8") as f:
         json.dump(results, f, indent=2, ensure_ascii=False)
 
