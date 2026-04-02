@@ -1,314 +1,413 @@
-/**
- * fetch-matches.mjs
- *
- * Stahne fixtures z API-Football, odfiltruje blokovane zeme
- * a zapise vysledek do hot.json.
- *
- * Env: API_FOOTBALL_KEY1
- * Pouziti: node fetch-matches.mjs
- */
+#!/usr/bin/env python3
+"""
+SureBets Football Bot – generates fotbals.json
+Runs daily at 7:00 UTC via GitHub Actions.
 
-import { writeFileSync } from 'fs';
+Criteria (Variant A or B) → qualifies for Over 2.5 potential
+→ output Over 1.5 with odds from API in range 1.75–3.00
 
-const API_KEY = process.env.API_FOOTBALL_KEY1;
-if (!API_KEY) { console.error('Chybi API_FOOTBALL_KEY1 env promenna.'); process.exit(1); }
+SETUP:
+  1. Copy this file to the root of cubin-star/cubin-star.github.io
+  2. Copy tools/github-actions-surebets.yml to .github/workflows/
+  3. In repo Settings → Secrets → Actions, add:
+     API_FOOTBALL_KEY1 = your API key
+"""
 
-const FOOTBALL_API = 'https://v3.football.api-sports.io';
-const MIN_ODDS = 1.75;
-const MAX_ODDS = 3.0;
-const PICK_COUNT = 6;
-const MIN_PLAYED = 5;
+import json
+import os
+import random
+import time
+import urllib.request
+from datetime import datetime, timedelta, timezone
 
-// League-relative criteria (ratios of game baseline)
-// Baseline = avg(h_for, a_for, h_agn, a_agn) → auto-scales to any league
-const BOTH_FLOOR_R = 0.85;      // oba alespoň 85% baseline
-const STRONG_MIN_R = 1.10;      // "výrazný" tým 110%+ baseline
-const CONTRAST_MAX_R = 0.95;    // protějšek pod 95% baseline (kontrast ≥ 15%)
-const MIN_BASELINE = 1.25;      // minimum avg per-team stat → expected ~2.5+ gólů celkem
-const EXCLUDED_COUNTRIES = new Set(['Russia', 'Belarus']);
-const TZ = 'Europe/Prague';
-let reqCount = 0;
+# ===== CONFIG =====
+API_KEY = os.environ.get("API_FOOTBALL_KEY1", "")
+BASE_URL = "https://v3.football.api-sports.io"
+DELAY = 0.3
+OUTPUT = "fotbals.json"
+OUTPUT_TIPS = "tips.json"
+MAX_TIPS = 2
 
-function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
-function shuffle(arr) { for (let i = arr.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [arr[i], arr[j]] = [arr[j], arr[i]]; } return arr; }
-function fmtDate(d) { return d.toISOString().split('T')[0]; }
+MIN_ODDS = 1.75
+MAX_ODDS = 3.00
+MIN_GAMES = 5
 
-async function apiFetch(path) {
-    const url = FOOTBALL_API + path;
-    try {
-        const res = await fetch(url, { headers: { 'x-apisports-key': API_KEY } });
-        reqCount++;
-        if (!res.ok) { console.warn('  HTTP ' + res.status + ': ' + path.split('?')[0]); return { response: [], paging: { total: 0 } }; }
-        const data = await res.json();
-        if (data.errors && Object.keys(data.errors).length > 0) { console.warn('  ', JSON.stringify(data.errors)); return { response: [], paging: { total: 0 } }; }
-        return data;
-    } catch (e) { console.warn('  Fetch error:', e.message); return { response: [], paging: { total: 0 } }; }
-}
+EXCLUDED_COUNTRIES = {"russia", "belarus"}
 
-async function getFixtures(date) {
-    const data = await apiFetch('/fixtures?date=' + date + '&timezone=' + TZ + '&status=NS');
-    return data.response || [];
-}
+# Football criteria – league-relative (ratios of game baseline)
+# Baseline = průměr 4 per-team hodnot (h_for, a_for, h_agn, a_agn)
+# → automaticky se přizpůsobí úrovni ligy (Eredivisie ~1.6, Ligue 1 ~1.2, atd.)
+BOTH_FLOOR_R = 0.85      # oba alespoň 85% baseline
+STRONG_MIN_R = 1.10      # "výrazný" tým 110%+ baseline
+CONTRAST_MAX_R = 0.95    # protějšek pod 95% baseline (kontrast ≥ 15%)
+MIN_BASELINE = 1.25      # minimum avg per-team stat → expected ~2.5+ gólů celkem
+MIN_ATTACK = 0.80        # oba týmy musí střílet ≥ 0.8 g/z (žádný "mrtvý" útok)
 
-async function getLeagueOdds(leagueId, season, date) {
-    let all = [], page = 1, totalPages = 1;
-    do {
-        const data = await apiFetch('/odds?league=' + leagueId + '&season=' + season + '&date=' + date + '&bet=5&page=' + page);
-        all.push(...(data.response || []));
-        totalPages = data.paging?.total || 0;
-        page++;
-        if (page <= totalPages) await sleep(350);
-    } while (page <= totalPages);
-    return all;
-}
+request_count = 0
 
-async function getPrediction(fixtureId) {
-    const data = await apiFetch('/predictions?fixture=' + fixtureId);
-    return (data.response && data.response[0]) || null;
-}
 
-function balanceGroups(picks) {
-    const n = picks.length;
-    if (n <= 2) return picks.map(p => ({ ...p, group: 1 }));
-    const indices = picks.map((_, i) => i);
-    const allP = generatePairings(indices);
+# ===== API =====
 
-    function hasLeagueConflict(pairing) {
-        return pairing.some(pair => {
-            const leagues = pair.map(idx => picks[idx].league);
-            return new Set(leagues).size < leagues.length;
-        });
-    }
+def api_get(endpoint, params):
+    global request_count
+    query = "&".join(f"{k}={v}" for k, v in params.items())
+    url = f"{BASE_URL}/{endpoint}?{query}"
+    req = urllib.request.Request(url)
+    req.add_header("x-apisports-key", API_KEY)
+    for attempt in range(1, 4):
+        try:
+            with urllib.request.urlopen(req, timeout=20) as resp:
+                request_count += 1
+                remaining = resp.headers.get("x-ratelimit-requests-remaining", "?")
+                print(f" [{remaining}]", end="")
+                return json.loads(resp.read().decode("utf-8"))
+        except urllib.error.HTTPError as e:
+            if e.code == 429:
+                time.sleep(5 * attempt)
+            else:
+                print(f" HTTP{e.code}", end="")
+                return {}
+        except Exception:
+            return {}
+    return {}
 
-    let bestP = null, bestD = Infinity;
-    for (const pairing of allP) {
-        if (hasLeagueConflict(pairing)) continue;
-        const gO = pairing.map(pair => pair.reduce((a, idx) => a * parseFloat(picks[idx].odds), 1));
-        const diff = Math.max(...gO) - Math.min(...gO);
-        if (diff < bestD) { bestD = diff; bestP = pairing; }
-    }
-    if (!bestP) {
-        for (const pairing of allP) {
-            const gO = pairing.map(pair => pair.reduce((a, idx) => a * parseFloat(picks[idx].odds), 1));
-            const diff = Math.max(...gO) - Math.min(...gO);
-            if (diff < bestD) { bestD = diff; bestP = pairing; }
+
+def fetch_fixtures(date_str):
+    print(f"  Fixtures {date_str}...", end="")
+    data = api_get("fixtures", {"date": date_str, "timezone": "UTC"})
+    fixtures = {}
+    for f in data.get("response", []):
+        fid = f.get("fixture", {}).get("id")
+        if not fid:
+            continue
+        status = f.get("fixture", {}).get("status", {}).get("short", "")
+        if status not in ("NS", "TBD", ""):
+            continue
+        fixtures[fid] = {
+            "home": f.get("teams", {}).get("home", {}).get("name", "?"),
+            "away": f.get("teams", {}).get("away", {}).get("name", "?"),
+            "league": f.get("league", {}).get("name", "?"),
+            "league_id": f.get("league", {}).get("id", 0),
+            "season": f.get("league", {}).get("season", 2025),
+            "country": f.get("league", {}).get("country", "?"),
+            "kickoff": f.get("fixture", {}).get("date", ""),
         }
-    }
+    print(f" {len(fixtures)} upcoming")
+    return fixtures
 
-    const result = [];
-    for (let g = 0; g < bestP.length; g++) { for (const idx of bestP[g]) result.push({ ...picks[idx], group: g + 1 }); }
-    return result;
-}
 
-function generatePairings(indices) {
-    const results = [];
-    function recurse(rem, cur) {
-        if (rem.length === 0) { results.push([...cur]); return; }
-        if (rem.length === 1) { results.push([...cur, [rem[0]]]); return; }
-        const first = rem[0], rest = rem.slice(1);
-        for (let i = 0; i < rest.length; i++) { cur.push([first, rest[i]]); recurse(rest.filter((_, j) => j !== i), cur); cur.pop(); }
-    }
-    recurse(indices, []);
-    return results;
-}
+def fetch_league_odds(league_id, season, date_str):
+    """Fetch odds for a specific league/season/date (paginated, like Kombik)."""
+    all_items = []
+    page = 1
+    while True:
+        time.sleep(DELAY)
+        data = api_get("odds", {
+            "league": str(league_id),
+            "season": str(season),
+            "date": date_str,
+            "bet": "5",
+            "page": str(page),
+        })
+        items = data.get("response", [])
+        paging = data.get("paging", {})
+        total_pages = paging.get("total", 1)
+        if items:
+            all_items.extend(items)
+        if page >= total_pages or not items:
+            break
+        page += 1
+    return all_items
 
-async function main() {
-    console.log('Kombik Bot - fetch-matches\n');
-    const now = new Date();
-    const max24h = new Date(now.getTime() + 24 * 60 * 60 * 1000);
-    const max48h = new Date(now.getTime() + 48 * 60 * 60 * 1000);
-    console.log('Window: ' + now.toUTCString() + ' -> ' + max48h.toUTCString() + ' (48h)\n');
 
-    // Collect dates covering the 48h window
-    const dates = new Set();
-    for (let d = new Date(now); d <= max48h; d = new Date(d.getTime() + 24 * 60 * 60 * 1000)) {
-        dates.add(fmtDate(d));
-    }
-    let fixtures = [];
-    for (const d of dates) { console.log('Fixtures ' + d + '...'); fixtures.push(...await getFixtures(d)); await sleep(350); }
-    console.log('   ' + fixtures.length + ' scheduled matches\n');
+def fetch_prediction(fixture_id):
+    """Single API call returns stats for BOTH teams."""
+    time.sleep(DELAY)
+    data = api_get("predictions", {"fixture": str(fixture_id)})
+    items = data.get("response", [])
+    return items[0] if items else None
 
-    // Filter: ban only Russia and Belarus
-    fixtures = fixtures.filter(f => {
-        const t = new Date(f.fixture.date);
-        const c = f.league.country;
-        return t >= now && t <= max48h
-            && !EXCLUDED_COUNTRIES.has(c);
-    });
-    console.log('   ' + fixtures.length + ' in 48h window (excl. RU/BY)');
 
-    // Map fixtures and leagues
-    const fixtureMap = new Map(), leagueMap = new Map();
-    for (const f of fixtures) {
-        fixtureMap.set(f.fixture.id, f);
-        const key = f.league.id + '_' + f.league.season;
-        if (!leagueMap.has(key)) leagueMap.set(key, { id: f.league.id, season: f.league.season, name: f.league.name, country: f.league.country, dates: new Set() });
-        leagueMap.get(key).dates.add(fmtDate(new Date(f.fixture.date)));
-    }
-    console.log('   ' + leagueMap.size + ' leagues\n');
+# ===== CRITERIA =====
 
-    // Download Over 2.5 odds for all leagues
-    const candidates = new Map();
-    for (const [, lg] of leagueMap) {
-        for (const d of lg.dates) {
-            const oddsData = await getLeagueOdds(lg.id, lg.season, d);
-            for (const entry of oddsData) {
-                const fix = fixtureMap.get(entry.fixture?.id); if (!fix) continue;
-                const matchKey = fix.fixture.id;
-                for (const bm of entry.bookmakers || []) { for (const bet of bm.bets || []) { for (const v of bet.values || []) {
-                    if (v.value !== 'Over 2.5') continue;
-                    const odd = parseFloat(v.odd); if (isNaN(odd) || odd < MIN_ODDS || odd > MAX_ODDS) continue;
-                    if (!candidates.has(matchKey)) candidates.set(matchKey, { fixtureId: matchKey, league: lg.name, country: lg.country, match: fix.teams.home.name + ' - ' + fix.teams.away.name, kickoff: fix.fixture.date, tip: 'Over 2.5', allOdds: [] });
-                    candidates.get(matchKey).allOdds.push(odd);
-                } } }
+def _sf(val, default=0.0):
+    try:
+        return float(val) if val is not None else default
+    except (ValueError, TypeError):
+        return default
+
+
+def meets_criteria(pred):
+    """
+    League-relative football criteria (home/away split).
+    Baseline = avg of h_for, a_for, h_agn, a_agn → adapts to any league.
+    A) oba conceded >= FLOOR_R * base  AND  (jeden scored >= STRONG_R * base + druhy < CONTRAST_R * base)
+    B) oba scored  >= FLOOR_R * base  AND  (jeden conceded >= STRONG_R * base + druhy < CONTRAST_R * base)
+    """
+    home = pred.get("teams", {}).get("home", {})
+    away = pred.get("teams", {}).get("away", {})
+    if not home or not away:
+        return False, "", 0.0
+
+    h_played = int(_sf(home.get("league", {}).get("fixtures", {}).get("played", {}).get("total", 0)))
+    a_played = int(_sf(away.get("league", {}).get("fixtures", {}).get("played", {}).get("total", 0)))
+    if h_played < MIN_GAMES or a_played < MIN_GAMES:
+        return False, f"too few games: {h_played}/{a_played}", 0.0
+
+    # Home team → home split, Away team → away split
+    h_for = _sf(home.get("league", {}).get("goals", {}).get("for", {}).get("average", {}).get("home"))
+    a_for = _sf(away.get("league", {}).get("goals", {}).get("for", {}).get("average", {}).get("away"))
+    h_agn = _sf(home.get("league", {}).get("goals", {}).get("against", {}).get("average", {}).get("home"))
+    a_agn = _sf(away.get("league", {}).get("goals", {}).get("against", {}).get("average", {}).get("away"))
+
+    if h_for == 0 and a_for == 0:
+        return False, "", 0.0
+
+    # Oba týmy musí mít minimální útočný výkon – žádný "mrtvý" útok
+    if h_for < MIN_ATTACK or a_for < MIN_ATTACK:
+        return False, f"weak attack: {h_for:.1f}/{a_for:.1f} (min {MIN_ATTACK})", 0.0
+
+    # Game baseline = průměrná per-team úroveň scoringu v tomto matchupu
+    baseline = (h_for + a_for + h_agn + a_agn) / 4
+    if baseline == 0:
+        return False, "", 0.0
+    if baseline < MIN_BASELINE:
+        return False, f"baseline too low: {baseline:.2f} < {MIN_BASELINE}", 0.0
+
+    both_floor = baseline * BOTH_FLOOR_R
+    strong_min = baseline * STRONG_MIN_R
+    contrast_max = baseline * CONTRAST_MAX_R
+
+    # A) oba inkasují >= floor + ofenzivní kontrast (jeden >= strong, druhý < contrast)
+    variant_a = (
+        h_agn >= both_floor and a_agn >= both_floor
+        and ((h_for >= strong_min and a_for < contrast_max)
+             or (a_for >= strong_min and h_for < contrast_max))
+    )
+
+    # B) oba střílí >= floor + defenzivní kontrast (jeden >= strong, druhý < contrast)
+    variant_b = (
+        h_for >= both_floor and a_for >= both_floor
+        and ((h_agn >= strong_min and a_agn < contrast_max)
+             or (a_agn >= strong_min and h_agn < contrast_max))
+    )
+
+    if variant_a or variant_b:
+        tag = "A" if variant_a else "B"
+        if variant_a:
+            s = sorted([h_for, a_for])
+        else:
+            s = sorted([h_agn, a_agn])
+        score = s[1] / s[0] if s[0] > 0 else 99.0
+        detail = (f"[{tag}] scored {h_for:.1f}/{a_for:.1f}, conceded {h_agn:.1f}/{a_agn:.1f} "
+                  f"(base={baseline:.2f}, score={score:.2f})")
+        return True, detail, score
+
+    return False, f"stats fail: scored {h_for:.1f}/{a_for:.1f}, conceded {h_agn:.1f}/{a_agn:.1f} (base={baseline:.2f})", 0.0
+
+
+# ===== CANDIDATES =====
+
+def extract_candidates(odds_data, fixtures):
+    """Find fixtures with Over 2.5 odds in range (avg across all bookmakers)
+    and Over 1.5 odds available.  Same logic as Kombik fetch-matches.mjs."""
+    candidates = []
+
+    for item in odds_data:
+        fid = item.get("fixture", {}).get("id")
+        fix = fixtures.get(fid)
+        if not fix:
+            continue
+
+        # Collect ALL in-range Over 2.5 odds from every bookmaker (like Kombik)
+        all_over25 = []
+        all_over15 = []
+        for bk in item.get("bookmakers", []):
+            for bet in bk.get("bets", []):
+                for val in bet.get("values", []):
+                    v = str(val.get("value", ""))
+                    try:
+                        odd_val = float(val.get("odd", "0"))
+                    except (ValueError, TypeError):
+                        continue
+                    if v == "Over 2.5" and MIN_ODDS <= odd_val <= MAX_ODDS:
+                        all_over25.append(odd_val)
+                    if v == "Over 1.5" and odd_val > 0:
+                        all_over15.append(odd_val)
+
+        if not all_over25 or not all_over15:
+            continue
+
+        avg_over25 = sum(all_over25) / len(all_over25)
+        avg_over15 = sum(all_over15) / len(all_over15)
+
+        candidates.append({
+            "fixture_id": fid,
+            "League": fix["league"],
+            "Match": f"{fix['home']} vs {fix['away']}",
+            "Odds_25": f"{avg_over25:.2f}",
+            "Odds_15": f"{avg_over15:.2f}",
+            "kickoff": fix["kickoff"],
+        })
+
+    return candidates
+
+
+# ===== MAIN =====
+
+def main():
+    if not API_KEY:
+        print("API_FOOTBALL_KEY1 not set!")
+        return
+
+    now = datetime.now(timezone.utc)
+    today = now.strftime("%Y-%m-%d")
+    tomorrow = (now + timedelta(days=1)).strftime("%Y-%m-%d")
+
+    print("== SureBets Football Bot ==")
+    print(f"Time: {now.strftime('%Y-%m-%d %H:%M UTC')}")
+    print(f"Select: Over 2.5 odds {MIN_ODDS}–{MAX_ODDS} + Variant A/B (league-relative)")
+    print(f"Ratios (× game baseline): FLOOR={BOTH_FLOOR_R}, STRONG={STRONG_MIN_R}, CONTRAST<{CONTRAST_MAX_R}")
+    print(f"Output: Over 1.5 with odds from API\n")
+
+    # 1. Fixtures
+    fixtures_today = fetch_fixtures(today)
+    time.sleep(DELAY)
+    fixtures_tomorrow = fetch_fixtures(tomorrow)
+    all_fixtures = {**fixtures_today, **fixtures_tomorrow}
+    print(f"  Total: {len(all_fixtures)} fixtures\n")
+
+    if not all_fixtures:
+        print("No fixtures found.")
+        with open(OUTPUT, "w", encoding="utf-8") as f:
+            json.dump([], f)
+        with open(OUTPUT_TIPS, "w", encoding="utf-8") as f:
+            json.dump([], f)
+        return
+
+    # 2. Filter fixtures by 24h window + country
+    now2 = datetime.now(timezone.utc)
+    cutoff = now2 + timedelta(hours=24)
+    filtered = {}
+    for fid, fix in all_fixtures.items():
+        kickoff_str = fix.get("kickoff", "")
+        if kickoff_str:
+            try:
+                kickoff_dt = datetime.fromisoformat(kickoff_str.replace("Z", "+00:00"))
+                if kickoff_dt < now2 or kickoff_dt > cutoff:
+                    continue
+            except ValueError:
+                pass
+        country = fix.get("country", "").lower()
+        if country in EXCLUDED_COUNTRIES:
+            continue
+        filtered[fid] = fix
+    print(f"  After filter (24h, no RU/BY): {len(filtered)} fixtures")
+
+    # 3. Group fixtures by league (same as Kombik: league.id + league.season)
+    league_map = {}
+    for fid, fix in filtered.items():
+        key = f"{fix['league_id']}_{fix['season']}"
+        if key not in league_map:
+            league_map[key] = {
+                "league_id": fix["league_id"],
+                "season": fix["season"],
+                "name": fix["league"],
+                "dates": set(),
             }
-            await sleep(350);
-        }
-    }
-    const pool = [...candidates.values()].map(m => ({
-        ...m,
-        odds: (m.allOdds.reduce((a, b) => a + b, 0) / m.allOdds.length).toFixed(2),
-    }));
-    console.log('Candidates: ' + pool.length + ' with Over 2.5 (odds ' + MIN_ODDS + '-' + MAX_ODDS + ')');
+        date_part = fix["kickoff"][:10] if fix["kickoff"] else today
+        league_map[key]["dates"].add(date_part)
+    print(f"  Leagues: {len(league_map)}\n")
 
-    // Filter via predictions (strictest criteria only)
-    shuffle(pool);
-    console.log('Analyzing teams (predictions)...\n');
-    const qualified = [];
-    for (const m of pool) {
-        const pred = await getPrediction(m.fixtureId);
-        if (pred) {
-            const home = pred.teams?.home;
-            const away = pred.teams?.away;
-            if (home && away) {
-                const hPlayed = parseInt(home.league?.fixtures?.played?.total) || 0;
-                const aPlayed = parseInt(away.league?.fixtures?.played?.total) || 0;
-                if (hPlayed < MIN_PLAYED || aPlayed < MIN_PLAYED) {
-                    console.log('   [SKIP] ' + m.match + ' | too few games: ' + hPlayed + '/' + aPlayed);
-                    continue;
-                }
-                // Home/away split: domácí → home stats, hosté → away stats
-                const hFor = parseFloat(home.league?.goals?.for?.average?.home) || 0;
-                const aFor = parseFloat(away.league?.goals?.for?.average?.away) || 0;
-                const hAgn = parseFloat(home.league?.goals?.against?.average?.home) || 0;
-                const aAgn = parseFloat(away.league?.goals?.against?.average?.away) || 0;
+    # 4. Fetch odds per league+date (same approach as Kombik)
+    print(f"  Fetching odds for {len(league_map)} leagues...")
+    all_odds = []
+    for i, (key, lg) in enumerate(league_map.items()):
+        for d in sorted(lg["dates"]):
+            print(f"  [{i+1}/{len(league_map)}] {lg['name'][:40]} ({d})...", end="")
+            items = fetch_league_odds(lg["league_id"], lg["season"], d)
+            all_odds.extend(items)
+            print(f" {len(items)}")
+    print(f"  Total odds entries: {len(all_odds)}\n")
 
-                if (hFor === 0 && aFor === 0) continue;
+    # 5. Extract candidates from odds
+    candidates = extract_candidates(all_odds, filtered)
+    print(f"  {len(candidates)} candidates (Over 2.5 @ {MIN_ODDS}–{MAX_ODDS})\n")
 
-                // League-relative baseline
-                const baseline = (hFor + aFor + hAgn + aAgn) / 4;
-                if (baseline === 0) continue;
-                if (baseline < MIN_BASELINE) {
-                    console.log('   [LOW] ' + m.match + ' | baseline ' + baseline.toFixed(2) + ' < ' + MIN_BASELINE);
-                    continue;
-                }
+    # 6. Analyze candidates with predictions (1 API call = both teams)
+    results = []
 
-                const bothFloor = baseline * BOTH_FLOOR_R;
-                const strongMin = baseline * STRONG_MIN_R;
-                const contrastMax = baseline * CONTRAST_MAX_R;
+    if candidates:
+        print(f"  Analyzing {len(candidates)} candidates...")
+    for i, c in enumerate(candidates):
+        print(f"  [{i+1}/{len(candidates)}] {c['Match'][:45]:.<47s}", end="")
+        try:
+            pred = fetch_prediction(c["fixture_id"])
+            if pred:
+                ok, detail, score = meets_criteria(pred)
+                if ok:
+                    print(f" ★ {detail} | O2.5={c['Odds_25']} → O1.5={c['Odds_15']}")
+                    results.append({
+                        "League": c["League"],
+                        "Match": c["Match"],
+                        "Tip": "Over 1.5",
+                        "Odds": c["Odds_15"],
+                        "Date": c["kickoff"],
+                        "_score": score,
+                    })
+                else:
+                    print(f" fail ({detail})")
+            else:
+                print(" no data")
+        except Exception as exc:
+            print(f" ERROR: {exc}")
 
-                // A) oba inkasují >= floor + ofenzivní kontrast
-                const variantA = (hAgn >= bothFloor && aAgn >= bothFloor)
-                    && ((hFor >= strongMin && aFor < contrastMax) || (aFor >= strongMin && hFor < contrastMax));
+    # 7. Best per league – keep only the top match from each league
+    before = len(results)
+    best_per_league = {}
+    for r in results:
+        lg = r["League"]
+        if lg not in best_per_league or r["_score"] > best_per_league[lg]["_score"]:
+            best_per_league[lg] = r
+    results = list(best_per_league.values())
+    for r in results:
+        r.pop("_score", None)
+    if before > len(results):
+        print(f"\n  Dedup: {before} → {len(results)} (best per league)")
 
-                // B) oba střílí >= floor + defenzivní kontrast
-                const variantB = (hFor >= bothFloor && aFor >= bothFloor)
-                    && ((hAgn >= strongMin && aAgn < contrastMax) || (aAgn >= strongMin && hAgn < contrastMax));
+    # 8. Write fotbals.json (empty array when no results → SureBets app shows FootballEmpty label)
+    with open(OUTPUT, "w", encoding="utf-8") as f:
+        json.dump(results, f, indent=2, ensure_ascii=False)
 
-                if (variantA || variantB) {
-                    const tag = variantA ? 'A' : 'B';
-                    const s = variantA ? [hFor, aFor].sort((a, b) => a - b) : [hAgn, aAgn].sort((a, b) => a - b);
-                    const score = s[0] > 0 ? s[1] / s[0] : 99;
-                    console.log('   [Q' + tag + '] ' + m.match + ' | scored ' + hFor.toFixed(1) + '/' + aFor.toFixed(1) + ', conceded ' + hAgn.toFixed(1) + '/' + aAgn.toFixed(1) + ' (base=' + baseline.toFixed(2) + ', score=' + score.toFixed(2) + ')');
-                    qualified.push({ ...m, contrastScore: score });
-                }
-            }
-        }
-        await sleep(350);
-    }
-    console.log('\nQualified (strict): ' + qualified.length + '/' + pool.length);
+    # 9. Write tips.json – max 2 random tips with Over 2.5
+    if results:
+        pool = [c for c in candidates if any(
+            r["Match"] == c["Match"] and r["Date"] == c["kickoff"]
+            for r in results
+        )]
+        selected = random.sample(pool, min(MAX_TIPS, len(pool)))
+        tips = []
+        for c in selected:
+            tips.append({
+                "League": c["League"],
+                "Match": c["Match"],
+                "Tip": "Over 2.5",
+                "Odds": c["Odds_25"],
+                "Date": c["kickoff"],
+            })
+        print(f"  Tips: {len(tips)} match(es) \u2192 {OUTPUT_TIPS}")
+    else:
+        tips = [{"League": "-", "Match": "No tips available today.", "Tip": "-", "Odds": "-", "Date": now.isoformat()}]
+        print(f"  Tips: no qualifying matches → placeholder \u2192 {OUTPUT_TIPS}")
 
-    // Best per league: keep only the match with highest contrastScore from each league
-    const bestByLeague = new Map();
-    for (const m of qualified) {
-        const prev = bestByLeague.get(m.league);
-        if (!prev || m.contrastScore > prev.contrastScore) bestByLeague.set(m.league, m);
-    }
-    const deduped = [...bestByLeague.values()];
-    if (deduped.length < qualified.length) console.log('Dedup: ' + qualified.length + ' → ' + deduped.length + ' (best per league)');
+    with open(OUTPUT_TIPS, "w", encoding="utf-8") as f:
+        json.dump(tips, f, indent=2, ensure_ascii=False)
 
-    const fullAccumulator = deduped.length >= PICK_COUNT;
-    if (!fullAccumulator) {
-        console.log('\nWARNING: Only ' + deduped.length + ' qualifying matches found (need ' + PICK_COUNT + ' for full accumulator).');
-    }
+    print(f"\n{'='*50}")
+    print(f"  Results: {len(results)} match(es) → {OUTPUT}")
+    print(f"  Tips:    {len(tips)} match(es) → {OUTPUT_TIPS}")
+    print(f"  API requests: {request_count} / 7500 ({request_count * 100 // 7500}%)")
 
-    // Prefer matches within 24h, pick by highest contrastScore
-    // Same league is allowed, but cap per league = number of groups so each lands in a different group
-    const targetCount = fullAccumulator ? PICK_COUNT : deduped.length;
-    const numGroups = Math.ceil(targetCount / 2);
-    const within24h = deduped.filter(m => new Date(m.kickoff) <= max24h);
-    const beyond24h = deduped.filter(m => new Date(m.kickoff) > max24h);
-    console.log('Within 24h: ' + within24h.length + ', beyond 24h: ' + beyond24h.length);
 
-    let selected;
-    if (within24h.length >= targetCount) {
-        // Pick by highest contrastScore from 24h pool (max numGroups per league)
-        within24h.sort((a, b) => b.contrastScore - a.contrastScore);
-        selected = [];
-        const lc = new Map();
-        for (const m of within24h) {
-            if (selected.length >= targetCount) break;
-            const cnt = lc.get(m.league) || 0;
-            if (cnt >= numGroups) continue;
-            selected.push(m);
-            lc.set(m.league, cnt + 1);
-        }
-        console.log('Selected ' + selected.length + ' matches with highest contrastScore from 24h window');
-    } else {
-        // Take all from 24h + fill from beyond 24h (by contrastScore desc)
-        selected = [];
-        const lc = new Map();
-        within24h.sort((a, b) => b.contrastScore - a.contrastScore);
-        for (const m of within24h) {
-            const cnt = lc.get(m.league) || 0;
-            if (cnt >= numGroups) continue;
-            selected.push(m);
-            lc.set(m.league, cnt + 1);
-        }
-        beyond24h.sort((a, b) => b.contrastScore - a.contrastScore);
-        for (const m of beyond24h) {
-            if (selected.length >= targetCount) break;
-            const cnt = lc.get(m.league) || 0;
-            if (cnt >= numGroups) continue;
-            selected.push(m);
-            lc.set(m.league, cnt + 1);
-        }
-        console.log('Selected ' + selected.length + ' matches (' + within24h.length + ' candidates from 24h window)');
-    }
-
-    console.log('\nSelected: ' + selected.length + ' matches\n');
-
-    if (selected.length === 0) {
-        writeFileSync('hot.json', JSON.stringify([], null, 2), 'utf-8');
-        console.log('No qualifying matches found in the 48h window.');
-        console.log('Written empty array to hot.json (' + reqCount + ' API req)');
-        process.exit(0);
-    }
-
-    // Balance into groups and write output (plain array)
-    const grouped = balanceGroups(selected);
-    const output = grouped.map(m => ({ league: m.league, match: m.match, kickoff: m.kickoff, tip: m.tip, odds: m.odds, group: m.group }));
-    writeFileSync('hot.json', JSON.stringify(output, null, 2), 'utf-8');
-
-    if (!fullAccumulator) console.log('NOTE: Today\'s accumulator could not be assembled - only ' + output.length + ' of ' + PICK_COUNT + ' matches found.');
-    console.log(output.length + ' matches -> hot.json (' + reqCount + ' API req)\n');
-    const gc = Math.ceil(output.length / 2);
-    for (let g = 1; g <= gc; g++) {
-        const gm = output.filter(m => m.group === g);
-        const go = gm.reduce((a, m) => a * parseFloat(m.odds), 1);
-        console.log('  Gr.' + g + ' (' + go.toFixed(2) + '):');
-        gm.forEach(m => console.log('     [' + m.league + '] ' + m.match + ' | ' + m.tip + ' @ ' + m.odds + ' | ' + m.kickoff));
-    }
-}
-
-main().catch(err => { console.error('Chyba:', err); process.exit(1); });
+if __name__ == "__main__":
+    main()
