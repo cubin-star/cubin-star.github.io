@@ -16,6 +16,7 @@ SETUP:
 import json
 import os
 import random
+import re
 import time
 import urllib.request
 from datetime import datetime, timedelta, timezone
@@ -363,17 +364,49 @@ def main():
             print(f" ERROR: {exc}")
 
     # 7. Best per league – keep only the top match from each league
+    #    Normalize league names: "Serie D - Girone A" → "Serie D",
+    #    "Tercera RFEF - Group 3" → "Tercera RFEF", etc.
+    #    Exception: international tournaments (World Cup, Euro, Champions League, etc.)
+    #    keep their groups as separate competitions.
+    TOURNAMENT_KEYWORDS = (
+        "world cup", "euro ", "european", "copa america", "africa cup",
+        "asian cup", "nations league", "champions league", "europa league",
+        "conference league", "libertadores", "sudamericana", "concacaf",
+        "afc cup", "afc champions", "olympic",
+    )
+
+    def normalize_league(name):
+        low = name.lower()
+        # Don't merge groups for international tournaments
+        if any(kw in low for kw in TOURNAMENT_KEYWORDS):
+            return name
+        # Strip group/girone/conference/division suffixes
+        return re.sub(
+            r'\s*[-–]\s*('
+            r'Gir(?:one|\.)\s*\w+'          # Serie D - Girone A/B/C
+            r'|Gr(?:oup|p\.?)\s*\w+'         # Group 1, Grp. A
+            r'|CFL\s*\w+'                    # 3. liga - CFL B
+            r'|Zone\s*\w+'                   # Zone Nord/Sud
+            r'|Conference\s*\w+'             # Conference North
+            r'|Division\s*\w+'               # Division A
+            r'|North(?:ern)?|South(?:ern)?'  # Northern/Southern
+            r'|East(?:ern)?|West(?:ern)?'    # Eastern/Western
+            r'|[A-I]'                        # single letter group: - A, - B, ..., - I
+            r')\s*$',
+            '', name, flags=re.IGNORECASE
+        ).strip()
+
     before = len(results)
     best_per_league = {}
     for r in results:
-        lg = r["League"]
+        lg = normalize_league(r["League"])
         if lg not in best_per_league or r["_score"] > best_per_league[lg]["_score"]:
             best_per_league[lg] = r
     results = list(best_per_league.values())
     for r in results:
         r.pop("_score", None)
     if before > len(results):
-        print(f"\n  Dedup: {before} → {len(results)} (best per league)")
+        print(f"\n  Dedup: {before} → {len(results)} (best per league, normalized)")
 
     # 8. Write fotbals.json (empty array when no results → SureBets app shows FootballEmpty label)
     with open(OUTPUT, "w", encoding="utf-8") as f:
