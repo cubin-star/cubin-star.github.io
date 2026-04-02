@@ -79,27 +79,7 @@
     "score": "1:1",
     "result": "✓"
   },
-  {
-    "sport": "football",
-    "league": "Tercera División RFEF - Group 15",
-    "match": "Valle Egüés vs Avance Ezcabarte",
-    "tip": "Over 1.5",
-    "odds": "1.22",
-    "date": "2026-04-01T18:15:00+00:00",
-    "score": "1:0",
-    "result": "✗"
-  },
-  {
-    "sport": "football",
-    "league": "Tercera División RFEF - Group 16",
-    "match": "Villegas vs Varea",
-    "tip": "Over 1.5",
-    "odds": "1.19",
-    "date": "2026-04-01T18:00:00+00:00",
-    "score": "0:1",
-    "result": "✗"
-  },
-  {
+ {
     "sport": "football",
     "league": "Reserve League",
     "match": "San Lorenzo Res. vs Atlético Tucumán Res.",
@@ -108,16 +88,6 @@
     "date": "2026-04-01T18:00:00+00:00",
     "score": "0:2",
     "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "National 2 - Group A",
-    "match": "Avranches vs Angoulême",
-    "tip": "Over 1.5",
-    "odds": "1.38",
-    "date": "2026-04-01T17:30:00+00:00",
-    "score": "1:0",
-    "result": "✗"
   },
   {
     "sport": "hockey",
@@ -151,16 +121,6 @@
   },
   {
     "sport": "basketball",
-    "league": "B League",
-    "match": "Gunma vs Altiri Chiba",
-    "tip": "Over 154",
-    "odds": "1.56",
-    "date": "2026-04-01T10:05:00+00:00",
-    "score": "84:59",
-    "result": "✗"
-  },
-  {
-    "sport": "basketball",
     "league": "B2.League",
     "match": "Ehime Orange Vikings vs Shizuoka",
     "tip": "Over 152.5",
@@ -168,16 +128,6 @@
     "date": "2026-04-01T10:05:00+00:00",
     "score": "88:89",
     "result": "✓"
-  },
-  {
-    "sport": "basketball",
-    "league": "NBA",
-    "match": "Brooklyn Nets vs Charlotte Hornets",
-    "tip": "Over 210.5",
-    "odds": "1.38",
-    "date": "2026-03-31T23:30:00+00:00",
-    "score": "86:117",
-    "result": "✗"
   },
   {
     "sport": "hockey",
@@ -191,16 +141,6 @@
   },
   {
     "sport": "football",
-    "league": "National League - North",
-    "match": "Alfreton Town vs Chorley",
-    "tip": "Over 1.5",
-    "odds": "1.27",
-    "date": "2026-03-31T18:45:00+00:00",
-    "score": "1:0",
-    "result": "✗"
-  },
-  {
-    "sport": "football",
     "league": "World Cup - Qualification Europe",
     "match": "Bosnia & Herzegovina vs Italy",
     "tip": "Over 1.5",
@@ -208,36 +148,6 @@
     "date": "2026-03-31T18:45:00+00:00",
     "score": "1:1",
     "result": "✓"
-  },
-  {
-    "sport": "basketball",
-    "league": "ZBL W",
-    "match": "Trutnov W vs Zabiny Brno W",
-    "tip": "Over 144.5",
-    "odds": "1.51",
-    "date": "2026-03-31T16:30:00+00:00",
-    "score": "50:75",
-    "result": "✗"
-  },
-  {
-    "sport": "football",
-    "league": "UEFA U19 Championship - Qualification",
-    "match": "Slovenia U19 vs Finland U19",
-    "tip": "Over 1.5",
-    "odds": "1.21",
-    "date": "2026-03-31T16:00:00+00:00",
-    "score": "0:1",
-    "result": "✗"
-  },
-  {
-    "sport": "basketball",
-    "league": "I Divisioona A",
-    "match": "Jyvaskyla vs Raholan Pyrkiva",
-    "tip": "Over 153.5",
-    "odds": "1.60",
-    "date": "2026-03-31T15:30:00+00:00",
-    "score": "65:60",
-    "result": "✗"
   },
   {
     "sport": "basketball",
@@ -318,16 +228,6 @@
     "date": "2026-03-28T23:00:00+00:00",
     "score": "3:2",
     "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Primera A",
-    "match": "Cucuta vs Chico",
-    "tip": "Over 1.5",
-    "odds": "1.36",
-    "date": "2026-03-28T21:00:00+00:00",
-    "score": "1:0",
-    "result": "✗"
   },
   {
     "sport": "basketball",
