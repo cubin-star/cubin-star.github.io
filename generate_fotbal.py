@@ -412,21 +412,24 @@ def main():
     with open(OUTPUT, "w", encoding="utf-8") as f:
         json.dump(results, f, indent=2, ensure_ascii=False)
 
-    # 9. Write tips.json – max 2 random tips with Over 2.5
+    # 9. Write tips.json – max 2 random tips with Over 2.5 (only from final results after dedup)
     if results:
-        pool = [c for c in candidates if any(
-            r["Match"] == c["Match"] and r["Date"] == c["kickoff"]
-            for r in results
-        )]
+        # Build lookup: match+date → Over 2.5 odds from candidates
+        odds_25_map = {(c["Match"], c["kickoff"]): c["Odds_25"] for c in candidates}
+        pool = []
+        for r in results:
+            odds_25 = odds_25_map.get((r["Match"], r["Date"]))
+            if odds_25:
+                pool.append({**r, "_odds_25": odds_25})
         selected = random.sample(pool, min(MAX_TIPS, len(pool)))
         tips = []
-        for c in selected:
+        for s in selected:
             tips.append({
-                "League": c["League"],
-                "Match": c["Match"],
+                "League": s["League"],
+                "Match": s["Match"],
                 "Tip": "Over 2.5",
-                "Odds": c["Odds_25"],
-                "Date": c["kickoff"],
+                "Odds": s["_odds_25"],
+                "Date": s["Date"],
             })
         print(f"  Tips: {len(tips)} match(es) \u2192 {OUTPUT_TIPS}")
     else:
