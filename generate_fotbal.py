@@ -41,6 +41,7 @@ BOTH_FLOOR_R = 0.85      # oba alespoň 85% baseline
 STRONG_MIN_R = 1.10      # "výrazný" tým 110%+ baseline
 CONTRAST_MAX_R = 0.95    # protějšek pod 95% baseline (kontrast ≥ 15%)
 MIN_BASELINE = 1.25      # minimum avg per-team stat → expected ~2.5+ gólů celkem
+MIN_ATTACK = 0.80        # oba týmy musí střílet ≥ 0.8 g/z (žádný "mrtvý" útok)
 
 request_count = 0
 
@@ -161,6 +162,10 @@ def meets_criteria(pred):
 
     if h_for == 0 and a_for == 0:
         return False, "", 0.0
+
+    # Oba týmy musí mít minimální útočný výkon – žádný "mrtvý" útok
+    if h_for < MIN_ATTACK or a_for < MIN_ATTACK:
+        return False, f"weak attack: {h_for:.1f}/{a_for:.1f} (min {MIN_ATTACK})", 0.0
 
     # Game baseline = průměrná per-team úroveň scoringu v tomto matchupu
     baseline = (h_for + a_for + h_agn + a_agn) / 4
