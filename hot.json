@@ -1,10 +1,50 @@
 [
   {
-    "league": "2. Division",
-    "match": "Brabrand - FC Helsingor",
-    "kickoff": "2026-04-02T14:00:00+02:00",
+    "league": "Serie A",
+    "match": "Chapecoense-sc - Atletico-MG",
+    "kickoff": "2026-04-03T00:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "1.83",
+    "odds": "2.15",
     "group": 1
+  },
+  {
+    "league": "Tercera División RFEF - Group 2",
+    "match": "Caudal - Lenense",
+    "kickoff": "2026-04-02T18:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "1.77",
+    "group": 1
+  },
+  {
+    "league": "Tercera División RFEF - Group 1",
+    "match": "Atlético Arteixo - Noia",
+    "kickoff": "2026-04-02T12:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.09",
+    "group": 2
+  },
+  {
+    "league": "Serie D - Girone A",
+    "match": "Sestri Levante - NovaRomentin",
+    "kickoff": "2026-04-02T15:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "1.80",
+    "group": 2
+  },
+  {
+    "league": "Serie D - Girone H",
+    "match": "Real Acerrana - Sarnese",
+    "kickoff": "2026-04-02T15:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.04",
+    "group": 3
+  },
+  {
+    "league": "Reserve League",
+    "match": "Central Córdoba SdE Res. - Huracán Res.",
+    "kickoff": "2026-04-03T01:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.06",
+    "group": 3
   }
 ]
