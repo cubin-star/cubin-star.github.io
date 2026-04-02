@@ -1,14 +1,16 @@
 [
   {
-    "league": "AHL",
-    "match": "Bridgeport Islanders vs Hershey Bears",
+    "league": "DEL",
+    "match": "Straubing Tigers vs Eisbaren Berlin",
     "tip": "Over 5.5",
-    "odds": "1.85"
+    "odds": "1.78",
+    "qualified13": true
   },
   {
-    "league": "National League",
-    "match": "Fribourg vs Rapperswil-Jona",
+    "league": "ELJ",
+    "match": "Pardubice U20 vs Karlovy Vary U20",
     "tip": "Over 5.5",
-    "odds": "1.98"
+    "odds": "1.87",
+    "qualified13": true
   }
 ]
