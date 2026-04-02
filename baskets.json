@@ -1,44 +1,9 @@
 [
   {
-    "league": "B League",
-    "match": "Gunma vs Altiri Chiba",
-    "tip": "Over 154",
-    "odds": "1.56",
-    "date": "2026-04-01T10:05:00+00:00"
-  },
-  {
-    "league": "B2.League",
-    "match": "Ehime Orange Vikings vs Shizuoka",
-    "tip": "Over 152.5",
-    "odds": "1.59",
-    "date": "2026-04-01T10:05:00+00:00"
-  },
-  {
-    "league": "CBA",
-    "match": "Sichuan vs Shanxi Zhongyu",
-    "tip": "Over 154.5",
-    "odds": "1.57",
-    "date": "2026-04-01T11:35:00+00:00"
-  },
-  {
-    "league": "Extraliga",
-    "match": "BC Komarno vs MBK Handlova",
-    "tip": "Over 158.5",
-    "odds": "1.53",
-    "date": "2026-04-01T17:00:00+00:00"
-  },
-  {
     "league": "NBA",
-    "match": "Memphis Grizzlies vs New York Knicks",
-    "tip": "Over 220.5",
-    "odds": "1.43",
-    "date": "2026-04-02T00:00:00+00:00"
-  },
-  {
-    "league": "NBA",
-    "match": "Houston Rockets vs Milwaukee Bucks",
-    "tip": "Over 210.5",
-    "odds": "1.41",
-    "date": "2026-04-02T00:00:00+00:00"
+    "match": "Golden State Warriors vs Cleveland Cavaliers",
+    "tip": "Over 215.5",
+    "odds": "1.52",
+    "date": "2026-04-03T02:00:00+00:00"
   }
 ]
