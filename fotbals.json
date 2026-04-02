@@ -1,79 +1,58 @@
 [
   {
-    "League": "II Liga - East",
-    "Match": "Sandecja Nowy Sącz vs Resovia Rzeszów",
-    "Tip": "Over 1.5",
-    "Odds": "1.25",
-    "Date": "2026-04-02T17:30:00+00:00"
-  },
-  {
-    "League": "Tercera División RFEF - Group 1",
-    "Match": "Atlético Arteixo vs Noia",
-    "Tip": "Over 1.5",
-    "Odds": "1.34",
-    "Date": "2026-04-02T10:00:00+00:00"
-  },
-  {
-    "League": "2. Division",
-    "Match": "Brabrand vs FC Helsingor",
-    "Tip": "Over 1.5",
-    "Odds": "1.28",
-    "Date": "2026-04-02T12:00:00+00:00"
-  },
-  {
-    "League": "Serie D - Girone A",
-    "Match": "Sestri Levante vs NovaRomentin",
-    "Tip": "Over 1.5",
-    "Odds": "1.20",
-    "Date": "2026-04-02T13:00:00+00:00"
-  },
-  {
     "League": "Serie D - Girone D",
-    "Match": "Sasso Marconi Zola vs Lentigione",
+    "Match": "Sangiuliano City vs Coriano",
     "Tip": "Over 1.5",
-    "Odds": "1.29",
+    "Odds": "1.32",
     "Date": "2026-04-02T13:00:00+00:00"
   },
   {
     "League": "Serie D - Girone E",
     "Match": "Ghivizzano Borgo Mozzano vs Foligno Calcio",
     "Tip": "Over 1.5",
-    "Odds": "1.30",
+    "Odds": "1.29",
     "Date": "2026-04-02T13:00:00+00:00"
   },
   {
     "League": "Serie D - Girone F",
     "Match": "Recanatese vs Vigor Senigallia",
     "Tip": "Over 1.5",
-    "Odds": "1.36",
+    "Odds": "1.35",
     "Date": "2026-04-02T16:00:00+00:00"
   },
   {
     "League": "Serie D - Girone H",
-    "Match": "Real Acerrana vs Sarnese",
+    "Match": "Nola 1925 vs Barletta",
     "Tip": "Over 1.5",
-    "Odds": "1.30",
+    "Odds": "1.32",
     "Date": "2026-04-02T13:00:00+00:00"
   },
   {
-    "League": "Tercera División RFEF - Group 2",
-    "Match": "Caudal vs Lenense",
+    "League": "Serie D - Girone I",
+    "Match": "Gelbison vs AC Palermo",
     "Tip": "Over 1.5",
-    "Odds": "1.23",
-    "Date": "2026-04-02T16:00:00+00:00"
+    "Odds": "1.24",
+    "Date": "2026-04-02T13:00:00+00:00"
+  },
+  {
+    "League": "II Liga - East",
+    "Match": "Sandecja Nowy Sącz vs Resovia Rzeszów",
+    "Tip": "Over 1.5",
+    "Odds": "1.24",
+    "Date": "2026-04-02T17:30:00+00:00"
   },
   {
     "League": "Reserve League",
     "Match": "Central Córdoba SdE Res. vs Huracán Res.",
     "Tip": "Over 1.5",
-    "Odds": "1.33",
+    "Odds": "1.35",
     "Date": "2026-04-02T23:00:00+00:00"
   },
   {
     "League": "Non League Premier - Northern",
     "Match": "Cleethorpes Town vs Stocksbridge Park Steels",
     "Tip": "Over 1.5",
-    "Odds": "1.22",
+    "Odds": "1.23",
     "Date": "2026-04-02T18:45:00+00:00"
   },
   {
@@ -87,14 +66,21 @@
     "League": "Liga Nacional",
     "Match": "Comunicaciones vs Mixco",
     "Tip": "Over 1.5",
-    "Odds": "1.40",
+    "Odds": "1.36",
     "Date": "2026-04-02T23:00:00+00:00"
   },
   {
-    "League": "Serie A",
-    "Match": "Chapecoense-sc vs Atletico-MG",
+    "League": "3. liga - CFL B",
+    "Match": "Pardubice II vs Ústí nad Orlicí",
     "Tip": "Over 1.5",
-    "Odds": "1.35",
-    "Date": "2026-04-02T22:00:00+00:00"
+    "Odds": "1.23",
+    "Date": "2026-04-03T08:15:00+00:00"
+  },
+  {
+    "League": "Liga Leumit",
+    "Match": "Maccabi Kabilio Jaffa vs Kiryat Yam SC",
+    "Tip": "Over 1.5",
+    "Odds": "1.25",
+    "Date": "2026-04-03T12:00:00+00:00"
   }
 ]
