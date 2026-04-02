@@ -1,22 +1,23 @@
 [
   {
-    "League": "Tercera División RFEF - Group 11",
-    "Match": "Constància vs Santanyí",
+    "League": "2. Division",
+    "Match": "Brabrand vs FC Helsingor",
     "Tip": "Over 2.5",
-    "Odds": "1.78"
+    "Odds": "1.88",
+    "qualified15": true
   },
   {
-    "League": "1st League - FBiH",
-    "Match": "Čelik vs Sloboda Tuzla",
+    "League": "3. Division",
+    "Match": "Holbæk B&I vs Nykobing FC",
     "Tip": "Over 2.5",
-    "Odds": "1.95",
-    "qualified13": true
+    "Odds": "1.75",
+    "qualified15": true
   },
   {
-    "League": "Primera Division",
-    "Match": "Águila vs Fuerte San Francisco",
+    "League": "Tercera División RFEF - Group 15",
+    "Match": "Txantrea vs Pamplona",
     "Tip": "Over 2.5",
-    "Odds": "1.83",
-    "qualified10": true
+    "Odds": "1.89",
+    "qualified15": true
   }
 ]
