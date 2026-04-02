@@ -236,13 +236,23 @@ async function main() {
     console.log('\nQualified (strict): ' + qualified.length + '/' + pool.length);
 
     // Best per league: keep only the match with highest contrastScore from each league
+    // Normalize league names: "Serie D - Girone A" → "Serie D", etc.
+    // Exception: international tournaments keep their groups as separate competitions.
+    const TOURNAMENT_KW = ['world cup','euro ','european','copa america','africa cup','asian cup','nations league','champions league','europa league','conference league','libertadores','sudamericana','concacaf','afc cup','afc champions','olympic'];
+    function normalizeLeague(name) {
+        const low = name.toLowerCase();
+        if (TOURNAMENT_KW.some(kw => low.includes(kw))) return name;
+        return name.replace(/\s*[-–]\s*(Gir(?:one|\.)\s*\w+|Gr(?:oup|p\.?)\s*\w+|CFL\s*\w+|Zone\s*\w+|Conference\s*\w+|Division\s*\w+|North(?:ern)?|South(?:ern)?|East(?:ern)?|West(?:ern)?|[A-I])\s*$/i, '').trim();
+    }
+
     const bestByLeague = new Map();
     for (const m of qualified) {
-        const prev = bestByLeague.get(m.league);
-        if (!prev || m.contrastScore > prev.contrastScore) bestByLeague.set(m.league, m);
+        const lg = normalizeLeague(m.league);
+        const prev = bestByLeague.get(lg);
+        if (!prev || m.contrastScore > prev.contrastScore) bestByLeague.set(lg, m);
     }
     const deduped = [...bestByLeague.values()];
-    if (deduped.length < qualified.length) console.log('Dedup: ' + qualified.length + ' → ' + deduped.length + ' (best per league)');
+    if (deduped.length < qualified.length) console.log('Dedup: ' + qualified.length + ' → ' + deduped.length + ' (best per league, normalized)');
 
     const fullAccumulator = deduped.length >= PICK_COUNT;
     if (!fullAccumulator) {
