@@ -1,23 +1,23 @@
 [
   {
-    "League": "2. Division",
-    "Match": "Brabrand vs FC Helsingor",
+    "League": "National League - North",
+    "Match": "Alfreton Town vs Worksop Town",
     "Tip": "Over 2.5",
-    "Odds": "1.88",
+    "Odds": "1.82",
     "qualified15": true
   },
   {
-    "League": "3. Division",
-    "Match": "Holbæk B&I vs Nykobing FC",
+    "League": "2. SNL",
+    "Match": "Ilirija vs Tabor Sežana",
     "Tip": "Over 2.5",
-    "Odds": "1.75",
-    "qualified15": true
+    "Odds": "1.90",
+    "qualified13": true
   },
   {
-    "League": "Tercera División RFEF - Group 15",
-    "Match": "Txantrea vs Pamplona",
+    "League": "League One",
+    "Match": "Lincoln vs AFC Wimbledon",
     "Tip": "Over 2.5",
-    "Odds": "1.89",
-    "qualified15": true
+    "Odds": "1.77",
+    "qualified13": true
   }
 ]
