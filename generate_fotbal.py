@@ -408,7 +408,8 @@ def main():
     if before > len(results):
         print(f"\n  Dedup: {before} → {len(results)} (best per league, normalized)")
 
-    # 8. Write fotbals.json (empty array when no results → SureBets app shows FootballEmpty label)
+    # 8. Sort by kickoff time and write fotbals.json
+    results.sort(key=lambda r: r["Date"])
     with open(OUTPUT, "w", encoding="utf-8") as f:
         json.dump(results, f, indent=2, ensure_ascii=False)
 
