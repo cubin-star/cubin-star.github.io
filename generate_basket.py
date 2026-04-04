@@ -4,9 +4,9 @@ SureBets Basketball Bot – generates baskets.json
 Runs daily at 7:00 UTC via GitHub Actions.
 
 Basketball has no fixed Over line – each game has its own.
-1. Find "selection line" (Over where odds ≈ 2.00) – aggressive, high line
+1. Find "selection line" (Over where odds ≈ 1.90) – aggressive, high line
 2. Derive dynamic Variant A/B thresholds from that line
-3. If qualified, output the "safe line" (Over where odds ≈ 1.25) – ~25pt cushion
+3. If qualified, output the "safe line" (Over where odds ≈ 1.30) – ~20pt cushion
 
 Thresholds are proportional ratios of half_line (= selection_line / 2),
 compressed for basketball's tighter scoring distribution.
@@ -31,18 +31,18 @@ DELAY = 0.3
 OUTPUT = "baskets.json"
 
 EXCLUDED_COUNTRIES = {"russia", "belarus"}
-MIN_GAMES = 10
+MIN_GAMES = 6
 
 # Target odds for line selection
-SELECTION_ODDS = 2.00   # find the Over line near this odds (aggressive – higher line ≈ Over 220)
-OUTPUT_ODDS = 1.25       # find the safer Over line near this odds (safe – lower line ≈ Over 195)
-ODDS_TOLERANCE = 0.30    # max deviation from target
+SELECTION_ODDS = 1.90   # find the Over line near this odds (aggressive – higher line)
+OUTPUT_ODDS = 1.30       # find the safer Over line near this odds (safe – lower line)
+ODDS_TOLERANCE = 0.35    # max deviation from target
 
 # Variant A/B ratios – contrast-based (relative to half_line = selection_line / 2)
 BOTH_FLOOR_R = 1.01      # oba týmy alespoň 101% of half-line (oba NAD průměrem → reálný Over)
 STRONG_MIN_R = 1.05      # "výrazný" tým musí být 105%+ (jasně nad průměrem)
 CONTRAST_MAX_R = 1.03    # protějšek pod 103% (stále nad průměrem, ale kontrast ≥ 2% se STRONG)
-MIN_HALF_LINE = 100      # minimální half_line – filtruje nízko-skórující ligy/zápasy
+MIN_HALF_LINE = 80       # minimální half_line – filtruje nízko-skórující ligy (80 = 160 bodů celkem)
 
 request_count = 0
 
