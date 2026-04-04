@@ -3,8 +3,8 @@
 SureBets Hockey Bot – generates hokejs.json
 Runs daily at 7:00 UTC via GitHub Actions.
 
-Selection: Over 5.5 odds (1.40–3.00) + Variant A/B criteria + MIN_BASELINE
-Output: Over 3.5 with odds from API (2-goal safety cushion)
+Selection: Over 5.0 odds (1.40–3.00) + Variant A/B criteria + MIN_BASELINE
+Output: Over 3.5 with odds from API (1.5-goal safety cushion)
 
 SETUP:
   1. Copy this file to the root of cubin-star/cubin-star.github.io
@@ -32,8 +32,8 @@ ODDS_TOLERANCE = 0.35    # max deviation from target odds
 
 EXCLUDED_COUNTRIES = {"russia", "belarus"}
 
-# Selection line: Over 5.5 (find odds near ~1.80) → Output line: Over 3.5 (safer bet)
-SELECTION_LINE = 5.5
+# Selection line: Over 5.0 (find odds near ~1.80) → Output line: Over 3.5 (safer bet)
+SELECTION_LINE = 5.0
 OUTPUT_LINE = 3.5
 SELECTION_ODDS_TARGET = 1.80   # target odds for selection line
 OUTPUT_ODDS_TARGET = 1.40      # target odds for output line
@@ -44,7 +44,7 @@ OUTPUT_ODDS_TARGET = 1.40      # target odds for output line
 BOTH_FLOOR_R = 0.85      # oba alespoň 85% baseline (široký záchyt)
 STRONG_MIN_R = 1.10      # "výrazný" tým 110%+ baseline (jasně nad normou ligy)
 CONTRAST_MAX_R = 0.95    # protějšek pod 95% baseline (kontrast ≥ 15%)
-MIN_BASELINE = 2.75      # minimum avg per-team stat → expected ~5.5+ gólů celkem
+MIN_BASELINE = 2.40      # minimum avg per-team stat → expected ~4.8+ gólů celkem
 
 request_count = 0
 
