@@ -4,7 +4,7 @@ SureBets Football Bot – generates fotbals.json
 Runs daily at 7:00 UTC via GitHub Actions.
 
 Criteria (Variant A or B) → qualifies for Over 2.5 potential
-→ output Over 1.5 with odds from API in range 1.75–3.00
+→ output Over 1.5 with odds ≤ 1.21 from API (filtered from Over 2.5 @ 1.60–1.80)
 
 SETUP:
   1. Copy this file to the root of cubin-star/cubin-star.github.io
@@ -29,8 +29,9 @@ OUTPUT = "fotbals.json"
 OUTPUT_TIPS = "tips.json"
 MAX_TIPS = 2
 
-MIN_ODDS = 1.75
-MAX_ODDS = 3.00
+MIN_ODDS = 1.60
+MAX_ODDS = 1.80
+MAX_ODDS_15 = 1.21
 MIN_GAMES = 5
 
 EXCLUDED_COUNTRIES = {"russia", "belarus"}
@@ -242,6 +243,9 @@ def extract_candidates(odds_data, fixtures):
         avg_over25 = sum(all_over25) / len(all_over25)
         avg_over15 = sum(all_over15) / len(all_over15)
 
+        if avg_over15 > MAX_ODDS_15:
+            continue
+
         candidates.append({
             "fixture_id": fid,
             "League": fix["league"],
@@ -269,7 +273,7 @@ def main():
     print(f"Time: {now.strftime('%Y-%m-%d %H:%M UTC')}")
     print(f"Select: Over 2.5 odds {MIN_ODDS}–{MAX_ODDS} + Variant A/B (league-relative)")
     print(f"Ratios (× game baseline): FLOOR={BOTH_FLOOR_R}, STRONG={STRONG_MIN_R}, CONTRAST<{CONTRAST_MAX_R}")
-    print(f"Output: Over 1.5 with odds from API\n")
+    print(f"Output: Over 1.5 with odds ≤ {MAX_ODDS_15}\n")
 
     # 1. Fixtures
     fixtures_today = fetch_fixtures(today)
