@@ -1,1 +1,135 @@
-[]
+[
+  {
+    "league": "Basket League",
+    "match": "Panionios vs Iraklis",
+    "tip": "Over 156.5",
+    "odds": "1.40",
+    "date": "2026-04-04T13:00:00+00:00"
+  },
+  {
+    "league": "LKL",
+    "match": "Lietkabelis vs Zalgiris Kaunas",
+    "tip": "Over 160.5",
+    "odds": "1.55",
+    "date": "2026-04-04T13:50:00+00:00"
+  },
+  {
+    "league": "Korisliiga",
+    "match": "UU-Korihait Uusikaupunki vs Honka",
+    "tip": "Over 170.5",
+    "odds": "1.44",
+    "date": "2026-04-04T14:00:00+00:00"
+  },
+  {
+    "league": "Liga A",
+    "match": "San Lorenzo vs Boca Juniors",
+    "tip": "Over 156",
+    "odds": "1.57",
+    "date": "2026-04-04T14:30:00+00:00"
+  },
+  {
+    "league": "NBL",
+    "match": "NH Ostrava vs Brno",
+    "tip": "Over 166.5",
+    "odds": "1.52",
+    "date": "2026-04-04T15:30:00+00:00"
+  },
+  {
+    "league": "Extraliga",
+    "match": "Slovan Bratislava vs BC Komarno",
+    "tip": "Over 157",
+    "odds": "1.53",
+    "date": "2026-04-04T16:00:00+00:00"
+  },
+  {
+    "league": "LPB",
+    "match": "Esgueira vs Imortal",
+    "tip": "Over 168",
+    "odds": "1.55",
+    "date": "2026-04-04T16:00:00+00:00"
+  },
+  {
+    "league": "SB League",
+    "match": "Neuchatel vs Fribourg Olympic",
+    "tip": "Over 162.5",
+    "odds": "1.61",
+    "date": "2026-04-04T16:00:00+00:00"
+  },
+  {
+    "league": "NB I A",
+    "match": "Szolnoki Olaj vs Atomeromu Paks",
+    "tip": "Over 164",
+    "odds": "1.54",
+    "date": "2026-04-04T16:00:00+00:00"
+  },
+  {
+    "league": "Division A",
+    "match": "Keravnos vs AEL",
+    "tip": "Over 158",
+    "odds": "1.58",
+    "date": "2026-04-04T16:00:00+00:00"
+  },
+  {
+    "league": "Pro A",
+    "match": "Bayreuth vs Bremerhaven",
+    "tip": "Over 158.5",
+    "odds": "1.50",
+    "date": "2026-04-04T17:00:00+00:00"
+  },
+  {
+    "league": "Segunda FEB",
+    "match": "Albacete vs Castello",
+    "tip": "Over 157.5",
+    "odds": "1.64",
+    "date": "2026-04-04T17:00:00+00:00"
+  },
+  {
+    "league": "Primera FEB",
+    "match": "Zamora vs Fuenlabrada",
+    "tip": "Over 161",
+    "odds": "1.56",
+    "date": "2026-04-04T17:30:00+00:00"
+  },
+  {
+    "league": "BBL",
+    "match": "Chemnitz vs Bonn",
+    "tip": "Over 158.5",
+    "odds": "1.37",
+    "date": "2026-04-04T18:00:00+00:00"
+  },
+  {
+    "league": "Lega A",
+    "match": "Cantu vs Sassari",
+    "tip": "Over 165.5",
+    "odds": "1.39",
+    "date": "2026-04-04T18:30:00+00:00"
+  },
+  {
+    "league": "ACB",
+    "match": "Joventut Badalona vs Murcia",
+    "tip": "Over 159.5",
+    "odds": "1.39",
+    "date": "2026-04-04T19:00:00+00:00"
+  },
+  {
+    "league": "Super League",
+    "match": "KW Titans vs Windsor",
+    "tip": "Over 206.5",
+    "odds": "1.62",
+    "date": "2026-04-04T20:00:00+00:00"
+  },
+  {
+    "league": "Superliga",
+    "match": "Pioneros vs Diablos",
+    "tip": "Over 159.5",
+    "odds": "1.59",
+    "date": "2026-04-04T23:00:00+00:00"
+  },
+  {
+    "league": "NBA",
+    "match": "Philadelphia 76ers vs Detroit Pistons",
+    "tip": "Over 219.5",
+    "odds": "1.40",
+    "date": "2026-04-04T23:00:00+00:00"
+  }
+]
