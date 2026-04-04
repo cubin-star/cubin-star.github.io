@@ -274,7 +274,7 @@ async function main() {
         const picked = [];
         pool.sort((a, b) => b.contrastScore - a.contrastScore);
         for (const m of pool) {
-            if (picked.length + (lc._total || 0) >= limit) break;
+            if (lc._total >= limit) break;
             const cnt = lc.get(m.league) || 0;
             if (cnt >= numGroups) continue;
             picked.push(m);
