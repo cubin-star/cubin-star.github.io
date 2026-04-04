@@ -1,128 +1,191 @@
 [
   {
-    "League": "3. liga - CFL B",
-    "Match": "Pardubice II vs Ústí nad Orlicí",
+    "League": "Liga 2",
+    "Match": "Persiku Kudus vs Tornado Pekanbaru",
     "Tip": "Over 1.5",
-    "Odds": "1.25",
-    "Date": "2026-04-03T08:15:00+00:00"
+    "Odds": "1.30",
+    "Date": "2026-04-04T08:30:00+00:00"
   },
   {
-    "League": "Tercera División RFEF - Group 5",
-    "Match": "Vic vs L'Hospitalet",
+    "League": "Persha Liga",
+    "Match": "Inhulets vs UCSA",
     "Tip": "Over 1.5",
-    "Odds": "1.39",
-    "Date": "2026-04-03T10:00:00+00:00"
+    "Odds": "1.32",
+    "Date": "2026-04-04T10:00:00+00:00"
   },
   {
-    "League": "Liga Leumit",
-    "Match": "Maccabi Kabilio Jaffa vs Kiryat Yam SC",
+    "League": "Thai League 2",
+    "Match": "Songkhla vs Chanthaburi",
+    "Tip": "Over 1.5",
+    "Odds": "1.34",
+    "Date": "2026-04-04T11:00:00+00:00"
+  },
+  {
+    "League": "Süper Lig",
+    "Match": "Gençlerbirliği S.K. vs Göztepe",
+    "Tip": "Over 1.5",
+    "Odds": "1.40",
+    "Date": "2026-04-04T11:30:00+00:00"
+  },
+  {
+    "League": "Liga 1",
+    "Match": "Persebaya Surabaya vs Persita",
     "Tip": "Over 1.5",
     "Odds": "1.26",
-    "Date": "2026-04-03T12:00:00+00:00"
+    "Date": "2026-04-04T12:00:00+00:00"
   },
   {
-    "League": "2. liga",
-    "Match": "Inter Bratislava vs Šamorín",
+    "League": "2. Lig",
+    "Match": "Altınordu vs Ankaraspor",
     "Tip": "Over 1.5",
-    "Odds": "1.25",
-    "Date": "2026-04-03T12:00:00+00:00"
+    "Odds": "1.23",
+    "Date": "2026-04-04T12:00:00+00:00"
   },
   {
-    "League": "1. Division",
-    "Match": "Hvidovre vs Hillerød",
+    "League": "3. Liga",
+    "Match": "Hansa Rostock vs FC Viktoria Köln",
     "Tip": "Over 1.5",
-    "Odds": "1.28",
-    "Date": "2026-04-03T13:30:00+00:00"
+    "Odds": "1.20",
+    "Date": "2026-04-04T12:00:00+00:00"
   },
   {
-    "League": "Premier League",
-    "Match": "Briton Ferry vs Cardiff MET",
+    "League": "Liga I",
+    "Match": "Oţelul vs AFC Hermannstadt",
     "Tip": "Over 1.5",
-    "Odds": "1.19",
-    "Date": "2026-04-03T13:30:00+00:00"
+    "Odds": "1.40",
+    "Date": "2026-04-04T12:00:00+00:00"
+  },
+  {
+    "League": "Serie C - Girone C",
+    "Match": "Siracusa vs Atalanta II",
+    "Tip": "Over 1.5",
+    "Odds": "1.22",
+    "Date": "2026-04-04T12:30:00+00:00"
+  },
+  {
+    "League": "Czech Liga",
+    "Match": "Dukla Praha vs Pardubice",
+    "Tip": "Over 1.5",
+    "Odds": "1.36",
+    "Date": "2026-04-04T13:00:00+00:00"
+  },
+  {
+    "League": "Super Liga",
+    "Match": "FK Košice vs Skalica",
+    "Tip": "Over 1.5",
+    "Odds": "1.22",
+    "Date": "2026-04-04T13:30:00+00:00"
   },
   {
     "League": "Championship",
-    "Match": "Sheffield Utd vs Swansea",
+    "Match": "Dunfermline vs Morton",
     "Tip": "Over 1.5",
-    "Odds": "1.26",
-    "Date": "2026-04-03T14:00:00+00:00"
+    "Odds": "1.30",
+    "Date": "2026-04-04T14:00:00+00:00"
   },
   {
     "League": "League One",
-    "Match": "Stockport County vs Wycombe",
+    "Match": "Cove Rangers vs Alloa Athletic",
     "Tip": "Over 1.5",
-    "Odds": "1.24",
-    "Date": "2026-04-03T14:00:00+00:00"
+    "Odds": "1.23",
+    "Date": "2026-04-04T14:00:00+00:00"
   },
   {
-    "League": "National League - South",
-    "Match": "Weston-super-Mare vs Torquay",
+    "League": "League Two",
+    "Match": "Stranraer vs Dumbarton",
     "Tip": "Over 1.5",
-    "Odds": "1.24",
-    "Date": "2026-04-03T14:00:00+00:00"
-  },
-  {
-    "League": "Second NL",
-    "Match": "Trnje vs Jadran LP",
-    "Tip": "Over 1.5",
-    "Odds": "1.24",
-    "Date": "2026-04-03T14:30:00+00:00"
+    "Odds": "1.21",
+    "Date": "2026-04-04T14:00:00+00:00"
   },
   {
     "League": "2. SNL",
-    "Match": "Rudar vs Slovan Ljubljana",
+    "Match": "Dravinja vs Brinje-Grosuplje",
     "Tip": "Over 1.5",
-    "Odds": "1.23",
-    "Date": "2026-04-03T16:00:00+00:00"
+    "Odds": "1.22",
+    "Date": "2026-04-04T14:00:00+00:00"
   },
   {
-    "League": "National 2 - Group C",
-    "Match": "Andrézieux vs Toulon",
+    "League": "Second League",
+    "Match": "Spartak Pleven vs Sportist Svoge",
+    "Tip": "Over 1.5",
+    "Odds": "1.34",
+    "Date": "2026-04-04T14:00:00+00:00"
+  },
+  {
+    "League": "Ligue 1",
+    "Match": "Strasbourg vs Nice",
+    "Tip": "Over 1.5",
+    "Odds": "1.20",
+    "Date": "2026-04-04T15:00:00+00:00"
+  },
+  {
+    "League": "Campeonato de Portugal Prio - Group D",
+    "Match": "O Elvas vs FC Serpa",
+    "Tip": "Over 1.5",
+    "Odds": "1.35",
+    "Date": "2026-04-04T15:00:00+00:00"
+  },
+  {
+    "League": "HNL",
+    "Match": "NK Slaven Belupo vs HNK Rijeka",
+    "Tip": "Over 1.5",
+    "Odds": "1.36",
+    "Date": "2026-04-04T15:45:00+00:00"
+  },
+  {
+    "League": "Division 1",
+    "Match": "Al Baten vs Al Orubah",
+    "Tip": "Over 1.5",
+    "Odds": "1.22",
+    "Date": "2026-04-04T15:55:00+00:00"
+  },
+  {
+    "League": "Major League Soccer",
+    "Match": "Toronto FC vs Colorado Rapids",
     "Tip": "Over 1.5",
     "Odds": "1.21",
-    "Date": "2026-04-03T17:00:00+00:00"
+    "Date": "2026-04-04T17:00:00+00:00"
   },
   {
-    "League": "III Liga - Group 2",
-    "Match": "Elana Toruń vs Wda Świecie",
+    "League": "First League",
+    "Match": "Mladost DG vs Arsenal Tivat",
     "Tip": "Over 1.5",
-    "Odds": "1.27",
-    "Date": "2026-04-03T18:08:00+00:00"
+    "Odds": "1.46",
+    "Date": "2026-04-04T18:30:00+00:00"
   },
   {
-    "League": "Serie C - Girone A",
-    "Match": "Arzignano Valchiampo vs Renate",
+    "League": "Primera División RFEF - Group 1",
+    "Match": "Ponferradina vs Mérida AD",
     "Tip": "Over 1.5",
     "Odds": "1.44",
-    "Date": "2026-04-03T18:30:00+00:00"
+    "Date": "2026-04-04T19:00:00+00:00"
   },
   {
-    "League": "Jupiler Pro League",
-    "Match": "Antwerp vs Genk",
+    "League": "Primera Division",
+    "Match": "Zacatecoluca vs FAS",
     "Tip": "Over 1.5",
-    "Odds": "1.24",
-    "Date": "2026-04-03T18:45:00+00:00"
-  },
-  {
-    "League": "Primera División",
-    "Match": "Caracas FC vs Metropolitanos FC",
-    "Tip": "Over 1.5",
-    "Odds": "1.32",
-    "Date": "2026-04-03T23:30:00+00:00"
+    "Odds": "1.28",
+    "Date": "2026-04-04T22:00:00+00:00"
   },
   {
     "League": "Liga de Expansión MX",
-    "Match": "Tepatitlán vs Alebrijes de Oaxaca",
+    "Match": "Leones Negros UDG vs Monarcas",
     "Tip": "Over 1.5",
-    "Odds": "1.20",
-    "Date": "2026-04-04T02:00:00+00:00"
+    "Odds": "1.26",
+    "Date": "2026-04-05T01:00:00+00:00"
   },
   {
-    "League": "Liga MX",
-    "Match": "Club Tijuana vs Tigres UANL",
+    "League": "J2/J3 League",
+    "Match": "Imabari vs Ehime FC",
     "Tip": "Over 1.5",
-    "Odds": "1.22",
-    "Date": "2026-04-04T03:06:00+00:00"
+    "Odds": "1.33",
+    "Date": "2026-04-05T04:30:00+00:00"
+  },
+  {
+    "League": "K League 2",
+    "Match": "Suwon Bluewings vs Cheongju",
+    "Tip": "Over 1.5",
+    "Odds": "1.24",
+    "Date": "2026-04-05T05:00:00+00:00"
   }
 ]
