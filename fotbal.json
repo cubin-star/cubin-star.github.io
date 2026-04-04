@@ -1,23 +1,23 @@
 [
   {
-    "League": "National League - North",
-    "Match": "Alfreton Town vs Worksop Town",
+    "League": "J1 League",
+    "Match": "FC Tokyo vs Machida Zelvia",
+    "Tip": "Over 2.5",
+    "Odds": "1.94",
+    "qualified15": true
+  },
+  {
+    "League": "Ligue 1",
+    "Match": "Lille vs Lens",
     "Tip": "Over 2.5",
     "Odds": "1.82",
     "qualified15": true
   },
   {
-    "League": "2. SNL",
-    "Match": "Ilirija vs Tabor Sežana",
+    "League": "New South Wales NPL",
+    "Match": "St George City FA vs Blacktown City",
     "Tip": "Over 2.5",
-    "Odds": "1.90",
-    "qualified13": true
-  },
-  {
-    "League": "League One",
-    "Match": "Lincoln vs AFC Wimbledon",
-    "Tip": "Over 2.5",
-    "Odds": "1.77",
-    "qualified13": true
+    "Odds": "1.76",
+    "qualified15": true
   }
 ]
