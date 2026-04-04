@@ -1,50 +1,50 @@
 [
   {
-    "league": "National 2 - Group C",
-    "match": "Andrézieux - Toulon",
-    "kickoff": "2026-04-03T19:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "1.78",
-    "group": 1
-  },
-  {
-    "league": "III Liga - Group 2",
-    "match": "Elana Toruń - Wda Świecie",
-    "kickoff": "2026-04-03T20:08:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "1.89",
-    "group": 1
-  },
-  {
-    "league": "Liga de Expansión MX",
-    "match": "Tepatitlán - Alebrijes de Oaxaca",
-    "kickoff": "2026-04-04T04:00:00+02:00",
+    "league": "K League 2",
+    "match": "Suwon Bluewings - Cheongju",
+    "kickoff": "2026-04-05T07:00:00+02:00",
     "tip": "Over 2.5",
     "odds": "1.81",
+    "group": 1
+  },
+  {
+    "league": "J2/J3 League",
+    "match": "Imabari - Ehime FC",
+    "kickoff": "2026-04-05T06:30:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.04",
+    "group": 1
+  },
+  {
+    "league": "Primera B Metropolitana",
+    "match": "Deportivo Laferrere - Excursionistas",
+    "kickoff": "2026-04-04T20:30:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.35",
     "group": 2
   },
   {
-    "league": "Liga Leumit",
-    "match": "Maccabi Kabilio Jaffa - Kiryat Yam SC",
-    "kickoff": "2026-04-03T14:00:00+02:00",
+    "league": "2. SNL",
+    "match": "Dravinja - Brinje-Grosuplje",
+    "kickoff": "2026-04-04T16:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "1.87",
+    "odds": "1.80",
     "group": 2
   },
   {
-    "league": "National League - South",
-    "match": "Weston-super-Mare - Torquay",
-    "kickoff": "2026-04-03T16:00:00+02:00",
+    "league": "First League",
+    "match": "Mladost DG - Arsenal Tivat",
+    "kickoff": "2026-04-04T20:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "1.82",
+    "odds": "2.38",
     "group": 3
   },
   {
-    "league": "3. liga - CFL B",
-    "match": "Pardubice II - Ústí nad Orlicí",
-    "kickoff": "2026-04-03T10:15:00+02:00",
+    "league": "2. Lig",
+    "match": "Altınordu - Ankaraspor",
+    "kickoff": "2026-04-04T14:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "1.87",
+    "odds": "1.80",
     "group": 3
   }
 ]
