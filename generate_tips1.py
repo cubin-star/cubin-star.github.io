@@ -1,5 +1,5 @@
 """
-Ultimate Football Overs - Daily Tip Generator v15
+Ultimate Football Overs - Daily Tip Generator v16
 
 Logika:
   1. Blacklist (youth/reserve/amateur/women/esports)
@@ -9,7 +9,7 @@ Logika:
   5. Vickolovy vyber:
      a) 1. kolo: Varianta A: scored(jeden<1, druhy>=1.3) + conceded(jeden>=1.5, druhy>=1.6)
                 Varianta B: scored(jeden>=1.5, druhy>=1.6) + conceded(jeden<1, druhy>=1.3)
-        - pokud >= 3: vyber 3 (nahodnym vyberem), konec
+        - pokud >= 3: PREDNOST zapasy v 16h okne (15:00-17:59 CET), pak ostatni
      b) 2. kolo: Varianta A: scored(jeden<1, druhy>=1.3) + conceded(oba>=1.3)
                 Varianta B: scored(oba>=1.3) + conceded(jeden<1, druhy>=1.3)
         - doplni zbyvajici mista do 3
@@ -36,6 +36,7 @@ import random
 import urllib.request
 import urllib.error
 from datetime import datetime, timezone, timedelta
+from zoneinfo import ZoneInfo
 
 API_KEY = os.environ.get("API_FOOTBALL_KEY1", "")
 BASE_URL = "https://v3.football.api-sports.io"
@@ -331,6 +332,7 @@ def extract_candidates(odds_data, fixtures, min_odds=MIN_ODDS, max_odds=MAX_ODDS
             "country": country,
             "is_european": country in EUROPEAN_COUNTRIES,
             "avg": avg,
+            "kickoff": fix.get("kickoff", ""),
         })
 
     return candidates
@@ -401,6 +403,22 @@ def weighted_pick(items, count):
     return result
 
 
+PRAGUE_TZ = ZoneInfo("Europe/Prague")
+
+
+def _is_16h_window(m):
+    """Check if match kickoff is in the 16h window (15:00-17:59 Prague time)."""
+    kickoff_str = m.get("kickoff", "")
+    if not kickoff_str:
+        return False
+    try:
+        dt = datetime.fromisoformat(kickoff_str.replace("Z", "+00:00"))
+        prague_hour = dt.astimezone(PRAGUE_TZ).hour
+        return 15 <= prague_hour <= 17
+    except (ValueError, TypeError):
+        return False
+
+
 def _qualifies_round1(m):
     """Round 1: Varianta A nebo B.
     A: vstrelene (jeden < 1, druhy >= 1.3) + obdrzene (jeden >= 1.5, druhy >= 1.6)
@@ -459,14 +477,24 @@ def select_best_tips(qualified, pool, all_odds, fixtures, num=NUM_TIPS):
 
     selected = []
     if len(round1) >= num:
-        # Round 1 has enough – pick only from round 1
-        selected = weighted_pick(round1, num)
+        # Round 1 has enough – prefer matches in 16h window (15:00-17:59 CET)
+        r1_16h = [m for m in round1 if _is_16h_window(m)]
+        r1_other = [m for m in round1 if not _is_16h_window(m)]
+        print(f"  1. kolo 16h okno: {len(r1_16h)} zapasu, ostatni: {len(r1_other)}")
+        if r1_16h:
+            selected = weighted_pick(r1_16h, min(len(r1_16h), num))
+        if len(selected) < num and r1_other:
+            # Fill remaining spots from non-16h matches (unique leagues)
+            used_leagues_16 = {s["League"] for s in selected}
+            r1_other_avail = [m for m in r1_other if m["League"] not in used_leagues_16]
+            selected.extend(weighted_pick(r1_other_avail, num - len(selected)))
         for m in selected:
             m["_qualified"] = True
             m["_round"] = 1
         print(f"  Vyber (1. kolo): {len(selected)} from {len(round1)}")
         for m in selected:
-            print(f"    >>> [VYBRAN R1] {m['Match']} ({m['League']}) - {m.get('detail','')}")
+            tag = "16h" if _is_16h_window(m) else "other"
+            print(f"    >>> [VYBRAN R1 {tag}] {m['Match']} ({m['League']}) - {m.get('detail','')}")
     else:
         # Take all round 1 picks first
         selected = weighted_pick(round1, min(len(round1), num))
@@ -566,7 +594,7 @@ def main():
     today = now.strftime("%Y-%m-%d")
     tomorrow = (now + timedelta(days=1)).strftime("%Y-%m-%d")
 
-    print(f"== generate_tips1 v15 ==")
+    print(f"== generate_tips1 v16 ==")
     print(f"Time: {now.strftime('%Y-%m-%d %H:%M UTC')}")
     print(f"Over 2.5 | odds {MIN_ODDS}-{MAX_ODDS} | min 1 tym scored>={MIN_SCORED_ONE} | conceded R1>={MIN_CONCEDED_R1} R2>={MIN_CONCEDED_R2} | min {MIN_GAMES} zapasu")
     print(f"Output: {OUTPUT_APP1} (3)\n")
