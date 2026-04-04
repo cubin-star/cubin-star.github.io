@@ -38,10 +38,9 @@ SELECTION_ODDS = 1.90   # find the Over line near this odds (aggressive – high
 OUTPUT_ODDS = 1.30       # find the safer Over line near this odds (safe – lower line)
 ODDS_TOLERANCE = 0.35    # max deviation from target
 
-# Variant A/B ratios – contrast-based (relative to half_line = selection_line / 2)
-BOTH_FLOOR_R = 1.01      # oba týmy alespoň 101% of half-line (oba NAD průměrem → reálný Over)
-STRONG_MIN_R = 1.05      # "výrazný" tým musí být 105%+ (jasně nad průměrem)
-CONTRAST_MAX_R = 1.03    # protějšek pod 103% (stále nad průměrem, ale kontrast ≥ 2% se STRONG)
+# Criteria ratios (relative to half_line = selection_line / 2)
+BOTH_FLOOR_R = 0.95      # oba týmy musí střílet alespoň 95% half-line (žádný "mrtvý" útok)
+EXPECTED_MIN_R = 1.00     # expected total musí být alespoň 100% selection_line
 MIN_HALF_LINE = 80       # minimální half_line – filtruje nízko-skórující ligy (80 = 160 bodů celkem)
 
 request_count = 0
@@ -169,10 +168,11 @@ def _sf(val, default=0.0):
 
 
 def meets_criteria(home_stats, away_stats, selection_line):
-    """Contrast-based Variant A/B – thresholds derived from the game's selection line.
+    """Basketball criteria – expected total vs. selection line.
 
-    Variant A: both concede >= FLOOR + offensive contrast (one >= STRONG, other < CONTRAST)
-    Variant B: both score  >= FLOOR + defensive contrast (one >= STRONG, other < CONTRAST)
+    1. Both teams must score >= BOTH_FLOOR_R * half_line (no dead offense)
+    2. Expected total (avg of h_for+a_agn, a_for+h_agn) must be >= selection_line
+    3. Score = expected / selection_line (higher = better Over candidate)
     """
     if not home_stats or not away_stats:
         return False, "", 0.0
@@ -180,7 +180,7 @@ def meets_criteria(home_stats, away_stats, selection_line):
     h_played = int(_sf(home_stats.get("games", {}).get("played", {}).get("all", 0)))
     a_played = int(_sf(away_stats.get("games", {}).get("played", {}).get("all", 0)))
     if h_played < MIN_GAMES or a_played < MIN_GAMES:
-        return False, "", 0.0
+        return False, f"few games: {h_played}/{a_played}", 0.0
 
     h_for = _sf(home_stats.get("points", {}).get("for", {}).get("average", {}).get("all"))
     a_for = _sf(away_stats.get("points", {}).get("for", {}).get("average", {}).get("all"))
@@ -188,42 +188,31 @@ def meets_criteria(home_stats, away_stats, selection_line):
     a_agn = _sf(away_stats.get("points", {}).get("against", {}).get("average", {}).get("all"))
 
     if h_for == 0 or a_for == 0:
-        return False, "", 0.0
+        return False, "no stats", 0.0
 
-    # Dynamic thresholds from the game's line
     half = selection_line / 2
     if half < MIN_HALF_LINE:
         return False, f"half_line too low: {half:.0f} < {MIN_HALF_LINE}", 0.0
 
-    both_floor = half * BOTH_FLOOR_R
-    strong_min = half * STRONG_MIN_R
-    contrast_max = half * CONTRAST_MAX_R
+    # Both teams must have active offense
+    min_floor = half * BOTH_FLOOR_R
+    if h_for < min_floor or a_for < min_floor:
+        return False, (f"weak offense: {h_for:.0f}/{a_for:.0f} "
+                       f"(min {min_floor:.0f})"), 0.0
 
-    min_for = min(h_for, a_for)
-    max_for = max(h_for, a_for)
-    min_agn = min(h_agn, a_agn)
-    max_agn = max(h_agn, a_agn)
+    # Expected total: average of two perspectives
+    # Home attack vs Away defense + Away attack vs Home defense
+    expected = (h_for + a_agn + a_for + h_agn) / 2
+    min_expected = selection_line * EXPECTED_MIN_R
 
-    # A) oba inkasují >= floor + ofenzivní kontrast (jeden >= strong, druhý < contrast)
-    variant_a = (min_agn >= both_floor) and \
-                (max_for >= strong_min and min_for < contrast_max)
-
-    # B) oba střílí >= floor + defenzivní kontrast (jeden >= strong, druhý < contrast)
-    variant_b = (min_for >= both_floor) and \
-                (max_agn >= strong_min and min_agn < contrast_max)
-
-    if variant_a or variant_b:
-        tag = "A" if variant_a else "B"
-        if variant_a:
-            s = sorted([h_for, a_for])
-        else:
-            s = sorted([h_agn, a_agn])
-        score = s[1] / s[0] if s[0] > 0 else 99.0
-        detail = (f"[{tag}] scored {h_for:.1f}/{a_for:.1f}, conceded {h_agn:.1f}/{a_agn:.1f} "
-                  f"(half={half:.0f}, score={score:.2f})")
+    if expected >= min_expected:
+        score = expected / selection_line
+        detail = (f"scored {h_for:.0f}/{a_for:.0f}, conceded {h_agn:.0f}/{a_agn:.0f} "
+                  f"(exp={expected:.0f} vs line={selection_line:.0f}, ratio={score:.3f})")
         return True, detail, score
 
-    return False, "", 0.0
+    return False, (f"scored {h_for:.0f}/{a_for:.0f}, conc {h_agn:.0f}/{a_agn:.0f} "
+                   f"(exp={expected:.0f} < line={selection_line:.0f})"), 0.0
 
 
 # ===== MAIN =====
@@ -240,9 +229,9 @@ def main():
 
     print("== SureBets Basketball Bot ==")
     print(f"Time: {now.strftime('%Y-%m-%d %H:%M UTC')}")
-    print(f"Select: Over @ ~{SELECTION_ODDS} odds + Variant A/B → Output: Over @ ~{OUTPUT_ODDS} odds")
-    print(f"MIN_HALF_LINE: {MIN_HALF_LINE} (filters low-scoring games)")
-    print(f"Ratios: FLOOR={BOTH_FLOOR_R}, STRONG={STRONG_MIN_R}, CONTRAST<{CONTRAST_MAX_R} of half-line\n")
+    print(f"Select: Over @ ~{SELECTION_ODDS} odds → Output: Over @ ~{OUTPUT_ODDS} odds")
+    print(f"MIN_HALF_LINE: {MIN_HALF_LINE}, BOTH_FLOOR_R: {BOTH_FLOOR_R}, EXPECTED_MIN_R: {EXPECTED_MIN_R}")
+    print(f"Criteria: expected_total >= selection_line * {EXPECTED_MIN_R}, both offenses >= half * {BOTH_FLOOR_R}\n")
 
     # 1. Fetch games
     games_today = fetch_games(today)
@@ -324,7 +313,7 @@ def main():
                     "_score": score,
                 })
             else:
-                print(" fail")
+                print(f" fail ({detail})")
         except Exception as exc:
             print(f" ERROR: {exc}")
 
