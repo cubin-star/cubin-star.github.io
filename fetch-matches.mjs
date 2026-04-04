@@ -116,6 +116,7 @@ function generatePairings(indices) {
 async function main() {
     console.log('Kombik Bot - fetch-matches\n');
     const now = new Date();
+    const max16h = new Date(now.getTime() + 16 * 60 * 60 * 1000);
     const max24h = new Date(now.getTime() + 24 * 60 * 60 * 1000);
     const max48h = new Date(now.getTime() + 48 * 60 * 60 * 1000);
     console.log('Window: ' + now.toUTCString() + ' -> ' + max48h.toUTCString() + ' (48h)\n');
@@ -259,49 +260,40 @@ async function main() {
         console.log('\nWARNING: Only ' + deduped.length + ' qualifying matches found (need ' + PICK_COUNT + ' for full accumulator).');
     }
 
-    // Prefer matches within 24h, pick by highest contrastScore
+    // Prefer matches: 16h > 24h > 48h, pick by highest contrastScore
     // Same league is allowed, but cap per league = number of groups so each lands in a different group
     const targetCount = fullAccumulator ? PICK_COUNT : deduped.length;
     const numGroups = Math.ceil(targetCount / 2);
-    const within24h = deduped.filter(m => new Date(m.kickoff) <= max24h);
+    const within16h = deduped.filter(m => new Date(m.kickoff) <= max16h);
+    const in16to24 = deduped.filter(m => { const t = new Date(m.kickoff); return t > max16h && t <= max24h; });
     const beyond24h = deduped.filter(m => new Date(m.kickoff) > max24h);
-    console.log('Within 24h: ' + within24h.length + ', beyond 24h: ' + beyond24h.length);
+    console.log('Within 16h: ' + within16h.length + ', 16-24h: ' + in16to24.length + ', beyond 24h: ' + beyond24h.length);
 
-    let selected;
-    if (within24h.length >= targetCount) {
-        // Pick by highest contrastScore from 24h pool (max numGroups per league)
-        within24h.sort((a, b) => b.contrastScore - a.contrastScore);
-        selected = [];
-        const lc = new Map();
-        for (const m of within24h) {
-            if (selected.length >= targetCount) break;
+    // Helper: greedily pick from a sorted pool respecting league cap
+    function pickFrom(pool, lc, limit) {
+        const picked = [];
+        pool.sort((a, b) => b.contrastScore - a.contrastScore);
+        for (const m of pool) {
+            if (picked.length + (lc._total || 0) >= limit) break;
             const cnt = lc.get(m.league) || 0;
             if (cnt >= numGroups) continue;
-            selected.push(m);
+            picked.push(m);
             lc.set(m.league, cnt + 1);
+            lc._total = (lc._total || 0) + 1;
         }
-        console.log('Selected ' + selected.length + ' matches with highest contrastScore from 24h window');
-    } else {
-        // Take all from 24h + fill from beyond 24h (by contrastScore desc)
-        selected = [];
-        const lc = new Map();
-        within24h.sort((a, b) => b.contrastScore - a.contrastScore);
-        for (const m of within24h) {
-            const cnt = lc.get(m.league) || 0;
-            if (cnt >= numGroups) continue;
-            selected.push(m);
-            lc.set(m.league, cnt + 1);
-        }
-        beyond24h.sort((a, b) => b.contrastScore - a.contrastScore);
-        for (const m of beyond24h) {
-            if (selected.length >= targetCount) break;
-            const cnt = lc.get(m.league) || 0;
-            if (cnt >= numGroups) continue;
-            selected.push(m);
-            lc.set(m.league, cnt + 1);
-        }
-        console.log('Selected ' + selected.length + ' matches (' + within24h.length + ' candidates from 24h window)');
+        return picked;
     }
+
+    const lc = new Map();
+    lc._total = 0;
+    let selected = pickFrom(within16h, lc, targetCount);
+    if (selected.length < targetCount) {
+        selected.push(...pickFrom(in16to24, lc, targetCount));
+    }
+    if (selected.length < targetCount) {
+        selected.push(...pickFrom(beyond24h, lc, targetCount));
+    }
+    console.log('Selected ' + selected.length + ' matches (16h:' + within16h.length + ' 24h:' + (within16h.length + in16to24.length) + ' 48h:' + deduped.length + ')');
 
     console.log('\nSelected: ' + selected.length + ' matches\n');
 
