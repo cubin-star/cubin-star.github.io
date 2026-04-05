@@ -1,50 +1,50 @@
 [
   {
-    "league": "Primera B Metropolitana",
-    "match": "Deportivo Laferrere - Excursionistas",
-    "kickoff": "2026-04-04T20:30:00+02:00",
+    "league": "Ligue 1",
+    "match": "Khenchela - Paradou AC",
+    "kickoff": "2026-04-05T17:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.20",
+    "group": 1
+  },
+  {
+    "league": "Premyer Liqa",
+    "match": "Sumqayıt - Neftchi Baku",
+    "kickoff": "2026-04-05T16:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.13",
+    "group": 1
+  },
+  {
+    "league": "Segunda División RFEF - Group 1",
+    "match": "Salamanca UDS - Racing Santander II",
+    "kickoff": "2026-04-05T17:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.10",
+    "group": 2
+  },
+  {
+    "league": "Prva Liga",
+    "match": "Jedinstvo Ub - Dubočica",
+    "kickoff": "2026-04-05T15:00:00+02:00",
     "tip": "Over 2.5",
     "odds": "2.35",
-    "group": 1
-  },
-  {
-    "league": "2. SNL",
-    "match": "Dravinja - Brinje-Grosuplje",
-    "kickoff": "2026-04-04T16:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "1.80",
-    "group": 1
-  },
-  {
-    "league": "First League",
-    "match": "Mladost DG - Arsenal Tivat",
-    "kickoff": "2026-04-04T20:30:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.38",
     "group": 2
   },
   {
-    "league": "2. Lig",
-    "match": "Altınordu - Ankaraspor",
-    "kickoff": "2026-04-04T14:00:00+02:00",
+    "league": "Primera División RFEF - Group 1",
+    "match": "Zamora - Unionistas de Salamanca",
+    "kickoff": "2026-04-05T16:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "1.80",
-    "group": 2
-  },
-  {
-    "league": "Primera Division",
-    "match": "Zacatecoluca - FAS",
-    "kickoff": "2026-04-05T00:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "1.92",
+    "odds": "2.30",
     "group": 3
   },
   {
-    "league": "Thai League 2",
-    "match": "Songkhla - Chanthaburi",
-    "kickoff": "2026-04-04T13:00:00+02:00",
+    "league": "Serie A",
+    "match": "Atletico-MG - Atletico Paranaense",
+    "kickoff": "2026-04-05T22:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "1.95",
+    "odds": "2.13",
     "group": 3
   }
 ]
