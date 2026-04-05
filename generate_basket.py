@@ -40,10 +40,10 @@ ODDS_TOLERANCE = 0.35    # max deviation from target
 
 # Criteria ratios (relative to half_line = selection_line / 2)
 BOTH_FLOOR_R = 0.95      # oba týmy musí střílet alespoň 95% half-line (žádný "mrtvý" útok)
-EXPECTED_MIN_R = 1.05     # expected total musí být alespoň 105% selection_line (5% bezpečnostní marže)
+EXPECTED_MIN_R = 1.02     # expected total musí být alespoň 102% selection_line (2% bezpečnostní marže)
 MIN_HALF_LINE = 80       # minimální half_line – filtruje nízko-skórující ligy (80 = 160 bodů celkem)
 LINE_VS_LEAGUE_R = 1.03   # selection_line nesmí přesáhnout 103% průměru soutěže (detekce pasti bookmakera)
-OFFENSE_VS_LEAGUE_R = 1.00  # offense obou týmů musí být >= průměru soutěže na tým
+OFFENSE_VS_LEAGUE_R = 0.93  # offense obou týmů musí být >= 93% průměru soutěže na tým
 
 request_count = 0
 
