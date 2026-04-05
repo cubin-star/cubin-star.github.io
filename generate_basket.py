@@ -38,12 +38,11 @@ SELECTION_ODDS = 1.90   # find the Over line near this odds (aggressive – high
 OUTPUT_ODDS = 1.30       # find the safer Over line near this odds (safe – lower line)
 ODDS_TOLERANCE = 0.35    # max deviation from target
 
-# Criteria ratios (relative to half_line = selection_line / 2)
-BOTH_FLOOR_R = 0.95      # oba týmy musí střílet alespoň 95% half-line (žádný "mrtvý" útok)
-EXPECTED_MIN_R = 1.02     # expected total musí být alespoň 102% selection_line (2% bezpečnostní marže)
-MIN_HALF_LINE = 80       # minimální half_line – filtruje nízko-skórující ligy (80 = 160 bodů celkem)
-LINE_VS_LEAGUE_R = 1.03   # selection_line nesmí přesáhnout 103% průměru soutěže (detekce pasti bookmakera)
-OFFENSE_VS_LEAGUE_R = 0.93  # offense obou týmů musí být >= 93% průměru soutěže na tým
+# Criteria – venue-specific matchup vs. bookmaker line
+BOTH_FLOOR_R = 0.95       # oba týmy musí střílet alespoň 95% half-line na svém venue
+MIN_HALF_LINE = 80        # minimální half_line – filtruje nízko-skórující ligy (80 = 160 bodů celkem)
+EXPECTED_MIN_R = 1.03     # matchup expected (venue splits) musí překročit line o 3%
+OFFENSE_VS_LEAGUE_R = 0.93  # offense obou týmů (venue) musí být >= 93% celkového průměru ligy
 
 request_count = 0
 
@@ -170,14 +169,18 @@ def _sf(val, default=0.0):
 
 
 def meets_criteria(home_stats, away_stats, selection_line):
-    """Basketball criteria – league context + team matchup.
+    """Basketball criteria – venue-specific matchup vs. bookmaker line.
 
-    1. Derive league average total from both teams' game averages
-    2. Selection line must not exceed league average * LINE_VS_LEAGUE_R
-    3. Both teams must score >= BOTH_FLOOR_R * half_line (no dead offense)
-    4. Both teams' offense must be >= league average per team (above-avg scorers)
-    5. Expected total must be >= selection_line * EXPECTED_MIN_R (5% margin)
-    6. Score = expected / selection_line (higher = better Over candidate)
+    Uses home/away splits to calculate matchup-specific expected total,
+    then checks if it meaningfully exceeds the bookmaker's selection line.
+    This finds matches where the bookmaker underpriced the Over.
+
+    1. Overall stats → league baseline
+    2. Home/away venue splits → matchup expected total
+    3. Both teams must score >= BOTH_FLOOR_R * half_line at their venue
+    4. Both teams' venue offense >= league avg per team * OFFENSE_VS_LEAGUE_R
+    5. Matchup expected must exceed selection_line * EXPECTED_MIN_R
+    6. Score = expected / selection_line (ranking)
     """
     if not home_stats or not away_stats:
         return False, "", 0.0
@@ -187,6 +190,7 @@ def meets_criteria(home_stats, away_stats, selection_line):
     if h_played < MIN_GAMES or a_played < MIN_GAMES:
         return False, f"few games: {h_played}/{a_played}", 0.0
 
+    # Overall stats (league baseline)
     h_for = _sf(home_stats.get("points", {}).get("for", {}).get("average", {}).get("all"))
     a_for = _sf(away_stats.get("points", {}).get("for", {}).get("average", {}).get("all"))
     h_agn = _sf(home_stats.get("points", {}).get("against", {}).get("average", {}).get("all"))
@@ -199,46 +203,46 @@ def meets_criteria(home_stats, away_stats, selection_line):
     if half < MIN_HALF_LINE:
         return False, f"half_line too low: {half:.0f} < {MIN_HALF_LINE}", 0.0
 
-    # --- Step 1: League average approximation from team stats ---
-    # avg total in home team's games / away team's games → league proxy
-    home_game_avg = h_for + h_agn
-    away_game_avg = a_for + a_agn
-    league_avg = (home_game_avg + away_game_avg) / 2
+    # Venue-specific stats: home team AT HOME, away team AWAY
+    # Fallback to overall if venue split unavailable (0 = no data)
+    h_for_h = _sf(home_stats.get("points", {}).get("for", {}).get("average", {}).get("home")) or h_for
+    a_for_a = _sf(away_stats.get("points", {}).get("for", {}).get("average", {}).get("away")) or a_for
+    h_agn_h = _sf(home_stats.get("points", {}).get("against", {}).get("average", {}).get("home")) or h_agn
+    a_agn_a = _sf(away_stats.get("points", {}).get("against", {}).get("average", {}).get("away")) or a_agn
 
-    # --- Step 2: Line vs. league average (bookmaker trap detection) ---
-    line_limit = league_avg * LINE_VS_LEAGUE_R
-    if selection_line > line_limit:
-        return False, (f"line above league avg: {selection_line:.0f} > "
-                       f"{league_avg:.0f}*{LINE_VS_LEAGUE_R}={line_limit:.0f}"), 0.0
+    # League baseline from overall stats
+    league_avg = (h_for + h_agn + a_for + a_agn) / 2
+    league_avg_per_team = league_avg / 2
 
-    # --- Step 3: Both teams must have active offense (absolute floor) ---
+    # Matchup expected from venue splits
+    # Home attack at home + away defense leakage away
+    # + Away attack away + home defense leakage at home
+    expected = (h_for_h + a_agn_a + a_for_a + h_agn_h) / 2
+
+    # --- Check 1: Both teams must have active offense at their venue ---
     min_floor = half * BOTH_FLOOR_R
-    if h_for < min_floor or a_for < min_floor:
-        return False, (f"weak offense: {h_for:.0f}/{a_for:.0f} "
+    if h_for_h < min_floor or a_for_a < min_floor:
+        return False, (f"weak venue offense: {h_for_h:.0f}/{a_for_a:.0f} "
                        f"(min {min_floor:.0f})"), 0.0
 
-    # --- Step 4: Both teams offense above league average per team ---
-    league_avg_per_team = league_avg / 2
+    # --- Check 2: Both teams venue offense above league average ---
     offense_floor = league_avg_per_team * OFFENSE_VS_LEAGUE_R
-    if h_for < offense_floor or a_for < offense_floor:
-        return False, (f"offense below league avg: {h_for:.0f}/{a_for:.0f} "
+    if h_for_h < offense_floor or a_for_a < offense_floor:
+        return False, (f"venue offense below league avg: {h_for_h:.0f}/{a_for_a:.0f} "
                        f"(league avg/team={league_avg_per_team:.0f})"), 0.0
 
-    # --- Step 5: Expected total with safety margin ---
-    # Home attack vs Away defense + Away attack vs Home defense
-    expected = (h_for + a_agn + a_for + h_agn) / 2
+    # --- Check 3: Matchup expected must exceed bookmaker line ---
     min_expected = selection_line * EXPECTED_MIN_R
+    if expected < min_expected:
+        return False, (f"venue {h_for_h:.0f}+{a_for_a:.0f} conc {h_agn_h:.0f}+{a_agn_a:.0f} "
+                       f"(exp={expected:.0f} < line*{EXPECTED_MIN_R}={min_expected:.0f}, "
+                       f"league={league_avg:.0f})"), 0.0
 
-    if expected >= min_expected:
-        score = expected / selection_line
-        detail = (f"scored {h_for:.0f}/{a_for:.0f}, conceded {h_agn:.0f}/{a_agn:.0f} "
-                  f"(exp={expected:.0f} vs line={selection_line:.0f}, "
-                  f"league={league_avg:.0f}, ratio={score:.3f})")
-        return True, detail, score
-
-    return False, (f"scored {h_for:.0f}/{a_for:.0f}, conc {h_agn:.0f}/{a_agn:.0f} "
-                   f"(exp={expected:.0f} < line*{EXPECTED_MIN_R}={min_expected:.0f}, "
-                   f"league={league_avg:.0f})"), 0.0
+    score = expected / selection_line
+    detail = (f"venue {h_for_h:.0f}+{a_for_a:.0f} conc {h_agn_h:.0f}+{a_agn_a:.0f} "
+              f"(exp={expected:.0f} vs line={selection_line:.0f}, "
+              f"league={league_avg:.0f}, ratio={score:.3f})")
+    return True, detail, score
 
 
 # ===== MAIN =====
@@ -257,9 +261,8 @@ def main():
     print(f"Time: {now.strftime('%Y-%m-%d %H:%M UTC')}")
     print(f"Select: Over @ ~{SELECTION_ODDS} odds → Output: Over @ ~{OUTPUT_ODDS} odds")
     print(f"MIN_HALF_LINE: {MIN_HALF_LINE}, BOTH_FLOOR_R: {BOTH_FLOOR_R}, EXPECTED_MIN_R: {EXPECTED_MIN_R}")
-    print(f"LINE_VS_LEAGUE_R: {LINE_VS_LEAGUE_R}, OFFENSE_VS_LEAGUE_R: {OFFENSE_VS_LEAGUE_R}")
-    print(f"Criteria: line <= league_avg*{LINE_VS_LEAGUE_R}, exp >= line*{EXPECTED_MIN_R}, "
-          f"both offenses >= half*{BOTH_FLOOR_R} & >= league_avg/team*{OFFENSE_VS_LEAGUE_R}\n")
+    print(f"Criteria: venue_expected >= line*{EXPECTED_MIN_R}, "
+          f"venue offense >= half*{BOTH_FLOOR_R} & >= league/team*{OFFENSE_VS_LEAGUE_R}\n")
 
     # 1. Fetch games
     games_today = fetch_games(today)
