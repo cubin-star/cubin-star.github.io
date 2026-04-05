@@ -40,8 +40,10 @@ ODDS_TOLERANCE = 0.35    # max deviation from target
 
 # Criteria ratios (relative to half_line = selection_line / 2)
 BOTH_FLOOR_R = 0.95      # oba týmy musí střílet alespoň 95% half-line (žádný "mrtvý" útok)
-EXPECTED_MIN_R = 1.00     # expected total musí být alespoň 100% selection_line
+EXPECTED_MIN_R = 1.05     # expected total musí být alespoň 105% selection_line (5% bezpečnostní marže)
 MIN_HALF_LINE = 80       # minimální half_line – filtruje nízko-skórující ligy (80 = 160 bodů celkem)
+LINE_VS_LEAGUE_R = 1.03   # selection_line nesmí přesáhnout 103% průměru soutěže (detekce pasti bookmakera)
+OFFENSE_VS_LEAGUE_R = 1.00  # offense obou týmů musí být >= průměru soutěže na tým
 
 request_count = 0
 
@@ -168,11 +170,14 @@ def _sf(val, default=0.0):
 
 
 def meets_criteria(home_stats, away_stats, selection_line):
-    """Basketball criteria – expected total vs. selection line.
+    """Basketball criteria – league context + team matchup.
 
-    1. Both teams must score >= BOTH_FLOOR_R * half_line (no dead offense)
-    2. Expected total (avg of h_for+a_agn, a_for+h_agn) must be >= selection_line
-    3. Score = expected / selection_line (higher = better Over candidate)
+    1. Derive league average total from both teams' game averages
+    2. Selection line must not exceed league average * LINE_VS_LEAGUE_R
+    3. Both teams must score >= BOTH_FLOOR_R * half_line (no dead offense)
+    4. Both teams' offense must be >= league average per team (above-avg scorers)
+    5. Expected total must be >= selection_line * EXPECTED_MIN_R (5% margin)
+    6. Score = expected / selection_line (higher = better Over candidate)
     """
     if not home_stats or not away_stats:
         return False, "", 0.0
@@ -194,13 +199,32 @@ def meets_criteria(home_stats, away_stats, selection_line):
     if half < MIN_HALF_LINE:
         return False, f"half_line too low: {half:.0f} < {MIN_HALF_LINE}", 0.0
 
-    # Both teams must have active offense
+    # --- Step 1: League average approximation from team stats ---
+    # avg total in home team's games / away team's games → league proxy
+    home_game_avg = h_for + h_agn
+    away_game_avg = a_for + a_agn
+    league_avg = (home_game_avg + away_game_avg) / 2
+
+    # --- Step 2: Line vs. league average (bookmaker trap detection) ---
+    line_limit = league_avg * LINE_VS_LEAGUE_R
+    if selection_line > line_limit:
+        return False, (f"line above league avg: {selection_line:.0f} > "
+                       f"{league_avg:.0f}*{LINE_VS_LEAGUE_R}={line_limit:.0f}"), 0.0
+
+    # --- Step 3: Both teams must have active offense (absolute floor) ---
     min_floor = half * BOTH_FLOOR_R
     if h_for < min_floor or a_for < min_floor:
         return False, (f"weak offense: {h_for:.0f}/{a_for:.0f} "
                        f"(min {min_floor:.0f})"), 0.0
 
-    # Expected total: average of two perspectives
+    # --- Step 4: Both teams offense above league average per team ---
+    league_avg_per_team = league_avg / 2
+    offense_floor = league_avg_per_team * OFFENSE_VS_LEAGUE_R
+    if h_for < offense_floor or a_for < offense_floor:
+        return False, (f"offense below league avg: {h_for:.0f}/{a_for:.0f} "
+                       f"(league avg/team={league_avg_per_team:.0f})"), 0.0
+
+    # --- Step 5: Expected total with safety margin ---
     # Home attack vs Away defense + Away attack vs Home defense
     expected = (h_for + a_agn + a_for + h_agn) / 2
     min_expected = selection_line * EXPECTED_MIN_R
@@ -208,11 +232,13 @@ def meets_criteria(home_stats, away_stats, selection_line):
     if expected >= min_expected:
         score = expected / selection_line
         detail = (f"scored {h_for:.0f}/{a_for:.0f}, conceded {h_agn:.0f}/{a_agn:.0f} "
-                  f"(exp={expected:.0f} vs line={selection_line:.0f}, ratio={score:.3f})")
+                  f"(exp={expected:.0f} vs line={selection_line:.0f}, "
+                  f"league={league_avg:.0f}, ratio={score:.3f})")
         return True, detail, score
 
     return False, (f"scored {h_for:.0f}/{a_for:.0f}, conc {h_agn:.0f}/{a_agn:.0f} "
-                   f"(exp={expected:.0f} < line={selection_line:.0f})"), 0.0
+                   f"(exp={expected:.0f} < line*{EXPECTED_MIN_R}={min_expected:.0f}, "
+                   f"league={league_avg:.0f})"), 0.0
 
 
 # ===== MAIN =====
@@ -231,7 +257,9 @@ def main():
     print(f"Time: {now.strftime('%Y-%m-%d %H:%M UTC')}")
     print(f"Select: Over @ ~{SELECTION_ODDS} odds → Output: Over @ ~{OUTPUT_ODDS} odds")
     print(f"MIN_HALF_LINE: {MIN_HALF_LINE}, BOTH_FLOOR_R: {BOTH_FLOOR_R}, EXPECTED_MIN_R: {EXPECTED_MIN_R}")
-    print(f"Criteria: expected_total >= selection_line * {EXPECTED_MIN_R}, both offenses >= half * {BOTH_FLOOR_R}\n")
+    print(f"LINE_VS_LEAGUE_R: {LINE_VS_LEAGUE_R}, OFFENSE_VS_LEAGUE_R: {OFFENSE_VS_LEAGUE_R}")
+    print(f"Criteria: line <= league_avg*{LINE_VS_LEAGUE_R}, exp >= line*{EXPECTED_MIN_R}, "
+          f"both offenses >= half*{BOTH_FLOOR_R} & >= league_avg/team*{OFFENSE_VS_LEAGUE_R}\n")
 
     # 1. Fetch games
     games_today = fetch_games(today)
