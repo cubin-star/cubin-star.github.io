@@ -1,23 +1,9 @@
 [
   {
-    "league": "Alps Hockey League",
-    "match": "KHL Sisak vs Merano",
-    "tip": "Over 3.5",
-    "odds": "1.13",
-    "date": "2026-04-04T17:30:00+00:00"
-  },
-  {
     "league": "NHL",
-    "match": "Carolina Hurricanes vs New York Islanders",
+    "match": "Colorado Avalanche vs St. Louis Blues",
     "tip": "Over 3.5",
-    "odds": "1.13",
-    "date": "2026-04-04T23:00:00+00:00"
-  },
-  {
-    "league": "AHL",
-    "match": "Lehigh Valley Phantoms vs Wilkes-Barre/Scranton",
-    "tip": "Over 3.5",
-    "odds": "1.15",
-    "date": "2026-04-04T23:05:00+00:00"
+    "odds": "1.10",
+    "date": "2026-04-06T01:30:00+00:00"
   }
 ]
