@@ -1,191 +1,79 @@
 [
   {
-    "League": "Liga 2",
-    "Match": "Persiku Kudus vs Tornado Pekanbaru",
+    "League": "2. liga",
+    "Match": "Slávia TU Košice vs Púchov",
     "Tip": "Over 1.5",
-    "Odds": "1.30",
-    "Date": "2026-04-04T08:30:00+00:00"
+    "Odds": "1.13",
+    "Date": "2026-04-05T09:00:00+00:00"
   },
   {
-    "League": "Persha Liga",
-    "Match": "Inhulets vs UCSA",
+    "League": "Campionato Primavera - 1",
+    "Match": "Torino U20 vs Cesena U20",
     "Tip": "Over 1.5",
-    "Odds": "1.32",
-    "Date": "2026-04-04T10:00:00+00:00"
+    "Odds": "1.15",
+    "Date": "2026-04-05T09:00:00+00:00"
   },
   {
     "League": "Thai League 2",
-    "Match": "Songkhla vs Chanthaburi",
+    "Match": "Nong Bua Pitchaya vs Khon Kaen United",
     "Tip": "Over 1.5",
-    "Odds": "1.34",
-    "Date": "2026-04-04T11:00:00+00:00"
+    "Odds": "1.12",
+    "Date": "2026-04-05T11:00:00+00:00"
   },
   {
-    "League": "Süper Lig",
-    "Match": "Gençlerbirliği S.K. vs Göztepe",
+    "League": "2. Bundesliga",
+    "Match": "SpVgg Greuther Fürth vs SC Paderborn 07",
     "Tip": "Over 1.5",
-    "Odds": "1.40",
-    "Date": "2026-04-04T11:30:00+00:00"
+    "Odds": "1.16",
+    "Date": "2026-04-05T11:30:00+00:00"
   },
   {
     "League": "Liga 1",
-    "Match": "Persebaya Surabaya vs Persita",
-    "Tip": "Over 1.5",
-    "Odds": "1.26",
-    "Date": "2026-04-04T12:00:00+00:00"
-  },
-  {
-    "League": "2. Lig",
-    "Match": "Altınordu vs Ankaraspor",
-    "Tip": "Over 1.5",
-    "Odds": "1.23",
-    "Date": "2026-04-04T12:00:00+00:00"
-  },
-  {
-    "League": "3. Liga",
-    "Match": "Hansa Rostock vs FC Viktoria Köln",
-    "Tip": "Over 1.5",
-    "Odds": "1.20",
-    "Date": "2026-04-04T12:00:00+00:00"
-  },
-  {
-    "League": "Liga I",
-    "Match": "Oţelul vs AFC Hermannstadt",
-    "Tip": "Over 1.5",
-    "Odds": "1.40",
-    "Date": "2026-04-04T12:00:00+00:00"
-  },
-  {
-    "League": "Serie C - Girone C",
-    "Match": "Siracusa vs Atalanta II",
-    "Tip": "Over 1.5",
-    "Odds": "1.22",
-    "Date": "2026-04-04T12:30:00+00:00"
-  },
-  {
-    "League": "Czech Liga",
-    "Match": "Dukla Praha vs Pardubice",
-    "Tip": "Over 1.5",
-    "Odds": "1.36",
-    "Date": "2026-04-04T13:00:00+00:00"
-  },
-  {
-    "League": "Super Liga",
-    "Match": "FK Košice vs Skalica",
-    "Tip": "Over 1.5",
-    "Odds": "1.22",
-    "Date": "2026-04-04T13:30:00+00:00"
-  },
-  {
-    "League": "Championship",
-    "Match": "Dunfermline vs Morton",
-    "Tip": "Over 1.5",
-    "Odds": "1.30",
-    "Date": "2026-04-04T14:00:00+00:00"
-  },
-  {
-    "League": "League One",
-    "Match": "Cove Rangers vs Alloa Athletic",
-    "Tip": "Over 1.5",
-    "Odds": "1.23",
-    "Date": "2026-04-04T14:00:00+00:00"
-  },
-  {
-    "League": "League Two",
-    "Match": "Stranraer vs Dumbarton",
+    "Match": "Persepam Madura Utd vs Pusamania Borneo",
     "Tip": "Over 1.5",
     "Odds": "1.21",
-    "Date": "2026-04-04T14:00:00+00:00"
+    "Date": "2026-04-05T12:00:00+00:00"
   },
   {
-    "League": "2. SNL",
-    "Match": "Dravinja vs Brinje-Grosuplje",
+    "League": "I-League",
+    "Match": "Sreenidi Deccan vs Aizawl",
     "Tip": "Over 1.5",
-    "Odds": "1.22",
-    "Date": "2026-04-04T14:00:00+00:00"
+    "Odds": "1.17",
+    "Date": "2026-04-05T13:00:00+00:00"
   },
   {
-    "League": "Second League",
-    "Match": "Spartak Pleven vs Sportist Svoge",
+    "League": "Bundesliga",
+    "Match": "Eintracht Frankfurt vs 1. FC Köln",
     "Tip": "Over 1.5",
-    "Odds": "1.34",
-    "Date": "2026-04-04T14:00:00+00:00"
+    "Odds": "1.20",
+    "Date": "2026-04-05T15:30:00+00:00"
+  },
+  {
+    "League": "Ligat Ha'al",
+    "Match": "Hapoel Haifa vs Maccabi Tel Aviv",
+    "Tip": "Over 1.5",
+    "Odds": "1.18",
+    "Date": "2026-04-05T17:15:00+00:00"
+  },
+  {
+    "League": "NB I",
+    "Match": "Gyori ETO FC vs Nyiregyhaza",
+    "Tip": "Over 1.5",
+    "Odds": "1.20",
+    "Date": "2026-04-05T17:30:00+00:00"
   },
   {
     "League": "Ligue 1",
-    "Match": "Strasbourg vs Nice",
+    "Match": "Monaco vs Marseille",
     "Tip": "Over 1.5",
-    "Odds": "1.20",
-    "Date": "2026-04-04T15:00:00+00:00"
+    "Odds": "1.16",
+    "Date": "2026-04-05T18:45:00+00:00"
   },
   {
-    "League": "Campeonato de Portugal Prio - Group D",
-    "Match": "O Elvas vs FC Serpa",
+    "League": "Liga de Ascenso",
+    "Match": "Cariari Pococi vs Futbol Consultants Moravia",
     "Tip": "Over 1.5",
-    "Odds": "1.35",
-    "Date": "2026-04-04T15:00:00+00:00"
-  },
-  {
-    "League": "HNL",
-    "Match": "NK Slaven Belupo vs HNK Rijeka",
-    "Tip": "Over 1.5",
-    "Odds": "1.36",
-    "Date": "2026-04-04T15:45:00+00:00"
-  },
-  {
-    "League": "Division 1",
-    "Match": "Al Baten vs Al Orubah",
-    "Tip": "Over 1.5",
-    "Odds": "1.22",
-    "Date": "2026-04-04T15:55:00+00:00"
-  },
-  {
-    "League": "Major League Soccer",
-    "Match": "Toronto FC vs Colorado Rapids",
-    "Tip": "Over 1.5",
-    "Odds": "1.21",
-    "Date": "2026-04-04T17:00:00+00:00"
-  },
-  {
-    "League": "First League",
-    "Match": "Mladost DG vs Arsenal Tivat",
-    "Tip": "Over 1.5",
-    "Odds": "1.46",
-    "Date": "2026-04-04T18:30:00+00:00"
-  },
-  {
-    "League": "Primera División RFEF - Group 1",
-    "Match": "Ponferradina vs Mérida AD",
-    "Tip": "Over 1.5",
-    "Odds": "1.44",
-    "Date": "2026-04-04T19:00:00+00:00"
-  },
-  {
-    "League": "Primera Division",
-    "Match": "Zacatecoluca vs FAS",
-    "Tip": "Over 1.5",
-    "Odds": "1.28",
-    "Date": "2026-04-04T22:00:00+00:00"
-  },
-  {
-    "League": "Liga de Expansión MX",
-    "Match": "Leones Negros UDG vs Monarcas",
-    "Tip": "Over 1.5",
-    "Odds": "1.26",
-    "Date": "2026-04-05T01:00:00+00:00"
-  },
-  {
-    "League": "J2/J3 League",
-    "Match": "Imabari vs Ehime FC",
-    "Tip": "Over 1.5",
-    "Odds": "1.33",
-    "Date": "2026-04-05T04:30:00+00:00"
-  },
-  {
-    "League": "K League 2",
-    "Match": "Suwon Bluewings vs Cheongju",
-    "Tip": "Over 1.5",
-    "Odds": "1.24",
-    "Date": "2026-04-05T05:00:00+00:00"
+    "Odds": "1.17",
+    "Date": "2026-04-05T20:00:00+00:00"
   }
 ]
