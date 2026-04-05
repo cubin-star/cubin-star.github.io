@@ -41,7 +41,7 @@ ODDS_TOLERANCE = 0.35    # max deviation from target
 # Criteria – venue-specific matchup vs. bookmaker line
 BOTH_FLOOR_R = 0.95       # oba týmy musí střílet alespoň 95% half-line na svém venue
 MIN_HALF_LINE = 80        # minimální half_line – filtruje nízko-skórující ligy (80 = 160 bodů celkem)
-EXPECTED_MIN_R = 1.03     # matchup expected (venue splits) musí překročit line o 3%
+EXPECTED_MIN_R = 1.02     # matchup expected (venue splits) musí překročit line o 2%
 OFFENSE_VS_LEAGUE_R = 0.93  # offense obou týmů (venue) musí být >= 93% celkového průměru ligy
 
 request_count = 0
