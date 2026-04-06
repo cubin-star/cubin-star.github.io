@@ -1,79 +1,72 @@
 [
   {
-    "League": "2. liga",
-    "Match": "Slávia TU Košice vs Púchov",
+    "League": "2. Liga",
+    "Match": "SV Kapfenberg vs Rapid Wien II",
     "Tip": "Over 1.5",
-    "Odds": "1.13",
-    "Date": "2026-04-05T09:00:00+00:00"
+    "Odds": "1.19",
+    "Date": "2026-04-06T12:00:00+00:00"
   },
   {
-    "League": "Campionato Primavera - 1",
-    "Match": "Torino U20 vs Cesena U20",
-    "Tip": "Over 1.5",
-    "Odds": "1.15",
-    "Date": "2026-04-05T09:00:00+00:00"
-  },
-  {
-    "League": "Thai League 2",
-    "Match": "Nong Bua Pitchaya vs Khon Kaen United",
-    "Tip": "Over 1.5",
-    "Odds": "1.12",
-    "Date": "2026-04-05T11:00:00+00:00"
-  },
-  {
-    "League": "2. Bundesliga",
-    "Match": "SpVgg Greuther Fürth vs SC Paderborn 07",
-    "Tip": "Over 1.5",
-    "Odds": "1.16",
-    "Date": "2026-04-05T11:30:00+00:00"
-  },
-  {
-    "League": "Liga 1",
-    "Match": "Persepam Madura Utd vs Pusamania Borneo",
-    "Tip": "Over 1.5",
-    "Odds": "1.21",
-    "Date": "2026-04-05T12:00:00+00:00"
-  },
-  {
-    "League": "I-League",
-    "Match": "Sreenidi Deccan vs Aizawl",
-    "Tip": "Over 1.5",
-    "Odds": "1.17",
-    "Date": "2026-04-05T13:00:00+00:00"
-  },
-  {
-    "League": "Bundesliga",
-    "Match": "Eintracht Frankfurt vs 1. FC Köln",
+    "League": "3. Division",
+    "Match": "FA 2000 vs Hørsholm-Usserød",
     "Tip": "Over 1.5",
     "Odds": "1.20",
-    "Date": "2026-04-05T15:30:00+00:00"
+    "Date": "2026-04-06T12:00:00+00:00"
   },
   {
-    "League": "Ligat Ha'al",
-    "Match": "Hapoel Haifa vs Maccabi Tel Aviv",
+    "League": "Regionalliga - Bayern",
+    "Match": "Eichstätt vs Augsburg II",
+    "Tip": "Over 1.5",
+    "Odds": "1.20",
+    "Date": "2026-04-06T12:00:00+00:00"
+  },
+  {
+    "League": "Derde Divisie - Sunday",
+    "Match": "Blauw Geel vs Groene Ster",
+    "Tip": "Over 1.5",
+    "Odds": "1.16",
+    "Date": "2026-04-06T12:00:00+00:00"
+  },
+  {
+    "League": "Regionalliga - Nord",
+    "Match": "Phönix Lübeck vs Kickers Emden",
     "Tip": "Over 1.5",
     "Odds": "1.18",
-    "Date": "2026-04-05T17:15:00+00:00"
+    "Date": "2026-04-06T12:00:00+00:00"
   },
   {
-    "League": "NB I",
-    "Match": "Gyori ETO FC vs Nyiregyhaza",
+    "League": "Ekstraklasa",
+    "Match": "Radomiak Radom vs Motor Lublin",
+    "Tip": "Over 1.5",
+    "Odds": "1.21",
+    "Date": "2026-04-06T12:45:00+00:00"
+  },
+  {
+    "League": "Non League Premier - Southern Central",
+    "Match": "Harborough Town vs Banbury United",
+    "Tip": "Over 1.5",
+    "Odds": "1.18",
+    "Date": "2026-04-06T14:00:00+00:00"
+  },
+  {
+    "League": "National League - North",
+    "Match": "AFC Telford United vs Kidderminster Harriers",
     "Tip": "Over 1.5",
     "Odds": "1.20",
-    "Date": "2026-04-05T17:30:00+00:00"
+    "Date": "2026-04-06T14:00:00+00:00"
   },
   {
-    "League": "Ligue 1",
-    "Match": "Monaco vs Marseille",
+    "League": "Non League Premier - Isthmian",
+    "Match": "Chichester City vs Burgess Hill Town",
     "Tip": "Over 1.5",
-    "Odds": "1.16",
-    "Date": "2026-04-05T18:45:00+00:00"
+    "Odds": "1.19",
+    "Date": "2026-04-06T14:00:00+00:00"
   },
   {
-    "League": "Liga de Ascenso",
-    "Match": "Cariari Pococi vs Futbol Consultants Moravia",
+    "League": "Non League Premier - Southern South",
+    "Match": "Havant & Wville vs Gosport Borough",
     "Tip": "Over 1.5",
-    "Odds": "1.17",
-    "Date": "2026-04-05T20:00:00+00:00"
+    "Odds": "1.15",
+    "Date": "2026-04-06T14:00:00+00:00"
   }
 ]
