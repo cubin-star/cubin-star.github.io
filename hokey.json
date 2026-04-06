@@ -1,14 +1,15 @@
 [
   {
-    "league": "Metal Ligaen",
-    "match": "Herlev vs Odense Bulldogs",
+    "league": "2. Liga",
+    "match": "Prostejov vs Pribram",
     "tip": "Over 5.5",
-    "odds": "1.82"
+    "odds": "1.97",
+    "qualified13": true
   },
   {
-    "league": "ICE Hockey League",
-    "match": "HK Olimpija vs Val Pusteria",
+    "league": "Ligue Magnus",
+    "match": "Angers vs Grenoble",
     "tip": "Over 5.5",
-    "odds": "2.14"
+    "odds": "2.04"
   }
 ]
