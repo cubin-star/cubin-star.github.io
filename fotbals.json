@@ -1,72 +1,44 @@
 [
   {
-    "League": "2. Liga",
-    "Match": "SV Kapfenberg vs Rapid Wien II",
-    "Tip": "Over 1.5",
-    "Odds": "1.19",
-    "Date": "2026-04-06T12:00:00+00:00"
-  },
-  {
-    "League": "3. Division",
-    "Match": "FA 2000 vs Hørsholm-Usserød",
-    "Tip": "Over 1.5",
-    "Odds": "1.20",
-    "Date": "2026-04-06T12:00:00+00:00"
-  },
-  {
-    "League": "Regionalliga - Bayern",
-    "Match": "Eichstätt vs Augsburg II",
-    "Tip": "Over 1.5",
-    "Odds": "1.20",
-    "Date": "2026-04-06T12:00:00+00:00"
-  },
-  {
-    "League": "Derde Divisie - Sunday",
-    "Match": "Blauw Geel vs Groene Ster",
-    "Tip": "Over 1.5",
-    "Odds": "1.16",
-    "Date": "2026-04-06T12:00:00+00:00"
-  },
-  {
-    "League": "Regionalliga - Nord",
-    "Match": "Phönix Lübeck vs Kickers Emden",
+    "League": "A-League",
+    "Match": "Melbourne City vs Central Coast Mariners",
     "Tip": "Over 1.5",
     "Odds": "1.18",
-    "Date": "2026-04-06T12:00:00+00:00"
+    "Date": "2026-04-07T09:00:00+00:00"
   },
   {
-    "League": "Ekstraklasa",
-    "Match": "Radomiak Radom vs Motor Lublin",
-    "Tip": "Over 1.5",
-    "Odds": "1.21",
-    "Date": "2026-04-06T12:45:00+00:00"
-  },
-  {
-    "League": "Non League Premier - Southern Central",
-    "Match": "Harborough Town vs Banbury United",
-    "Tip": "Over 1.5",
-    "Odds": "1.18",
-    "Date": "2026-04-06T14:00:00+00:00"
-  },
-  {
-    "League": "National League - North",
-    "Match": "AFC Telford United vs Kidderminster Harriers",
-    "Tip": "Over 1.5",
-    "Odds": "1.20",
-    "Date": "2026-04-06T14:00:00+00:00"
-  },
-  {
-    "League": "Non League Premier - Isthmian",
-    "Match": "Chichester City vs Burgess Hill Town",
-    "Tip": "Over 1.5",
-    "Odds": "1.19",
-    "Date": "2026-04-06T14:00:00+00:00"
-  },
-  {
-    "League": "Non League Premier - Southern South",
-    "Match": "Havant & Wville vs Gosport Borough",
+    "League": "Liga Revelação U23",
+    "Match": "Santa Clara U23 vs Benfica U23",
     "Tip": "Over 1.5",
     "Odds": "1.15",
-    "Date": "2026-04-06T14:00:00+00:00"
+    "Date": "2026-04-07T11:00:00+00:00"
+  },
+  {
+    "League": "2. liga",
+    "Match": "Malženice vs Zlaté Moravce",
+    "Tip": "Over 1.5",
+    "Odds": "1.19",
+    "Date": "2026-04-07T14:00:00+00:00"
+  },
+  {
+    "League": "3. Liga",
+    "Match": "Energie Cottbus vs TSV 1860 München",
+    "Tip": "Over 1.5",
+    "Odds": "1.16",
+    "Date": "2026-04-07T17:00:00+00:00"
+  },
+  {
+    "League": "League One",
+    "Match": "Montrose vs Cove Rangers",
+    "Tip": "Over 1.5",
+    "Odds": "1.21",
+    "Date": "2026-04-07T18:45:00+00:00"
+  },
+  {
+    "League": "Premiership",
+    "Match": "Portadown vs Carrick Rangers",
+    "Tip": "Over 1.5",
+    "Odds": "1.20",
+    "Date": "2026-04-07T18:45:00+00:00"
   }
 ]
