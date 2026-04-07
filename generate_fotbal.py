@@ -26,6 +26,7 @@ API_KEY = os.environ.get("API_FOOTBALL_KEY1", "")
 BASE_URL = "https://v3.football.api-sports.io"
 DELAY = 0.3
 OUTPUT = "fotbals.json"
+OUTPUT_LIVE = "live.json"
 OUTPUT_TIPS = "tips.json"
 MAX_TIPS = 2
 
@@ -287,6 +288,8 @@ def main():
         print("No fixtures found.")
         with open(OUTPUT, "w", encoding="utf-8") as f:
             json.dump([], f)
+        with open(OUTPUT_LIVE, "w", encoding="utf-8") as f:
+            json.dump([], f)
         with open(OUTPUT_TIPS, "w", encoding="utf-8") as f:
             json.dump([], f)
         return
@@ -413,9 +416,11 @@ def main():
     if before > len(results):
         print(f"\n  Dedup: {before} → {len(results)} (best per league, normalized)")
 
-    # 8. Sort by kickoff time and write fotbals.json
+    # 8. Sort by kickoff time and write fotbals.json + live.json
     results.sort(key=lambda r: r["Date"])
     with open(OUTPUT, "w", encoding="utf-8") as f:
+        json.dump(results, f, indent=2, ensure_ascii=False)
+    with open(OUTPUT_LIVE, "w", encoding="utf-8") as f:
         json.dump(results, f, indent=2, ensure_ascii=False)
 
     # 9. Write tips.json – max 2 random tips with Over 2.5 (only from final results after dedup)
@@ -446,7 +451,7 @@ def main():
         json.dump(tips, f, indent=2, ensure_ascii=False)
 
     print(f"\n{'='*50}")
-    print(f"  Results: {len(results)} match(es) → {OUTPUT}")
+    print(f"  Results: {len(results)} match(es) → {OUTPUT} + {OUTPUT_LIVE}")
     print(f"  Tips:    {len(tips)} match(es) → {OUTPUT_TIPS}")
     print(f"  API requests: {request_count} / 7500 ({request_count * 100 // 7500}%)")
 
