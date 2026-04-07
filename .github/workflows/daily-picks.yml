@@ -33,7 +33,7 @@ jobs:
         run: |
           git config user.name "Kombík Bot"
           git config user.email "bot@kombik.cz"
-          git add hot.json state.json
+          git add hot.json state.json live1.json
           git diff --cached --quiet || git commit -m "🤖 Denní tipy $(date +%Y-%m-%d)"
           git pull --rebase
           git push
