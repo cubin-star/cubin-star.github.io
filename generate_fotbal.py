@@ -371,7 +371,14 @@ def main():
         except Exception as exc:
             print(f" ERROR: {exc}")
 
-    # 7. Best per league – keep only the top match from each league
+    # 7a. Write live.json – ALL qualifying matches (no dedup)
+    live_results = sorted(results, key=lambda r: r["Date"])
+    live_out = [{k: v for k, v in r.items() if k != "_score"} for r in live_results]
+    with open(OUTPUT_LIVE, "w", encoding="utf-8") as f:
+        json.dump(live_out, f, indent=2, ensure_ascii=False)
+    print(f"  Live: {len(live_out)} match(es) \u2192 {OUTPUT_LIVE}")
+
+    # 7b. Best per league – keep only the top match from each league (for fotbals.json)
     #    Normalize league names: "Serie D - Girone A" → "Serie D",
     #    "Tercera RFEF - Group 3" → "Tercera RFEF", etc.
     #    Exception: international tournaments (World Cup, Euro, Champions League, etc.)
@@ -416,11 +423,9 @@ def main():
     if before > len(results):
         print(f"\n  Dedup: {before} → {len(results)} (best per league, normalized)")
 
-    # 8. Sort by kickoff time and write fotbals.json + live.json
+    # 8. Sort by kickoff time and write fotbals.json
     results.sort(key=lambda r: r["Date"])
     with open(OUTPUT, "w", encoding="utf-8") as f:
-        json.dump(results, f, indent=2, ensure_ascii=False)
-    with open(OUTPUT_LIVE, "w", encoding="utf-8") as f:
         json.dump(results, f, indent=2, ensure_ascii=False)
 
     # 9. Write tips.json – max 2 random tips with Over 2.5 (only from final results after dedup)
