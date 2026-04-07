@@ -252,6 +252,13 @@ async function main() {
     }
     console.log('\nQualified (strict): ' + qualified.length + '/' + pool.length);
 
+    // --- live1.json: all strict-qualified matches within 24h (no dedup, no limit) ---
+    const live1 = qualified
+        .filter(m => new Date(m.kickoff) <= max24h)
+        .map(m => ({ league: m.league, match: m.match, kickoff: m.kickoff, tip: m.tip, odds: m.odds }));
+    writeFileSync('live1.json', JSON.stringify(live1, null, 2), 'utf-8');
+    console.log('live1.json: ' + live1.length + ' qualified matches in 24h window');
+
     // Best per league: keep only the match with highest contrastScore from each league
     // Normalize league names: "Serie D - Girone A" → "Serie D", etc.
     // Exception: international tournaments keep their groups as separate competitions.
