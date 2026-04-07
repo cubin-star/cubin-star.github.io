@@ -1,23 +1,23 @@
 [
   {
-    "League": "National League",
-    "Match": "Brackley Town vs Boston United",
+    "League": "Challenge League",
+    "Match": "FC WIL 1900 vs Neuchatel Xamax FC",
     "Tip": "Over 2.5",
-    "Odds": "1.82",
+    "Odds": "1.76",
+    "qualified13": true
+  },
+  {
+    "League": "3. Liga",
+    "Match": "MSV Duisburg vs VfL Osnabrück",
+    "Tip": "Over 2.5",
+    "Odds": "1.81",
     "qualified15": true
   },
   {
-    "League": "Championship",
-    "Match": "Sheffield Wednesday vs Leicester",
+    "League": "UEFA Champions League",
+    "Match": "Sporting CP vs Arsenal",
     "Tip": "Over 2.5",
-    "Odds": "1.83",
-    "qualified15": true
-  },
-  {
-    "League": "Serie B",
-    "Match": "Reggiana vs Pescara",
-    "Tip": "Over 2.5",
-    "Odds": "1.86",
+    "Odds": "1.91",
     "qualified15": true
   }
 ]
