@@ -1,1 +1,37 @@
-[]
+[
+  {
+    "League": "Liga Revelação U23",
+    "Match": "Santa Clara U23 vs Benfica U23",
+    "Tip": "Over 1.5",
+    "Odds": "1.15",
+    "Date": "2026-04-07T11:00:00+00:00"
+  },
+  {
+    "League": "2. liga",
+    "Match": "Malženice vs Zlaté Moravce",
+    "Tip": "Over 1.5",
+    "Odds": "1.19",
+    "Date": "2026-04-07T14:00:00+00:00"
+  },
+  {
+    "League": "3. Liga",
+    "Match": "Energie Cottbus vs TSV 1860 München",
+    "Tip": "Over 1.5",
+    "Odds": "1.16",
+    "Date": "2026-04-07T17:00:00+00:00"
+  },
+  {
+    "League": "League One",
+    "Match": "Montrose vs Cove Rangers",
+    "Tip": "Over 1.5",
+    "Odds": "1.20",
+    "Date": "2026-04-07T18:45:00+00:00"
+  },
+  {
+    "League": "Premiership",
+    "Match": "Portadown vs Carrick Rangers",
+    "Tip": "Over 1.5",
+    "Odds": "1.20",
+    "Date": "2026-04-07T18:45:00+00:00"
+  }
+]
