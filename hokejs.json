@@ -1,16 +1,16 @@
 [
   {
-    "league": "NHL",
-    "match": "Carolina Hurricanes vs Boston Bruins",
+    "league": "Liiga",
+    "match": "Ilves vs KalPa",
     "tip": "Over 3.5",
     "odds": "1.13",
-    "date": "2026-04-07T23:00:00+00:00"
+    "date": "2026-04-08T15:30:00+00:00"
   },
   {
     "league": "AHL",
-    "match": "Texas Stars vs Iowa Wild",
+    "match": "Coachella Valley Firebirds vs Henderson Silver Knights",
     "tip": "Over 3.5",
-    "odds": "1.15",
-    "date": "2026-04-08T00:00:00+00:00"
+    "odds": "1.12",
+    "date": "2026-04-09T01:30:00+00:00"
   }
 ]
