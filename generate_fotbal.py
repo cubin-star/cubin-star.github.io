@@ -38,6 +38,17 @@ MIN_GAMES = 5
 
 EXCLUDED_COUNTRIES = {"russia", "belarus"}
 
+# League blacklist – exact league names from API
+EXCLUDED_LEAGUES = {
+    "2. liga",           # 2. Slovenská liga
+}
+
+# Country-specific whitelist – if a country is listed here,
+# only the specified leagues are allowed (all others blocked)
+ALLOWED_LEAGUES_BY_COUNTRY = {
+    "poland": {"Superliga", "Ekstraklasa", "I Liga"},
+}
+
 # Football criteria – league-relative (ratios of game baseline)
 # Baseline = průměr 4 per-team hodnot (h_for, a_for, h_agn, a_agn)
 # → automaticky se přizpůsobí úrovni ligy (Eredivisie ~1.6, Ligue 1 ~1.2, atd.)
@@ -310,8 +321,14 @@ def main():
         country = fix.get("country", "").lower()
         if country in EXCLUDED_COUNTRIES:
             continue
+        league = fix.get("league", "")
+        if league in EXCLUDED_LEAGUES:
+            continue
+        if country in ALLOWED_LEAGUES_BY_COUNTRY:
+            if league not in ALLOWED_LEAGUES_BY_COUNTRY[country]:
+                continue
         filtered[fid] = fix
-    print(f"  After filter (24h, no RU/BY): {len(filtered)} fixtures")
+    print(f"  After filter (24h, country/league): {len(filtered)} fixtures")
 
     # 3. Group fixtures by league (same as Kombik: league.id + league.season)
     league_map = {}
