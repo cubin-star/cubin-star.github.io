@@ -1,15 +1,14 @@
 [
   {
-    "league": "Championship",
-    "match": "Torpedo vs Kulager",
+    "league": "Extraliga",
+    "match": "Karlovy Vary vs Trinec",
     "tip": "Over 5.5",
-    "odds": "1.82",
-    "qualified13": true
+    "odds": "2.55"
   },
   {
-    "league": "Alps Hockey League",
-    "match": "Merano vs KHL Sisak",
+    "league": "DEL",
+    "match": "Eisbaren Berlin vs Kolner",
     "tip": "Over 5.5",
-    "odds": "1.79"
+    "odds": "1.83"
   }
 ]
