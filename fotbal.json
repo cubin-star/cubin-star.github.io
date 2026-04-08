@@ -1,23 +1,23 @@
 [
   {
-    "League": "Challenge League",
-    "Match": "FC WIL 1900 vs Neuchatel Xamax FC",
+    "League": "Pro League",
+    "Match": "Al-Fayha vs Al-Ahli Jeddah",
     "Tip": "Over 2.5",
-    "Odds": "1.76",
+    "Odds": "1.75",
     "qualified13": true
   },
   {
-    "League": "3. Liga",
-    "Match": "MSV Duisburg vs VfL Osnabrück",
+    "League": "2. Lig",
+    "Match": "Muğlaspor vs Karacabey Belediyespor",
     "Tip": "Over 2.5",
-    "Odds": "1.81",
-    "qualified15": true
+    "Odds": "1.84",
+    "qualified10": true
   },
   {
-    "League": "UEFA Champions League",
-    "Match": "Sporting CP vs Arsenal",
+    "League": "2. SNL",
+    "Match": "Slovan Ljubljana vs Ilirija",
     "Tip": "Over 2.5",
-    "Odds": "1.91",
+    "Odds": "1.77",
     "qualified15": true
   }
 ]
