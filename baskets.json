@@ -1,37 +1,37 @@
 [
   {
-    "league": "1 Liga",
-    "match": "Bydgoszcz vs Miners Katowice",
+    "league": "Liga Nova KBM",
+    "match": "Sencur vs KK Krka Novo mesto",
+    "tip": "Over 157",
+    "odds": "1.54",
+    "date": "2026-04-08T15:00:00+00:00"
+  },
+  {
+    "league": "ABA League 2",
+    "match": "Siroki Brijeg vs Helios Domzale",
     "tip": "Over 161.5",
-    "odds": "1.58",
-    "date": "2026-04-07T17:00:00+00:00"
-  },
-  {
-    "league": "Basketligan",
-    "match": "Jamtland vs Boras",
-    "tip": "Over 172.5",
-    "odds": "1.44",
-    "date": "2026-04-07T17:04:00+00:00"
-  },
-  {
-    "league": "Pro B",
-    "match": "St. Chamond vs Hyeres-Toulon",
-    "tip": "Over 162.5",
-    "odds": "1.60",
-    "date": "2026-04-07T18:30:00+00:00"
-  },
-  {
-    "league": "Superliga",
-    "match": "Diablos vs Cocodrilos",
-    "tip": "Over 165.5",
-    "odds": "1.61",
-    "date": "2026-04-07T23:00:00+00:00"
+    "odds": "1.63",
+    "date": "2026-04-08T18:30:00+00:00"
   },
   {
     "league": "NBA",
-    "match": "Los Angeles Lakers vs Oklahoma City Thunder",
-    "tip": "Over 214.5",
-    "odds": "1.40",
-    "date": "2026-04-08T02:30:00+00:00"
+    "match": "Orlando Magic vs Minnesota Timberwolves",
+    "tip": "Over 218.5",
+    "odds": "1.41",
+    "date": "2026-04-08T23:00:00+00:00"
+  },
+  {
+    "league": "Superliga",
+    "match": "Diablos vs Trotamundos",
+    "tip": "Over 164.5",
+    "odds": "1.65",
+    "date": "2026-04-08T23:00:00+00:00"
+  },
+  {
+    "league": "Liga Uruguaya",
+    "match": "Penarol vs Nacional",
+    "tip": "Over 165.5",
+    "odds": "1.64",
+    "date": "2026-04-09T00:30:00+00:00"
   }
 ]
