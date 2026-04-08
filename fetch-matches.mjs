@@ -315,8 +315,9 @@ async function main() {
     }
     console.log('Selected ' + selected.length + ' strict matches\n');
 
-    // --- best.json: top 3 strict matches by highest odds (always written) ---
+    // --- best.json: top 3 strict matches by highest odds, 24h window only ---
     const best = [...selected]
+        .filter(m => new Date(m.kickoff) <= max24h)
         .sort((a, b) => parseFloat(b.odds) - parseFloat(a.odds))
         .slice(0, 3)
         .map(m => ({ league: m.league, match: m.match, kickoff: m.kickoff, tip: m.tip, odds: m.odds }));
