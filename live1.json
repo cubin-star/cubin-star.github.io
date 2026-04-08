@@ -1,9 +1,16 @@
 [
   {
-    "league": "Championship",
-    "match": "Ayr Utd - Dunfermline",
-    "kickoff": "2026-04-07T20:45:00+02:00",
+    "league": "Super League",
+    "match": "Kokand-1912 - Nasaf",
+    "kickoff": "2026-04-08T15:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.18"
+    "odds": "2.26"
+  },
+  {
+    "league": "First League",
+    "match": "Mladost DG - Dečić",
+    "kickoff": "2026-04-08T14:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.28"
   }
 ]
