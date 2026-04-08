@@ -315,6 +315,14 @@ async function main() {
     }
     console.log('Selected ' + selected.length + ' strict matches\n');
 
+    // --- best.json: top 3 strict matches by highest odds (always written) ---
+    const best = [...selected]
+        .sort((a, b) => parseFloat(b.odds) - parseFloat(a.odds))
+        .slice(0, 3)
+        .map(m => ({ league: m.league, match: m.match, kickoff: m.kickoff, tip: m.tip, odds: m.odds }));
+    writeFileSync('best.json', JSON.stringify(best, null, 2), 'utf-8');
+    console.log('best.json: ' + best.length + ' matches (top odds)');
+
     // --- State: missed-days counter ---
     const state = loadState();
     console.log('State: missedDays=' + state.missedDays + ' (max=' + MAX_MISSED_DAYS + ')');
