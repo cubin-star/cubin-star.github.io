@@ -8,7 +8,7 @@
  * Pouziti: node fetch-matches.mjs
  */
 
-import { writeFileSync, readFileSync, existsSync } from 'fs';
+import { writeFileSync } from 'fs';
 
 const API_KEY = process.env.API_FOOTBALL_KEY1;
 if (!API_KEY) { console.error('Chybi API_FOOTBALL_KEY1 env promenna.'); process.exit(1); }
@@ -27,28 +27,13 @@ const CONTRAST_MAX_R = 0.95;    // protějšek pod 95% baseline (kontrast ≥ 15
 const MIN_BASELINE = 1.25;      // minimum avg per-team stat → expected ~2.5+ gólů celkem
 const MIN_ATTACK = 0.80;        // oba týmy musí střílet ≥ 0.8 g/z (žádný "mrtvý" útok)
 const EXCLUDED_COUNTRIES = new Set(['Russia', 'Belarus']);
-const MAX_MISSED_DAYS = 2;
-const STATE_FILE = 'state.json';
+const FALLBACK_MAX_ODDS = 2.6;
 const TZ = 'Europe/Prague';
 let reqCount = 0;
 
 function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 function shuffle(arr) { for (let i = arr.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [arr[i], arr[j]] = [arr[j], arr[i]]; } return arr; }
 function fmtDate(d) { return d.toISOString().split('T')[0]; }
-
-function loadState() {
-    if (existsSync(STATE_FILE)) {
-        try {
-            const data = JSON.parse(readFileSync(STATE_FILE, 'utf-8'));
-            return { missedDays: parseInt(data.missedDays) || 0 };
-        } catch { /* corrupted */ }
-    }
-    return { missedDays: 0 };
-}
-
-function saveState(state) {
-    writeFileSync(STATE_FILE, JSON.stringify(state, null, 2), 'utf-8');
-}
 
 async function apiFetch(path) {
     const url = FOOTBALL_API + path;
@@ -280,20 +265,15 @@ async function main() {
 
     const fullAccumulator = deduped.length >= PICK_COUNT;
 
-    // Prefer matches: 16h > 24h > 48h, pick by highest contrastScore
-    // Same league is allowed, but cap per league = number of groups so each lands in a different group
-    const targetCount = fullAccumulator ? PICK_COUNT : deduped.length;
-    const numGroups = Math.ceil(Math.max(targetCount, PICK_COUNT) / 2);
+    // Pick strict matches from 16h window only
+    const numGroups = Math.ceil(PICK_COUNT / 2);
     const within16h = deduped.filter(m => new Date(m.kickoff) <= max16h);
-    const in16to24 = deduped.filter(m => { const t = new Date(m.kickoff); return t > max16h && t <= max24h; });
-    const beyond24h = deduped.filter(m => new Date(m.kickoff) > max24h);
-    console.log('Within 16h: ' + within16h.length + ', 16-24h: ' + in16to24.length + ', beyond 24h: ' + beyond24h.length);
+    console.log('Strict in 16h window: ' + within16h.length);
 
-    // Helper: greedily pick from a sorted pool respecting league cap
-    function pickFrom(pool, lc, limit) {
+    function pickFrom(arr, lc, limit) {
         const picked = [];
-        pool.sort((a, b) => b.contrastScore - a.contrastScore);
-        for (const m of pool) {
+        arr.sort((a, b) => b.contrastScore - a.contrastScore);
+        for (const m of arr) {
             if (lc._total >= limit) break;
             const cnt = lc.get(m.league) || 0;
             if (cnt >= numGroups) continue;
@@ -306,71 +286,43 @@ async function main() {
 
     const lc = new Map();
     lc._total = 0;
-    let selected = pickFrom(within16h, lc, targetCount);
-    if (selected.length < targetCount) {
-        selected.push(...pickFrom(in16to24, lc, targetCount));
-    }
-    if (selected.length < targetCount) {
-        selected.push(...pickFrom(beyond24h, lc, targetCount));
-    }
-    console.log('Selected ' + selected.length + ' strict matches\n');
+    let selected = pickFrom(within16h, lc, PICK_COUNT);
+    console.log('Selected ' + selected.length + ' strict matches from 16h window');
 
-    // --- best.json: top 3 strict matches by highest odds, 24h window only ---
+    // Fallback: fill remaining with random picks from pool (odds 2.1-2.6)
+    if (selected.length < PICK_COUNT) {
+        const selectedIds = new Set(selected.map(m => m.fixtureId));
+        // Prefer 16h, then expand to 24h
+        const fb16 = pool.filter(m => !selectedIds.has(m.fixtureId) && new Date(m.kickoff) <= max16h && parseFloat(m.odds) <= FALLBACK_MAX_ODDS);
+        const fb24 = pool.filter(m => !selectedIds.has(m.fixtureId) && new Date(m.kickoff) > max16h && new Date(m.kickoff) <= max24h && parseFloat(m.odds) <= FALLBACK_MAX_ODDS);
+        shuffle(fb16);
+        shuffle(fb24);
+        const fallback = [...fb16, ...fb24];
+        console.log('Fallback pool: ' + fb16.length + ' (16h) + ' + fb24.length + ' (16-24h), odds ≤' + FALLBACK_MAX_ODDS);
+        for (const m of fallback) {
+            if (selected.length >= PICK_COUNT) break;
+            m.contrastScore = m.contrastScore || 0;
+            m.forced = true;
+            selected.push(m);
+            console.log('   [RANDOM] ' + m.match + ' | ' + m.tip + ' @ ' + m.odds);
+        }
+    }
+
+    const forcedCount = selected.filter(m => m.forced).length;
+    if (forcedCount > 0) console.log('Ticket: ' + (selected.length - forcedCount) + ' strict + ' + forcedCount + ' random');
+    if (selected.length < PICK_COUNT) console.log('WARNING: Only ' + selected.length + '/' + PICK_COUNT + ' matches available even after fallback.');
+
+    // --- best.json: top 3 from final selected (strict + random) by highest odds ---
     const best = [...selected]
-        .filter(m => new Date(m.kickoff) <= max24h)
         .sort((a, b) => parseFloat(b.odds) - parseFloat(a.odds))
         .slice(0, 3)
         .map(m => ({ league: m.league, match: m.match, kickoff: m.kickoff, tip: m.tip, odds: m.odds }));
     writeFileSync('best.json', JSON.stringify(best, null, 2), 'utf-8');
     console.log('best.json: ' + best.length + ' matches (top odds)');
 
-    // --- State: missed-days counter ---
-    const state = loadState();
-    console.log('State: missedDays=' + state.missedDays + ' (max=' + MAX_MISSED_DAYS + ')');
-
-    const needForce = selected.length < PICK_COUNT && state.missedDays >= MAX_MISSED_DAYS;
-    const canSkip = selected.length < PICK_COUNT && state.missedDays < MAX_MISSED_DAYS;
-
-    if (selected.length >= PICK_COUNT) {
-        // Full ticket from strict criteria
-        console.log('Full accumulator from strict criteria.');
-        state.missedDays = 0;
-    } else if (canSkip) {
-        // Grace period – no ticket today
-        state.missedDays++;
-        saveState(state);
-        writeFileSync('hot.json', JSON.stringify([], null, 2), 'utf-8');
-        console.log('Only ' + selected.length + '/' + PICK_COUNT + ' strict matches. Grace day ' + state.missedDays + '/' + MAX_MISSED_DAYS + ' – no ticket today.');
-        console.log('Written empty hot.json (' + reqCount + ' API req)');
-        process.exit(0);
-    } else if (needForce) {
-        // Force mode – fill remaining slots from pool (24h preferred, then 48h)
-        console.log('FORCE MODE: ' + selected.length + '/' + PICK_COUNT + ' strict. Filling ' + (PICK_COUNT - selected.length) + ' from pool...');
-        const selectedIds = new Set(selected.map(m => m.fixtureId));
-        const forcePool24 = pool.filter(m => !selectedIds.has(m.fixtureId) && new Date(m.kickoff) <= max24h);
-        const forcePool48 = pool.filter(m => !selectedIds.has(m.fixtureId) && new Date(m.kickoff) > max24h);
-        shuffle(forcePool24);
-        shuffle(forcePool48);
-        const forceCandidates = [...forcePool24, ...forcePool48];
-        for (const m of forceCandidates) {
-            if (selected.length >= PICK_COUNT) break;
-            m.contrastScore = m.contrastScore || 0;
-            m.forced = true;
-            selected.push(m);
-            console.log('   [FORCE] ' + m.match + ' | ' + m.tip + ' @ ' + m.odds);
-        }
-        if (selected.length < PICK_COUNT) {
-            console.log('WARNING: Even after force-fill, only ' + selected.length + '/' + PICK_COUNT + ' matches available.');
-        }
-        state.missedDays = 0;
-    }
-
     if (selected.length === 0) {
-        state.missedDays++;
-        saveState(state);
         writeFileSync('hot.json', JSON.stringify([], null, 2), 'utf-8');
-        console.log('No matches at all. missedDays=' + state.missedDays);
-        console.log('Written empty hot.json (' + reqCount + ' API req)');
+        console.log('No matches at all. Written empty hot.json (' + reqCount + ' API req)');
         process.exit(0);
     }
 
@@ -378,10 +330,7 @@ async function main() {
     const grouped = balanceGroups(selected);
     const output = grouped.map(m => ({ league: m.league, match: m.match, kickoff: m.kickoff, tip: m.tip, odds: m.odds, group: m.group }));
     writeFileSync('hot.json', JSON.stringify(output, null, 2), 'utf-8');
-    saveState(state);
 
-    const forcedCount = selected.filter(m => m.forced).length;
-    if (forcedCount > 0) console.log('Ticket assembled with ' + (selected.length - forcedCount) + ' strict + ' + forcedCount + ' force-filled matches.');
     console.log(output.length + ' matches -> hot.json (' + reqCount + ' API req)\n');
     const gc = Math.ceil(output.length / 2);
     for (let g = 1; g <= gc; g++) {
