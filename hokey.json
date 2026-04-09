@@ -1,14 +1,15 @@
 [
   {
-    "league": "Extraliga",
-    "match": "Karlovy Vary vs Trinec",
+    "league": "Championship",
+    "match": "Torpedo vs Kulager",
     "tip": "Over 5.5",
-    "odds": "2.55"
+    "odds": "1.83",
+    "qualified13": true
   },
   {
-    "league": "DEL",
-    "match": "Eisbaren Berlin vs Kolner",
+    "league": "Hockey Allsvenskan",
+    "match": "BIK Karlskoga vs MODO",
     "tip": "Over 5.5",
-    "odds": "1.83"
+    "odds": "2.35"
   }
 ]
