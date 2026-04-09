@@ -1,9 +1,23 @@
 [
   {
+    "league": "UEFA Europa League",
+    "match": "FC Porto - Nottingham Forest",
+    "kickoff": "2026-04-09T21:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.47"
+  },
+  {
+    "league": "Ligue 1",
+    "match": "MC Oran - MB Rouisset",
+    "kickoff": "2026-04-09T18:45:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.28"
+  },
+  {
     "league": "Second League",
     "match": "Chernomorets 1919 Burgas - Pirin Blagoevgrad",
     "kickoff": "2026-04-09T16:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.20"
+    "odds": "2.17"
   }
 ]
