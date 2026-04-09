@@ -1,5 +1,115 @@
 [
   {
+    "sport": "hockey",
+    "league": "AHL",
+    "match": "Coachella Valley Firebirds vs Henderson Silver Knights",
+    "tip": "Over 3.5",
+    "odds": "1.12",
+    "date": "2026-04-09T01:30:00+00:00",
+    "score": "1:3",
+    "result": "✓"
+  },
+  {
+    "sport": "basketball",
+    "league": "Liga Uruguaya",
+    "match": "Penarol vs Nacional",
+    "tip": "Over 165.5",
+    "odds": "1.64",
+    "date": "2026-04-09T00:30:00+00:00",
+    "score": "71:78",
+    "result": "✗"
+  },
+  {
+    "sport": "basketball",
+    "league": "NBA",
+    "match": "Orlando Magic vs Minnesota Timberwolves",
+    "tip": "Over 218.5",
+    "odds": "1.41",
+    "date": "2026-04-08T23:00:00+00:00",
+    "score": "132:120",
+    "result": "✓"
+  },
+  {
+    "sport": "basketball",
+    "league": "Superliga",
+    "match": "Diablos vs Trotamundos",
+    "tip": "Over 164.5",
+    "odds": "1.65",
+    "date": "2026-04-08T23:00:00+00:00",
+    "score": "83:90",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "National League - North",
+    "match": "Marine vs Hereford",
+    "tip": "Over 1.5",
+    "odds": "1.18",
+    "date": "2026-04-08T18:45:00+00:00",
+    "score": "0:1",
+    "result": "✗"
+  },
+  {
+    "sport": "basketball",
+    "league": "ABA League 2",
+    "match": "Siroki Brijeg vs Helios Domzale",
+    "tip": "Over 161.5",
+    "odds": "1.63",
+    "date": "2026-04-08T18:30:00+00:00",
+    "score": "92:82",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "Stars League",
+    "match": "Al Shahaniya vs Al Shamal",
+    "tip": "Over 1.5",
+    "odds": "1.18",
+    "date": "2026-04-08T15:30:00+00:00",
+    "score": "2:0",
+    "result": "✓"
+  },
+  {
+    "sport": "hockey",
+    "league": "Liiga",
+    "match": "Ilves vs KalPa",
+    "tip": "Over 3.5",
+    "odds": "1.13",
+    "date": "2026-04-08T15:30:00+00:00",
+    "score": "2:1",
+    "result": "✗"
+  },
+  {
+    "sport": "basketball",
+    "league": "Liga Nova KBM",
+    "match": "Sencur vs KK Krka Novo mesto",
+    "tip": "Over 157",
+    "odds": "1.54",
+    "date": "2026-04-08T15:00:00+00:00",
+    "score": "66:86",
+    "result": "✗"
+  },
+  {
+    "sport": "football",
+    "league": "1. Lig",
+    "match": "Iğdır FK vs Keçiörengücü",
+    "tip": "Over 1.5",
+    "odds": "1.19",
+    "date": "2026-04-08T14:00:00+00:00",
+    "score": "0:1",
+    "result": "✗"
+  },
+  {
+    "sport": "football",
+    "league": "Liga Revelação U23",
+    "match": "Rio Ave U23 vs Marítimo U23",
+    "tip": "Over 1.5",
+    "odds": "1.19",
+    "date": "2026-04-08T14:00:00+00:00",
+    "score": "3:1",
+    "result": "✓"
+  },
+  {
     "sport": "basketball",
     "league": "NBA",
     "match": "Los Angeles Lakers vs Oklahoma City Thunder",
