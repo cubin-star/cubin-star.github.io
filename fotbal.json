@@ -1,23 +1,23 @@
 [
   {
-    "League": "Pro League",
-    "Match": "Al-Fayha vs Al-Ahli Jeddah",
-    "Tip": "Over 2.5",
-    "Odds": "1.75",
-    "qualified13": true
-  },
-  {
-    "League": "2. Lig",
-    "Match": "Muğlaspor vs Karacabey Belediyespor",
+    "League": "1. Lig",
+    "Match": "İstanbulspor vs Erzurumspor FK",
     "Tip": "Over 2.5",
     "Odds": "1.84",
     "qualified10": true
   },
   {
-    "League": "2. SNL",
-    "Match": "Slovan Ljubljana vs Ilirija",
+    "League": "First League",
+    "Match": "Lokomotiv Sofia vs Beroe",
     "Tip": "Over 2.5",
-    "Odds": "1.77",
+    "Odds": "1.86",
+    "qualified13": true
+  },
+  {
+    "League": "Liga Nacional",
+    "Match": "CD Marathon vs CD Motagua",
+    "Tip": "Over 2.5",
+    "Odds": "1.84",
     "qualified15": true
   }
 ]
