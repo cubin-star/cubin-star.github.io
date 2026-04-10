@@ -1,20 +1,23 @@
 [
   {
-    "League": "Premier League",
-    "Match": "West Ham vs Wolves",
+    "League": "Tercera División RFEF - Group 13",
+    "Match": "Real Murcia II vs Cieza",
     "Tip": "Over 2.5",
-    "Odds": "1.82"
+    "Odds": "1.95",
+    "qualified15": true
   },
   {
-    "League": "Serie A",
-    "Match": "AS Roma vs Pisa",
+    "League": "National 2 - Group C",
+    "Match": "Fréjus St-Raphaël vs Limonest",
     "Tip": "Over 2.5",
-    "Odds": "1.89"
+    "Odds": "1.88",
+    "qualified15": true
   },
   {
-    "League": "Ekstraklasa",
-    "Match": "Wisla Plock vs Lechia Gdansk",
+    "League": "Primera A",
+    "Match": "Deportivo Pereira vs Once Caldas",
     "Tip": "Over 2.5",
-    "Odds": "1.81"
+    "Odds": "1.92",
+    "qualified13": true
   }
 ]
