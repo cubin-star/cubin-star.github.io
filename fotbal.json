@@ -1,23 +1,20 @@
 [
   {
-    "League": "1. Lig",
-    "Match": "İstanbulspor vs Erzurumspor FK",
+    "League": "Premier League",
+    "Match": "West Ham vs Wolves",
     "Tip": "Over 2.5",
-    "Odds": "1.84",
-    "qualified10": true
+    "Odds": "1.82"
   },
   {
-    "League": "First League",
-    "Match": "Lokomotiv Sofia vs Beroe",
+    "League": "Serie A",
+    "Match": "AS Roma vs Pisa",
     "Tip": "Over 2.5",
-    "Odds": "1.86",
-    "qualified13": true
+    "Odds": "1.89"
   },
   {
-    "League": "Liga Nacional",
-    "Match": "CD Marathon vs CD Motagua",
+    "League": "Ekstraklasa",
+    "Match": "Wisla Plock vs Lechia Gdansk",
     "Tip": "Over 2.5",
-    "Odds": "1.84",
-    "qualified15": true
+    "Odds": "1.81"
   }
 ]
