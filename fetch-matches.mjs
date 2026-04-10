@@ -26,9 +26,9 @@ const STRONG_MIN_R = 1.10;      // "výrazný" tým 110%+ baseline
 const CONTRAST_MAX_R = 0.95;    // protějšek pod 95% baseline (kontrast ≥ 15%)
 const MIN_BASELINE = 1.25;      // minimum avg per-team stat → expected ~2.5+ gólů celkem
 const MIN_ATTACK = 0.80;        // oba týmy musí střílet ≥ 0.8 g/z (žádný "mrtvý" útok)
-// 2nd-half filter: boj proti "1:0 a pak nic" scénáři
-const MIN_2ND_HALF_STRONG = 0.55; // aspoň jeden tým ≥ 0.55 g/z ve 2. poločase
-const MIN_2ND_HALF_FLOOR  = 0.30; // oba týmy ≥ 0.30 (žádný "mrtvý" 2. poločas)
+// 2nd-half filter: stejný A/B princip aplikovaný na 2. poločas
+// Používá stejné poměry (BOTH_FLOOR_R, STRONG_MIN_R, CONTRAST_MAX_R) ale na 2H data
+const MIN_2H_BASELINE     = 0.45; // minimum 2H baseline (avg scored+conceded ve 2H)
 const EXCLUDED_COUNTRIES = new Set(['Russia', 'Belarus']);
 const FALLBACK_MAX_ODDS = 2.6;
 const TZ = 'Europe/Prague';
@@ -238,32 +238,51 @@ async function main() {
                     && ((hAgn >= strongMin && aAgn < contrastMax) || (aAgn >= strongMin && hAgn < contrastMax));
 
                 if (variantA || variantB) {
-                    // 2nd-half filter
-                    const h2nd = getHalfStats(home, 'for');
-                    const a2nd = getHalfStats(away, 'for');
+                    // 2nd-half filter: stejný A/B princip na 2H data (scored + conceded)
+                    const h2f = getHalfStats(home, 'for');
+                    const a2f = getHalfStats(away, 'for');
+                    const h2a = getHalfStats(home, 'against');
+                    const a2a = getHalfStats(away, 'against');
 
-                    if (!h2nd || !a2nd) {
+                    if (!h2f || !a2f || !h2a || !a2a) {
                         console.log('   [2H-NODATA] ' + m.match + ' | no minute breakdown');
                         continue;
                     }
-                    const hAvg2 = h2nd.avgSecond;
-                    const aAvg2 = a2nd.avgSecond;
-                    const best2  = Math.max(hAvg2, aAvg2);
-                    const worst2 = Math.min(hAvg2, aAvg2);
+                    const hScr2 = h2f.avgSecond;   // domácí střílí ve 2H
+                    const aScr2 = a2f.avgSecond;   // hosté střílí ve 2H
+                    const hCon2 = h2a.avgSecond;   // domácí inkasují ve 2H
+                    const aCon2 = a2a.avgSecond;   // hosté inkasují ve 2H
 
-                    if (best2 < MIN_2ND_HALF_STRONG) {
-                        console.log('   [2H-WEAK] ' + m.match + ' | 2H: ' + hAvg2.toFixed(2) + '/' + aAvg2.toFixed(2) + ' (need one >=' + MIN_2ND_HALF_STRONG + ')');
+                    // 2H baseline (stejný koncept jako celkový baseline)
+                    const base2h = (hScr2 + aScr2 + hCon2 + aCon2) / 4;
+                    if (base2h < MIN_2H_BASELINE) {
+                        console.log('   [2H-LOW] ' + m.match + ' | 2Hbase=' + base2h.toFixed(2) + ' < ' + MIN_2H_BASELINE + ' (scr ' + hScr2.toFixed(2) + '/' + aScr2.toFixed(2) + ', con ' + hCon2.toFixed(2) + '/' + aCon2.toFixed(2) + ')');
                         continue;
                     }
-                    if (worst2 < MIN_2ND_HALF_FLOOR) {
-                        console.log('   [2H-DEAD] ' + m.match + ' | 2H: ' + hAvg2.toFixed(2) + '/' + aAvg2.toFixed(2) + ' (both need >=' + MIN_2ND_HALF_FLOOR + ')');
+
+                    // Stejné poměry jako hlavní A/B, aplikované na 2H baseline
+                    const floor2h = base2h * BOTH_FLOOR_R;
+                    const strong2h = base2h * STRONG_MIN_R;
+                    const contrast2h = base2h * CONTRAST_MAX_R;
+
+                    // 2H Varianta A: oba inkasují ve 2H >= floor + ofenzivní kontrast ve 2H
+                    const var2hA = (hCon2 >= floor2h && aCon2 >= floor2h)
+                        && ((hScr2 >= strong2h && aScr2 < contrast2h) || (aScr2 >= strong2h && hScr2 < contrast2h));
+
+                    // 2H Varianta B: oba střílí ve 2H >= floor + defenzivní kontrast ve 2H
+                    const var2hB = (hScr2 >= floor2h && aScr2 >= floor2h)
+                        && ((hCon2 >= strong2h && aCon2 < contrast2h) || (aCon2 >= strong2h && hCon2 < contrast2h));
+
+                    if (!var2hA && !var2hB) {
+                        console.log('   [2H-FAIL] ' + m.match + ' | 2H contrast fail: scr ' + hScr2.toFixed(2) + '/' + aScr2.toFixed(2) + ', con ' + hCon2.toFixed(2) + '/' + aCon2.toFixed(2) + ' (2Hbase=' + base2h.toFixed(2) + ', floor=' + floor2h.toFixed(2) + ', strong=' + strong2h.toFixed(2) + ')');
                         continue;
                     }
 
                     const tag = variantA ? 'A' : 'B';
+                    const tag2h = var2hA ? '2A' : '2B';
                     const s = variantA ? [hFor, aFor].sort((a, b) => a - b) : [hAgn, aAgn].sort((a, b) => a - b);
                     const score = s[0] > 0 ? s[1] / s[0] : 99;
-                    console.log('   [Q' + tag + '] ' + m.match + ' | scored ' + hFor.toFixed(1) + '/' + aFor.toFixed(1) + ', conceded ' + hAgn.toFixed(1) + '/' + aAgn.toFixed(1) + ' | 2H: ' + hAvg2.toFixed(2) + '/' + aAvg2.toFixed(2) + ' (base=' + baseline.toFixed(2) + ', score=' + score.toFixed(2) + ')');
+                    console.log('   [Q' + tag + '+' + tag2h + '] ' + m.match + ' | scored ' + hFor.toFixed(1) + '/' + aFor.toFixed(1) + ', conceded ' + hAgn.toFixed(1) + '/' + aAgn.toFixed(1) + ' | 2H: scr=' + hScr2.toFixed(2) + '/' + aScr2.toFixed(2) + ' con=' + hCon2.toFixed(2) + '/' + aCon2.toFixed(2) + ' (base=' + baseline.toFixed(2) + ', 2Hb=' + base2h.toFixed(2) + ', score=' + score.toFixed(2) + ')');
                     qualified.push({ ...m, contrastScore: score });
                 }
             }
