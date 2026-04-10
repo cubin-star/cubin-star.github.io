@@ -29,6 +29,7 @@ API_KEY = os.environ.get("API_BASKETBALL_KEY", "")
 BASE_URL = "https://v1.basketball.api-sports.io"
 DELAY = 0.3
 OUTPUT = "baskets.json"
+OUTPUT_LIVE = "liveb.json"
 
 EXCLUDED_COUNTRIES = {"russia", "belarus"}
 MIN_GAMES = 6
@@ -320,6 +321,8 @@ def main():
         print("No qualifying matches.")
         with open(OUTPUT, "w", encoding="utf-8") as f:
             json.dump([], f)
+        with open(OUTPUT_LIVE, "w", encoding="utf-8") as f:
+            json.dump([], f)
         return
 
     # 4. Analyze team stats
@@ -348,7 +351,14 @@ def main():
         except Exception as exc:
             print(f" ERROR: {exc}")
 
-    # 5. Best per league – keep only the top match from each league
+    # 5a. Write liveb.json – ALL qualifying matches (no dedup)
+    live_results = sorted(results, key=lambda r: r["date"])
+    live_out = [{k: v for k, v in r.items() if k != "_score"} for r in live_results]
+    with open(OUTPUT_LIVE, "w", encoding="utf-8") as f:
+        json.dump(live_out, f, indent=2, ensure_ascii=False)
+    print(f"  Live: {len(live_out)} match(es) \u2192 {OUTPUT_LIVE}")
+
+    # 5b. Best per league – keep only the top match from each league
     before = len(results)
     best_per_league = {}
     for r in results:
@@ -367,7 +377,7 @@ def main():
         json.dump(results, f, indent=2, ensure_ascii=False)
 
     print(f"\n{'='*50}")
-    print(f"  Results: {len(results)} match(es) → {OUTPUT}")
+    print(f"  Results: {len(results)} match(es) → {OUTPUT} + {OUTPUT_LIVE}")
     print(f"  API requests: {request_count} / 7500 ({request_count * 100 // 7500}%)")
 
 
