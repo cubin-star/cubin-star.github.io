@@ -1,9 +1,16 @@
 [
   {
-    "League": "-",
-    "Match": "No tips available today.",
-    "Tip": "-",
-    "Odds": "-",
-    "Date": "2026-04-10T07:30:38.162778+00:00"
+    "League": "2. Bundesliga",
+    "Match": "Karlsruher SC vs Arminia Bielefeld",
+    "Tip": "Over 2.5",
+    "Odds": "1.62",
+    "Date": "2026-04-10T16:30:00+00:00"
+  },
+  {
+    "League": "Superliga",
+    "Match": "Aarhus vs FC Nordsjaelland",
+    "Tip": "Over 2.5",
+    "Odds": "1.64",
+    "Date": "2026-04-10T17:00:00+00:00"
   }
 ]
