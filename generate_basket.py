@@ -345,15 +345,23 @@ def main():
                     "odds": c["out_odds"],
                     "date": kickoff,
                     "_score": score,
+                    "_sel_label": c["sel_label"],
+                    "_sel_odds": c["sel_odds"],
                 })
             else:
                 print(f" fail ({detail})")
         except Exception as exc:
             print(f" ERROR: {exc}")
 
-    # 5a. Write liveb.json – ALL qualifying matches (no dedup)
+    # 5a. Write liveb.json – ALL qualifying matches with PRE-MATCH SELECTION line
     live_results = sorted(results, key=lambda r: r["date"])
-    live_out = [{k: v for k, v in r.items() if k != "_score"} for r in live_results]
+    live_out = [{
+        "league": r["league"],
+        "match": r["match"],
+        "tip": r["_sel_label"],
+        "odds": r["_sel_odds"],
+        "date": r["date"],
+    } for r in live_results]
     with open(OUTPUT_LIVE, "w", encoding="utf-8") as f:
         json.dump(live_out, f, indent=2, ensure_ascii=False)
     print(f"  Live: {len(live_out)} match(es) \u2192 {OUTPUT_LIVE}")
@@ -368,6 +376,8 @@ def main():
     results = list(best_per_league.values())
     for r in results:
         r.pop("_score", None)
+        r.pop("_sel_label", None)
+        r.pop("_sel_odds", None)
     if before > len(results):
         print(f"\n  Dedup: {before} → {len(results)} (best per league)")
 
