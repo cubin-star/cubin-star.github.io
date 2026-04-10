@@ -1,16 +1,16 @@
 [
   {
-    "league": "Alps Hockey League",
-    "match": "KHL Sisak vs Merano",
+    "league": "DEL",
+    "match": "Kolner vs Eisbaren Berlin",
     "tip": "Over 3.5",
-    "odds": "1.12",
-    "date": "2026-04-09T17:30:00+00:00"
+    "odds": "1.13",
+    "date": "2026-04-10T17:30:00+00:00"
   },
   {
-    "league": "NHL",
-    "match": "Colorado Avalanche vs Calgary Flames",
+    "league": "AHL",
+    "match": "Laval Rocket vs Belleville Senators",
     "tip": "Over 3.5",
-    "odds": "1.09",
-    "date": "2026-04-10T01:00:00+00:00"
+    "odds": "1.14",
+    "date": "2026-04-10T23:00:00+00:00"
   }
 ]
