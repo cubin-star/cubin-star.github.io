@@ -130,14 +130,12 @@ function generatePairings(indices) {
 async function main() {
     console.log('Kombik Bot - fetch-matches\n');
     const now = new Date();
-    const max16h = new Date(now.getTime() + 16 * 60 * 60 * 1000);
     const max24h = new Date(now.getTime() + 24 * 60 * 60 * 1000);
-    const max48h = new Date(now.getTime() + 48 * 60 * 60 * 1000);
-    console.log('Window: ' + now.toUTCString() + ' -> ' + max48h.toUTCString() + ' (48h)\n');
+    console.log('Window: ' + now.toUTCString() + ' -> ' + max24h.toUTCString() + ' (24h)\n');
 
-    // Collect dates covering the 48h window
+    // Collect dates covering the 24h window
     const dates = new Set();
-    for (let d = new Date(now); d <= max48h; d = new Date(d.getTime() + 24 * 60 * 60 * 1000)) {
+    for (let d = new Date(now); d <= max24h; d = new Date(d.getTime() + 24 * 60 * 60 * 1000)) {
         dates.add(fmtDate(d));
     }
     let fixtures = [];
@@ -148,10 +146,10 @@ async function main() {
     fixtures = fixtures.filter(f => {
         const t = new Date(f.fixture.date);
         const c = f.league.country;
-        return t >= now && t <= max48h
+        return t >= now && t <= max24h
             && !EXCLUDED_COUNTRIES.has(c);
     });
-    console.log('   ' + fixtures.length + ' in 48h window (excl. RU/BY)');
+    console.log('   ' + fixtures.length + ' in 24h window (excl. RU/BY)');
 
     // Map fixtures and leagues
     const fixtureMap = new Map(), leagueMap = new Map();
@@ -319,10 +317,10 @@ async function main() {
 
     const fullAccumulator = deduped.length >= PICK_COUNT;
 
-    // Pick strict matches from 16h window only
+    // Pick strict matches from 24h window
     const numGroups = Math.ceil(PICK_COUNT / 2);
-    const within16h = deduped.filter(m => new Date(m.kickoff) <= max16h);
-    console.log('Strict in 16h window: ' + within16h.length);
+    const within24h = deduped.filter(m => new Date(m.kickoff) <= max24h);
+    console.log('Strict in 24h window: ' + within24h.length);
 
     function pickFrom(arr, lc, limit) {
         const picked = [];
@@ -340,19 +338,15 @@ async function main() {
 
     const lc = new Map();
     lc._total = 0;
-    let selected = pickFrom(within16h, lc, PICK_COUNT);
-    console.log('Selected ' + selected.length + ' strict matches from 16h window');
+    let selected = pickFrom(within24h, lc, PICK_COUNT);
+    console.log('Selected ' + selected.length + ' strict matches from 24h window');
 
     // Fallback: fill remaining with random picks from pool (odds 2.1-2.6)
     if (selected.length < PICK_COUNT) {
         const selectedIds = new Set(selected.map(m => m.fixtureId));
-        // Prefer 16h, then expand to 24h
-        const fb16 = pool.filter(m => !selectedIds.has(m.fixtureId) && new Date(m.kickoff) <= max16h && parseFloat(m.odds) <= FALLBACK_MAX_ODDS);
-        const fb24 = pool.filter(m => !selectedIds.has(m.fixtureId) && new Date(m.kickoff) > max16h && new Date(m.kickoff) <= max24h && parseFloat(m.odds) <= FALLBACK_MAX_ODDS);
-        shuffle(fb16);
-        shuffle(fb24);
-        const fallback = [...fb16, ...fb24];
-        console.log('Fallback pool: ' + fb16.length + ' (16h) + ' + fb24.length + ' (16-24h), odds ≤' + FALLBACK_MAX_ODDS);
+        const fallback = pool.filter(m => !selectedIds.has(m.fixtureId) && new Date(m.kickoff) <= max24h && parseFloat(m.odds) <= FALLBACK_MAX_ODDS);
+        shuffle(fallback);
+        console.log('Fallback pool: ' + fallback.length + ' (24h), odds ≤' + FALLBACK_MAX_ODDS);
         for (const m of fallback) {
             if (selected.length >= PICK_COUNT) break;
             m.contrastScore = m.contrastScore || 0;
