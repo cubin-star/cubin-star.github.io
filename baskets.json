@@ -1,12 +1,5 @@
 [
   {
-    "league": "Liga Leumit",
-    "match": "Maccabi Kiryat Gat vs Elitzur Ashkelon",
-    "tip": "Over 164.5",
-    "odds": "1.63",
-    "date": "2026-04-10T10:30:00+00:00"
-  },
-  {
     "league": "Extraliga",
     "match": "Levice vs Spisski Rytieri",
     "tip": "Over 166.5",
@@ -14,24 +7,24 @@
     "date": "2026-04-10T17:00:00+00:00"
   },
   {
-    "league": "Pro B",
-    "match": "Chalons-Reims vs Antibes",
-    "tip": "Over 158.5",
-    "odds": "1.60",
-    "date": "2026-04-10T18:00:00+00:00"
-  },
-  {
     "league": "Euroleague",
     "match": "Partizan Mozzart Bet vs Zalgiris Kaunas",
     "tip": "Over 158.5",
-    "odds": "1.37",
+    "odds": "1.40",
     "date": "2026-04-10T18:30:00+00:00"
   },
   {
+    "league": "Premier league",
+    "match": "Stjarnan vs KR Basket",
+    "tip": "Over 190",
+    "odds": "1.57",
+    "date": "2026-04-10T19:30:00+00:00"
+  },
+  {
     "league": "NBA",
-    "match": "New York Knicks vs Toronto Raptors",
+    "match": "Los Angeles Lakers vs Phoenix Suns",
     "tip": "Over 211.5",
-    "odds": "1.41",
-    "date": "2026-04-10T23:30:00+00:00"
+    "odds": "1.40",
+    "date": "2026-04-11T02:30:00+00:00"
   }
 ]

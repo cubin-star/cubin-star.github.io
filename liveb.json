@@ -1,1 +1,51 @@
-[]
+[
+  {
+    "league": "Extraliga",
+    "match": "Levice vs Spisski Rytieri",
+    "tip": "Over 166.5",
+    "odds": "1.58",
+    "date": "2026-04-10T17:00:00+00:00"
+  },
+  {
+    "league": "Euroleague",
+    "match": "Partizan Mozzart Bet vs Zalgiris Kaunas",
+    "tip": "Over 158.5",
+    "odds": "1.40",
+    "date": "2026-04-10T18:30:00+00:00"
+  },
+  {
+    "league": "Premier league",
+    "match": "Stjarnan vs KR Basket",
+    "tip": "Over 190",
+    "odds": "1.57",
+    "date": "2026-04-10T19:30:00+00:00"
+  },
+  {
+    "league": "NBA",
+    "match": "New York Knicks vs Toronto Raptors",
+    "tip": "Over 211.5",
+    "odds": "1.39",
+    "date": "2026-04-10T23:30:00+00:00"
+  },
+  {
+    "league": "NBA",
+    "match": "Houston Rockets vs Minnesota Timberwolves",
+    "tip": "Over 211.5",
+    "odds": "1.38",
+    "date": "2026-04-11T01:30:00+00:00"
+  },
+  {
+    "league": "NBA",
+    "match": "Portland Trail Blazers vs Los Angeles Clippers",
+    "tip": "Over 216.5",
+    "odds": "1.39",
+    "date": "2026-04-11T02:00:00+00:00"
+  },
+  {
+    "league": "NBA",
+    "match": "Los Angeles Lakers vs Phoenix Suns",
+    "tip": "Over 211.5",
+    "odds": "1.40",
+    "date": "2026-04-11T02:30:00+00:00"
+  }
+]
