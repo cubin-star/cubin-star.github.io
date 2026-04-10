@@ -1,15 +1,16 @@
 [
   {
-    "league": "Championship",
-    "match": "Torpedo vs Kulager",
+    "league": "Extraliga",
+    "match": "HC 19 Humenne vs Presov",
     "tip": "Over 5.5",
-    "odds": "1.83",
-    "qualified13": true
+    "odds": "4.2",
+    "qualified15": true
   },
   {
-    "league": "Hockey Allsvenskan",
-    "match": "BIK Karlskoga vs MODO",
+    "league": "DEL",
+    "match": "Kolner vs Eisbaren Berlin",
     "tip": "Over 5.5",
-    "odds": "2.35"
+    "odds": "1.8",
+    "qualified13": true
   }
 ]
