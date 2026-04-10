@@ -57,6 +57,9 @@ STRONG_MIN_R = 1.10      # "výrazný" tým 110%+ baseline
 CONTRAST_MAX_R = 0.95    # protějšek pod 95% baseline (kontrast ≥ 15%)
 MIN_BASELINE = 1.25      # minimum avg per-team stat → expected ~2.5+ gólů celkem
 MIN_ATTACK = 0.80        # oba týmy musí střílet ≥ 0.8 g/z (žádný "mrtvý" útok)
+# 2nd-half filter: boj proti "1:0 a pak nic" scénáři
+MIN_2ND_HALF_STRONG = 0.55  # aspoň jeden tým ≥ 0.55 g/z ve 2. poločase
+MIN_2ND_HALF_FLOOR  = 0.30  # oba týmy ≥ 0.30 (žádný "mrtvý" 2. poločas)
 
 request_count = 0
 
@@ -152,6 +155,19 @@ def _sf(val, default=0.0):
         return default
 
 
+def get_half_stats(team_data, side):
+    """Extract 1st/2nd half goal averages from minute breakdown."""
+    minute = team_data.get("league", {}).get("goals", {}).get(side, {}).get("minute", {})
+    played = int(_sf(team_data.get("league", {}).get("fixtures", {}).get("played", {}).get("total", 0)))
+    if not minute or played == 0:
+        return None
+    val = lambda k: int(_sf(minute.get(k, {}).get("total", 0)))
+    first_half = val("0-15") + val("16-30") + val("31-45")
+    second_half = val("46-60") + val("61-75") + val("76-90")
+    return {"first": first_half, "second": second_half,
+            "avg_first": first_half / played, "avg_second": second_half / played, "played": played}
+
+
 def meets_criteria(pred):
     """
     League-relative football criteria (home/away split).
@@ -208,6 +224,23 @@ def meets_criteria(pred):
     )
 
     if variant_a or variant_b:
+        # 2nd-half filter
+        h2nd = get_half_stats(home, "for")
+        a2nd = get_half_stats(away, "for")
+
+        if not h2nd or not a2nd:
+            return False, "no minute breakdown", 0.0
+
+        h_avg2 = h2nd["avg_second"]
+        a_avg2 = a2nd["avg_second"]
+        best2 = max(h_avg2, a_avg2)
+        worst2 = min(h_avg2, a_avg2)
+
+        if best2 < MIN_2ND_HALF_STRONG:
+            return False, f"2H weak: {h_avg2:.2f}/{a_avg2:.2f} (need one >={MIN_2ND_HALF_STRONG})", 0.0
+        if worst2 < MIN_2ND_HALF_FLOOR:
+            return False, f"2H dead: {h_avg2:.2f}/{a_avg2:.2f} (both need >={MIN_2ND_HALF_FLOOR})", 0.0
+
         tag = "A" if variant_a else "B"
         if variant_a:
             s = sorted([h_for, a_for])
@@ -215,6 +248,7 @@ def meets_criteria(pred):
             s = sorted([h_agn, a_agn])
         score = s[1] / s[0] if s[0] > 0 else 99.0
         detail = (f"[{tag}] scored {h_for:.1f}/{a_for:.1f}, conceded {h_agn:.1f}/{a_agn:.1f} "
+                  f"| 2H: {h_avg2:.2f}/{a_avg2:.2f} "
                   f"(base={baseline:.2f}, score={score:.2f})")
         return True, detail, score
 
