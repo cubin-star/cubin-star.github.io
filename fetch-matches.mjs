@@ -26,6 +26,9 @@ const STRONG_MIN_R = 1.10;      // "výrazný" tým 110%+ baseline
 const CONTRAST_MAX_R = 0.95;    // protějšek pod 95% baseline (kontrast ≥ 15%)
 const MIN_BASELINE = 1.25;      // minimum avg per-team stat → expected ~2.5+ gólů celkem
 const MIN_ATTACK = 0.80;        // oba týmy musí střílet ≥ 0.8 g/z (žádný "mrtvý" útok)
+// 2nd-half filter: boj proti "1:0 a pak nic" scénáři
+const MIN_2ND_HALF_STRONG = 0.55; // aspoň jeden tým ≥ 0.55 g/z ve 2. poločase
+const MIN_2ND_HALF_FLOOR  = 0.30; // oba týmy ≥ 0.30 (žádný "mrtvý" 2. poločas)
 const EXCLUDED_COUNTRIES = new Set(['Russia', 'Belarus']);
 const FALLBACK_MAX_ODDS = 2.6;
 const TZ = 'Europe/Prague';
@@ -34,6 +37,16 @@ let reqCount = 0;
 function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 function shuffle(arr) { for (let i = arr.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [arr[i], arr[j]] = [arr[j], arr[i]]; } return arr; }
 function fmtDate(d) { return d.toISOString().split('T')[0]; }
+
+function getHalfStats(teamData, side) {
+    const minute = teamData?.league?.goals?.[side]?.minute;
+    const played = parseInt(teamData?.league?.fixtures?.played?.total) || 0;
+    if (!minute || played === 0) return null;
+    const val = (k) => parseInt(minute[k]?.total) || 0;
+    const firstHalf  = val('0-15') + val('16-30') + val('31-45');
+    const secondHalf = val('46-60') + val('61-75') + val('76-90');
+    return { first: firstHalf, second: secondHalf, avgFirst: firstHalf / played, avgSecond: secondHalf / played, played };
+}
 
 async function apiFetch(path) {
     const url = FOOTBALL_API + path;
@@ -225,10 +238,32 @@ async function main() {
                     && ((hAgn >= strongMin && aAgn < contrastMax) || (aAgn >= strongMin && hAgn < contrastMax));
 
                 if (variantA || variantB) {
+                    // 2nd-half filter
+                    const h2nd = getHalfStats(home, 'for');
+                    const a2nd = getHalfStats(away, 'for');
+
+                    if (!h2nd || !a2nd) {
+                        console.log('   [2H-NODATA] ' + m.match + ' | no minute breakdown');
+                        continue;
+                    }
+                    const hAvg2 = h2nd.avgSecond;
+                    const aAvg2 = a2nd.avgSecond;
+                    const best2  = Math.max(hAvg2, aAvg2);
+                    const worst2 = Math.min(hAvg2, aAvg2);
+
+                    if (best2 < MIN_2ND_HALF_STRONG) {
+                        console.log('   [2H-WEAK] ' + m.match + ' | 2H: ' + hAvg2.toFixed(2) + '/' + aAvg2.toFixed(2) + ' (need one >=' + MIN_2ND_HALF_STRONG + ')');
+                        continue;
+                    }
+                    if (worst2 < MIN_2ND_HALF_FLOOR) {
+                        console.log('   [2H-DEAD] ' + m.match + ' | 2H: ' + hAvg2.toFixed(2) + '/' + aAvg2.toFixed(2) + ' (both need >=' + MIN_2ND_HALF_FLOOR + ')');
+                        continue;
+                    }
+
                     const tag = variantA ? 'A' : 'B';
                     const s = variantA ? [hFor, aFor].sort((a, b) => a - b) : [hAgn, aAgn].sort((a, b) => a - b);
                     const score = s[0] > 0 ? s[1] / s[0] : 99;
-                    console.log('   [Q' + tag + '] ' + m.match + ' | scored ' + hFor.toFixed(1) + '/' + aFor.toFixed(1) + ', conceded ' + hAgn.toFixed(1) + '/' + aAgn.toFixed(1) + ' (base=' + baseline.toFixed(2) + ', score=' + score.toFixed(2) + ')');
+                    console.log('   [Q' + tag + '] ' + m.match + ' | scored ' + hFor.toFixed(1) + '/' + aFor.toFixed(1) + ', conceded ' + hAgn.toFixed(1) + '/' + aAgn.toFixed(1) + ' | 2H: ' + hAvg2.toFixed(2) + '/' + aAvg2.toFixed(2) + ' (base=' + baseline.toFixed(2) + ', score=' + score.toFixed(2) + ')');
                     qualified.push({ ...m, contrastScore: score });
                 }
             }
