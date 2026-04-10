@@ -57,9 +57,9 @@ STRONG_MIN_R = 1.10      # "výrazný" tým 110%+ baseline
 CONTRAST_MAX_R = 0.95    # protějšek pod 95% baseline (kontrast ≥ 15%)
 MIN_BASELINE = 1.25      # minimum avg per-team stat → expected ~2.5+ gólů celkem
 MIN_ATTACK = 0.80        # oba týmy musí střílet ≥ 0.8 g/z (žádný "mrtvý" útok)
-# 2nd-half filter: boj proti "1:0 a pak nic" scénáři
-MIN_2ND_HALF_STRONG = 0.55  # aspoň jeden tým ≥ 0.55 g/z ve 2. poločase
-MIN_2ND_HALF_FLOOR  = 0.30  # oba týmy ≥ 0.30 (žádný "mrtvý" 2. poločas)
+# 2nd-half filter: stejný A/B princip aplikovaný na 2. poločas
+# Používá stejné poměry (BOTH_FLOOR_R, STRONG_MIN_R, CONTRAST_MAX_R) ale na 2H data
+MIN_2H_BASELINE = 0.45     # minimum 2H baseline (avg scored+conceded ve 2H)
 
 request_count = 0
 
@@ -224,32 +224,61 @@ def meets_criteria(pred):
     )
 
     if variant_a or variant_b:
-        # 2nd-half filter
-        h2nd = get_half_stats(home, "for")
-        a2nd = get_half_stats(away, "for")
+        # 2nd-half filter: stejný A/B princip na 2H data (scored + conceded)
+        h2f = get_half_stats(home, "for")
+        a2f = get_half_stats(away, "for")
+        h2a = get_half_stats(home, "against")
+        a2a = get_half_stats(away, "against")
 
-        if not h2nd or not a2nd:
+        if not h2f or not a2f or not h2a or not a2a:
             return False, "no minute breakdown", 0.0
 
-        h_avg2 = h2nd["avg_second"]
-        a_avg2 = a2nd["avg_second"]
-        best2 = max(h_avg2, a_avg2)
-        worst2 = min(h_avg2, a_avg2)
+        h_scr_2h = h2f["avg_second"]   # domácí střílí ve 2H
+        a_scr_2h = a2f["avg_second"]   # hosté střílí ve 2H
+        h_con_2h = h2a["avg_second"]   # domácí inkasují ve 2H
+        a_con_2h = a2a["avg_second"]   # hosté inkasují ve 2H
 
-        if best2 < MIN_2ND_HALF_STRONG:
-            return False, f"2H weak: {h_avg2:.2f}/{a_avg2:.2f} (need one >={MIN_2ND_HALF_STRONG})", 0.0
-        if worst2 < MIN_2ND_HALF_FLOOR:
-            return False, f"2H dead: {h_avg2:.2f}/{a_avg2:.2f} (both need >={MIN_2ND_HALF_FLOOR})", 0.0
+        # 2H baseline (stejný koncept jako celkový baseline)
+        base_2h = (h_scr_2h + a_scr_2h + h_con_2h + a_con_2h) / 4
+        if base_2h < MIN_2H_BASELINE:
+            return False, (f"2H low base: {base_2h:.2f} < {MIN_2H_BASELINE} "
+                           f"(scr {h_scr_2h:.2f}/{a_scr_2h:.2f}, con {h_con_2h:.2f}/{a_con_2h:.2f})"), 0.0
+
+        # Stejné poměry jako hlavní A/B, aplikované na 2H baseline
+        floor_2h = base_2h * BOTH_FLOOR_R
+        strong_2h = base_2h * STRONG_MIN_R
+        contrast_2h = base_2h * CONTRAST_MAX_R
+
+        # 2H Varianta A: oba inkasují ve 2H >= floor + ofenzivní kontrast ve 2H
+        var_2h_a = (
+            h_con_2h >= floor_2h and a_con_2h >= floor_2h
+            and ((h_scr_2h >= strong_2h and a_scr_2h < contrast_2h)
+                 or (a_scr_2h >= strong_2h and h_scr_2h < contrast_2h))
+        )
+
+        # 2H Varianta B: oba střílí ve 2H >= floor + defenzivní kontrast ve 2H
+        var_2h_b = (
+            h_scr_2h >= floor_2h and a_scr_2h >= floor_2h
+            and ((h_con_2h >= strong_2h and a_con_2h < contrast_2h)
+                 or (a_con_2h >= strong_2h and h_con_2h < contrast_2h))
+        )
+
+        if not (var_2h_a or var_2h_b):
+            tag_2h = "2H-A" if not var_2h_a else "2H-B"
+            return False, (f"2H contrast fail: scr {h_scr_2h:.2f}/{a_scr_2h:.2f}, "
+                           f"con {h_con_2h:.2f}/{a_con_2h:.2f} "
+                           f"(2Hbase={base_2h:.2f}, floor={floor_2h:.2f}, strong={strong_2h:.2f})"), 0.0
 
         tag = "A" if variant_a else "B"
+        tag_2h = "2A" if var_2h_a else "2B"
         if variant_a:
             s = sorted([h_for, a_for])
         else:
             s = sorted([h_agn, a_agn])
         score = s[1] / s[0] if s[0] > 0 else 99.0
-        detail = (f"[{tag}] scored {h_for:.1f}/{a_for:.1f}, conceded {h_agn:.1f}/{a_agn:.1f} "
-                  f"| 2H: {h_avg2:.2f}/{a_avg2:.2f} "
-                  f"(base={baseline:.2f}, score={score:.2f})")
+        detail = (f"[{tag}+{tag_2h}] scored {h_for:.1f}/{a_for:.1f}, conceded {h_agn:.1f}/{a_agn:.1f} "
+                  f"| 2H: scr={h_scr_2h:.2f}/{a_scr_2h:.2f} con={h_con_2h:.2f}/{a_con_2h:.2f} "
+                  f"(base={baseline:.2f}, 2Hb={base_2h:.2f}, score={score:.2f})")
         return True, detail, score
 
     return False, f"stats fail: scored {h_for:.1f}/{a_for:.1f}, conceded {h_agn:.1f}/{a_agn:.1f} (base={baseline:.2f})", 0.0
