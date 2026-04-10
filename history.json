@@ -1,6 +1,66 @@
 [
   {
     "sport": "hockey",
+    "league": "NHL",
+    "match": "Colorado Avalanche vs Calgary Flames",
+    "tip": "Over 3.5",
+    "odds": "1.09",
+    "date": "2026-04-10T01:00:00+00:00",
+    "score": "3:1",
+    "result": "✓"
+  },
+  {
+    "sport": "basketball",
+    "league": "NBA",
+    "match": "New York Knicks vs Boston Celtics",
+    "tip": "Over 208.5",
+    "odds": "1.40",
+    "date": "2026-04-09T23:30:00+00:00",
+    "score": "112:106",
+    "result": "✓"
+  },
+  {
+    "sport": "basketball",
+    "league": "Superliga",
+    "match": "Heroes de Falcon vs Brillantes",
+    "tip": "Over 161.5",
+    "odds": "1.60",
+    "date": "2026-04-09T23:00:00+00:00",
+    "score": "99:83",
+    "result": "✓"
+  },
+  {
+    "sport": "hockey",
+    "league": "Alps Hockey League",
+    "match": "KHL Sisak vs Merano",
+    "tip": "Over 3.5",
+    "odds": "1.12",
+    "date": "2026-04-09T17:30:00+00:00",
+    "score": "2:3",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "League",
+    "match": "Al Buqa'a vs Al Wihdat",
+    "tip": "Over 1.5",
+    "odds": "1.20",
+    "date": "2026-04-09T16:30:00+00:00",
+    "score": "1:5",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "Pro League",
+    "match": "Damac vs Al-Qadisiyah FC",
+    "tip": "Over 1.5",
+    "odds": "1.17",
+    "date": "2026-04-09T16:00:00+00:00",
+    "score": "1:1",
+    "result": "✓"
+  },
+  {
+    "sport": "hockey",
     "league": "AHL",
     "match": "Coachella Valley Firebirds vs Henderson Silver Knights",
     "tip": "Over 3.5",
