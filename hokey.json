@@ -1,16 +1,14 @@
 [
   {
-    "league": "Extraliga",
-    "match": "HC 19 Humenne vs Presov",
+    "league": "AHL",
+    "match": "Wilkes-Barre/Scranton vs Cleveland Monsters",
     "tip": "Over 5.5",
-    "odds": "4.2",
-    "qualified15": true
+    "odds": "1.79"
   },
   {
-    "league": "DEL",
-    "match": "Kolner vs Eisbaren Berlin",
+    "league": "Extraliga",
+    "match": "Trinec vs Karlovy Vary",
     "tip": "Over 5.5",
-    "odds": "1.8",
-    "qualified13": true
+    "odds": "2.58"
   }
 ]
