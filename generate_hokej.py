@@ -653,6 +653,7 @@ def main():
                 "odds": c["out_odds"],
                 "date": kickoff,
                 "_score": score,
+                "_league_id": c["league_id"],
                 "_sel_label": c["sel_label"],
                 "_sel_odds": c["sel_odds"],
             })
@@ -673,15 +674,17 @@ def main():
     print(f"  Live: {len(live_out)} match(es) → {OUTPUT_LIVE}")
 
     # 5b. Best per league – keep only the top match from each league
+    # Use league_id (not name) as key – e.g. Czech & Slovak "Extraliga" are different
     before = len(results)
     best_per_league = {}
     for r in results:
-        lg = r["league"]
-        if lg not in best_per_league or r["_score"] > best_per_league[lg]["_score"]:
-            best_per_league[lg] = r
+        lg_id = r["_league_id"]
+        if lg_id not in best_per_league or r["_score"] > best_per_league[lg_id]["_score"]:
+            best_per_league[lg_id] = r
     results = list(best_per_league.values())
     for r in results:
         r.pop("_score", None)
+        r.pop("_league_id", None)
         r.pop("_sel_label", None)
         r.pop("_sel_odds", None)
     if before > len(results):
