@@ -1,5 +1,85 @@
 [
   {
+    "sport": "basketball",
+    "league": "NBA",
+    "match": "Los Angeles Lakers vs Phoenix Suns",
+    "tip": "Over 211.5",
+    "odds": "1.40",
+    "date": "2026-04-11T02:30:00+00:00",
+    "score": "101:73",
+    "result": "✗"
+  },
+  {
+    "sport": "hockey",
+    "league": "AHL",
+    "match": "Laval Rocket vs Belleville Senators",
+    "tip": "Over 3.5",
+    "odds": "1.14",
+    "date": "2026-04-10T23:00:00+00:00",
+    "score": "6:7",
+    "result": "✓"
+  },
+  {
+    "sport": "basketball",
+    "league": "Premier league",
+    "match": "Stjarnan vs KR Basket",
+    "tip": "Over 190",
+    "odds": "1.56",
+    "date": "2026-04-10T19:30:00+00:00",
+    "score": "104:80",
+    "result": "✗"
+  },
+  {
+    "sport": "basketball",
+    "league": "Euroleague",
+    "match": "Partizan Mozzart Bet vs Zalgiris Kaunas",
+    "tip": "Over 158.5",
+    "odds": "1.37",
+    "date": "2026-04-10T18:30:00+00:00",
+    "score": "74:83",
+    "result": "✗"
+  },
+  {
+    "sport": "hockey",
+    "league": "DEL",
+    "match": "Kolner vs Eisbaren Berlin",
+    "tip": "Over 3.5",
+    "odds": "1.12",
+    "date": "2026-04-10T17:30:00+00:00",
+    "score": "5:1",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "Superliga",
+    "match": "Aarhus vs FC Nordsjaelland",
+    "tip": "Over 1.5",
+    "odds": "1.17",
+    "date": "2026-04-10T17:00:00+00:00",
+    "score": "1:1",
+    "result": "✓"
+  },
+  {
+    "sport": "basketball",
+    "league": "Extraliga",
+    "match": "Levice vs Spisski Rytieri",
+    "tip": "Over 166.5",
+    "odds": "1.50",
+    "date": "2026-04-10T17:00:00+00:00",
+    "score": "105:82",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "2. Bundesliga",
+    "match": "Karlsruher SC vs Arminia Bielefeld",
+    "tip": "Over 1.5",
+    "odds": "1.17",
+    "date": "2026-04-10T16:30:00+00:00",
+    "score": "4:1",
+    "result": "✓"
+  },
+  {
     "sport": "hockey",
     "league": "NHL",
     "match": "Colorado Avalanche vs Calgary Flames",
