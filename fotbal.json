@@ -1,16 +1,9 @@
 [
   {
     "League": "NB II",
-    "Match": "Csakvar vs Karcag SE",
+    "Match": "Budafoki LC vs Mezokovesd-zsory",
     "Tip": "Over 2.5",
-    "Odds": "1.84",
-    "qualified": true
-  },
-  {
-    "League": "Premier League",
-    "Match": "Brentford vs Everton",
-    "Tip": "Over 2.5",
-    "Odds": "1.96",
+    "Odds": "1.87",
     "qualified": true
   },
   {
@@ -18,6 +11,13 @@
     "Match": "Ilkeston Town vs Bamber Bridge",
     "Tip": "Over 2.5",
     "Odds": "1.85",
+    "qualified": true
+  },
+  {
+    "League": "Premier League",
+    "Match": "Brentford vs Everton",
+    "Tip": "Over 2.5",
+    "Odds": "1.96",
     "qualified": true
   }
 ]

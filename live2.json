@@ -1,1 +1,65 @@
-[]
+[
+  {
+    "League": "Non League Premier - Northern",
+    "Match": "Ilkeston Town vs Bamber Bridge",
+    "Tip": "Over 2.5",
+    "Odds": "1.85",
+    "qualified": true
+  },
+  {
+    "League": "NB II",
+    "Match": "Csakvar vs Karcag SE",
+    "Tip": "Over 2.5",
+    "Odds": "1.83"
+  },
+  {
+    "League": "2. liga",
+    "Match": "Malženice vs Považská Bystrica",
+    "Tip": "Over 2.5",
+    "Odds": "1.80"
+  },
+  {
+    "League": "Serie A",
+    "Match": "Remo vs Vasco DA Gama",
+    "Tip": "Over 2.5",
+    "Odds": "1.97"
+  },
+  {
+    "League": "Serie A",
+    "Match": "Remo vs Vasco DA Gama",
+    "Tip": "Over 2.5",
+    "Odds": "1.97"
+  },
+  {
+    "League": "Premyer Liqa",
+    "Match": "Neftchi Baku vs Araz",
+    "Tip": "Over 2.5",
+    "Odds": "1.80"
+  },
+  {
+    "League": "NB II",
+    "Match": "Kecskeméti TE vs Bekescsaba 1912",
+    "Tip": "Over 2.5",
+    "Odds": "1.84"
+  },
+  {
+    "League": "Premier League",
+    "Match": "Brentford vs Everton",
+    "Tip": "Over 2.5",
+    "Odds": "1.96",
+    "qualified": true
+  },
+  {
+    "League": "Liga 3",
+    "Match": "Varzim vs Mafra",
+    "Tip": "Over 2.5",
+    "Odds": "2.00"
+  },
+  {
+    "League": "NB II",
+    "Match": "Budafoki LC vs Mezokovesd-zsory",
+    "Tip": "Over 2.5",
+    "Odds": "1.87",
+    "qualified": true
+  }
+]
