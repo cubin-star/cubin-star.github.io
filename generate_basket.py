@@ -19,6 +19,7 @@ SETUP:
 """
 
 import json
+import math
 import os
 import time
 import urllib.request
@@ -44,6 +45,15 @@ BOTH_FLOOR_R = 0.95       # oba týmy musí střílet alespoň 95% half-line na 
 MIN_HALF_LINE = 80        # minimální half_line – filtruje nízko-skórující ligy (80 = 160 bodů celkem)
 EXPECTED_MIN_R = 1.02     # matchup expected (venue splits) musí překročit line o 2%
 OFFENSE_VS_LEAGUE_R = 0.93  # offense obou týmů (venue) musí být >= 93% celkového průměru ligy
+
+# Enhanced criteria – recent form, H2H, consistency, rest
+RECENT_N = 10               # rolling window: last N finished games
+RECENT_FLOOR_R = 0.93       # rolling avg total of last N games >= 93% of selection_line
+MIN_OVER_HIT_RATE = 0.55    # >= 55% of last N games had total >= safe_line (each team)
+MAX_TOTAL_SD = 22.0         # max std dev of game totals – prefer consistent high-scoring
+H2H_MIN_GAMES = 2           # min H2H finished games to apply H2H filter
+H2H_OVER_R = 0.95           # H2H avg total >= 95% of selection_line
+MIN_REST_HOURS = 36          # min hours since last game (36h filters back-to-back)
 
 request_count = 0
 
@@ -114,6 +124,64 @@ def fetch_team_stats(league_id, season, team_id):
         "team": str(team_id),
     })
     return data.get("response")
+
+
+def fetch_team_games(team_id, league_id, season):
+    """Fetch all finished games for a team in given league+season."""
+    time.sleep(DELAY)
+    data = api_get("games", {
+        "team": str(team_id),
+        "league": str(league_id),
+        "season": str(season),
+    })
+    finished = []
+    for g in data.get("response", []):
+        status = g.get("status", {}).get("short", "")
+        if status not in ("FT", "AOT"):
+            continue
+        scores = g.get("scores", {})
+        h_total = scores.get("home", {}).get("total")
+        a_total = scores.get("away", {}).get("total")
+        if h_total is None or a_total is None:
+            continue
+        try:
+            finished.append({
+                "timestamp": g.get("timestamp", 0),
+                "home_id": g.get("teams", {}).get("home", {}).get("id", 0),
+                "away_id": g.get("teams", {}).get("away", {}).get("id", 0),
+                "home_total": int(h_total),
+                "away_total": int(a_total),
+                "total": int(h_total) + int(a_total),
+            })
+        except (ValueError, TypeError):
+            pass
+    finished.sort(key=lambda x: x["timestamp"], reverse=True)
+    return finished
+
+
+def fetch_h2h(home_id, away_id):
+    """Fetch head-to-head history between two teams."""
+    time.sleep(DELAY)
+    data = api_get("games", {"h2h": f"{home_id}-{away_id}"})
+    results = []
+    for g in data.get("response", []):
+        status = g.get("status", {}).get("short", "")
+        if status not in ("FT", "AOT"):
+            continue
+        scores = g.get("scores", {})
+        h_total = scores.get("home", {}).get("total")
+        a_total = scores.get("away", {}).get("total")
+        if h_total is None or a_total is None:
+            continue
+        try:
+            results.append({
+                "timestamp": g.get("timestamp", 0),
+                "total": int(h_total) + int(a_total),
+            })
+        except (ValueError, TypeError):
+            pass
+    results.sort(key=lambda x: x["timestamp"], reverse=True)
+    return results
 
 
 # ===== ODDS PARSING =====
@@ -246,6 +314,111 @@ def meets_criteria(home_stats, away_stats, selection_line):
     return True, detail, score
 
 
+def analyze_recent_form(games, team_id, n=RECENT_N):
+    """Analyze last N finished games for a team.
+    Returns dict with avg_total, totals, std_dev, last_game_ts, n_games.
+    Returns None if insufficient data."""
+    if not games:
+        return None
+    last_n = games[:n]
+    if len(last_n) < MIN_GAMES:
+        return None
+
+    totals = [g["total"] for g in last_n]
+    team_points = []
+    for g in last_n:
+        if g["home_id"] == team_id:
+            team_points.append(g["home_total"])
+        else:
+            team_points.append(g["away_total"])
+
+    avg_total = sum(totals) / len(totals)
+    avg_team_pts = sum(team_points) / len(team_points)
+    variance = sum((t - avg_total) ** 2 for t in totals) / len(totals)
+    std_dev = math.sqrt(variance)
+    last_ts = games[0]["timestamp"] if games else 0
+
+    return {
+        "avg_total": avg_total,
+        "avg_team_pts": avg_team_pts,
+        "totals": totals,
+        "std_dev": std_dev,
+        "last_game_ts": last_ts,
+        "n_games": len(last_n),
+    }
+
+
+def meets_enhanced_criteria(home_form, away_form, h2h_games,
+                            selection_line, safe_line, game_ts):
+    """Enhanced criteria – recent form, H2H, consistency, rest.
+
+    1. Recent form: avg total of last N games >= RECENT_FLOOR_R * selection_line
+    2. Over hit rate: >= MIN_OVER_HIT_RATE of last N games had total >= safe_line
+    3. Consistency: std_dev <= MAX_TOTAL_SD (both teams)
+    4. H2H: if >= H2H_MIN_GAMES, avg total >= H2H_OVER_R * selection_line
+    5. Rest: both teams rested >= MIN_REST_HOURS
+
+    Returns (ok, detail_string).
+    """
+    parts = []
+
+    # --- Checks 1-3 & 5: Recent form (both teams must have data) ---
+    if home_form and away_form:
+        # Check 1: Rolling average total
+        min_avg = selection_line * RECENT_FLOOR_R
+        h_avg = home_form["avg_total"]
+        a_avg = away_form["avg_total"]
+        if h_avg < min_avg or a_avg < min_avg:
+            return False, (f"recent avg low: {h_avg:.0f}/{a_avg:.0f} "
+                           f"(min {min_avg:.0f}={RECENT_FLOOR_R}*{selection_line:.0f})")
+
+        # Check 2: Over hit rate (against safe line)
+        h_over = sum(1 for t in home_form["totals"] if t >= safe_line) / home_form["n_games"]
+        a_over = sum(1 for t in away_form["totals"] if t >= safe_line) / away_form["n_games"]
+        if h_over < MIN_OVER_HIT_RATE or a_over < MIN_OVER_HIT_RATE:
+            return False, (f"over rate low: {h_over:.0%}/{a_over:.0%} "
+                           f"(min {MIN_OVER_HIT_RATE:.0%} @ safe={safe_line:.0f})")
+
+        # Check 3: Consistency (standard deviation)
+        h_sd = home_form["std_dev"]
+        a_sd = away_form["std_dev"]
+        if h_sd > MAX_TOTAL_SD or a_sd > MAX_TOTAL_SD:
+            return False, (f"inconsistent: SD {h_sd:.1f}/{a_sd:.1f} "
+                           f"(max {MAX_TOTAL_SD:.0f})")
+
+        parts.append(f"form={h_avg:.0f}/{a_avg:.0f} over={h_over:.0%}/{a_over:.0%} "
+                     f"SD={h_sd:.0f}/{a_sd:.0f}")
+
+        # Check 5: Rest (back-to-back filter)
+        if MIN_REST_HOURS > 0:
+            game_dt = datetime.fromtimestamp(game_ts, tz=timezone.utc)
+            h_last_dt = datetime.fromtimestamp(home_form["last_game_ts"], tz=timezone.utc)
+            a_last_dt = datetime.fromtimestamp(away_form["last_game_ts"], tz=timezone.utc)
+            h_rest_h = (game_dt - h_last_dt).total_seconds() / 3600
+            a_rest_h = (game_dt - a_last_dt).total_seconds() / 3600
+            if h_rest_h < MIN_REST_HOURS or a_rest_h < MIN_REST_HOURS:
+                return False, (f"B2B fatigue: rest {h_rest_h:.0f}h/{a_rest_h:.0f}h "
+                               f"(min {MIN_REST_HOURS}h)")
+            parts.append(f"rest={h_rest_h:.0f}h/{a_rest_h:.0f}h")
+    else:
+        parts.append("form=N/A")
+
+    # --- Check 4: Head-to-Head ---
+    if h2h_games and len(h2h_games) >= H2H_MIN_GAMES:
+        h2h_avg = sum(g["total"] for g in h2h_games) / len(h2h_games)
+        h2h_min = selection_line * H2H_OVER_R
+        if h2h_avg < h2h_min:
+            return False, (f"H2H avg low: {h2h_avg:.0f} "
+                           f"(min {h2h_min:.0f}={H2H_OVER_R}*{selection_line:.0f}, "
+                           f"n={len(h2h_games)})")
+        parts.append(f"H2H={h2h_avg:.0f}(n={len(h2h_games)})")
+    else:
+        n_h2h = len(h2h_games) if h2h_games else 0
+        parts.append(f"H2H=N/A(n={n_h2h})")
+
+    return True, " | ".join(parts)
+
+
 # ===== MAIN =====
 
 def main():
@@ -263,7 +436,9 @@ def main():
     print(f"Select: Over @ ~{SELECTION_ODDS} odds → Output: Over @ ~{OUTPUT_ODDS} odds")
     print(f"MIN_HALF_LINE: {MIN_HALF_LINE}, BOTH_FLOOR_R: {BOTH_FLOOR_R}, EXPECTED_MIN_R: {EXPECTED_MIN_R}")
     print(f"Criteria: venue_expected >= line*{EXPECTED_MIN_R}, "
-          f"venue offense >= half*{BOTH_FLOOR_R} & >= league/team*{OFFENSE_VS_LEAGUE_R}\n")
+          f"venue offense >= half*{BOTH_FLOOR_R} & >= league/team*{OFFENSE_VS_LEAGUE_R}")
+    print(f"Enhanced: form>={RECENT_FLOOR_R}*line, over>={MIN_OVER_HIT_RATE:.0%}@safe, "
+          f"SD<={MAX_TOTAL_SD:.0f}, H2H>={H2H_OVER_R}*line, rest>={MIN_REST_HOURS}h\n")
 
     # 1. Fetch games
     games_today = fetch_games(today)
@@ -308,6 +483,7 @@ def main():
                 "sel_line": sel["line"],
                 "sel_label": sel["label"],
                 "sel_odds": sel["odd_str"],
+                "out_line": out["line"],
                 "out_label": out["label"],
                 "out_odds": out["odd_str"],
                 "timestamp": g["timestamp"],
@@ -325,31 +501,48 @@ def main():
             json.dump([], f)
         return
 
-    # 4. Analyze team stats
+    # 4. Analyze team stats (two-phase: basic venue → enhanced form+H2H)
     results = []
     print(f"  Analyzing {len(candidates)} candidates...")
     for i, c in enumerate(candidates):
         print(f"  [{i+1}/{len(candidates)}] {c['match'][:45]:.<47s}", end="")
         try:
+            # Phase 1: Basic venue criteria
             home_stats = fetch_team_stats(c["league_id"], c["season"], c["home_id"])
             away_stats = fetch_team_stats(c["league_id"], c["season"], c["away_id"])
             ok, detail, score = meets_criteria(home_stats, away_stats, c["sel_line"])
-            if ok:
-                print(f" ★ {detail}")
-                print(f"       → {c['sel_label']}@{c['sel_odds']} → OUTPUT: {c['out_label']}@{c['out_odds']}")
-                kickoff = datetime.fromtimestamp(c["timestamp"], tz=timezone.utc).strftime("%Y-%m-%dT%H:%M:%S+00:00")
-                results.append({
-                    "league": c["league"],
-                    "match": c["match"],
-                    "tip": c["out_label"],
-                    "odds": c["out_odds"],
-                    "date": kickoff,
-                    "_score": score,
-                    "_sel_label": c["sel_label"],
-                    "_sel_odds": c["sel_odds"],
-                })
-            else:
+            if not ok:
                 print(f" fail ({detail})")
+                continue
+
+            # Phase 2: Enhanced criteria (recent form, H2H, consistency, rest)
+            print(f" basic✓", end="")
+            home_games = fetch_team_games(c["home_id"], c["league_id"], c["season"])
+            away_games = fetch_team_games(c["away_id"], c["league_id"], c["season"])
+            h2h = fetch_h2h(c["home_id"], c["away_id"])
+            home_form = analyze_recent_form(home_games, c["home_id"])
+            away_form = analyze_recent_form(away_games, c["away_id"])
+            ok2, detail2 = meets_enhanced_criteria(
+                home_form, away_form, h2h,
+                c["sel_line"], c["out_line"], c["timestamp"])
+            if not ok2:
+                print(f" enhanced fail ({detail2})")
+                continue
+
+            print(f" ★ {detail}")
+            print(f"       enhanced: {detail2}")
+            print(f"       → {c['sel_label']}@{c['sel_odds']} → OUTPUT: {c['out_label']}@{c['out_odds']}")
+            kickoff = datetime.fromtimestamp(c["timestamp"], tz=timezone.utc).strftime("%Y-%m-%dT%H:%M:%S+00:00")
+            results.append({
+                "league": c["league"],
+                "match": c["match"],
+                "tip": c["out_label"],
+                "odds": c["out_odds"],
+                "date": kickoff,
+                "_score": score,
+                "_sel_label": c["sel_label"],
+                "_sel_odds": c["sel_odds"],
+            })
         except Exception as exc:
             print(f" ERROR: {exc}")
 
