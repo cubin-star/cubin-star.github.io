@@ -630,7 +630,7 @@ def main():
     def fmt(tips):
         out = []
         for t in tips:
-            entry = {"League": t["League"], "Match": t["Match"], "Tip": t["Tip"], "Odds": t["Odds"]}
+            entry = {"League": t["League"], "Match": t["Match"], "Tip": t["Tip"], "Odds": t["Odds"], "Date": t.get("kickoff", "")}
             tag = t.get("_tag", "")
             if tag in ("16h", "qualified"):
                 entry["qualified"] = True
