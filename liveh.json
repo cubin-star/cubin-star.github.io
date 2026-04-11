@@ -22,9 +22,16 @@
   },
   {
     "league": "Elite League",
+    "match": "Coventry vs Cardiff",
+    "tip": "Over 5.25",
+    "odds": "1.82",
+    "date": "2026-04-11T18:00:00+00:00"
+  },
+  {
+    "league": "Elite League",
     "match": "Manchester vs Nottingham",
     "tip": "Over 4.75",
-    "odds": "1.66",
+    "odds": "1.67",
     "date": "2026-04-11T18:00:00+00:00"
   },
   {
@@ -59,7 +66,7 @@
     "league": "AHL",
     "match": "Wilkes-Barre/Scranton vs Cleveland Monsters",
     "tip": "Over 5.5",
-    "odds": "1.79",
+    "odds": "1.80",
     "date": "2026-04-11T22:05:00+00:00"
   },
   {
