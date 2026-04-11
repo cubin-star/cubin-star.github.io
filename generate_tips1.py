@@ -21,6 +21,7 @@ Analyza: az 200 kandidatu, delay 0.3s
 
 Output:
   fotbal.json - 3 tips (Ultimate Football Overs)
+  live2.json  - all qualified tips (for external app)
 """
 
 import os
@@ -42,6 +43,7 @@ NUM_TIPS = 3
 DELAY = 0.3
 MAX_ANALYZE = 200
 OUTPUT_APP1 = "fotbal.json"
+OUTPUT_LIVE2 = "live2.json"
 request_count = 0
 
 # League-relative criteria (from SureBets)
@@ -585,7 +587,7 @@ def main():
     print(f"Time: {now.strftime('%Y-%m-%d %H:%M UTC')}")
     print(f"Over 2.5 | odds {MIN_ODDS}-{MAX_ODDS} | league-relative A/B + 2H filter")
     print(f"Ratios: FLOOR={BOTH_FLOOR_R}, STRONG={STRONG_MIN_R}, CONTRAST<{CONTRAST_MAX_R}, minBase={MIN_BASELINE}, minAtk={MIN_ATTACK}")
-    print(f"Output: {OUTPUT_APP1} ({NUM_TIPS})\n")
+    print(f"Output: {OUTPUT_APP1} ({NUM_TIPS}), {OUTPUT_LIVE2} (all qualified)\n")
 
     # Fixtures
     fixtures_today = fetch_fixtures(today)
@@ -637,15 +639,25 @@ def main():
 
     app1_tips = fmt(selected_raw)
 
+    # live2.json – all qualified tips for the second app
+    live2_tips = fmt(qualified)
+
     print(f"\n  {OUTPUT_APP1} ({len(app1_tips)} tips):")
     for t in app1_tips:
         tag = "[OK]" if t.get("qualified") else "[Fallback]"
         print(f"    {tag} {t['League']}: {t['Match']} - {t['Tip']} @ {t['Odds']}")
 
+    print(f"\n  {OUTPUT_LIVE2} ({len(live2_tips)} tips):")
+    for t in live2_tips:
+        print(f"    [Q] {t['League']}: {t['Match']} - {t['Tip']} @ {t['Odds']}")
+
     with open(OUTPUT_APP1, "w", encoding="utf-8") as f:
         json.dump(app1_tips, f, indent=2, ensure_ascii=False)
 
-    print(f"\n  Written: {OUTPUT_APP1} ({len(app1_tips)})")
+    with open(OUTPUT_LIVE2, "w", encoding="utf-8") as f:
+        json.dump(live2_tips, f, indent=2, ensure_ascii=False)
+
+    print(f"\n  Written: {OUTPUT_APP1} ({len(app1_tips)}), {OUTPUT_LIVE2} ({len(live2_tips)})")
     print(f"  API requests: {request_count} / 7500 ({request_count*100//7500}%)")
 
 
