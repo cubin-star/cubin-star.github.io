@@ -52,12 +52,15 @@ MAX_SEL_ODDS = 3.00      # max acceptable odds for selection line
 BOTH_FLOOR_R = 0.85      # oba alespoň 85% baseline (široký záchyt)
 STRONG_MIN_R = 1.10      # "výrazný" tým 110%+ baseline (jasně nad normou ligy)
 CONTRAST_MAX_R = 0.95    # protějšek pod 95% baseline (kontrast ≥ 15%)
-MIN_BASELINE = 2.20      # sníženo z 2.40 → otevírá SHL, Liiga, DEL, Extraligu
-EXPECTED_MIN_R = 1.02    # matchup expected musí překročit selection line o 2%
+MIN_BASELINE = 2.10      # sníženo z 2.40 → otevírá SHL, Liiga, DEL, Extraligu
+EXPECTED_VS_OUTPUT_R = 1.15  # matchup expected musí překročit OUTPUT line o 15%
 
 # Variant C – both teams offensive (no contrast needed, but stricter floor)
 BOTH_OFFENSE_R = 1.00    # oba skórují >= 100% baseline
 BOTH_CONCEDE_R = 1.00    # oba inkasují >= 100% baseline (otevřený zápas)
+
+# Variant D – pure expected-based (balanced high-scoring, no pattern needed)
+EXPECTED_VS_SEL_R = 0.95  # expected >= 95% selection line (balanced games)
 
 # Enhanced criteria – recent form, H2H, consistency, rest
 RECENT_N = 10              # rolling window: last N finished games
@@ -144,6 +147,24 @@ def fetch_team_stats(league_id, season, team_id):
     return data.get("response")
 
 
+def _parse_period(period_val):
+    """Parse period score – handles both string '2 - 1' and dict {'home': 2, 'away': 1}."""
+    if period_val is None:
+        return None, None
+    if isinstance(period_val, dict):
+        try:
+            return int(period_val.get("home", 0) or 0), int(period_val.get("away", 0) or 0)
+        except (ValueError, TypeError):
+            return None, None
+    if isinstance(period_val, str) and "-" in period_val:
+        parts = period_val.split("-")
+        try:
+            return int(parts[0].strip()), int(parts[1].strip())
+        except (ValueError, IndexError):
+            return None, None
+    return None, None
+
+
 def fetch_team_games(team_id, league_id, season):
     """Fetch all finished games for a team in given league+season."""
     time.sleep(DELAY)
@@ -163,7 +184,7 @@ def fetch_team_games(team_id, league_id, season):
         if h_total is None or a_total is None:
             continue
         # Period scores for period-by-period analysis
-        periods = g.get("periods", {})
+        periods = g.get("periods", {}) or {}
         try:
             entry = {
                 "timestamp": g.get("timestamp", 0),
@@ -173,21 +194,19 @@ def fetch_team_games(team_id, league_id, season):
                 "away_total": int(a_total),
                 "total": int(h_total) + int(a_total),
             }
-            # Period data (may not always be available)
-            p1 = periods.get("first")
-            p2 = periods.get("second")
-            p3 = periods.get("third")
-            if p1 and p2 and p3:
-                h_p1 = int(p1.get("home", 0) or 0)
-                a_p1 = int(p1.get("away", 0) or 0)
-                h_p2 = int(p2.get("home", 0) or 0)
-                a_p2 = int(p2.get("away", 0) or 0)
-                h_p3 = int(p3.get("home", 0) or 0)
-                a_p3 = int(p3.get("away", 0) or 0)
-                entry["p1_total"] = h_p1 + a_p1
-                entry["p23_total"] = h_p2 + a_p2 + h_p3 + a_p3
-                entry["p23_home"] = h_p2 + h_p3
-                entry["p23_away"] = a_p2 + a_p3
+            # Period data – hockey API returns strings like "2 - 1"
+            p1_str = periods.get("first")
+            p2_str = periods.get("second")
+            p3_str = periods.get("third")
+            if p1_str and p2_str and p3_str:
+                p1h, p1a = _parse_period(p1_str)
+                p2h, p2a = _parse_period(p2_str)
+                p3h, p3a = _parse_period(p3_str)
+                if all(v is not None for v in (p1h, p1a, p2h, p2a, p3h, p3a)):
+                    entry["p1_total"] = p1h + p1a
+                    entry["p23_total"] = p2h + p2a + p3h + p3a
+                    entry["p23_home"] = p2h + p3h
+                    entry["p23_away"] = p2a + p3a
             finished.append(entry)
         except (ValueError, TypeError):
             pass
@@ -280,14 +299,15 @@ def _sf(val, default=0.0):
         return default
 
 
-def meets_criteria(home_stats, away_stats, selection_line):
+def meets_criteria(home_stats, away_stats, selection_line, output_line):
     """
     League-relative hockey criteria (home/away split) + expected total vs line.
     Baseline = avg of h_for, a_for, h_agn, a_agn → adapts to any league.
     A) oba conceded >= FLOOR_R * base + ofenzivní kontrast
     B) oba scored  >= FLOOR_R * base + defenzivní kontrast
     C) oba skórují i inkasují >= 100% baseline (otevřený zápas, žádný kontrast)
-    + expected total must exceed selection_line * EXPECTED_MIN_R
+    D) expected >= 95% selection line (balanced high-scoring, no pattern needed)
+    + expected total must exceed output_line * EXPECTED_VS_OUTPUT_R
     """
     if not home_stats or not away_stats:
         return False, "", 0.0
@@ -316,11 +336,11 @@ def meets_criteria(home_stats, away_stats, selection_line):
     # Expected total from venue matchup
     expected = (h_for + a_agn + a_for + h_agn) / 2
 
-    # Check expected vs selection line
-    min_expected = selection_line * EXPECTED_MIN_R
+    # Check expected vs OUTPUT line (what we actually bet on, not the aggressive selection line)
+    min_expected = output_line * EXPECTED_VS_OUTPUT_R
     if expected < min_expected:
         return False, (f"expected low: {expected:.1f} < {min_expected:.1f} "
-                       f"(line={selection_line:.1f}×{EXPECTED_MIN_R})"), 0.0
+                       f"(out={output_line:.1f}×{EXPECTED_VS_OUTPUT_R})"), 0.0
 
     both_floor = baseline * BOTH_FLOOR_R
     strong_min = baseline * STRONG_MIN_R
@@ -348,16 +368,20 @@ def meets_criteria(home_stats, away_stats, selection_line):
         and h_agn >= concede_floor and a_agn >= concede_floor
     )
 
-    if variant_a or variant_b or variant_c:
+    # D) expected >= 95% selection line → balanced high-scoring (no pattern needed)
+    # Catches games like BOS 3.5/3.6 vs 2.7/2.9 where both teams score well
+    # but don't fit contrast patterns. Enhanced criteria (form, H2H) provide safety.
+    variant_d = (expected >= selection_line * EXPECTED_VS_SEL_R)
+
+    if variant_a or variant_b or variant_c or variant_d:
         if variant_a:
             tag = "A"
-            s = sorted([h_for, a_for])
         elif variant_b:
             tag = "B"
-            s = sorted([h_agn, a_agn])
-        else:
+        elif variant_c:
             tag = "C"
-            s = sorted([h_for + h_agn, a_for + a_agn])
+        else:
+            tag = "D"
         score = expected / selection_line if selection_line > 0 else 0.0
         detail = (f"[{tag}] scored {h_for:.2f}/{a_for:.2f}, conceded {h_agn:.2f}/{a_agn:.2f} "
                   f"(base={baseline:.2f}, exp={expected:.1f}, line={selection_line:.1f}, "
@@ -365,7 +389,8 @@ def meets_criteria(home_stats, away_stats, selection_line):
         return True, detail, score
 
     return False, (f"no variant | scored {h_for:.2f}/{a_for:.2f}, "
-                   f"conceded {h_agn:.2f}/{a_agn:.2f} (base={baseline:.2f})"), 0.0
+                   f"conceded {h_agn:.2f}/{a_agn:.2f} (base={baseline:.2f}, "
+                   f"exp={expected:.1f})"), 0.0
 
 
 def analyze_recent_form(games, team_id, n=RECENT_N):
@@ -520,7 +545,7 @@ def main():
     print("== SureBets Hockey Bot v2 ==")
     print(f"Time: {now.strftime('%Y-%m-%d %H:%M UTC')}")
     print(f"Dynamic lines: sel@~{SELECTION_ODDS} → safe@~{OUTPUT_ODDS} (tol={ODDS_TOLERANCE})")
-    print(f"MIN_BASELINE: {MIN_BASELINE} | EXPECTED_MIN_R: {EXPECTED_MIN_R}")
+    print(f"MIN_BASELINE: {MIN_BASELINE} | EXPECTED_VS_OUTPUT_R: {EXPECTED_VS_OUTPUT_R}")
     print(f"Variants: A(contr offense) B(contr defense) C(both open)")
     print(f"  A/B: FLOOR={BOTH_FLOOR_R}, STRONG={STRONG_MIN_R}, CONTRAST<{CONTRAST_MAX_R}")
     print(f"  C: offense>={BOTH_OFFENSE_R}×base, concede>={BOTH_CONCEDE_R}×base")
@@ -598,7 +623,7 @@ def main():
             # Phase 1: Basic venue criteria
             home_stats = fetch_team_stats(c["league_id"], c["season"], c["home_id"])
             away_stats = fetch_team_stats(c["league_id"], c["season"], c["away_id"])
-            ok, detail, score = meets_criteria(home_stats, away_stats, c["sel_line"])
+            ok, detail, score = meets_criteria(home_stats, away_stats, c["sel_line"], c["out_line"])
             if not ok:
                 print(f" fail ({detail})")
                 continue
