@@ -1,1 +1,30 @@
-[]
+[
+  {
+    "league": "Elite League",
+    "match": "Manchester vs Nottingham",
+    "tip": "Over 3.5",
+    "odds": "1.22",
+    "date": "2026-04-11T18:00:00+00:00"
+  },
+  {
+    "league": "AHL",
+    "match": "Charlotte Checkers vs Hershey Bears",
+    "tip": "Over 4.25",
+    "odds": "1.32",
+    "date": "2026-04-11T20:00:00+00:00"
+  },
+  {
+    "league": "NHL",
+    "match": "Winnipeg Jets vs Philadelphia Flyers",
+    "tip": "Over 4.5",
+    "odds": "1.40",
+    "date": "2026-04-11T23:00:00+00:00"
+  },
+  {
+    "league": "Extraliga",
+    "match": "Slovan Bratislava vs Kosice",
+    "tip": "Over 3.5",
+    "odds": "1.31",
+    "date": "2026-04-12T14:00:00+00:00"
+  }
+]
