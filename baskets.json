@@ -1,30 +1,44 @@
 [
   {
-    "league": "Extraliga",
-    "match": "Levice vs Spisski Rytieri",
-    "tip": "Over 166.5",
-    "odds": "1.50",
-    "date": "2026-04-10T17:00:00+00:00"
+    "league": "NKL",
+    "match": "Suduva-Mantinga vs Vilkaviskis",
+    "tip": "Over 155.5",
+    "odds": "1.58",
+    "date": "2026-04-11T11:10:00+00:00"
   },
   {
-    "league": "Euroleague",
-    "match": "Partizan Mozzart Bet vs Zalgiris Kaunas",
-    "tip": "Over 158.5",
-    "odds": "1.37",
-    "date": "2026-04-10T18:30:00+00:00"
+    "league": "NBL",
+    "match": "USK Prague vs Slavia Prague",
+    "tip": "Over 161.5",
+    "odds": "1.53",
+    "date": "2026-04-11T16:00:00+00:00"
+  },
+  {
+    "league": "ABA League",
+    "match": "KK Bosna vs Igokea",
+    "tip": "Over 159",
+    "odds": "1.56",
+    "date": "2026-04-11T16:00:00+00:00"
+  },
+  {
+    "league": "LPB",
+    "match": "Imortal vs Vasco Da Gama",
+    "tip": "Over 174.5",
+    "odds": "1.58",
+    "date": "2026-04-11T16:30:00+00:00"
+  },
+  {
+    "league": "BNXT League",
+    "match": "Leiden vs Kortrijk",
+    "tip": "Over 162",
+    "odds": "1.55",
+    "date": "2026-04-11T18:00:00+00:00"
   },
   {
     "league": "Premier league",
-    "match": "Stjarnan vs KR Basket",
-    "tip": "Over 190",
-    "odds": "1.56",
-    "date": "2026-04-10T19:30:00+00:00"
-  },
-  {
-    "league": "NBA",
-    "match": "Los Angeles Lakers vs Phoenix Suns",
-    "tip": "Over 211.5",
-    "odds": "1.40",
-    "date": "2026-04-11T02:30:00+00:00"
+    "match": "Tindastoll vs IR Reykjavik",
+    "tip": "Over 184.5",
+    "odds": "1.60",
+    "date": "2026-04-11T19:00:00+00:00"
   }
 ]
