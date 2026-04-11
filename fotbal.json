@@ -1,23 +1,23 @@
 [
   {
-    "League": "Tercera División RFEF - Group 13",
-    "Match": "Real Murcia II vs Cieza",
+    "League": "NB II",
+    "Match": "Csakvar vs Karcag SE",
     "Tip": "Over 2.5",
-    "Odds": "1.95",
-    "qualified15": true
+    "Odds": "1.84",
+    "qualified": true
   },
   {
-    "League": "National 2 - Group C",
-    "Match": "Fréjus St-Raphaël vs Limonest",
+    "League": "Premier League",
+    "Match": "Brentford vs Everton",
     "Tip": "Over 2.5",
-    "Odds": "1.88",
-    "qualified15": true
+    "Odds": "1.96",
+    "qualified": true
   },
   {
-    "League": "Primera A",
-    "Match": "Deportivo Pereira vs Once Caldas",
+    "League": "Non League Premier - Northern",
+    "Match": "Ilkeston Town vs Bamber Bridge",
     "Tip": "Over 2.5",
-    "Odds": "1.92",
-    "qualified13": true
+    "Odds": "1.85",
+    "qualified": true
   }
 ]
