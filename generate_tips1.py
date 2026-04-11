@@ -1,24 +1,19 @@
 """
-Ultimate Football Overs - Daily Tip Generator v16
+Ultimate Football Overs - Daily Tip Generator v17
 
-Logika:
+Logika (SureBets league-relative):
   1. Blacklist (youth/reserve/amateur/women/esports)
   2. Liga filter: max 3. liga (Anglie: az 6. liga)
-  3. Kurzy Over 2.5 v rozmezi 1.75-1.95
-  4. Goal criteria: min. jeden tym >= 1.3 vstrelenych golu/zapas, oba tymy min 5 odehranych
-  5. Vickolovy vyber:
-     a) 1. kolo: Varianta A: scored(jeden<1, druhy>=1.3) + conceded(jeden>=1.5, druhy>=1.6)
-                Varianta B: scored(jeden>=1.5, druhy>=1.6) + conceded(jeden<1, druhy>=1.3)
-        - pokud >= 3: PREDNOST zapasy v 16h okne (15:00-17:59 CET), pak ostatni
-     b) 2. kolo: Varianta A: scored(jeden<1, druhy>=1.3) + conceded(oba>=1.3)
-                Varianta B: scored(oba>=1.3) + conceded(jeden<1, druhy>=1.3)
-        - doplni zbyvajici mista do 3
-     c) 3. kolo: Varianta A: conceded(oba>1) + scored(jeden>=1.3, druhy<1)
-                Varianta B: scored(oba>1) + conceded(jeden>=1.3, druhy<1)
-        - doplni zbyvajici mista do 3
-     d) Fallback: evropske prvni ligy, pak pool (unikatni ligy)
-  6. Nahodny vyber: vaha = expectedGoals z predictions
-     - kazdy zapas z jine ligy
+  3. Kurzy Over 2.5 v rozmezi 1.80-2.00
+  4. 24h okno – jen zapasy v nasledujicich 24 hodinach
+  5. League-relative criteria (home/away split):
+     baseline = avg(h_for, a_for, h_agn, a_agn)
+     A) oba conceded >= 0.85*base + ofenzivni kontrast (jeden scored >= 1.10*base, druhy < 0.95*base)
+     B) oba scored >= 0.85*base + defenzivni kontrast (jeden conceded >= 1.10*base, druhy < 0.95*base)
+     + 2nd-half filtr (stejny A/B princip na 2H data)
+  6. Vyber: kvalifikovane zapasy -> prednost 16h okno (15:00-17:59 CET)
+     - kazdy zapas z jine ligy, vaha = score (kontrast)
+  7. Fallback: evropske prvni ligy, pak pool (unikatni ligy)
 
 API: https://www.api-football.com/ (7500 req/day)
 Env: API_FOOTBALL_KEY1
@@ -40,17 +35,22 @@ from zoneinfo import ZoneInfo
 
 API_KEY = os.environ.get("API_FOOTBALL_KEY1", "")
 BASE_URL = "https://v3.football.api-sports.io"
-MIN_ODDS = 1.75
-MAX_ODDS = 1.95
-MIN_SCORED_ONE = 1.3
-MIN_CONCEDED_R1 = 1.5
-MIN_CONCEDED_R2 = 1.3
+MIN_ODDS = 1.80
+MAX_ODDS = 2.00
 MIN_GAMES = 5
 NUM_TIPS = 3
 DELAY = 0.3
 MAX_ANALYZE = 200
 OUTPUT_APP1 = "fotbal.json"
 request_count = 0
+
+# League-relative criteria (from SureBets)
+BOTH_FLOOR_R = 0.85      # oba alespon 85% baseline
+STRONG_MIN_R = 1.10       # "vyrazny" tym 110%+ baseline
+CONTRAST_MAX_R = 0.95     # protejsek pod 95% baseline (kontrast >= 15%)
+MIN_BASELINE = 1.25       # minimum avg per-team stat
+MIN_ATTACK = 0.80         # oba tymy musi strilet >= 0.8 g/z
+MIN_2H_BASELINE = 0.45    # minimum 2H baseline
 
 EXCLUDED_COUNTRIES = {"russia", "belarus"}
 BLOCKED_AFRICAN = {
@@ -233,7 +233,7 @@ def is_low_tier_league(name, country):
     return False
 
 
-# ===== GOAL CRITERIA (from fetch-matches.mjs) =====
+# ===== CRITERIA (SureBets league-relative, home/away split + 2H filter) =====
 
 def _sf(val, default=0.0):
     try:
@@ -242,35 +242,127 @@ def _sf(val, default=0.0):
         return default
 
 
-def meets_goal_criteria(pred):
-    """At least one team scores >= MIN_SCORED_ONE. Both teams must have >= MIN_GAMES played.
-    Conceded stats returned for two-round selection."""
+def get_half_stats(team_data, side):
+    """Extract 1st/2nd half goal averages from minute breakdown."""
+    minute = team_data.get("league", {}).get("goals", {}).get(side, {}).get("minute", {})
+    played = int(_sf(team_data.get("league", {}).get("fixtures", {}).get("played", {}).get("total", 0)))
+    if not minute or played == 0:
+        return None
+    val = lambda k: int(_sf(minute.get(k, {}).get("total", 0)))
+    first_half = val("0-15") + val("16-30") + val("31-45")
+    second_half = val("46-60") + val("61-75") + val("76-90")
+    return {"first": first_half, "second": second_half,
+            "avg_first": first_half / played, "avg_second": second_half / played, "played": played}
+
+
+def meets_criteria(pred):
+    """
+    League-relative football criteria (home/away split).
+    Baseline = avg of h_for, a_for, h_agn, a_agn -> adapts to any league.
+    A) oba conceded >= FLOOR * base + ofenzivni kontrast
+    B) oba scored >= FLOOR * base + defenzivni kontrast
+    + 2nd-half filter (stejny A/B princip na 2H data)
+    """
     home = pred.get("teams", {}).get("home", {})
     away = pred.get("teams", {}).get("away", {})
     if not home or not away:
-        return False, {}
+        return False, "", 0.0
 
     h_played = int(_sf(home.get("league", {}).get("fixtures", {}).get("played", {}).get("total", 0)))
     a_played = int(_sf(away.get("league", {}).get("fixtures", {}).get("played", {}).get("total", 0)))
     if h_played < MIN_GAMES or a_played < MIN_GAMES:
-        return False, {}
+        return False, f"too few games: {h_played}/{a_played}", 0.0
 
-    h_for = _sf(home.get("league", {}).get("goals", {}).get("for", {}).get("average", {}).get("total")) or \
-            _sf(home.get("last_5", {}).get("goals", {}).get("for", {}).get("average"))
-    a_for = _sf(away.get("league", {}).get("goals", {}).get("for", {}).get("average", {}).get("total")) or \
-            _sf(away.get("last_5", {}).get("goals", {}).get("for", {}).get("average"))
-    h_agn = _sf(home.get("league", {}).get("goals", {}).get("against", {}).get("average", {}).get("total")) or \
-            _sf(home.get("last_5", {}).get("goals", {}).get("against", {}).get("average"))
-    a_agn = _sf(away.get("league", {}).get("goals", {}).get("against", {}).get("average", {}).get("total")) or \
-            _sf(away.get("last_5", {}).get("goals", {}).get("against", {}).get("average"))
+    # Home team -> home split, Away team -> away split
+    h_for = _sf(home.get("league", {}).get("goals", {}).get("for", {}).get("average", {}).get("home"))
+    a_for = _sf(away.get("league", {}).get("goals", {}).get("for", {}).get("average", {}).get("away"))
+    h_agn = _sf(home.get("league", {}).get("goals", {}).get("against", {}).get("average", {}).get("home"))
+    a_agn = _sf(away.get("league", {}).get("goals", {}).get("against", {}).get("average", {}).get("away"))
 
-    if h_for < MIN_SCORED_ONE and a_for < MIN_SCORED_ONE:
-        return False, {}
+    if h_for == 0 and a_for == 0:
+        return False, "", 0.0
 
+    if h_for < MIN_ATTACK or a_for < MIN_ATTACK:
+        return False, f"weak attack: {h_for:.1f}/{a_for:.1f} (min {MIN_ATTACK})", 0.0
+
+    baseline = (h_for + a_for + h_agn + a_agn) / 4
+    if baseline == 0:
+        return False, "", 0.0
+    if baseline < MIN_BASELINE:
+        return False, f"baseline too low: {baseline:.2f} < {MIN_BASELINE}", 0.0
+
+    both_floor = baseline * BOTH_FLOOR_R
+    strong_min = baseline * STRONG_MIN_R
+    contrast_max = baseline * CONTRAST_MAX_R
+
+    # A) oba inkasují >= floor + ofenzivni kontrast
+    variant_a = (
+        h_agn >= both_floor and a_agn >= both_floor
+        and ((h_for >= strong_min and a_for < contrast_max)
+             or (a_for >= strong_min and h_for < contrast_max))
+    )
+
+    # B) oba strili >= floor + defenzivni kontrast
+    variant_b = (
+        h_for >= both_floor and a_for >= both_floor
+        and ((h_agn >= strong_min and a_agn < contrast_max)
+             or (a_agn >= strong_min and h_agn < contrast_max))
+    )
+
+    if not (variant_a or variant_b):
+        return False, f"stats fail: scored {h_for:.1f}/{a_for:.1f}, conceded {h_agn:.1f}/{a_agn:.1f} (base={baseline:.2f})", 0.0
+
+    # 2nd-half filter
+    h2f = get_half_stats(home, "for")
+    a2f = get_half_stats(away, "for")
+    h2a = get_half_stats(home, "against")
+    a2a = get_half_stats(away, "against")
+
+    if not h2f or not a2f or not h2a or not a2a:
+        return False, "no minute breakdown", 0.0
+
+    h_scr_2h = h2f["avg_second"]
+    a_scr_2h = a2f["avg_second"]
+    h_con_2h = h2a["avg_second"]
+    a_con_2h = a2a["avg_second"]
+
+    base_2h = (h_scr_2h + a_scr_2h + h_con_2h + a_con_2h) / 4
+    if base_2h < MIN_2H_BASELINE:
+        return False, (f"2H low base: {base_2h:.2f} < {MIN_2H_BASELINE} "
+                       f"(scr {h_scr_2h:.2f}/{a_scr_2h:.2f}, con {h_con_2h:.2f}/{a_con_2h:.2f})"), 0.0
+
+    floor_2h = base_2h * BOTH_FLOOR_R
+    strong_2h = base_2h * STRONG_MIN_R
+    contrast_2h = base_2h * CONTRAST_MAX_R
+
+    var_2h_a = (
+        h_con_2h >= floor_2h and a_con_2h >= floor_2h
+        and ((h_scr_2h >= strong_2h and a_scr_2h < contrast_2h)
+             or (a_scr_2h >= strong_2h and h_scr_2h < contrast_2h))
+    )
+    var_2h_b = (
+        h_scr_2h >= floor_2h and a_scr_2h >= floor_2h
+        and ((h_con_2h >= strong_2h and a_con_2h < contrast_2h)
+             or (a_con_2h >= strong_2h and h_con_2h < contrast_2h))
+    )
+
+    if not (var_2h_a or var_2h_b):
+        return False, (f"2H contrast fail: scr {h_scr_2h:.2f}/{a_scr_2h:.2f}, "
+                       f"con {h_con_2h:.2f}/{a_con_2h:.2f} "
+                       f"(2Hbase={base_2h:.2f}, floor={floor_2h:.2f}, strong={strong_2h:.2f})"), 0.0
+
+    tag = "A" if variant_a else "B"
+    tag_2h = "2A" if var_2h_a else "2B"
+    if variant_a:
+        s = sorted([h_for, a_for])
+    else:
+        s = sorted([h_agn, a_agn])
+    score = s[1] / s[0] if s[0] > 0 else 99.0
     expected_goals = (h_for + a_for + h_agn + a_agn) / 2
-    detail = f"scored {h_for:.1f}/{a_for:.1f}, conceded {h_agn:.1f}/{a_agn:.1f} => {expected_goals:.2f}g (played {h_played}/{a_played})"
-    return True, {"expectedGoals": expected_goals, "detail": detail,
-                  "h_for": h_for, "a_for": a_for, "h_agn": h_agn, "a_agn": a_agn}
+    detail = (f"[{tag}+{tag_2h}] scored {h_for:.1f}/{a_for:.1f}, conceded {h_agn:.1f}/{a_agn:.1f} "
+             f"| 2H: scr={h_scr_2h:.2f}/{a_scr_2h:.2f} con={h_con_2h:.2f}/{a_con_2h:.2f} "
+             f"(base={baseline:.2f}, 2Hb={base_2h:.2f}, score={score:.2f})")
+    return True, detail, score
 
 
 # ===== KANDIDATI + VYBER =====
@@ -338,8 +430,8 @@ def extract_candidates(odds_data, fixtures, min_odds=MIN_ODDS, max_odds=MAX_ODDS
     return candidates
 
 
-def filter_by_goal_criteria(candidates):
-    """Filter candidates via predictions API: goal criteria from fetch-matches.mjs."""
+def filter_by_criteria(candidates):
+    """Filter candidates via predictions API: SureBets league-relative criteria."""
     print(f"\n  Analyza tymu (predictions) - {len(candidates)} candidates (max {MAX_ANALYZE})...")
     shuffled = list(candidates)
     random.shuffle(shuffled)
@@ -349,28 +441,15 @@ def filter_by_goal_criteria(candidates):
         print(f"  [{i+1}/{len(to_analyze)}] {c['Match'][:40]:.<42s}", end="")
         pred = fetch_prediction(c["fixture_id"])
         if pred:
-            ok, info = meets_goal_criteria(pred)
+            ok, detail, score = meets_criteria(pred)
             if ok:
-                c["expectedGoals"] = info["expectedGoals"]
-                c["detail"] = info["detail"]
-                c["h_for"] = info["h_for"]
-                c["a_for"] = info["a_for"]
-                c["h_agn"] = info["h_agn"]
-                c["a_agn"] = info["a_agn"]
-                # Determine round qualifications for this match
-                rounds_tag = ""
-                if _qualifies_round1(c):
-                    rounds_tag += "[R1]"
-                if _qualifies_round2(c):
-                    rounds_tag += "[R2]"
-                if _qualifies_round3(c):
-                    rounds_tag += "[R3]"
-                if not rounds_tag:
-                    rounds_tag = "[--]"
-                print(f" OK {rounds_tag} {info['detail']}")
+                c["detail"] = detail
+                c["score"] = score
+                c["expectedGoals"] = score
+                print(f" ★ {detail}")
                 qualified.append(c)
             else:
-                print(" fail criteria")
+                print(f" fail ({detail})")
         else:
             print(" no data")
     return qualified
@@ -419,137 +498,45 @@ def _is_16h_window(m):
         return False
 
 
-def _qualifies_round1(m):
-    """Round 1: Varianta A nebo B.
-    A: vstrelene (jeden < 1, druhy >= 1.3) + obdrzene (jeden >= 1.5, druhy >= 1.6)
-    B: vstrelene (jeden >= 1.5, druhy >= 1.6) + obdrzene (jeden < 1, druhy >= 1.3)"""
-    h_for = m.get("h_for", 0)
-    a_for = m.get("a_for", 0)
-    h_agn = m.get("h_agn", 0)
-    a_agn = m.get("a_agn", 0)
-    min_for = min(h_for, a_for)
-    max_for = max(h_for, a_for)
-    min_agn = min(h_agn, a_agn)
-    max_agn = max(h_agn, a_agn)
-    option_a = (min_for < 1 and max_for >= 1.3) and (min_agn >= 1.5 and max_agn >= 1.6)
-    option_b = (min_for >= 1.5 and max_for >= 1.6) and (min_agn < 1 and max_agn >= 1.3)
-    return option_a or option_b
+def select_best_tips(qualified, pool, num=NUM_TIPS):
+    """Select best tips: prefer 16h window, then others, fallback from pool."""
+    print(f"\n  Kvalifikovano: {len(qualified)} zapasu")
 
-
-def _qualifies_round2(m):
-    """Round 2: Varianta A nebo B.
-    A: vstrelene (jeden < 1, druhy >= 1.3) + obdrzene (oba >= 1.3)
-    B: vstrelene (oba >= 1.3) + obdrzene (jeden < 1, druhy >= 1.3)"""
-    h_for = m.get("h_for", 0)
-    a_for = m.get("a_for", 0)
-    h_agn = m.get("h_agn", 0)
-    a_agn = m.get("a_agn", 0)
-    min_for = min(h_for, a_for)
-    max_for = max(h_for, a_for)
-    min_agn = min(h_agn, a_agn)
-    max_agn = max(h_agn, a_agn)
-    option_a = (min_for < 1 and max_for >= 1.3) and (min_agn >= 1.3)
-    option_b = (min_for >= 1.3) and (min_agn < 1 and max_agn >= 1.3)
-    return option_a or option_b
-
-
-def _qualifies_round3(m):
-    """Round 3: Varianta A nebo B.
-    A: obdrzene (oba > 1) + vstrelene (jeden >= 1.3, druhy < 1)
-    B: vstrelene (oba > 1) + obdrzene (jeden >= 1.3, druhy < 1)"""
-    h_for = m.get("h_for", 0)
-    a_for = m.get("a_for", 0)
-    h_agn = m.get("h_agn", 0)
-    a_agn = m.get("a_agn", 0)
-    min_for = min(h_for, a_for)
-    max_for = max(h_for, a_for)
-    min_agn = min(h_agn, a_agn)
-    max_agn = max(h_agn, a_agn)
-    option_a = (min_agn > 1) and (min_for < 1 and max_for >= 1.3)
-    option_b = (min_for > 1) and (min_agn < 1 and max_agn >= 1.3)
-    return option_a or option_b
-
-
-def select_best_tips(qualified, pool, all_odds, fixtures, num=NUM_TIPS):
-    # --- Round 1: scored (one<1, other>=1.3) + conceded (one>=1.5, other>=1.6) OR opposite ---
-    round1 = [m for m in qualified if _qualifies_round1(m)]
-    print(f"\n  1. kolo (scored/conceded varianta A|B): {len(round1)} zapasu")
+    # Split into 16h window and others
+    q_16h = [m for m in qualified if _is_16h_window(m)]
+    q_other = [m for m in qualified if not _is_16h_window(m)]
+    print(f"  16h okno (15:00-17:59 CET): {len(q_16h)}, ostatni: {len(q_other)}")
 
     selected = []
-    if len(round1) >= num:
-        # Round 1 has enough – prefer matches in 16h window (15:00-17:59 CET)
-        r1_16h = [m for m in round1 if _is_16h_window(m)]
-        r1_other = [m for m in round1 if not _is_16h_window(m)]
-        print(f"  1. kolo 16h okno: {len(r1_16h)} zapasu, ostatni: {len(r1_other)}")
-        if r1_16h:
-            selected = weighted_pick(r1_16h, min(len(r1_16h), num))
-        if len(selected) < num and r1_other:
-            # Fill remaining spots from non-16h matches (unique leagues)
-            used_leagues_16 = {s["League"] for s in selected}
-            r1_other_avail = [m for m in r1_other if m["League"] not in used_leagues_16]
-            selected.extend(weighted_pick(r1_other_avail, num - len(selected)))
-        for m in selected:
-            m["_qualified"] = True
-            m["_round"] = 1
-        print(f"  Vyber (1. kolo): {len(selected)} from {len(round1)}")
-        for m in selected:
-            tag = "16h" if _is_16h_window(m) else "other"
-            print(f"    >>> [VYBRAN R1 {tag}] {m['Match']} ({m['League']}) - {m.get('detail','')}")
-    else:
-        # Take all round 1 picks first
-        selected = weighted_pick(round1, min(len(round1), num))
-        for m in selected:
-            m["_qualified"] = True
-            m["_round"] = 1
-        print(f"  Vyber (1. kolo): {len(selected)} from {len(round1)}")
-        for m in selected:
-            print(f"    >>> [VYBRAN R1] {m['Match']} ({m['League']}) - {m.get('detail','')}")
 
-        # --- Round 2: remaining qualified with BOTH teams conceded >= 1.3 ---
-        if len(selected) < num:
-            used_ids_r = {s["fixture_id"] for s in selected}
-            used_leagues_r = {s["League"] for s in selected}
-            round2 = [m for m in qualified
-                      if m["fixture_id"] not in used_ids_r
-                      and m["League"] not in used_leagues_r
-                      and _qualifies_round2(m)]
-            need = num - len(selected)
-            print(f"  2. kolo (scored/conceded varianta A|B): {len(round2)} zapasu, doplnuji {need}")
-            r2_picks = weighted_pick(round2, need)
-            for m in r2_picks:
-                m["_qualified"] = True
-                m["_round"] = 2
-            selected.extend(r2_picks)
-            print(f"  Vyber (2. kolo): {len(r2_picks)} doplneno, celkem {len(selected)}")
-            for m in r2_picks:
-                print(f"    >>> [VYBRAN R2] {m['Match']} ({m['League']}) - {m.get('detail','')}")
+    # 1) Pick from 16h window first
+    if q_16h:
+        selected = weighted_pick(q_16h, min(len(q_16h), num))
+        for m in selected:
+            m["_tag"] = "16h"
+        print(f"  Vybrano z 16h: {len(selected)}")
+        for m in selected:
+            print(f"    >>> [VYBRAN 16h] {m['Match']} ({m['League']}) - {m.get('detail','')}")
 
-    # --- Round 3: conceded(oba>1) + scored(jeden>=1.3, druhy<1) OR scored(oba>1) + conceded(jeden>=1.3, druhy<1) ---
-    if len(selected) < num:
-        used_ids_r3 = {s["fixture_id"] for s in selected}
-        used_leagues_r3 = {s["League"] for s in selected}
-        round3 = [m for m in qualified
-                  if m["fixture_id"] not in used_ids_r3
-                  and m["League"] not in used_leagues_r3
-                  and _qualifies_round3(m)]
+    # 2) Fill from remaining qualified (unique leagues)
+    if len(selected) < num and q_other:
+        used_leagues = {s["League"] for s in selected}
+        avail = [m for m in q_other if m["League"] not in used_leagues]
         need = num - len(selected)
-        print(f"  3. kolo (scored/conceded varianta A|B): {len(round3)} zapasu, doplnuji {need}")
-        r3_picks = weighted_pick(round3, need)
-        for m in r3_picks:
-            m["_qualified"] = True
-            m["_round"] = 3
-        selected.extend(r3_picks)
-        print(f"  Vyber (3. kolo): {len(r3_picks)} doplneno, celkem {len(selected)}")
-        for m in r3_picks:
-            print(f"    >>> [VYBRAN R3] {m['Match']} ({m['League']}) - {m.get('detail','')}")
+        picks = weighted_pick(avail, need)
+        for m in picks:
+            m["_tag"] = "qualified"
+        selected.extend(picks)
+        print(f"  Doplneno z ostatnich: {len(picks)}, celkem: {len(selected)}")
+        for m in picks:
+            print(f"    >>> [VYBRAN] {m['Match']} ({m['League']}) - {m.get('detail','')}")
 
-    # Fallback (4. kolo): fill remaining from pool (European top leagues first, unique leagues)
+    # 3) Fallback from pool (European top leagues first, then any)
     if len(selected) < num:
         used_ids = {s["fixture_id"] for s in selected}
         used_leagues = {s["League"] for s in selected}
         remaining = [m for m in pool if m["fixture_id"] not in used_ids and m["League"] not in used_leagues]
 
-        # 1) European top leagues (not second tier)
         euro_top = [m for m in remaining if m.get("is_european") and not is_second_tier(m["League"])]
         random.shuffle(euro_top)
         for m in euro_top:
@@ -557,11 +544,11 @@ def select_best_tips(qualified, pool, all_odds, fixtures, num=NUM_TIPS):
                 break
             if m["League"] in used_leagues:
                 continue
+            m["_tag"] = "fallback"
             selected.append(m)
             used_leagues.add(m["League"])
             used_ids.add(m["fixture_id"])
 
-        # 2) Any remaining from pool (unique league)
         if len(selected) < num:
             rest = [m for m in remaining if m["fixture_id"] not in used_ids and m["League"] not in used_leagues]
             random.shuffle(rest)
@@ -570,14 +557,14 @@ def select_best_tips(qualified, pool, all_odds, fixtures, num=NUM_TIPS):
                     break
                 if m["League"] in used_leagues:
                     continue
+                m["_tag"] = "fallback"
                 selected.append(m)
                 used_leagues.add(m["League"])
 
-        # Print all fallback picks
-        fallback_picks = [m for m in selected if not m.get("_round")]
-        print(f"  Fallback (4. kolo): doplneno na {len(selected)} (evropske 1. ligy, pak pool, unikatni ligy)")
+        fallback_picks = [m for m in selected if m.get("_tag") == "fallback"]
+        print(f"  Fallback: {len(fallback_picks)} doplneno, celkem: {len(selected)}")
         for m in fallback_picks:
-            print(f"    >>> [VYBRAN FALLBACK] {m['Match']} ({m['League']}) - {m.get('detail','N/A')}")
+            print(f"    >>> [FALLBACK] {m['Match']} ({m['League']}) - {m.get('detail','N/A')}")
 
     random.shuffle(selected)
     return selected[:num]
@@ -594,10 +581,11 @@ def main():
     today = now.strftime("%Y-%m-%d")
     tomorrow = (now + timedelta(days=1)).strftime("%Y-%m-%d")
 
-    print(f"== generate_tips1 v16 ==")
+    print(f"== generate_tips1 v17 (SureBets criteria) ==")
     print(f"Time: {now.strftime('%Y-%m-%d %H:%M UTC')}")
-    print(f"Over 2.5 | odds {MIN_ODDS}-{MAX_ODDS} | min 1 tym scored>={MIN_SCORED_ONE} | conceded R1>={MIN_CONCEDED_R1} R2>={MIN_CONCEDED_R2} | min {MIN_GAMES} zapasu")
-    print(f"Output: {OUTPUT_APP1} (3)\n")
+    print(f"Over 2.5 | odds {MIN_ODDS}-{MAX_ODDS} | league-relative A/B + 2H filter")
+    print(f"Ratios: FLOOR={BOTH_FLOOR_R}, STRONG={STRONG_MIN_R}, CONTRAST<{CONTRAST_MAX_R}, minBase={MIN_BASELINE}, minAtk={MIN_ATTACK}")
+    print(f"Output: {OUTPUT_APP1} ({NUM_TIPS})\n")
 
     # Fixtures
     fixtures_today = fetch_fixtures(today)
@@ -617,7 +605,7 @@ def main():
     all_odds = odds_today + odds_tomorrow
     print(f"  Total: {len(all_odds)} with odds\n")
 
-    # Candidates
+    # Candidates (24h window + blacklist filters)
     candidates = extract_candidates(all_odds, all_fixtures)
     print(f"  {len(candidates)} candidates (Over 2.5 @ {MIN_ODDS}-{MAX_ODDS})")
 
@@ -630,42 +618,29 @@ def main():
         print("No matches at all.")
         return
 
-    # Filter by goal criteria (predictions)
-    qualified = filter_by_goal_criteria(candidates)
+    # Filter by SureBets criteria (league-relative A/B + 2H)
+    qualified = filter_by_criteria(candidates)
     print(f"\n  Splnuje kriteria: {len(qualified)}/{len(candidates)}")
 
-    # Select (weighted pick + fallbacks for 3 tips)
-    selected_raw = select_best_tips(qualified, candidates, all_odds, all_fixtures)
+    # Select (16h preference + fallback)
+    selected_raw = select_best_tips(qualified, candidates)
 
     def fmt(tips):
         out = []
         for t in tips:
             entry = {"League": t["League"], "Match": t["Match"], "Tip": t["Tip"], "Odds": t["Odds"]}
-            rnd = t.get("_round")
-            if rnd == 1:
-                entry["qualified15"] = True
-            elif rnd == 2:
-                entry["qualified13"] = True
-            elif rnd == 3:
-                entry["qualified10"] = True
+            tag = t.get("_tag", "")
+            if tag in ("16h", "qualified"):
+                entry["qualified"] = True
             out.append(entry)
         return out
 
     app1_tips = fmt(selected_raw)
 
-    def _round_label(t):
-        if t.get("qualified15"):
-            return "[Kolo 1]"
-        elif t.get("qualified13"):
-            return "[Kolo 2]"
-        elif t.get("qualified10"):
-            return "[Kolo 3]"
-        else:
-            return "[Fallback]"
-
     print(f"\n  {OUTPUT_APP1} ({len(app1_tips)} tips):")
     for t in app1_tips:
-        print(f"    {_round_label(t)} {t['League']}: {t['Match']} - {t['Tip']} @ {t['Odds']}")
+        tag = "[OK]" if t.get("qualified") else "[Fallback]"
+        print(f"    {tag} {t['League']}: {t['Match']} - {t['Tip']} @ {t['Odds']}")
 
     with open(OUTPUT_APP1, "w", encoding="utf-8") as f:
         json.dump(app1_tips, f, indent=2, ensure_ascii=False)
