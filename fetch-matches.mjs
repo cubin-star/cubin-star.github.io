@@ -50,14 +50,32 @@ function getHalfStats(teamData, side) {
 
 async function apiFetch(path) {
     const url = FOOTBALL_API + path;
-    try {
-        const res = await fetch(url, { headers: { 'x-apisports-key': API_KEY } });
-        reqCount++;
-        if (!res.ok) { console.warn('  HTTP ' + res.status + ': ' + path.split('?')[0]); return { response: [], paging: { total: 0 } }; }
-        const data = await res.json();
-        if (data.errors && Object.keys(data.errors).length > 0) { console.warn('  ', JSON.stringify(data.errors)); return { response: [], paging: { total: 0 } }; }
-        return data;
-    } catch (e) { console.warn('  Fetch error:', e.message); return { response: [], paging: { total: 0 } }; }
+    for (let attempt = 1; attempt <= 3; attempt++) {
+        try {
+            const res = await fetch(url, { headers: { 'x-apisports-key': API_KEY } });
+            reqCount++;
+            if (res.status === 429) {
+                console.warn('  [429] Rate limit hit, waiting ' + (5 * attempt) + 's... (attempt ' + attempt + '/3)');
+                await sleep(5000 * attempt);
+                continue;
+            }
+            if (!res.ok) { console.warn('  HTTP ' + res.status + ': ' + path.split('?')[0]); return { response: [], paging: { total: 0 } }; }
+            const data = await res.json();
+            if (data.errors && Object.keys(data.errors).length > 0) {
+                const errStr = JSON.stringify(data.errors);
+                if (errStr.includes('rateLimit') || errStr.includes('Too many')) {
+                    console.warn('  [RATE] ' + errStr + ' waiting ' + (5 * attempt) + 's... (attempt ' + attempt + '/3)');
+                    await sleep(5000 * attempt);
+                    continue;
+                }
+                console.warn('  ', errStr);
+                return { response: [], paging: { total: 0 } };
+            }
+            return data;
+        } catch (e) { console.warn('  Fetch error:', e.message); return { response: [], paging: { total: 0 } }; }
+    }
+    console.warn('  [FAIL] Max retries for: ' + path.split('?')[0]);
+    return { response: [], paging: { total: 0 } };
 }
 
 async function getFixtures(date) {
@@ -72,7 +90,7 @@ async function getLeagueOdds(leagueId, season, date) {
         all.push(...(data.response || []));
         totalPages = data.paging?.total || 0;
         page++;
-        if (page <= totalPages) await sleep(350);
+        if (page <= totalPages) await sleep(450);
     } while (page <= totalPages);
     return all;
 }
@@ -139,7 +157,7 @@ async function main() {
         dates.add(fmtDate(d));
     }
     let fixtures = [];
-    for (const d of dates) { console.log('Fixtures ' + d + '...'); fixtures.push(...await getFixtures(d)); await sleep(350); }
+    for (const d of dates) { console.log('Fixtures ' + d + '...'); fixtures.push(...await getFixtures(d)); await sleep(450); }
     console.log('   ' + fixtures.length + ' scheduled matches\n');
 
     // Filter: ban only Russia and Belarus
@@ -176,7 +194,7 @@ async function main() {
                     candidates.get(matchKey).allOdds.push(odd);
                 } } }
             }
-            await sleep(350);
+            await sleep(450);
         }
     }
     const pool = [...candidates.values()].map(m => ({
@@ -285,7 +303,7 @@ async function main() {
                 }
             }
         }
-        await sleep(350);
+        await sleep(450);
     }
     console.log('\nQualified (strict): ' + qualified.length + '/' + pool.length);
 
