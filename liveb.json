@@ -1,51 +1,30 @@
 [
   {
-    "league": "NKL",
-    "match": "Suduva-Mantinga vs Vilkaviskis",
-    "tip": "Over 161.5",
-    "odds": "1.89",
-    "date": "2026-04-11T11:10:00+00:00"
-  },
-  {
-    "league": "NBL",
-    "match": "Decin vs Opava",
-    "tip": "Over 168.5",
-    "odds": "1.89",
-    "date": "2026-04-11T15:00:00+00:00"
-  },
-  {
-    "league": "NBL",
-    "match": "USK Prague vs Slavia Prague",
-    "tip": "Over 167",
-    "odds": "1.89",
-    "date": "2026-04-11T16:00:00+00:00"
-  },
-  {
-    "league": "ABA League",
-    "match": "KK Bosna vs Igokea",
-    "tip": "Over 163.5",
-    "odds": "1.88",
-    "date": "2026-04-11T16:00:00+00:00"
-  },
-  {
-    "league": "LPB",
-    "match": "Imortal vs Vasco Da Gama",
-    "tip": "Over 178.25",
+    "league": "Pro A",
+    "match": "Bremerhaven vs Nurnberger",
+    "tip": "Over 163",
     "odds": "1.91",
-    "date": "2026-04-11T16:30:00+00:00"
+    "date": "2026-04-12T13:00:00+00:00"
   },
   {
-    "league": "BNXT League",
-    "match": "Leiden vs Kortrijk",
-    "tip": "Over 167",
+    "league": "Korisliiga",
+    "match": "Helsinki Seagulls vs Kataja",
+    "tip": "Over 169",
+    "odds": "1.91",
+    "date": "2026-04-12T14:00:00+00:00"
+  },
+  {
+    "league": "NBA",
+    "match": "New York Knicks vs Charlotte Hornets",
+    "tip": "Over 215.5",
     "odds": "1.90",
-    "date": "2026-04-11T18:00:00+00:00"
+    "date": "2026-04-12T22:00:00+00:00"
   },
   {
-    "league": "Premier league",
-    "match": "Tindastoll vs IR Reykjavik",
-    "tip": "Over 189.5",
+    "league": "NBA",
+    "match": "Oklahoma City Thunder vs Phoenix Suns",
+    "tip": "Over 215",
     "odds": "1.91",
-    "date": "2026-04-11T19:00:00+00:00"
+    "date": "2026-04-13T00:30:00+00:00"
   }
 ]
