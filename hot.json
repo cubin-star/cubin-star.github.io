@@ -1,43 +1,27 @@
 [
   {
+    "league": "Segunda División RFEF - Group 5",
+    "match": "Rayo Majadahonda - Quintanar del Rey",
+    "kickoff": "2026-04-12T18:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.12",
+    "group": 1
+  },
+  {
+    "league": "Persha Liga",
+    "match": "Ahrobiznes Volochysk - Chornomorets",
+    "kickoff": "2026-04-12T15:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.46",
+    "group": 1
+  },
+  {
     "league": "La Liga",
     "match": "Mallorca - Rayo Vallecano",
     "kickoff": "2026-04-12T16:15:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.23",
-    "group": 1
-  },
-  {
-    "league": "Campeonato de Portugal Prio - Group A",
-    "match": "Os Limianos - Tirsense",
-    "kickoff": "2026-04-12T17:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.19",
-    "group": 1
-  },
-  {
-    "league": "Primera División RFEF - Group 1",
-    "match": "Arenas Getxo - Celta de Vigo II",
-    "kickoff": "2026-04-12T16:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.11",
+    "odds": "2.24",
     "group": 2
-  },
-  {
-    "league": "Premier Soccer League",
-    "match": "Marumo Gallants - Orbit College",
-    "kickoff": "2026-04-12T17:30:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.56",
-    "group": 2
-  },
-  {
-    "league": "Segunda División RFEF - Group 1",
-    "match": "Burgos Promesas - Coruxo",
-    "kickoff": "2026-04-12T17:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.28",
-    "group": 3
   },
   {
     "league": "Tercera División RFEF - Group 1",
@@ -45,6 +29,22 @@
     "kickoff": "2026-04-12T12:30:00+02:00",
     "tip": "Over 2.5",
     "odds": "2.13",
+    "group": 2
+  },
+  {
+    "league": "Primera B",
+    "match": "Deportes Temuco - Antofagasta",
+    "kickoff": "2026-04-12T23:30:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.21",
+    "group": 3
+  },
+  {
+    "league": "Ligue 1",
+    "match": "Toulouse - Lille",
+    "kickoff": "2026-04-12T17:15:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.21",
     "group": 3
   }
 ]

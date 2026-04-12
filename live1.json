@@ -1,5 +1,19 @@
 [
   {
+    "league": "Segunda División RFEF - Group 1",
+    "match": "Burgos Promesas - Coruxo",
+    "kickoff": "2026-04-12T17:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.31"
+  },
+  {
+    "league": "Segunda División RFEF - Group 5",
+    "match": "Rayo Majadahonda - Quintanar del Rey",
+    "kickoff": "2026-04-12T18:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.12"
+  },
+  {
     "league": "Tercera División RFEF - Group 1",
     "match": "Coruña - Estradense",
     "kickoff": "2026-04-12T12:30:00+02:00",
@@ -7,24 +21,10 @@
     "odds": "2.13"
   },
   {
-    "league": "Segunda División RFEF - Group 1",
-    "match": "Burgos Promesas - Coruxo",
-    "kickoff": "2026-04-12T17:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.28"
-  },
-  {
     "league": "La Liga",
     "match": "Mallorca - Rayo Vallecano",
     "kickoff": "2026-04-12T16:15:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.23"
-  },
-  {
-    "league": "Primera División RFEF - Group 1",
-    "match": "Arenas Getxo - Celta de Vigo II",
-    "kickoff": "2026-04-12T16:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.11"
+    "odds": "2.24"
   }
 ]
