@@ -1,14 +1,16 @@
 [
   {
-    "league": "AHL",
-    "match": "Wilkes-Barre/Scranton vs Cleveland Monsters",
+    "league": "ELJ",
+    "match": "Pardubice U20 vs Trinec U20",
     "tip": "Over 5.5",
-    "odds": "1.79"
+    "odds": "1.77",
+    "qualified13": true
   },
   {
-    "league": "Extraliga",
-    "match": "Trinec vs Karlovy Vary",
+    "league": "Elite League",
+    "match": "Sheffield vs Guildford",
     "tip": "Over 5.5",
-    "odds": "2.58"
+    "odds": "1.78",
+    "qualified13": true
   }
 ]
