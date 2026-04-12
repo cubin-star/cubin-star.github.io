@@ -1,26 +1,26 @@
 [
   {
-    "League": "Non League Premier - Northern",
-    "Match": "Ilkeston Town vs Bamber Bridge",
+    "League": "2. liga",
+    "Match": "Malženice vs Považská Bystrica",
     "Tip": "Over 2.5",
-    "Odds": "1.85",
-    "Date": "2026-04-11T14:00:00+00:00",
+    "Odds": "1.80",
+    "Date": "2026-04-12T08:30:00+00:00",
     "qualified": true
   },
   {
-    "League": "Premier League",
-    "Match": "Brentford vs Everton",
+    "League": "Primera División RFEF - Group 1",
+    "Match": "Arenas Getxo vs Celta de Vigo II",
     "Tip": "Over 2.5",
-    "Odds": "1.97",
-    "Date": "2026-04-11T14:00:00+00:00",
+    "Odds": "1.94",
+    "Date": "2026-04-12T14:00:00+00:00",
     "qualified": true
   },
   {
-    "League": "NB II",
-    "Match": "Kecskeméti TE vs Bekescsaba 1912",
+    "League": "Segunda División RFEF - Group 1",
+    "Match": "Burgos Promesas vs Coruxo",
     "Tip": "Over 2.5",
-    "Odds": "1.84",
-    "Date": "2026-04-11T15:00:00+00:00",
+    "Odds": "2.00",
+    "Date": "2026-04-12T15:00:00+00:00",
     "qualified": true
   }
 ]
