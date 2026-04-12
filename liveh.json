@@ -1,93 +1,37 @@
 [
   {
     "league": "Extraliga",
-    "match": "Trinec vs Karlovy Vary",
-    "tip": "Over 4.5",
-    "odds": "1.55",
-    "date": "2026-04-11T14:30:00+00:00"
-  },
-  {
-    "league": "Extraliga",
-    "match": "Nitra vs Poprad",
-    "tip": "Over 5.25",
-    "odds": "1.87",
-    "date": "2026-04-11T16:00:00+00:00"
-  },
-  {
-    "league": "Extraliga",
-    "match": "Pardubice vs Sparta Prague",
-    "tip": "Over 4.5",
-    "odds": "1.50",
-    "date": "2026-04-11T17:00:00+00:00"
-  },
-  {
-    "league": "Elite League",
-    "match": "Coventry vs Cardiff",
-    "tip": "Over 5.25",
-    "odds": "1.82",
-    "date": "2026-04-11T18:00:00+00:00"
-  },
-  {
-    "league": "Elite League",
-    "match": "Manchester vs Nottingham",
-    "tip": "Over 4.75",
-    "odds": "1.67",
-    "date": "2026-04-11T18:00:00+00:00"
-  },
-  {
-    "league": "AHL",
-    "match": "Charlotte Checkers vs Hershey Bears",
-    "tip": "Over 5.5",
-    "odds": "1.79",
-    "date": "2026-04-11T20:00:00+00:00"
-  },
-  {
-    "league": "NHL",
-    "match": "Detroit Red Wings vs New Jersey Devils",
-    "tip": "Over 5.5",
-    "odds": "1.62",
-    "date": "2026-04-11T21:00:00+00:00"
-  },
-  {
-    "league": "NHL",
-    "match": "Nashville Predators vs Minnesota Wild",
-    "tip": "Over 6",
-    "odds": "1.83",
-    "date": "2026-04-11T21:00:00+00:00"
-  },
-  {
-    "league": "NHL",
-    "match": "Utah Mammoth vs Carolina Hurricanes",
-    "tip": "Over 6.5",
-    "odds": "1.95",
-    "date": "2026-04-11T21:00:00+00:00"
-  },
-  {
-    "league": "AHL",
-    "match": "Wilkes-Barre/Scranton vs Cleveland Monsters",
-    "tip": "Over 5.5",
-    "odds": "1.80",
-    "date": "2026-04-11T22:05:00+00:00"
-  },
-  {
-    "league": "NHL",
-    "match": "Winnipeg Jets vs Philadelphia Flyers",
-    "tip": "Over 5.5",
-    "odds": "1.90",
-    "date": "2026-04-11T23:00:00+00:00"
-  },
-  {
-    "league": "NHL",
-    "match": "Seattle Kraken vs Calgary Flames",
-    "tip": "Over 6",
-    "odds": "1.90",
-    "date": "2026-04-11T23:00:00+00:00"
-  },
-  {
-    "league": "Extraliga",
     "match": "Slovan Bratislava vs Kosice",
     "tip": "Over 4.5",
-    "odds": "1.80",
+    "odds": "1.55",
     "date": "2026-04-12T14:00:00+00:00"
+  },
+  {
+    "league": "Extraliga",
+    "match": "Presov vs Skalica",
+    "tip": "Over 5.5",
+    "odds": "1.55",
+    "date": "2026-04-12T15:00:00+00:00"
+  },
+  {
+    "league": "National League",
+    "match": "Davos vs Zurich",
+    "tip": "Over 4.5",
+    "odds": "1.48",
+    "date": "2026-04-12T18:00:00+00:00"
+  },
+  {
+    "league": "National League",
+    "match": "Fribourg vs Servette",
+    "tip": "Over 5",
+    "odds": "1.73",
+    "date": "2026-04-12T18:00:00+00:00"
+  },
+  {
+    "league": "AHL",
+    "match": "Manitoba Moose vs Texas Stars",
+    "tip": "Over 5.25",
+    "odds": "1.91",
+    "date": "2026-04-12T19:00:00+00:00"
   }
 ]
