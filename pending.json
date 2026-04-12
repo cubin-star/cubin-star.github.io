@@ -6,5 +6,21 @@
     "tip": "Over 1.5",
     "odds": "1.54",
     "date": "2026-04-02T11:00:00+00:00"
+  },
+  {
+    "sport": "football",
+    "league": "J1 League",
+    "match": "Kawasaki Frontale vs Kashima",
+    "tip": "Over 1.5",
+    "odds": "1.20",
+    "date": "2026-04-12T07:00:00+00:00"
+  },
+  {
+    "sport": "hockey",
+    "league": "Extraliga",
+    "match": "Slovan Bratislava vs Kosice",
+    "tip": "Over 3.5",
+    "odds": "1.31",
+    "date": "2026-04-12T14:00:00+00:00"
   }
 ]

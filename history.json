@@ -1,5 +1,155 @@
 [
   {
+    "sport": "football",
+    "league": "A-League",
+    "match": "Melbourne City vs Wellington Phoenix",
+    "tip": "Over 1.5",
+    "odds": "1.20",
+    "date": "2026-04-12T05:00:00+00:00",
+    "score": "2:0",
+    "result": "✓"
+  },
+  {
+    "sport": "hockey",
+    "league": "NHL",
+    "match": "Winnipeg Jets vs Philadelphia Flyers",
+    "tip": "Over 4.5",
+    "odds": "1.40",
+    "date": "2026-04-11T23:00:00+00:00",
+    "score": "1:7",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "USL Super League",
+    "match": "Fort Lauderdale United W vs Sporting JAX W",
+    "tip": "Over 1.5",
+    "odds": "1.21",
+    "date": "2026-04-11T20:00:00+00:00",
+    "score": "1:4",
+    "result": "✓"
+  },
+  {
+    "sport": "hockey",
+    "league": "AHL",
+    "match": "Charlotte Checkers vs Hershey Bears",
+    "tip": "Over 4.25",
+    "odds": "1.32",
+    "date": "2026-04-11T20:00:00+00:00",
+    "score": "1:2",
+    "result": "✗"
+  },
+  {
+    "sport": "basketball",
+    "league": "Premier league",
+    "match": "Tindastoll vs IR Reykjavik",
+    "tip": "Over 184.5",
+    "odds": "1.60",
+    "date": "2026-04-11T19:00:00+00:00",
+    "score": "125:87",
+    "result": "✓"
+  },
+  {
+    "sport": "hockey",
+    "league": "Elite League",
+    "match": "Manchester vs Nottingham",
+    "tip": "Over 3.5",
+    "odds": "1.22",
+    "date": "2026-04-11T18:00:00+00:00",
+    "score": "2:1",
+    "result": "✗"
+  },
+  {
+    "sport": "basketball",
+    "league": "BNXT League",
+    "match": "Leiden vs Kortrijk",
+    "tip": "Over 162",
+    "odds": "1.55",
+    "date": "2026-04-11T18:00:00+00:00",
+    "score": "69:93",
+    "result": "✗"
+  },
+  {
+    "sport": "basketball",
+    "league": "LPB",
+    "match": "Imortal vs Vasco Da Gama",
+    "tip": "Over 174.5",
+    "odds": "1.58",
+    "date": "2026-04-11T16:30:00+00:00",
+    "score": "95:79",
+    "result": "✗"
+  },
+  {
+    "sport": "basketball",
+    "league": "NBL",
+    "match": "USK Prague vs Slavia Prague",
+    "tip": "Over 161.5",
+    "odds": "1.53",
+    "date": "2026-04-11T16:00:00+00:00",
+    "score": "76:81",
+    "result": "✗"
+  },
+  {
+    "sport": "basketball",
+    "league": "ABA League",
+    "match": "KK Bosna vs Igokea",
+    "tip": "Over 159",
+    "odds": "1.56",
+    "date": "2026-04-11T16:00:00+00:00",
+    "score": "86:89",
+    "result": "✓"
+  },
+  {
+    "sport": "hockey",
+    "league": "Extraliga",
+    "match": "Trinec vs Karlovy Vary",
+    "tip": "Over 3.5",
+    "odds": "1.30",
+    "date": "2026-04-11T14:30:00+00:00",
+    "score": "3:2",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "National League",
+    "match": "Woking vs Morecambe",
+    "tip": "Over 1.5",
+    "odds": "1.16",
+    "date": "2026-04-11T14:00:00+00:00",
+    "score": "5:1",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "Non League Premier - Northern",
+    "match": "Stockton Town vs Rushall Olympic",
+    "tip": "Over 1.5",
+    "odds": "1.18",
+    "date": "2026-04-11T14:00:00+00:00",
+    "score": "2:4",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "3. Liga",
+    "match": "Waldhof Mannheim vs MSV Duisburg",
+    "tip": "Over 1.5",
+    "odds": "1.19",
+    "date": "2026-04-11T12:00:00+00:00",
+    "score": "1:4",
+    "result": "✓"
+  },
+  {
+    "sport": "basketball",
+    "league": "NKL",
+    "match": "Suduva-Mantinga vs Vilkaviskis",
+    "tip": "Over 155.5",
+    "odds": "1.58",
+    "date": "2026-04-11T11:10:00+00:00",
+    "score": "104:77",
+    "result": "✓"
+  },
+  {
     "sport": "basketball",
     "league": "NBA",
     "match": "Los Angeles Lakers vs Phoenix Suns",
