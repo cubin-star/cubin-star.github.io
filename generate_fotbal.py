@@ -104,6 +104,8 @@ def fetch_fixtures(date_str):
         fixtures[fid] = {
             "home": f.get("teams", {}).get("home", {}).get("name", "?"),
             "away": f.get("teams", {}).get("away", {}).get("name", "?"),
+            "home_id": f.get("teams", {}).get("home", {}).get("id", 0),
+            "away_id": f.get("teams", {}).get("away", {}).get("id", 0),
             "league": f.get("league", {}).get("name", "?"),
             "league_id": f.get("league", {}).get("id", 0),
             "season": f.get("league", {}).get("season", 2025),
@@ -144,6 +146,30 @@ def fetch_prediction(fixture_id):
     data = api_get("predictions", {"fixture": str(fixture_id)})
     items = data.get("response", [])
     return items[0] if items else None
+
+
+def fetch_team_stats(league_id, season, team_id):
+    """Fetch team statistics – fallback when /predictions has no data."""
+    time.sleep(DELAY)
+    data = api_get("teams/statistics", {
+        "league": str(league_id),
+        "season": str(season),
+        "team": str(team_id),
+    })
+    return data.get("response")
+
+
+def build_pred_from_stats(home_stats, away_stats):
+    """Convert /teams/statistics responses into the same structure
+    that /predictions returns, so meets_criteria() works unchanged."""
+    if not home_stats or not away_stats:
+        return None
+    return {
+        "teams": {
+            "home": {"league": home_stats},
+            "away": {"league": away_stats},
+        }
+    }
 
 
 # ===== CRITERIA =====
@@ -329,6 +355,10 @@ def extract_candidates(odds_data, fixtures):
             "Odds_25": f"{avg_over25:.2f}",
             "Odds_15": f"{avg_over15:.2f}",
             "kickoff": fix["kickoff"],
+            "home_id": fix.get("home_id", 0),
+            "away_id": fix.get("away_id", 0),
+            "league_id": fix.get("league_id", 0),
+            "season": fix.get("season", 2025),
         })
 
     return candidates
@@ -432,6 +462,12 @@ def main():
         print(f"  [{i+1}/{len(candidates)}] {c['Match'][:45]:.<47s}", end="")
         try:
             pred = fetch_prediction(c["fixture_id"])
+            if not pred and c["home_id"] and c["away_id"]:
+                # Fallback: /predictions empty → try /teams/statistics
+                print(" pred=∅", end="")
+                h_stats = fetch_team_stats(c["league_id"], c["season"], c["home_id"])
+                a_stats = fetch_team_stats(c["league_id"], c["season"], c["away_id"])
+                pred = build_pred_from_stats(h_stats, a_stats)
             if pred:
                 ok, detail, score = meets_criteria(pred)
                 if ok:
