@@ -1,37 +1,58 @@
 [
   {
-    "league": "Extraliga",
-    "match": "Slovan Bratislava vs Kosice",
-    "tip": "Over 4.5",
-    "odds": "1.55",
-    "date": "2026-04-12T14:00:00+00:00"
-  },
-  {
-    "league": "Extraliga",
-    "match": "Presov vs Skalica",
+    "league": "Liiga",
+    "match": "SaiPa vs Assat",
     "tip": "Over 5.5",
-    "odds": "1.55",
-    "date": "2026-04-12T15:00:00+00:00"
+    "odds": "2.15",
+    "date": "2026-04-13T15:30:00+00:00"
   },
   {
-    "league": "National League",
-    "match": "Davos vs Zurich",
+    "league": "Extraliga",
+    "match": "Sparta Prague vs Pardubice",
     "tip": "Over 4.5",
-    "odds": "1.48",
-    "date": "2026-04-12T18:00:00+00:00"
+    "odds": "1.52",
+    "date": "2026-04-13T16:45:00+00:00"
   },
   {
-    "league": "National League",
-    "match": "Fribourg vs Servette",
-    "tip": "Over 5",
+    "league": "SHL",
+    "match": "Luleå vs Skellefteå",
+    "tip": "Over 4.5",
+    "odds": "1.52",
+    "date": "2026-04-13T17:00:00+00:00"
+  },
+  {
+    "league": "NHL",
+    "match": "Tampa Bay Lightning vs Detroit Red Wings",
+    "tip": "Over 5.5",
+    "odds": "1.65",
+    "date": "2026-04-13T23:00:00+00:00"
+  },
+  {
+    "league": "NHL",
+    "match": "Philadelphia Flyers vs Carolina Hurricanes",
+    "tip": "Over 5.5",
+    "odds": "1.70",
+    "date": "2026-04-13T23:00:00+00:00"
+  },
+  {
+    "league": "NHL",
+    "match": "Nashville Predators vs San Jose Sharks",
+    "tip": "Over 6.5",
+    "odds": "1.95",
+    "date": "2026-04-14T00:00:00+00:00"
+  },
+  {
+    "league": "NHL",
+    "match": "Chicago Blackhawks vs Buffalo Sabres",
+    "tip": "Over 5.5",
+    "odds": "1.60",
+    "date": "2026-04-14T00:30:00+00:00"
+  },
+  {
+    "league": "NHL",
+    "match": "Vegas Golden Knights vs Winnipeg Jets",
+    "tip": "Over 5.5",
     "odds": "1.73",
-    "date": "2026-04-12T18:00:00+00:00"
-  },
-  {
-    "league": "AHL",
-    "match": "Manitoba Moose vs Texas Stars",
-    "tip": "Over 5.25",
-    "odds": "1.91",
-    "date": "2026-04-12T19:00:00+00:00"
+    "date": "2026-04-14T02:00:00+00:00"
   }
 ]
