@@ -1,5 +1,125 @@
 [
   {
+    "sport": "basketball",
+    "league": "NBA",
+    "match": "New York Knicks vs Charlotte Hornets",
+    "tip": "Over 207.5",
+    "odds": "1.40",
+    "date": "2026-04-12T22:00:00+00:00",
+    "score": "96:110",
+    "result": "✗"
+  },
+  {
+    "sport": "football",
+    "league": "Liga Mayor",
+    "match": "Delfines Del Este vs Universidad O&M",
+    "tip": "Over 1.5",
+    "odds": "1.16",
+    "date": "2026-04-12T20:00:00+00:00",
+    "score": "2:2",
+    "result": "✓"
+  },
+  {
+    "sport": "hockey",
+    "league": "AHL",
+    "match": "Manitoba Moose vs Texas Stars",
+    "tip": "Over 3.5",
+    "odds": "1.20",
+    "date": "2026-04-12T19:00:00+00:00",
+    "score": "4:3",
+    "result": "✓"
+  },
+  {
+    "sport": "hockey",
+    "league": "National League",
+    "match": "Davos vs Zurich",
+    "tip": "Over 3.5",
+    "odds": "1.28",
+    "date": "2026-04-12T18:00:00+00:00",
+    "score": "2:1",
+    "result": "✗"
+  },
+  {
+    "sport": "hockey",
+    "league": "Extraliga",
+    "match": "Presov vs Skalica",
+    "tip": "Over 4.5",
+    "odds": "1.20",
+    "date": "2026-04-12T15:00:00+00:00",
+    "score": "4:2",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "Super League",
+    "match": "FC Sion vs Lausanne",
+    "tip": "Over 1.5",
+    "odds": "1.18",
+    "date": "2026-04-12T14:30:00+00:00",
+    "score": "3:0",
+    "result": "✓"
+  },
+  {
+    "sport": "hockey",
+    "league": "Extraliga",
+    "match": "Slovan Bratislava vs Kosice",
+    "tip": "Over 3.5",
+    "odds": "1.31",
+    "date": "2026-04-12T14:00:00+00:00",
+    "score": "0:3",
+    "result": "✗"
+  },
+  {
+    "sport": "basketball",
+    "league": "Korisliiga",
+    "match": "Helsinki Seagulls vs Kataja",
+    "tip": "Over 160.5",
+    "odds": "1.43",
+    "date": "2026-04-12T14:00:00+00:00",
+    "score": "86:76",
+    "result": "✓"
+  },
+  {
+    "sport": "basketball",
+    "league": "Pro A",
+    "match": "Bremerhaven vs Nurnberger",
+    "tip": "Over 158",
+    "odds": "1.55",
+    "date": "2026-04-12T13:00:00+00:00",
+    "score": "81:73",
+    "result": "✗"
+  },
+  {
+    "sport": "football",
+    "league": "2. Lig",
+    "match": "Şanlıurfaspor vs Kastamonuspor",
+    "tip": "Over 1.5",
+    "odds": "1.19",
+    "date": "2026-04-12T12:00:00+00:00",
+    "score": "5:2",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "Regionalliga - SudWest",
+    "match": "Freiburg II vs Eintracht Trier",
+    "tip": "Over 1.5",
+    "odds": "1.20",
+    "date": "2026-04-12T12:00:00+00:00",
+    "score": "4:1",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "J1 League",
+    "match": "Kawasaki Frontale vs Kashima",
+    "tip": "Over 1.5",
+    "odds": "1.20",
+    "date": "2026-04-12T07:00:00+00:00",
+    "score": "0:2",
+    "result": "✓"
+  },
+  {
     "sport": "football",
     "league": "A-League",
     "match": "Melbourne City vs Wellington Phoenix",
