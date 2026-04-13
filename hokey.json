@@ -1,16 +1,14 @@
 [
   {
-    "league": "ELJ",
-    "match": "Pardubice U20 vs Trinec U20",
+    "league": "Extraliga",
+    "match": "Sparta Prague vs Pardubice",
     "tip": "Over 5.5",
-    "odds": "1.77",
-    "qualified13": true
+    "odds": "2.51"
   },
   {
-    "league": "Elite League",
-    "match": "Sheffield vs Guildford",
+    "league": "Hockey Allsvenskan",
+    "match": "BIK Karlskoga vs MODO",
     "tip": "Over 5.5",
-    "odds": "1.78",
-    "qualified13": true
+    "odds": "2.16"
   }
 ]
