@@ -1,26 +1,23 @@
 [
   {
-    "League": "2. liga",
-    "Match": "Malženice vs Považská Bystrica",
+    "League": "Superliga",
+    "Match": "Prishtina vs Dukagjini",
     "Tip": "Over 2.5",
-    "Odds": "1.80",
-    "Date": "2026-04-12T08:30:00+00:00",
-    "qualified": true
+    "Odds": "1.83",
+    "Date": "2026-04-13T13:00:00+00:00"
   },
   {
-    "League": "Primera División RFEF - Group 1",
-    "Match": "Arenas Getxo vs Celta de Vigo II",
+    "League": "Liga I",
+    "Match": "Metaloglobus vs Csikszereda",
     "Tip": "Over 2.5",
-    "Odds": "1.94",
-    "Date": "2026-04-12T14:00:00+00:00",
-    "qualified": true
+    "Odds": "1.99",
+    "Date": "2026-04-13T12:30:00+00:00"
   },
   {
-    "League": "Segunda División RFEF - Group 1",
-    "Match": "Burgos Promesas vs Coruxo",
+    "League": "Serie C - Girone C",
+    "Match": "Benevento vs Cavese",
     "Tip": "Over 2.5",
-    "Odds": "2.00",
-    "Date": "2026-04-12T15:00:00+00:00",
-    "qualified": true
+    "Odds": "1.83",
+    "Date": "2026-04-13T18:30:00+00:00"
   }
 ]
