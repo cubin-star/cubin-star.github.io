@@ -1,30 +1,23 @@
 [
   {
-    "League": "2. Lig",
-    "Match": "Şanlıurfaspor vs Kastamonuspor",
+    "League": "Campionato Primavera - 1",
+    "Match": "Torino U20 vs Cremonese U20",
     "Tip": "Over 1.5",
     "Odds": "1.19",
-    "Date": "2026-04-12T12:00:00+00:00"
+    "Date": "2026-04-13T13:00:00+00:00"
   },
   {
-    "League": "Regionalliga - SudWest",
-    "Match": "Freiburg II vs Eintracht Trier",
-    "Tip": "Over 1.5",
-    "Odds": "1.20",
-    "Date": "2026-04-12T12:00:00+00:00"
-  },
-  {
-    "League": "Super League",
-    "Match": "FC Sion vs Lausanne",
+    "League": "1. Lig",
+    "Match": "Sivasspor vs İstanbulspor",
     "Tip": "Over 1.5",
     "Odds": "1.18",
-    "Date": "2026-04-12T14:30:00+00:00"
+    "Date": "2026-04-13T13:00:00+00:00"
   },
   {
-    "League": "Liga Mayor",
-    "Match": "Delfines Del Este vs Universidad O&M",
+    "League": "Eerste Divisie",
+    "Match": "Jong Utrecht vs Vitesse",
     "Tip": "Over 1.5",
-    "Odds": "1.16",
-    "Date": "2026-04-12T20:00:00+00:00"
+    "Odds": "1.17",
+    "Date": "2026-04-13T18:00:00+00:00"
   }
 ]
