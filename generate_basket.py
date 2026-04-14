@@ -55,6 +55,13 @@ H2H_MIN_GAMES = 2           # min H2H finished games to apply H2H filter
 H2H_OVER_R = 0.95           # H2H avg total >= 95% of selection_line
 MIN_REST_HOURS = 36          # min hours since last game (36h filters back-to-back)
 
+# Defense leakage – both teams must concede enough (porous defense)
+BOTH_CONCEDE_FLOOR_R = 0.93  # oba inkasují ≥ 93% half-line na svém venue
+
+# 2nd half filter (like football's 2nd-half filter)
+MIN_2H_RATIO = 0.47           # 2H bodů musí být ≥ 47% celkových bodů
+MIN_2H_BASELINE = 38.0        # minimum 2H baseline (avg per-team scored+conceded in Q3+Q4)
+
 request_count = 0
 
 
@@ -145,14 +152,35 @@ def fetch_team_games(team_id, league_id, season):
         if h_total is None or a_total is None:
             continue
         try:
-            finished.append({
+            entry = {
                 "timestamp": g.get("timestamp", 0),
                 "home_id": g.get("teams", {}).get("home", {}).get("id", 0),
                 "away_id": g.get("teams", {}).get("away", {}).get("id", 0),
                 "home_total": int(h_total),
                 "away_total": int(a_total),
                 "total": int(h_total) + int(a_total),
-            })
+            }
+            # Quarter data for 2nd half (Q3+Q4) analysis
+            h_sc = scores.get("home", {})
+            a_sc = scores.get("away", {})
+            h_q3 = h_sc.get("quarter_3")
+            h_q4 = h_sc.get("quarter_4")
+            a_q3 = a_sc.get("quarter_3")
+            a_q4 = a_sc.get("quarter_4")
+            if all(v is not None for v in (h_q3, h_q4, a_q3, a_q4)):
+                try:
+                    entry["h_sh"] = int(h_q3) + int(h_q4)
+                    entry["a_sh"] = int(a_q3) + int(a_q4)
+                    entry["total_sh"] = entry["h_sh"] + entry["a_sh"]
+                    # Regulation total (4Q, no OT) for fair 2H ratio
+                    h_q1 = int(h_sc.get("quarter_1", 0) or 0)
+                    h_q2 = int(h_sc.get("quarter_2", 0) or 0)
+                    a_q1 = int(a_sc.get("quarter_1", 0) or 0)
+                    a_q2 = int(a_sc.get("quarter_2", 0) or 0)
+                    entry["reg_total"] = h_q1 + h_q2 + int(h_q3) + int(h_q4) + a_q1 + a_q2 + int(a_q3) + int(a_q4)
+                except (ValueError, TypeError):
+                    pass
+            finished.append(entry)
         except (ValueError, TypeError):
             pass
     finished.sort(key=lambda x: x["timestamp"], reverse=True)
@@ -300,6 +328,12 @@ def meets_criteria(home_stats, away_stats, selection_line):
         return False, (f"venue offense below league avg: {h_for_h:.0f}/{a_for_a:.0f} "
                        f"(league avg/team={league_avg_per_team:.0f})"), 0.0
 
+    # --- Check 2b: Both teams must have porous defense at their venue ---
+    concede_floor = half * BOTH_CONCEDE_FLOOR_R
+    if h_agn_h < concede_floor or a_agn_a < concede_floor:
+        return False, (f"defense too tight: concede {h_agn_h:.0f}/{a_agn_a:.0f} "
+                       f"(min {concede_floor:.0f})"), 0.0
+
     # --- Check 3: Matchup expected must exceed bookmaker line ---
     min_expected = selection_line * EXPECTED_MIN_R
     if expected < min_expected:
@@ -338,6 +372,27 @@ def analyze_recent_form(games, team_id, n=RECENT_N):
     std_dev = math.sqrt(variance)
     last_ts = games[0]["timestamp"] if games else 0
 
+    # 2nd half (Q3+Q4) analysis – like football's 2nd-half filter
+    sh_games = [g for g in last_n if "total_sh" in g and g.get("reg_total", g["total"]) > 0]
+    if sh_games:
+        sh_ratios = [g["total_sh"] / g.get("reg_total", g["total"]) for g in sh_games]
+        avg_sh_ratio = sum(sh_ratios) / len(sh_ratios)
+        team_sh = []
+        team_sh_conceded = []
+        for g in sh_games:
+            if g["home_id"] == team_id:
+                team_sh.append(g.get("h_sh", 0))
+                team_sh_conceded.append(g.get("a_sh", 0))
+            else:
+                team_sh.append(g.get("a_sh", 0))
+                team_sh_conceded.append(g.get("h_sh", 0))
+        avg_team_sh = sum(team_sh) / len(team_sh) if team_sh else 0
+        avg_team_sh_conceded = sum(team_sh_conceded) / len(team_sh_conceded) if team_sh_conceded else 0
+    else:
+        avg_sh_ratio = None
+        avg_team_sh = None
+        avg_team_sh_conceded = None
+
     return {
         "avg_total": avg_total,
         "avg_team_pts": avg_team_pts,
@@ -345,6 +400,9 @@ def analyze_recent_form(games, team_id, n=RECENT_N):
         "std_dev": std_dev,
         "last_game_ts": last_ts,
         "n_games": len(last_n),
+        "avg_sh_ratio": avg_sh_ratio,
+        "avg_team_sh": avg_team_sh,
+        "avg_team_sh_conceded": avg_team_sh_conceded,
     }
 
 
@@ -400,6 +458,31 @@ def meets_enhanced_criteria(home_form, away_form, h2h_games,
                 return False, (f"B2B fatigue: rest {h_rest_h:.0f}h/{a_rest_h:.0f}h "
                                f"(min {MIN_REST_HOURS}h)")
             parts.append(f"rest={h_rest_h:.0f}h/{a_rest_h:.0f}h")
+
+        # Check 6: 2nd half ratio (Q3+Q4 scoring distribution)
+        h_sh_ratio = home_form.get("avg_sh_ratio")
+        a_sh_ratio = away_form.get("avg_sh_ratio")
+        if h_sh_ratio is not None and a_sh_ratio is not None:
+            if h_sh_ratio < MIN_2H_RATIO or a_sh_ratio < MIN_2H_RATIO:
+                return False, (f"weak 2nd half: ratio {h_sh_ratio:.0%}/{a_sh_ratio:.0%} "
+                               f"(min {MIN_2H_RATIO:.0%})")
+            parts.append(f"2H={h_sh_ratio:.0%}/{a_sh_ratio:.0%}")
+
+            # Check 7: 2nd half scoring baseline
+            h_sh_scr = home_form.get("avg_team_sh")
+            a_sh_scr = away_form.get("avg_team_sh")
+            h_sh_con = home_form.get("avg_team_sh_conceded")
+            a_sh_con = away_form.get("avg_team_sh_conceded")
+            if all(v is not None for v in (h_sh_scr, a_sh_scr, h_sh_con, a_sh_con)):
+                base_2h = (h_sh_scr + a_sh_scr + h_sh_con + a_sh_con) / 4
+                if base_2h < MIN_2H_BASELINE:
+                    return False, (f"2H baseline low: {base_2h:.1f} < {MIN_2H_BASELINE} "
+                                   f"(scr {h_sh_scr:.1f}/{a_sh_scr:.1f}, con {h_sh_con:.1f}/{a_sh_con:.1f})")
+                parts.append(f"2Hbase={base_2h:.0f}")
+            else:
+                parts.append("2Hbase=N/A")
+        else:
+            parts.append("2H=N/A")
     else:
         parts.append("form=N/A")
 
@@ -436,9 +519,11 @@ def main():
     print(f"Select: Over @ ~{SELECTION_ODDS} odds → Output: Over @ ~{OUTPUT_ODDS} odds")
     print(f"MIN_HALF_LINE: {MIN_HALF_LINE}, BOTH_FLOOR_R: {BOTH_FLOOR_R}, EXPECTED_MIN_R: {EXPECTED_MIN_R}")
     print(f"Criteria: venue_expected >= line*{EXPECTED_MIN_R}, "
-          f"venue offense >= half*{BOTH_FLOOR_R} & >= league/team*{OFFENSE_VS_LEAGUE_R}")
+          f"venue offense >= half*{BOTH_FLOOR_R} & >= league/team*{OFFENSE_VS_LEAGUE_R}, "
+          f"defense concede >= half*{BOTH_CONCEDE_FLOOR_R}")
     print(f"Enhanced: form>={RECENT_FLOOR_R}*line, over>={MIN_OVER_HIT_RATE:.0%}@safe, "
-          f"SD<={MAX_TOTAL_SD:.0f}, H2H>={H2H_OVER_R}*line, rest>={MIN_REST_HOURS}h\n")
+          f"SD<={MAX_TOTAL_SD:.0f}, H2H>={H2H_OVER_R}*line, rest>={MIN_REST_HOURS}h, "
+          f"2H>={MIN_2H_RATIO:.0%}, 2Hbase>={MIN_2H_BASELINE:.0f}\n")
 
     # 1. Fetch games
     games_today = fetch_games(today)
