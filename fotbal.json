@@ -1,23 +1,26 @@
 [
   {
-    "League": "Superliga",
-    "Match": "Prishtina vs Dukagjini",
+    "League": "League One",
+    "Match": "Leyton Orient vs Mansfield Town",
     "Tip": "Over 2.5",
-    "Odds": "1.83",
-    "Date": "2026-04-13T13:00:00+00:00"
+    "Odds": "1.88",
+    "Date": "2026-04-14T18:45:00+00:00",
+    "qualified": true
   },
   {
-    "League": "Liga I",
-    "Match": "Metaloglobus vs Csikszereda",
+    "League": "National League",
+    "Match": "Woking vs Solihull Moors",
     "Tip": "Over 2.5",
-    "Odds": "1.99",
-    "Date": "2026-04-13T12:30:00+00:00"
+    "Odds": "1.80",
+    "Date": "2026-04-14T18:45:00+00:00",
+    "qualified": true
   },
   {
-    "League": "Serie C - Girone C",
-    "Match": "Benevento vs Cavese",
+    "League": "Liga Leumit",
+    "Match": "Hapoel Acre vs Hapoel Kfar Shalem",
     "Tip": "Over 2.5",
-    "Odds": "1.83",
-    "Date": "2026-04-13T18:30:00+00:00"
+    "Odds": "1.85",
+    "Date": "2026-04-14T17:30:00+00:00",
+    "qualified": true
   }
 ]

@@ -1,1 +1,33 @@
-[]
+[
+  {
+    "League": "League One",
+    "Match": "Leyton Orient vs Mansfield Town",
+    "Tip": "Over 2.5",
+    "Odds": "1.88",
+    "Date": "2026-04-14T18:45:00+00:00",
+    "qualified": true
+  },
+  {
+    "League": "National League",
+    "Match": "Woking vs Solihull Moors",
+    "Tip": "Over 2.5",
+    "Odds": "1.80",
+    "Date": "2026-04-14T18:45:00+00:00",
+    "qualified": true
+  },
+  {
+    "League": "Liga Leumit",
+    "Match": "Maccabi Kabilio Jaffa vs Hapoel Rishon LeZion",
+    "Tip": "Over 2.5",
+    "Odds": "1.82",
+    "Date": "2026-04-14T17:30:00+00:00"
+  },
+  {
+    "League": "Liga Leumit",
+    "Match": "Hapoel Acre vs Hapoel Kfar Shalem",
+    "Tip": "Over 2.5",
+    "Odds": "1.85",
+    "Date": "2026-04-14T17:30:00+00:00",
+    "qualified": true
+  }
+]
