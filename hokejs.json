@@ -1,30 +1,16 @@
 [
   {
-    "league": "Liiga",
-    "match": "SaiPa vs Assat",
-    "tip": "Over 4.5",
-    "odds": "1.42",
-    "date": "2026-04-13T15:30:00+00:00"
-  },
-  {
-    "league": "Extraliga",
-    "match": "Sparta Prague vs Pardubice",
+    "league": "Alps Hockey League",
+    "match": "Gherdeina vs Merano",
     "tip": "Over 3.5",
-    "odds": "1.30",
-    "date": "2026-04-13T16:45:00+00:00"
+    "odds": "1.18",
+    "date": "2026-04-14T17:30:00+00:00"
   },
   {
-    "league": "SHL",
-    "match": "Luleå vs Skellefteå",
-    "tip": "Over 3.5",
-    "odds": "1.30",
-    "date": "2026-04-13T17:00:00+00:00"
-  },
-  {
-    "league": "NHL",
-    "match": "Vegas Golden Knights vs Winnipeg Jets",
+    "league": "WHL",
+    "match": "Saskatoon Blades vs Prince Albert Raiders",
     "tip": "Over 4.5",
-    "odds": "1.35",
-    "date": "2026-04-14T02:00:00+00:00"
+    "odds": "1.33",
+    "date": "2026-04-15T01:00:00+00:00"
   }
 ]
