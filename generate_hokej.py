@@ -54,13 +54,14 @@ STRONG_MIN_R = 1.10      # "výrazný" tým 110%+ baseline (jasně nad normou li
 CONTRAST_MAX_R = 0.95    # protějšek pod 95% baseline (kontrast ≥ 15%)
 MIN_BASELINE = 2.10      # sníženo z 2.40 → otevírá SHL, Liiga, DEL, Extraligu
 EXPECTED_VS_OUTPUT_R = 1.15  # matchup expected musí překročit OUTPUT line o 15%
+MIN_ATTACK = 2.00            # oba týmy musí střílet ≥ 2.0 g/z (žádný "mrtvý" útok)
 
 # Variant C – both teams offensive (no contrast needed, but stricter floor)
-BOTH_OFFENSE_R = 1.00    # oba skórují >= 100% baseline
+BOTH_OFFENSE_R = 1.05    # oba skórují >= 105% baseline (přísnější než 100%)
 BOTH_CONCEDE_R = 1.00    # oba inkasují >= 100% baseline (otevřený zápas)
 
-# Variant D – pure expected-based (balanced high-scoring, no pattern needed)
-EXPECTED_VS_SEL_R = 0.95  # expected >= 95% selection line (balanced games)
+# P2+P3 period filter (like football's 2nd-half filter)
+MIN_P23_BASELINE = 0.80  # minimum P2+P3 baseline (avg per-team P2+P3 stat)
 
 # Enhanced criteria – recent form, H2H, consistency, rest
 RECENT_N = 10              # rolling window: last N finished games
@@ -207,6 +208,8 @@ def fetch_team_games(team_id, league_id, season):
                     entry["p23_total"] = p2h + p2a + p3h + p3a
                     entry["p23_home"] = p2h + p3h
                     entry["p23_away"] = p2a + p3a
+                    # Regulation total (3 periods only, no OT) – for fair P2+P3 ratio
+                    entry["reg_total"] = p1h + p1a + p2h + p2a + p3h + p3a
             finished.append(entry)
         except (ValueError, TypeError):
             pass
@@ -326,6 +329,10 @@ def meets_criteria(home_stats, away_stats, selection_line, output_line):
     if h_for == 0 and a_for == 0:
         return False, "no stats", 0.0
 
+    # Oba týmy musí mít minimální útočný výkon – žádný "mrtvý" útok
+    if h_for < MIN_ATTACK or a_for < MIN_ATTACK:
+        return False, f"weak attack: {h_for:.2f}/{a_for:.2f} (min {MIN_ATTACK})", 0.0
+
     # Game baseline = průměrná per-team úroveň scoringu v tomto matchupu
     baseline = (h_for + a_for + h_agn + a_agn) / 4
     if baseline == 0:
@@ -368,20 +375,13 @@ def meets_criteria(home_stats, away_stats, selection_line, output_line):
         and h_agn >= concede_floor and a_agn >= concede_floor
     )
 
-    # D) expected >= 95% selection line → balanced high-scoring (no pattern needed)
-    # Catches games like BOS 3.5/3.6 vs 2.7/2.9 where both teams score well
-    # but don't fit contrast patterns. Enhanced criteria (form, H2H) provide safety.
-    variant_d = (expected >= selection_line * EXPECTED_VS_SEL_R)
-
-    if variant_a or variant_b or variant_c or variant_d:
+    if variant_a or variant_b or variant_c:
         if variant_a:
             tag = "A"
         elif variant_b:
             tag = "B"
-        elif variant_c:
-            tag = "C"
         else:
-            tag = "D"
+            tag = "C"
         score = expected / selection_line if selection_line > 0 else 0.0
         detail = (f"[{tag}] scored {h_for:.2f}/{a_for:.2f}, conceded {h_agn:.2f}/{a_agn:.2f} "
                   f"(base={baseline:.2f}, exp={expected:.1f}, line={selection_line:.1f}, "
@@ -418,10 +418,10 @@ def analyze_recent_form(games, team_id, n=RECENT_N):
     std_dev = math.sqrt(variance)
     last_ts = games[0]["timestamp"] if games else 0
 
-    # Period-by-period: calculate ratio of P2+P3 goals to total
-    p23_games = [g for g in last_n if "p23_total" in g and g["total"] > 0]
+    # Period-by-period: calculate ratio of P2+P3 goals to regulation total (no OT)
+    p23_games = [g for g in last_n if "p23_total" in g and g.get("reg_total", g["total"]) > 0]
     if p23_games:
-        p23_ratios = [g["p23_total"] / g["total"] for g in p23_games]
+        p23_ratios = [g["p23_total"] / g.get("reg_total", g["total"]) for g in p23_games]
         avg_p23_ratio = sum(p23_ratios) / len(p23_ratios)
         # Team-specific late scoring (P2+P3)
         team_p23 = []
@@ -431,9 +431,18 @@ def analyze_recent_form(games, team_id, n=RECENT_N):
             else:
                 team_p23.append(g.get("p23_away", 0))
         avg_team_p23 = sum(team_p23) / len(team_p23) if team_p23 else 0
+        # P2+P3 conceded (opponent's P2+P3 goals) – for contrast filter
+        team_p23_conceded = []
+        for g in p23_games:
+            if g["home_id"] == team_id:
+                team_p23_conceded.append(g.get("p23_away", 0))
+            else:
+                team_p23_conceded.append(g.get("p23_home", 0))
+        avg_team_p23_conceded = sum(team_p23_conceded) / len(team_p23_conceded) if team_p23_conceded else 0
     else:
         avg_p23_ratio = None
         avg_team_p23 = None
+        avg_team_p23_conceded = None
 
     return {
         "avg_total": avg_total,
@@ -444,6 +453,7 @@ def analyze_recent_form(games, team_id, n=RECENT_N):
         "n_games": len(last_n),
         "avg_p23_ratio": avg_p23_ratio,
         "avg_team_p23": avg_team_p23,
+        "avg_team_p23_conceded": avg_team_p23_conceded,
     }
 
 
@@ -509,6 +519,44 @@ def meets_enhanced_criteria(home_form, away_form, h2h_games,
                 return False, (f"weak late periods: P2+P3 ratio {h_p23:.0%}/{a_p23:.0%} "
                                f"(min {LATE_PERIOD_MIN_R:.0%})")
             parts.append(f"P2+P3={h_p23:.0%}/{a_p23:.0%}")
+
+        # Check 7: P2+P3 contrast filter (like football's 2nd-half A/B filter)
+        h_p23_scr = home_form.get("avg_team_p23")
+        a_p23_scr = away_form.get("avg_team_p23")
+        h_p23_con = home_form.get("avg_team_p23_conceded")
+        a_p23_con = away_form.get("avg_team_p23_conceded")
+        if all(v is not None for v in (h_p23_scr, a_p23_scr, h_p23_con, a_p23_con)):
+            p23_base = (h_p23_scr + a_p23_scr + h_p23_con + a_p23_con) / 4
+            if p23_base < MIN_P23_BASELINE:
+                return False, (f"P2+P3 base low: {p23_base:.2f} < {MIN_P23_BASELINE}")
+            p23_floor = p23_base * BOTH_FLOOR_R
+            p23_strong = p23_base * STRONG_MIN_R
+            p23_contrast = p23_base * CONTRAST_MAX_R
+            p23_off = p23_base * BOTH_OFFENSE_R
+            p23_cfloor = p23_base * BOTH_CONCEDE_R
+
+            # P2+P3 Varianta A: oba inkasují v P2+P3 >= floor + ofenzivní kontrast
+            p23_var_a = (
+                h_p23_con >= p23_floor and a_p23_con >= p23_floor
+                and ((h_p23_scr >= p23_strong and a_p23_scr < p23_contrast)
+                     or (a_p23_scr >= p23_strong and h_p23_scr < p23_contrast))
+            )
+            # P2+P3 Varianta B: oba střílí v P2+P3 >= floor + defenzivní kontrast
+            p23_var_b = (
+                h_p23_scr >= p23_floor and a_p23_scr >= p23_floor
+                and ((h_p23_con >= p23_strong and a_p23_con < p23_contrast)
+                     or (a_p23_con >= p23_strong and h_p23_con < p23_contrast))
+            )
+            # P2+P3 Varianta C: oba skórují i inkasují nadprůměrně v P2+P3
+            p23_var_c = (
+                h_p23_scr >= p23_off and a_p23_scr >= p23_off
+                and h_p23_con >= p23_cfloor and a_p23_con >= p23_cfloor
+            )
+            if not (p23_var_a or p23_var_b or p23_var_c):
+                return False, (f"P2+P3 contrast fail: scr {h_p23_scr:.2f}/{a_p23_scr:.2f}, "
+                               f"con {h_p23_con:.2f}/{a_p23_con:.2f} (P23base={p23_base:.2f})")
+            p23_tag = "P-A" if p23_var_a else ("P-B" if p23_var_b else "P-C")
+            parts.append(f"{p23_tag}: scr={h_p23_scr:.2f}/{a_p23_scr:.2f} con={h_p23_con:.2f}/{a_p23_con:.2f}")
         else:
             parts.append("P2+P3=N/A")
     else:
@@ -546,12 +594,12 @@ def main():
     print(f"Time: {now.strftime('%Y-%m-%d %H:%M UTC')}")
     print(f"Dynamic lines: sel@~{SELECTION_ODDS} → safe@~{OUTPUT_ODDS} (tol={ODDS_TOLERANCE})")
     print(f"MIN_BASELINE: {MIN_BASELINE} | EXPECTED_VS_OUTPUT_R: {EXPECTED_VS_OUTPUT_R}")
-    print(f"Variants: A(contr offense) B(contr defense) C(both open)")
+    print(f"Variants: A(contr offense) B(contr defense) C(both open) + P2+P3 contrast")
     print(f"  A/B: FLOOR={BOTH_FLOOR_R}, STRONG={STRONG_MIN_R}, CONTRAST<{CONTRAST_MAX_R}")
     print(f"  C: offense>={BOTH_OFFENSE_R}×base, concede>={BOTH_CONCEDE_R}×base")
     print(f"Enhanced: form>={RECENT_FLOOR_R}×line, over>={MIN_OVER_HIT_RATE:.0%}@safe, "
           f"SD<={MAX_TOTAL_SD}, H2H>={H2H_OVER_R}×line, rest>={MIN_REST_HOURS}h, "
-          f"P2+P3>={LATE_PERIOD_MIN_R:.0%}\n")
+          f"P2+P3>={LATE_PERIOD_MIN_R:.0%}, P2+P3 contrast(A/B/C)\n")
 
     # 1. Fetch games
     games_today = fetch_games(today)
