@@ -1,5 +1,21 @@
 [
   {
+    "league": "1 Liga",
+    "homeTeam": "Spojnia Stargard",
+    "awayTeam": "Inowroclaw",
+    "tip": "Over 163",
+    "odds": "1.85",
+    "halftimeScore": "33:32 (65 pts)",
+    "liveOdds": "1.85",
+    "finalScore": "",
+    "result": "",
+    "sport": "basketball",
+    "kickoff": "2026-04-15T16:00:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-basketball",
+    "scoutStats": "Score: 6/10 | HT: 33:32 (65 pts) | Q1=33 Q2=32 (line 164.5, pace 79%) | 1 Liga"
+  },
+  {
     "league": "Extraliga",
     "homeTeam": "Iskra Svit",
     "awayTeam": "Slovan Bratislava",
