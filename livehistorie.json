@@ -1,5 +1,21 @@
 [
   {
+    "league": "A2",
+    "homeTeam": "Volos",
+    "awayTeam": "Sofadon",
+    "tip": "Over 164",
+    "odds": "",
+    "halftimeScore": "37:40 (77 pts)",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "basketball",
+    "kickoff": "2026-04-15T14:00:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-basketball",
+    "scoutStats": "Score: 5/10 | HT: 37:40 (77 pts) | Q1=33 Q2=44 (no line, pace 73%) | A2"
+  },
+  {
     "league": "Premier League W",
     "homeTeam": "Horizont Minsk 2 W",
     "awayTeam": "Minsk W",
