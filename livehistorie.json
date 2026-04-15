@@ -1,5 +1,21 @@
 [
   {
+    "league": "WKBL W",
+    "homeTeam": "Samsung Blue Minx W",
+    "awayTeam": "Hana Bank W",
+    "tip": "Over 126",
+    "odds": "1.84",
+    "halftimeScore": "27:30 (57 pts)",
+    "liveOdds": "1.84",
+    "finalScore": "",
+    "result": "",
+    "sport": "basketball",
+    "kickoff": "2026-04-15T10:00:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-basketball",
+    "scoutStats": "Score: 4/10 | HT: 27:30 (57 pts) | Q1=31 Q2=26 (line 127, pace 90%) | WKBL W"
+  },
+  {
     "league": "Superleague",
     "homeTeam": "Margveti",
     "awayTeam": "VSA",
