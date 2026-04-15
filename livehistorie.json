@@ -1,5 +1,21 @@
 [
   {
+    "league": "NHL",
+    "homeTeam": "Utah Mammoth",
+    "awayTeam": "Winnipeg Jets",
+    "tip": "Over 3.5",
+    "odds": "1.01",
+    "halftimeScore": "1:0",
+    "liveOdds": "1.01",
+    "finalScore": "",
+    "result": "",
+    "sport": "hockey",
+    "kickoff": "2026-04-15T01:00:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-hockey",
+    "scoutStats": "Score: 10/10 | P1: 1:0 | GF: 6.0 GA: 6.1 | Odds: 1.01 | NHL"
+  },
+  {
     "league": "CONMEBOL Libertadores",
     "homeTeam": "Bolívar",
     "awayTeam": "Deportivo La Guaira",
