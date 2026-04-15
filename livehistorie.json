@@ -1,5 +1,21 @@
 [
   {
+    "league": "KHL",
+    "homeTeam": "Nizhny Novgorod",
+    "awayTeam": "Magnitogorsk",
+    "tip": "Over 3.75",
+    "odds": 1.33,
+    "halftimeScore": "0:1",
+    "liveOdds": 1.33,
+    "finalScore": "",
+    "result": "",
+    "sport": "hockey",
+    "kickoff": "2026-04-15T16:30:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-hockey",
+    "scoutStats": "Score: 4/9 | P1: 0:1 | GF: 2.8 GA: 2.8 | Line: 3.75 @ 1.33 | KHL"
+  },
+  {
     "league": "Extraliga",
     "homeTeam": "Iskra Svit",
     "awayTeam": "Slovan Bratislava",
@@ -103,11 +119,11 @@
     "odds": "",
     "halftimeScore": "32:25 (57 pts)",
     "liveOdds": "",
-    "finalScore": "59:71 (130 pts)",
-    "result": "✅ Won",
+    "finalScore": "",
+    "result": "",
     "sport": "basketball",
     "kickoff": "2026-04-15T14:30:00.000Z",
-    "resolvedAt": "2026-04-15T17:01:06.457Z",
+    "resolvedAt": "",
     "source": "scout-basketball",
     "scoutStats": "Score: 6/10 | HT: 32:25 (57 pts) | Q1=24 Q2=33 (no line, pace 54%) | I Divisioona Women"
   },
