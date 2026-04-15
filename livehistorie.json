@@ -1,5 +1,21 @@
 [
   {
+    "league": "Extraliga",
+    "homeTeam": "Pardubice",
+    "awayTeam": "Sparta Prague",
+    "tip": "Over 1",
+    "odds": 1.32,
+    "halftimeScore": "1:0",
+    "liveOdds": 1.32,
+    "finalScore": "",
+    "result": "",
+    "sport": "hockey",
+    "kickoff": "2026-04-15T16:00:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-hockey",
+    "scoutStats": "Score: 6/9 | P1: 1:0 | GF: 5.0 GA: 3.9 | Line: 1 @ 1.32 | Extraliga"
+  },
+  {
     "league": "I Divisioona Women",
     "homeTeam": "Pyrinto II W",
     "awayTeam": "Torpan Pojat Helsinki II W",
@@ -71,11 +87,11 @@
     "odds": "",
     "halftimeScore": "37:40 (77 pts)",
     "liveOdds": "",
-    "finalScore": "65:76 (141 pts)",
-    "result": "❌ Lost",
+    "finalScore": "",
+    "result": "",
     "sport": "basketball",
     "kickoff": "2026-04-15T14:00:00.000Z",
-    "resolvedAt": "2026-04-15T16:31:06.836Z",
+    "resolvedAt": "",
     "source": "scout-basketball",
     "scoutStats": "Score: 5/10 | HT: 37:40 (77 pts) | Q1=33 Q2=44 (no line, pace 73%) | A2"
   },
