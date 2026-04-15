@@ -1,5 +1,21 @@
 [
   {
+    "league": "Extraliga W",
+    "homeTeam": "CBK Kosice W",
+    "awayTeam": "Samorin W",
+    "tip": "Over 125.5",
+    "odds": "1.84",
+    "halftimeScore": "21:23 (44 pts)",
+    "liveOdds": "1.84",
+    "finalScore": "",
+    "result": "",
+    "sport": "basketball",
+    "kickoff": "2026-04-15T15:00:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-basketball",
+    "scoutStats": "Score: 6/10 | HT: 21:23 (44 pts) | Q1=25 Q2=19 (line 126.5, pace 70%) | Extraliga W"
+  },
+  {
     "league": "Premier League",
     "homeTeam": "Rubon II",
     "awayTeam": "Gomel",
@@ -71,11 +87,11 @@
     "odds": 1.32,
     "halftimeScore": "1:0",
     "liveOdds": 1.32,
-    "finalScore": "1:2",
-    "result": "✅ Won",
+    "finalScore": "",
+    "result": "",
     "sport": "hockey",
     "kickoff": "2026-04-15T13:30:00.000Z",
-    "resolvedAt": "2026-04-15T15:37:05.502Z",
+    "resolvedAt": "",
     "source": "scout-hockey",
     "scoutStats": "Score: 7/9 | P1: 1:0 | GF: 7.1 GA: 5.3 | Line: 1 @ 1.32 | MHL"
   },
