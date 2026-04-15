@@ -1,5 +1,21 @@
 [
   {
+    "league": "Euroleague Women",
+    "homeTeam": "Landes W",
+    "awayTeam": "Zaragoza W",
+    "tip": "Over 139.5",
+    "odds": "1.86",
+    "halftimeScore": "26:35 (61 pts)",
+    "liveOdds": "1.86",
+    "finalScore": "",
+    "result": "",
+    "sport": "basketball",
+    "kickoff": "2026-04-15T18:30:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-basketball",
+    "scoutStats": "Score: 5/10 | HT: 26:35 (61 pts) | Q1=37 Q2=24 (line 139.5, pace 87%) | Euroleague Women"
+  },
+  {
     "league": "Pro League",
     "homeTeam": "Al-Nassr",
     "awayTeam": "Al-Ettifaq",
