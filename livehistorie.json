@@ -1,5 +1,21 @@
 [
   {
+    "league": "Espoirs U21",
+    "homeTeam": "Paris U21",
+    "awayTeam": "Gravelines-Dunkerque U21",
+    "tip": "Over 120",
+    "odds": "",
+    "halftimeScore": "32:23 (55 pts)",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "basketball",
+    "kickoff": "2026-04-15T14:30:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-basketball",
+    "scoutStats": "Score: 6/10 | HT: 32:23 (55 pts) | Q1=28 Q2=27 (no line, pace 52%) | Espoirs U21"
+  },
+  {
     "league": "A2",
     "homeTeam": "Volos",
     "awayTeam": "Sofadon",
