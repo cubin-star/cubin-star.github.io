@@ -1,5 +1,21 @@
 [
   {
+    "league": "MHL",
+    "homeTeam": "Stalnye Lisy",
+    "awayTeam": "Avto",
+    "tip": "Over 1",
+    "odds": 1.32,
+    "halftimeScore": "1:0",
+    "liveOdds": 1.32,
+    "finalScore": "",
+    "result": "",
+    "sport": "hockey",
+    "kickoff": "2026-04-15T13:30:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-hockey",
+    "scoutStats": "Score: 7/9 | P1: 1:0 | GF: 7.1 GA: 5.3 | Line: 1 @ 1.32 | MHL"
+  },
+  {
     "league": "Premier League W",
     "homeTeam": "Olimpia Grodno 2 W",
     "awayTeam": "BC Minsk Youth W",
