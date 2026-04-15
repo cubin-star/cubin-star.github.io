@@ -1,5 +1,21 @@
 [
   {
+    "league": "Super League",
+    "homeTeam": "Tambov",
+    "awayTeam": "Metallurg",
+    "tip": "Over 172",
+    "odds": "",
+    "halftimeScore": "49:32 (81 pts)",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "basketball",
+    "kickoff": "2026-04-15T09:00:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-basketball",
+    "scoutStats": "Score: 4/10 | HT: 49:32 (81 pts) | Q1=36 Q2=45 (no line, pace 77%) | Super League"
+  },
+  {
     "league": "Higher League",
     "homeTeam": "Tobol Kostanay 2",
     "awayTeam": "Pavlodar",
