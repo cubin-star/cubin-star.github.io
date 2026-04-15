@@ -1,18 +1,19 @@
 [
   {
-    "league": "Eliteserien",
-    "homeTeam": "Sarpsborg 08 FF",
-    "awayTeam": "Bodo/Glimt",
-    "tip": "Over 1.5",
-    "odds": "",
-    "halftimeScore": "1:0",
-    "liveOdds": "",
+    "league": "Basketligan",
+    "homeTeam": "BC Lulea",
+    "awayTeam": "Norrkoping",
+    "tip": "Over 176",
+    "odds": "1.85",
+    "halftimeScore": "50:21 (71 pts)",
+    "liveOdds": "1.85",
     "finalScore": "",
     "result": "",
-    "kickoff": "2026-04-15T17:00:00.000Z",
+    "sport": "basketball",
+    "kickoff": "2026-04-15T17:04:00.000Z",
     "resolvedAt": "",
-    "source": "scout-football",
-    "scoutStats": "Score: 13/14 | xG: 1.80 | Shots: 15/7 | Corners: 5 | Poss: 63%"
+    "source": "scout-basketball",
+    "scoutStats": "Score: 5/10 | HT: 50:21 (71 pts) | Q1=34 Q2=37 (line 177, pace 80%) | Basketligan"
   },
   {
     "league": "NB I A W",
