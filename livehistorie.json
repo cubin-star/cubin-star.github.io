@@ -1,5 +1,21 @@
 [
   {
+    "league": "Higher League",
+    "homeTeam": "Atyrau 2",
+    "awayTeam": "Turan",
+    "tip": "Over 118",
+    "odds": "",
+    "halftimeScore": "27:27 (54 pts)",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "basketball",
+    "kickoff": "2026-04-15T07:00:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-basketball",
+    "scoutStats": "Score: 6/10 | HT: 27:27 (54 pts) | Q1=23 Q2=31 (no line, pace 51%) | Higher League"
+  },
+  {
     "league": "NHL",
     "homeTeam": "Utah Mammoth",
     "awayTeam": "Winnipeg Jets",
