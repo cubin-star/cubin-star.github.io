@@ -1,14 +1,15 @@
 [
   {
-    "league": "Extraliga",
-    "match": "Kosice vs Slovan Bratislava",
+    "league": "DEL",
+    "match": "Kolner vs Eisbaren Berlin",
     "tip": "Over 5.5",
-    "odds": "2.59"
+    "odds": "1.77",
+    "qualified13": true
   },
   {
-    "league": "Alps Hockey League",
-    "match": "Gherdeina vs Merano",
+    "league": "SHL",
+    "match": "Skellefteå vs Luleå",
     "tip": "Over 5.5",
-    "odds": "2.05"
+    "odds": "2.38"
   }
 ]
