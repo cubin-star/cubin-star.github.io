@@ -1,50 +1,50 @@
 [
   {
-    "league": "CONMEBOL Libertadores",
-    "match": "Universitario - Coquimbo Unido",
-    "kickoff": "2026-04-15T04:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.57",
-    "group": 1
-  },
-  {
-    "league": "Reserve League",
-    "match": "San Lorenzo Res. - Gimnasia La Plata Res.",
-    "kickoff": "2026-04-14T18:30:00+02:00",
+    "league": "Primera Division",
+    "match": "Alianza - Águila",
+    "kickoff": "2026-04-16T03:30:00+02:00",
     "tip": "Over 2.5",
     "odds": "2.10",
     "group": 1
   },
   {
-    "league": "CONMEBOL Sudamericana",
-    "match": "Gremio - Deportivo Riestra",
-    "kickoff": "2026-04-15T00:00:00+02:00",
+    "league": "Première Division",
+    "match": "Bougouni - Afrique Football Élite",
+    "kickoff": "2026-04-15T18:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.21",
+    "odds": "2.48",
+    "group": 1
+  },
+  {
+    "league": "Copa Sul-Sudeste",
+    "match": "São Bernardo - Cianorte",
+    "kickoff": "2026-04-16T00:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.31",
     "group": 2
   },
   {
     "league": "CONMEBOL Libertadores",
-    "match": "Boca Juniors - Barcelona SC",
-    "kickoff": "2026-04-15T02:00:00+02:00",
+    "match": "Corinthians - Santa Fe",
+    "kickoff": "2026-04-16T02:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.21",
+    "odds": "2.23",
     "group": 2
   },
   {
-    "league": "Primera División RFEF - Group 1",
-    "match": "Real Madrid II - Ourense CF",
-    "kickoff": "2026-04-14T17:00:00+02:00",
+    "league": "Paulista - A2",
+    "match": "Ferroviária - Juventus",
+    "kickoff": "2026-04-16T00:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.27",
+    "odds": "2.32",
     "group": 3
   },
   {
-    "league": "League Two",
-    "match": "Cheltenham - Gillingham",
-    "kickoff": "2026-04-14T20:45:00+02:00",
+    "league": "Reserve League",
+    "match": "Banfield Res. - Godoy Cruz Res.",
+    "kickoff": "2026-04-15T20:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.10",
+    "odds": "2.20",
     "group": 3
   }
 ]
