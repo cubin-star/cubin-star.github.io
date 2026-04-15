@@ -1,5 +1,21 @@
 [
   {
+    "league": "Superleague",
+    "homeTeam": "Margveti",
+    "awayTeam": "VSA",
+    "tip": "Over 168.5",
+    "odds": "1.82",
+    "halftimeScore": "41:29 (70 pts)",
+    "liveOdds": "1.82",
+    "finalScore": "",
+    "result": "",
+    "sport": "basketball",
+    "kickoff": "2026-04-15T10:00:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-basketball",
+    "scoutStats": "Score: 4/10 | HT: 41:29 (70 pts) | Q1=28 Q2=42 (line 169, pace 83%) | Superleague"
+  },
+  {
     "league": "Super League",
     "homeTeam": "Tambov",
     "awayTeam": "Metallurg",
