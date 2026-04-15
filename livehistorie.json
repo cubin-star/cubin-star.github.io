@@ -1,5 +1,21 @@
 [
   {
+    "league": "TB2L",
+    "homeTeam": "Akhisar Belediye",
+    "awayTeam": "Kecioren Baglum",
+    "tip": "Over 106",
+    "odds": "",
+    "halftimeScore": "26:22 (48 pts)",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "basketball",
+    "kickoff": "2026-04-15T16:30:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-basketball",
+    "scoutStats": "Score: 6/10 | HT: 26:22 (48 pts) | Q1=24 Q2=24 (no line, pace 46%) | TB2L"
+  },
+  {
     "league": "KHL",
     "homeTeam": "Nizhny Novgorod",
     "awayTeam": "Magnitogorsk",
