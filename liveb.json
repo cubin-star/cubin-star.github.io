@@ -1,9 +1,16 @@
 [
   {
-    "league": "NBA",
-    "match": "Phoenix Suns vs Portland Trail Blazers",
-    "tip": "Over 217",
+    "league": "BBL",
+    "match": "Chemnitz vs Ulm",
+    "tip": "Over 164.5",
     "odds": "1.90",
-    "date": "2026-04-15T02:00:00+00:00"
+    "date": "2026-04-15T18:00:00+00:00"
+  },
+  {
+    "league": "Champions League",
+    "match": "Tenerife vs Galatasaray",
+    "tip": "Over 162",
+    "odds": "1.90",
+    "date": "2026-04-15T19:00:00+00:00"
   }
 ]
