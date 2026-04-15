@@ -544,29 +544,54 @@ def main():
     with open(OUTPUT, "w", encoding="utf-8") as f:
         json.dump(results, f, indent=2, ensure_ascii=False)
 
-    # 9. Write tips.json – max 2 random tips with Over 2.5 (only from final results after dedup)
-    if results:
-        # Build lookup: match+date → Over 2.5 odds from candidates
-        odds_25_map = {(c["Match"], c["kickoff"]): c["Odds_25"] for c in candidates}
-        pool = []
-        for r in results:
-            odds_25 = odds_25_map.get((r["Match"], r["Date"]))
-            if odds_25:
-                pool.append({**r, "_odds_25": odds_25})
-        selected = random.sample(pool, min(MAX_TIPS, len(pool)))
-        tips = []
-        for s in selected:
+    # 9. Write tips.json – always exactly 2 tips with Over 2.5
+    #    Priority: qualified results first, then fill from all candidates pool
+    odds_25_map = {(c["Match"], c["kickoff"]): c["Odds_25"] for c in candidates}
+
+    # 9a. Pick from qualified results (best-per-league)
+    qualified_pool = []
+    for r in results:
+        odds_25 = odds_25_map.get((r["Match"], r["Date"]))
+        if odds_25:
+            qualified_pool.append({**r, "_odds_25": odds_25})
+    selected = random.sample(qualified_pool, min(MAX_TIPS, len(qualified_pool)))
+
+    tips = []
+    selected_keys = set()
+    for s in selected:
+        tips.append({
+            "League": s["League"],
+            "Match": s["Match"],
+            "Tip": "Over 2.5",
+            "Odds": s["_odds_25"],
+            "Date": s["Date"],
+        })
+        selected_keys.add((s["Match"], s["Date"]))
+
+    # 9b. If fewer than MAX_TIPS, fill randomly from ALL candidates (Over 2.5 @ 1.60–1.80)
+    if len(tips) < MAX_TIPS and candidates:
+        filler_pool = [
+            c for c in candidates
+            if (c["Match"], c["kickoff"]) not in selected_keys
+        ]
+        need = MAX_TIPS - len(tips)
+        fillers = random.sample(filler_pool, min(need, len(filler_pool)))
+        for f in fillers:
             tips.append({
-                "League": s["League"],
-                "Match": s["Match"],
+                "League": f["League"],
+                "Match": f["Match"],
                 "Tip": "Over 2.5",
-                "Odds": s["_odds_25"],
-                "Date": s["Date"],
+                "Odds": f["Odds_25"],
+                "Date": f["kickoff"],
             })
-        print(f"  Tips: {len(tips)} match(es) \u2192 {OUTPUT_TIPS}")
+        if fillers:
+            print(f"  Tips: {len(selected)} qualified + {len(fillers)} random filler(s) → {len(tips)} total")
+
+    if tips:
+        print(f"  Tips: {len(tips)} match(es) → {OUTPUT_TIPS}")
     else:
         tips = [{"League": "-", "Match": "No tips available today.", "Tip": "-", "Odds": "-", "Date": now.isoformat()}]
-        print(f"  Tips: no qualifying matches → placeholder \u2192 {OUTPUT_TIPS}")
+        print(f"  Tips: no candidates at all → placeholder → {OUTPUT_TIPS}")
 
     with open(OUTPUT_TIPS, "w", encoding="utf-8") as f:
         json.dump(tips, f, indent=2, ensure_ascii=False)
