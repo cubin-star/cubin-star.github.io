@@ -1,5 +1,21 @@
 [
   {
+    "league": "NBL1 South",
+    "homeTeam": "Eltham",
+    "awayTeam": "Frankston",
+    "tip": "Over 176",
+    "odds": "1.84",
+    "halftimeScore": "49:32 (81 pts)",
+    "liveOdds": "1.84",
+    "finalScore": "",
+    "result": "",
+    "sport": "basketball",
+    "kickoff": "2026-04-15T10:30:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-basketball",
+    "scoutStats": "Score: 4/10 | HT: 49:32 (81 pts) | Q1=45 Q2=36 (line 177.5, pace 91%) | NBL1 South"
+  },
+  {
     "league": "FBU Superleague",
     "homeTeam": "Kharkivski Sokoly",
     "awayTeam": "Kyiv Basket",
