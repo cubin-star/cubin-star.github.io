@@ -1,5 +1,21 @@
 [
   {
+    "league": "Premier League W",
+    "homeTeam": "Horizont Minsk 2 W",
+    "awayTeam": "Minsk W",
+    "tip": "Over 144",
+    "odds": "",
+    "halftimeScore": "23:44 (67 pts)",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "basketball",
+    "kickoff": "2026-04-15T14:00:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-basketball",
+    "scoutStats": "Score: 6/10 | HT: 23:44 (67 pts) | Q1=33 Q2=34 (no line, pace 64%) | Premier League W"
+  },
+  {
     "league": "MHL",
     "homeTeam": "Stalnye Lisy",
     "awayTeam": "Avto",
