@@ -1,19 +1,18 @@
 [
   {
-    "league": "Premijer liga",
-    "homeTeam": "Dinamo Zagreb",
-    "awayTeam": "Dubrava",
-    "tip": "Over 172.5",
-    "odds": "1.85",
-    "halftimeScore": "37:35 (72 pts)",
-    "liveOdds": "1.85",
+    "league": "Eliteserien",
+    "homeTeam": "Sarpsborg 08 FF",
+    "awayTeam": "Bodo/Glimt",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "1:0",
+    "liveOdds": "",
     "finalScore": "",
     "result": "",
-    "sport": "basketball",
     "kickoff": "2026-04-15T17:00:00.000Z",
     "resolvedAt": "",
-    "source": "scout-basketball",
-    "scoutStats": "Score: 5/10 | HT: 37:35 (72 pts) | Q1=34 Q2=38 (line 173.75, pace 83%) | Premijer liga"
+    "source": "scout-football",
+    "scoutStats": "Score: 13/14 | xG: 1.80 | Shots: 15/7 | Corners: 5 | Poss: 63%"
   },
   {
     "league": "NB I A W",
