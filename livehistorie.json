@@ -1,5 +1,21 @@
 [
   {
+    "league": "NHL",
+    "homeTeam": "New York Islanders",
+    "awayTeam": "Carolina Hurricanes",
+    "tip": "Over 3.5",
+    "odds": "1.01",
+    "halftimeScore": "0:1",
+    "liveOdds": "1.01",
+    "finalScore": "",
+    "result": "",
+    "sport": "hockey",
+    "kickoff": "2026-04-14T23:00:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-hockey",
+    "scoutStats": "Score: 10/10 | P1: 0:1 | GF: 6.5 GA: 6.0 | Odds: 1.01 | NHL"
+  },
+  {
     "league": "QMJHL",
     "homeTeam": "Newfoundland Regiment",
     "awayTeam": "Blainville-Boisbriand Armada",
