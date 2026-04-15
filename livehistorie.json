@@ -1,5 +1,21 @@
 [
   {
+    "league": "FBU Superleague",
+    "homeTeam": "Kharkivski Sokoly",
+    "awayTeam": "Kyiv Basket",
+    "tip": "Over 151.5",
+    "odds": "1.83",
+    "halftimeScore": "29:28 (57 pts)",
+    "liveOdds": "1.83",
+    "finalScore": "",
+    "result": "",
+    "sport": "basketball",
+    "kickoff": "2026-04-15T10:00:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-basketball",
+    "scoutStats": "Score: 6/10 | HT: 29:28 (57 pts) | Q1=29 Q2=28 (line 153.5, pace 74%) | FBU Superleague"
+  },
+  {
     "league": "WKBL W",
     "homeTeam": "Samsung Blue Minx W",
     "awayTeam": "Hana Bank W",
