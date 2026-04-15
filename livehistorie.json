@@ -1,5 +1,21 @@
 [
   {
+    "league": "KHL",
+    "homeTeam": "Bars Kazan",
+    "awayTeam": "Dinamo Minsk",
+    "tip": "Over 3.5",
+    "odds": 1.33,
+    "halftimeScore": "1:0",
+    "liveOdds": 1.33,
+    "finalScore": "",
+    "result": "",
+    "sport": "hockey",
+    "kickoff": "2026-04-15T16:30:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-hockey",
+    "scoutStats": "Score: 8/9 | P1: 1:0 | GF: 6.6 GA: 4.9 | Line: 3.5 @ 1.33 | KHL"
+  },
+  {
     "league": "TB2L",
     "homeTeam": "Akhisar Belediye",
     "awayTeam": "Kecioren Baglum",
