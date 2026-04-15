@@ -1,5 +1,21 @@
 [
   {
+    "league": "Divizia A",
+    "homeTeam": "BC Steaua Bucuresti",
+    "awayTeam": "Valcea",
+    "tip": "Over 150",
+    "odds": "",
+    "halftimeScore": "35:35 (70 pts)",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "basketball",
+    "kickoff": "2026-04-15T17:00:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-basketball",
+    "scoutStats": "Score: 6/10 | HT: 35:35 (70 pts) | Q1=32 Q2=38 (no line, pace 67%) | Divizia A"
+  },
+  {
     "league": "Basketligan",
     "homeTeam": "BC Lulea",
     "awayTeam": "Norrkoping",
