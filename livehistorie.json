@@ -1,5 +1,21 @@
 [
   {
+    "league": "SHL",
+    "homeTeam": "Skellefteå",
+    "awayTeam": "Luleå",
+    "tip": "Over 3.75",
+    "odds": 1.32,
+    "halftimeScore": "1:0",
+    "liveOdds": 1.32,
+    "finalScore": "",
+    "result": "",
+    "sport": "hockey",
+    "kickoff": "2026-04-15T17:00:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-hockey",
+    "scoutStats": "Score: 7/9 | P1: 1:0 | GF: 5.2 GA: 4.1 | Line: 3.75 @ 1.32 | SHL"
+  },
+  {
     "league": "KHL",
     "homeTeam": "Bars Kazan",
     "awayTeam": "Dinamo Minsk",
