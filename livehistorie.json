@@ -1,5 +1,21 @@
 [
   {
+    "league": "Premier League",
+    "homeTeam": "Rubon II",
+    "awayTeam": "Gomel",
+    "tip": "Over 168",
+    "odds": "",
+    "halftimeScore": "30:49 (79 pts)",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "basketball",
+    "kickoff": "2026-04-15T15:00:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-basketball",
+    "scoutStats": "Score: 5/10 | HT: 30:49 (79 pts) | Q1=42 Q2=37 (no line, pace 75%) | Premier League"
+  },
+  {
     "league": "I Divisioona Women",
     "homeTeam": "Tapiolan Honka II W",
     "awayTeam": "Espoo Team II W",
@@ -71,11 +87,11 @@
     "odds": "",
     "halftimeScore": "22:31 (53 pts)",
     "liveOdds": "",
-    "finalScore": "43:58 (101 pts)",
-    "result": "❌ Lost",
+    "finalScore": "",
+    "result": "",
     "sport": "basketball",
     "kickoff": "2026-04-15T13:00:00.000Z",
-    "resolvedAt": "2026-04-15T15:31:05.079Z",
+    "resolvedAt": "",
     "source": "scout-basketball",
     "scoutStats": "Score: 6/10 | HT: 22:31 (53 pts) | Q1=22 Q2=31 (no line, pace 50%) | Premier League W"
   },
