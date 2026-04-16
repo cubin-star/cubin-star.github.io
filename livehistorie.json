@@ -1,5 +1,21 @@
 [
   {
+    "league": "Higher League",
+    "homeTeam": "Turan",
+    "awayTeam": "Kaspiy Aktau 2",
+    "tip": "Over 154",
+    "odds": "",
+    "halftimeScore": "35:37 (72 pts)",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "basketball",
+    "kickoff": "2026-04-16T04:00:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-basketball",
+    "scoutStats": "Score: 5/10 | HT: 35:37 (72 pts) | Q1=39 Q2=33 (no line, pace 69%) | Higher League"
+  },
+  {
     "league": "CIBACOPA",
     "homeTeam": "Astros",
     "awayTeam": "Halcones de Obregon",
