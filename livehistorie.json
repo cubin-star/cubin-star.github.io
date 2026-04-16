@@ -1,5 +1,21 @@
 [
   {
+    "league": "Higher League",
+    "homeTeam": "Shymkent",
+    "awayTeam": "Atyrau 2",
+    "tip": "Over 146.5",
+    "odds": "",
+    "halftimeScore": "40:35 (75 pts)",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "basketball",
+    "kickoff": "2026-04-16T06:00:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-basketball",
+    "scoutStats": "Score: 5/10 | HT: 40:35 (75 pts) | Q1=34 Q2=41 (no line, pace 71%) | Proj: 150 | Higher League"
+  },
+  {
     "league": "Super League",
     "homeTeam": "Metallurg",
     "awayTeam": "Izhevsk",
