@@ -1,5 +1,21 @@
 [
   {
+    "league": "Super League",
+    "homeTeam": "Metallurg",
+    "awayTeam": "Izhevsk",
+    "tip": "Over 130.5",
+    "odds": "",
+    "halftimeScore": "37:30 (67 pts)",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "basketball",
+    "kickoff": "2026-04-16T05:00:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-basketball",
+    "scoutStats": "Score: 5/10 | HT: 37:30 (67 pts) | Q1=32 Q2=35 (no line, pace 64%) | Proj: 134 | Super League"
+  },
+  {
     "league": "Higher League",
     "homeTeam": "Turan",
     "awayTeam": "Kaspiy Aktau 2",
