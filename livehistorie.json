@@ -1,5 +1,21 @@
 [
   {
+    "league": "NHL",
+    "homeTeam": "Florida Panthers",
+    "awayTeam": "Detroit Red Wings",
+    "tip": "Over 1.25",
+    "odds": 1.32,
+    "halftimeScore": "1:0",
+    "liveOdds": 1.32,
+    "finalScore": "",
+    "result": "",
+    "sport": "hockey",
+    "kickoff": "2026-04-15T23:00:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-hockey",
+    "scoutStats": "Score: 10/9 | P1: 1:0 | GF: 6.0 GA: 6.4 | Line: 1.25 @ 1.32 | NHL"
+  },
+  {
     "league": "CONMEBOL Libertadores",
     "homeTeam": "Cruzeiro",
     "awayTeam": "U. Catolica",
