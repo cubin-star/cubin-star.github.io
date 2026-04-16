@@ -1,5 +1,21 @@
 [
   {
+    "league": "NBL",
+    "homeTeam": "Spartak Pleven",
+    "awayTeam": "Academic Plovdiv",
+    "tip": "Over 133.5",
+    "odds": "",
+    "halftimeScore": "36:32 (68 pts)",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "basketball",
+    "kickoff": "2026-04-16T16:15:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-basketball",
+    "scoutStats": "Score: 5/10 | HT: 36:32 (68 pts) | Q1=34 Q2=34 (line 164.5, pace 83%) | Proj: 137.4 | NBL"
+  },
+  {
     "league": "Superliga Women",
     "homeTeam": "Peja W",
     "awayTeam": "Bashkimi W",
