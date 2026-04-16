@@ -1,5 +1,21 @@
 [
   {
+    "league": "MPBL",
+    "homeTeam": "San Juan Knights",
+    "awayTeam": "Cebu Greats",
+    "tip": "Over 142.5",
+    "odds": "",
+    "halftimeScore": "44:29 (73 pts)",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "basketball",
+    "kickoff": "2026-04-16T08:00:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-basketball",
+    "scoutStats": "Score: 5/10 | HT: 44:29 (73 pts) | Q1=37 Q2=36 (no line, pace 70%) | Proj: 146 | MPBL"
+  },
+  {
     "league": "Higher League",
     "homeTeam": "Pavlodar",
     "awayTeam": "ChelSU Kostanay",
