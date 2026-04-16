@@ -1,5 +1,21 @@
 [
   {
+    "league": "Premier League W",
+    "homeTeam": "Horizont Minsk W",
+    "awayTeam": "Olimpia Grodno W",
+    "tip": "Over 90.5",
+    "odds": "",
+    "halftimeScore": "22:25 (47 pts)",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "basketball",
+    "kickoff": "2026-04-16T14:30:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-basketball",
+    "scoutStats": "Score: 6/10 | HT: 22:25 (47 pts) | Q1=20 Q2=27 (no line, pace 45%) | Proj: 94 | Premier League W"
+  },
+  {
     "league": "NBL1 South Women",
     "homeTeam": "Sandringham W",
     "awayTeam": "Melbourne Tigers W",
