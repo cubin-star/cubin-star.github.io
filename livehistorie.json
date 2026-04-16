@@ -1,5 +1,21 @@
 [
   {
+    "league": "Euroleague",
+    "homeTeam": "Maccabi Tel Aviv",
+    "awayTeam": "Virtus Bologna",
+    "tip": "Over 152.5",
+    "odds": "",
+    "halftimeScore": "36:40 (76 pts)",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "basketball",
+    "kickoff": "2026-04-16T18:05:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-basketball",
+    "scoutStats": "Score: 7/10 | HT: 36:40 (76 pts) | Q1=30 Q2=46 (line 196.5, pace 77%) | Proj: 155.8 | Euroleague"
+  },
+  {
     "league": "NBL",
     "homeTeam": "Spartak Pleven",
     "awayTeam": "Academic Plovdiv",
@@ -7,11 +23,11 @@
     "odds": "",
     "halftimeScore": "36:32 (68 pts)",
     "liveOdds": "",
-    "finalScore": "90:82 (172 pts)",
-    "result": "✅ Won",
+    "finalScore": "",
+    "result": "",
     "sport": "basketball",
     "kickoff": "2026-04-16T16:15:00.000Z",
-    "resolvedAt": "2026-04-16T18:46:04.981Z",
+    "resolvedAt": "",
     "source": "scout-basketball",
     "scoutStats": "Score: 5/10 | HT: 36:32 (68 pts) | Q1=34 Q2=34 (line 164.5, pace 83%) | Proj: 137.4 | NBL"
   },
