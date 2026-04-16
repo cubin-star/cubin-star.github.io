@@ -1,5 +1,21 @@
 [
   {
+    "league": "CIBACOPA",
+    "homeTeam": "Angeles CDMX",
+    "awayTeam": "Venados de Mazatlan",
+    "tip": "Over 160",
+    "odds": "",
+    "halftimeScore": "46:29 (75 pts)",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "basketball",
+    "kickoff": "2026-04-16T02:15:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-basketball",
+    "scoutStats": "Score: 5/10 | HT: 46:29 (75 pts) | Q1=37 Q2=38 (no line, pace 71%) | CIBACOPA"
+  },
+  {
     "league": "NHL",
     "homeTeam": "Ottawa Senators",
     "awayTeam": "Toronto Maple Leafs",
