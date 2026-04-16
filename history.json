@@ -1,6 +1,36 @@
 [
   {
     "sport": "basketball",
+    "league": "Champions League",
+    "match": "Tenerife vs Galatasaray",
+    "tip": "Over 153.5",
+    "odds": "1.37",
+    "date": "2026-04-15T19:00:00+00:00",
+    "score": "99:59",
+    "result": "✓"
+  },
+  {
+    "sport": "basketball",
+    "league": "BBL",
+    "match": "Chemnitz vs Ulm",
+    "tip": "Over 155.5",
+    "odds": "1.35",
+    "date": "2026-04-15T18:00:00+00:00",
+    "score": "79:66",
+    "result": "✗"
+  },
+  {
+    "sport": "football",
+    "league": "FNL",
+    "match": "Slavia Praha II vs Vysočina Jihlava",
+    "tip": "Over 1.5",
+    "odds": "1.18",
+    "date": "2026-04-15T15:00:00+00:00",
+    "score": "1:0",
+    "result": "✗"
+  },
+  {
+    "sport": "basketball",
     "league": "NBA",
     "match": "Phoenix Suns vs Portland Trail Blazers",
     "tip": "Over 207.5",
@@ -1967,26 +1997,6 @@
     "odds": "1.23",
     "date": "2026-03-25T20:00:00+00:00",
     "score": "2:3",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "National League",
-    "match": "Scunthorpe vs Rochdale",
-    "tip": "Over 1.5",
-    "odds": "1.25",
-    "date": "2026-03-25T19:45:00+00:00",
-    "score": "2:2",
-    "result": "✓"
-  },
-  {
-    "sport": "basketball",
-    "league": "Extraliga",
-    "match": "BC Komarno vs Kosice Wolves",
-    "tip": "Over 156.5",
-    "odds": "1.53",
-    "date": "2026-03-25T17:00:00+00:00",
-    "score": "91:82",
     "result": "✓"
   }
 ]
