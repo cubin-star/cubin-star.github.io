@@ -1,5 +1,21 @@
 [
   {
+    "league": "ECHL",
+    "homeTeam": "Greensboro Gargoyles",
+    "awayTeam": "Norfolk Admirals",
+    "tip": "Over 4.5",
+    "odds": "",
+    "halftimeScore": "1:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "hockey",
+    "kickoff": "2026-04-16T14:30:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-hockey",
+    "scoutStats": "Score: 6/9 | P1: 1:0 | GF: 5.4 GA: 7.3 | Proj: 4.9 → Over 4.5 | ECHL"
+  },
+  {
     "league": "Premier League",
     "homeTeam": "Rubon",
     "awayTeam": "Minsk",
