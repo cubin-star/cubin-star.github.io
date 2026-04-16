@@ -1,5 +1,21 @@
 [
   {
+    "league": "Liga National W",
+    "homeTeam": "Rapid Bucuresti W",
+    "awayTeam": "Municipal Targoviste W",
+    "tip": "Over 114.5",
+    "odds": "",
+    "halftimeScore": "30:29 (59 pts)",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "basketball",
+    "kickoff": "2026-04-16T16:00:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-basketball",
+    "scoutStats": "Score: 5/10 | HT: 30:29 (59 pts) | Q1=36 Q2=23 (no line, pace 56%) | Proj: 118 | Liga National W"
+  },
+  {
     "league": "Superliga Women",
     "homeTeam": "Peja W",
     "awayTeam": "Bashkimi W",
