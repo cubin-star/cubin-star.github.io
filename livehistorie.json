@@ -1,21 +1,5 @@
 [
   {
-    "league": "AHL",
-    "homeTeam": "Wilkes-Barre/Scranton",
-    "awayTeam": "Hershey Bears",
-    "tip": "Over 1",
-    "odds": 1.32,
-    "halftimeScore": "0:1",
-    "liveOdds": 1.32,
-    "finalScore": "",
-    "result": "",
-    "sport": "hockey",
-    "kickoff": "2026-04-15T23:05:00.000Z",
-    "resolvedAt": "",
-    "source": "scout-hockey",
-    "scoutStats": "Score: 9/9 | P1: 0:1 | GF: 6.2 GA: 5.8 | Line: 1 @ 1.32 | AHL"
-  },
-  {
     "league": "CONMEBOL Libertadores",
     "homeTeam": "Cruzeiro",
     "awayTeam": "U. Catolica",
@@ -23,10 +7,10 @@
     "odds": "",
     "halftimeScore": "0:1",
     "liveOdds": "",
-    "finalScore": "",
-    "result": "",
+    "finalScore": "1:2",
+    "result": "✅ Won",
     "kickoff": "2026-04-15T22:00:00.000Z",
-    "resolvedAt": "",
+    "resolvedAt": "2026-04-16T00:01:04.671Z",
     "source": "scout-football",
     "scoutStats": "Score: 10/14 | xG: 0.65 | Shots: 12/4 | Corners: 6 | Poss: 63%"
   },
