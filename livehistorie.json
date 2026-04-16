@@ -1,19 +1,19 @@
 [
   {
-    "league": "Superliga",
-    "homeTeam": "Spartans",
-    "awayTeam": "Heroes de Falcon",
-    "tip": "Over 164.5",
-    "odds": "1.84",
-    "halftimeScore": "32:34 (66 pts)",
-    "liveOdds": "1.84",
+    "league": "AHL",
+    "homeTeam": "Belleville Senators",
+    "awayTeam": "Utica Comets",
+    "tip": "Over 1.25",
+    "odds": 1.32,
+    "halftimeScore": "0:1",
+    "liveOdds": 1.32,
     "finalScore": "",
     "result": "",
-    "sport": "basketball",
+    "sport": "hockey",
     "kickoff": "2026-04-15T23:00:00.000Z",
     "resolvedAt": "",
-    "source": "scout-basketball",
-    "scoutStats": "Score: 5/10 | HT: 32:34 (66 pts) | Q1=30 Q2=36 (line 163.5, pace 81%) | Superliga"
+    "source": "scout-hockey",
+    "scoutStats": "Score: 9/9 | P1: 0:1 | GF: 5.8 GA: 6.8 | Line: 1.25 @ 1.32 | AHL"
   },
   {
     "league": "CONMEBOL Libertadores",
