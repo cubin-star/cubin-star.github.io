@@ -568,14 +568,41 @@ def main():
         })
         selected_keys.add((s["Match"], s["Date"]))
 
-    # 9b. If fewer than MAX_TIPS, fill randomly from ALL candidates (Over 2.5 @ 1.60–1.80)
+    # 9b. If fewer than MAX_TIPS, fill from ALL candidates (Over 2.5 @ 1.60–1.80)
+    #      Prefer top European leagues, avoid duplicate leagues with already-selected tips.
+    PREFERRED_LEAGUES = {
+        "Premier League", "La Liga", "Bundesliga", "Serie A", "Ligue 1",
+        "Eredivisie", "Primeira Liga", "Super League", "Jupiler Pro League",
+        "Champions League", "Europa League", "Conference League",
+    }
     if len(tips) < MAX_TIPS and candidates:
+        used_leagues = {t["League"] for t in tips}
         filler_pool = [
             c for c in candidates
             if (c["Match"], c["kickoff"]) not in selected_keys
+               and c["League"] not in used_leagues
         ]
+        # Sort: preferred leagues first (shuffled within each group)
+        preferred = [c for c in filler_pool if c["League"] in PREFERRED_LEAGUES]
+        others = [c for c in filler_pool if c["League"] not in PREFERRED_LEAGUES]
+        random.shuffle(preferred)
+        random.shuffle(others)
+        sorted_pool = preferred + others
+
         need = MAX_TIPS - len(tips)
-        fillers = random.sample(filler_pool, min(need, len(filler_pool)))
+        fillers = []
+        filler_leagues = set(used_leagues)
+        for c in sorted_pool:
+            if c["League"] not in filler_leagues:
+                fillers.append(c)
+                filler_leagues.add(c["League"])
+                if len(fillers) >= need:
+                    break
+        # Fallback: if not enough unique leagues, allow any remaining
+        if len(fillers) < need:
+            rest = [c for c in sorted_pool if c not in fillers]
+            fillers.extend(rest[:need - len(fillers)])
+
         for f in fillers:
             tips.append({
                 "League": f["League"],
