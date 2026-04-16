@@ -1,5 +1,21 @@
 [
   {
+    "league": "NHL",
+    "homeTeam": "Ottawa Senators",
+    "awayTeam": "Toronto Maple Leafs",
+    "tip": "Over 1.5",
+    "odds": 1.32,
+    "halftimeScore": "1:0",
+    "liveOdds": 1.32,
+    "finalScore": "",
+    "result": "",
+    "sport": "hockey",
+    "kickoff": "2026-04-15T23:30:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-hockey",
+    "scoutStats": "Score: 10/9 | P1: 1:0 | GF: 6.4 GA: 6.6 | Line: 1.5 @ 1.32 | NHL"
+  },
+  {
     "league": "CONMEBOL Libertadores",
     "homeTeam": "Cruzeiro",
     "awayTeam": "U. Catolica",
