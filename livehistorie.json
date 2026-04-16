@@ -1,22 +1,6 @@
 [
   {
     "league": "NHL",
-    "homeTeam": "Chicago Blackhawks",
-    "awayTeam": "San Jose Sharks",
-    "tip": "Over 4.5",
-    "odds": 1.32,
-    "halftimeScore": "0:1",
-    "liveOdds": 1.32,
-    "finalScore": "",
-    "result": "",
-    "sport": "hockey",
-    "kickoff": "2026-04-16T00:30:00.000Z",
-    "resolvedAt": "",
-    "source": "scout-hockey",
-    "scoutStats": "Score: 9/9 | P1: 0:1 | GF: 5.5 GA: 6.8 | Line: 4.5 @ 1.32 | NHL"
-  },
-  {
-    "league": "NHL",
     "homeTeam": "Ottawa Senators",
     "awayTeam": "Toronto Maple Leafs",
     "tip": "Over 1.5",
