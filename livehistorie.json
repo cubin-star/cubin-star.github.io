@@ -1,5 +1,21 @@
 [
   {
+    "league": "Premier League",
+    "homeTeam": "Rubon",
+    "awayTeam": "Minsk",
+    "tip": "Over 144.5",
+    "odds": "",
+    "halftimeScore": "36:38 (74 pts)",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "basketball",
+    "kickoff": "2026-04-16T15:00:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-basketball",
+    "scoutStats": "Score: 5/10 | HT: 36:38 (74 pts) | Q1=43 Q2=31 (no line, pace 70%) | Proj: 148 | Premier League"
+  },
+  {
     "league": "Premier League W",
     "homeTeam": "Horizont Minsk W",
     "awayTeam": "Olimpia Grodno W",
