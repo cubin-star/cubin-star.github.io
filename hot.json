@@ -1,50 +1,50 @@
 [
   {
-    "league": "Primera Division",
-    "match": "Alianza - Águila",
-    "kickoff": "2026-04-16T03:30:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.10",
-    "group": 1
-  },
-  {
     "league": "Première Division",
-    "match": "Bougouni - Afrique Football Élite",
-    "kickoff": "2026-04-15T18:00:00+02:00",
+    "match": "Stade Malien Bamako - US Bougouba",
+    "kickoff": "2026-04-16T18:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.48",
+    "odds": "2.27",
     "group": 1
   },
   {
-    "league": "Copa Sul-Sudeste",
-    "match": "São Bernardo - Cianorte",
-    "kickoff": "2026-04-16T00:00:00+02:00",
+    "league": "Professional League",
+    "match": "Dhofar - Al-Rustaq",
+    "kickoff": "2026-04-16T15:55:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.31",
-    "group": 2
+    "odds": "2.28",
+    "group": 1
   },
   {
-    "league": "CONMEBOL Libertadores",
-    "match": "Corinthians - Santa Fe",
-    "kickoff": "2026-04-16T02:30:00+02:00",
+    "league": "Professional League",
+    "match": "Oman Club - Al Nasr",
+    "kickoff": "2026-04-16T18:20:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.23",
+    "odds": "2.40",
     "group": 2
-  },
-  {
-    "league": "Paulista - A2",
-    "match": "Ferroviária - Juventus",
-    "kickoff": "2026-04-16T00:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.32",
-    "group": 3
   },
   {
     "league": "Reserve League",
-    "match": "Banfield Res. - Godoy Cruz Res.",
-    "kickoff": "2026-04-15T20:00:00+02:00",
+    "match": "Instituto Res. - Barracas Central Res.",
+    "kickoff": "2026-04-16T20:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.20",
+    "odds": "2.22",
+    "group": 2
+  },
+  {
+    "league": "Copa do Nordeste",
+    "match": "Imperatriz - ABC",
+    "kickoff": "2026-04-17T00:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.27",
+    "group": 3
+  },
+  {
+    "league": "UEFA Europa League",
+    "match": "Nottingham Forest - FC Porto",
+    "kickoff": "2026-04-16T21:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.32",
     "group": 3
   }
 ]
