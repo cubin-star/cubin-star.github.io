@@ -1,19 +1,19 @@
 [
   {
-    "league": "NHL",
-    "homeTeam": "Florida Panthers",
-    "awayTeam": "Detroit Red Wings",
-    "tip": "Over 1.25",
-    "odds": 1.32,
-    "halftimeScore": "1:0",
-    "liveOdds": 1.32,
+    "league": "Superliga",
+    "homeTeam": "Spartans",
+    "awayTeam": "Heroes de Falcon",
+    "tip": "Over 164.5",
+    "odds": "1.84",
+    "halftimeScore": "32:34 (66 pts)",
+    "liveOdds": "1.84",
     "finalScore": "",
     "result": "",
-    "sport": "hockey",
+    "sport": "basketball",
     "kickoff": "2026-04-15T23:00:00.000Z",
     "resolvedAt": "",
-    "source": "scout-hockey",
-    "scoutStats": "Score: 10/9 | P1: 1:0 | GF: 6.0 GA: 6.4 | Line: 1.25 @ 1.32 | NHL"
+    "source": "scout-basketball",
+    "scoutStats": "Score: 5/10 | HT: 32:34 (66 pts) | Q1=30 Q2=36 (line 163.5, pace 81%) | Superliga"
   },
   {
     "league": "CONMEBOL Libertadores",
