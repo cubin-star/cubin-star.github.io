@@ -1,21 +1,5 @@
 [
   {
-    "league": "1. Liga",
-    "homeTeam": "Zlin",
-    "awayTeam": "Svitavy",
-    "tip": "Over 108.5",
-    "odds": "",
-    "halftimeScore": "33:23 (56 pts)",
-    "liveOdds": "",
-    "finalScore": "",
-    "result": "",
-    "sport": "basketball",
-    "kickoff": "2026-04-17T16:00:00.000Z",
-    "resolvedAt": "",
-    "source": "scout-basketball",
-    "scoutStats": "Score: 6/10 | HT: 33:23 (56 pts) | Q1=31 Q2=25 (line 170.5, pace 66%) | Proj: 112 | 1. Liga"
-  },
-  {
     "league": "Extraliga",
     "homeTeam": "Skalica",
     "awayTeam": "Dukla Trencin",
