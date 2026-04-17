@@ -1,50 +1,50 @@
 [
   {
-    "league": "Première Division",
-    "match": "Stade Malien Bamako - US Bougouba",
-    "kickoff": "2026-04-16T18:30:00+02:00",
+    "league": "Championship",
+    "match": "Blackburn - Coventry",
+    "kickoff": "2026-04-17T21:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.27",
+    "odds": "2.13",
     "group": 1
   },
   {
-    "league": "Professional League",
-    "match": "Dhofar - Al-Rustaq",
-    "kickoff": "2026-04-16T15:55:00+02:00",
+    "league": "Primera División - Apertura",
+    "match": "Albion FC - Central Espanol",
+    "kickoff": "2026-04-18T01:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.28",
+    "odds": "2.46",
     "group": 1
   },
   {
-    "league": "Professional League",
-    "match": "Oman Club - Al Nasr",
-    "kickoff": "2026-04-16T18:20:00+02:00",
+    "league": "Primera A",
+    "match": "Jaguares - Deportivo Pasto",
+    "kickoff": "2026-04-17T23:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.40",
+    "odds": "2.18",
     "group": 2
   },
   {
-    "league": "Reserve League",
-    "match": "Instituto Res. - Barracas Central Res.",
-    "kickoff": "2026-04-16T20:00:00+02:00",
+    "league": "1st Division",
+    "match": "Casric Stars - Black Leopards",
+    "kickoff": "2026-04-17T15:00:00+02:00",
     "tip": "Over 2.5",
     "odds": "2.22",
     "group": 2
   },
   {
-    "league": "Copa do Nordeste",
-    "match": "Imperatriz - ABC",
-    "kickoff": "2026-04-17T00:00:00+02:00",
+    "league": "Second League",
+    "match": "Dunav Ruse - Marek",
+    "kickoff": "2026-04-17T18:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.27",
+    "odds": "2.13",
     "group": 3
   },
   {
-    "league": "UEFA Europa League",
-    "match": "Nottingham Forest - FC Porto",
-    "kickoff": "2026-04-16T21:00:00+02:00",
+    "league": "National Soccer League",
+    "match": "Marines - AS Kigali",
+    "kickoff": "2026-04-17T15:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.32",
+    "odds": "2.26",
     "group": 3
   }
 ]
