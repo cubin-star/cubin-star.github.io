@@ -1,5 +1,21 @@
 [
   {
+    "league": "Higher League",
+    "homeTeam": "ChelSU Kostanay",
+    "awayTeam": "Karaganda",
+    "tip": "Over 114.5",
+    "odds": "",
+    "halftimeScore": "26:33 (59 pts)",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "basketball",
+    "kickoff": "2026-04-17T05:00:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-basketball",
+    "scoutStats": "Score: 5/10 | HT: 26:33 (59 pts) | Q1=36 Q2=23 (no line, pace 56%) | Proj: 118 | Higher League"
+  },
+  {
     "league": "OHL",
     "homeTeam": "Ottawa 67s",
     "awayTeam": "Barrie Colts",
