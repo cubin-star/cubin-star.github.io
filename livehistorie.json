@@ -1,21 +1,5 @@
 [
   {
-    "league": "National League Women",
-    "homeTeam": "Aktau W",
-    "awayTeam": "Pavlodar W",
-    "tip": "Over 114.5",
-    "odds": "",
-    "halftimeScore": "24:35 (59 pts)",
-    "liveOdds": "",
-    "finalScore": "",
-    "result": "",
-    "sport": "basketball",
-    "kickoff": "2026-04-17T12:00:00.000Z",
-    "resolvedAt": "",
-    "source": "scout-basketball",
-    "scoutStats": "Score: 6/10 | HT: 24:35 (59 pts) | Q1=30 Q2=29 (no line, pace 56%) | Proj: 118 | National League Women"
-  },
-  {
     "league": "WCBA Women",
     "homeTeam": "Shanxi Xing Rui W",
     "awayTeam": "Sichuan W",
@@ -39,11 +23,11 @@
     "odds": "",
     "halftimeScore": "30:42 (72 pts)",
     "liveOdds": "",
-    "finalScore": "",
-    "result": "",
+    "finalScore": "40:68 (108 pts)",
+    "result": "❌ Lost",
     "sport": "basketball",
     "kickoff": "2026-04-17T10:20:00.000Z",
-    "resolvedAt": "",
+    "resolvedAt": "2026-04-17T12:52:04.724Z",
     "source": "scout-basketball",
     "scoutStats": "Score: 5/10 | HT: 30:42 (72 pts) | Q1=37 Q2=35 (line 172, pace 84%) | Proj: 145.4 | NBL1 West Women"
   },
