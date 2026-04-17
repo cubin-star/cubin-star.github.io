@@ -1,5 +1,21 @@
 [
   {
+    "league": "Euroleague",
+    "homeTeam": "Panathinaikos",
+    "awayTeam": "Anadolu Efes",
+    "tip": "Over 166.5",
+    "odds": "",
+    "halftimeScore": "45:38 (83 pts)",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "basketball",
+    "kickoff": "2026-04-17T18:15:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-basketball",
+    "scoutStats": "Score: 6/10 | HT: 45:38 (83 pts) | Q1=36 Q2=47 (no line, pace 79%) | Proj: 170.2 | Euroleague"
+  },
+  {
     "league": "AFC Champions League Elite",
     "homeTeam": "Machida Zelvia",
     "awayTeam": "Al-Ittihad FC",
