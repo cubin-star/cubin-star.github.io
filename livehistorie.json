@@ -1,11 +1,11 @@
 [
   {
     "league": "OHL",
-    "homeTeam": "Flint Firebirds",
-    "awayTeam": "Windsor Spitfires",
+    "homeTeam": "Ottawa 67s",
+    "awayTeam": "Barrie Colts",
     "tip": "Over 4.5",
     "odds": "",
-    "halftimeScore": "1:0",
+    "halftimeScore": "0:1",
     "liveOdds": "",
     "finalScore": "",
     "result": "",
@@ -13,7 +13,7 @@
     "kickoff": "2026-04-16T23:00:00.000Z",
     "resolvedAt": "",
     "source": "scout-hockey",
-    "scoutStats": "Score: 6/9 | P1: 1:0 | GF: 7.7 GA: 5.2 | Proj: 4.9 → Over 4.5 | OHL"
+    "scoutStats": "Score: 6/9 | P1: 0:1 | GF: 7.1 GA: 5.1 | Proj: 4.8 → Over 4.5 | OHL"
   },
   {
     "league": "UEFA Europa League",
