@@ -1,5 +1,21 @@
 [
   {
+    "league": "Commissioners Cup",
+    "homeTeam": "Meralco Bolts",
+    "awayTeam": "NLEX Road Warriors",
+    "tip": "Over 156.5",
+    "odds": "",
+    "halftimeScore": "45:35 (80 pts)",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "basketball",
+    "kickoff": "2026-04-17T11:30:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-basketball",
+    "scoutStats": "Score: 6/10 | HT: 45:35 (80 pts) | Q1=33 Q2=47 (line 205.5, pace 78%) | Proj: 160 | Commissioners Cup"
+  },
+  {
     "league": "WCBA Women",
     "homeTeam": "Shanxi Xing Rui W",
     "awayTeam": "Sichuan W",
