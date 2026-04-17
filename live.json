@@ -1,1 +1,44 @@
-[]
+[
+  {
+    "League": "2. SNL",
+    "Match": "Ilirija vs Bistrica",
+    "Tip": "Over 1.5",
+    "Odds": "1.21",
+    "Date": "2026-04-17T15:00:00+00:00"
+  },
+  {
+    "League": "2. Liga",
+    "Match": "Austria Lustenau vs Rapid Wien II",
+    "Tip": "Over 1.5",
+    "Odds": "1.20",
+    "Date": "2026-04-17T16:00:00+00:00"
+  },
+  {
+    "League": "2. Bundesliga",
+    "Match": "Holstein Kiel vs 1. FC Kaiserslautern",
+    "Tip": "Over 1.5",
+    "Odds": "1.19",
+    "Date": "2026-04-17T16:30:00+00:00"
+  },
+  {
+    "League": "Superliga",
+    "Match": "Brondby vs Sonderjyske",
+    "Tip": "Over 1.5",
+    "Odds": "1.19",
+    "Date": "2026-04-17T17:00:00+00:00"
+  },
+  {
+    "League": "J1 League",
+    "Match": "Sanfrecce Hiroshima vs V-varen Nagasaki",
+    "Tip": "Over 1.5",
+    "Odds": "1.20",
+    "Date": "2026-04-18T05:00:00+00:00"
+  },
+  {
+    "League": "K League 2",
+    "Match": "Gyeongnam FC vs Suwon Bluewings",
+    "Tip": "Over 1.5",
+    "Odds": "1.20",
+    "Date": "2026-04-18T05:00:00+00:00"
+  }
+]
