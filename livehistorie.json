@@ -1,5 +1,21 @@
 [
   {
+    "league": "BNXT League",
+    "homeTeam": "Brussels Basketball",
+    "awayTeam": "BAL Weert",
+    "tip": "Over 136.5",
+    "odds": "",
+    "halftimeScore": "51:19 (70 pts)",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "basketball",
+    "kickoff": "2026-04-17T18:30:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-basketball",
+    "scoutStats": "Score: 5/10 | HT: 51:19 (70 pts) | Q1=40 Q2=30 (no line, pace 67%) | Proj: 140 | BNXT League"
+  },
+  {
     "league": "Euroleague",
     "homeTeam": "Barcelona",
     "awayTeam": "Bayern",
