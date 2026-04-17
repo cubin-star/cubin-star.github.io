@@ -1,5 +1,21 @@
 [
   {
+    "league": "Extraliga",
+    "homeTeam": "Skalica",
+    "awayTeam": "Dukla Trencin",
+    "tip": "Over 4.5",
+    "odds": "",
+    "halftimeScore": "0:1",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "hockey",
+    "kickoff": "2026-04-17T15:30:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-hockey",
+    "scoutStats": "Score: 7/9 | P1: 0:1 | GF: 5.3 GA: 6.7 | Proj: 4.9 → Over 4.5 | Extraliga"
+  },
+  {
     "league": "NKL",
     "homeTeam": "Suduva-Mantinga",
     "awayTeam": "Vilkaviskis",
