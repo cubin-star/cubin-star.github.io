@@ -1,25 +1,26 @@
 [
   {
-    "League": "CONMEBOL Libertadores",
-    "Match": "Flamengo vs Independiente Medellin",
+    "League": "I Liga",
+    "Match": "Chrobry Głogów vs Stal Mielec",
     "Tip": "Over 2.5",
     "Odds": "1.82",
-    "Date": "2026-04-17T00:30:00+00:00"
-  },
-  {
-    "League": "Premier League",
-    "Match": "Al Najma vs Budaiya",
-    "Tip": "Over 2.5",
-    "Odds": "1.98",
-    "Date": "2026-04-16T16:00:00+00:00",
+    "Date": "2026-04-17T16:00:00+00:00",
     "qualified": true
   },
   {
-    "League": "AFC Champions League Elite",
-    "Match": "Al Sadd vs Vissel Kobe",
+    "League": "Championship",
+    "Match": "Blackburn vs Coventry",
     "Tip": "Over 2.5",
-    "Odds": "1.82",
-    "Date": "2026-04-16T16:15:00+00:00",
+    "Odds": "1.97",
+    "Date": "2026-04-17T19:00:00+00:00",
+    "qualified": true
+  },
+  {
+    "League": "Liga I",
+    "Match": "Oţelul vs Uta Arad",
+    "Tip": "Over 2.5",
+    "Odds": "1.97",
+    "Date": "2026-04-17T14:30:00+00:00",
     "qualified": true
   }
 ]
