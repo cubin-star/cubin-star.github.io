@@ -1,5 +1,21 @@
 [
   {
+    "league": "NBL1 West Women",
+    "homeTeam": "Perth Redbacks W",
+    "awayTeam": "Warwick Senators W",
+    "tip": "Over 141.5",
+    "odds": "",
+    "halftimeScore": "30:42 (72 pts)",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "basketball",
+    "kickoff": "2026-04-17T10:20:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-basketball",
+    "scoutStats": "Score: 5/10 | HT: 30:42 (72 pts) | Q1=37 Q2=35 (line 172, pace 84%) | Proj: 145.4 | NBL1 West Women"
+  },
+  {
     "league": "Higher League",
     "homeTeam": "ChelSU Kostanay",
     "awayTeam": "Karaganda",
