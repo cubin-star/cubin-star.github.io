@@ -1,5 +1,21 @@
 [
   {
+    "league": "KHL",
+    "homeTeam": "Magnitogorsk",
+    "awayTeam": "Nizhny Novgorod",
+    "tip": "Over 4.5",
+    "odds": "",
+    "halftimeScore": "1:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "hockey",
+    "kickoff": "2026-04-17T14:00:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-hockey",
+    "scoutStats": "Score: 7/9 | P1: 1:0 | GF: 6.4 GA: 5.4 | Proj: 4.8 → Over 4.5 | KHL"
+  },
+  {
     "league": "NBL1 West",
     "homeTeam": "Perth Redbacks",
     "awayTeam": "Warwick Senators",
