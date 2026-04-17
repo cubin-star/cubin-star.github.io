@@ -1,5 +1,21 @@
 [
   {
+    "league": "WCBA Women",
+    "homeTeam": "Shanxi Xing Rui W",
+    "awayTeam": "Sichuan W",
+    "tip": "Over 154.5",
+    "odds": "",
+    "halftimeScore": "37:41 (78 pts)",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "basketball",
+    "kickoff": "2026-04-17T11:30:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-basketball",
+    "scoutStats": "Score: 5/10 | HT: 37:41 (78 pts) | Q1=35 Q2=43 (no line, pace 74%) | Proj: 157.6 | WCBA Women"
+  },
+  {
     "league": "NBL1 West Women",
     "homeTeam": "Perth Redbacks W",
     "awayTeam": "Warwick Senators W",
