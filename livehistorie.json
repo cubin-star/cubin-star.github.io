@@ -1,5 +1,21 @@
 [
   {
+    "league": "MPBL",
+    "homeTeam": "Manila Batang Quiapo",
+    "awayTeam": "Meycauayan",
+    "tip": "Over 140.5",
+    "odds": "",
+    "halftimeScore": "31:41 (72 pts)",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "basketball",
+    "kickoff": "2026-04-17T12:00:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-basketball",
+    "scoutStats": "Score: 5/10 | HT: 31:41 (72 pts) | Q1=30 Q2=42 (no line, pace 69%) | Proj: 144 | MPBL"
+  },
+  {
     "league": "WCBA Women",
     "homeTeam": "Shanxi Xing Rui W",
     "awayTeam": "Sichuan W",
