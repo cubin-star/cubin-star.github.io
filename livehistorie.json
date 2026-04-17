@@ -1,19 +1,18 @@
 [
   {
-    "league": "BBL",
-    "homeTeam": "Wurzburg",
-    "awayTeam": "Frankfurt",
-    "tip": "Over 141.5",
+    "league": "AFC Champions League Elite",
+    "homeTeam": "Machida Zelvia",
+    "awayTeam": "Al-Ittihad FC",
+    "tip": "Over 1.5",
     "odds": "",
-    "halftimeScore": "37:35 (72 pts)",
+    "halftimeScore": "1:0",
     "liveOdds": "",
     "finalScore": "",
     "result": "",
-    "sport": "basketball",
     "kickoff": "2026-04-17T18:00:00.000Z",
     "resolvedAt": "",
-    "source": "scout-basketball",
-    "scoutStats": "Score: 5/10 | HT: 37:35 (72 pts) | Q1=43 Q2=29 (no line, pace 69%) | Proj: 145.4 | BBL"
+    "source": "scout-football",
+    "scoutStats": "Score: 10/14 | xG: 0.87 | Shots: 11/5 | Corners: 5 | Poss: 64% | Pre O2.5: 2.15"
   },
   {
     "league": "Extraliga",
