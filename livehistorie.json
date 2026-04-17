@@ -1,18 +1,19 @@
 [
   {
-    "league": "Premier Division",
-    "homeTeam": "Shelbourne",
-    "awayTeam": "Derry City",
-    "tip": "Over 1.5",
+    "league": "Pro B",
+    "homeTeam": "Pau-Orthez",
+    "awayTeam": "Chalons-Reims",
+    "tip": "Over 126.5",
     "odds": "",
-    "halftimeScore": "0:1",
+    "halftimeScore": "35:30 (65 pts)",
     "liveOdds": "",
     "finalScore": "",
     "result": "",
-    "kickoff": "2026-04-17T18:45:00.000Z",
+    "sport": "basketball",
+    "kickoff": "2026-04-17T18:30:00.000Z",
     "resolvedAt": "",
-    "source": "scout-football",
-    "scoutStats": "Score: 9/14 | xG: 0.00 | Shots: 12/5 | Corners: 4 | Poss: 64% | Pre O2.5: 2.25"
+    "source": "scout-basketball",
+    "scoutStats": "Score: 6/10 | HT: 35:30 (65 pts) | Q1=31 Q2=34 (no line, pace 62%) | Proj: 130 | Pro B"
   },
   {
     "league": "BNXT League",
