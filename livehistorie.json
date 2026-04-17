@@ -1,5 +1,21 @@
 [
   {
+    "league": "LBF W",
+    "homeTeam": "Recife W",
+    "awayTeam": "Maringa W",
+    "tip": "Over 144.5",
+    "odds": "",
+    "halftimeScore": "37:37 (74 pts)",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "basketball",
+    "kickoff": "2026-04-16T22:30:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-basketball",
+    "scoutStats": "Score: 5/10 | HT: 37:37 (74 pts) | Q1=37 Q2=37 (no line, pace 70%) | Proj: 148 | LBF W"
+  },
+  {
     "league": "UEFA Europa League",
     "homeTeam": "Nottingham Forest",
     "awayTeam": "FC Porto",
