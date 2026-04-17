@@ -1,6 +1,22 @@
 [
   {
     "league": "Euroleague",
+    "homeTeam": "Barcelona",
+    "awayTeam": "Bayern",
+    "tip": "Over 146.5",
+    "odds": "",
+    "halftimeScore": "42:31 (73 pts)",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "basketball",
+    "kickoff": "2026-04-17T18:30:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-basketball",
+    "scoutStats": "Score: 5/10 | HT: 42:31 (73 pts) | Q1=39 Q2=34 (line 166, pace 88%) | Proj: 149.7 | Euroleague"
+  },
+  {
+    "league": "Euroleague",
     "homeTeam": "Panathinaikos",
     "awayTeam": "Anadolu Efes",
     "tip": "Over 166.5",
