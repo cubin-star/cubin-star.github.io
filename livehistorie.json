@@ -1,19 +1,19 @@
 [
   {
-    "league": "LBF W",
-    "homeTeam": "Recife W",
-    "awayTeam": "Maringa W",
-    "tip": "Over 144.5",
+    "league": "OHL",
+    "homeTeam": "Flint Firebirds",
+    "awayTeam": "Windsor Spitfires",
+    "tip": "Over 4.5",
     "odds": "",
-    "halftimeScore": "37:37 (74 pts)",
+    "halftimeScore": "1:0",
     "liveOdds": "",
     "finalScore": "",
     "result": "",
-    "sport": "basketball",
-    "kickoff": "2026-04-16T22:30:00.000Z",
+    "sport": "hockey",
+    "kickoff": "2026-04-16T23:00:00.000Z",
     "resolvedAt": "",
-    "source": "scout-basketball",
-    "scoutStats": "Score: 5/10 | HT: 37:37 (74 pts) | Q1=37 Q2=37 (no line, pace 70%) | Proj: 148 | LBF W"
+    "source": "scout-hockey",
+    "scoutStats": "Score: 6/9 | P1: 1:0 | GF: 7.7 GA: 5.2 | Proj: 4.9 → Over 4.5 | OHL"
   },
   {
     "league": "UEFA Europa League",
