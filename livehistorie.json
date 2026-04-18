@@ -1,19 +1,5 @@
 [
   {
-    "league": "League One",
-    "homeTeam": "Peterhead",
-    "awayTeam": "Queen of the South",
-    "tip": "Over 0.5",
-    "odds": "1.21",
-    "halftimeScore": "0:0",
-    "liveOdds": "",
-    "finalScore": "",
-    "result": "",
-    "sport": "football",
-    "kickoff": "2026-04-18T14:00:00.000Z",
-    "resolvedAt": ""
-  },
-  {
     "league": "LPB",
     "homeTeam": "Sporting CP",
     "awayTeam": "CA Queluz",
