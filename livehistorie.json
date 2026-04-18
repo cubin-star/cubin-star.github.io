@@ -1,5 +1,21 @@
 [
   {
+    "league": "Serie A2",
+    "homeTeam": "Urania Milano",
+    "awayTeam": "Sebastiani Rieti",
+    "tip": "Over 158.5",
+    "odds": "",
+    "halftimeScore": "39:41 (80 pts)",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "basketball",
+    "kickoff": "2026-04-18T18:30:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-basketball",
+    "scoutStats": "Score: 5/10 | HT: 39:41 (80 pts) | Q1=39 Q2=41 (no line, pace 76%) | Proj: 161.6 | Serie A2"
+  },
+  {
     "league": "2. Bundesliga",
     "homeTeam": "Hannover 96",
     "awayTeam": "SC Paderborn 07",
