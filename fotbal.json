@@ -1,26 +1,26 @@
 [
   {
-    "League": "I Liga",
-    "Match": "Chrobry Głogów vs Stal Mielec",
+    "League": "Championship",
+    "Match": "Watford vs Sheffield Utd",
     "Tip": "Over 2.5",
     "Odds": "1.82",
-    "Date": "2026-04-17T16:00:00+00:00",
+    "Date": "2026-04-18T14:00:00+00:00",
     "qualified": true
   },
   {
-    "League": "Championship",
-    "Match": "Blackburn vs Coventry",
+    "League": "Super League",
+    "Match": "Pakhtakor vs Dinamo Samarqand",
     "Tip": "Over 2.5",
-    "Odds": "1.97",
-    "Date": "2026-04-17T19:00:00+00:00",
+    "Odds": "1.83",
+    "Date": "2026-04-18T15:15:00+00:00",
     "qualified": true
   },
   {
-    "League": "Liga I",
-    "Match": "Oţelul vs Uta Arad",
+    "League": "Super Liga",
+    "Match": "Cukaricki vs Radnik Surdulica",
     "Tip": "Over 2.5",
-    "Odds": "1.97",
-    "Date": "2026-04-17T14:30:00+00:00",
+    "Odds": "1.94",
+    "Date": "2026-04-18T13:00:00+00:00",
     "qualified": true
   }
 ]

@@ -1,26 +1,75 @@
 [
   {
-    "League": "I Liga",
-    "Match": "Chrobry Głogów vs Stal Mielec",
+    "League": "FNL",
+    "Match": "Chrudim vs Vlašim",
     "Tip": "Over 2.5",
-    "Odds": "1.82",
-    "Date": "2026-04-17T16:00:00+00:00",
+    "Odds": "1.85",
+    "Date": "2026-04-18T08:15:00+00:00"
+  },
+  {
+    "League": "Liga Premier Serie A",
+    "Match": "Leones Negros vs Celaya",
+    "Tip": "Over 2.5",
+    "Odds": "1.80",
+    "Date": "2026-04-18T17:00:00+00:00"
+  },
+  {
+    "League": "I Liga",
+    "Match": "Puszcza Niepołomice vs Polonia Bytom",
+    "Tip": "Over 2.5",
+    "Odds": "1.87",
+    "Date": "2026-04-18T17:30:00+00:00"
+  },
+  {
+    "League": "National Division",
+    "Match": "Racing FC Union Luxembourg vs Progres Niederkorn",
+    "Tip": "Over 2.5",
+    "Odds": "1.94",
+    "Date": "2026-04-18T16:00:00+00:00"
+  },
+  {
+    "League": "League One",
+    "Match": "Barnsley vs Bradford",
+    "Tip": "Over 2.5",
+    "Odds": "1.83",
+    "Date": "2026-04-18T11:30:00+00:00"
+  },
+  {
+    "League": "Super Liga",
+    "Match": "Cukaricki vs Radnik Surdulica",
+    "Tip": "Over 2.5",
+    "Odds": "1.94",
+    "Date": "2026-04-18T13:00:00+00:00",
     "qualified": true
+  },
+  {
+    "League": "Super League",
+    "Match": "Pakhtakor vs Dinamo Samarqand",
+    "Tip": "Over 2.5",
+    "Odds": "1.83",
+    "Date": "2026-04-18T15:15:00+00:00",
+    "qualified": true
+  },
+  {
+    "League": "Division Profesional - Apertura",
+    "Match": "Club Guarani vs Sportivo Luqueno",
+    "Tip": "Over 2.5",
+    "Odds": "1.98",
+    "Date": "2026-04-18T21:15:00+00:00"
   },
   {
     "League": "Championship",
-    "Match": "Blackburn vs Coventry",
+    "Match": "Watford vs Sheffield Utd",
     "Tip": "Over 2.5",
-    "Odds": "1.97",
-    "Date": "2026-04-17T19:00:00+00:00",
+    "Odds": "1.82",
+    "Date": "2026-04-18T14:00:00+00:00",
     "qualified": true
   },
   {
-    "League": "Liga I",
-    "Match": "Oţelul vs Uta Arad",
+    "League": "J1 League",
+    "Match": "Mito Hollyhock vs Kashiwa Reysol",
     "Tip": "Over 2.5",
-    "Odds": "1.97",
-    "Date": "2026-04-17T14:30:00+00:00",
-    "qualified": true
+    "Odds": "1.94",
+    "Date": "2026-04-19T04:00:00+00:00"
   }
 ]
