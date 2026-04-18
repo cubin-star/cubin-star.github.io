@@ -1,19 +1,18 @@
 [
   {
-    "league": "NB I A",
-    "homeTeam": "Kaposvari",
-    "awayTeam": "DEAC",
-    "tip": "Over 140.5",
+    "league": "Serie A",
+    "homeTeam": "Napoli",
+    "awayTeam": "Lazio",
+    "tip": "Over 1.5",
     "odds": "",
-    "halftimeScore": "33:39 (72 pts)",
+    "halftimeScore": "0:1",
     "liveOdds": "",
     "finalScore": "",
     "result": "",
-    "sport": "basketball",
     "kickoff": "2026-04-18T16:00:00.000Z",
     "resolvedAt": "",
-    "source": "scout-basketball",
-    "scoutStats": "Score: 5/10 | HT: 33:39 (72 pts) | Q1=39 Q2=33 (no line, pace 69%) | Proj: 144 | NB I A"
+    "source": "scout-football",
+    "scoutStats": "Score: 12/14 | xG: 1.86 | Shots: 13/6 | Corners: 5 | Poss: 67% | Pre O2.5: 2.2"
   },
   {
     "league": "Superleague",
