@@ -1,5 +1,20 @@
 [
   {
+    "league": "Liga MX",
+    "homeTeam": "Atletico San Luis",
+    "awayTeam": "U.N.A.M. - Pumas",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "0:1",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "kickoff": "2026-04-18T01:00:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-football",
+    "scoutStats": "Score: 9/14 | xG: 1.49 | Shots: 15/4 | Corners: 3 | Poss: 50% | Pre O2.5: 1.7"
+  },
+  {
     "league": "BSN",
     "homeTeam": "Indios de Mayaguez",
     "awayTeam": "San German",
