@@ -1,5 +1,21 @@
 [
   {
+    "league": "LPB",
+    "homeTeam": "Sporting CP",
+    "awayTeam": "CA Queluz",
+    "tip": "Over 120.5",
+    "odds": "",
+    "halftimeScore": "31:31 (62 pts)",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "basketball",
+    "kickoff": "2026-04-18T14:00:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-basketball",
+    "scoutStats": "Score: 5/10 | HT: 31:31 (62 pts) | Q1=25 Q2=37 (no line, pace 59%) | Proj: 124 | LPB"
+  },
+  {
     "league": "Bundesliga",
     "homeTeam": "Union Berlin",
     "awayTeam": "VfL Wolfsburg",
