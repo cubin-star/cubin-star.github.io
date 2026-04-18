@@ -1,19 +1,18 @@
 [
   {
-    "league": "Segunda FEB",
-    "homeTeam": "Spanish Basketball Academy",
-    "awayTeam": "Gandia",
-    "tip": "Over 146.5",
+    "league": "Ligue 2",
+    "homeTeam": "Bastia",
+    "awayTeam": "Saint Etienne",
+    "tip": "Over 1.5",
     "odds": "",
-    "halftimeScore": "48:27 (75 pts)",
+    "halftimeScore": "1:0",
     "liveOdds": "",
     "finalScore": "",
     "result": "",
-    "sport": "basketball",
     "kickoff": "2026-04-18T18:00:00.000Z",
     "resolvedAt": "",
-    "source": "scout-basketball",
-    "scoutStats": "Score: 5/10 | HT: 48:27 (75 pts) | Q1=32 Q2=43 (no line, pace 71%) | Proj: 150 | Segunda FEB"
+    "source": "scout-football",
+    "scoutStats": "Score: 7/14 | xG: 0.00 | Shots: 7/4 | Corners: 4 | Poss: 74% | Pre O2.5: 2"
   },
   {
     "league": "Segunda FEB",
