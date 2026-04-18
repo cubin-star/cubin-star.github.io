@@ -1,5 +1,20 @@
 [
   {
+    "league": "Süper Lig",
+    "homeTeam": "Kocaelispor",
+    "awayTeam": "Göztepe",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "0:1",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "kickoff": "2026-04-18T14:00:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-football",
+    "scoutStats": "Score: 8/14 | xG: 0.91 | Shots: 12/3 | Corners: 3 | Poss: 70% | Pre O2.5: 2.62"
+  },
+  {
     "league": "LPB",
     "homeTeam": "Sporting CP",
     "awayTeam": "CA Queluz",
