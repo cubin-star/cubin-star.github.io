@@ -1,5 +1,21 @@
 [
   {
+    "league": "Segunda FEB",
+    "homeTeam": "Jaen",
+    "awayTeam": "Logrono",
+    "tip": "Over 126.5",
+    "odds": "",
+    "halftimeScore": "34:31 (65 pts)",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "basketball",
+    "kickoff": "2026-04-18T19:00:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-basketball",
+    "scoutStats": "Score: 6/10 | HT: 34:31 (65 pts) | Q1=32 Q2=33 (no line, pace 62%) | Proj: 130 | Segunda FEB"
+  },
+  {
     "league": "Jupiler Pro League",
     "homeTeam": "KV Mechelen",
     "awayTeam": "Anderlecht",
