@@ -1,1 +1,16 @@
-[]
+[
+  {
+    "league": "Alps Hockey League",
+    "match": "Gherdeina vs Merano",
+    "tip": "Over 4",
+    "odds": "1.22",
+    "date": "2026-04-18T17:30:00+00:00"
+  },
+  {
+    "league": "AHL",
+    "match": "Charlotte Checkers vs Lehigh Valley Phantoms",
+    "tip": "Over 4.25",
+    "odds": "1.31",
+    "date": "2026-04-18T20:00:00+00:00"
+  }
+]
