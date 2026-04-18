@@ -1,5 +1,21 @@
 [
   {
+    "league": "WHL",
+    "homeTeam": "Penticton Vees",
+    "awayTeam": "Prince George Cougars",
+    "tip": "Over 4.5",
+    "odds": "",
+    "halftimeScore": "1:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "hockey",
+    "kickoff": "2026-04-18T02:05:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-hockey",
+    "scoutStats": "Score: 6/9 | P1: 1:0 | GF: 7.2 GA: 5.5 | Proj: 4.9 → Over 4.5 | WHL"
+  },
+  {
     "league": "AHL",
     "homeTeam": "Tucson Roadrunners",
     "awayTeam": "Henderson Silver Knights",
