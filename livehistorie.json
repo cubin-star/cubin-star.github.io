@@ -1,5 +1,20 @@
 [
   {
+    "league": "2. Bundesliga",
+    "homeTeam": "Dynamo Dresden",
+    "awayTeam": "VfL Bochum",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "1:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "kickoff": "2026-04-18T11:00:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-football",
+    "scoutStats": "Score: 8/14 | xG: 0.88 | Shots: 11/5 | Corners: 4 | Poss: 56% | Pre O2.5: 1.57"
+  },
+  {
     "league": "MPBL",
     "homeTeam": "Marikina Shoemasters",
     "awayTeam": "Zamboanga Sikat",
