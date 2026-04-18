@@ -1,5 +1,19 @@
 [
   {
+    "league": "NB I A",
+    "homeTeam": "Szolnoki Olaj",
+    "awayTeam": "Soproni KC",
+    "tip": "Over -3.5",
+    "odds": "1.90",
+    "halftimeScore": "0:0 (0 pts)",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "basketball",
+    "kickoff": "2026-04-18T16:00:00.000Z",
+    "resolvedAt": ""
+  },
+  {
     "league": "Ligue 1",
     "homeTeam": "Lorient",
     "awayTeam": "Marseille",
