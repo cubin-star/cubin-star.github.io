@@ -1,11 +1,11 @@
 [
   {
-    "league": "Superliga",
-    "homeTeam": "Skenderbeu",
-    "awayTeam": "Apolonia Fier",
-    "tip": "Over 146.5",
+    "league": "NB I A",
+    "homeTeam": "Kaposvari",
+    "awayTeam": "DEAC",
+    "tip": "Over 140.5",
     "odds": "",
-    "halftimeScore": "30:45 (75 pts)",
+    "halftimeScore": "33:39 (72 pts)",
     "liveOdds": "",
     "finalScore": "",
     "result": "",
@@ -13,7 +13,7 @@
     "kickoff": "2026-04-18T16:00:00.000Z",
     "resolvedAt": "",
     "source": "scout-basketball",
-    "scoutStats": "Score: 5/10 | HT: 30:45 (75 pts) | Q1=38 Q2=37 (no line, pace 71%) | Proj: 150 | Superliga"
+    "scoutStats": "Score: 5/10 | HT: 33:39 (72 pts) | Q1=39 Q2=33 (no line, pace 69%) | Proj: 144 | NB I A"
   },
   {
     "league": "Superleague",
