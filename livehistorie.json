@@ -1,20 +1,5 @@
 [
   {
-    "league": "Serie B",
-    "homeTeam": "Palermo",
-    "awayTeam": "Cesena",
-    "tip": "Over 1.5",
-    "odds": "",
-    "halftimeScore": "1:0",
-    "liveOdds": "",
-    "finalScore": "",
-    "result": "",
-    "kickoff": "2026-04-18T15:15:00.000Z",
-    "resolvedAt": "",
-    "source": "scout-football",
-    "scoutStats": "Score: 12/14 | xG: 1.98 | Shots: 16/4 | Corners: 5 | Poss: 61% | Pre O2.5: 1.7"
-  },
-  {
     "league": "Ligue 1",
     "homeTeam": "Lorient",
     "awayTeam": "Marseille",
@@ -52,10 +37,10 @@
     "odds": "",
     "halftimeScore": "0:1",
     "liveOdds": "",
-    "finalScore": "",
-    "result": "",
+    "finalScore": "1:1",
+    "result": "✅ Won",
     "kickoff": "2026-04-18T14:00:00.000Z",
-    "resolvedAt": "",
+    "resolvedAt": "2026-04-18T16:07:05.710Z",
     "source": "scout-football",
     "scoutStats": "Score: 8/14 | xG: 0.91 | Shots: 12/3 | Corners: 3 | Poss: 70% | Pre O2.5: 2.62"
   },
