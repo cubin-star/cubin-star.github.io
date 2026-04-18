@@ -1,15 +1,14 @@
 [
   {
-    "league": "2. Liga",
-    "match": "AZ Havirov vs Prostejov",
+    "league": "AHL",
+    "match": "Toronto Marlies vs Laval Rocket",
     "tip": "Over 5.5",
-    "odds": "3.4",
-    "qualified15": true
+    "odds": "1.8"
   },
   {
-    "league": "DEL",
-    "match": "Eisbaren Berlin vs Kolner",
+    "league": "National League",
+    "match": "Davos vs Fribourg",
     "tip": "Over 5.5",
-    "odds": "1.78"
+    "odds": "2.0"
   }
 ]
