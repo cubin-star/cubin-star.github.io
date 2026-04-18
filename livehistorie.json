@@ -1,5 +1,21 @@
 [
   {
+    "league": "ACB",
+    "homeTeam": "Gran Canaria",
+    "awayTeam": "Basket Zaragoza",
+    "tip": "Over 135.5",
+    "odds": "",
+    "halftimeScore": "30:39 (69 pts)",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "basketball",
+    "kickoff": "2026-04-18T18:00:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-basketball",
+    "scoutStats": "Score: 6/10 | HT: 30:39 (69 pts) | Q1=38 Q2=31 (no line, pace 66%) | Proj: 139.4 | ACB"
+  },
+  {
     "league": "Premier League",
     "homeTeam": "El Mokawloon",
     "awayTeam": "El Geish",
@@ -38,10 +54,10 @@
     "odds": "",
     "halftimeScore": "0:1",
     "liveOdds": "",
-    "finalScore": "3:3",
-    "result": "✅ Won",
+    "finalScore": "",
+    "result": "",
     "kickoff": "2026-04-18T17:00:00.000Z",
-    "resolvedAt": "2026-04-18T19:16:05.952Z",
+    "resolvedAt": "",
     "source": "scout-football",
     "scoutStats": "Score: 10/14 | xG: 1.63 | Shots: 13/8 | Corners: 6 | Poss: 54% | Pre O2.5: 1.85"
   },
