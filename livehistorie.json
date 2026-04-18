@@ -1,5 +1,21 @@
 [
   {
+    "league": "ECHL",
+    "homeTeam": "Florida Everblades",
+    "awayTeam": "Reading Royals",
+    "tip": "Over 4.5",
+    "odds": "",
+    "halftimeScore": "1:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "hockey",
+    "kickoff": "2026-04-17T23:30:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-hockey",
+    "scoutStats": "Score: 5/9 | P1: 1:0 | GF: 6.2 GA: 4.8 | Proj: 4.6 → Over 4.5 | ECHL"
+  },
+  {
     "league": "USHL",
     "homeTeam": "Youngstown Phantoms",
     "awayTeam": "Madison Capitols",
