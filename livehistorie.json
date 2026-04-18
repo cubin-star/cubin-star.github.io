@@ -1,5 +1,21 @@
 [
   {
+    "league": "NBA",
+    "homeTeam": "Phoenix Suns",
+    "awayTeam": "Golden State Warriors",
+    "tip": "Over 191.5",
+    "odds": "",
+    "halftimeScore": "50:45 (95 pts)",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "basketball",
+    "kickoff": "2026-04-18T02:00:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-basketball",
+    "scoutStats": "Score: 7/10 | HT: 50:45 (95 pts) | Q1=48 Q2=47 (line 219.5, pace 87%) | Proj: 194.8 | NBA"
+  },
+  {
     "league": "WHL",
     "homeTeam": "Penticton Vees",
     "awayTeam": "Prince George Cougars",
