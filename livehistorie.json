@@ -1,5 +1,20 @@
 [
   {
+    "league": "Segunda División",
+    "homeTeam": "Zaragoza",
+    "awayTeam": "AD Ceuta FC",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "0:1",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "kickoff": "2026-04-18T14:15:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-football",
+    "scoutStats": "Score: 8/14 | xG: 0.00 | Shots: 11/4 | Corners: 3 | Poss: 63% | Pre O2.5: 1.83"
+  },
+  {
     "league": "Süper Lig",
     "homeTeam": "Kocaelispor",
     "awayTeam": "Göztepe",
