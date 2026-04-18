@@ -1,5 +1,21 @@
 [
   {
+    "league": "MPBL",
+    "homeTeam": "Marikina Shoemasters",
+    "awayTeam": "Zamboanga Sikat",
+    "tip": "Over 136.5",
+    "odds": "",
+    "halftimeScore": "32:38 (70 pts)",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "basketball",
+    "kickoff": "2026-04-18T10:00:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-basketball",
+    "scoutStats": "Score: 5/10 | HT: 32:38 (70 pts) | Q1=41 Q2=29 (no line, pace 67%) | Proj: 140 | MPBL"
+  },
+  {
     "league": "FNL",
     "homeTeam": "Chrudim",
     "awayTeam": "Vlašim",
