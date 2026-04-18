@@ -1,18 +1,17 @@
 [
   {
-    "league": "Championship",
-    "homeTeam": "Bristol City",
-    "awayTeam": "Norwich",
-    "tip": "Over 1.5",
-    "odds": "",
-    "halftimeScore": "1:0",
+    "league": "League One",
+    "homeTeam": "Peterhead",
+    "awayTeam": "Queen of the South",
+    "tip": "Over 0.5",
+    "odds": "1.21",
+    "halftimeScore": "0:0",
     "liveOdds": "",
     "finalScore": "",
     "result": "",
+    "sport": "football",
     "kickoff": "2026-04-18T14:00:00.000Z",
-    "resolvedAt": "",
-    "source": "scout-football",
-    "scoutStats": "Score: 9/14 | xG: 0.95 | Shots: 12/6 | Corners: 5 | Poss: 53% | Pre O2.5: 1.85"
+    "resolvedAt": ""
   },
   {
     "league": "LPB",
