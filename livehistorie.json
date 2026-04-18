@@ -1,5 +1,21 @@
 [
   {
+    "league": "NBL",
+    "homeTeam": "Tauranga Whai",
+    "awayTeam": "Taranaki Airs",
+    "tip": "Over 143.5",
+    "odds": "",
+    "halftimeScore": "46:27 (73 pts)",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "basketball",
+    "kickoff": "2026-04-18T04:00:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-basketball",
+    "scoutStats": "Score: 5/10 | HT: 46:27 (73 pts) | Q1=41 Q2=32 (line 174, pace 84%) | Proj: 147.5 | NBL"
+  },
+  {
     "league": "NBA",
     "homeTeam": "Phoenix Suns",
     "awayTeam": "Golden State Warriors",
