@@ -1,5 +1,20 @@
 [
   {
+    "league": "Serie B",
+    "homeTeam": "Modena",
+    "awayTeam": "Frosinone",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "1:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "kickoff": "2026-04-18T13:00:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-football",
+    "scoutStats": "Score: 12/14 | xG: 1.33 | Shots: 19/10 | Corners: 6 | Poss: 57% | Pre O2.5: 1.65"
+  },
+  {
     "league": "MPBL",
     "homeTeam": "Bataan Risers",
     "awayTeam": "Valenzuela City Darkhorse",
