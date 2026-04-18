@@ -1,17 +1,19 @@
 [
   {
-    "league": "NB I A",
-    "homeTeam": "Szolnoki Olaj",
-    "awayTeam": "Soproni KC",
-    "tip": "Over -3.5",
-    "odds": "1.90",
-    "halftimeScore": "0:0 (0 pts)",
+    "league": "Prvenstvo BiH",
+    "homeTeam": "Mrkonjic Grad",
+    "awayTeam": "Leotar Trebinje",
+    "tip": "Over 128.5",
+    "odds": "",
+    "halftimeScore": "32:34 (66 pts)",
     "liveOdds": "",
     "finalScore": "",
     "result": "",
     "sport": "basketball",
     "kickoff": "2026-04-18T16:00:00.000Z",
-    "resolvedAt": ""
+    "resolvedAt": "",
+    "source": "scout-basketball",
+    "scoutStats": "Score: 5/10 | HT: 32:34 (66 pts) | Q1=37 Q2=29 (no line, pace 63%) | Proj: 132 | Prvenstvo BiH"
   },
   {
     "league": "Ligue 1",
