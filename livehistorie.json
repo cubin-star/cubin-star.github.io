@@ -1,5 +1,21 @@
 [
   {
+    "league": "Espoirs U21",
+    "homeTeam": "Nancy U21",
+    "awayTeam": "Le Portel U21",
+    "tip": "Over 118.5",
+    "odds": "",
+    "halftimeScore": "30:31 (61 pts)",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "basketball",
+    "kickoff": "2026-04-18T12:30:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-basketball",
+    "scoutStats": "Score: 6/10 | HT: 30:31 (61 pts) | Q1=30 Q2=31 (no line, pace 58%) | Proj: 122 | Espoirs U21"
+  },
+  {
     "league": "CBA",
     "homeTeam": "Guangdong",
     "awayTeam": "Fujian",
