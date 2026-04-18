@@ -1,5 +1,19 @@
 [
   {
+    "league": "NBA",
+    "homeTeam": "Cleveland Cavaliers",
+    "awayTeam": "Toronto Raptors",
+    "tip": "Over 131.5",
+    "odds": "1.90",
+    "halftimeScore": "35:31 (66 pts)",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "basketball",
+    "kickoff": "2026-04-18T17:00:00.000Z",
+    "resolvedAt": ""
+  },
+  {
     "league": "Serie A",
     "homeTeam": "Napoli",
     "awayTeam": "Lazio",
