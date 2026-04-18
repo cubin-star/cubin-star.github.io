@@ -1,21 +1,5 @@
 [
   {
-    "league": "NHL",
-    "homeTeam": "Dallas Stars",
-    "awayTeam": "Minnesota Wild",
-    "tip": "Over 4.5",
-    "odds": "",
-    "halftimeScore": "0:1",
-    "liveOdds": "",
-    "finalScore": "",
-    "result": "",
-    "sport": "hockey",
-    "kickoff": "2026-04-18T21:30:00.000Z",
-    "resolvedAt": "",
-    "source": "scout-hockey",
-    "scoutStats": "Score: 7/9 | P1: 0:1 | GF: 6.7 GA: 5.6 | Proj: 4.9 → Over 4.5 | NHL"
-  },
-  {
     "league": "Serie A",
     "homeTeam": "Vasco DA Gama",
     "awayTeam": "Sao Paulo",
@@ -52,11 +36,11 @@
     "odds": "",
     "halftimeScore": "0:1",
     "liveOdds": "",
-    "finalScore": "",
-    "result": "",
+    "finalScore": "1:4",
+    "result": "✅ Won",
     "sport": "hockey",
     "kickoff": "2026-04-18T20:05:00.000Z",
-    "resolvedAt": "",
+    "resolvedAt": "2026-04-18T22:31:05.722Z",
     "source": "scout-hockey",
     "scoutStats": "Score: 7/9 | P1: 0:1 | GF: 6.2 GA: 6.8 | Proj: 5 → Over 4.5 | ECHL"
   },
