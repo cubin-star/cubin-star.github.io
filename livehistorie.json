@@ -1,8 +1,8 @@
 [
   {
-    "league": "Premier League",
-    "homeTeam": "Petrojet",
-    "awayTeam": "Pharco",
+    "league": "Super League 1",
+    "homeTeam": "OFI",
+    "awayTeam": "Levadiakos",
     "tip": "Over 1.5",
     "odds": "",
     "halftimeScore": "1:0",
@@ -12,7 +12,7 @@
     "kickoff": "2026-04-18T15:00:00.000Z",
     "resolvedAt": "",
     "source": "scout-football",
-    "scoutStats": "Score: 9/14 | xG: 1.19 | Shots: 13/4 | Corners: 5 | Poss: 52% | Pre O2.5: 2.3"
+    "scoutStats": "Score: 9/14 | xG: 1.39 | Shots: 16/7 | Corners: 2 | Poss: 51% | Pre O2.5: 2"
   },
   {
     "league": "Ligue 1",
