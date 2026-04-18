@@ -1,5 +1,21 @@
 [
   {
+    "league": "Zweite Liga",
+    "homeTeam": "Wagram",
+    "awayTeam": "Kufstein",
+    "tip": "Over 122.5",
+    "odds": "",
+    "halftimeScore": "28:35 (63 pts)",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "basketball",
+    "kickoff": "2026-04-18T15:30:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-basketball",
+    "scoutStats": "Score: 6/10 | HT: 28:35 (63 pts) | Q1=29 Q2=34 (no line, pace 60%) | Proj: 126 | Zweite Liga"
+  },
+  {
     "league": "Ligue 1",
     "homeTeam": "Lorient",
     "awayTeam": "Marseille",
