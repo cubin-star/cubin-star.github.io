@@ -1,5 +1,21 @@
 [
   {
+    "league": "Segunda FEB",
+    "homeTeam": "Molina Basket",
+    "awayTeam": "CB Getafe",
+    "tip": "Over 120.5",
+    "odds": "",
+    "halftimeScore": "34:28 (62 pts)",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "basketball",
+    "kickoff": "2026-04-18T18:00:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-basketball",
+    "scoutStats": "Score: 6/10 | HT: 34:28 (62 pts) | Q1=36 Q2=26 (no line, pace 59%) | Proj: 124 | Segunda FEB"
+  },
+  {
     "league": "Major League Soccer",
     "homeTeam": "Toronto FC",
     "awayTeam": "Austin",
