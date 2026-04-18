@@ -1,5 +1,21 @@
 [
   {
+    "league": "Superliga",
+    "homeTeam": "Skenderbeu",
+    "awayTeam": "Apolonia Fier",
+    "tip": "Over 146.5",
+    "odds": "",
+    "halftimeScore": "30:45 (75 pts)",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "basketball",
+    "kickoff": "2026-04-18T16:00:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-basketball",
+    "scoutStats": "Score: 5/10 | HT: 30:45 (75 pts) | Q1=38 Q2=37 (no line, pace 71%) | Proj: 150 | Superliga"
+  },
+  {
     "league": "Superleague",
     "homeTeam": "Gostivar",
     "awayTeam": "Rabotnicki",
