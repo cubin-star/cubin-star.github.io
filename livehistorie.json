@@ -1,5 +1,19 @@
 [
   {
+    "league": "FNL",
+    "homeTeam": "Chrudim",
+    "awayTeam": "Vlašim",
+    "tip": "Over 0.5",
+    "odds": "1.19",
+    "halftimeScore": "0:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-04-18T08:15:00.000Z",
+    "resolvedAt": ""
+  },
+  {
     "league": "IBL",
     "homeTeam": "Borneo Hornbills",
     "awayTeam": "Satya Wacana",
