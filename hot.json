@@ -1,50 +1,50 @@
 [
   {
-    "league": "Championship",
-    "match": "Blackburn - Coventry",
-    "kickoff": "2026-04-17T21:00:00+02:00",
+    "league": "J1 League",
+    "match": "Mito Hollyhock - Kashiwa Reysol",
+    "kickoff": "2026-04-19T06:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.12",
+    "group": 1
+  },
+  {
+    "league": "Division Profesional - Apertura",
+    "match": "Club Guarani - Sportivo Luqueno",
+    "kickoff": "2026-04-18T23:15:00+02:00",
     "tip": "Over 2.5",
     "odds": "2.13",
     "group": 1
   },
   {
-    "league": "Primera División - Apertura",
-    "match": "Albion FC - Central Espanol",
-    "kickoff": "2026-04-18T01:00:00+02:00",
+    "league": "Liga II",
+    "match": "Metalul Buzău - Politehnica Iasi",
+    "kickoff": "2026-04-18T10:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.46",
-    "group": 1
-  },
-  {
-    "league": "Primera A",
-    "match": "Jaguares - Deportivo Pasto",
-    "kickoff": "2026-04-17T23:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.18",
+    "odds": "2.10",
     "group": 2
   },
   {
-    "league": "1st Division",
-    "match": "Casric Stars - Black Leopards",
-    "kickoff": "2026-04-17T15:00:00+02:00",
+    "league": "Premijer Liga",
+    "match": "Radnik Bijeljina - FK Sarajevo",
+    "kickoff": "2026-04-18T16:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.22",
+    "odds": "2.35",
     "group": 2
   },
   {
-    "league": "Second League",
-    "match": "Dunav Ruse - Marek",
-    "kickoff": "2026-04-17T18:30:00+02:00",
+    "league": "Premyer Liqa",
+    "match": "Qarabag - Sabah FA",
+    "kickoff": "2026-04-18T17:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.13",
+    "odds": "2.10",
     "group": 3
   },
   {
-    "league": "National Soccer League",
-    "match": "Marines - AS Kigali",
-    "kickoff": "2026-04-17T15:00:00+02:00",
+    "league": "Championship",
+    "match": "Preston - West Brom",
+    "kickoff": "2026-04-18T16:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.26",
+    "odds": "2.13",
     "group": 3
   }
 ]
