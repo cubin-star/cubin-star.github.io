@@ -1,19 +1,18 @@
 [
   {
-    "league": "ECHL",
-    "homeTeam": "Trois-Rivieres Lions",
-    "awayTeam": "Maine Mariners",
-    "tip": "Over 4.5",
+    "league": "Jupiler Pro League",
+    "homeTeam": "KV Mechelen",
+    "awayTeam": "Anderlecht",
+    "tip": "Over 1.5",
     "odds": "",
     "halftimeScore": "1:0",
     "liveOdds": "",
     "finalScore": "",
     "result": "",
-    "sport": "hockey",
-    "kickoff": "2026-04-18T19:00:00.000Z",
+    "kickoff": "2026-04-18T18:45:00.000Z",
     "resolvedAt": "",
-    "source": "scout-hockey",
-    "scoutStats": "Score: 5/9 | P1: 1:0 | GF: 5.9 GA: 5.3 | Proj: 4.6 → Over 4.5 | ECHL"
+    "source": "scout-football",
+    "scoutStats": "Score: 8/14 | xG: 0.67 | Shots: 13/4 | Corners: 3 | Poss: 57% | Pre O2.5: 1.73"
   },
   {
     "league": "Serie A2",
