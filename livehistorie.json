@@ -1,5 +1,21 @@
 [
   {
+    "league": "AHL",
+    "homeTeam": "Tucson Roadrunners",
+    "awayTeam": "Henderson Silver Knights",
+    "tip": "Over 4.5",
+    "odds": "",
+    "halftimeScore": "1:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "hockey",
+    "kickoff": "2026-04-18T02:00:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-hockey",
+    "scoutStats": "Score: 8/9 | P1: 1:0 | GF: 6.7 GA: 6.3 | Proj: 5.1 → Over 4.5 | AHL"
+  },
+  {
     "league": "Liga MX",
     "homeTeam": "Atletico San Luis",
     "awayTeam": "U.N.A.M. - Pumas",
