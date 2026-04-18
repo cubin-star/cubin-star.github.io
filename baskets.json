@@ -1,9 +1,44 @@
 [
   {
-    "league": "First League",
-    "match": "Cacak 94 vs Sloga",
-    "tip": "Over 163.5",
-    "odds": "1.60",
-    "date": "2026-04-17T15:00:00+00:00"
+    "league": "Korisliiga",
+    "match": "Helsinki Seagulls vs Kataja",
+    "tip": "Over 159.5",
+    "odds": "1.47",
+    "date": "2026-04-18T14:00:00+00:00"
+  },
+  {
+    "league": "SB League",
+    "match": "Neuchatel vs Lausanne Basket",
+    "tip": "Over 157",
+    "odds": "1.54",
+    "date": "2026-04-18T16:00:00+00:00"
+  },
+  {
+    "league": "NB I A",
+    "match": "Szolnoki Olaj vs Soproni KC",
+    "tip": "Over 154.5",
+    "odds": "1.53",
+    "date": "2026-04-18T16:00:00+00:00"
+  },
+  {
+    "league": "Lega A",
+    "match": "Trento vs Reggiana",
+    "tip": "Over 154.5",
+    "odds": "1.33",
+    "date": "2026-04-18T16:15:00+00:00"
+  },
+  {
+    "league": "BBL",
+    "match": "Heidelberg vs Ludwigsburg",
+    "tip": "Over 157.5",
+    "odds": "1.34",
+    "date": "2026-04-18T16:30:00+00:00"
+  },
+  {
+    "league": "NBA",
+    "match": "New York Knicks vs Atlanta Hawks",
+    "tip": "Over 206.5",
+    "odds": "1.29",
+    "date": "2026-04-18T22:00:00+00:00"
   }
 ]
