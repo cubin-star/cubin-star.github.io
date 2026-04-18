@@ -1,5 +1,21 @@
 [
   {
+    "league": "BSN",
+    "homeTeam": "Indios de Mayaguez",
+    "awayTeam": "San German",
+    "tip": "Over 132.5",
+    "odds": "",
+    "halftimeScore": "36:32 (68 pts)",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "basketball",
+    "kickoff": "2026-04-18T00:00:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-basketball",
+    "scoutStats": "Score: 5/10 | HT: 36:32 (68 pts) | Q1=35 Q2=33 (no line, pace 65%) | Proj: 136 | BSN"
+  },
+  {
     "league": "LNAH",
     "homeTeam": "Marquis Jonquiere",
     "awayTeam": "Petroliers Laval",
