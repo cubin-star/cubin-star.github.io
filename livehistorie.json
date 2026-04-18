@@ -1,5 +1,21 @@
 [
   {
+    "league": "ECHL",
+    "homeTeam": "Trois-Rivieres Lions",
+    "awayTeam": "Maine Mariners",
+    "tip": "Over 4.5",
+    "odds": "",
+    "halftimeScore": "1:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "hockey",
+    "kickoff": "2026-04-18T19:00:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-hockey",
+    "scoutStats": "Score: 5/9 | P1: 1:0 | GF: 5.9 GA: 5.3 | Proj: 4.6 → Over 4.5 | ECHL"
+  },
+  {
     "league": "Serie A2",
     "homeTeam": "Urania Milano",
     "awayTeam": "Sebastiani Rieti",
