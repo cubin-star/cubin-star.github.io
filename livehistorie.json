@@ -1,9 +1,9 @@
 [
   {
-    "league": "AHL",
-    "homeTeam": "Iowa Wild",
-    "awayTeam": "Manitoba Moose",
-    "tip": "Over 4.5",
+    "league": "LNAH",
+    "homeTeam": "Marquis Jonquiere",
+    "awayTeam": "Petroliers Laval",
+    "tip": "Over 3.5",
     "odds": "",
     "halftimeScore": "0:1",
     "liveOdds": "",
@@ -13,7 +13,7 @@
     "kickoff": "2026-04-18T00:00:00.000Z",
     "resolvedAt": "",
     "source": "scout-hockey",
-    "scoutStats": "Score: 7/9 | P1: 0:1 | GF: 5.0 GA: 6.1 | Proj: 4.7 → Over 4.5 | AHL"
+    "scoutStats": "Score: 5/9 | P1: 0:1 | GF: 5.3 GA: 5.0 | Proj: 4.4 → Over 3.5 | LNAH"
   },
   {
     "league": "ECHL",
