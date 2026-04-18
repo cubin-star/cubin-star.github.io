@@ -1,5 +1,21 @@
 [
   {
+    "league": "NBL1 East",
+    "homeTeam": "Manly W.",
+    "awayTeam": "Inner West Bulls",
+    "tip": "Over 127.5",
+    "odds": "",
+    "halftimeScore": "38:27 (65 pts)",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "basketball",
+    "kickoff": "2026-04-18T07:00:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-basketball",
+    "scoutStats": "Score: 6/10 | HT: 38:27 (65 pts) | Q1=31 Q2=34 (line 170.5, pace 76%) | Proj: 131.3 | NBL1 East"
+  },
+  {
     "league": "NBL",
     "homeTeam": "Tauranga Whai",
     "awayTeam": "Taranaki Airs",
