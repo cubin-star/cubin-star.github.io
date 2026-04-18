@@ -1,5 +1,21 @@
 [
   {
+    "league": "MPBL",
+    "homeTeam": "Bataan Risers",
+    "awayTeam": "Valenzuela City Darkhorse",
+    "tip": "Over 126.5",
+    "odds": "",
+    "halftimeScore": "38:27 (65 pts)",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "basketball",
+    "kickoff": "2026-04-18T12:00:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-basketball",
+    "scoutStats": "Score: 6/10 | HT: 38:27 (65 pts) | Q1=33 Q2=32 (no line, pace 62%) | Proj: 130 | MPBL"
+  },
+  {
     "league": "Espoirs U21",
     "homeTeam": "Nancy U21",
     "awayTeam": "Le Portel U21",
@@ -39,10 +55,10 @@
     "odds": "",
     "halftimeScore": "1:0",
     "liveOdds": "",
-    "finalScore": "1:0",
-    "result": "❌ Lost",
+    "finalScore": "",
+    "result": "",
     "kickoff": "2026-04-18T11:30:00.000Z",
-    "resolvedAt": "2026-04-18T13:25:05.560Z",
+    "resolvedAt": "",
     "source": "scout-football",
     "scoutStats": "Score: 7/14 | xG: 0.63 | Shots: 13/1 | Corners: 3 | Poss: 78% | Pre O2.5: 2"
   },
