@@ -128,6 +128,10 @@ function balanceGroups(picks) {
         }
     }
 
+    if (!bestP) {
+        // Fallback: simple sequential pairing
+        return picks.map((p, i) => ({ ...p, group: Math.floor(i / 2) + 1 }));
+    }
     const result = [];
     for (let g = 0; g < bestP.length; g++) { for (const idx of bestP[g]) result.push({ ...picks[idx], group: g + 1 }); }
     return result;
@@ -341,9 +345,19 @@ async function main() {
         try {
             const live2 = JSON.parse(readFileSync('live2.json', 'utf-8'));
             if (Array.isArray(live2)) {
-                for (const m of live2) {
+                for (const raw of live2) {
                     if (selected.length >= PICK_COUNT) break;
-                    selected.push({ ...m, contrastScore: m.contrastScore || 0 });
+                    // live2.json uses PascalCase keys; normalize to camelCase
+                    const m = {
+                        league: raw.League || raw.league || '',
+                        match: raw.Match || raw.match || '',
+                        tip: raw.Tip || raw.tip || 'Over 2.5',
+                        odds: raw.Odds || raw.odds || '0',
+                        kickoff: raw.Date || raw.date || raw.kickoff || '',
+                        fixtureId: raw.fixtureId || null,
+                        contrastScore: raw.contrastScore || 0,
+                    };
+                    selected.push(m);
                     console.log('   [LIVE2] ' + m.match + ' | ' + m.tip + ' @ ' + m.odds);
                 }
                 console.log('From live2.json: ' + selected.length + ' matches');
@@ -355,8 +369,8 @@ async function main() {
 
     // --- Priority 2: fill from qualified (deduped) matches ---
     if (selected.length < PICK_COUNT) {
-        const selectedIds = new Set(selected.map(m => m.fixtureId || (m.match + m.kickoff)));
-        const within24h = deduped.filter(m => new Date(m.kickoff) <= max24h && !selectedIds.has(m.fixtureId));
+        const selectedKeys = new Set(selected.map(m => m.match + '|' + m.kickoff));
+        const within24h = deduped.filter(m => new Date(m.kickoff) <= max24h && !selectedKeys.has(m.match + '|' + m.kickoff));
         shuffle(within24h);
         console.log('Qualified pool (hot): ' + within24h.length + ' available');
         for (const m of within24h) {
@@ -369,8 +383,8 @@ async function main() {
 
     // --- Priority 3: fill remaining with random picks from pool (no criteria, just odds range) ---
     if (selected.length < PICK_COUNT) {
-        const selectedIds = new Set(selected.map(m => m.fixtureId || (m.match + m.kickoff)));
-        const fallback = pool.filter(m => !selectedIds.has(m.fixtureId) && new Date(m.kickoff) <= max24h && parseFloat(m.odds) <= FALLBACK_MAX_ODDS);
+        const selectedKeys = new Set(selected.map(m => m.match + '|' + m.kickoff));
+        const fallback = pool.filter(m => !selectedKeys.has(m.match + '|' + m.kickoff) && new Date(m.kickoff) <= max24h && parseFloat(m.odds) <= FALLBACK_MAX_ODDS);
         shuffle(fallback);
         console.log('Random fallback pool: ' + fallback.length + ' (24h), odds ≤' + FALLBACK_MAX_ODDS);
         for (const m of fallback) {
