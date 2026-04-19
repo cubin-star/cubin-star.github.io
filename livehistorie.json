@@ -1,19 +1,18 @@
 [
   {
-    "league": "ECHL",
-    "homeTeam": "Bloomington Bison",
-    "awayTeam": "Iowa Heartlanders",
-    "tip": "Over 4.5",
+    "league": "Serie B",
+    "homeTeam": "CRB",
+    "awayTeam": "Juventude",
+    "tip": "Over 1.5",
     "odds": "",
     "halftimeScore": "0:1",
     "liveOdds": "",
     "finalScore": "",
     "result": "",
-    "sport": "hockey",
-    "kickoff": "2026-04-19T00:00:00.000Z",
+    "kickoff": "2026-04-18T23:45:00.000Z",
     "resolvedAt": "",
-    "source": "scout-hockey",
-    "scoutStats": "Score: 6/9 | P1: 0:1 | GF: 5.7 GA: 6.6 | Proj: 4.8 → Over 4.5 | ECHL"
+    "source": "scout-football",
+    "scoutStats": "Score: 8/14 | xG: 1.21 | Shots: 11/5 | Corners: 2 | Poss: 58% | Pre O2.5: 2"
   },
   {
     "league": "OHL",
