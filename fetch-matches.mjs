@@ -8,7 +8,7 @@
  * Pouziti: node fetch-matches.mjs
  */
 
-import { writeFileSync } from 'fs';
+import { writeFileSync, readFileSync, existsSync } from 'fs';
 
 const API_KEY = process.env.API_FOOTBALL_KEY1;
 if (!API_KEY) { console.error('Chybi API_FOOTBALL_KEY1 env promenna.'); process.exit(1); }
@@ -335,36 +335,44 @@ async function main() {
 
     const fullAccumulator = deduped.length >= PICK_COUNT;
 
-    // Pick strict matches from 24h window
-    const numGroups = Math.ceil(PICK_COUNT / 2);
-    const within24h = deduped.filter(m => new Date(m.kickoff) <= max24h);
-    console.log('Strict in 24h window: ' + within24h.length);
-
-    function pickFrom(arr, lc, limit) {
-        const picked = [];
-        arr.sort((a, b) => b.contrastScore - a.contrastScore);
-        for (const m of arr) {
-            if (lc._total >= limit) break;
-            const cnt = lc.get(m.league) || 0;
-            if (cnt >= numGroups) continue;
-            picked.push(m);
-            lc.set(m.league, cnt + 1);
-            lc._total = (lc._total || 0) + 1;
-        }
-        return picked;
+    // --- Priority 1: load matches from live2.json ---
+    let selected = [];
+    if (existsSync('live2.json')) {
+        try {
+            const live2 = JSON.parse(readFileSync('live2.json', 'utf-8'));
+            if (Array.isArray(live2)) {
+                for (const m of live2) {
+                    if (selected.length >= PICK_COUNT) break;
+                    selected.push({ ...m, contrastScore: m.contrastScore || 0 });
+                    console.log('   [LIVE2] ' + m.match + ' | ' + m.tip + ' @ ' + m.odds);
+                }
+                console.log('From live2.json: ' + selected.length + ' matches');
+            }
+        } catch (e) { console.warn('Failed to read live2.json:', e.message); }
+    } else {
+        console.log('live2.json not found, skipping priority source');
     }
 
-    const lc = new Map();
-    lc._total = 0;
-    let selected = pickFrom(within24h, lc, PICK_COUNT);
-    console.log('Selected ' + selected.length + ' strict matches from 24h window');
-
-    // Fallback: fill remaining with random picks from pool (odds 2.1-2.6)
+    // --- Priority 2: fill from qualified (deduped) matches ---
     if (selected.length < PICK_COUNT) {
-        const selectedIds = new Set(selected.map(m => m.fixtureId));
+        const selectedIds = new Set(selected.map(m => m.fixtureId || (m.match + m.kickoff)));
+        const within24h = deduped.filter(m => new Date(m.kickoff) <= max24h && !selectedIds.has(m.fixtureId));
+        shuffle(within24h);
+        console.log('Qualified pool (hot): ' + within24h.length + ' available');
+        for (const m of within24h) {
+            if (selected.length >= PICK_COUNT) break;
+            selected.push(m);
+            console.log('   [HOT] ' + m.match + ' | ' + m.tip + ' @ ' + m.odds);
+        }
+        console.log('After hot fill: ' + selected.length + '/' + PICK_COUNT);
+    }
+
+    // --- Priority 3: fill remaining with random picks from pool (no criteria, just odds range) ---
+    if (selected.length < PICK_COUNT) {
+        const selectedIds = new Set(selected.map(m => m.fixtureId || (m.match + m.kickoff)));
         const fallback = pool.filter(m => !selectedIds.has(m.fixtureId) && new Date(m.kickoff) <= max24h && parseFloat(m.odds) <= FALLBACK_MAX_ODDS);
         shuffle(fallback);
-        console.log('Fallback pool: ' + fallback.length + ' (24h), odds ≤' + FALLBACK_MAX_ODDS);
+        console.log('Random fallback pool: ' + fallback.length + ' (24h), odds ≤' + FALLBACK_MAX_ODDS);
         for (const m of fallback) {
             if (selected.length >= PICK_COUNT) break;
             m.contrastScore = m.contrastScore || 0;
