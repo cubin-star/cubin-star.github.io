@@ -1,18 +1,18 @@
 [
   {
-    "league": "Serie A",
-    "homeTeam": "Flamengo",
-    "awayTeam": "Bahia",
+    "league": "Primera División",
+    "homeTeam": "Colo Colo",
+    "awayTeam": "Palestino",
     "tip": "Over 1.5",
     "odds": "",
-    "halftimeScore": "1:0",
+    "halftimeScore": "0:1",
     "liveOdds": "",
     "finalScore": "",
     "result": "",
     "kickoff": "2026-04-19T22:30:00.000Z",
     "resolvedAt": "",
     "source": "scout-football",
-    "scoutStats": "Score: 9/14 | xG: 0.67 | Shots: 12/4 | Corners: 3 | Poss: 63% | Pre O2.5: 1.8"
+    "scoutStats": "Score: 9/14 | xG: 0.00 | Shots: 11/4 | Corners: 5 | Poss: 62% | Pre O2.5: 1.93"
   },
   {
     "league": "NHL",
