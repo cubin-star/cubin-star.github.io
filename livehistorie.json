@@ -1,20 +1,5 @@
 [
   {
-    "league": "Division Profesional - Apertura",
-    "homeTeam": "Deportivo Recoleta",
-    "awayTeam": "2 de Mayo",
-    "tip": "Over 1.5",
-    "odds": "",
-    "halftimeScore": "1:0",
-    "liveOdds": "",
-    "finalScore": "",
-    "result": "",
-    "kickoff": "2026-04-18T23:30:00.000Z",
-    "resolvedAt": "",
-    "source": "scout-football",
-    "scoutStats": "Score: 7/14 | xG: 0.00 | Shots: 12/5 | Corners: 3 | Poss: 51% | Pre O2.5: 2.1"
-  },
-  {
     "league": "OHL",
     "homeTeam": "Barrie Colts",
     "awayTeam": "Ottawa 67s",
