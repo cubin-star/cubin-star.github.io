@@ -1,5 +1,21 @@
 [
   {
+    "league": "AHL",
+    "homeTeam": "San Jose Barracuda",
+    "awayTeam": "Bakersfield Condors",
+    "tip": "Over 4.5",
+    "odds": "",
+    "halftimeScore": "1:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "hockey",
+    "kickoff": "2026-04-19T02:00:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-hockey",
+    "scoutStats": "Score: 8/9 | P1: 1:0 | GF: 6.7 GA: 6.5 | Proj: 5.1 → Over 4.5 | AHL"
+  },
+  {
     "league": "Liga MX",
     "homeTeam": "Monterrey",
     "awayTeam": "Pachuca",
