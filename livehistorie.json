@@ -1,5 +1,20 @@
 [
   {
+    "league": "2. Bundesliga",
+    "homeTeam": "Eintracht Braunschweig",
+    "awayTeam": "Hertha BSC",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "0:1",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "kickoff": "2026-04-19T11:30:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-football",
+    "scoutStats": "Score: 8/14 | xG: 1.94 | Shots: 10/2 | Corners: 3 | Poss: 57% | Pre O2.5: 1.62"
+  },
+  {
     "league": "2. liga",
     "homeTeam": "Slovan Bratislava II",
     "awayTeam": "Malženice",
