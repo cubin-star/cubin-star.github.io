@@ -1,5 +1,20 @@
 [
   {
+    "league": "Liga Pro",
+    "homeTeam": "Manta FC",
+    "awayTeam": "Deportivo Cuenca",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "0:1",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "kickoff": "2026-04-19T18:00:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-football",
+    "scoutStats": "Score: 8/14 | xG: 0.00 | Shots: 12/5 | Corners: 4 | Poss: 59% | Pre O2.5: 2.25"
+  },
+  {
     "league": "WCH IIIA",
     "homeTeam": "South Africa",
     "awayTeam": "Bosnia & Herzegovina",
