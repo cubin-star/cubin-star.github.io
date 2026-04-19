@@ -1,20 +1,5 @@
 [
   {
-    "league": "Bundesliga",
-    "homeTeam": "SC Freiburg",
-    "awayTeam": "1. FC Heidenheim",
-    "tip": "Over 1.5",
-    "odds": "",
-    "halftimeScore": "1:0",
-    "liveOdds": "",
-    "finalScore": "",
-    "result": "",
-    "kickoff": "2026-04-19T13:30:00.000Z",
-    "resolvedAt": "",
-    "source": "scout-football",
-    "scoutStats": "Score: 9/14 | xG: 1.51 | Shots: 14/3 | Corners: 5 | Poss: 51% | Pre O2.5: 1.55"
-  },
-  {
     "league": "1. Lig",
     "homeTeam": "Bodrum FK",
     "awayTeam": "Erzurumspor FK",
@@ -37,10 +22,10 @@
     "odds": "",
     "halftimeScore": "1:0",
     "liveOdds": "",
-    "finalScore": "",
-    "result": "",
+    "finalScore": "2:2",
+    "result": "✅ Won",
     "kickoff": "2026-04-19T12:30:00.000Z",
-    "resolvedAt": "",
+    "resolvedAt": "2026-04-19T14:22:05.699Z",
     "source": "scout-football",
     "scoutStats": "Score: 7/14 | xG: 0.71 | Shots: 13/1 | Corners: 4 | Poss: 66% | Pre O2.5: 2"
   },
