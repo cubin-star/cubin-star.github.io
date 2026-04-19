@@ -1,5 +1,20 @@
 [
   {
+    "league": "Bundesliga",
+    "homeTeam": "TSV Hartberg",
+    "awayTeam": "Rapid Vienna",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "1:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "kickoff": "2026-04-19T12:30:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-football",
+    "scoutStats": "Score: 7/14 | xG: 0.71 | Shots: 13/1 | Corners: 4 | Poss: 66% | Pre O2.5: 2"
+  },
+  {
     "league": "2. Bundesliga",
     "homeTeam": "Eintracht Braunschweig",
     "awayTeam": "Hertha BSC",
