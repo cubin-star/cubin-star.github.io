@@ -1,5 +1,21 @@
 [
   {
+    "league": "ECHL",
+    "homeTeam": "Rapid City Rush",
+    "awayTeam": "Tahoe Knight Monsters",
+    "tip": "Over 4.5",
+    "odds": "",
+    "halftimeScore": "1:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "hockey",
+    "kickoff": "2026-04-19T01:05:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-hockey",
+    "scoutStats": "Score: 7/9 | P1: 1:0 | GF: 6.6 GA: 7.2 | Proj: 5.1 → Over 4.5 | ECHL"
+  },
+  {
     "league": "FPHL",
     "homeTeam": "Monroe Moccasins",
     "awayTeam": "Columbus River Dragons",
@@ -70,11 +86,11 @@
     "odds": "",
     "halftimeScore": "1:0",
     "liveOdds": "",
-    "finalScore": "2:4",
-    "result": "✅ Won",
+    "finalScore": "",
+    "result": "",
     "sport": "hockey",
     "kickoff": "2026-04-18T23:05:00.000Z",
-    "resolvedAt": "2026-04-19T01:43:05.723Z",
+    "resolvedAt": "",
     "source": "scout-hockey",
     "scoutStats": "Score: 7/9 | P1: 1:0 | GF: 6.0 GA: 5.3 | Proj: 4.7 → Over 4.5 | AHL"
   },
