@@ -1,5 +1,21 @@
 [
   {
+    "league": "Liiga",
+    "homeTeam": "Ilves",
+    "awayTeam": "Tappara",
+    "tip": "Over 4.5",
+    "odds": "",
+    "halftimeScore": "1:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "hockey",
+    "kickoff": "2026-04-19T14:00:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-hockey",
+    "scoutStats": "Score: 5/9 | P1: 1:0 | GF: 5.8 GA: 4.3 | Proj: 4.5 → Over 4.5 | Liiga"
+  },
+  {
     "league": "1. Lig",
     "homeTeam": "Bodrum FK",
     "awayTeam": "Erzurumspor FK",
