@@ -1,18 +1,18 @@
 [
   {
-    "league": "Bundesliga",
-    "homeTeam": "Borussia Mönchengladbach",
-    "awayTeam": "FSV Mainz 05",
+    "league": "Serie B",
+    "homeTeam": "Empoli",
+    "awayTeam": "Virtus Entella",
     "tip": "Over 1.5",
     "odds": "",
-    "halftimeScore": "1:0",
+    "halftimeScore": "0:1",
     "liveOdds": "",
     "finalScore": "",
     "result": "",
     "kickoff": "2026-04-19T17:30:00.000Z",
     "resolvedAt": "",
     "source": "scout-football",
-    "scoutStats": "Score: 9/14 | xG: 1.11 | Shots: 15/5 | Corners: 3 | Poss: 51% | Pre O2.5: 1.8"
+    "scoutStats": "Score: 10/14 | xG: 0.84 | Shots: 14/2 | Corners: 6 | Poss: 61% | Pre O2.5: 2.1"
   },
   {
     "league": "Primeira Liga",
