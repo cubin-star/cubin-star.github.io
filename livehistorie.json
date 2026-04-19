@@ -1,5 +1,20 @@
 [
   {
+    "league": "Bundesliga",
+    "homeTeam": "Borussia Mönchengladbach",
+    "awayTeam": "FSV Mainz 05",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "1:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "kickoff": "2026-04-19T17:30:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-football",
+    "scoutStats": "Score: 9/14 | xG: 1.11 | Shots: 15/5 | Corners: 3 | Poss: 51% | Pre O2.5: 1.8"
+  },
+  {
     "league": "Primeira Liga",
     "homeTeam": "Sporting CP",
     "awayTeam": "Benfica",
