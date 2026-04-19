@@ -1,5 +1,19 @@
 [
   {
+    "league": "2. liga",
+    "homeTeam": "Slovan Bratislava II",
+    "awayTeam": "Malženice",
+    "tip": "Over 0.5",
+    "odds": "1.80",
+    "halftimeScore": "0:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-04-19T08:30:00.000Z",
+    "resolvedAt": ""
+  },
+  {
     "league": "NBL1 East",
     "homeTeam": "Newcastle Falcons",
     "awayTeam": "Canberra",
