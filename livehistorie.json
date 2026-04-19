@@ -1,5 +1,20 @@
 [
   {
+    "league": "Major League Soccer",
+    "homeTeam": "New England Revolution",
+    "awayTeam": "Columbus Crew",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "0:1",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "kickoff": "2026-04-18T23:30:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-football",
+    "scoutStats": "Score: 9/14 | xG: 0.80 | Shots: 10/5 | Corners: 6 | Poss: 59% | Pre O2.5: 1.83"
+  },
+  {
     "league": "OHL",
     "homeTeam": "Barrie Colts",
     "awayTeam": "Ottawa 67s",
