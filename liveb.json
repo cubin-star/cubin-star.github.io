@@ -1,58 +1,9 @@
 [
   {
-    "league": "Korisliiga",
-    "match": "Helsinki Seagulls vs Kataja",
-    "tip": "Over 165.5",
+    "league": "Premier league",
+    "match": "Valur vs Keflavik",
+    "tip": "Over 174.25",
     "odds": "1.89",
-    "date": "2026-04-18T14:00:00+00:00"
-  },
-  {
-    "league": "Korisliiga",
-    "match": "Salon Vilpas vs UU-Korihait Uusikaupunki",
-    "tip": "Over 169",
-    "odds": "1.90",
-    "date": "2026-04-18T16:00:00+00:00"
-  },
-  {
-    "league": "SB League",
-    "match": "Neuchatel vs Lausanne Basket",
-    "tip": "Over 162.5",
-    "odds": "1.91",
-    "date": "2026-04-18T16:00:00+00:00"
-  },
-  {
-    "league": "NB I A",
-    "match": "Szolnoki Olaj vs Soproni KC",
-    "tip": "Over 160",
-    "odds": "1.90",
-    "date": "2026-04-18T16:00:00+00:00"
-  },
-  {
-    "league": "Lega A",
-    "match": "Trento vs Reggiana",
-    "tip": "Over 163.5",
-    "odds": "1.88",
-    "date": "2026-04-18T16:15:00+00:00"
-  },
-  {
-    "league": "BBL",
-    "match": "Heidelberg vs Ludwigsburg",
-    "tip": "Over 166.5",
-    "odds": "1.89",
-    "date": "2026-04-18T16:30:00+00:00"
-  },
-  {
-    "league": "NBA",
-    "match": "Cleveland Cavaliers vs Toronto Raptors",
-    "tip": "Over 219.5",
-    "odds": "1.90",
-    "date": "2026-04-18T17:00:00+00:00"
-  },
-  {
-    "league": "NBA",
-    "match": "New York Knicks vs Atlanta Hawks",
-    "tip": "Over 216.5",
-    "odds": "1.90",
-    "date": "2026-04-18T22:00:00+00:00"
+    "date": "2026-04-19T19:15:00+00:00"
   }
 ]
