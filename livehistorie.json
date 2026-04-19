@@ -1,5 +1,19 @@
 [
   {
+    "league": "Primera Division",
+    "homeTeam": "Águila",
+    "awayTeam": "Inter",
+    "tip": "Over 0.5",
+    "odds": "1.81",
+    "halftimeScore": "0:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-04-19T21:00:00.000Z",
+    "resolvedAt": ""
+  },
+  {
     "league": "Liga Pro",
     "homeTeam": "Independiente del Valle",
     "awayTeam": "LDU de Quito",
