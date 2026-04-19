@@ -1,20 +1,5 @@
 [
   {
-    "league": "Primera División",
-    "homeTeam": "Coquimbo Unido",
-    "awayTeam": "Nublense",
-    "tip": "Over 1.5",
-    "odds": "",
-    "halftimeScore": "1:0",
-    "liveOdds": "",
-    "finalScore": "",
-    "result": "",
-    "kickoff": "2026-04-19T16:30:00.000Z",
-    "resolvedAt": "",
-    "source": "scout-football",
-    "scoutStats": "Score: 7/14 | xG: 0.00 | Shots: 14/3 | Corners: 4 | Poss: 56% | Pre O2.5: 2.2"
-  },
-  {
     "league": "Super Liga",
     "homeTeam": "Javor",
     "awayTeam": "FK Spartak Zdrepceva KRV",
@@ -22,10 +7,10 @@
     "odds": "",
     "halftimeScore": "1:0",
     "liveOdds": "",
-    "finalScore": "",
-    "result": "",
+    "finalScore": "1:0",
+    "result": "❌ Lost",
     "kickoff": "2026-04-19T15:30:00.000Z",
-    "resolvedAt": "",
+    "resolvedAt": "2026-04-19T17:25:05.577Z",
     "source": "scout-football",
     "scoutStats": "Score: 7/14 | xG: 0.00 | Shots: 13/4 | Corners: 7 | Poss: 53% | Pre O2.5: 2.2"
   },
