@@ -1,5 +1,20 @@
 [
   {
+    "league": "Liga Pro",
+    "homeTeam": "Independiente del Valle",
+    "awayTeam": "LDU de Quito",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "0:1",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "kickoff": "2026-04-19T20:30:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-football",
+    "scoutStats": "Score: 11/14 | xG: 0.00 | Shots: 16/4 | Corners: 9 | Poss: 65% | Pre O2.5: 1.95"
+  },
+  {
     "league": "Serie A",
     "homeTeam": "Coritiba",
     "awayTeam": "Atletico-MG",
