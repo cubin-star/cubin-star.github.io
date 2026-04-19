@@ -1,5 +1,21 @@
 [
   {
+    "league": "OHL",
+    "homeTeam": "Barrie Colts",
+    "awayTeam": "Ottawa 67s",
+    "tip": "Over 4.5",
+    "odds": "",
+    "halftimeScore": "1:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "hockey",
+    "kickoff": "2026-04-18T23:30:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-hockey",
+    "scoutStats": "Score: 6/9 | P1: 1:0 | GF: 7.1 GA: 5.1 | Proj: 4.8 → Over 4.5 | OHL"
+  },
+  {
     "league": "AHL",
     "homeTeam": "Providence Bruins",
     "awayTeam": "Utica Comets",
