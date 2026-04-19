@@ -1,65 +1,9 @@
 [
   {
-    "League": "FNL",
-    "Match": "Chrudim vs Vlašim",
-    "Tip": "Over 1.5",
-    "Odds": "1.19",
-    "Date": "2026-04-18T08:15:00+00:00"
-  },
-  {
-    "League": "Liga 1",
-    "Match": "Arema FC vs Persis Solo",
-    "Tip": "Over 1.5",
-    "Odds": "1.20",
-    "Date": "2026-04-18T08:30:00+00:00"
-  },
-  {
-    "League": "3. Division",
-    "Match": "FA 2000 vs Hørsholm-Usserød",
-    "Tip": "Over 1.5",
-    "Odds": "1.19",
-    "Date": "2026-04-18T12:00:00+00:00"
-  },
-  {
-    "League": "Regionalliga - West",
-    "Match": "Paderborn II vs Fortuna Düsseldorf II",
-    "Tip": "Over 1.5",
-    "Odds": "1.20",
-    "Date": "2026-04-18T12:00:00+00:00"
-  },
-  {
-    "League": "Campionato Primavera - 2",
-    "Match": "Pescara U19 vs Monopoli U19",
-    "Tip": "Over 1.5",
-    "Odds": "1.16",
-    "Date": "2026-04-18T13:00:00+00:00"
-  },
-  {
-    "League": "Czech Liga",
-    "Match": "Slovan Liberec vs Mlada Boleslav",
-    "Tip": "Over 1.5",
-    "Odds": "1.20",
-    "Date": "2026-04-18T13:00:00+00:00"
-  },
-  {
-    "League": "League One",
-    "Match": "Peterhead vs Queen of the South",
-    "Tip": "Over 1.5",
-    "Odds": "1.21",
-    "Date": "2026-04-18T14:00:00+00:00"
-  },
-  {
-    "League": "Ligat Ha'al",
-    "Match": "Maccabi Netanya vs Ashdod",
+    "League": "Premier League",
+    "Match": "Hamrun Spartans vs Naxxar Lions",
     "Tip": "Over 1.5",
     "Odds": "1.17",
-    "Date": "2026-04-18T16:50:00+00:00"
-  },
-  {
-    "League": "First Amateur Division",
-    "Match": "Albert Quévy-Mons vs Excelsior Virton",
-    "Tip": "Over 1.5",
-    "Odds": "1.19",
-    "Date": "2026-04-18T18:00:00+00:00"
+    "Date": "2026-04-19T15:30:00+00:00"
   }
 ]
