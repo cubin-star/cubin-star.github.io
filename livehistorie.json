@@ -1,5 +1,21 @@
 [
   {
+    "league": "WCH IIIA",
+    "homeTeam": "South Africa",
+    "awayTeam": "Bosnia & Herzegovina",
+    "tip": "Over 4.5",
+    "odds": "",
+    "halftimeScore": "1:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "hockey",
+    "kickoff": "2026-04-19T18:00:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-hockey",
+    "scoutStats": "Score: 6/9 | P1: 1:0 | GF: 6.8 GA: 8.3 | Proj: 5.2 → Over 4.5 | WCH IIIA"
+  },
+  {
     "league": "Serie B",
     "homeTeam": "Empoli",
     "awayTeam": "Virtus Entella",
