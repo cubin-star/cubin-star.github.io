@@ -1,5 +1,175 @@
 [
   {
+    "sport": "basketball",
+    "league": "NBA",
+    "match": "New York Knicks vs Atlanta Hawks",
+    "tip": "Over 206.5",
+    "odds": "1.29",
+    "date": "2026-04-18T22:00:00+00:00",
+    "score": "113:102",
+    "result": "✓"
+  },
+  {
+    "sport": "hockey",
+    "league": "AHL",
+    "match": "Charlotte Checkers vs Lehigh Valley Phantoms",
+    "tip": "Over 4.25",
+    "odds": "1.31",
+    "date": "2026-04-18T20:00:00+00:00",
+    "score": "0:2",
+    "result": "✗"
+  },
+  {
+    "sport": "football",
+    "league": "First Amateur Division",
+    "match": "Albert Quévy-Mons vs Excelsior Virton",
+    "tip": "Over 1.5",
+    "odds": "1.19",
+    "date": "2026-04-18T18:00:00+00:00",
+    "score": "0:2",
+    "result": "✓"
+  },
+  {
+    "sport": "hockey",
+    "league": "Alps Hockey League",
+    "match": "Gherdeina vs Merano",
+    "tip": "Over 4",
+    "odds": "1.22",
+    "date": "2026-04-18T17:30:00+00:00",
+    "score": "4:3",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "Ligat Ha'al",
+    "match": "Maccabi Netanya vs Ashdod",
+    "tip": "Over 1.5",
+    "odds": "1.17",
+    "date": "2026-04-18T16:50:00+00:00",
+    "score": "2:1",
+    "result": "✓"
+  },
+  {
+    "sport": "basketball",
+    "league": "BBL",
+    "match": "Heidelberg vs Ludwigsburg",
+    "tip": "Over 157.5",
+    "odds": "1.34",
+    "date": "2026-04-18T16:30:00+00:00",
+    "score": "73:83",
+    "result": "✗"
+  },
+  {
+    "sport": "basketball",
+    "league": "Lega A",
+    "match": "Trento vs Reggiana",
+    "tip": "Over 154.5",
+    "odds": "1.33",
+    "date": "2026-04-18T16:15:00+00:00",
+    "score": "82:90",
+    "result": "✓"
+  },
+  {
+    "sport": "basketball",
+    "league": "SB League",
+    "match": "Neuchatel vs Lausanne Basket",
+    "tip": "Over 157",
+    "odds": "1.54",
+    "date": "2026-04-18T16:00:00+00:00",
+    "score": "93:76",
+    "result": "✓"
+  },
+  {
+    "sport": "basketball",
+    "league": "NB I A",
+    "match": "Szolnoki Olaj vs Soproni KC",
+    "tip": "Over 154.5",
+    "odds": "1.53",
+    "date": "2026-04-18T16:00:00+00:00",
+    "score": "107:68",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "League One",
+    "match": "Peterhead vs Queen of the South",
+    "tip": "Over 1.5",
+    "odds": "1.21",
+    "date": "2026-04-18T14:00:00+00:00",
+    "score": "1:1",
+    "result": "✓"
+  },
+  {
+    "sport": "basketball",
+    "league": "Korisliiga",
+    "match": "Helsinki Seagulls vs Kataja",
+    "tip": "Over 159.5",
+    "odds": "1.47",
+    "date": "2026-04-18T14:00:00+00:00",
+    "score": "72:92",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "Campionato Primavera - 2",
+    "match": "Pescara U19 vs Monopoli U19",
+    "tip": "Over 1.5",
+    "odds": "1.16",
+    "date": "2026-04-18T13:00:00+00:00",
+    "score": "1:4",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "Czech Liga",
+    "match": "Slovan Liberec vs Mlada Boleslav",
+    "tip": "Over 1.5",
+    "odds": "1.20",
+    "date": "2026-04-18T13:00:00+00:00",
+    "score": "0:0",
+    "result": "✗"
+  },
+  {
+    "sport": "football",
+    "league": "3. Division",
+    "match": "FA 2000 vs Hørsholm-Usserød",
+    "tip": "Over 1.5",
+    "odds": "1.19",
+    "date": "2026-04-18T12:00:00+00:00",
+    "score": "3:1",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "Regionalliga - West",
+    "match": "Paderborn II vs Fortuna Düsseldorf II",
+    "tip": "Over 1.5",
+    "odds": "1.20",
+    "date": "2026-04-18T12:00:00+00:00",
+    "score": "1:2",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "Liga 1",
+    "match": "Arema FC vs Persis Solo",
+    "tip": "Over 1.5",
+    "odds": "1.20",
+    "date": "2026-04-18T08:30:00+00:00",
+    "score": "2:0",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "FNL",
+    "match": "Chrudim vs Vlašim",
+    "tip": "Over 1.5",
+    "odds": "1.19",
+    "date": "2026-04-18T08:15:00+00:00",
+    "score": "0:2",
+    "result": "✓"
+  },
+  {
     "sport": "football",
     "league": "J1 League",
     "match": "Sanfrecce Hiroshima vs V-varen Nagasaki",
@@ -1827,176 +1997,6 @@
     "odds": "1.21",
     "date": "2026-04-01T19:30:00+00:00",
     "score": "3:1",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Botola Pro",
-    "match": "Olympique Safi vs Renaissance Berkane",
-    "tip": "Over 1.5",
-    "odds": "1.48",
-    "date": "2026-04-01T19:00:00+00:00",
-    "score": "1:1",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Reserve League",
-    "match": "San Lorenzo Res. vs Atlético Tucumán Res.",
-    "tip": "Over 1.5",
-    "odds": "1.32",
-    "date": "2026-04-01T18:00:00+00:00",
-    "score": "0:2",
-    "result": "✓"
-  },
-  {
-    "sport": "hockey",
-    "league": "SHL",
-    "match": "Vaxjo vs Brynas",
-    "tip": "Over 4.5",
-    "odds": "1.67",
-    "date": "2026-04-01T17:00:00+00:00",
-    "score": "2:1",
-    "result": "✗"
-  },
-  {
-    "sport": "basketball",
-    "league": "Extraliga",
-    "match": "BC Komarno vs MBK Handlova",
-    "tip": "Over 158.5",
-    "odds": "1.53",
-    "date": "2026-04-01T17:00:00+00:00",
-    "score": "81:65",
-    "result": "✗"
-  },
-  {
-    "sport": "basketball",
-    "league": "CBA",
-    "match": "Sichuan vs Shanxi Zhongyu",
-    "tip": "Over 154.5",
-    "odds": "1.57",
-    "date": "2026-04-01T11:35:00+00:00",
-    "score": "81:103",
-    "result": "✓"
-  },
-  {
-    "sport": "basketball",
-    "league": "B2.League",
-    "match": "Ehime Orange Vikings vs Shizuoka",
-    "tip": "Over 152.5",
-    "odds": "1.59",
-    "date": "2026-04-01T10:05:00+00:00",
-    "score": "88:89",
-    "result": "✓"
-  },
-  {
-    "sport": "hockey",
-    "league": "AHL",
-    "match": "Toronto Marlies vs Manitoba Moose",
-    "tip": "Over 4.5",
-    "odds": "1.50",
-    "date": "2026-03-31T23:00:00+00:00",
-    "score": "1:5",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "World Cup - Qualification Europe",
-    "match": "Bosnia & Herzegovina vs Italy",
-    "tip": "Over 1.5",
-    "odds": "1.34",
-    "date": "2026-03-31T18:45:00+00:00",
-    "score": "1:1",
-    "result": "✓"
-  },
-  {
-    "sport": "basketball",
-    "league": "CBA",
-    "match": "Guangdong vs Jiangsu Dragons",
-    "tip": "Over 170.5",
-    "odds": "1.40",
-    "date": "2026-03-31T11:35:00+00:00",
-    "score": "101:92",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Segunda División RFEF - Group 2",
-    "match": "Utebo vs Real Unión",
-    "tip": "Over 1.5",
-    "odds": "1.28",
-    "date": "2026-03-29T16:00:00+00:00",
-    "score": "2:3",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "First Amateur Division",
-    "match": "Habay-la-Neuve vs Tubize",
-    "tip": "Over 1.5",
-    "odds": "1.21",
-    "date": "2026-03-29T13:00:00+00:00",
-    "score": "2:0",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Primera División Femenina",
-    "match": "Granad. Tenerife W vs Madrid CFF W",
-    "tip": "Over 1.5",
-    "odds": "1.22",
-    "date": "2026-03-29T11:00:00+00:00",
-    "score": "2:0",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "J2/J3 League",
-    "match": "Tokushima Vortis vs Kochi United",
-    "tip": "Over 1.5",
-    "odds": "1.28",
-    "date": "2026-03-29T05:00:00+00:00",
-    "score": "3:0",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "J2/J3 League",
-    "match": "Kitakyushu vs FC Ryukyu",
-    "tip": "Over 1.5",
-    "odds": "1.33",
-    "date": "2026-03-29T05:00:00+00:00",
-    "score": "1:0",
-    "result": "✗"
-  },
-  {
-    "sport": "hockey",
-    "league": "AHL",
-    "match": "Syracuse Crunch vs Rochester Americans",
-    "tip": "Over 4.5",
-    "odds": "1.40",
-    "date": "2026-03-28T23:00:00+00:00",
-    "score": "5:3",
-    "result": "✓"
-  },
-  {
-    "sport": "hockey",
-    "league": "AHL",
-    "match": "Grand Rapids Griffins vs Chicago Wolves",
-    "tip": "Over 4.5",
-    "odds": "1.44",
-    "date": "2026-03-28T23:00:00+00:00",
-    "score": "3:2",
-    "result": "✓"
-  },
-  {
-    "sport": "basketball",
-    "league": "Extraliga",
-    "match": "Kosice Wolves vs BKM Lucenec",
-    "tip": "Over 161",
-    "odds": "1.55",
-    "date": "2026-03-28T17:00:00+00:00",
-    "score": "75:92",
     "result": "✓"
   }
 ]
