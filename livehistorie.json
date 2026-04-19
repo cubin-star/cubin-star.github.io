@@ -1,5 +1,20 @@
 [
   {
+    "league": "Liga MX",
+    "homeTeam": "Club America",
+    "awayTeam": "Toluca",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "1:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "kickoff": "2026-04-19T03:10:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-football",
+    "scoutStats": "Score: 8/14 | xG: 0.56 | Shots: 10/6 | Corners: 3 | Poss: 58% | Pre O2.5: 1.9"
+  },
+  {
     "league": "AHL",
     "homeTeam": "San Jose Barracuda",
     "awayTeam": "Bakersfield Condors",
