@@ -1,5 +1,21 @@
 [
   {
+    "league": "NBL1 East",
+    "homeTeam": "Newcastle Falcons",
+    "awayTeam": "Canberra",
+    "tip": "Over 150.5",
+    "odds": "",
+    "halftimeScore": "36:40 (76 pts)",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "basketball",
+    "kickoff": "2026-04-19T05:00:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-basketball",
+    "scoutStats": "Score: 5/10 | HT: 36:40 (76 pts) | Q1=37 Q2=39 (no line, pace 72%) | Proj: 153.5 | NBL1 East"
+  },
+  {
     "league": "Liga MX",
     "homeTeam": "Club America",
     "awayTeam": "Toluca",
