@@ -1,5 +1,21 @@
 [
   {
+    "league": "ECHL",
+    "homeTeam": "Worcester Railers",
+    "awayTeam": "Adirondack Thunder",
+    "tip": "Over 4.5",
+    "odds": "",
+    "halftimeScore": "1:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "hockey",
+    "kickoff": "2026-04-19T19:05:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-hockey",
+    "scoutStats": "Score: 6/9 | P1: 1:0 | GF: 5.7 GA: 6.0 | Proj: 4.7 → Over 4.5 | ECHL"
+  },
+  {
     "league": "Liga Pro",
     "homeTeam": "Manta FC",
     "awayTeam": "Deportivo Cuenca",
