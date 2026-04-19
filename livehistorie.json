@@ -1,5 +1,21 @@
 [
   {
+    "league": "ECHL",
+    "homeTeam": "Bloomington Bison",
+    "awayTeam": "Iowa Heartlanders",
+    "tip": "Over 4.5",
+    "odds": "",
+    "halftimeScore": "0:1",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "hockey",
+    "kickoff": "2026-04-19T00:00:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-hockey",
+    "scoutStats": "Score: 6/9 | P1: 0:1 | GF: 5.7 GA: 6.6 | Proj: 4.8 → Over 4.5 | ECHL"
+  },
+  {
     "league": "OHL",
     "homeTeam": "Barrie Colts",
     "awayTeam": "Ottawa 67s",
