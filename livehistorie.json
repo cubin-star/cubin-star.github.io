@@ -1,5 +1,20 @@
 [
   {
+    "league": "Primeira Liga",
+    "homeTeam": "Sporting CP",
+    "awayTeam": "Benfica",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "0:1",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "kickoff": "2026-04-19T17:15:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-football",
+    "scoutStats": "Score: 11/14 | xG: 2.04 | Shots: 12/5 | Corners: 7 | Poss: 65% | Pre O2.5: 1.8"
+  },
+  {
     "league": "Eliteserien",
     "homeTeam": "Start",
     "awayTeam": "Molde",
