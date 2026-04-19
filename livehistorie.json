@@ -1,5 +1,21 @@
 [
   {
+    "league": "FPHL",
+    "homeTeam": "Monroe Moccasins",
+    "awayTeam": "Columbus River Dragons",
+    "tip": "Over 4.5",
+    "odds": "",
+    "halftimeScore": "1:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "hockey",
+    "kickoff": "2026-04-19T00:05:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-hockey",
+    "scoutStats": "Score: 6/9 | P1: 1:0 | GF: 8.3 GA: 6.3 | Proj: 5.1 → Over 4.5 | FPHL"
+  },
+  {
     "league": "ECHL",
     "homeTeam": "Allen Americans",
     "awayTeam": "Kansas City",
