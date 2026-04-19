@@ -1,5 +1,20 @@
 [
   {
+    "league": "Major League Soccer",
+    "homeTeam": "Minnesota United FC",
+    "awayTeam": "Portland Timbers",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "1:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "kickoff": "2026-04-19T00:30:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-football",
+    "scoutStats": "Score: 8/14 | xG: 1.07 | Shots: 16/3 | Corners: 3 | Poss: 54% | Pre O2.5: 1.57"
+  },
+  {
     "league": "FPHL",
     "homeTeam": "Monroe Moccasins",
     "awayTeam": "Columbus River Dragons",
