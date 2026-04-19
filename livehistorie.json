@@ -1,5 +1,21 @@
 [
   {
+    "league": "Extraliga",
+    "homeTeam": "HC 19 Humenne",
+    "awayTeam": "Dukla Trencin",
+    "tip": "Over 4.5",
+    "odds": "",
+    "halftimeScore": "1:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "hockey",
+    "kickoff": "2026-04-19T15:00:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-hockey",
+    "scoutStats": "Score: 6/9 | P1: 1:0 | GF: 4.7 GA: 6.2 | Proj: 4.7 → Over 4.5 | Extraliga"
+  },
+  {
     "league": "Liiga",
     "homeTeam": "Ilves",
     "awayTeam": "Tappara",
