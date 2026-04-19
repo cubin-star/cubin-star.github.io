@@ -1,5 +1,21 @@
 [
   {
+    "league": "ECHL",
+    "homeTeam": "Allen Americans",
+    "awayTeam": "Kansas City",
+    "tip": "Over 4.5",
+    "odds": "",
+    "halftimeScore": "1:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "hockey",
+    "kickoff": "2026-04-19T00:10:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-hockey",
+    "scoutStats": "Score: 6/9 | P1: 1:0 | GF: 7.3 GA: 5.1 | Proj: 4.8 → Over 4.5 | ECHL"
+  },
+  {
     "league": "Serie B",
     "homeTeam": "CRB",
     "awayTeam": "Juventude",
