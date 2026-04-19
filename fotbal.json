@@ -1,26 +1,26 @@
 [
   {
-    "League": "Championship",
-    "Match": "Watford vs Sheffield Utd",
+    "League": "NB II",
+    "Match": "Karcag SE vs Kecskeméti TE",
     "Tip": "Over 2.5",
-    "Odds": "1.82",
-    "Date": "2026-04-18T14:00:00+00:00",
+    "Odds": "1.93",
+    "Date": "2026-04-19T15:00:00+00:00",
     "qualified": true
   },
   {
-    "League": "Super League",
-    "Match": "Pakhtakor vs Dinamo Samarqand",
-    "Tip": "Over 2.5",
-    "Odds": "1.83",
-    "Date": "2026-04-18T15:15:00+00:00",
-    "qualified": true
-  },
-  {
-    "League": "Super Liga",
-    "Match": "Cukaricki vs Radnik Surdulica",
+    "League": "Liga 1",
+    "Match": "Persik Kediri vs Persita",
     "Tip": "Over 2.5",
     "Odds": "1.94",
-    "Date": "2026-04-18T13:00:00+00:00",
+    "Date": "2026-04-19T08:30:00+00:00",
+    "qualified": true
+  },
+  {
+    "League": "Segunda División",
+    "Match": "Sporting Gijon vs Cadiz",
+    "Tip": "Over 2.5",
+    "Odds": "1.92",
+    "Date": "2026-04-19T14:15:00+00:00",
     "qualified": true
   }
 ]
