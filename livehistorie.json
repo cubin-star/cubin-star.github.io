@@ -1,5 +1,21 @@
 [
   {
+    "league": "LNB 2",
+    "homeTeam": "Omega",
+    "awayTeam": "CDB La Union",
+    "tip": "Over 118.5",
+    "odds": "",
+    "halftimeScore": "35:26 (61 pts)",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "basketball",
+    "kickoff": "2026-04-18T23:00:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-basketball",
+    "scoutStats": "Score: 6/10 | HT: 35:26 (61 pts) | Q1=30 Q2=31 (no line, pace 58%) | Proj: 122 | LNB 2"
+  },
+  {
     "league": "Liga MX",
     "homeTeam": "Necaxa",
     "awayTeam": "Tigres UANL",
