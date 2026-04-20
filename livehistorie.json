@@ -1,5 +1,20 @@
 [
   {
+    "league": "Ligue 2",
+    "homeTeam": "Dunkerque",
+    "awayTeam": "Laval",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "0:1",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "kickoff": "2026-04-20T18:45:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-football",
+    "scoutStats": "Score: 8/14 | xG: 0.60(est) | Shots: 11/5 | Corners: 2 | Poss: 75% | Pre O2.5: 1.93"
+  },
+  {
     "league": "Segunda Liga",
     "homeTeam": "Sporting CP B",
     "awayTeam": "Felgueiras 1932",
@@ -21,10 +36,10 @@
     "odds": "",
     "halftimeScore": "1:0",
     "liveOdds": "",
-    "finalScore": "2:3",
-    "result": "✅ Won",
+    "finalScore": "",
+    "result": "",
     "kickoff": "2026-04-20T17:30:00.000Z",
-    "resolvedAt": "2026-04-20T19:31:05.616Z",
+    "resolvedAt": "",
     "source": "scout-football",
     "scoutStats": "Score: 8/14 | xG: 0.48(est) | Shots: 10/4 | Corners: 3 | Poss: 60% | Pre O2.5: 1.75"
   },
