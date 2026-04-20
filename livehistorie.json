@@ -1,5 +1,21 @@
 [
   {
+    "league": "NHL",
+    "homeTeam": "Buffalo Sabres",
+    "awayTeam": "Boston Bruins",
+    "tip": "Over 4.5",
+    "odds": "",
+    "halftimeScore": "0:1",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "hockey",
+    "kickoff": "2026-04-19T23:30:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-hockey",
+    "scoutStats": "Score: 7/9 | P1: 0:1 | GF: 6.8 GA: 5.9 | Proj: 5 → Over 4.5 | NHL"
+  },
+  {
     "league": "AHL",
     "homeTeam": "Coachella Valley Firebirds",
     "awayTeam": "Abbotsford Canucks",
