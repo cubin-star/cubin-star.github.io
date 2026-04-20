@@ -37,26 +37,27 @@ MIN_GAMES = 6
 
 # Target odds for line selection
 SELECTION_ODDS = 1.90   # find the Over line near this odds (aggressive – higher line)
-OUTPUT_ODDS = 1.30       # find the safer Over line near this odds (safe – lower line)
-ODDS_TOLERANCE = 0.35    # max deviation from target
+OUTPUT_ODDS = 1.22       # find the safer Over line near this odds (safe – bigger cushion)
+ODDS_TOLERANCE = 0.30    # max deviation from target
 
 # Criteria – venue-specific matchup vs. bookmaker line
-BOTH_FLOOR_R = 0.95       # oba týmy musí střílet alespoň 95% half-line na svém venue
+BOTH_FLOOR_R = 0.97       # oba týmy musí střílet alespoň 97% half-line na svém venue
 MIN_HALF_LINE = 80        # minimální half_line – filtruje nízko-skórující ligy (80 = 160 bodů celkem)
-EXPECTED_MIN_R = 1.02     # matchup expected (venue splits) musí překročit line o 2%
-OFFENSE_VS_LEAGUE_R = 0.93  # offense obou týmů (venue) musí být >= 93% celkového průměru ligy
+EXPECTED_MIN_R = 1.05     # matchup expected (venue splits) musí překročit line o 5%
+OFFENSE_VS_LEAGUE_R = 0.95  # offense obou týmů (venue) musí být >= 95% celkového průměru ligy
 
 # Enhanced criteria – recent form, H2H, consistency, rest
 RECENT_N = 10               # rolling window: last N finished games
-RECENT_FLOOR_R = 0.93       # rolling avg total of last N games >= 93% of selection_line
-MIN_OVER_HIT_RATE = 0.55    # >= 55% of last N games had total >= safe_line (each team)
-MAX_TOTAL_SD = 22.0         # max std dev of game totals – prefer consistent high-scoring
+RECENT_FLOOR_R = 0.97       # rolling avg total of last N games >= 97% of selection_line
+MIN_OVER_HIT_RATE = 0.65    # >= 65% of last N games had total >= safe_line (each team)
+MAX_TOTAL_SD = 20.0         # max std dev of game totals – prefer consistent high-scoring
 H2H_MIN_GAMES = 2           # min H2H finished games to apply H2H filter
 H2H_OVER_R = 0.95           # H2H avg total >= 95% of selection_line
 MIN_REST_HOURS = 36          # min hours since last game (36h filters back-to-back)
 
 # Defense leakage – both teams must concede enough (porous defense)
-BOTH_CONCEDE_FLOOR_R = 0.93  # oba inkasují ≥ 93% half-line na svém venue
+BOTH_CONCEDE_FLOOR_R = 0.95  # oba inkasují ≥ 95% half-line na svém venue
+MIN_LINE_GAP = 10.0          # output line must be at least 10 pts below selection line
 
 # 2nd half filter (like football's 2nd-half filter)
 MIN_2H_RATIO = 0.47           # 2H bodů musí být ≥ 47% celkových bodů
@@ -250,7 +251,8 @@ def find_over_lines(odds_data):
 
                 if abs(sel["odd"] - SELECTION_ODDS) <= ODDS_TOLERANCE and \
                    abs(out["odd"] - OUTPUT_ODDS) <= ODDS_TOLERANCE and \
-                   out["line"] < sel["line"]:
+                   out["line"] < sel["line"] and \
+                   sel["line"] - out["line"] >= MIN_LINE_GAP:
                     return sel, out
 
     return None, None
@@ -671,3 +673,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
