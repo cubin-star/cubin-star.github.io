@@ -36,15 +36,16 @@ OUTPUT = "hokejs.json"
 OUTPUT_LIVE = "liveh.json"
 
 MIN_GAMES = 5
-ODDS_TOLERANCE = 0.35    # max deviation from target odds
+ODDS_TOLERANCE = 0.30    # max deviation from target odds
 
 EXCLUDED_COUNTRIES = {"russia", "belarus"}
 
 # Dynamic line selection (like basketball bot)
 SELECTION_ODDS = 1.80    # find Over line where odds ≈ 1.80 (aggressive)
-OUTPUT_ODDS = 1.30       # find safer Over line where odds ≈ 1.30 (safe – cushion)
+OUTPUT_ODDS = 1.22       # find safer Over line where odds ≈ 1.22 (safe – bigger cushion)
 MIN_SEL_ODDS = 1.40      # min acceptable odds for selection line
 MAX_SEL_ODDS = 3.00      # max acceptable odds for selection line
+MIN_LINE_GAP = 1.0       # output line must be at least 1.0 below selection line
 
 # Hockey criteria – league-relative (ratios of game baseline)
 # Baseline = průměr 4 per-team hodnot (h_for, a_for, h_agn, a_agn)
@@ -53,7 +54,7 @@ BOTH_FLOOR_R = 0.85      # oba alespoň 85% baseline (široký záchyt)
 STRONG_MIN_R = 1.10      # "výrazný" tým 110%+ baseline (jasně nad normou ligy)
 CONTRAST_MAX_R = 0.95    # protějšek pod 95% baseline (kontrast ≥ 15%)
 MIN_BASELINE = 2.10      # sníženo z 2.40 → otevírá SHL, Liiga, DEL, Extraligu
-EXPECTED_VS_OUTPUT_R = 1.15  # matchup expected musí překročit OUTPUT line o 15%
+EXPECTED_VS_OUTPUT_R = 1.22  # matchup expected musí překročit OUTPUT line o 22%
 MIN_ATTACK = 2.00            # oba týmy musí střílet ≥ 2.0 g/z (žádný "mrtvý" útok)
 
 # Variant C – both teams offensive (no contrast needed, but stricter floor)
@@ -65,9 +66,9 @@ MIN_P23_BASELINE = 0.80  # minimum P2+P3 baseline (avg per-team P2+P3 stat)
 
 # Enhanced criteria – recent form, H2H, consistency, rest
 RECENT_N = 10              # rolling window: last N finished games
-RECENT_FLOOR_R = 0.93     # rolling avg total of last N games >= 93% of selection_line
-MIN_OVER_HIT_RATE = 0.50  # >= 50% of last N games had total >= safe_line (each team)
-MAX_TOTAL_SD = 2.5        # max std dev of game totals (hockey scale: ~6 goals avg)
+RECENT_FLOOR_R = 0.97     # rolling avg total of last N games >= 97% of selection_line
+MIN_OVER_HIT_RATE = 0.60  # >= 60% of last N games had total >= safe_line (each team)
+MAX_TOTAL_SD = 2.3        # max std dev of game totals (tighter = more consistent)
 H2H_MIN_GAMES = 2         # min H2H finished games to apply H2H filter
 H2H_OVER_R = 0.90         # H2H avg total >= 90% of selection_line
 MIN_REST_HOURS = 36        # min hours since last game (filters back-to-back)
@@ -266,6 +267,9 @@ def find_over_lines(odds_data):
                         continue
                     try:
                         line = float(v.split()[-1])
+                        # Only accept .5 lines (3.5, 4.5, 5.5, etc.)
+                        if line % 1 != 0.5:
+                            continue
                         odd = float(val.get("odd", "0"))
                         overs.append({
                             "line": line,
@@ -287,7 +291,8 @@ def find_over_lines(odds_data):
                 if (abs(sel["odd"] - SELECTION_ODDS) <= ODDS_TOLERANCE
                         and abs(out["odd"] - OUTPUT_ODDS) <= ODDS_TOLERANCE
                         and MIN_SEL_ODDS <= sel["odd"] <= MAX_SEL_ODDS
-                        and out["line"] < sel["line"]):
+                        and out["line"] < sel["line"]
+                        and sel["line"] - out["line"] >= MIN_LINE_GAP):
                     return sel, out
 
     return None, None
