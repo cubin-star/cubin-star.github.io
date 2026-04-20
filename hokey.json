@@ -1,14 +1,15 @@
 [
   {
-    "league": "AHL",
-    "match": "Charlotte Checkers vs Lehigh Valley Phantoms",
+    "league": "DEL",
+    "match": "Kolner vs Eisbaren Berlin",
     "tip": "Over 5.5",
-    "odds": "1.85"
+    "odds": "1.78",
+    "qualified13": true
   },
   {
-    "league": "AHL",
-    "match": "Coachella Valley Firebirds vs Abbotsford Canucks",
+    "league": "National League",
+    "match": "Fribourg vs Davos",
     "tip": "Over 5.5",
-    "odds": "1.95"
+    "odds": "1.96"
   }
 ]
