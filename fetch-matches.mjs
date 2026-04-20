@@ -367,12 +367,17 @@ async function main() {
         console.log('live2.json not found, skipping priority source');
     }
 
+    function matchKey(m) {
+        // Normalize: strip separators (vs, -, whitespace) and lowercase for reliable dedup
+        return (m.match || '').toLowerCase().replace(/\s*(vs\.?|-)\s*/g, '|').trim();
+    }
+
     // --- Priority 2: fill from qualified (deduped) matches ---
     if (selected.length < PICK_COUNT) {
-        const selectedKeys = new Set(selected.map(m => m.match + '|' + m.kickoff));
-        const within24h = deduped.filter(m => new Date(m.kickoff) <= max24h && !selectedKeys.has(m.match + '|' + m.kickoff));
+        const selectedKeys = new Set(selected.map(m => matchKey(m)));
+        const within24h = deduped.filter(m => new Date(m.kickoff) <= max24h && !selectedKeys.has(matchKey(m)));
         shuffle(within24h);
-        console.log('Qualified pool (hot): ' + within24h.length + ' available');
+        console.log('Qualified pool (hot): ' + within24h.length + ' available (excl. ' + selectedKeys.size + ' from live2)');
         for (const m of within24h) {
             if (selected.length >= PICK_COUNT) break;
             selected.push(m);
@@ -383,8 +388,8 @@ async function main() {
 
     // --- Priority 3: fill remaining with random picks from pool (no criteria, just odds range) ---
     if (selected.length < PICK_COUNT) {
-        const selectedKeys = new Set(selected.map(m => m.match + '|' + m.kickoff));
-        const fallback = pool.filter(m => !selectedKeys.has(m.match + '|' + m.kickoff) && new Date(m.kickoff) <= max24h && parseFloat(m.odds) <= FALLBACK_MAX_ODDS);
+        const selectedKeys = new Set(selected.map(m => matchKey(m)));
+        const fallback = pool.filter(m => !selectedKeys.has(matchKey(m)) && new Date(m.kickoff) <= max24h && parseFloat(m.odds) <= FALLBACK_MAX_ODDS);
         shuffle(fallback);
         console.log('Random fallback pool: ' + fallback.length + ' (24h), odds ≤' + FALLBACK_MAX_ODDS);
         for (const m of fallback) {
