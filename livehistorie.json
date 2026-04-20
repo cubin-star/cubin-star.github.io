@@ -63,21 +63,6 @@
     "scoutStats": "Score: 7/9 | P1: 0:1 | GF: 5.7 GA: 6.3 | Proj: 4.9 → Over 4.5 | AHL"
   },
   {
-    "league": "Primera División",
-    "homeTeam": "Colo Colo",
-    "awayTeam": "Palestino",
-    "tip": "Over 1.5",
-    "odds": "",
-    "halftimeScore": "0:1",
-    "liveOdds": "",
-    "finalScore": "",
-    "result": "",
-    "kickoff": "2026-04-19T22:30:00.000Z",
-    "resolvedAt": "",
-    "source": "scout-football",
-    "scoutStats": "Score: 9/14 | xG: 0.00 | Shots: 11/4 | Corners: 5 | Poss: 62% | Pre O2.5: 1.93"
-  },
-  {
     "league": "NHL",
     "homeTeam": "Tampa Bay Lightning",
     "awayTeam": "Montreal Canadiens",
@@ -168,21 +153,6 @@
     "scoutStats": "Score: 6/9 | P1: 1:0 | GF: 5.7 GA: 6.0 | Proj: 4.7 → Over 4.5 | ECHL"
   },
   {
-    "league": "Liga Pro",
-    "homeTeam": "Manta FC",
-    "awayTeam": "Deportivo Cuenca",
-    "tip": "Over 1.5",
-    "odds": "",
-    "halftimeScore": "0:1",
-    "liveOdds": "",
-    "finalScore": "0:1",
-    "result": "❌ Lost",
-    "kickoff": "2026-04-19T18:00:00.000Z",
-    "resolvedAt": "2026-04-19T20:01:05.938Z",
-    "source": "scout-football",
-    "scoutStats": "Score: 8/14 | xG: 0.00 | Shots: 12/5 | Corners: 4 | Poss: 59% | Pre O2.5: 2.25"
-  },
-  {
     "league": "WCH IIIA",
     "homeTeam": "South Africa",
     "awayTeam": "Bosnia & Herzegovina",
@@ -242,21 +212,6 @@
     "resolvedAt": "",
     "source": "scout-football",
     "scoutStats": "Score: 7/14 | xG: 0.75 | Shots: 9/5 | Corners: 3 | Poss: 56% | Pre O2.5: 1.62"
-  },
-  {
-    "league": "Super Liga",
-    "homeTeam": "Javor",
-    "awayTeam": "FK Spartak Zdrepceva KRV",
-    "tip": "Over 1.5",
-    "odds": "",
-    "halftimeScore": "1:0",
-    "liveOdds": "",
-    "finalScore": "1:0",
-    "result": "❌ Lost",
-    "kickoff": "2026-04-19T15:30:00.000Z",
-    "resolvedAt": "2026-04-19T17:25:05.577Z",
-    "source": "scout-football",
-    "scoutStats": "Score: 7/14 | xG: 0.00 | Shots: 13/4 | Corners: 7 | Poss: 53% | Pre O2.5: 2.2"
   },
   {
     "league": "Ligue 1",
@@ -378,22 +333,6 @@
     "sport": "football",
     "kickoff": "2026-04-19T08:30:00.000Z",
     "resolvedAt": "2026-04-19T10:25:05.098Z"
-  },
-  {
-    "league": "NBL1 East",
-    "homeTeam": "Newcastle Falcons",
-    "awayTeam": "Canberra",
-    "tip": "Over 150.5",
-    "odds": "",
-    "halftimeScore": "36:40 (76 pts)",
-    "liveOdds": "",
-    "finalScore": "62:71 (133 pts)",
-    "result": "❌ Lost",
-    "sport": "basketball",
-    "kickoff": "2026-04-19T05:00:00.000Z",
-    "resolvedAt": "2026-04-19T07:31:08.231Z",
-    "source": "scout-basketball",
-    "scoutStats": "Score: 5/10 | HT: 36:40 (76 pts) | Q1=37 Q2=39 (no line, pace 72%) | Proj: 153.5 | NBL1 East"
   },
   {
     "league": "Liga MX",
@@ -564,20 +503,6 @@
     "resolvedAt": "2026-04-18T23:34:06.790Z",
     "source": "scout-football",
     "scoutStats": "Score: 11/14 | xG: 1.38 | Shots: 12/4 | Corners: 5 | Poss: 60% | Pre O2.5: 2.2"
-  },
-  {
-    "league": "Division Profesional - Apertura",
-    "homeTeam": "Club Guarani",
-    "awayTeam": "Sportivo Luqueno",
-    "tip": "Over 0.5",
-    "odds": "2.13",
-    "halftimeScore": "0:0",
-    "liveOdds": "",
-    "finalScore": "0:0",
-    "result": "❌ Lost",
-    "sport": "football",
-    "kickoff": "2026-04-18T21:15:00.000Z",
-    "resolvedAt": "2026-04-18T23:07:06.103Z"
   },
   {
     "league": "ECHL",
