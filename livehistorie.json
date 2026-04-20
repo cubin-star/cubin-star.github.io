@@ -1,5 +1,21 @@
 [
   {
+    "league": "MPBL",
+    "homeTeam": "Imus Braderhood",
+    "awayTeam": "Iloilo United Royals",
+    "tip": "Over 90.5",
+    "odds": "",
+    "halftimeScore": "19:28 (47 pts)",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "basketball",
+    "kickoff": "2026-04-20T12:00:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-basketball",
+    "scoutStats": "Score: 6/10 | HT: 19:28 (47 pts) | Q1=15 Q2=32 (line 170, pace 55%) | Proj: 94 | MPBL"
+  },
+  {
     "league": "NHL",
     "homeTeam": "Vegas Golden Knights",
     "awayTeam": "Utah Mammoth",
