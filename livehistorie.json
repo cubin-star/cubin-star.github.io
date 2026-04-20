@@ -1,5 +1,19 @@
 [
   {
+    "league": "Segunda Liga",
+    "homeTeam": "Sporting CP B",
+    "awayTeam": "Felgueiras 1932",
+    "tip": "Over 0.5",
+    "odds": "1.92",
+    "halftimeScore": "0:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-04-20T17:45:00.000Z",
+    "resolvedAt": ""
+  },
+  {
     "league": "Liga I",
     "homeTeam": "Farul Constanta",
     "awayTeam": "FCSB",
