@@ -1,6 +1,26 @@
 [
   {
     "sport": "basketball",
+    "league": "Premier league",
+    "match": "Valur vs Keflavik",
+    "tip": "Over 168.5",
+    "odds": "1.60",
+    "date": "2026-04-19T19:15:00+00:00",
+    "score": "90:76",
+    "result": "✗"
+  },
+  {
+    "sport": "football",
+    "league": "Premier League",
+    "match": "Hamrun Spartans vs Naxxar Lions",
+    "tip": "Over 1.5",
+    "odds": "1.17",
+    "date": "2026-04-19T15:30:00+00:00",
+    "score": "3:0",
+    "result": "✓"
+  },
+  {
+    "sport": "basketball",
     "league": "NBA",
     "match": "New York Knicks vs Atlanta Hawks",
     "tip": "Over 206.5",
@@ -1977,26 +1997,6 @@
     "odds": "1.39",
     "date": "2026-04-01T21:30:00+00:00",
     "score": "0:2",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Primera Division",
-    "match": "Águila vs Fuerte San Francisco",
-    "tip": "Over 1.5",
-    "odds": "1.23",
-    "date": "2026-04-01T21:00:00+00:00",
-    "score": "1:1",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Segunda División",
-    "match": "Racing Santander vs Sporting Gijon",
-    "tip": "Over 1.5",
-    "odds": "1.21",
-    "date": "2026-04-01T19:30:00+00:00",
-    "score": "3:1",
     "result": "✓"
   }
 ]
