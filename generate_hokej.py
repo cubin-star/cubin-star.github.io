@@ -104,6 +104,7 @@ MAX_TIPS_PER_DAY = 3     # globální limit – nejlepších N podle skóre (kva
 # US zůstává přísné (NHL/AHL mají dost dat a jasnější profily)
 BOTH_OFFENSE_R_EU = 0.95   # bylo společné 1.05
 BOTH_CONCEDE_R_EU = 0.85   # bylo společné 1.00
+CONTRAST_MAX_R_EU = 0.85   # EU: povolí větší rozdíl v kontrastních P2+P3 variantách
 # Varianta D – fallback pro EU: hodně vysoký expected = automatický pass i bez A/B/C
 HIGH_EXPECTED_R_EU = 1.18   # expected >= out_line × 1.18 → propustit jako variant D
 
@@ -533,7 +534,7 @@ def analyze_recent_form(games, team_id, n=RECENT_N):
 
 
 def meets_enhanced_criteria(home_form, away_form, h2h_games,
-                            selection_line, safe_line, game_ts, is_eu=False):
+                            selection_line, safe_line, game_ts, is_eu=False, quality_score=0):
     """Enhanced criteria – recent form, H2H, consistency, rest, periods.
 
     Thresholds switch between US (NHL/AHL) and EU (SHL/Liiga/Extraliga/DEL)
@@ -625,32 +626,48 @@ def meets_enhanced_criteria(home_form, away_form, h2h_games,
                 return False, (f"P2+P3 base low: {p23_base:.2f} < {MIN_P23_BASELINE}")
             p23_floor = p23_base * BOTH_FLOOR_R
             p23_strong = p23_base * STRONG_MIN_R
-            p23_contrast = p23_base * CONTRAST_MAX_R
-            p23_off = p23_base * BOTH_OFFENSE_R
-            p23_cfloor = p23_base * BOTH_CONCEDE_R
+            p23_contrast = p23_base * (CONTRAST_MAX_R_EU if is_eu else CONTRAST_MAX_R)
+            p23_off = p23_base * (BOTH_OFFENSE_R_EU if is_eu else BOTH_OFFENSE_R)
+            p23_cfloor = p23_base * (BOTH_CONCEDE_R_EU if is_eu else BOTH_CONCEDE_R)
 
-            # P2+P3 Varianta A: oba inkasují v P2+P3 >= floor + ofenzivní kontrast
-            p23_var_a = (
-                h_p23_con >= p23_floor and a_p23_con >= p23_floor
-                and ((h_p23_scr >= p23_strong and a_p23_scr < p23_contrast)
-                     or (a_p23_scr >= p23_strong and h_p23_scr < p23_contrast))
-            )
-            # P2+P3 Varianta B: oba střílí v P2+P3 >= floor + defenzivní kontrast
-            p23_var_b = (
-                h_p23_scr >= p23_floor and a_p23_scr >= p23_floor
-                and ((h_p23_con >= p23_strong and a_p23_con < p23_contrast)
-                     or (a_p23_con >= p23_strong and h_p23_con < p23_contrast))
-            )
-            # P2+P3 Varianta C: oba skórují i inkasují nadprůměrně v P2+P3
-            p23_var_c = (
-                h_p23_scr >= p23_off and a_p23_scr >= p23_off
-                and h_p23_con >= p23_cfloor and a_p23_con >= p23_cfloor
-            )
-            if not (p23_var_a or p23_var_b or p23_var_c):
-                return False, (f"P2+P3 contrast fail: scr {h_p23_scr:.2f}/{a_p23_scr:.2f}, "
-                               f"con {h_p23_con:.2f}/{a_p23_con:.2f} (P23base={p23_base:.2f})")
-            p23_tag = "P-A" if p23_var_a else ("P-B" if p23_var_b else "P-C")
-            parts.append(f"{p23_tag}: scr={h_p23_scr:.2f}/{a_p23_scr:.2f} con={h_p23_con:.2f}/{a_p23_con:.2f}")
+            # EU: pokud jsou oba týmy silné v P2+P3 (scoring nebo conceding), kontrast neřešit
+            if is_eu and ((h_p23_scr >= 1.2 and a_p23_scr >= 1.2)
+                          or (h_p23_con >= 1.2 and a_p23_con >= 1.2)):
+                parts.append(f"P2+P3 contrast skipped: scr={h_p23_scr:.2f}/{a_p23_scr:.2f} "
+                             f"con={h_p23_con:.2f}/{a_p23_con:.2f}")
+                p23_var_a = p23_var_b = p23_var_c = False
+                p23_ok = True
+            else:
+                # P2+P3 Varianta A: oba inkasují v P2+P3 >= floor + ofenzivní kontrast
+                p23_var_a = (
+                    h_p23_con >= p23_floor and a_p23_con >= p23_floor
+                    and ((h_p23_scr >= p23_strong and a_p23_scr < p23_contrast)
+                         or (a_p23_scr >= p23_strong and h_p23_scr < p23_contrast))
+                )
+                # P2+P3 Varianta B: oba střílí v P2+P3 >= floor + defenzivní kontrast
+                p23_var_b = (
+                    h_p23_scr >= p23_floor and a_p23_scr >= p23_floor
+                    and ((h_p23_con >= p23_strong and a_p23_con < p23_contrast)
+                         or (a_p23_con >= p23_strong and h_p23_con < p23_contrast))
+                )
+                # P2+P3 Varianta C: oba skórují i inkasují nadprůměrně v P2+P3
+                p23_var_c = (
+                    h_p23_scr >= p23_off and a_p23_scr >= p23_off
+                    and h_p23_con >= p23_cfloor and a_p23_con >= p23_cfloor
+                )
+                p23_ok = p23_var_a or p23_var_b or p23_var_c
+
+            if not p23_ok:
+                if is_eu and quality_score >= 5:
+                    parts.append(f"P2+P3 contrast warning: scr={h_p23_scr:.2f}/{a_p23_scr:.2f} "
+                                 f"con={h_p23_con:.2f}/{a_p23_con:.2f} (P23base={p23_base:.2f}, Q={quality_score})")
+                else:
+                    return False, (f"P2+P3 contrast fail: scr {h_p23_scr:.2f}/{a_p23_scr:.2f}, "
+                                   f"con {h_p23_con:.2f}/{a_p23_con:.2f} (P23base={p23_base:.2f})")
+            elif not (is_eu and ((h_p23_scr >= 1.2 and a_p23_scr >= 1.2)
+                                 or (h_p23_con >= 1.2 and a_p23_con >= 1.2))):
+                p23_tag = "P-A" if p23_var_a else ("P-B" if p23_var_b else "P-C")
+                parts.append(f"{p23_tag}: scr={h_p23_scr:.2f}/{a_p23_scr:.2f} con={h_p23_con:.2f}/{a_p23_con:.2f}")
         else:
             parts.append("P2+P3=N/A")
     else:
@@ -864,9 +881,12 @@ def main():
             h2h = fetch_h2h(c["home_id"], c["away_id"])
             home_form = analyze_recent_form(home_games, c["home_id"])
             away_form = analyze_recent_form(away_games, c["away_id"])
+            qpts, qdetail = compute_quality_score(
+                home_form, away_form, h2h,
+                c["sel_line"], c["out_line"], c.get("bts2_odd"), c["is_eu"])
             ok2, detail2 = meets_enhanced_criteria(
                 home_form, away_form, h2h,
-                c["sel_line"], c["out_line"], c["timestamp"], is_eu=c["is_eu"])
+                c["sel_line"], c["out_line"], c["timestamp"], is_eu=c["is_eu"], quality_score=qpts)
             if not ok2:
                 print(f" enhanced fail ({detail2})")
                 continue
@@ -878,9 +898,6 @@ def main():
                 detail2 += f" | BTS2+={bts2:.2f}★"
 
             # Quality score – body za kvalitní (nepovinná) kritéria
-            qpts, qdetail = compute_quality_score(
-                home_form, away_form, h2h,
-                c["sel_line"], c["out_line"], bts2, c["is_eu"])
             if qpts < MIN_QUALITY_SCORE:
                 print(f" quality fail (Q={qpts}/{MIN_QUALITY_SCORE}: {qdetail})")
                 continue
