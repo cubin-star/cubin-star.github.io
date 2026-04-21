@@ -42,18 +42,18 @@ ODDS_TOLERANCE = 0.30    # max deviation from target
 
 # Criteria – venue-specific matchup vs. bookmaker line
 BOTH_FLOOR_R = 0.97       # oba týmy musí střílet alespoň 97% half-line na svém venue
-MIN_HALF_LINE = 80        # minimální half_line – filtruje nízko-skórující ligy (80 = 160 bodů celkem)
+MIN_HALF_LINE = 70        # minimální half_line – sníženo z 80 (otevírá EuroCup, NCAA, atd.)
 EXPECTED_MIN_R = 1.05     # matchup expected (venue splits) musí překročit line o 5%
 OFFENSE_VS_LEAGUE_R = 0.95  # offense obou týmů (venue) musí být >= 95% celkového průměru ligy
 
 # Enhanced criteria – recent form, H2H, consistency, rest
 RECENT_N = 10               # rolling window: last N finished games
 RECENT_FLOOR_R = 0.97       # rolling avg total of last N games >= 97% of selection_line
-MIN_OVER_HIT_RATE = 0.65    # >= 65% of last N games had total >= safe_line (each team)
-MAX_TOTAL_SD = 20.0         # max std dev of game totals – prefer consistent high-scoring
+MIN_OVER_HIT_RATE = 0.60    # >= 60% of last N games had total >= safe_line (each team)
+MAX_TOTAL_SD = 22.0         # max std dev of game totals – uvolněno z 20 (evro ligy mají vyšší)
 H2H_MIN_GAMES = 2           # min H2H finished games to apply H2H filter
-H2H_OVER_R = 0.95           # H2H avg total >= 95% of selection_line
-MIN_REST_HOURS = 36          # min hours since last game (36h filters back-to-back)
+H2H_OVER_R = 0.92           # H2H avg total >= 92% of selection_line
+MIN_REST_HOURS = 0           # 0 = vypnuto (back-to-back filtr deaktivován)
 
 # Defense leakage – both teams must concede enough (porous defense)
 BOTH_CONCEDE_FLOOR_R = 0.95  # oba inkasují ≥ 95% half-line na svém venue
@@ -62,6 +62,18 @@ MIN_LINE_GAP = 10.0          # output line must be at least 10 pts below selecti
 # 2nd half filter (like football's 2nd-half filter)
 MIN_2H_RATIO = 0.47           # 2H bodů musí být ≥ 47% celkových bodů
 MIN_2H_BASELINE = 38.0        # minimum 2H baseline (avg per-team scored+conceded in Q3+Q4)
+
+# Pace proxy z Q1 – pomalý start = riziko Under
+MIN_Q1_RATIO = 0.22           # avg Q1 score musí být >= 22% selection_line / 4 baseline
+                              # pomalé starty (< 22 %) = pravděpodobně low-pace zápas
+
+# Blowout / garbage time filter – velký rozdíl skóre tlačí Q4 dolů
+BLOWOUT_MARGIN = 25           # rozdíl > 25 bodů = blowout
+MAX_BLOWOUT_RATE = 0.40       # max 40 % posledních H2H smí být blowouty
+
+# Cross-market konfirmace: oba team totaly Over levné = bookmaker vidí oba aktivní
+TT_BONUS_ODDS = 1.95          # pokud oba Team Total Over kurzy <= 1.95
+TT_BONUS_MULT = 1.15          # multiplikátor skóre při konfirmaci
 
 request_count = 0
 
@@ -160,6 +172,7 @@ def fetch_team_games(team_id, league_id, season):
                 "home_total": int(h_total),
                 "away_total": int(a_total),
                 "total": int(h_total) + int(a_total),
+                "margin": abs(int(h_total) - int(a_total)),
             }
             # Quarter data for 2nd half (Q3+Q4) analysis
             h_sc = scores.get("home", {})
@@ -179,6 +192,8 @@ def fetch_team_games(team_id, league_id, season):
                     a_q1 = int(a_sc.get("quarter_1", 0) or 0)
                     a_q2 = int(a_sc.get("quarter_2", 0) or 0)
                     entry["reg_total"] = h_q1 + h_q2 + int(h_q3) + int(h_q4) + a_q1 + a_q2 + int(a_q3) + int(a_q4)
+                    # Q1 total (pace proxy)
+                    entry["q1_total"] = h_q1 + a_q1
                 except (ValueError, TypeError):
                     pass
             finished.append(entry)
@@ -206,6 +221,7 @@ def fetch_h2h(home_id, away_id):
             results.append({
                 "timestamp": g.get("timestamp", 0),
                 "total": int(h_total) + int(a_total),
+                "margin": abs(int(h_total) - int(a_total)),
             })
         except (ValueError, TypeError):
             pass
@@ -217,45 +233,72 @@ def fetch_h2h(home_id, away_id):
 
 def find_over_lines(odds_data):
     """Find selection line (odds ≈ 1.80) and output line (odds ≈ 1.45).
-    Returns (selection, output) dicts with 'line', 'odd', 'label', 'odd_str'
-    or (None, None) if not found."""
+    Returns (selection, output, home_tt_over, away_tt_over) where the team-total
+    Over odds (closest to selection_line/2) are returned for cross-market
+    confirmation. Team total values are None if not found.
+    Returns (None, None, None, None) if main lines not found."""
+    sel_result = None
+    out_result = None
+    home_tt = None
+    away_tt = None
+
     for resp in odds_data:
         for bk in resp.get("bookmakers", []):
             for bet in bk.get("bets", []):
-                # Only full-game Over/Under (bet id 4)
-                if bet.get("id") != 4:
-                    continue
+                bet_id = bet.get("id")
+                bet_name = bet.get("name", "").lower()
 
-                overs = []
-                for val in bet.get("values", []):
-                    v = str(val.get("value", ""))
-                    if not v.lower().startswith("over"):
-                        continue
-                    try:
-                        line = float(v.split()[-1])
-                        odd = float(val.get("odd", "0"))
-                        overs.append({
-                            "line": line,
-                            "odd": odd,
-                            "label": v,
-                            "odd_str": str(val.get("odd")),
-                        })
-                    except (ValueError, IndexError):
-                        pass
+                # --- Cross-market: Home/Away Team Total ---
+                # Hledáme bet, kde název obsahuje "team total" + "home"/"away"
+                if "team total" in bet_name or ("total" in bet_name and ("home" in bet_name or "away" in bet_name)):
+                    is_home = "home" in bet_name
+                    is_away = "away" in bet_name
+                    if is_home or is_away:
+                        # Vezmeme nejnižší Over kurz (nejvíc preferovaný bookmakerem)
+                        for val in bet.get("values", []):
+                            v = str(val.get("value", ""))
+                            if not v.lower().startswith("over"):
+                                continue
+                            try:
+                                odd = float(val.get("odd", "0"))
+                                if is_home and (home_tt is None or odd < home_tt):
+                                    home_tt = odd
+                                if is_away and (away_tt is None or odd < away_tt):
+                                    away_tt = odd
+                            except (ValueError, TypeError):
+                                pass
 
-                if len(overs) < 2:
-                    continue
+                # --- Main: Over/Under full game (bet id 4) ---
+                if (sel_result is None or out_result is None) and bet_id == 4:
+                    overs = []
+                    for val in bet.get("values", []):
+                        v = str(val.get("value", ""))
+                        if not v.lower().startswith("over"):
+                            continue
+                        try:
+                            line = float(v.split()[-1])
+                            odd = float(val.get("odd", "0"))
+                            overs.append({
+                                "line": line,
+                                "odd": odd,
+                                "label": v,
+                                "odd_str": str(val.get("odd")),
+                            })
+                        except (ValueError, IndexError):
+                            pass
 
-                sel = min(overs, key=lambda x: abs(x["odd"] - SELECTION_ODDS))
-                out = min(overs, key=lambda x: abs(x["odd"] - OUTPUT_ODDS))
+                    if len(overs) >= 2:
+                        sel = min(overs, key=lambda x: abs(x["odd"] - SELECTION_ODDS))
+                        out = min(overs, key=lambda x: abs(x["odd"] - OUTPUT_ODDS))
 
-                if abs(sel["odd"] - SELECTION_ODDS) <= ODDS_TOLERANCE and \
-                   abs(out["odd"] - OUTPUT_ODDS) <= ODDS_TOLERANCE and \
-                   out["line"] < sel["line"] and \
-                   sel["line"] - out["line"] >= MIN_LINE_GAP:
-                    return sel, out
+                        if abs(sel["odd"] - SELECTION_ODDS) <= ODDS_TOLERANCE and \
+                           abs(out["odd"] - OUTPUT_ODDS) <= ODDS_TOLERANCE and \
+                           out["line"] < sel["line"] and \
+                           sel["line"] - out["line"] >= MIN_LINE_GAP:
+                            sel_result = sel
+                            out_result = out
 
-    return None, None
+    return sel_result, out_result, home_tt, away_tt
 
 
 # ===== CRITERIA =====
@@ -374,6 +417,14 @@ def analyze_recent_form(games, team_id, n=RECENT_N):
     std_dev = math.sqrt(variance)
     last_ts = games[0]["timestamp"] if games else 0
 
+    # Q1 pace proxy – avg total bodů v Q1
+    q1_games = [g for g in last_n if "q1_total" in g]
+    avg_q1 = (sum(g["q1_total"] for g in q1_games) / len(q1_games)) if q1_games else None
+
+    # Blowout rate – kolik % posledních zápasů končilo s rozdílem > BLOWOUT_MARGIN
+    blowout_count = sum(1 for g in last_n if g.get("margin", 0) > BLOWOUT_MARGIN)
+    blowout_rate = blowout_count / len(last_n) if last_n else 0.0
+
     # 2nd half (Q3+Q4) analysis – like football's 2nd-half filter
     sh_games = [g for g in last_n if "total_sh" in g and g.get("reg_total", g["total"]) > 0]
     if sh_games:
@@ -402,6 +453,8 @@ def analyze_recent_form(games, team_id, n=RECENT_N):
         "std_dev": std_dev,
         "last_game_ts": last_ts,
         "n_games": len(last_n),
+        "avg_q1": avg_q1,
+        "blowout_rate": blowout_rate,
         "avg_sh_ratio": avg_sh_ratio,
         "avg_team_sh": avg_team_sh,
         "avg_team_sh_conceded": avg_team_sh_conceded,
@@ -449,7 +502,29 @@ def meets_enhanced_criteria(home_form, away_form, h2h_games,
         parts.append(f"form={h_avg:.0f}/{a_avg:.0f} over={h_over:.0%}/{a_over:.0%} "
                      f"SD={h_sd:.0f}/{a_sd:.0f}")
 
-        # Check 5: Rest (back-to-back filter)
+        # Check 3b: Q1 pace proxy – pomalý start = riziko Under
+        # Očekávaná Q1 hodnota = selection_line / 4 (jeden quarter z reg času)
+        h_q1 = home_form.get("avg_q1")
+        a_q1 = away_form.get("avg_q1")
+        if h_q1 is not None and a_q1 is not None:
+            q1_floor = (selection_line / 4) * (1 + MIN_Q1_RATIO - 0.25)  # baseline Q1 ~ line/4
+            # Jednodušší práh: oba týmy musí mít Q1 ratio >= MIN_Q1_RATIO ze selection_line
+            h_q1_r = h_q1 / selection_line
+            a_q1_r = a_q1 / selection_line
+            if h_q1_r < MIN_Q1_RATIO or a_q1_r < MIN_Q1_RATIO:
+                return False, (f"slow Q1 start: ratio {h_q1_r:.0%}/{a_q1_r:.0%} "
+                               f"(min {MIN_Q1_RATIO:.0%} of {selection_line:.0f})")
+            parts.append(f"Q1={h_q1:.0f}/{a_q1:.0f}({h_q1_r:.0%}/{a_q1_r:.0%})")
+
+        # Check 3c: Blowout rate – garbage time tlačí Q4 dolů
+        h_blow = home_form.get("blowout_rate", 0.0)
+        a_blow = away_form.get("blowout_rate", 0.0)
+        if h_blow > MAX_BLOWOUT_RATE or a_blow > MAX_BLOWOUT_RATE:
+            return False, (f"blowout-heavy: rate {h_blow:.0%}/{a_blow:.0%} "
+                           f"(max {MAX_BLOWOUT_RATE:.0%}, margin>{BLOWOUT_MARGIN})")
+        parts.append(f"blow={h_blow:.0%}/{a_blow:.0%}")
+
+        # Check 5: Rest (back-to-back filter) – přeskočeno pokud MIN_REST_HOURS == 0
         if MIN_REST_HOURS > 0:
             game_dt = datetime.fromtimestamp(game_ts, tz=timezone.utc)
             h_last_dt = datetime.fromtimestamp(home_form["last_game_ts"], tz=timezone.utc)
@@ -496,7 +571,12 @@ def meets_enhanced_criteria(home_form, away_form, h2h_games,
             return False, (f"H2H avg low: {h2h_avg:.0f} "
                            f"(min {h2h_min:.0f}={H2H_OVER_R}*{selection_line:.0f}, "
                            f"n={len(h2h_games)})")
-        parts.append(f"H2H={h2h_avg:.0f}(n={len(h2h_games)})")
+        # H2H blowout filtr – pokud byly H2H často blowouty, garbage time tlačí Q4 dolů
+        h2h_blow = sum(1 for g in h2h_games if g.get("margin", 0) > BLOWOUT_MARGIN) / len(h2h_games)
+        if h2h_blow > MAX_BLOWOUT_RATE:
+            return False, (f"H2H blowouts: {h2h_blow:.0%} "
+                           f"(max {MAX_BLOWOUT_RATE:.0%}, n={len(h2h_games)})")
+        parts.append(f"H2H={h2h_avg:.0f}(n={len(h2h_games)},bl={h2h_blow:.0%})")
     else:
         n_h2h = len(h2h_games) if h2h_games else 0
         parts.append(f"H2H=N/A(n={n_h2h})")
@@ -524,8 +604,10 @@ def main():
           f"venue offense >= half*{BOTH_FLOOR_R} & >= league/team*{OFFENSE_VS_LEAGUE_R}, "
           f"defense concede >= half*{BOTH_CONCEDE_FLOOR_R}")
     print(f"Enhanced: form>={RECENT_FLOOR_R}*line, over>={MIN_OVER_HIT_RATE:.0%}@safe, "
-          f"SD<={MAX_TOTAL_SD:.0f}, H2H>={H2H_OVER_R}*line, rest>={MIN_REST_HOURS}h, "
-          f"2H>={MIN_2H_RATIO:.0%}, 2Hbase>={MIN_2H_BASELINE:.0f}\n")
+          f"SD<={MAX_TOTAL_SD:.0f}, H2H>={H2H_OVER_R}*line, rest>={MIN_REST_HOURS}h (0=off), "
+          f"2H>={MIN_2H_RATIO:.0%}, 2Hbase>={MIN_2H_BASELINE:.0f}, "
+          f"Q1>={MIN_Q1_RATIO:.0%}, blow<={MAX_BLOWOUT_RATE:.0%}@>{BLOWOUT_MARGIN}, "
+          f"TT bonus@<={TT_BONUS_ODDS} (×{TT_BONUS_MULT})\n")
 
     # 1. Fetch games
     games_today = fetch_games(today)
@@ -556,9 +638,12 @@ def main():
         label = f"{g['home']} vs {g['away']}"
         print(f"  [{i+1}/{len(filtered)}] {label[:45]:.<47s}", end="")
         odds_data = fetch_odds(gid)
-        sel, out = find_over_lines(odds_data)
+        sel, out, h_tt, a_tt = find_over_lines(odds_data)
         if sel and out:
-            print(f" sel={sel['label']}@{sel['odd_str']} → out={out['label']}@{out['odd_str']} ✓")
+            tt_str = ""
+            if h_tt is not None or a_tt is not None:
+                tt_str = f" TT={h_tt or '-'}/{a_tt or '-'}"
+            print(f" sel={sel['label']}@{sel['odd_str']} → out={out['label']}@{out['odd_str']}{tt_str} ✓")
             candidates.append({
                 "game_id": gid,
                 "league": g["league"],
@@ -573,6 +658,8 @@ def main():
                 "out_line": out["line"],
                 "out_label": out["label"],
                 "out_odds": out["odd_str"],
+                "home_tt_odd": h_tt,
+                "away_tt_odd": a_tt,
                 "timestamp": g["timestamp"],
             })
         else:
@@ -615,6 +702,14 @@ def main():
             if not ok2:
                 print(f" enhanced fail ({detail2})")
                 continue
+
+            # Cross-market konfirmace: oba Team Total Over kurzy levné = bonus do skóre
+            h_tt = c.get("home_tt_odd")
+            a_tt = c.get("away_tt_odd")
+            if (h_tt is not None and a_tt is not None
+                    and h_tt <= TT_BONUS_ODDS and a_tt <= TT_BONUS_ODDS):
+                score *= TT_BONUS_MULT
+                detail2 += f" | TT={h_tt:.2f}/{a_tt:.2f}★"
 
             print(f" ★ {detail}")
             print(f"       enhanced: {detail2}")
@@ -673,4 +768,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
