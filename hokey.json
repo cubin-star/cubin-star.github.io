@@ -1,15 +1,14 @@
 [
   {
-    "league": "DEL",
-    "match": "Kolner vs Eisbaren Berlin",
+    "league": "Extraliga",
+    "match": "Presov vs Dukla Trencin",
     "tip": "Over 5.5",
-    "odds": "1.78",
-    "qualified13": true
+    "odds": "1.78"
   },
   {
-    "league": "National League",
-    "match": "Fribourg vs Davos",
+    "league": "Liiga",
+    "match": "Tappara vs Ilves",
     "tip": "Over 5.5",
-    "odds": "1.96"
+    "odds": "2.0"
   }
 ]
