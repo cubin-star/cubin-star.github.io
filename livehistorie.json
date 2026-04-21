@@ -1,18 +1,17 @@
 [
   {
-    "league": "Championship",
-    "homeTeam": "Leicester",
-    "awayTeam": "Hull City",
-    "tip": "Over 1.5",
-    "odds": "",
-    "halftimeScore": "0:1",
+    "league": "National League - North",
+    "homeTeam": "Macclesfield",
+    "awayTeam": "Southport",
+    "tip": "Over 0.5",
+    "odds": "1.21",
+    "halftimeScore": "0:0",
     "liveOdds": "",
     "finalScore": "",
     "result": "",
+    "sport": "football",
     "kickoff": "2026-04-21T18:45:00.000Z",
-    "resolvedAt": "",
-    "source": "scout-football",
-    "scoutStats": "Score: 8/14 | xG: 1.24 | Shots: 13/1 | Corners: 10 | Poss: 51% | Pre O2.5: 1.75"
+    "resolvedAt": ""
   },
   {
     "league": "La Liga",
