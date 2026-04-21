@@ -1,1 +1,23 @@
-[]
+[
+  {
+    "league": "Liiga",
+    "match": "KooKoo vs SaiPa",
+    "tip": "Over 5.5",
+    "odds": "1.92",
+    "date": "2026-04-21T15:30:00+00:00"
+  },
+  {
+    "league": "Extraliga",
+    "match": "Presov vs Dukla Trencin",
+    "tip": "Over 5.5",
+    "odds": "1.82",
+    "date": "2026-04-21T16:00:00+00:00"
+  },
+  {
+    "league": "Extraliga",
+    "match": "Skalica vs HC 19 Humenne",
+    "tip": "Over 5.5",
+    "odds": "1.84",
+    "date": "2026-04-21T16:00:00+00:00"
+  }
+]
