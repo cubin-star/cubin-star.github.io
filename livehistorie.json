@@ -1,5 +1,21 @@
 [
   {
+    "league": "NHL",
+    "homeTeam": "Carolina Hurricanes",
+    "awayTeam": "Ottawa Senators",
+    "tip": "Over 4.5",
+    "odds": "",
+    "halftimeScore": "1:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "hockey",
+    "kickoff": "2026-04-20T23:30:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-hockey",
+    "scoutStats": "Score: 7/9 | P1: 1:0 | GF: 6.8 GA: 5.9 | Proj: 5 → Over 4.5 | NHL"
+  },
+  {
     "league": "Ligue 2",
     "homeTeam": "Dunkerque",
     "awayTeam": "Laval",
