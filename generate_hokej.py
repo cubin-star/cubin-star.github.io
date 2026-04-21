@@ -84,7 +84,7 @@ MIN_OVER_HIT_RATE_EU = 0.55
 MAX_TOTAL_SD_US = 2.3
 MAX_TOTAL_SD_EU = 2.7
 LATE_PERIOD_MIN_R_US = 0.55
-LATE_PERIOD_MIN_R_EU = 0.50
+LATE_PERIOD_MIN_R_EU = 0.40  # sníženo z 0.50
 
 # OT/SO filter – pokud tým hraje moc OT/nájezdů, je vyrovnaný (past pro Over)
 MAX_OT_RATE_US = 0.40
