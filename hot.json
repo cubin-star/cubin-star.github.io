@@ -1,50 +1,50 @@
 [
   {
-    "league": "Segunda Liga",
-    "match": "Sporting CP B vs Felgueiras 1932",
-    "kickoff": "2026-04-20T17:45:00+00:00",
+    "league": "1. Division",
+    "match": "Hvidovre vs Kolding IF",
+    "kickoff": "2026-04-21T17:00:00+00:00",
     "tip": "Over 2.5",
-    "odds": "1.92",
+    "odds": "1.98",
     "group": 1
   },
   {
-    "league": "Elite One",
-    "match": "Jeunes Fauves - Panthère",
-    "kickoff": "2026-04-20T17:00:00+02:00",
+    "league": "Bundesliga",
+    "match": "SCR Altach - WSG Wattens",
+    "kickoff": "2026-04-21T18:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.30",
+    "odds": "2.22",
     "group": 1
   },
   {
-    "league": "K League 1",
-    "match": "Gimcheon Sangmu FC - Gangwon FC",
-    "kickoff": "2026-04-21T12:30:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.11",
-    "group": 2
-  },
-  {
-    "league": "Serie A",
-    "match": "Lecce - Fiorentina",
-    "kickoff": "2026-04-20T20:45:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.20",
-    "group": 2
-  },
-  {
-    "league": "Premier League",
-    "match": "Shakhtar Donetsk - Polessya",
-    "kickoff": "2026-04-20T17:00:00+02:00",
+    "league": "La Liga",
+    "match": "Mallorca - Valencia",
+    "kickoff": "2026-04-21T19:00:00+02:00",
     "tip": "Over 2.5",
     "odds": "2.19",
+    "group": 2
+  },
+  {
+    "league": "Prva Liga",
+    "match": "FAP - Dinamo Jug",
+    "kickoff": "2026-04-21T16:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.10",
+    "group": 2
+  },
+  {
+    "league": "1. Division",
+    "match": "AC Horsens - Esbjerg",
+    "kickoff": "2026-04-21T18:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.16",
     "group": 3
   },
   {
-    "league": "Division Profesional - Apertura",
-    "match": "Rubio NU - Libertad Asuncion",
-    "kickoff": "2026-04-20T23:15:00+02:00",
+    "league": "Cup",
+    "match": "Ludogorets - CSKA Sofia",
+    "kickoff": "2026-04-21T18:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.20",
+    "odds": "2.18",
     "group": 3
   }
 ]
