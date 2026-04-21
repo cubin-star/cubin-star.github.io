@@ -1,24 +1,24 @@
 [
   {
-    "League": "Segunda Liga",
-    "Match": "Sporting CP B vs Felgueiras 1932",
+    "League": "1. Division",
+    "Match": "Hvidovre vs Kolding IF",
     "Tip": "Over 2.5",
-    "Odds": "1.92",
-    "Date": "2026-04-20T17:45:00+00:00",
+    "Odds": "1.98",
+    "Date": "2026-04-21T17:00:00+00:00",
     "qualified": true
   },
   {
-    "League": "Superettan",
-    "Match": "GIF Sundsvall vs IK brage",
+    "League": "Coppa Italia",
+    "Match": "Inter vs Como",
     "Tip": "Over 2.5",
     "Odds": "1.84",
-    "Date": "2026-04-20T17:05:00+00:00"
+    "Date": "2026-04-21T19:00:00+00:00"
   },
   {
-    "League": "Liga I",
-    "Match": "Farul Constanta vs FCSB",
+    "League": "Magyar Kupa",
+    "Match": "Budapest Honved vs Zalaegerszegi TE",
     "Tip": "Over 2.5",
-    "Odds": "1.80",
-    "Date": "2026-04-20T17:30:00+00:00"
+    "Odds": "1.87",
+    "Date": "2026-04-21T18:00:00+00:00"
   }
 ]
