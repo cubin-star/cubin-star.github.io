@@ -39,6 +39,7 @@ MIN_GAMES = 5
 ODDS_TOLERANCE = 0.30    # max deviation from target odds
 
 EXCLUDED_COUNTRIES = {"russia", "belarus"}
+AMERICAN_COUNTRIES = {"usa", "canada", "us", "united states", "world"}
 
 # Dynamic line selection (like basketball bot)
 SELECTION_ODDS = 1.80    # find Over line where odds ≈ 1.80 (aggressive)
@@ -54,8 +55,13 @@ BOTH_FLOOR_R = 0.85      # oba alespoň 85% baseline (široký záchyt)
 STRONG_MIN_R = 1.10      # "výrazný" tým 110%+ baseline (jasně nad normou ligy)
 CONTRAST_MAX_R = 0.95    # protějšek pod 95% baseline (kontrast ≥ 15%)
 MIN_BASELINE = 2.10      # sníženo z 2.40 → otevírá SHL, Liiga, DEL, Extraligu
-EXPECTED_VS_OUTPUT_R = 1.22  # matchup expected musí překročit OUTPUT line o 22%
 MIN_ATTACK = 2.00            # oba týmy musí střílet ≥ 2.0 g/z (žádný "mrtvý" útok)
+
+# Expected vs OUTPUT line – league-aware
+# US ligy (NHL/AHL) drží přísnější rezervu (víc empty-net, víc OT gólů)
+# EU ligy (SHL, Liiga, Extraliga, DEL) potřebují nižší rezervu, jinak nikdy nepustí
+EXPECTED_VS_OUTPUT_R_US = 1.22
+EXPECTED_VS_OUTPUT_R_EU = 1.12
 
 # Variant C – both teams offensive (no contrast needed, but stricter floor)
 BOTH_OFFENSE_R = 1.05    # oba skórují >= 105% baseline (přísnější než 100%)
@@ -66,15 +72,28 @@ MIN_P23_BASELINE = 0.80  # minimum P2+P3 baseline (avg per-team P2+P3 stat)
 
 # Enhanced criteria – recent form, H2H, consistency, rest
 RECENT_N = 10              # rolling window: last N finished games
-RECENT_FLOOR_R = 0.97     # rolling avg total of last N games >= 97% of selection_line
-MIN_OVER_HIT_RATE = 0.60  # >= 60% of last N games had total >= safe_line (each team)
-MAX_TOTAL_SD = 2.3        # max std dev of game totals (tighter = more consistent)
 H2H_MIN_GAMES = 2         # min H2H finished games to apply H2H filter
 H2H_OVER_R = 0.90         # H2H avg total >= 90% of selection_line
-MIN_REST_HOURS = 36        # min hours since last game (filters back-to-back)
+MIN_REST_HOURS = 0         # 0 = vypnuto (back-to-back filtr deaktivován)
 
-# Period-by-period: 2nd+3rd period scoring must be substantial
-LATE_PERIOD_MIN_R = 0.55  # goals in P2+P3 must be >= 55% of total (both teams)
+# League-aware enhanced thresholds (US = NHL/AHL striktně, EU = uvolněně)
+RECENT_FLOOR_R_US = 0.97
+RECENT_FLOOR_R_EU = 0.92
+MIN_OVER_HIT_RATE_US = 0.60
+MIN_OVER_HIT_RATE_EU = 0.55
+MAX_TOTAL_SD_US = 2.3
+MAX_TOTAL_SD_EU = 2.7
+LATE_PERIOD_MIN_R_US = 0.55
+LATE_PERIOD_MIN_R_EU = 0.50
+
+# OT/SO filter – pokud tým hraje moc OT/nájezdů, je vyrovnaný (past pro Over)
+MAX_OT_RATE_US = 0.40
+MAX_OT_RATE_EU = 0.35
+
+# Cross-market konfirmace: BTS 2+ (oba týmy dají 2+ góly)
+# V hokeji je standardní BTTS 90%+ jistota (bez info hodnoty), proto BTS 2+
+BTS2_BONUS_ODDS = 1.85   # pokud BTS 2+ kurz <= 1.85, tým získá ranking bonus
+BTS2_BONUS_MULT = 1.10   # multiplikátor skóre při konfirmaci
 
 request_count = 0
 
@@ -195,6 +214,7 @@ def fetch_team_games(team_id, league_id, season):
                 "home_total": int(h_total),
                 "away_total": int(a_total),
                 "total": int(h_total) + int(a_total),
+                "status_short": status,
             }
             # Period data – hockey API returns strings like "2 - 1"
             p1_str = periods.get("first")
@@ -248,54 +268,79 @@ def fetch_h2h(home_id, away_id):
 def find_over_lines(odds_data):
     """Dynamic line discovery: find selection line (odds ≈ 1.80) and output line (odds ≈ 1.30).
     Works for any league – no fixed line numbers.
-    Returns (selection, output) dicts with 'line', 'odd', 'label', 'odd_str'
-    or (None, None) if not found."""
+    Returns (selection, output, bts2_odd) where bts2_odd is the cross-market
+    "Both Teams To Score 2+" odds (or None if not available).
+    Returns (None, None, None) if main lines not found."""
+    sel_result = None
+    out_result = None
+    bts2_odd = None
+
     for resp in odds_data:
         for bk in resp.get("bookmakers", []):
             for bet in bk.get("bets", []):
-                # Bet 4 = Over/Under (full game), Bet 52 = Over/Under (Reg Time)
-                if bet.get("id") not in (4, 52) and "over/under" not in bet.get("name", "").lower():
-                    continue
-                # Skip period-specific bets
-                if "period" in bet.get("name", "").lower():
-                    continue
+                bet_id = bet.get("id")
+                bet_name = bet.get("name", "").lower()
 
-                overs = []
-                for val in bet.get("values", []):
-                    v = str(val.get("value", ""))
-                    if not v.lower().startswith("over"):
-                        continue
-                    try:
-                        line = float(v.split()[-1])
-                        # Only accept .5 lines (3.5, 4.5, 5.5, etc.)
-                        if line % 1 != 0.5:
+                # --- Cross-market: BTS 2+ (oba dají 2+ góly) ---
+                # Hledáme bet, kde název obsahuje "both teams" + ("2" nebo "over 1.5")
+                if bts2_odd is None and "both teams" in bet_name:
+                    is_bts2 = ("2" in bet_name and "1.5" not in bet_name and "score" in bet_name) \
+                              or ("over 1.5" in bet_name) \
+                              or ("score 2" in bet_name)
+                    if is_bts2:
+                        for val in bet.get("values", []):
+                            v = str(val.get("value", "")).lower()
+                            if v in ("yes", "y") or v.startswith("yes"):
+                                try:
+                                    bts2_odd = float(val.get("odd", "0"))
+                                    break
+                                except (ValueError, TypeError):
+                                    pass
+
+                # --- Main: Over/Under full game ---
+                if sel_result is None or out_result is None:
+                    # Bet 4 = Over/Under (full game), Bet 52 = Over/Under (Reg Time)
+                    if bet_id in (4, 52) or ("over/under" in bet_name and "period" not in bet_name):
+                        if "period" in bet_name:
                             continue
-                        odd = float(val.get("odd", "0"))
-                        overs.append({
-                            "line": line,
-                            "odd": odd,
-                            "label": v,
-                            "odd_str": str(val.get("odd")),
-                        })
-                    except (ValueError, IndexError):
-                        pass
 
-                if len(overs) < 2:
-                    continue
+                        overs = []
+                        for val in bet.get("values", []):
+                            v = str(val.get("value", ""))
+                            if not v.lower().startswith("over"):
+                                continue
+                            try:
+                                line = float(v.split()[-1])
+                                # Only accept .5 lines (3.5, 4.5, 5.5, etc.)
+                                if line % 1 != 0.5:
+                                    continue
+                                odd = float(val.get("odd", "0"))
+                                overs.append({
+                                    "line": line,
+                                    "odd": odd,
+                                    "label": v,
+                                    "odd_str": str(val.get("odd")),
+                                })
+                            except (ValueError, IndexError):
+                                pass
 
-                # Find selection line (odds closest to SELECTION_ODDS)
-                sel = min(overs, key=lambda x: abs(x["odd"] - SELECTION_ODDS))
-                # Find output/safe line (odds closest to OUTPUT_ODDS)
-                out = min(overs, key=lambda x: abs(x["odd"] - OUTPUT_ODDS))
+                        if len(overs) >= 2:
+                            sel = min(overs, key=lambda x: abs(x["odd"] - SELECTION_ODDS))
+                            out = min(overs, key=lambda x: abs(x["odd"] - OUTPUT_ODDS))
 
-                if (abs(sel["odd"] - SELECTION_ODDS) <= ODDS_TOLERANCE
-                        and abs(out["odd"] - OUTPUT_ODDS) <= ODDS_TOLERANCE
-                        and MIN_SEL_ODDS <= sel["odd"] <= MAX_SEL_ODDS
-                        and out["line"] < sel["line"]
-                        and sel["line"] - out["line"] >= MIN_LINE_GAP):
-                    return sel, out
+                            if (abs(sel["odd"] - SELECTION_ODDS) <= ODDS_TOLERANCE
+                                    and abs(out["odd"] - OUTPUT_ODDS) <= ODDS_TOLERANCE
+                                    and MIN_SEL_ODDS <= sel["odd"] <= MAX_SEL_ODDS
+                                    and out["line"] < sel["line"]
+                                    and sel["line"] - out["line"] >= MIN_LINE_GAP):
+                                sel_result = sel
+                                out_result = out
 
-    return None, None
+                # Brzy ven, když máme vše
+                if sel_result and out_result and bts2_odd is not None:
+                    return sel_result, out_result, bts2_odd
+
+    return sel_result, out_result, bts2_odd
 
 
 # ===== CRITERIA =====
@@ -307,7 +352,7 @@ def _sf(val, default=0.0):
         return default
 
 
-def meets_criteria(home_stats, away_stats, selection_line, output_line):
+def meets_criteria(home_stats, away_stats, selection_line, output_line, is_eu=False):
     """
     League-relative hockey criteria (home/away split) + expected total vs line.
     Baseline = avg of h_for, a_for, h_agn, a_agn → adapts to any league.
@@ -349,10 +394,11 @@ def meets_criteria(home_stats, away_stats, selection_line, output_line):
     expected = (h_for + a_agn + a_for + h_agn) / 2
 
     # Check expected vs OUTPUT line (what we actually bet on, not the aggressive selection line)
-    min_expected = output_line * EXPECTED_VS_OUTPUT_R
+    expected_ratio = EXPECTED_VS_OUTPUT_R_EU if is_eu else EXPECTED_VS_OUTPUT_R_US
+    min_expected = output_line * expected_ratio
     if expected < min_expected:
         return False, (f"expected low: {expected:.1f} < {min_expected:.1f} "
-                       f"(out={output_line:.1f}×{EXPECTED_VS_OUTPUT_R})"), 0.0
+                       f"(out={output_line:.1f}×{expected_ratio})"), 0.0
 
     both_floor = baseline * BOTH_FLOOR_R
     strong_min = baseline * STRONG_MIN_R
@@ -423,6 +469,10 @@ def analyze_recent_form(games, team_id, n=RECENT_N):
     std_dev = math.sqrt(variance)
     last_ts = games[0]["timestamp"] if games else 0
 
+    # OT/SO rate – kolik % posledních zápasů šlo do prodloužení/nájezdů
+    ot_count = sum(1 for g in last_n if g.get("status_short") in ("AOT", "AP"))
+    ot_rate = ot_count / len(last_n) if last_n else 0.0
+
     # Period-by-period: calculate ratio of P2+P3 goals to regulation total (no OT)
     p23_games = [g for g in last_n if "p23_total" in g and g.get("reg_total", g["total"]) > 0]
     if p23_games:
@@ -456,6 +506,7 @@ def analyze_recent_form(games, team_id, n=RECENT_N):
         "std_dev": std_dev,
         "last_game_ts": last_ts,
         "n_games": len(last_n),
+        "ot_rate": ot_rate,
         "avg_p23_ratio": avg_p23_ratio,
         "avg_team_p23": avg_team_p23,
         "avg_team_p23_conceded": avg_team_p23_conceded,
@@ -463,48 +514,67 @@ def analyze_recent_form(games, team_id, n=RECENT_N):
 
 
 def meets_enhanced_criteria(home_form, away_form, h2h_games,
-                            selection_line, safe_line, game_ts):
+                            selection_line, safe_line, game_ts, is_eu=False):
     """Enhanced criteria – recent form, H2H, consistency, rest, periods.
+
+    Thresholds switch between US (NHL/AHL) and EU (SHL/Liiga/Extraliga/DEL)
+    profiles based on `is_eu` flag.
 
     1. Recent form: avg total of last N games >= RECENT_FLOOR_R * selection_line
     2. Over hit rate: >= MIN_OVER_HIT_RATE of last N games had total >= safe_line
     3. Consistency: std_dev <= MAX_TOTAL_SD (both teams)
     4. H2H: if >= H2H_MIN_GAMES, avg total >= H2H_OVER_R * selection_line
-    5. Rest: both teams rested >= MIN_REST_HOURS
+    5. Rest: both teams rested >= MIN_REST_HOURS (0 = vypnuto)
     6. Period analysis: P2+P3 goals >= LATE_PERIOD_MIN_R of total
+    7. OT rate: oba týmy <= MAX_OT_RATE (vyrovnané obrany = past pro Over)
 
     Returns (ok, detail_string).
     """
     parts = []
 
+    # Vybrat profil prahů
+    recent_floor_r = RECENT_FLOOR_R_EU if is_eu else RECENT_FLOOR_R_US
+    min_over_rate = MIN_OVER_HIT_RATE_EU if is_eu else MIN_OVER_HIT_RATE_US
+    max_sd = MAX_TOTAL_SD_EU if is_eu else MAX_TOTAL_SD_US
+    late_period_r = LATE_PERIOD_MIN_R_EU if is_eu else LATE_PERIOD_MIN_R_US
+    max_ot_rate = MAX_OT_RATE_EU if is_eu else MAX_OT_RATE_US
+
     # --- Checks 1-3, 5-6: Recent form (both teams must have data) ---
     if home_form and away_form:
         # Check 1: Rolling average total
-        min_avg = selection_line * RECENT_FLOOR_R
+        min_avg = selection_line * recent_floor_r
         h_avg = home_form["avg_total"]
         a_avg = away_form["avg_total"]
         if h_avg < min_avg or a_avg < min_avg:
             return False, (f"recent avg low: {h_avg:.1f}/{a_avg:.1f} "
-                           f"(min {min_avg:.1f}={RECENT_FLOOR_R}×{selection_line:.1f})")
+                           f"(min {min_avg:.1f}={recent_floor_r}×{selection_line:.1f})")
 
         # Check 2: Over hit rate (against safe line)
         h_over = sum(1 for t in home_form["totals"] if t >= safe_line) / home_form["n_games"]
         a_over = sum(1 for t in away_form["totals"] if t >= safe_line) / away_form["n_games"]
-        if h_over < MIN_OVER_HIT_RATE or a_over < MIN_OVER_HIT_RATE:
+        if h_over < min_over_rate or a_over < min_over_rate:
             return False, (f"over rate low: {h_over:.0%}/{a_over:.0%} "
-                           f"(min {MIN_OVER_HIT_RATE:.0%} @ safe={safe_line:.1f})")
+                           f"(min {min_over_rate:.0%} @ safe={safe_line:.1f})")
 
         # Check 3: Consistency (standard deviation)
         h_sd = home_form["std_dev"]
         a_sd = away_form["std_dev"]
-        if h_sd > MAX_TOTAL_SD or a_sd > MAX_TOTAL_SD:
+        if h_sd > max_sd or a_sd > max_sd:
             return False, (f"inconsistent: SD {h_sd:.2f}/{a_sd:.2f} "
-                           f"(max {MAX_TOTAL_SD:.1f})")
+                           f"(max {max_sd:.1f})")
 
         parts.append(f"form={h_avg:.1f}/{a_avg:.1f} over={h_over:.0%}/{a_over:.0%} "
                      f"SD={h_sd:.2f}/{a_sd:.2f}")
 
-        # Check 5: Rest (back-to-back filter)
+        # Check 3b: OT/SO rate – vyrovnané obrany = past pro Over
+        h_ot = home_form.get("ot_rate", 0.0)
+        a_ot = away_form.get("ot_rate", 0.0)
+        if h_ot > max_ot_rate or a_ot > max_ot_rate:
+            return False, (f"OT-heavy: rate {h_ot:.0%}/{a_ot:.0%} "
+                           f"(max {max_ot_rate:.0%})")
+        parts.append(f"OT={h_ot:.0%}/{a_ot:.0%}")
+
+        # Check 5: Rest (back-to-back filter) – přeskočeno pokud MIN_REST_HOURS == 0
         if MIN_REST_HOURS > 0:
             game_dt = datetime.fromtimestamp(game_ts, tz=timezone.utc)
             h_last_dt = datetime.fromtimestamp(home_form["last_game_ts"], tz=timezone.utc)
@@ -520,9 +590,9 @@ def meets_enhanced_criteria(home_form, away_form, h2h_games,
         h_p23 = home_form.get("avg_p23_ratio")
         a_p23 = away_form.get("avg_p23_ratio")
         if h_p23 is not None and a_p23 is not None:
-            if h_p23 < LATE_PERIOD_MIN_R or a_p23 < LATE_PERIOD_MIN_R:
+            if h_p23 < late_period_r or a_p23 < late_period_r:
                 return False, (f"weak late periods: P2+P3 ratio {h_p23:.0%}/{a_p23:.0%} "
-                               f"(min {LATE_PERIOD_MIN_R:.0%})")
+                               f"(min {late_period_r:.0%})")
             parts.append(f"P2+P3={h_p23:.0%}/{a_p23:.0%}")
 
         # Check 7: P2+P3 contrast filter (like football's 2nd-half A/B filter)
@@ -598,13 +668,16 @@ def main():
     print("== SureBets Hockey Bot v2 ==")
     print(f"Time: {now.strftime('%Y-%m-%d %H:%M UTC')}")
     print(f"Dynamic lines: sel@~{SELECTION_ODDS} → safe@~{OUTPUT_ODDS} (tol={ODDS_TOLERANCE})")
-    print(f"MIN_BASELINE: {MIN_BASELINE} | EXPECTED_VS_OUTPUT_R: {EXPECTED_VS_OUTPUT_R}")
+    print(f"MIN_BASELINE: {MIN_BASELINE} | EXP_VS_OUT: US={EXPECTED_VS_OUTPUT_R_US} EU={EXPECTED_VS_OUTPUT_R_EU}")
     print(f"Variants: A(contr offense) B(contr defense) C(both open) + P2+P3 contrast")
     print(f"  A/B: FLOOR={BOTH_FLOOR_R}, STRONG={STRONG_MIN_R}, CONTRAST<{CONTRAST_MAX_R}")
     print(f"  C: offense>={BOTH_OFFENSE_R}×base, concede>={BOTH_CONCEDE_R}×base")
-    print(f"Enhanced: form>={RECENT_FLOOR_R}×line, over>={MIN_OVER_HIT_RATE:.0%}@safe, "
-          f"SD<={MAX_TOTAL_SD}, H2H>={H2H_OVER_R}×line, rest>={MIN_REST_HOURS}h, "
-          f"P2+P3>={LATE_PERIOD_MIN_R:.0%}, P2+P3 contrast(A/B/C)\n")
+    print(f"Enhanced US: form>={RECENT_FLOOR_R_US}, over>={MIN_OVER_HIT_RATE_US:.0%}, "
+          f"SD<={MAX_TOTAL_SD_US}, P2+P3>={LATE_PERIOD_MIN_R_US:.0%}, OT<={MAX_OT_RATE_US:.0%}")
+    print(f"Enhanced EU: form>={RECENT_FLOOR_R_EU}, over>={MIN_OVER_HIT_RATE_EU:.0%}, "
+          f"SD<={MAX_TOTAL_SD_EU}, P2+P3>={LATE_PERIOD_MIN_R_EU:.0%}, OT<={MAX_OT_RATE_EU:.0%}")
+    print(f"Common: H2H>={H2H_OVER_R}×line, rest>={MIN_REST_HOURS}h (0=off), "
+          f"BTS2+ bonus@<={BTS2_BONUS_ODDS} (×{BTS2_BONUS_MULT})\n")
 
     # 1. Fetch games
     games_today = fetch_games(today)
@@ -635,9 +708,12 @@ def main():
         label = f"{g['home']} vs {g['away']}"
         print(f"  [{i+1}/{len(filtered)}] {label[:45]:.<47s}", end="")
         odds_data = fetch_odds(gid)
-        sel, out = find_over_lines(odds_data)
+        sel, out, bts2_odd = find_over_lines(odds_data)
         if sel and out:
-            print(f" sel={sel['label']}@{sel['odd_str']} → out={out['label']}@{out['odd_str']} ✓")
+            bts_str = f" BTS2={bts2_odd:.2f}" if bts2_odd is not None else ""
+            print(f" sel={sel['label']}@{sel['odd_str']} → out={out['label']}@{out['odd_str']}{bts_str} ✓")
+            country = g.get("country", "").lower()
+            is_eu = country not in AMERICAN_COUNTRIES
             candidates.append({
                 "game_id": gid,
                 "league": g["league"],
@@ -646,12 +722,15 @@ def main():
                 "match": f"{g['home']} vs {g['away']}",
                 "home_id": g["home_id"],
                 "away_id": g["away_id"],
+                "country": country,
+                "is_eu": is_eu,
                 "sel_line": sel["line"],
                 "sel_label": sel["label"],
                 "sel_odds": sel["odd_str"],
                 "out_line": out["line"],
                 "out_label": out["label"],
                 "out_odds": out["odd_str"],
+                "bts2_odd": bts2_odd,
                 "timestamp": g["timestamp"],
             })
         else:
@@ -676,7 +755,7 @@ def main():
             # Phase 1: Basic venue criteria
             home_stats = fetch_team_stats(c["league_id"], c["season"], c["home_id"])
             away_stats = fetch_team_stats(c["league_id"], c["season"], c["away_id"])
-            ok, detail, score = meets_criteria(home_stats, away_stats, c["sel_line"], c["out_line"])
+            ok, detail, score = meets_criteria(home_stats, away_stats, c["sel_line"], c["out_line"], is_eu=c["is_eu"])
             if not ok:
                 print(f" fail ({detail})")
                 continue
@@ -690,12 +769,19 @@ def main():
             away_form = analyze_recent_form(away_games, c["away_id"])
             ok2, detail2 = meets_enhanced_criteria(
                 home_form, away_form, h2h,
-                c["sel_line"], c["out_line"], c["timestamp"])
+                c["sel_line"], c["out_line"], c["timestamp"], is_eu=c["is_eu"])
             if not ok2:
                 print(f" enhanced fail ({detail2})")
                 continue
 
-            print(f" ★ {detail}")
+            # Cross-market konfirmace: BTS 2+ bonus do skóre
+            bts2 = c.get("bts2_odd")
+            if bts2 is not None and bts2 <= BTS2_BONUS_ODDS:
+                score *= BTS2_BONUS_MULT
+                detail2 += f" | BTS2+={bts2:.2f}★"
+
+            region = "EU" if c["is_eu"] else "US"
+            print(f" ★ [{region}] {detail}")
             print(f"       enhanced: {detail2}")
             print(f"       → {c['sel_label']}@{c['sel_odds']} → OUTPUT: {c['out_label']}@{c['out_odds']}")
             kickoff = datetime.fromtimestamp(c["timestamp"], tz=timezone.utc).strftime("%Y-%m-%dT%H:%M:%S+00:00")
