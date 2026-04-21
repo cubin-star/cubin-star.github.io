@@ -95,6 +95,18 @@ MAX_OT_RATE_EU = 0.35
 BTS2_BONUS_ODDS = 1.85   # pokud BTS 2+ kurz <= 1.85, tým získá ranking bonus
 BTS2_BONUS_MULT = 1.10   # multiplikátor skóre při konfirmaci
 
+# Quality score system – pouští jen TOP zápasy splňující víc než jen základ
+# Každé splněné kritérium = body. Zápas musí mít >= MIN_QUALITY_SCORE.
+MIN_QUALITY_SCORE = 4    # min počet bodů z kvalitního skóre (0-10)
+MAX_TIPS_PER_DAY = 3     # globální limit – nejlepších N podle skóre (kvalita>kvantita)
+
+# Měkké uvolnění variant pro EU – aby vůbec něco prošlo do quality scoringu
+# US zůstává přísné (NHL/AHL mají dost dat a jasnější profily)
+BOTH_OFFENSE_R_EU = 0.95   # bylo společné 1.05
+BOTH_CONCEDE_R_EU = 0.85   # bylo společné 1.00
+# Varianta D – fallback pro EU: hodně vysoký expected = automatický pass i bez A/B/C
+HIGH_EXPECTED_R_EU = 1.18   # expected >= out_line × 1.18 → propustit jako variant D
+
 request_count = 0
 
 
@@ -419,20 +431,27 @@ def meets_criteria(home_stats, away_stats, selection_line, output_line, is_eu=Fa
     )
 
     # C) oba skórují i inkasují nadprůměrně → otevřený zápas (žádný kontrast nutný)
-    offense_floor = baseline * BOTH_OFFENSE_R
-    concede_floor = baseline * BOTH_CONCEDE_R
+    # EU má uvolněné prahy (vyrovnanější týmy než NHL/AHL)
+    offense_floor = baseline * (BOTH_OFFENSE_R_EU if is_eu else BOTH_OFFENSE_R)
+    concede_floor = baseline * (BOTH_CONCEDE_R_EU if is_eu else BOTH_CONCEDE_R)
     variant_c = (
         h_for >= offense_floor and a_for >= offense_floor
         and h_agn >= concede_floor and a_agn >= concede_floor
     )
 
-    if variant_a or variant_b or variant_c:
+    # D) EU fallback – velmi vysoký expected (≥ HIGH_EXPECTED_R_EU × out_line)
+    # propustí i bez splnění A/B/C, protože data sama mluví jasně
+    variant_d = is_eu and expected >= output_line * HIGH_EXPECTED_R_EU
+
+    if variant_a or variant_b or variant_c or variant_d:
         if variant_a:
             tag = "A"
         elif variant_b:
             tag = "B"
-        else:
+        elif variant_c:
             tag = "C"
+        else:
+            tag = "D"
         score = expected / selection_line if selection_line > 0 else 0.0
         detail = (f"[{tag}] scored {h_for:.2f}/{a_for:.2f}, conceded {h_agn:.2f}/{a_agn:.2f} "
                   f"(base={baseline:.2f}, exp={expected:.1f}, line={selection_line:.1f}, "
@@ -653,6 +672,84 @@ def meets_enhanced_criteria(home_form, away_form, h2h_games,
     return True, " | ".join(parts)
 
 
+def compute_quality_score(home_form, away_form, h2h_games,
+                          selection_line, safe_line,
+                          bts2_odd, is_eu):
+    """Quality score 0-10 – body za splnění kvalitních (nepovinných) kritérií.
+    Čím vyšší, tím lepší zápas. Min. MIN_QUALITY_SCORE pro propuštění do výsledků.
+
+    Bodovník:
+    + 2  recent form avg (oba) ≥ 1.20× safe_line — silný recent trend
+    + 1  recent form avg (oba) > selection_line
+    + 2  oba týmy mají Over hit-rate ≥ 75 % na safe_line
+    + 1  oba mají Over hit-rate ≥ 70 %
+    + 1  H2H avg ≥ selection_line (silný H2H signál)
+    + 1  oba mají std_dev ≤ 60 % maximálního prahu (velmi konzistentní)
+    + 1  oba mají P2+P3 ratio ≥ 70 % (dominantní pozdní scoring)
+    + 1  BTS 2+ kurz ≤ 1.70 (silná konfirmace bookmakerem)
+    + 1  oba mají OT rate ≤ 15 % (málo vyrovnaných zápasů)
+    """
+    pts = 0
+    reasons = []
+
+    if home_form and away_form:
+        h_avg = home_form["avg_total"]
+        a_avg = away_form["avg_total"]
+
+        # 1. Recent form vs line
+        if h_avg >= safe_line * 1.20 and a_avg >= safe_line * 1.20:
+            pts += 2
+            reasons.append("form≥1.20×safe(+2)")
+        elif h_avg > selection_line and a_avg > selection_line:
+            pts += 1
+            reasons.append("form>sel(+1)")
+
+        # 2. Over hit-rate
+        h_over = sum(1 for t in home_form["totals"] if t >= safe_line) / home_form["n_games"]
+        a_over = sum(1 for t in away_form["totals"] if t >= safe_line) / away_form["n_games"]
+        if h_over >= 0.75 and a_over >= 0.75:
+            pts += 2
+            reasons.append(f"over≥75%(+2)")
+        elif h_over >= 0.70 and a_over >= 0.70:
+            pts += 1
+            reasons.append(f"over≥70%(+1)")
+
+        # 3. Konzistence (SD)
+        max_sd = MAX_TOTAL_SD_EU if is_eu else MAX_TOTAL_SD_US
+        if home_form["std_dev"] <= max_sd * 0.6 and away_form["std_dev"] <= max_sd * 0.6:
+            pts += 1
+            reasons.append(f"SD≤60%(+1)")
+
+        # 4. P2+P3 dominantní pozdní scoring
+        h_p23 = home_form.get("avg_p23_ratio")
+        a_p23 = away_form.get("avg_p23_ratio")
+        if h_p23 is not None and a_p23 is not None:
+            if h_p23 >= 0.70 and a_p23 >= 0.70:
+                pts += 1
+                reasons.append(f"P2+P3≥70%(+1)")
+
+        # 5. OT rate – málo vyrovnaných zápasů (nedopadají do OT)
+        h_ot = home_form.get("ot_rate", 0.0)
+        a_ot = away_form.get("ot_rate", 0.0)
+        if h_ot <= 0.15 and a_ot <= 0.15:
+            pts += 1
+            reasons.append(f"OT≤15%(+1)")
+
+    # 6. H2H signál
+    if h2h_games and len(h2h_games) >= H2H_MIN_GAMES:
+        h2h_avg = sum(g["total"] for g in h2h_games) / len(h2h_games)
+        if h2h_avg >= selection_line:
+            pts += 1
+            reasons.append(f"H2H≥sel(+1)")
+
+    # 7. BTS 2+ silná konfirmace
+    if bts2_odd is not None and bts2_odd <= 1.70:
+        pts += 1
+        reasons.append(f"BTS2+≤1.70(+1)")
+
+    return pts, ", ".join(reasons) if reasons else "no bonuses"
+
+
 # ===== MAIN =====
 
 def main():
@@ -780,9 +877,18 @@ def main():
                 score *= BTS2_BONUS_MULT
                 detail2 += f" | BTS2+={bts2:.2f}★"
 
+            # Quality score – body za kvalitní (nepovinná) kritéria
+            qpts, qdetail = compute_quality_score(
+                home_form, away_form, h2h,
+                c["sel_line"], c["out_line"], bts2, c["is_eu"])
+            if qpts < MIN_QUALITY_SCORE:
+                print(f" quality fail (Q={qpts}/{MIN_QUALITY_SCORE}: {qdetail})")
+                continue
+
             region = "EU" if c["is_eu"] else "US"
-            print(f" ★ [{region}] {detail}")
+            print(f" ★ [{region}] Q={qpts} {detail}")
             print(f"       enhanced: {detail2}")
+            print(f"       quality: {qdetail}")
             print(f"       → {c['sel_label']}@{c['sel_odds']} → OUTPUT: {c['out_label']}@{c['out_odds']}")
             kickoff = datetime.fromtimestamp(c["timestamp"], tz=timezone.utc).strftime("%Y-%m-%dT%H:%M:%S+00:00")
             results.append({
@@ -792,6 +898,7 @@ def main():
                 "odds": c["out_odds"],
                 "date": kickoff,
                 "_score": score,
+                "_quality": qpts,
                 "_league_id": c["league_id"],
                 "_sel_label": c["sel_label"],
                 "_sel_odds": c["sel_odds"],
@@ -818,16 +925,29 @@ def main():
     best_per_league = {}
     for r in results:
         lg_id = r["_league_id"]
-        if lg_id not in best_per_league or r["_score"] > best_per_league[lg_id]["_score"]:
+        # Tiebreak: nejdřív quality, pak score
+        rank = (r["_quality"], r["_score"])
+        cur_rank = (best_per_league[lg_id]["_quality"], best_per_league[lg_id]["_score"]) if lg_id in best_per_league else (-1, -1)
+        if rank > cur_rank:
             best_per_league[lg_id] = r
     results = list(best_per_league.values())
+    if before > len(results):
+        print(f"\n  Dedup: {before} → {len(results)} (best per league by Q+score)")
+
+    # 5c. Globální TOP-N podle (quality, score) – kvalita > kvantita
+    if len(results) > MAX_TIPS_PER_DAY:
+        results.sort(key=lambda r: (r["_quality"], r["_score"]), reverse=True)
+        before_n = len(results)
+        results = results[:MAX_TIPS_PER_DAY]
+        print(f"  Top-N filter: {before_n} → {len(results)} (max {MAX_TIPS_PER_DAY}/day)")
+
+    # Cleanup interních polí
     for r in results:
         r.pop("_score", None)
+        r.pop("_quality", None)
         r.pop("_league_id", None)
         r.pop("_sel_label", None)
         r.pop("_sel_odds", None)
-    if before > len(results):
-        print(f"\n  Dedup: {before} → {len(results)} (best per league)")
 
     # 6. Sort by kickoff time and write output
     results.sort(key=lambda r: r["date"])
