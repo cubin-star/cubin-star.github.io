@@ -41,10 +41,10 @@ OUTPUT_ODDS = 1.22       # find the safer Over line near this odds (safe – big
 ODDS_TOLERANCE = 0.30    # max deviation from target
 
 # Criteria – venue-specific matchup vs. bookmaker line
-BOTH_FLOOR_R = 0.97       # oba týmy musí střílet alespoň 97% half-line na svém venue
+BOTH_FLOOR_R = 0.93       # uvolněno z 0.97 (evro ligy mají 1 tým mírně pod průměrem)
 MIN_HALF_LINE = 70        # minimální half_line – sníženo z 80 (otevírá EuroCup, NCAA, atd.)
-EXPECTED_MIN_R = 1.05     # matchup expected (venue splits) musí překročit line o 5%
-OFFENSE_VS_LEAGUE_R = 0.95  # offense obou týmů (venue) musí být >= 95% celkového průměru ligy
+EXPECTED_MIN_R = 1.02     # uvolněno z 1.05 (NBA top zápasy padaly o 2 body)
+OFFENSE_VS_LEAGUE_R = 0.90  # uvolněno z 0.95 (jeden tým může být pod průměrem)
 
 # Enhanced criteria – recent form, H2H, consistency, rest
 RECENT_N = 10               # rolling window: last N finished games
@@ -56,7 +56,7 @@ H2H_OVER_R = 0.92           # H2H avg total >= 92% of selection_line
 MIN_REST_HOURS = 0           # 0 = vypnuto (back-to-back filtr deaktivován)
 
 # Defense leakage – both teams must concede enough (porous defense)
-BOTH_CONCEDE_FLOOR_R = 0.95  # oba inkasují ≥ 95% half-line na svém venue
+BOTH_CONCEDE_FLOOR_R = 0.90  # uvolněno z 0.95 (lepší obrana neznamená zákaz)
 MIN_LINE_GAP = 10.0          # output line must be at least 10 pts below selection line
 
 # 2nd half filter (like football's 2nd-half filter)
@@ -74,6 +74,11 @@ MAX_BLOWOUT_RATE = 0.40       # max 40 % posledních H2H smí být blowouty
 # Cross-market konfirmace: oba team totaly Over levné = bookmaker vidí oba aktivní
 TT_BONUS_ODDS = 1.95          # pokud oba Team Total Over kurzy <= 1.95
 TT_BONUS_MULT = 1.15          # multiplikátor skóre při konfirmaci
+
+# Quality score system – pouští jen TOP zápasy splňující víc než jen základ
+# Každé splněné kritérium = body. Zápas musí mít >= MIN_QUALITY_SCORE.
+MIN_QUALITY_SCORE = 4    # min počet bodů z kvalitního skóre (0-10)
+MAX_TIPS_PER_DAY = 3     # globální limit – nejlepších N podle skóre (kvalita>kvantita)
 
 request_count = 0
 
@@ -584,6 +589,83 @@ def meets_enhanced_criteria(home_form, away_form, h2h_games,
     return True, " | ".join(parts)
 
 
+def compute_quality_score(home_form, away_form, h2h_games,
+                          selection_line, safe_line,
+                          h_tt, a_tt):
+    """Quality score 0-10 – body za splnění kvalitních (nepovinných) kritérií.
+    Čím vyšší, tím lepší zápas. Min. MIN_QUALITY_SCORE pro propuštění do výsledků.
+
+    Bodovník:
+    + 2  recent form avg (oba) ≥ 1.10× safe_line — silný recent trend
+    + 1  recent form avg (oba) > selection_line
+    + 2  oba týmy mají Over hit-rate ≥ 80 % na safe_line
+    + 1  oba mají Over hit-rate ≥ 75 %
+    + 1  H2H avg ≥ selection_line (silný H2H signál)
+    + 1  oba mají std_dev ≤ 60 % maximálního prahu (velmi konzistentní)
+    + 1  oba mají 2H ratio ≥ 50 % (dominantní H2 scoring)
+    + 1  oba TT Over kurzy ≤ 1.85 (silná konfirmace bookmakerem)
+    + 1  oba mají blowout rate ≤ 20 % (málo garbage time)
+    """
+    pts = 0
+    reasons = []
+
+    if home_form and away_form:
+        h_avg = home_form["avg_total"]
+        a_avg = away_form["avg_total"]
+
+        # 1. Recent form vs line
+        if h_avg >= safe_line * 1.10 and a_avg >= safe_line * 1.10:
+            pts += 2
+            reasons.append("form≥1.10×safe(+2)")
+        elif h_avg > selection_line and a_avg > selection_line:
+            pts += 1
+            reasons.append("form>sel(+1)")
+
+        # 2. Over hit-rate
+        h_over = sum(1 for t in home_form["totals"] if t >= safe_line) / home_form["n_games"]
+        a_over = sum(1 for t in away_form["totals"] if t >= safe_line) / away_form["n_games"]
+        if h_over >= 0.80 and a_over >= 0.80:
+            pts += 2
+            reasons.append("over≥80%(+2)")
+        elif h_over >= 0.75 and a_over >= 0.75:
+            pts += 1
+            reasons.append("over≥75%(+1)")
+
+        # 3. Konzistence (SD)
+        if home_form["std_dev"] <= MAX_TOTAL_SD * 0.6 and away_form["std_dev"] <= MAX_TOTAL_SD * 0.6:
+            pts += 1
+            reasons.append("SD≤60%(+1)")
+
+        # 4. 2H ratio dominantní pozdní scoring
+        h_sh = home_form.get("avg_sh_ratio")
+        a_sh = away_form.get("avg_sh_ratio")
+        if h_sh is not None and a_sh is not None:
+            if h_sh >= 0.50 and a_sh >= 0.50:
+                pts += 1
+                reasons.append("2H≥50%(+1)")
+
+        # 5. Blowout rate – málo garbage time
+        h_blow = home_form.get("blowout_rate", 0.0)
+        a_blow = away_form.get("blowout_rate", 0.0)
+        if h_blow <= 0.20 and a_blow <= 0.20:
+            pts += 1
+            reasons.append("blow≤20%(+1)")
+
+    # 6. H2H signál
+    if h2h_games and len(h2h_games) >= H2H_MIN_GAMES:
+        h2h_avg = sum(g["total"] for g in h2h_games) / len(h2h_games)
+        if h2h_avg >= selection_line:
+            pts += 1
+            reasons.append("H2H≥sel(+1)")
+
+    # 7. TT silná konfirmace
+    if h_tt is not None and a_tt is not None and h_tt <= 1.85 and a_tt <= 1.85:
+        pts += 1
+        reasons.append("TT≤1.85(+1)")
+
+    return pts, ", ".join(reasons) if reasons else "no bonuses"
+
+
 # ===== MAIN =====
 
 def main():
@@ -711,8 +793,17 @@ def main():
                 score *= TT_BONUS_MULT
                 detail2 += f" | TT={h_tt:.2f}/{a_tt:.2f}★"
 
-            print(f" ★ {detail}")
+            # Quality score – body za kvalitní (nepovinná) kritéria
+            qpts, qdetail = compute_quality_score(
+                home_form, away_form, h2h,
+                c["sel_line"], c["out_line"], h_tt, a_tt)
+            if qpts < MIN_QUALITY_SCORE:
+                print(f" quality fail (Q={qpts}/{MIN_QUALITY_SCORE}: {qdetail})")
+                continue
+
+            print(f" ★ Q={qpts} {detail}")
             print(f"       enhanced: {detail2}")
+            print(f"       quality: {qdetail}")
             print(f"       → {c['sel_label']}@{c['sel_odds']} → OUTPUT: {c['out_label']}@{c['out_odds']}")
             kickoff = datetime.fromtimestamp(c["timestamp"], tz=timezone.utc).strftime("%Y-%m-%dT%H:%M:%S+00:00")
             results.append({
@@ -722,6 +813,7 @@ def main():
                 "odds": c["out_odds"],
                 "date": kickoff,
                 "_score": score,
+                "_quality": qpts,
                 "_sel_label": c["sel_label"],
                 "_sel_odds": c["sel_odds"],
             })
@@ -741,20 +833,32 @@ def main():
         json.dump(live_out, f, indent=2, ensure_ascii=False)
     print(f"  Live: {len(live_out)} match(es) \u2192 {OUTPUT_LIVE}")
 
-    # 5b. Best per league – keep only the top match from each league
+    # 5b. Best per league – keep only the top match from each league (by Q+score)
     before = len(results)
     best_per_league = {}
     for r in results:
         lg = r["league"]
-        if lg not in best_per_league or r["_score"] > best_per_league[lg]["_score"]:
+        rank = (r["_quality"], r["_score"])
+        cur_rank = (best_per_league[lg]["_quality"], best_per_league[lg]["_score"]) if lg in best_per_league else (-1, -1)
+        if rank > cur_rank:
             best_per_league[lg] = r
     results = list(best_per_league.values())
+    if before > len(results):
+        print(f"\n  Dedup: {before} → {len(results)} (best per league by Q+score)")
+
+    # 5c. Globální TOP-N podle (quality, score) – kvalita > kvantita
+    if len(results) > MAX_TIPS_PER_DAY:
+        results.sort(key=lambda r: (r["_quality"], r["_score"]), reverse=True)
+        before_n = len(results)
+        results = results[:MAX_TIPS_PER_DAY]
+        print(f"  Top-N filter: {before_n} → {len(results)} (max {MAX_TIPS_PER_DAY}/day)")
+
+    # Cleanup interních polí
     for r in results:
         r.pop("_score", None)
+        r.pop("_quality", None)
         r.pop("_sel_label", None)
         r.pop("_sel_odds", None)
-    if before > len(results):
-        print(f"\n  Dedup: {before} → {len(results)} (best per league)")
 
     # 6. Sort by kickoff time and write output
     results.sort(key=lambda r: r["date"])
