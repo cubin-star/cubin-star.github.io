@@ -1,5 +1,21 @@
 [
   {
+    "league": "Superliga",
+    "homeTeam": "Marinos",
+    "awayTeam": "Spartans",
+    "tip": "Over 120.5",
+    "odds": "",
+    "halftimeScore": "36:26 (62 pts)",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "basketball",
+    "kickoff": "2026-04-21T23:00:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-basketball",
+    "scoutStats": "Score: 4/10 | HT: 36:26 (62 pts) | Q1=30 Q2=32 (line 162.5, pace 76%) | Proj: 124 | Superliga"
+  },
+  {
     "league": "National League - North",
     "homeTeam": "Macclesfield",
     "awayTeam": "Southport",
