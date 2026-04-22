@@ -1,5 +1,20 @@
 [
   {
+    "league": "Super League 1",
+    "homeTeam": "Larisa",
+    "awayTeam": "Kifisia",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "0:1",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "kickoff": "2026-04-22T14:00:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-football",
+    "scoutStats": "Score: 8/14 | xG: 1.30 | Shots: 11/3 | Corners: 5 | Poss: 51% | Pre O2.5: 2.15"
+  },
+  {
     "league": "LNB",
     "homeTeam": "Reales de la Vega",
     "awayTeam": "Titanes Del Licey",
