@@ -1,5 +1,21 @@
 [
   {
+    "league": "LNB",
+    "homeTeam": "Reales de la Vega",
+    "awayTeam": "Titanes Del Licey",
+    "tip": "Over 154.5",
+    "odds": "",
+    "halftimeScore": "42:37 (79 pts)",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "basketball",
+    "kickoff": "2026-04-22T00:30:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-basketball",
+    "scoutStats": "Score: 4/10 | HT: 42:37 (79 pts) | Q1=32 Q2=47 (line 180.5, pace 88%) | Proj: 158 | LNB"
+  },
+  {
     "league": "Superliga",
     "homeTeam": "Guaiqueries",
     "awayTeam": "Gaiteros del Zulia",
