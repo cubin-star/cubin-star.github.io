@@ -8,11 +8,43 @@
     "group": 1
   },
   {
+    "league": "La Liga",
+    "match": "Real Sociedad - Getafe",
+    "kickoff": "2026-04-22T20:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.42",
+    "group": 1
+  },
+  {
     "league": "Super Liga",
     "match": "Radnik Surdulica vs Novi Pazar",
     "kickoff": "2026-04-22T15:00:00+00:00",
     "tip": "Over 2.5",
     "odds": "1.80",
-    "group": 1
+    "group": 2
+  },
+  {
+    "league": "Super League 1",
+    "match": "Panserraikos - Atromitos",
+    "kickoff": "2026-04-22T15:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.50",
+    "group": 2
+  },
+  {
+    "league": "Liga 1",
+    "match": "Persis Solo - Bhayangkara FC",
+    "kickoff": "2026-04-22T10:30:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.15",
+    "group": 3
+  },
+  {
+    "league": "Iraqi League",
+    "match": "Al Zawra'a - Diyala",
+    "kickoff": "2026-04-22T18:30:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.20",
+    "group": 3
   }
 ]
