@@ -1,16 +1,23 @@
 [
   {
-    "league": "Liiga",
-    "match": "KooKoo vs SaiPa",
+    "league": "Hockey Allsvenskan",
+    "match": "BIK Karlskoga vs IF Bjorkloven",
     "tip": "Over 3.5",
-    "odds": "1.15",
-    "date": "2026-04-21T15:30:00+00:00"
+    "odds": "1.23",
+    "date": "2026-04-22T17:00:00+00:00"
   },
   {
-    "league": "Extraliga",
-    "match": "Skalica vs HC 19 Humenne",
+    "league": "D1",
+    "match": "Cholet vs Caen",
     "tip": "Over 3.5",
     "odds": "1.14",
-    "date": "2026-04-21T16:00:00+00:00"
+    "date": "2026-04-22T18:00:00+00:00"
+  },
+  {
+    "league": "National League",
+    "match": "Davos vs Fribourg",
+    "tip": "Over 3.5",
+    "odds": "1.19",
+    "date": "2026-04-22T18:00:00+00:00"
   }
 ]
