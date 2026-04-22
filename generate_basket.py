@@ -80,6 +80,22 @@ TT_BONUS_MULT = 1.15          # multiplikátor skóre při konfirmaci
 MIN_QUALITY_SCORE = 4    # min počet bodů z kvalitního skóre (0-10)
 MAX_TIPS_PER_DAY = 3     # globální limit – nejlepších N podle skóre (kvalita>kvantita)
 
+# H2H jako TVRDÝ filtr (ne jen bonus) – při dostatečném vzorku H2H
+# Pokud H2H avg < HARD_FAIL_R × selection_line a n >= MIN_N → automatický fail
+# Důvod: bookmaker už ví o specifickém matchupu víc než naše recent form
+H2H_HARD_FAIL_R = 0.96       # H2H avg pod 96 % selection_line = past
+H2H_HARD_FAIL_MIN_N = 10     # min počet H2H pro hard fail (statistická významnost)
+
+# Playoff / play-in detekce – taktičtější zápasy mívají nižší totaly
+# Pokud název ligy obsahuje některý keyword, přidej rezervu na expected_min_r
+PLAYOFF_KEYWORDS = ("playoff", "play-in", "play in", "semifinal", "semi-final",
+                    "final", "quarter", "elimination", "knockout")
+PLAYOFF_EXPECTED_BONUS = 0.05  # +5 % rezerva na expected vs. line v playoff
+
+# Recent form rozdíl mezi týmy – velký rozdíl = různé tempo, neslučitelné styly
+# (jeden tým hraje 180, druhý 160 → průměr 170 je často chimér)
+MAX_FORM_GAP = 12.0          # |h_avg - a_avg| > 12 → fail (různé tempo)
+
 request_count = 0
 
 
@@ -315,7 +331,7 @@ def _sf(val, default=0.0):
         return default
 
 
-def meets_criteria(home_stats, away_stats, selection_line):
+def meets_criteria(home_stats, away_stats, selection_line, is_playoff=False):
     """Basketball criteria – venue-specific matchup vs. bookmaker line.
 
     Uses home/away splits to calculate matchup-specific expected total,
@@ -327,6 +343,7 @@ def meets_criteria(home_stats, away_stats, selection_line):
     3. Both teams must score >= BOTH_FLOOR_R * half_line at their venue
     4. Both teams' venue offense >= league avg per team * OFFENSE_VS_LEAGUE_R
     5. Matchup expected must exceed selection_line * EXPECTED_MIN_R
+       (+ PLAYOFF_EXPECTED_BONUS pokud is_playoff – playoff má nižší totaly)
     6. Score = expected / selection_line (ranking)
     """
     if not home_stats or not away_stats:
@@ -385,14 +402,18 @@ def meets_criteria(home_stats, away_stats, selection_line):
                        f"(min {concede_floor:.0f})"), 0.0
 
     # --- Check 3: Matchup expected must exceed bookmaker line ---
-    min_expected = selection_line * EXPECTED_MIN_R
+    # Playoff/play-in zápasy mají historicky o ~5 % nižší totaly (taktika, méně risku)
+    expected_r = EXPECTED_MIN_R + (PLAYOFF_EXPECTED_BONUS if is_playoff else 0.0)
+    min_expected = selection_line * expected_r
     if expected < min_expected:
+        po_tag = " [PO]" if is_playoff else ""
         return False, (f"venue {h_for_h:.0f}+{a_for_a:.0f} conc {h_agn_h:.0f}+{a_agn_a:.0f} "
-                       f"(exp={expected:.0f} < line*{EXPECTED_MIN_R}={min_expected:.0f}, "
+                       f"(exp={expected:.0f} < line*{expected_r:.2f}={min_expected:.0f}{po_tag}, "
                        f"league={league_avg:.0f})"), 0.0
 
     score = expected / selection_line
-    detail = (f"venue {h_for_h:.0f}+{a_for_a:.0f} conc {h_agn_h:.0f}+{a_agn_a:.0f} "
+    po_tag = " [PO]" if is_playoff else ""
+    detail = (f"venue {h_for_h:.0f}+{a_for_a:.0f} conc {h_agn_h:.0f}+{a_agn_a:.0f}{po_tag} "
               f"(exp={expected:.0f} vs line={selection_line:.0f}, "
               f"league={league_avg:.0f}, ratio={score:.3f})")
     return True, detail, score
@@ -504,8 +525,15 @@ def meets_enhanced_criteria(home_form, away_form, h2h_games,
             return False, (f"inconsistent: SD {h_sd:.1f}/{a_sd:.1f} "
                            f"(max {MAX_TOTAL_SD:.0f})")
 
+        # Check 3a: Form gap – velký rozdíl mezi týmy = různé tempo (chimérický průměr)
+        # Příklad: jeden tým hraje 162, druhý 178 → "průměr" 170 je často spíš náhoda
+        form_gap = abs(h_avg - a_avg)
+        if form_gap > MAX_FORM_GAP:
+            return False, (f"form gap too large: {h_avg:.0f} vs {a_avg:.0f} "
+                           f"(gap={form_gap:.0f} > {MAX_FORM_GAP:.0f}, různé tempo)")
+
         parts.append(f"form={h_avg:.0f}/{a_avg:.0f} over={h_over:.0%}/{a_over:.0%} "
-                     f"SD={h_sd:.0f}/{a_sd:.0f}")
+                     f"SD={h_sd:.0f}/{a_sd:.0f} gap={form_gap:.0f}")
 
         # Check 3b: Q1 pace proxy – pomalý start = riziko Under
         # Očekávaná Q1 hodnota = selection_line / 4 (jeden quarter z reg času)
@@ -576,6 +604,17 @@ def meets_enhanced_criteria(home_form, away_form, h2h_games,
             return False, (f"H2H avg low: {h2h_avg:.0f} "
                            f"(min {h2h_min:.0f}={H2H_OVER_R}*{selection_line:.0f}, "
                            f"n={len(h2h_games)})")
+
+        # H2H HARD FAIL – při dostatečném vzorku (n >= 10) je H2H silnější signál
+        # než recent form. Pokud H2H avg < 96 % selection_line, bookmaker už ví víc
+        # o specifickém matchupu (typicky pomalejší tempo) – automatický fail.
+        if len(h2h_games) >= H2H_HARD_FAIL_MIN_N:
+            hard_min = selection_line * H2H_HARD_FAIL_R
+            if h2h_avg < hard_min:
+                return False, (f"H2H HARD FAIL: avg {h2h_avg:.0f} < {hard_min:.0f} "
+                               f"({H2H_HARD_FAIL_R}*{selection_line:.0f}, n={len(h2h_games)}) "
+                               f"– bookmaker zná matchup")
+
         # H2H blowout filtr – pokud byly H2H často blowouty, garbage time tlačí Q4 dolů
         h2h_blow = sum(1 for g in h2h_games if g.get("margin", 0) > BLOWOUT_MARGIN) / len(h2h_games)
         if h2h_blow > MAX_BLOWOUT_RATE:
@@ -689,6 +728,9 @@ def main():
           f"SD<={MAX_TOTAL_SD:.0f}, H2H>={H2H_OVER_R}*line, rest>={MIN_REST_HOURS}h (0=off), "
           f"2H>={MIN_2H_RATIO:.0%}, 2Hbase>={MIN_2H_BASELINE:.0f}, "
           f"Q1>={MIN_Q1_RATIO:.0%}, blow<={MAX_BLOWOUT_RATE:.0%}@>{BLOWOUT_MARGIN}, "
+          f"form_gap<={MAX_FORM_GAP:.0f}, "
+          f"H2H HARD<{H2H_HARD_FAIL_R}*line@n>={H2H_HARD_FAIL_MIN_N}, "
+          f"PO bonus +{PLAYOFF_EXPECTED_BONUS}, "
           f"TT bonus@<={TT_BONUS_ODDS} (×{TT_BONUS_MULT})\n")
 
     # 1. Fetch games
@@ -726,6 +768,8 @@ def main():
             if h_tt is not None or a_tt is not None:
                 tt_str = f" TT={h_tt or '-'}/{a_tt or '-'}"
             print(f" sel={sel['label']}@{sel['odd_str']} → out={out['label']}@{out['odd_str']}{tt_str} ✓")
+            league_lower = (g["league"] or "").lower()
+            is_playoff = any(kw in league_lower for kw in PLAYOFF_KEYWORDS)
             candidates.append({
                 "game_id": gid,
                 "league": g["league"],
@@ -734,6 +778,7 @@ def main():
                 "match": f"{g['home']} vs {g['away']}",
                 "home_id": g["home_id"],
                 "away_id": g["away_id"],
+                "is_playoff": is_playoff,
                 "sel_line": sel["line"],
                 "sel_label": sel["label"],
                 "sel_odds": sel["odd_str"],
@@ -766,7 +811,7 @@ def main():
             # Phase 1: Basic venue criteria
             home_stats = fetch_team_stats(c["league_id"], c["season"], c["home_id"])
             away_stats = fetch_team_stats(c["league_id"], c["season"], c["away_id"])
-            ok, detail, score = meets_criteria(home_stats, away_stats, c["sel_line"])
+            ok, detail, score = meets_criteria(home_stats, away_stats, c["sel_line"], is_playoff=c.get("is_playoff", False))
             if not ok:
                 print(f" fail ({detail})")
                 continue
