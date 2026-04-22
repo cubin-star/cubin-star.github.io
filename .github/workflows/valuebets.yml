@@ -1,0 +1,79 @@
+# ValueBets Bot
+#
+# translate : čte live.json + live2.json (READ-ONLY), pro každý zápas dohledá
+#             v API-Football kurz na Over 2.5 a zapíše valuetips.json.
+# evaluate  : pro skončené zápasy z valuetips.json doplní výsledek
+#             do valuebetshistory.json (OK / KO).
+#
+# .NET 10 konzolová aplikace ze složky tools/ValueBetsBot.
+#
+# SETUP:
+# 1. Secret API_FOOTBALL_KEY1 musí být v Settings -> Secrets and variables -> Actions.
+# 2. Settings -> Actions -> General: "Read and write permissions" pro GITHUB_TOKEN.
+
+name: ValueBets Bot
+
+on:
+  schedule:
+    - cron: '5 9 * * *'      # translate – denně 09:05 UTC
+    - cron: '0 * * * *'      # evaluate  – každou celou hodinu
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'translate | evaluate | both'
+        required: true
+        default: 'both'
+        type: choice
+        options:
+          - translate
+          - evaluate
+          - both
+
+permissions:
+  contents: write
+
+jobs:
+  run-bot:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.x'
+
+      - name: Decide mode
+        id: mode
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "value=${{ github.event.inputs.mode }}" >> "$GITHUB_OUTPUT"
+          elif [ "${{ github.event.schedule }}" = "5 9 * * *" ]; then
+            echo "value=translate" >> "$GITHUB_OUTPUT"
+          else
+            echo "value=evaluate" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Run translate
+        if: steps.mode.outputs.value == 'translate' || steps.mode.outputs.value == 'both'
+        env:
+          API_FOOTBALL_KEY1: ${{ secrets.API_FOOTBALL_KEY1 }}
+        run: dotnet run --project tools/ValueBetsBot/ValueBetsBot.csproj -c Release -- translate .
+
+      - name: Run evaluate
+        if: steps.mode.outputs.value == 'evaluate' || steps.mode.outputs.value == 'both'
+        env:
+          API_FOOTBALL_KEY1: ${{ secrets.API_FOOTBALL_KEY1 }}
+        run: dotnet run --project tools/ValueBetsBot/ValueBetsBot.csproj -c Release -- evaluate . --max-age-hours 48
+
+      - name: Commit & push
+        run: |
+          git config user.name  "ValueBets Bot"
+          git config user.email "bot@valuebets.app"
+          # Důležité: NIKDY nepřibalit live.json / live2.json – ty patří jiné aplikaci.
+          git add valuetips.json valuebetshistory.json
+          git diff --cached --quiet || git commit -m "valuebets bot: ${{ steps.mode.outputs.value }} $(date -u +%Y-%m-%d_%H-%M)"
+          git pull --rebase
+          git push
