@@ -1,19 +1,5 @@
 [
   {
-    "league": "Super Liga",
-    "homeTeam": "Radnik Surdulica",
-    "awayTeam": "Novi Pazar",
-    "tip": "Over 0.5",
-    "odds": "1.80",
-    "halftimeScore": "0:0",
-    "liveOdds": "",
-    "finalScore": "",
-    "result": "",
-    "sport": "football",
-    "kickoff": "2026-04-22T15:00:00.000Z",
-    "resolvedAt": ""
-  },
-  {
     "league": "Super League 1",
     "homeTeam": "Larisa",
     "awayTeam": "Kifisia",
@@ -21,10 +7,10 @@
     "odds": "",
     "halftimeScore": "0:1",
     "liveOdds": "",
-    "finalScore": "",
-    "result": "",
+    "finalScore": "1:1",
+    "result": "✅ Won",
     "kickoff": "2026-04-22T14:00:00.000Z",
-    "resolvedAt": "",
+    "resolvedAt": "2026-04-22T15:55:04.984Z",
     "source": "scout-football",
     "scoutStats": "Score: 8/14 | xG: 1.30 | Shots: 11/3 | Corners: 5 | Poss: 51% | Pre O2.5: 2.15"
   },
