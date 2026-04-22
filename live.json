@@ -1,82 +1,23 @@
 [
   {
-    "League": "HNL (Croatia)",
-    "Match": "Vukovar vs HNK Gorica",
-    "Tip": "Over 2.5",
-    "Odds": "2.00",
-    "Date": "2026-04-22T13:30:00+00:00",
-    "FixtureId": 1384073
+    "League": "Major League Soccer",
+    "Match": "FC Dallas vs Minnesota United FC",
+    "Tip": "Over 1.5",
+    "Odds": "1.18",
+    "Date": "2026-04-23T00:30:00+00:00"
   },
   {
-    "League": "HNL (Croatia)",
-    "Match": "NK Varazdin vs HNK Rijeka",
-    "Tip": "Over 2.5",
-    "Odds": "2.20",
-    "Date": "2026-04-22T15:45:00+00:00",
-    "FixtureId": 1384072
+    "League": "Major League Soccer",
+    "Match": "San Jose Earthquakes vs Austin",
+    "Tip": "Over 1.5",
+    "Odds": "1.16",
+    "Date": "2026-04-23T02:30:00+00:00"
   },
   {
-    "League": "Eredivisie (Netherlands)",
-    "Match": "Telstar vs Sparta Rotterdam",
-    "Tip": "Over 2.5",
-    "Odds": "1.60",
-    "Date": "2026-04-22T18:00:00+00:00",
-    "FixtureId": 1381144
-  },
-  {
-    "League": "HNL (Croatia)",
-    "Match": "Istra 1961 vs Dinamo Zagreb",
-    "Tip": "Over 2.5",
-    "Odds": "1.52",
-    "Date": "2026-04-22T18:15:00+00:00",
-    "FixtureId": 1384070
-  },
-  {
-    "League": "Championship (England)",
-    "Match": "Middlesbrough vs Sheffield Wednesday",
-    "Tip": "Over 2.5",
-    "Odds": "1.36",
-    "Date": "2026-04-22T18:45:00+00:00",
-    "FixtureId": 1387071
-  },
-  {
-    "League": "Championship (England)",
-    "Match": "Charlton vs Ipswich",
-    "Tip": "Over 2.5",
-    "Odds": "2.01",
-    "Date": "2026-04-22T18:45:00+00:00",
-    "FixtureId": 1387075
-  },
-  {
-    "League": "Championship (England)",
-    "Match": "Birmingham vs Preston",
-    "Tip": "Over 2.5",
-    "Odds": "1.90",
-    "Date": "2026-04-22T18:45:00+00:00",
-    "FixtureId": 1387076
-  },
-  {
-    "League": "Championship (England)",
-    "Match": "Sheffield Utd vs Blackburn",
-    "Tip": "Over 2.5",
-    "Odds": "1.93",
-    "Date": "2026-04-22T18:45:00+00:00",
-    "FixtureId": 1387078
-  },
-  {
-    "League": "Premier League (England)",
-    "Match": "Bournemouth vs Leeds",
-    "Tip": "Over 2.5",
-    "Odds": "1.75",
-    "Date": "2026-04-22T19:00:00+00:00",
-    "FixtureId": 1379300
-  },
-  {
-    "League": "Premier League (England)",
-    "Match": "Burnley vs Manchester City",
-    "Tip": "Over 2.5",
-    "Odds": "1.35",
-    "Date": "2026-04-22T19:00:00+00:00",
-    "FixtureId": 1379302
+    "League": "Liga MX",
+    "Match": "Necaxa vs Guadalajara Chivas",
+    "Tip": "Over 1.5",
+    "Odds": "1.17",
+    "Date": "2026-04-23T03:05:00+00:00"
   }
 ]
