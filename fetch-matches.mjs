@@ -33,6 +33,16 @@ const EXCLUDED_COUNTRIES = new Set(['Russia', 'Belarus']);
 const FALLBACK_MAX_ODDS = 2.6;
 const TZ = 'Europe/Prague';
 let reqCount = 0;
+let fixtureFetchErrors = 0;
+let fixtureFetchAttempts = 0;
+
+const USER_AGENT = 'kombik-bot/1.0 (+github-actions)';
+
+function maskKey(k) {
+    if (!k) return '(none)';
+    if (k.length <= 8) return '***';
+    return k.slice(0, 4) + '...' + k.slice(-4) + ' (len=' + k.length + ')';
+}
 
 function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 function shuffle(arr) { for (let i = arr.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [arr[i], arr[j]] = [arr[j], arr[i]]; } return arr; }
@@ -52,14 +62,32 @@ async function apiFetch(path) {
     const url = FOOTBALL_API + path;
     for (let attempt = 1; attempt <= 3; attempt++) {
         try {
-            const res = await fetch(url, { headers: { 'x-apisports-key': API_KEY } });
+            const res = await fetch(url, {
+                headers: {
+                    'x-apisports-key': API_KEY,
+                    'Accept': 'application/json',
+                    'User-Agent': USER_AGENT
+                }
+            });
             reqCount++;
             if (res.status === 429) {
                 console.warn('  [429] Rate limit hit, waiting ' + (5 * attempt) + 's... (attempt ' + attempt + '/3)');
                 await sleep(5000 * attempt);
                 continue;
             }
-            if (!res.ok) { console.warn('  HTTP ' + res.status + ': ' + path.split('?')[0]); return { response: [], paging: { total: 0 } }; }
+            if (res.status === 403) {
+                let body = '';
+                try { body = (await res.text()).slice(0, 400); } catch { }
+                console.warn('  [403] ' + path.split('?')[0] + ' key=' + maskKey(API_KEY) + ' body=' + body);
+                if (attempt < 3) { await sleep(3000 * attempt); continue; }
+                return { response: [], paging: { total: 0 }, __error: 403 };
+            }
+            if (!res.ok) {
+                let body = '';
+                try { body = (await res.text()).slice(0, 200); } catch { }
+                console.warn('  HTTP ' + res.status + ': ' + path.split('?')[0] + ' body=' + body);
+                return { response: [], paging: { total: 0 }, __error: res.status };
+            }
             const data = await res.json();
             if (data.errors && Object.keys(data.errors).length > 0) {
                 const errStr = JSON.stringify(data.errors);
@@ -69,17 +97,19 @@ async function apiFetch(path) {
                     continue;
                 }
                 console.warn('  ', errStr);
-                return { response: [], paging: { total: 0 } };
+                return { response: [], paging: { total: 0 }, __error: 'api-errors' };
             }
             return data;
-        } catch (e) { console.warn('  Fetch error:', e.message); return { response: [], paging: { total: 0 } }; }
+        } catch (e) { console.warn('  Fetch error:', e.message); return { response: [], paging: { total: 0 }, __error: 'exception' }; }
     }
     console.warn('  [FAIL] Max retries for: ' + path.split('?')[0]);
-    return { response: [], paging: { total: 0 } };
+    return { response: [], paging: { total: 0 }, __error: 'max-retries' };
 }
 
 async function getFixtures(date) {
+    fixtureFetchAttempts++;
     const data = await apiFetch('/fixtures?date=' + date + '&timezone=' + TZ + '&status=NS');
+    if (data.__error) fixtureFetchErrors++;
     return data.response || [];
 }
 
@@ -163,6 +193,13 @@ async function main() {
     let fixtures = [];
     for (const d of dates) { console.log('Fixtures ' + d + '...'); fixtures.push(...await getFixtures(d)); await sleep(450); }
     console.log('   ' + fixtures.length + ' scheduled matches\n');
+
+    // Pojistka: pokud VSECHNY /fixtures requesty selhaly, neni to "prazdny den" ale chyba API.
+    if (fixtureFetchAttempts > 0 && fixtureFetchErrors === fixtureFetchAttempts) {
+        console.error('FATAL: All /fixtures requests failed (' + fixtureFetchErrors + '/' + fixtureFetchAttempts + '). API key='
+            + maskKey(API_KEY) + '. Aborting so workflow fails visibly.');
+        process.exit(2);
+    }
 
     // Filter: ban only Russia and Belarus
     fixtures = fixtures.filter(f => {
