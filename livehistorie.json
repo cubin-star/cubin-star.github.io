@@ -1,5 +1,19 @@
 [
   {
+    "league": "HNL (Croatia)",
+    "homeTeam": "NK Varazdin",
+    "awayTeam": "HNK Rijeka",
+    "tip": "Over 0.5",
+    "odds": "2.20",
+    "halftimeScore": "0:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-04-22T15:45:00.000Z",
+    "resolvedAt": ""
+  },
+  {
     "league": "Super League 1",
     "homeTeam": "Larisa",
     "awayTeam": "Kifisia",
