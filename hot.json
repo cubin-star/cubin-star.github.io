@@ -1,50 +1,50 @@
 [
   {
-    "league": "Liga Pro",
-    "match": "Barcelona SC vs Mushuc Runa SC",
-    "kickoff": "2026-04-22T23:00:00+00:00",
+    "league": "Primera División",
+    "match": "LD Alajuelense vs Puntarenas FC",
+    "kickoff": "2026-04-24T02:00:00+00:00",
     "tip": "Over 2.5",
-    "odds": "1.96",
+    "odds": "1.94",
     "group": 1
-  },
-  {
-    "league": "La Liga",
-    "match": "Real Sociedad - Getafe",
-    "kickoff": "2026-04-22T20:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.42",
-    "group": 1
-  },
-  {
-    "league": "Super Liga",
-    "match": "Radnik Surdulica vs Novi Pazar",
-    "kickoff": "2026-04-22T15:00:00+00:00",
-    "tip": "Over 2.5",
-    "odds": "1.80",
-    "group": 2
-  },
-  {
-    "league": "Super League 1",
-    "match": "Panserraikos - Atromitos",
-    "kickoff": "2026-04-22T15:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.50",
-    "group": 2
-  },
-  {
-    "league": "Liga 1",
-    "match": "Persis Solo - Bhayangkara FC",
-    "kickoff": "2026-04-22T10:30:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.15",
-    "group": 3
   },
   {
     "league": "Iraqi League",
-    "match": "Al Zawra'a - Diyala",
-    "kickoff": "2026-04-22T18:30:00+02:00",
+    "match": "Al Quwa Al Jawiya - Erbil",
+    "kickoff": "2026-04-23T18:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.20",
+    "odds": "2.25",
+    "group": 1
+  },
+  {
+    "league": "Pro League",
+    "match": "Sharjah FC vs Al Wahda FC",
+    "kickoff": "2026-04-23T14:00:00+00:00",
+    "tip": "Over 2.5",
+    "odds": "1.84",
+    "group": 2
+  },
+  {
+    "league": "Super League",
+    "match": "Nasaf - Lokomotiv",
+    "kickoff": "2026-04-23T16:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.35",
+    "group": 2
+  },
+  {
+    "league": "Reserve League",
+    "match": "Huracán Res. - San Lorenzo Res.",
+    "kickoff": "2026-04-23T20:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.21",
+    "group": 3
+  },
+  {
+    "league": "Super Liga",
+    "match": "Mladost Lucani - Radnicki 1923",
+    "kickoff": "2026-04-23T20:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.15",
     "group": 3
   }
 ]

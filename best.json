@@ -1,23 +1,23 @@
 [
   {
-    "league": "Super League 1",
-    "match": "Panserraikos - Atromitos",
-    "kickoff": "2026-04-22T15:00:00+02:00",
+    "league": "Super League",
+    "match": "Nasaf - Lokomotiv",
+    "kickoff": "2026-04-23T16:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.50"
-  },
-  {
-    "league": "La Liga",
-    "match": "Real Sociedad - Getafe",
-    "kickoff": "2026-04-22T20:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.42"
+    "odds": "2.35"
   },
   {
     "league": "Iraqi League",
-    "match": "Al Zawra'a - Diyala",
-    "kickoff": "2026-04-22T18:30:00+02:00",
+    "match": "Al Quwa Al Jawiya - Erbil",
+    "kickoff": "2026-04-23T18:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.20"
+    "odds": "2.25"
+  },
+  {
+    "league": "Reserve League",
+    "match": "Huracán Res. - San Lorenzo Res.",
+    "kickoff": "2026-04-23T20:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.21"
   }
 ]
