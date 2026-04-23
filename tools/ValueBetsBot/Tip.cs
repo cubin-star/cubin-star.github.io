@@ -12,6 +12,7 @@ public class Tip
     [JsonPropertyName("Date")] public DateTimeOffset Date { get; set; }
     [JsonPropertyName("FixtureId")] public long FixtureId { get; set; }
     [JsonPropertyName("Result")] public string? Result { get; set; }
+    [JsonPropertyName("Score")] public string? Score { get; set; }
 
     [JsonIgnore]
     public decimal OddsValue =>

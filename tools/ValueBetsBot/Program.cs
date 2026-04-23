@@ -181,6 +181,7 @@ async Task<int> EvaluateAsync()
 
         int total = (fx.Goals.Home ?? 0) + (fx.Goals.Away ?? 0);
         tip.Result = total >= 3 ? "OK" : "KO";
+        tip.Score = $"{fx.Goals.Home ?? 0}:{fx.Goals.Away ?? 0}";
         history.Add(tip);
         existingIds.Add(tip.FixtureId);
         evaluatedIds.Add(tip.FixtureId);
