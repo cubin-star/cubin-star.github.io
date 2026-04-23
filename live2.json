@@ -1,18 +1,18 @@
 [
   {
-    "League": "Liga Pro",
-    "Match": "Barcelona SC vs Mushuc Runa SC",
+    "League": "Primera División",
+    "Match": "LD Alajuelense vs Puntarenas FC",
     "Tip": "Over 2.5",
-    "Odds": "1.96",
-    "Date": "2026-04-22T23:00:00+00:00",
+    "Odds": "1.94",
+    "Date": "2026-04-24T02:00:00+00:00",
     "qualified": true
   },
   {
-    "League": "Super Liga",
-    "Match": "Radnik Surdulica vs Novi Pazar",
+    "League": "Pro League",
+    "Match": "Sharjah FC vs Al Wahda FC",
     "Tip": "Over 2.5",
-    "Odds": "1.80",
-    "Date": "2026-04-22T15:00:00+00:00",
+    "Odds": "1.84",
+    "Date": "2026-04-23T14:00:00+00:00",
     "qualified": true
   }
 ]
