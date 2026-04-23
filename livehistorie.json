@@ -1,21 +1,5 @@
 [
   {
-    "league": "AHL",
-    "homeTeam": "Colorado Eagles",
-    "awayTeam": "San Diego Gulls",
-    "tip": "Over 4.5",
-    "odds": "",
-    "halftimeScore": "1:0",
-    "liveOdds": "",
-    "finalScore": "",
-    "result": "",
-    "sport": "hockey",
-    "kickoff": "2026-04-23T01:05:00.000Z",
-    "resolvedAt": "",
-    "source": "scout-hockey",
-    "scoutStats": "Score: 8/9 | P1: 1:0 | GF: 6.4 GA: 6.0 | Proj: 5 → Over 4.5 | AHL"
-  },
-  {
     "league": "Major League Soccer",
     "homeTeam": "Toronto FC",
     "awayTeam": "Philadelphia Union",
@@ -23,10 +7,10 @@
     "odds": "",
     "halftimeScore": "0:1",
     "liveOdds": "",
-    "finalScore": "",
-    "result": "",
+    "finalScore": "3:3",
+    "result": "✅ Won",
     "kickoff": "2026-04-22T23:30:00.000Z",
-    "resolvedAt": "",
+    "resolvedAt": "2026-04-23T01:46:05.077Z",
     "source": "scout-football",
     "scoutStats": "Score: 7/14 | xG: 0.74 | Shots: 12/2 | Corners: 3 | Poss: 59% | Pre O2.5: 1.83"
   },
