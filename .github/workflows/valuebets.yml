@@ -8,12 +8,15 @@
 # .NET 10 konzolová aplikace ze složky tools/ValueBetsBot.
 #
 # Cron rozvrh:
-#   '5 9  * * *'  -> translate (primární run)
-#   '15 9 * * *'  -> translate (záložní run, idempotentní – pokud primární proběhl, nic neudělá)
-#   '0 *  * * *'  -> evaluate
+#   '0 8 * * *'   -> translate (10:00 lokálního času v létě, CEST)
+#   '0 9 * * *'   -> translate (10:00 lokálního času v zimě, CET)
+#                    Druhý run se díky idempotentní pojistce automaticky přeskočí,
+#                    pokud první proběhl. Tím cíleně řešíme přechod letní/zimní čas
+#                    i případy, kdy GH cron vzácně přeskočí.
+#   '0 * * * *'   -> evaluate (každou celou hodinu)
 #
 # Detekce modu se NEdělá porovnáním cron stringu (to je křehké), ale podle UTC času
-# spuštění: pokud je hodina = 9 a minuta v okně 0..29, jde o translate, jinak evaluate.
+# spuštění: pokud je hodina 8 nebo 9 a minuta v okně 0..29, jde o translate, jinak evaluate.
 #
 # SETUP:
 # 1. Secret API_FOOTBALL_KEY1 musí být v Settings -> Secrets and variables -> Actions.
@@ -23,8 +26,8 @@ name: ValueBets Bot
 
 on:
   schedule:
-    - cron: '5 9 * * *'      # translate – denně 09:05 UTC (primární)
-    - cron: '15 9 * * *'     # translate – denně 09:15 UTC (záloha pro případ že GH cron přeskočí)
+    - cron: '0 8 * * *'      # translate – 10:00 lokálního času v létě (CEST = UTC+2)
+    - cron: '0 9 * * *'      # translate – 10:00 lokálního času v zimě (CET  = UTC+1)
     - cron: '0 * * * *'      # evaluate  – každou celou hodinu
   workflow_dispatch:
     inputs:
@@ -66,9 +69,9 @@ jobs:
           else
             hour=$(date -u +%H)
             min=$(date -u +%M)
-            # Translate vždy v 9. hodině UTC (primární cron 09:05, záložní 09:15).
+            # Translate jede vždy v 8. nebo 9. hodině UTC (= 10:00 lokálního času CEST/CET).
             # Vše ostatní = evaluate.
-            if [ "$hour" = "09" ] && [ "$min" -lt 30 ]; then
+            if { [ "$hour" = "08" ] || [ "$hour" = "09" ]; } && [ "$min" -lt 30 ]; then
               value="translate"
             else
               value="evaluate"
