@@ -1,5 +1,21 @@
 [
   {
+    "league": "NHL",
+    "homeTeam": "Philadelphia Flyers",
+    "awayTeam": "Pittsburgh Penguins",
+    "tip": "Over 4.5",
+    "odds": "",
+    "halftimeScore": "0:1",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "hockey",
+    "kickoff": "2026-04-22T23:00:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-hockey",
+    "scoutStats": "Score: 8/9 | P1: 0:1 | GF: 6.5 GA: 6.2 | Proj: 5 → Over 4.5 | NHL"
+  },
+  {
     "league": "Liga Pro",
     "homeTeam": "Deportivo Cuenca",
     "awayTeam": "Orense SC",
