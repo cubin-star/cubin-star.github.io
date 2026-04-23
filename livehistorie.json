@@ -1,5 +1,21 @@
 [
   {
+    "league": "Friendly International",
+    "homeTeam": "Germany",
+    "awayTeam": "Slovakia",
+    "tip": "Over 4.5",
+    "odds": "",
+    "halftimeScore": "0:1",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "hockey",
+    "kickoff": "2026-04-23T18:00:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-hockey",
+    "scoutStats": "Score: 5/9 | P1: 0:1 | GF: 5.7 GA: 7.0 | Proj: 4.8 → Over 4.5 | Friendly International"
+  },
+  {
     "league": "Superliga",
     "homeTeam": "FC Nordsjaelland",
     "awayTeam": "Aarhus",
