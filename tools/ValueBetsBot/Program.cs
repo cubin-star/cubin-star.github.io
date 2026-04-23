@@ -5,6 +5,7 @@ using ValueBetsBot;
 // USAGE:
 //   ValueBetsBot translate <repo-dir>            -- read live.json + live2.json, build valuetips.json (Over 2.5)
 //   ValueBetsBot evaluate  <repo-dir> [--max-age-hours 48]  -- move finished bets to valuebetshistory.json
+//                                                              and remove them from valuetips.json
 //
 // Required env var: API_FOOTBALL_KEY1
 //
@@ -138,7 +139,8 @@ async Task<int> TranslateAsync()
 
 // ----------------------------------------------------------------------------------------------
 // evaluate: for tips in valuetips.json that finished (>= 2 h after kickoff ≈ 1 h after end),
-//           fetch the result and append the entry to valuebetshistory.json with an OK/KO marker.
+//           fetch the result, append the entry to valuebetshistory.json with an OK/KO marker
+//           and remove it from valuetips.json (so the pending list only contains open tips).
 // ----------------------------------------------------------------------------------------------
 async Task<int> EvaluateAsync()
 {
@@ -151,6 +153,7 @@ async Task<int> EvaluateAsync()
     var history = LoadList(historyPath);
 
     var existingIds = history.Where(t => t.FixtureId != 0).Select(t => t.FixtureId).ToHashSet();
+    var evaluatedIds = new HashSet<long>();
     var nowUtc = DateTimeOffset.UtcNow;
     int added = 0;
 
@@ -180,6 +183,7 @@ async Task<int> EvaluateAsync()
         tip.Result = total >= 3 ? "OK" : "KO";
         history.Add(tip);
         existingIds.Add(tip.FixtureId);
+        evaluatedIds.Add(tip.FixtureId);
         added++;
 
         Console.WriteLine($"[evaluate] {tip.Match} -> {total} goals -> {tip.Result}");
@@ -188,6 +192,23 @@ async Task<int> EvaluateAsync()
     history = history.OrderByDescending(t => t.Date).ToList();
     File.WriteAllText(historyPath, JsonSerializer.Serialize(history, jsonOptions));
     Console.WriteLine($"[evaluate] history now has {history.Count} entries (+{added})");
+
+    // Remove just-evaluated tips (and any leftovers already in history) from valuetips.json
+    // so that the pending list only contains tips that are still open.
+    var remaining = pending
+        .Where(t => t.FixtureId == 0 || (!evaluatedIds.Contains(t.FixtureId) && !existingIds.Contains(t.FixtureId)))
+        .OrderBy(t => t.Date)
+        .ToList();
+    int removed = pending.Count - remaining.Count;
+    if (removed > 0)
+    {
+        File.WriteAllText(tipsPath, JsonSerializer.Serialize(remaining, jsonOptions));
+        Console.WriteLine($"[evaluate] valuetips.json: removed {removed} evaluated tip(s), {remaining.Count} remain");
+    }
+    else
+    {
+        Console.WriteLine($"[evaluate] valuetips.json unchanged ({remaining.Count} tips pending)");
+    }
     return 0;
 }
 
