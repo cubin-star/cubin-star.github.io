@@ -1,23 +1,16 @@
 [
   {
-    "league": "Hockey Allsvenskan",
-    "match": "BIK Karlskoga vs IF Bjorkloven",
-    "tip": "Over 3.5",
-    "odds": "1.23",
-    "date": "2026-04-22T17:00:00+00:00"
+    "league": "Extraliga",
+    "match": "Trinec vs Pardubice",
+    "tip": "Over 2.5",
+    "odds": "1.11",
+    "date": "2026-04-23T15:00:00+00:00"
   },
   {
-    "league": "D1",
-    "match": "Cholet vs Caen",
+    "league": "SHL",
+    "match": "Skellefteå vs Rögle",
     "tip": "Over 3.5",
-    "odds": "1.14",
-    "date": "2026-04-22T18:00:00+00:00"
-  },
-  {
-    "league": "National League",
-    "match": "Davos vs Fribourg",
-    "tip": "Over 3.5",
-    "odds": "1.19",
-    "date": "2026-04-22T18:00:00+00:00"
+    "odds": "1.33",
+    "date": "2026-04-23T17:00:00+00:00"
   }
 ]
