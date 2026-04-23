@@ -1,5 +1,14 @@
 [
   {
+    "League": "Major League Soccer (USA)",
+    "Match": "FC Dallas vs Minnesota United FC",
+    "Tip": "Over 2.5",
+    "Odds": "1.62",
+    "Date": "2026-04-23T00:30:00+00:00",
+    "FixtureId": 1490231,
+    "Result": "KO"
+  },
+  {
     "League": "Liga Pro (Ecuador)",
     "Match": "Barcelona SC vs Mushuc Runa SC",
     "Tip": "Over 2.5",
