@@ -1,5 +1,21 @@
 [
   {
+    "league": "WHL",
+    "homeTeam": "Everett Silvertips",
+    "awayTeam": "Penticton Vees",
+    "tip": "Over 4.5",
+    "odds": "",
+    "halftimeScore": "1:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "hockey",
+    "kickoff": "2026-04-24T02:05:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-hockey",
+    "scoutStats": "Score: 6/9 | P1: 1:0 | GF: 7.9 GA: 5.1 | Proj: 5 → Over 4.5 | WHL"
+  },
+  {
     "league": "USHL",
     "homeTeam": "Sioux City",
     "awayTeam": "Fargo Force",
