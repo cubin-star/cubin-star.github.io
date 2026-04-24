@@ -1,21 +1,5 @@
 [
   {
-    "league": "Friendly International",
-    "homeTeam": "Switzerland",
-    "awayTeam": "Hungary",
-    "tip": "Over 7.5",
-    "odds": "",
-    "halftimeScore": "3:1",
-    "liveOdds": "",
-    "finalScore": "",
-    "result": "",
-    "sport": "hockey",
-    "kickoff": "2026-04-24T17:45:00.000Z",
-    "resolvedAt": "",
-    "source": "scout-hockey",
-    "scoutStats": "Score: 9/10 | P1: 3:1 | GF: 5.3 GA: 6.3 | Proj: 7.5 → Over 7.5 | Friendly International"
-  },
-  {
     "league": "Metal Ligaen",
     "homeTeam": "Herlev",
     "awayTeam": "Herning Blue Fox",
@@ -70,10 +54,10 @@
     "odds": "",
     "halftimeScore": "0:1",
     "liveOdds": "",
-    "finalScore": "",
-    "result": "",
+    "finalScore": "0:2",
+    "result": "✅ Won",
     "kickoff": "2026-04-24T16:30:00.000Z",
-    "resolvedAt": "",
+    "resolvedAt": "2026-04-24T18:25:05.820Z",
     "source": "scout-football",
     "scoutStats": "Score: 8/14 | xG: 0.98 | Shots: 8/3 | Corners: 7 | Poss: 78% | Pre O2.5: 1.57"
   },
