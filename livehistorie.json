@@ -1,5 +1,21 @@
 [
   {
+    "league": "2. Liga",
+    "homeTeam": "AZ Havirov",
+    "awayTeam": "Prostejov",
+    "tip": "Over 5.5",
+    "odds": "",
+    "halftimeScore": "0:2",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "hockey",
+    "kickoff": "2026-04-24T15:30:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-hockey",
+    "scoutStats": "Score: 6/10 | P1: 0:2 | GF: 7.2 GA: 4.7 | Proj: 5.6 → Over 5.5 | 2. Liga"
+  },
+  {
     "league": "Friendly International",
     "homeTeam": "Finland",
     "awayTeam": "Denmark",
@@ -23,10 +39,10 @@
     "odds": "",
     "halftimeScore": "1:0",
     "liveOdds": "",
-    "finalScore": "2:1",
-    "result": "✅ Won",
+    "finalScore": "",
+    "result": "",
     "kickoff": "2026-04-24T14:00:00.000Z",
-    "resolvedAt": "2026-04-24T16:01:05.309Z",
+    "resolvedAt": "",
     "source": "scout-football",
     "scoutStats": "Score: 10/14 | xG: 0.68 | Shots: 9/4 | Corners: 8 | Poss: 61% | Pre O2.5: 2.35"
   },
