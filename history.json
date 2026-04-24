@@ -1,5 +1,25 @@
 [
   {
+    "sport": "hockey",
+    "league": "SHL",
+    "match": "Skellefteå vs Rögle",
+    "tip": "Over 3.5",
+    "odds": "1.33",
+    "date": "2026-04-23T17:00:00+00:00",
+    "score": "4:1",
+    "result": "✓"
+  },
+  {
+    "sport": "hockey",
+    "league": "Extraliga",
+    "match": "Trinec vs Pardubice",
+    "tip": "Over 2.5",
+    "odds": "1.11",
+    "date": "2026-04-23T15:00:00+00:00",
+    "score": "4:2",
+    "result": "✓"
+  },
+  {
     "sport": "football",
     "league": "Liga MX",
     "match": "Necaxa vs Guadalajara Chivas",
@@ -1977,26 +1997,6 @@
     "odds": "1.24",
     "date": "2026-04-02T17:30:00+00:00",
     "score": "2:2",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "First NL",
-    "match": "Karlovac 1919 vs Dubrava Zagreb",
-    "tip": "Over 1.5",
-    "odds": "1.41",
-    "date": "2026-04-02T16:15:00+00:00",
-    "score": "5:0",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Tercera División RFEF - Group 2",
-    "match": "Caudal vs Lenense",
-    "tip": "Over 1.5",
-    "odds": "1.23",
-    "date": "2026-04-02T16:00:00+00:00",
-    "score": "4:1",
     "result": "✓"
   }
 ]
