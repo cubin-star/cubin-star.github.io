@@ -3,32 +3,30 @@
 # translate : čte live.json + live2.json (READ-ONLY), pro každý zápas dohledá
 #             v API-Football kurz na Over 2.5 a zapíše valuetips.json.
 # evaluate  : pro skončené zápasy z valuetips.json doplní výsledek
-#             do valuebetshistory.json (OK / KO).
+#             do valuebetshistory.json (OK / KO) včetně skóre.
 #
 # .NET 10 konzolová aplikace ze složky tools/ValueBetsBot.
 #
-# Cron rozvrh:
-#   '0 8 * * *'   -> translate (10:00 lokálního času v létě, CEST)
-#   '0 9 * * *'   -> translate (10:00 lokálního času v zimě, CET)
-#                    Druhý run se díky idempotentní pojistce automaticky přeskočí,
-#                    pokud první proběhl. Tím cíleně řešíme přechod letní/zimní čas
-#                    i případy, kdy GH cron vzácně přeskočí.
-#   '0 * * * *'   -> evaluate (každou celou hodinu)
-#
-# Detekce modu se NEdělá porovnáním cron stringu (to je křehké), ale podle UTC času
-# spuštění: pokud je hodina 8 nebo 9 a minuta v okně 0..29, jde o translate, jinak evaluate.
+# Cron rozvrh (translate – okno 08:00–09:45 UTC = 10:00–11:45 lokálního času CEST):
+#   6 záložních cron slotů každých 15 minut. První úspěšný translate provede práci,
+#   ostatní jsou idempotentně přeskočeny díky guard kroku.
+#   Tím řešíme i přechod letního/zimního času i občasné přeskočení GH cronu.
 #
 # SETUP:
-# 1. Secret API_FOOTBALL_KEY1 musí být v Settings -> Secrets and variables -> Actions.
+# 1. Secret API_FOOTBALL_KEY1 v Settings -> Secrets and variables -> Actions.
 # 2. Settings -> Actions -> General: "Read and write permissions" pro GITHUB_TOKEN.
 
 name: ValueBets Bot
 
 on:
   schedule:
-    - cron: '0 8 * * *'      # translate – 10:00 lokálního času v létě (CEST = UTC+2)
-    - cron: '0 9 * * *'      # translate – 10:00 lokálního času v zimě (CET  = UTC+1)
-    - cron: '0 * * * *'      # evaluate  – každou celou hodinu
+    - cron: '0  8 * * *'   # translate slot 1 – 08:00 UTC (10:00 CEST / 09:00 CET)
+    - cron: '15 8 * * *'   # translate slot 2 – 08:15 UTC
+    - cron: '30 8 * * *'   # translate slot 3 – 08:30 UTC
+    - cron: '45 8 * * *'   # translate slot 4 – 08:45 UTC
+    - cron: '0  9 * * *'   # translate slot 5 – 09:00 UTC (11:00 CEST / 10:00 CET)
+    - cron: '15 9 * * *'   # translate slot 6 – 09:15 UTC (záloha)
+    - cron: '0  * * * *'   # evaluate         – každou celou hodinu
   workflow_dispatch:
     inputs:
       mode:
@@ -52,7 +50,7 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0      # potřebujeme historii, abychom poznali, jestli dnes translate už proběhl
+          fetch-depth: 0      # potřebujeme historii pro guard krok
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
@@ -69,14 +67,14 @@ jobs:
           else
             hour=$(date -u +%H)
             min=$(date -u +%M)
-            # Translate jede vždy v 8. nebo 9. hodině UTC (= 10:00 lokálního času CEST/CET).
+            # Translate = 08:00–09:59 UTC (okno 10:00–11:59 CEST).
             # Vše ostatní = evaluate.
-            if { [ "$hour" = "08" ] || [ "$hour" = "09" ]; } && [ "$min" -lt 30 ]; then
+            if [ "$hour" = "08" ] || [ "$hour" = "09" ]; then
               value="translate"
             else
               value="evaluate"
             fi
-            echo "Mode from schedule (UTC $hour:$min): $value"
+            echo "Mode from schedule (UTC ${hour}:${min}): $value"
           fi
           echo "value=$value" >> "$GITHUB_OUTPUT"
 
@@ -85,8 +83,8 @@ jobs:
         if: steps.mode.outputs.value == 'translate' && github.event_name == 'schedule'
         run: |
           today=$(date -u +%Y-%m-%d)
-          if git log --since="${today}T00:00:00Z" --author="ValueBets Bot" --pretty=format:"%s" | grep -E "valuebets bot: (translate|both)" > /dev/null; then
-            echo "Translate already ran today – skipping this backup run."
+          if git log --since="${today}T00:00:00Z" --author="ValueBets Bot" --pretty=format:"%s" | grep -qE "valuebets bot: (translate|both)"; then
+            echo "Translate already ran today ($today) – skipping."
             echo "skip=true" >> "$GITHUB_OUTPUT"
           else
             echo "No translate commit found for $today – proceeding."
