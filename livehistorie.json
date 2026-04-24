@@ -1,5 +1,21 @@
 [
   {
+    "league": "Friendly International",
+    "homeTeam": "Finland",
+    "awayTeam": "Denmark",
+    "tip": "Over 5.5",
+    "odds": "",
+    "halftimeScore": "2:1",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "hockey",
+    "kickoff": "2026-04-24T15:00:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-hockey",
+    "scoutStats": "Score: 4/10 | P1: 2:1 | GF: 2.0 GA: 4.0 | Proj: 5.4 → Over 5.5 | Friendly International"
+  },
+  {
     "league": "Premier League",
     "homeTeam": "National Bank of Egypt",
     "awayTeam": "Masr",
