@@ -1,8 +1,8 @@
 [
   {
-    "league": "AHL",
-    "homeTeam": "Hershey Bears",
-    "awayTeam": "Bridgeport Islanders",
+    "league": "ECHL",
+    "homeTeam": "Toledo Walleye",
+    "awayTeam": "Bloomington Bison",
     "tip": "Over 4.5",
     "odds": "",
     "halftimeScore": "1:0",
@@ -10,10 +10,10 @@
     "finalScore": "",
     "result": "",
     "sport": "hockey",
-    "kickoff": "2026-04-23T23:00:00.000Z",
+    "kickoff": "2026-04-23T23:15:00.000Z",
     "resolvedAt": "",
     "source": "scout-hockey",
-    "scoutStats": "Score: 7/9 | P1: 1:0 | GF: 5.9 GA: 6.2 | Proj: 4.9 → Over 4.5 | AHL"
+    "scoutStats": "Score: 6/9 | P1: 1:0 | GF: 6.6 GA: 5.8 | Proj: 4.8 → Over 4.5 | ECHL"
   },
   {
     "league": "La Liga",
