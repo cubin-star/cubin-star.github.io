@@ -1,1 +1,37 @@
-[]
+[
+  {
+    "League": "Victoria NPL",
+    "Match": "Dandenong City vs Dandenong Thunder",
+    "Tip": "Over 1.5",
+    "Odds": "1.20",
+    "Date": "2026-04-24T09:45:00+00:00"
+  },
+  {
+    "League": "Victoria NPL",
+    "Match": "St. Albans Saints vs South Melbourne",
+    "Tip": "Over 1.5",
+    "Odds": "1.18",
+    "Date": "2026-04-24T10:00:00+00:00"
+  },
+  {
+    "League": "2. Liga",
+    "Match": "Schwarz-Weiß Bregenz vs WSPG Wels",
+    "Tip": "Over 1.5",
+    "Odds": "1.20",
+    "Date": "2026-04-24T16:00:00+00:00"
+  },
+  {
+    "League": "Regionalliga - West",
+    "Match": "Fortuna Düsseldorf II vs Sportfreunde Siegen",
+    "Tip": "Over 1.5",
+    "Odds": "1.20",
+    "Date": "2026-04-24T17:30:00+00:00"
+  },
+  {
+    "League": "Eerste Divisie",
+    "Match": "Dordrecht vs Willem II",
+    "Tip": "Over 1.5",
+    "Odds": "1.17",
+    "Date": "2026-04-24T18:00:00+00:00"
+  }
+]
