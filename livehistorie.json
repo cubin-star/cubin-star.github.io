@@ -1,5 +1,21 @@
 [
   {
+    "league": "QMJHL",
+    "homeTeam": "Moncton Wildcats",
+    "awayTeam": "Blainville-Boisbriand Armada",
+    "tip": "Over 4.5",
+    "odds": "",
+    "halftimeScore": "1:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "hockey",
+    "kickoff": "2026-04-23T22:00:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-hockey",
+    "scoutStats": "Score: 6/9 | P1: 1:0 | GF: 8.6 GA: 5.2 | Proj: 5.1 → Over 4.5 | QMJHL"
+  },
+  {
     "league": "La Liga",
     "homeTeam": "Oviedo",
     "awayTeam": "Villarreal",
