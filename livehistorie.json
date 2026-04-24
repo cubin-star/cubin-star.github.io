@@ -1,5 +1,20 @@
 [
   {
+    "league": "Serie B",
+    "homeTeam": "Ponte Preta",
+    "awayTeam": "America Mineiro",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "1:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "kickoff": "2026-04-24T23:00:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-football",
+    "scoutStats": "Score: 9/14 | xG: 1.00 | Shots: 11/4 | Corners: 2 | Poss: 62% | Pre O2.5: 2.35"
+  },
+  {
     "league": "Primeira Liga",
     "homeTeam": "Alverca",
     "awayTeam": "Arouca",
