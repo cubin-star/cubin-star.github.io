@@ -1,5 +1,21 @@
 [
   {
+    "league": "Metal Ligaen",
+    "homeTeam": "Herlev",
+    "awayTeam": "Herning Blue Fox",
+    "tip": "Over 6.5",
+    "odds": "",
+    "halftimeScore": "1:2",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "hockey",
+    "kickoff": "2026-04-24T17:30:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-hockey",
+    "scoutStats": "Score: 8/10 | P1: 1:2 | GF: 8.5 GA: 4.9 | Proj: 6.9 → Over 6.5 | Metal Ligaen"
+  },
+  {
     "league": "Serie B",
     "homeTeam": "Monza",
     "awayTeam": "Modena",
@@ -53,10 +69,10 @@
     "odds": "",
     "halftimeScore": "0:1",
     "liveOdds": "",
-    "finalScore": "2:1",
-    "result": "✅ Won",
+    "finalScore": "",
+    "result": "",
     "kickoff": "2026-04-24T16:10:00.000Z",
-    "resolvedAt": "2026-04-24T18:10:05.309Z",
+    "resolvedAt": "",
     "source": "scout-football",
     "scoutStats": "Score: 8/14 | xG: 1.33 | Shots: 13/3 | Corners: 7 | Poss: 53% | Pre O2.5: 1.77"
   },
