@@ -1,8 +1,8 @@
 [
   {
-    "league": "QMJHL",
-    "homeTeam": "Moncton Wildcats",
-    "awayTeam": "Blainville-Boisbriand Armada",
+    "league": "AHL",
+    "homeTeam": "Hershey Bears",
+    "awayTeam": "Bridgeport Islanders",
     "tip": "Over 4.5",
     "odds": "",
     "halftimeScore": "1:0",
@@ -10,10 +10,10 @@
     "finalScore": "",
     "result": "",
     "sport": "hockey",
-    "kickoff": "2026-04-23T22:00:00.000Z",
+    "kickoff": "2026-04-23T23:00:00.000Z",
     "resolvedAt": "",
     "source": "scout-hockey",
-    "scoutStats": "Score: 6/9 | P1: 1:0 | GF: 8.6 GA: 5.2 | Proj: 5.1 → Over 4.5 | QMJHL"
+    "scoutStats": "Score: 7/9 | P1: 1:0 | GF: 5.9 GA: 6.2 | Proj: 4.9 → Over 4.5 | AHL"
   },
   {
     "league": "La Liga",
