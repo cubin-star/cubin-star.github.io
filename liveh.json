@@ -1,16 +1,30 @@
 [
   {
-    "league": "Extraliga",
-    "match": "Trinec vs Pardubice",
-    "tip": "Over 4.5",
-    "odds": "1.85",
-    "date": "2026-04-23T15:00:00+00:00"
+    "league": "2. Liga",
+    "match": "AZ Havirov vs Prostejov",
+    "tip": "Over 6.5",
+    "odds": "1.86",
+    "date": "2026-04-24T15:30:00+00:00"
   },
   {
-    "league": "SHL",
-    "match": "Skellefteå vs Rögle",
+    "league": "Extraliga",
+    "match": "Slovan Bratislava vs Nitra",
+    "tip": "Over 5.5",
+    "odds": "1.93",
+    "date": "2026-04-24T16:30:00+00:00"
+  },
+  {
+    "league": "DEL",
+    "match": "Adler Mannheim vs Eisbaren Berlin",
+    "tip": "Over 5.5",
+    "odds": "1.80",
+    "date": "2026-04-24T17:30:00+00:00"
+  },
+  {
+    "league": "National League",
+    "match": "Fribourg vs Davos",
     "tip": "Over 4.5",
-    "odds": "1.84",
-    "date": "2026-04-23T17:00:00+00:00"
+    "odds": "1.69",
+    "date": "2026-04-24T18:00:00+00:00"
   }
 ]
