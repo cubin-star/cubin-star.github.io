@@ -1,5 +1,21 @@
 [
   {
+    "league": "WCH U18 IA",
+    "homeTeam": "Switzerland U18",
+    "awayTeam": "Ukraine U18",
+    "tip": "Over 5.5",
+    "odds": "",
+    "halftimeScore": "2:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "hockey",
+    "kickoff": "2026-04-24T14:00:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-hockey",
+    "scoutStats": "Score: 7/10 | P1: 2:0 | GF: 10.3 GA: 5.5 | Proj: 6.4 → Over 5.5 | WCH U18 IA"
+  },
+  {
     "league": "NHL",
     "homeTeam": "Los Angeles Kings",
     "awayTeam": "Colorado Avalanche",
