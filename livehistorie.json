@@ -1,20 +1,5 @@
 [
   {
-    "league": "Primera A",
-    "homeTeam": "Millonarios",
-    "awayTeam": "Deportes Tolima",
-    "tip": "Over 1.5",
-    "odds": "",
-    "halftimeScore": "1:0",
-    "liveOdds": "",
-    "finalScore": "",
-    "result": "",
-    "kickoff": "2026-04-24T01:00:00.000Z",
-    "resolvedAt": "",
-    "source": "scout-football",
-    "scoutStats": "Score: 7/14 | xG: 0.82 | Shots: 13/5 | Corners: 4 | Poss: 51% | Pre O2.5: 2"
-  },
-  {
     "league": "USHL",
     "homeTeam": "Sioux City",
     "awayTeam": "Fargo Force",
