@@ -1,15 +1,16 @@
 [
   {
-    "league": "Extraliga",
-    "match": "HC 19 Humenne vs Presov",
+    "league": "2. Liga",
+    "match": "AZ Havirov vs Prostejov",
     "tip": "Over 5.5",
-    "odds": "1.8",
-    "qualified13": true
+    "odds": "4.8",
+    "qualified15": true
   },
   {
-    "league": "Liiga",
-    "match": "Ilves vs Tappara",
+    "league": "DEL",
+    "match": "Adler Mannheim vs Eisbaren Berlin",
     "tip": "Over 5.5",
-    "odds": "1.95"
+    "odds": "1.75",
+    "qualified13": true
   }
 ]
