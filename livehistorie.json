@@ -1,5 +1,21 @@
 [
   {
+    "league": "Energa Basket Liga",
+    "homeTeam": "Torun",
+    "awayTeam": "Gornik Walbrzych",
+    "tip": "Over 153.5 (preLine 177.5)",
+    "odds": "",
+    "halftimeScore": "30:42 (72 pts)",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "basketball",
+    "kickoff": "2026-04-24T18:15:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-basketball",
+    "scoutStats": "Score: 6/10 | HT: 30:42 (72 pts) | Q1=24 Q2=48 (line 177.5, pace 81%) | PreLine: 177.5 | Proj: 157.4 | Energa Basket Liga"
+  },
+  {
     "league": "Metal Ligaen",
     "homeTeam": "Herlev",
     "awayTeam": "Herning Blue Fox",
@@ -23,10 +39,10 @@
     "odds": "",
     "halftimeScore": "1:0",
     "liveOdds": "",
-    "finalScore": "1:0",
-    "result": "❌ Lost",
+    "finalScore": "",
+    "result": "",
     "kickoff": "2026-04-24T17:00:00.000Z",
-    "resolvedAt": "2026-04-24T18:58:05.320Z",
+    "resolvedAt": "",
     "source": "scout-football",
     "scoutStats": "Score: 7/14 | xG: 0.62 | Shots: 12/4 | Corners: 4 | Poss: 52% | Pre O2.5: 1.8"
   },
