@@ -1,5 +1,21 @@
 [
   {
+    "league": "WCH U18",
+    "homeTeam": "Germany U18",
+    "awayTeam": "Czech Republic U18",
+    "tip": "Over 4.5",
+    "odds": "",
+    "halftimeScore": "1:1",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "hockey",
+    "kickoff": "2026-04-25T10:00:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-hockey",
+    "scoutStats": "Score: 6/12 | P1: 1:1 | GF: 4.0 GA: 7.0 | Proj: 5.4 → Over 4.5 | WCH U18"
+  },
+  {
     "league": "J1 League",
     "homeTeam": "V-varen Nagasaki",
     "awayTeam": "Gamba Osaka",
