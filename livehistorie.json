@@ -1,19 +1,18 @@
 [
   {
-    "league": "Lega A",
-    "homeTeam": "Basket Napoli",
-    "awayTeam": "Trento",
-    "tip": "Over 148.5 (preLine 178.5)",
-    "odds": "",
-    "halftimeScore": "30:37 (67 pts)",
+    "league": "I Liga",
+    "homeTeam": "Polonia Warszawa",
+    "awayTeam": "Chrobry Głogów",
+    "tip": "Over 0.5",
+    "odds": "1.83",
+    "halftimeScore": "0:0",
     "liveOdds": "",
     "finalScore": "",
     "result": "",
-    "sport": "basketball",
+    "sport": "football",
     "kickoff": "2026-04-25T17:30:00.000Z",
     "resolvedAt": "",
-    "source": "scout-basketball",
-    "scoutStats": "Score: 6/10 | HT: 30:37 (67 pts) | Q1=27 Q2=40 (line 178.5, pace 75%) | PreLine: 178.5 | Proj: 151.8 | Lega A"
+    "source": "live2.json"
   },
   {
     "league": "Friendly International",
