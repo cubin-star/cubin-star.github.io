@@ -38,10 +38,10 @@
     "odds": "",
     "halftimeScore": "0:1",
     "liveOdds": "",
-    "finalScore": "",
-    "result": "",
+    "finalScore": "1:1",
+    "result": "✅ Won",
     "kickoff": "2026-04-25T12:45:00.000Z",
-    "resolvedAt": "",
+    "resolvedAt": "2026-04-25T14:40:05.948Z",
     "source": "scout-football",
     "scoutStats": "Score: 7/14 | xG: 1.51 | Shots: 15/3 | Corners: 0 | Poss: 54% | Pre O2.5: 1.73"
   },
