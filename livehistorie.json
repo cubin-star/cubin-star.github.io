@@ -1,5 +1,21 @@
 [
   {
+    "league": "Lega A",
+    "homeTeam": "Basket Napoli",
+    "awayTeam": "Trento",
+    "tip": "Over 148.5 (preLine 178.5)",
+    "odds": "",
+    "halftimeScore": "30:37 (67 pts)",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "basketball",
+    "kickoff": "2026-04-25T17:30:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-basketball",
+    "scoutStats": "Score: 6/10 | HT: 30:37 (67 pts) | Q1=27 Q2=40 (line 178.5, pace 75%) | PreLine: 178.5 | Proj: 151.8 | Lega A"
+  },
+  {
     "league": "Friendly International",
     "homeTeam": "Poland",
     "awayTeam": "Slovenia",
