@@ -1,26 +1,40 @@
 [
   {
-    "League": "Pro League",
-    "Match": "Al Nasr vs Al-Jazira",
+    "League": "I Liga",
+    "Match": "Polonia Warszawa vs Chrobry Głogów",
     "Tip": "Over 2.5",
-    "Odds": "1.81",
-    "Date": "2026-04-24T16:45:00+00:00",
+    "Odds": "1.83",
+    "Date": "2026-04-25T17:30:00+00:00",
     "qualified": true
   },
   {
-    "League": "Championship",
-    "Match": "Leicester vs Millwall",
+    "League": "J1 League",
+    "Match": "V-varen Nagasaki vs Gamba Osaka",
+    "Tip": "Over 2.5",
+    "Odds": "1.85",
+    "Date": "2026-04-25T09:30:00+00:00"
+  },
+  {
+    "League": "Czech Liga",
+    "Match": "Baník Ostrava vs Plzen",
     "Tip": "Over 2.5",
     "Odds": "1.81",
-    "Date": "2026-04-24T19:00:00+00:00",
+    "Date": "2026-04-25T14:00:00+00:00",
     "qualified": true
   },
   {
-    "League": "Division Profesional - Apertura",
-    "Match": "Nacional Asuncion vs Deportivo Recoleta",
+    "League": "Primera División",
+    "Match": "Comerciantes Unidos vs Sporting Cristal",
     "Tip": "Over 2.5",
-    "Odds": "1.98",
-    "Date": "2026-04-24T20:45:00+00:00",
+    "Odds": "1.99",
+    "Date": "2026-04-25T20:30:00+00:00",
     "qualified": true
+  },
+  {
+    "League": "Primera División",
+    "Match": "Comerciantes Unidos vs Sporting Cristal",
+    "Tip": "Over 2.5",
+    "Odds": "1.99",
+    "Date": "2026-04-25T20:30:00+00:00"
   }
 ]
