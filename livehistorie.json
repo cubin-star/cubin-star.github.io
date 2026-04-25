@@ -1,8 +1,8 @@
 [
   {
-    "league": "WHL",
-    "homeTeam": "Prince Albert Raiders",
-    "awayTeam": "Medicine Hat Tigers",
+    "league": "AHL",
+    "homeTeam": "Colorado Eagles",
+    "awayTeam": "San Diego Gulls",
     "tip": "Over 6.5",
     "odds": "",
     "halftimeScore": "2:1",
@@ -10,10 +10,10 @@
     "finalScore": "",
     "result": "",
     "sport": "hockey",
-    "kickoff": "2026-04-25T01:00:00.000Z",
+    "kickoff": "2026-04-25T01:05:00.000Z",
     "resolvedAt": "",
     "source": "scout-hockey",
-    "scoutStats": "Score: 10/10 | P1: 2:1 | GF: 9.5 GA: 5.3 | Proj: 7.3 → Over 6.5 | WHL"
+    "scoutStats": "Score: 11/10 | P1: 2:1 | GF: 6.4 GA: 5.9 | Proj: 6.9 → Over 6.5 | AHL"
   },
   {
     "league": "USHL",
