@@ -1,5 +1,21 @@
 [
   {
+    "league": "NHL",
+    "homeTeam": "Utah Mammoth",
+    "awayTeam": "Vegas Golden Knights",
+    "tip": "Over 5.5",
+    "odds": "",
+    "halftimeScore": "2:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "hockey",
+    "kickoff": "2026-04-25T01:30:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-hockey",
+    "scoutStats": "Score: 10/10 | P1: 2:0 | GF: 6.3 GA: 6.0 | Proj: 5.9 → Over 5.5 | NHL"
+  },
+  {
     "league": "AHL",
     "homeTeam": "Colorado Eagles",
     "awayTeam": "San Diego Gulls",
