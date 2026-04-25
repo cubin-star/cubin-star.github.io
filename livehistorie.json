@@ -1,19 +1,18 @@
 [
   {
-    "league": "WCH U18",
-    "homeTeam": "Sweden U18",
-    "awayTeam": "USA U18",
-    "tip": "Over 6.5",
+    "league": "League Two",
+    "homeTeam": "Walsall",
+    "awayTeam": "Harrogate Town",
+    "tip": "Over 1.5",
     "odds": "",
-    "halftimeScore": "0:4",
+    "halftimeScore": "0:1",
     "liveOdds": "",
     "finalScore": "",
     "result": "",
-    "sport": "hockey",
     "kickoff": "2026-04-25T14:00:00.000Z",
     "resolvedAt": "",
-    "source": "scout-hockey",
-    "scoutStats": "Score: 5/12 | P1: 0:4 | GF: 6.0 GA: 3.5 | Proj: 7.1 → Over 6.5 | WCH U18"
+    "source": "scout-football",
+    "scoutStats": "Score: 9/14 | xG: 0.72(est) | Shots: 12/6 | Corners: 4 | Poss: 59% | Pre O2.5: 2"
   },
   {
     "league": "Bundesliga",
