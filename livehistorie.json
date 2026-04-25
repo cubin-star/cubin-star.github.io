@@ -1,11 +1,11 @@
 [
   {
     "league": "OHL",
-    "homeTeam": "Brantford Bulldogs",
-    "awayTeam": "Barrie Colts",
-    "tip": "Over 5.5",
+    "homeTeam": "Kitchener Rangers",
+    "awayTeam": "Windsor Spitfires",
+    "tip": "Over 7.5",
     "odds": "",
-    "halftimeScore": "1:1",
+    "halftimeScore": "2:2",
     "liveOdds": "",
     "finalScore": "",
     "result": "",
@@ -13,7 +13,7 @@
     "kickoff": "2026-04-24T23:00:00.000Z",
     "resolvedAt": "",
     "source": "scout-hockey",
-    "scoutStats": "Score: 9/10 | P1: 1:1 | GF: 7.8 GA: 5.4 | Proj: 6 → Over 5.5 | OHL"
+    "scoutStats": "Score: 11/10 | P1: 2:2 | GF: 7.6 GA: 5.1 | Proj: 7.9 → Over 7.5 | OHL"
   },
   {
     "league": "Serie B",
