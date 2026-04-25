@@ -1,5 +1,25 @@
 [
   {
+    "League": "Thai League 2 (Thailand)",
+    "Match": "Chanthaburi vs Police Tero",
+    "Tip": "Over 2.5",
+    "Odds": "1.73",
+    "Date": "2026-04-25T11:00:00+00:00",
+    "FixtureId": 1491127,
+    "Result": "KO",
+    "Score": "1:1"
+  },
+  {
+    "League": "Thai League 2 (Thailand)",
+    "Match": "Mahasarakham United vs Khon Kaen United",
+    "Tip": "Over 2.5",
+    "Odds": "1.62",
+    "Date": "2026-04-25T11:00:00+00:00",
+    "FixtureId": 1491129,
+    "Result": "OK",
+    "Score": "2:2"
+  },
+  {
     "League": "J1 League (Japan)",
     "Match": "V-varen Nagasaki vs Gamba Osaka",
     "Tip": "Over 2.5",
