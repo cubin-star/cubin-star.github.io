@@ -1,5 +1,21 @@
 [
   {
+    "league": "USHL",
+    "homeTeam": "Lincoln Stars",
+    "awayTeam": "Sioux Falls Stampede",
+    "tip": "Over 5.5",
+    "odds": "",
+    "halftimeScore": "2:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "hockey",
+    "kickoff": "2026-04-25T00:05:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-hockey",
+    "scoutStats": "Score: 9/10 | P1: 2:0 | GF: 6.9 GA: 5.6 | Proj: 6 → Over 5.5 | USHL"
+  },
+  {
     "league": "AHL",
     "homeTeam": "Rochester Americans",
     "awayTeam": "Toronto Marlies",
