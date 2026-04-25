@@ -1,5 +1,21 @@
 [
   {
+    "league": "Commissioners Cup",
+    "homeTeam": "Magnolia Hotshots",
+    "awayTeam": "Rain or Shine Elasto Painters",
+    "tip": "Over 177.5 (preLine 216.5)",
+    "odds": "",
+    "halftimeScore": "41:38 (79 pts)",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "basketball",
+    "kickoff": "2026-04-25T11:30:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-basketball",
+    "scoutStats": "Score: 6/10 | HT: 41:38 (79 pts) | Q1=45 Q2=34 (line 216.5, pace 73%) | PreLine: 216.5 | Proj: 181.4 | Commissioners Cup"
+  },
+  {
     "league": "Premier League",
     "homeTeam": "Fulham",
     "awayTeam": "Aston Villa",
@@ -22,11 +38,11 @@
     "odds": "",
     "halftimeScore": "1:1",
     "liveOdds": "",
-    "finalScore": "3:2",
-    "result": "✅ Won",
+    "finalScore": "",
+    "result": "",
     "sport": "hockey",
     "kickoff": "2026-04-25T10:00:00.000Z",
-    "resolvedAt": "2026-04-25T12:37:05.524Z",
+    "resolvedAt": "",
     "source": "scout-hockey",
     "scoutStats": "Score: 6/12 | P1: 1:1 | GF: 4.0 GA: 7.0 | Proj: 5.4 → Over 4.5 | WCH U18"
   },
