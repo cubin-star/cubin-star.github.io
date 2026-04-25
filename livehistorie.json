@@ -1,11 +1,11 @@
 [
   {
-    "league": "QMJHL",
-    "homeTeam": "Chicoutimi Sagueneens",
-    "awayTeam": "Rouyn-Noranda Huskies",
+    "league": "OHL",
+    "homeTeam": "Brantford Bulldogs",
+    "awayTeam": "Barrie Colts",
     "tip": "Over 5.5",
     "odds": "",
-    "halftimeScore": "0:2",
+    "halftimeScore": "1:1",
     "liveOdds": "",
     "finalScore": "",
     "result": "",
@@ -13,7 +13,7 @@
     "kickoff": "2026-04-24T23:00:00.000Z",
     "resolvedAt": "",
     "source": "scout-hockey",
-    "scoutStats": "Score: 7/10 | P1: 0:2 | GF: 8.1 GA: 4.8 | Proj: 5.9 → Over 5.5 | QMJHL"
+    "scoutStats": "Score: 9/10 | P1: 1:1 | GF: 7.8 GA: 5.4 | Proj: 6 → Over 5.5 | OHL"
   },
   {
     "league": "Serie B",
