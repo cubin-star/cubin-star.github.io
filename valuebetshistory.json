@@ -1,5 +1,55 @@
 [
   {
+    "League": "League Two (England)",
+    "Match": "Barnet vs Gillingham",
+    "Tip": "Over 2.5",
+    "Odds": "1.75",
+    "Date": "2026-04-25T14:00:00+00:00",
+    "FixtureId": 1386525,
+    "Result": "OK",
+    "Score": "6:2"
+  },
+  {
+    "League": "Championship (England)",
+    "Match": "Sheffield Utd vs Preston",
+    "Tip": "Over 2.5",
+    "Odds": "1.67",
+    "Date": "2026-04-25T14:00:00+00:00",
+    "FixtureId": 1387079,
+    "Result": "OK",
+    "Score": "2:3"
+  },
+  {
+    "League": "League One (England)",
+    "Match": "Luton vs Barnsley",
+    "Tip": "Over 2.5",
+    "Odds": "1.62",
+    "Date": "2026-04-25T14:00:00+00:00",
+    "FixtureId": 1387637,
+    "Result": "OK",
+    "Score": "2:1"
+  },
+  {
+    "League": "League Two (Scotland)",
+    "Match": "Spartans vs Elgin City",
+    "Tip": "Over 2.5",
+    "Odds": "1.70",
+    "Date": "2026-04-25T14:00:00+00:00",
+    "FixtureId": 1383398,
+    "Result": "KO",
+    "Score": "1:1"
+  },
+  {
+    "League": "Czech Liga (Czech-Republic)",
+    "Match": "Ban\u00EDk Ostrava vs Plzen",
+    "Tip": "Over 2.5",
+    "Odds": "1.82",
+    "Date": "2026-04-25T14:00:00+00:00",
+    "FixtureId": 1384863,
+    "Result": "KO",
+    "Score": "0:1"
+  },
+  {
     "League": "I Liga (Poland)",
     "Match": "\u0141KS \u0141\u00F3d\u017A vs Stal Rzesz\u00F3w",
     "Tip": "Over 2.5",
