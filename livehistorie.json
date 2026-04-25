@@ -1,19 +1,19 @@
 [
   {
-    "league": "OHL",
-    "homeTeam": "Kitchener Rangers",
-    "awayTeam": "Windsor Spitfires",
-    "tip": "Over 7.5",
+    "league": "AHL",
+    "homeTeam": "Rochester Americans",
+    "awayTeam": "Toronto Marlies",
+    "tip": "Over 5.5",
     "odds": "",
-    "halftimeScore": "2:2",
+    "halftimeScore": "2:0",
     "liveOdds": "",
     "finalScore": "",
     "result": "",
     "sport": "hockey",
-    "kickoff": "2026-04-24T23:00:00.000Z",
+    "kickoff": "2026-04-24T23:05:00.000Z",
     "resolvedAt": "",
     "source": "scout-hockey",
-    "scoutStats": "Score: 11/10 | P1: 2:2 | GF: 7.6 GA: 5.1 | Proj: 7.9 → Over 7.5 | OHL"
+    "scoutStats": "Score: 10/10 | P1: 2:0 | GF: 6.1 GA: 6.4 | Proj: 6 → Over 5.5 | AHL"
   },
   {
     "league": "Serie B",
