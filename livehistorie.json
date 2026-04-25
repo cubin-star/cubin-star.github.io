@@ -1,11 +1,11 @@
 [
   {
-    "league": "NHL",
-    "homeTeam": "Montreal Canadiens",
-    "awayTeam": "Tampa Bay Lightning",
+    "league": "QMJHL",
+    "homeTeam": "Chicoutimi Sagueneens",
+    "awayTeam": "Rouyn-Noranda Huskies",
     "tip": "Over 5.5",
     "odds": "",
-    "halftimeScore": "1:1",
+    "halftimeScore": "0:2",
     "liveOdds": "",
     "finalScore": "",
     "result": "",
@@ -13,7 +13,7 @@
     "kickoff": "2026-04-24T23:00:00.000Z",
     "resolvedAt": "",
     "source": "scout-hockey",
-    "scoutStats": "Score: 10/10 | P1: 1:1 | GF: 6.9 GA: 5.9 | Proj: 6 → Over 5.5 | NHL"
+    "scoutStats": "Score: 7/10 | P1: 0:2 | GF: 8.1 GA: 4.8 | Proj: 5.9 → Over 5.5 | QMJHL"
   },
   {
     "league": "Serie B",
