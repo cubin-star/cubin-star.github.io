@@ -1,5 +1,21 @@
 [
   {
+    "league": "NHL",
+    "homeTeam": "Anaheim Ducks",
+    "awayTeam": "Edmonton Oilers",
+    "tip": "Over 6.5",
+    "odds": "",
+    "halftimeScore": "2:1",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "hockey",
+    "kickoff": "2026-04-25T02:00:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-hockey",
+    "scoutStats": "Score: 12/10 | P1: 2:1 | GF: 6.8 GA: 6.7 | Proj: 7.2 → Over 6.5 | NHL"
+  },
+  {
     "league": "AHL",
     "homeTeam": "Henderson Silver Knights",
     "awayTeam": "San Jose Barracuda",
