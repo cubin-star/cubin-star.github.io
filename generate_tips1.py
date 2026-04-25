@@ -435,7 +435,16 @@ def extract_candidates(odds_data, fixtures, min_odds=MIN_ODDS, max_odds=MAX_ODDS
 def filter_by_criteria(candidates):
     """Filter candidates via predictions API: SureBets league-relative criteria."""
     print(f"\n  Analyza tymu (predictions) - {len(candidates)} candidates (max {MAX_ANALYZE})...")
-    shuffled = list(candidates)
+    # Deduplicate by match name (same teams can appear from today+tomorrow fetch)
+    seen_matches = {}
+    for c in candidates:
+        key = c["Match"].lower()
+        if key not in seen_matches:
+            seen_matches[key] = c
+    unique_candidates = list(seen_matches.values())
+    if len(unique_candidates) < len(candidates):
+        print(f"  Deduplikovano: {len(candidates)} -> {len(unique_candidates)} kandidatu")
+    shuffled = list(unique_candidates)
     random.shuffle(shuffled)
     to_analyze = shuffled[:MAX_ANALYZE]
     qualified = []
