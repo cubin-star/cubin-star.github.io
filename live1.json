@@ -1,9 +1,16 @@
 [
   {
-    "league": "Bundesliga",
-    "match": "FC BW Linz - SCR Altach",
-    "kickoff": "2026-04-24T19:30:00+02:00",
+    "league": "National 2 - Group B",
+    "match": "Haguenau - Furiani-Agliani",
+    "kickoff": "2026-04-25T16:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.13"
+    "odds": "2.15"
+  },
+  {
+    "league": "Primera División",
+    "match": "Comerciantes Unidos - Sporting Cristal",
+    "kickoff": "2026-04-25T22:30:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.10"
   }
 ]
