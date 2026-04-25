@@ -1,5 +1,21 @@
 [
   {
+    "league": "Commissioners Cup",
+    "homeTeam": "Terrafirma Dyip",
+    "awayTeam": "NLEX Road Warriors",
+    "tip": "Over 178.5 (preLine 206.5)",
+    "odds": "",
+    "halftimeScore": "47:36 (83 pts)",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "basketball",
+    "kickoff": "2026-04-25T09:15:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-basketball",
+    "scoutStats": "Score: 5/10 | HT: 47:36 (83 pts) | Q1=41 Q2=42 (line 206.5, pace 80%) | PreLine: 206.5 | Proj: 182.2 | Commissioners Cup"
+  },
+  {
     "league": "NHL",
     "homeTeam": "Anaheim Ducks",
     "awayTeam": "Edmonton Oilers",
