@@ -1,5 +1,21 @@
 [
   {
+    "league": "Friendly International",
+    "homeTeam": "Poland",
+    "awayTeam": "Slovenia",
+    "tip": "Over 6.5",
+    "odds": "",
+    "halftimeScore": "3:1",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "hockey",
+    "kickoff": "2026-04-25T16:30:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-hockey",
+    "scoutStats": "Score: 6/12 | P1: 3:1 | GF: 5.8 GA: 3.4 | Proj: 7.1 → Over 6.5 | Friendly International"
+  },
+  {
     "league": "League Two",
     "homeTeam": "Walsall",
     "awayTeam": "Harrogate Town",
