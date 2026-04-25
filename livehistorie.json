@@ -1,5 +1,21 @@
 [
   {
+    "league": "WHL",
+    "homeTeam": "Prince Albert Raiders",
+    "awayTeam": "Medicine Hat Tigers",
+    "tip": "Over 6.5",
+    "odds": "",
+    "halftimeScore": "2:1",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "hockey",
+    "kickoff": "2026-04-25T01:00:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-hockey",
+    "scoutStats": "Score: 10/10 | P1: 2:1 | GF: 9.5 GA: 5.3 | Proj: 7.3 → Over 6.5 | WHL"
+  },
+  {
     "league": "USHL",
     "homeTeam": "Lincoln Stars",
     "awayTeam": "Sioux Falls Stampede",
