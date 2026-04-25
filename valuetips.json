@@ -1,1 +1,138 @@
-[]
+[
+  {
+    "League": "Victoria NPL (Australia)",
+    "Match": "Sunshine Georgies vs Altona Magic",
+    "Tip": "Over 2.5",
+    "Odds": "1.75",
+    "Date": "2026-04-25T08:00:00+00:00",
+    "FixtureId": 1521919
+  },
+  {
+    "League": "J1 League (Japan)",
+    "Match": "V-varen Nagasaki vs Gamba Osaka",
+    "Tip": "Over 2.5",
+    "Odds": "1.92",
+    "Date": "2026-04-25T09:30:00+00:00",
+    "FixtureId": 1504767
+  },
+  {
+    "League": "Thai League 2 (Thailand)",
+    "Match": "Chanthaburi vs Police Tero",
+    "Tip": "Over 2.5",
+    "Odds": "1.73",
+    "Date": "2026-04-25T11:00:00+00:00",
+    "FixtureId": 1491127
+  },
+  {
+    "League": "Thai League 2 (Thailand)",
+    "Match": "Mahasarakham United vs Khon Kaen United",
+    "Tip": "Over 2.5",
+    "Odds": "1.62",
+    "Date": "2026-04-25T11:00:00+00:00",
+    "FixtureId": 1491129
+  },
+  {
+    "League": "League Two (England)",
+    "Match": "Milton Keynes Dons vs Tranmere",
+    "Tip": "Over 2.5",
+    "Odds": "1.74",
+    "Date": "2026-04-25T11:30:00+00:00",
+    "FixtureId": 1386531
+  },
+  {
+    "League": "National League (England)",
+    "Match": "Scunthorpe vs Eastleigh",
+    "Tip": "Over 2.5",
+    "Odds": "1.62",
+    "Date": "2026-04-25T11:30:00+00:00",
+    "FixtureId": 1399945
+  },
+  {
+    "League": "I Liga (Poland)",
+    "Match": "\u0141KS \u0141\u00F3d\u017A vs Stal Rzesz\u00F3w",
+    "Tip": "Over 2.5",
+    "Odds": "1.62",
+    "Date": "2026-04-25T12:30:00+00:00",
+    "FixtureId": 1381780
+  },
+  {
+    "League": "League Two (England)",
+    "Match": "Barnet vs Gillingham",
+    "Tip": "Over 2.5",
+    "Odds": "1.75",
+    "Date": "2026-04-25T14:00:00+00:00",
+    "FixtureId": 1386525
+  },
+  {
+    "League": "Championship (England)",
+    "Match": "Sheffield Utd vs Preston",
+    "Tip": "Over 2.5",
+    "Odds": "1.67",
+    "Date": "2026-04-25T14:00:00+00:00",
+    "FixtureId": 1387079
+  },
+  {
+    "League": "League One (England)",
+    "Match": "Luton vs Barnsley",
+    "Tip": "Over 2.5",
+    "Odds": "1.62",
+    "Date": "2026-04-25T14:00:00+00:00",
+    "FixtureId": 1387637
+  },
+  {
+    "League": "League Two (Scotland)",
+    "Match": "Spartans vs Elgin City",
+    "Tip": "Over 2.5",
+    "Odds": "1.70",
+    "Date": "2026-04-25T14:00:00+00:00",
+    "FixtureId": 1383398
+  },
+  {
+    "League": "Czech Liga (Czech-Republic)",
+    "Match": "Ban\u00EDk Ostrava vs Plzen",
+    "Tip": "Over 2.5",
+    "Odds": "1.82",
+    "Date": "2026-04-25T14:00:00+00:00",
+    "FixtureId": 1384863
+  },
+  {
+    "League": "I Liga (Poland)",
+    "Match": "Stal Mielec vs Slask Wroclaw",
+    "Tip": "Over 2.5",
+    "Odds": "1.67",
+    "Date": "2026-04-25T17:30:00+00:00",
+    "FixtureId": 1381786
+  },
+  {
+    "League": "I Liga (Poland)",
+    "Match": "Polonia Warszawa vs Chrobry G\u0142og\u00F3w",
+    "Tip": "Over 2.5",
+    "Odds": "1.85",
+    "Date": "2026-04-25T17:30:00+00:00",
+    "FixtureId": 1381783
+  },
+  {
+    "League": "Serie C - Girone A (Italy)",
+    "Match": "Dolomiti Bellunesi vs Trento",
+    "Tip": "Over 2.5",
+    "Odds": "1.73",
+    "Date": "2026-04-25T18:30:00+00:00",
+    "FixtureId": 1439349
+  },
+  {
+    "League": "Primera Divisi\u00F3n (Peru)",
+    "Match": "Comerciantes Unidos vs Sporting Cristal",
+    "Tip": "Over 2.5",
+    "Odds": "2.10",
+    "Date": "2026-04-25T20:30:00+00:00",
+    "FixtureId": 1512581
+  },
+  {
+    "League": "K League 2 (South-Korea)",
+    "Match": "Cheongju vs Asan Mugunghwa",
+    "Tip": "Over 2.5",
+    "Odds": "2.10",
+    "Date": "2026-04-26T07:30:00+00:00",
+    "FixtureId": 1510313
+  }
+]
