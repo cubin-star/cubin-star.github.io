@@ -1,5 +1,21 @@
 [
   {
+    "league": "SHL",
+    "homeTeam": "Skellefteå",
+    "awayTeam": "Rögle",
+    "tip": "Over 6.5",
+    "odds": "",
+    "halftimeScore": "4:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "hockey",
+    "kickoff": "2026-04-25T13:15:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-hockey",
+    "scoutStats": "Score: 7/12 | P1: 4:0 | GF: 5.6 GA: 3.8 | Proj: 7.4 → Over 6.5 | SHL"
+  },
+  {
     "league": "Ekstraklasa",
     "homeTeam": "Korona Kielce",
     "awayTeam": "GKS Katowice",
