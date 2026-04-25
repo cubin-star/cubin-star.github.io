@@ -1,6 +1,22 @@
 [
   {
     "league": "AHL",
+    "homeTeam": "Henderson Silver Knights",
+    "awayTeam": "San Jose Barracuda",
+    "tip": "Over 5.5",
+    "odds": "",
+    "halftimeScore": "2:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "hockey",
+    "kickoff": "2026-04-25T02:00:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-hockey",
+    "scoutStats": "Score: 10/10 | P1: 2:0 | GF: 7.0 GA: 6.3 | Proj: 6.1 → Over 5.5 | AHL"
+  },
+  {
+    "league": "AHL",
     "homeTeam": "Colorado Eagles",
     "awayTeam": "San Diego Gulls",
     "tip": "Over 6.5",
