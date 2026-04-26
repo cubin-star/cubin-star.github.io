@@ -7,11 +7,11 @@
     "odds": "1.98",
     "halftimeScore": "0:0",
     "liveOdds": "",
-    "finalScore": "",
-    "result": "",
+    "finalScore": "0:0",
+    "result": "❌ Lost",
     "sport": "football",
     "kickoff": "2026-04-26T07:30:00.000Z",
-    "resolvedAt": "",
+    "resolvedAt": "2026-04-26T09:31:05.838Z",
     "source": "live2.json"
   },
   {
