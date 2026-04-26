@@ -1,5 +1,21 @@
 [
   {
+    "league": "Superliga",
+    "homeTeam": "Diablos",
+    "awayTeam": "Panteras",
+    "tip": "Over 146.5 (preLine 176.5)",
+    "odds": "",
+    "halftimeScore": "35:31 (66 pts)",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "basketball",
+    "kickoff": "2026-04-26T18:00:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-basketball",
+    "scoutStats": "Score: 5/10 | HT: 35:31 (66 pts) | Q1=36 Q2=30 (line 176.5, pace 75%) | PreLine: 176.5 | Proj: 149.8 | Superliga"
+  },
+  {
     "league": "National League",
     "homeTeam": "Davos",
     "awayTeam": "Fribourg",
