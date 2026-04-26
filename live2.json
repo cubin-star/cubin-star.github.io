@@ -1,5 +1,49 @@
 [
   {
+    "League": "Primeira Liga",
+    "Match": "Estrela vs FC Porto",
+    "Tip": "Over 2.5",
+    "Odds": "1.83",
+    "Date": "2026-04-26T17:00:00+00:00"
+  },
+  {
+    "League": "Premier League",
+    "Match": "Zabbar St. Patrick vs Sliema Wanderers",
+    "Tip": "Over 2.5",
+    "Odds": "1.92",
+    "Date": "2026-04-26T13:00:00+00:00",
+    "qualified": true
+  },
+  {
+    "League": "Ekstraklasa",
+    "Match": "Wisla Plock vs Radomiak Radom",
+    "Tip": "Over 2.5",
+    "Odds": "1.92",
+    "Date": "2026-04-26T10:15:00+00:00"
+  },
+  {
+    "League": "Segunda División",
+    "Match": "Granada CF vs Almeria",
+    "Tip": "Over 2.5",
+    "Odds": "1.82",
+    "Date": "2026-04-26T14:15:00+00:00",
+    "qualified": true
+  },
+  {
+    "League": "Thai League 1",
+    "Match": "Rayong FC vs Lamphun Warrior",
+    "Tip": "Over 2.5",
+    "Odds": "1.87",
+    "Date": "2026-04-26T11:00:00+00:00"
+  },
+  {
+    "League": "Liga I",
+    "Match": "Uta Arad vs Farul Constanta",
+    "Tip": "Over 2.5",
+    "Odds": "1.88",
+    "Date": "2026-04-26T11:00:00+00:00"
+  },
+  {
     "League": "K League 2",
     "Match": "Cheongju vs Asan Mugunghwa",
     "Tip": "Over 2.5",
@@ -8,33 +52,10 @@
     "qualified": true
   },
   {
-    "League": "I Liga",
-    "Match": "Polonia Warszawa vs Chrobry Głogów",
+    "League": "Eredivisie",
+    "Match": "Excelsior vs Utrecht",
     "Tip": "Over 2.5",
-    "Odds": "1.83",
-    "Date": "2026-04-25T17:30:00+00:00",
-    "qualified": true
-  },
-  {
-    "League": "Primera División",
-    "Match": "Comerciantes Unidos vs Sporting Cristal",
-    "Tip": "Over 2.5",
-    "Odds": "1.99",
-    "Date": "2026-04-25T20:30:00+00:00"
-  },
-  {
-    "League": "Czech Liga",
-    "Match": "Baník Ostrava vs Plzen",
-    "Tip": "Over 2.5",
-    "Odds": "1.81",
-    "Date": "2026-04-25T14:00:00+00:00",
-    "qualified": true
-  },
-  {
-    "League": "J1 League",
-    "Match": "V-varen Nagasaki vs Gamba Osaka",
-    "Tip": "Over 2.5",
-    "Odds": "1.85",
-    "Date": "2026-04-25T09:30:00+00:00"
+    "Odds": "1.80",
+    "Date": "2026-04-26T10:15:00+00:00"
   }
 ]
