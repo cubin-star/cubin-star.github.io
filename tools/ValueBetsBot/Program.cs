@@ -51,9 +51,8 @@ return command switch
 int UsageAndExit() { PrintUsage(); return 1; }
 
 // ----------------------------------------------------------------------------------------------
-// translate: read live*.json -> stáhne odds pro celé datum najednou (stejný přístup jako
-//            Python generátor) -> páruje přes fixture.date+týmy -> zapíše valuetips.json.
-// Pouze zápasy, které jsou v live*.json, se dostanou do výstupu (žádné přidané navíc).
+// translate: read live*.json -> páruj textem na fixtures (jméno týmu) -> kurzy z denního
+//            cache (1 request/den) -> zapíše valuetips.json.
 // ----------------------------------------------------------------------------------------------
 async Task<int> TranslateAsync()
 {
@@ -80,90 +79,78 @@ async Task<int> TranslateAsync()
 
     Console.WriteLine($"[translate] {sources.Count} input tips ({unique.Count} unique)");
 
-    // Stáhni všechny Over/Under odds per datum (1 request/den) – stejně jako Python generátor.
-    var oddsByDate = new Dictionary<DateOnly, List<ApiFootballClient.OddsDto>>();
+    // 1 request na datum pro fixtures (jména týmů) + 1 request na datum pro odds.
+    var fixturesPerDate = new Dictionary<DateOnly, List<ApiFootballClient.FixtureDto>>();
+    var oddsByFixtureId = new Dictionary<long, decimal>();  // fixtureId -> best Over 2.5 odd
+
     foreach (var date in unique.Select(t => DateOnly.FromDateTime(t.Date.UtcDateTime)).Distinct())
     {
+        // Fixtures – pro textové párování (jména týmů).
+        var fixtures = await client.GetFixturesByDateAsync(date);
+        fixturesPerDate[date] = fixtures;
+        Console.WriteLine($"[translate] fetched {fixtures.Count} fixtures for {date:yyyy-MM-dd}");
+
+        // Odds pro celý den – 1 request místo N per fixture.
         var dayOdds = await client.GetOverUnderOddsByDateAsync(date);
-        oddsByDate[date] = dayOdds;
-        Console.WriteLine($"[translate] fetched {dayOdds.Count} fixtures with Over/Under odds for {date:yyyy-MM-dd}");
+        Console.WriteLine($"[translate] fetched odds for {dayOdds.Count} fixtures on {date:yyyy-MM-dd}");
+
+        foreach (var o in dayOdds)
+        {
+            decimal best = 0m;
+            foreach (var bm in o.Bookmakers)
+                foreach (var bet in bm.Bets)
+                    foreach (var v in bet.Values)
+                        if (v.IsOver25 && v.OddDecimal > best) best = v.OddDecimal;
+            if (best > 0)
+                oddsByFixtureId[o.Fixture.Id] = best;
+        }
     }
 
-    var result    = new List<Tip>();
-    var usedIds   = new HashSet<long>(); // deduplikace výsledků podle FixtureId
+    var result  = new List<Tip>();
+    var usedIds = new HashSet<long>();
 
     foreach (var src in unique)
     {
         var date = DateOnly.FromDateTime(src.Date.UtcDateTime);
-        if (!oddsByDate.TryGetValue(date, out var dayOdds)) continue;
+        if (!fixturesPerDate.TryGetValue(date, out var fixtures)) continue;
 
-        var srcUtc = src.Date.UtcDateTime;
-
-        // Najdi nejbližší fixture v odds podle času výkopu (±60 min).
-        ApiFootballClient.OddsDto? matched = null;
-        decimal bestOdd = 0m;
-        double bestDiff = double.MaxValue;
-
-        foreach (var o in dayOdds)
+        // Textové párování – stejná logika jako původně (jméno týmu + čas ±60 min).
+        var fixture = MatchFixture(src, fixtures);
+        if (fixture == null)
         {
-            var diff = Math.Abs((o.Fixture.Date.UtcDateTime - srcUtc).TotalMinutes);
-            if (diff > 60) continue;
-
-            decimal over25 = 0m;
-            foreach (var bm in o.Bookmakers)
-                foreach (var bet in bm.Bets)
-                    foreach (var v in bet.Values)
-                        if (v.IsOver25 && v.OddDecimal > over25) over25 = v.OddDecimal;
-
-            if (over25 <= 0) continue;
-
-            if (diff < bestDiff || (diff == bestDiff && over25 > bestOdd))
-            {
-                matched  = o;
-                bestOdd  = over25;
-                bestDiff = diff;
-            }
-        }
-
-        if (matched == null || bestOdd <= 0)
-        {
-            Console.WriteLine($"[translate]   ! no Over 2.5 odd found for '{src.Match}' @ {src.Date:u}");
+            Console.WriteLine($"[translate]   ! no fixture match for '{src.Match}' @ {src.Date:u}");
             continue;
         }
 
-        // Přeskoč duplicity – stejný FixtureId z různých zdrojů nebo více bookmakerů.
-        if (!usedIds.Add(matched.Fixture.Id))
+        // Kurz z denního cache – žádný extra API request.
+        if (!oddsByFixtureId.TryGetValue(fixture.Fixture.Id, out var best) || best <= 0)
         {
-            Console.WriteLine($"[translate]   ~ skipping duplicate fixture {matched.Fixture.Id} for '{src.Match}'");
+            Console.WriteLine($"[translate]   ! no Over 2.5 odd for '{src.Match}' (fixture {fixture.Fixture.Id})");
             continue;
         }
 
-        // Stáhni jméno týmu/ligy pro zobrazení (1× per nalezený zápas).
-        ApiFootballClient.FixtureDto? fx = null;
-        try { fx = await client.GetFixtureAsync(matched.Fixture.Id); }
-        catch (Exception ex) { Console.WriteLine($"[translate]   ! fixture detail failed {matched.Fixture.Id}: {ex.Message}"); }
-
-        var league = src.League ?? "Unknown";
-        var match  = src.Match  ?? "Unknown";
-        if (fx != null)
+        if (!usedIds.Add(fixture.Fixture.Id))
         {
-            league = string.IsNullOrEmpty(fx.League.Country)
-                ? fx.League.Name ?? league
-                : $"{fx.League.Name} ({fx.League.Country})";
-            match = $"{fx.Teams.Home.Name} vs {fx.Teams.Away.Name}";
+            Console.WriteLine($"[translate]   ~ duplicate fixture {fixture.Fixture.Id} skipped");
+            continue;
         }
+
+        var league = string.IsNullOrEmpty(fixture.League.Country)
+            ? fixture.League.Name ?? src.League ?? "Unknown"
+            : $"{fixture.League.Name} ({fixture.League.Country})";
+        var match = $"{fixture.Teams.Home.Name} vs {fixture.Teams.Away.Name}";
 
         result.Add(new Tip
         {
             League    = league,
             Match     = match,
             TipText   = "Over 2.5",
-            Odds      = bestOdd.ToString("0.00", CultureInfo.InvariantCulture),
-            Date      = matched.Fixture.Date.ToUniversalTime(),
-            FixtureId = matched.Fixture.Id
+            Odds      = best.ToString("0.00", CultureInfo.InvariantCulture),
+            Date      = fixture.Fixture.Date.ToUniversalTime(),
+            FixtureId = fixture.Fixture.Id
         });
 
-        Console.WriteLine($"[translate]   + {match} @ {bestOdd:0.00}");
+        Console.WriteLine($"[translate]   + {match} @ {best:0.00}");
     }
 
     result = result.OrderBy(t => t.Date).ToList();
@@ -283,6 +270,40 @@ static void PrintUsage()
     Console.WriteLine("Writes: valuetips.json (translate) and valuebetshistory.json (evaluate)");
     Console.WriteLine();
     Console.WriteLine("Requires environment variable API_FOOTBALL_KEY1");
+}
+
+// Páruj tip z live*.json s fixture z API podle jména týmu (±60 min).
+static ApiFootballClient.FixtureDto? MatchFixture(Tip src, List<ApiFootballClient.FixtureDto> fixtures)
+{
+    var srcMatch = Normalize(src.Match);
+    var srcUtc   = src.Date.UtcDateTime;
+
+    ApiFootballClient.FixtureDto? best = null;
+    int bestScore    = -1;
+    double bestDiff  = double.MaxValue;
+
+    foreach (var fx in fixtures)
+    {
+        var diff = Math.Abs((fx.Fixture.Date.UtcDateTime - srcUtc).TotalMinutes);
+        if (diff > 60) continue;
+
+        var home = Normalize(fx.Teams.Home.Name);
+        var away = Normalize(fx.Teams.Away.Name);
+
+        int score = 0;
+        if (!string.IsNullOrEmpty(home) && srcMatch.Contains(home)) score++;
+        if (!string.IsNullOrEmpty(away) && srcMatch.Contains(away)) score++;
+        if (score == 0) continue;
+
+        if (score > bestScore || (score == bestScore && diff < bestDiff))
+        {
+            best      = fx;
+            bestScore = score;
+            bestDiff  = diff;
+        }
+    }
+
+    return best;
 }
 
 static string Normalize(string? s)
