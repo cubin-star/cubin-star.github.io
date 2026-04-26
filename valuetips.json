@@ -8,51 +8,11 @@
     "FixtureId": 1380652
   },
   {
-    "League": "Serie A (Italy)",
-    "Match": "Fiorentina vs Sassuolo",
+    "League": "Eredivisie (Netherlands)",
+    "Match": "Excelsior vs Utrecht",
     "Tip": "Over 2.5",
-    "Odds": "1.94",
-    "Date": "2026-04-26T10:30:00+00:00",
-    "FixtureId": 1378196
-  },
-  {
-    "League": "Ekstraklasa (Poland)",
-    "Match": "Widzew \u0141\u00F3d\u017A vs Motor Lublin",
-    "Tip": "Over 2.5",
-    "Odds": "1.80",
-    "Date": "2026-04-26T12:45:00+00:00",
-    "FixtureId": 1380651
-  },
-  {
-    "League": "Serie A (Italy)",
-    "Match": "Genoa vs Como",
-    "Tip": "Over 2.5",
-    "Odds": "2.07",
-    "Date": "2026-04-26T13:00:00+00:00",
-    "FixtureId": 1378197
-  },
-  {
-    "League": "NB I (Hungary)",
-    "Match": "Ferencvarosi TC vs Paks",
-    "Tip": "Over 2.5",
-    "Odds": "1.43",
-    "Date": "2026-04-26T15:00:00+00:00",
-    "FixtureId": 1380355
-  },
-  {
-    "League": "NB I (Hungary)",
-    "Match": "Debreceni VSC vs Gyori ETO FC",
-    "Tip": "Over 2.5",
-    "Odds": "1.57",
-    "Date": "2026-04-26T17:30:00+00:00",
-    "FixtureId": 1380354
-  },
-  {
-    "League": "Serie A (Italy)",
-    "Match": "AC Milan vs Juventus",
-    "Tip": "Over 2.5",
-    "Odds": "2.12",
-    "Date": "2026-04-26T18:45:00+00:00",
-    "FixtureId": 1378199
+    "Odds": "1.75",
+    "Date": "2026-04-26T10:15:00+00:00",
+    "FixtureId": 1381137
   }
 ]
