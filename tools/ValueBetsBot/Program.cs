@@ -51,112 +51,58 @@ return command switch
 int UsageAndExit() { PrintUsage(); return 1; }
 
 // ----------------------------------------------------------------------------------------------
-// translate: read live*.json -> páruj textem na fixtures (jméno týmu) -> kurzy z denního
-//            cache (1 request/den) -> zapíše valuetips.json.
+// translate: jednoduché přepsání live*.json do valuetips.json – žádné API volání.
+//   live2.json  → má kurzy na Over 2.5 → přepiš přímo.
+//   live.json   → má kurzy na Over 1.5 → odhadni Over 2.5 jako odds × 1.45.
 // ----------------------------------------------------------------------------------------------
-async Task<int> TranslateAsync()
+Task<int> TranslateAsync()
 {
     var livePath  = Path.Combine(repoDir, "live.json");
     var live2Path = Path.Combine(repoDir, "live2.json");
     var outPath   = Path.Combine(repoDir, "valuetips.json");
 
-    var sources = new List<Tip>();
-    sources.AddRange(LoadList(livePath));
-    sources.AddRange(LoadList(live2Path));
+    var result = new List<Tip>();
 
-    if (sources.Count == 0)
+    // live2.json – kurzy jsou Already Over 2.5, přepiš přímo.
+    foreach (var t in LoadList(live2Path))
     {
-        Console.WriteLine("[translate] no tips found in live.json/live2.json");
-        File.WriteAllText(outPath, JsonSerializer.Serialize(new List<Tip>(), jsonOptions));
-        return 0;
-    }
-
-    // Deduplicate by (Match + Date) — same fixture can appear in both files.
-    var unique = sources
-        .GroupBy(t => $"{Normalize(t.Match)}|{t.Date.UtcDateTime:yyyyMMddHHmm}")
-        .Select(g => g.First())
-        .ToList();
-
-    Console.WriteLine($"[translate] {sources.Count} input tips ({unique.Count} unique)");
-
-    // 1 request na datum pro fixtures (jména týmů) + 1 request na datum pro odds.
-    var fixturesPerDate = new Dictionary<DateOnly, List<ApiFootballClient.FixtureDto>>();
-    var oddsByFixtureId = new Dictionary<long, decimal>();  // fixtureId -> best Over 2.5 odd
-
-    foreach (var date in unique.Select(t => DateOnly.FromDateTime(t.Date.UtcDateTime)).Distinct())
-    {
-        // Fixtures – pro textové párování (jména týmů).
-        var fixtures = await client.GetFixturesByDateAsync(date);
-        fixturesPerDate[date] = fixtures;
-        Console.WriteLine($"[translate] fetched {fixtures.Count} fixtures for {date:yyyy-MM-dd}");
-
-        // Odds pro celý den – 1 request místo N per fixture.
-        var dayOdds = await client.GetOverUnderOddsByDateAsync(date);
-        Console.WriteLine($"[translate] fetched odds for {dayOdds.Count} fixtures on {date:yyyy-MM-dd}");
-
-        foreach (var o in dayOdds)
-        {
-            decimal best = 0m;
-            foreach (var bm in o.Bookmakers)
-                foreach (var bet in bm.Bets)
-                    foreach (var v in bet.Values)
-                        if (v.IsOver25 && v.OddDecimal > best) best = v.OddDecimal;
-            if (best > 0)
-                oddsByFixtureId[o.Fixture.Id] = best;
-        }
-    }
-
-    var result  = new List<Tip>();
-    var usedIds = new HashSet<long>();
-
-    foreach (var src in unique)
-    {
-        var date = DateOnly.FromDateTime(src.Date.UtcDateTime);
-        if (!fixturesPerDate.TryGetValue(date, out var fixtures)) continue;
-
-        // Textové párování – stejná logika jako původně (jméno týmu + čas ±60 min).
-        var fixture = MatchFixture(src, fixtures);
-        if (fixture == null)
-        {
-            Console.WriteLine($"[translate]   ! no fixture match for '{src.Match}' @ {src.Date:u}");
-            continue;
-        }
-
-        // Kurz z denního cache – žádný extra API request.
-        if (!oddsByFixtureId.TryGetValue(fixture.Fixture.Id, out var best) || best <= 0)
-        {
-            Console.WriteLine($"[translate]   ! no Over 2.5 odd for '{src.Match}' (fixture {fixture.Fixture.Id})");
-            continue;
-        }
-
-        if (!usedIds.Add(fixture.Fixture.Id))
-        {
-            Console.WriteLine($"[translate]   ~ duplicate fixture {fixture.Fixture.Id} skipped");
-            continue;
-        }
-
-        var league = string.IsNullOrEmpty(fixture.League.Country)
-            ? fixture.League.Name ?? src.League ?? "Unknown"
-            : $"{fixture.League.Name} ({fixture.League.Country})";
-        var match = $"{fixture.Teams.Home.Name} vs {fixture.Teams.Away.Name}";
-
         result.Add(new Tip
         {
-            League    = league,
-            Match     = match,
-            TipText   = "Over 2.5",
-            Odds      = best.ToString("0.00", CultureInfo.InvariantCulture),
-            Date      = fixture.Fixture.Date.ToUniversalTime(),
-            FixtureId = fixture.Fixture.Id
+            League  = t.League,
+            Match   = t.Match,
+            TipText = "Over 2.5",
+            Odds    = t.Odds,
+            Date    = t.Date,
         });
-
-        Console.WriteLine($"[translate]   + {match} @ {best:0.00}");
+        Console.WriteLine($"[translate] live2 → {t.Match} @ {t.Odds}");
     }
 
-    result = result.OrderBy(t => t.Date).ToList();
+    // live.json – kurzy jsou Over 1.5, odhadni Over 2.5 = odds × 1.45.
+    foreach (var t in LoadList(livePath))
+    {
+        var over15 = t.OddsValue;
+        var over25 = over15 > 0 ? Math.Round(over15 * 1.45m, 2) : 0m;
+        result.Add(new Tip
+        {
+            League  = t.League,
+            Match   = t.Match,
+            TipText = "Over 2.5",
+            Odds    = over25.ToString("0.00", CultureInfo.InvariantCulture),
+            Date    = t.Date,
+        });
+        Console.WriteLine($"[translate] live  → {t.Match} @ {over25:0.00} (odhadnuto z Over 1.5 {over15:0.00})");
+    }
+
+    // Deduplicate by (Match + Date).
+    result = result
+        .GroupBy(t => $"{Normalize(t.Match)}|{t.Date.UtcDateTime:yyyyMMddHHmm}")
+        .Select(g => g.First())
+        .OrderBy(t => t.Date)
+        .ToList();
+
     File.WriteAllText(outPath, JsonSerializer.Serialize(result, jsonOptions));
     Console.WriteLine($"[translate] wrote valuetips.json ({result.Count} tips)");
-    return 0;
+    return Task.FromResult(0);
 }
 
 // ----------------------------------------------------------------------------------------------
@@ -270,40 +216,6 @@ static void PrintUsage()
     Console.WriteLine("Writes: valuetips.json (translate) and valuebetshistory.json (evaluate)");
     Console.WriteLine();
     Console.WriteLine("Requires environment variable API_FOOTBALL_KEY1");
-}
-
-// Páruj tip z live*.json s fixture z API podle jména týmu (±60 min).
-static ApiFootballClient.FixtureDto? MatchFixture(Tip src, List<ApiFootballClient.FixtureDto> fixtures)
-{
-    var srcMatch = Normalize(src.Match);
-    var srcUtc   = src.Date.UtcDateTime;
-
-    ApiFootballClient.FixtureDto? best = null;
-    int bestScore    = -1;
-    double bestDiff  = double.MaxValue;
-
-    foreach (var fx in fixtures)
-    {
-        var diff = Math.Abs((fx.Fixture.Date.UtcDateTime - srcUtc).TotalMinutes);
-        if (diff > 60) continue;
-
-        var home = Normalize(fx.Teams.Home.Name);
-        var away = Normalize(fx.Teams.Away.Name);
-
-        int score = 0;
-        if (!string.IsNullOrEmpty(home) && srcMatch.Contains(home)) score++;
-        if (!string.IsNullOrEmpty(away) && srcMatch.Contains(away)) score++;
-        if (score == 0) continue;
-
-        if (score > bestScore || (score == bestScore && diff < bestDiff))
-        {
-            best      = fx;
-            bestScore = score;
-            bestDiff  = diff;
-        }
-    }
-
-    return best;
 }
 
 static string Normalize(string? s)
