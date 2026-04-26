@@ -1,5 +1,21 @@
 [
   {
+    "league": "ECHL",
+    "homeTeam": "Maine Mariners",
+    "awayTeam": "Adirondack Thunder",
+    "tip": "Over 6.5",
+    "odds": "",
+    "halftimeScore": "1:2",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "hockey",
+    "kickoff": "2026-04-25T22:00:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-hockey",
+    "scoutStats": "Score: 10/12 | P1: 1:2 | GF: 6.0 GA: 5.4 | Proj: 6.6 → Over 6.5 | ECHL"
+  },
+  {
     "league": "NHL",
     "homeTeam": "Minnesota Wild",
     "awayTeam": "Dallas Stars",
