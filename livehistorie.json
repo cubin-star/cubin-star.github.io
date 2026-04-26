@@ -1,8 +1,8 @@
 [
   {
-    "league": "ECHL",
-    "homeTeam": "Florida Everblades",
-    "awayTeam": "Savannah Ghost Pirates",
+    "league": "FPHL",
+    "homeTeam": "Columbus River Dragons",
+    "awayTeam": "Pee Dee IceCats",
     "tip": "Over 5.5",
     "odds": "",
     "halftimeScore": "1:1",
@@ -10,10 +10,10 @@
     "finalScore": "",
     "result": "",
     "sport": "hockey",
-    "kickoff": "2026-04-25T23:00:00.000Z",
+    "kickoff": "2026-04-25T23:05:00.000Z",
     "resolvedAt": "",
     "source": "scout-hockey",
-    "scoutStats": "Score: 8/12 | P1: 1:1 | GF: 6.3 GA: 4.8 | Proj: 5.6 → Over 5.5 | ECHL"
+    "scoutStats": "Score: 9/12 | P1: 1:1 | GF: 7.3 GA: 6.6 | Proj: 6 → Over 5.5 | FPHL"
   },
   {
     "league": "NHL",
