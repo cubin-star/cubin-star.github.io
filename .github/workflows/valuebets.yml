@@ -1,16 +1,14 @@
 # ValueBets Bot
 #
-# translate : čte live.json + live2.json (READ-ONLY), pro každý zápas dohledá
-#             v API-Football kurz na Over 2.5 a zapíše valuetips.json.
-# evaluate  : pro skončené zápasy z valuetips.json doplní výsledek
-#             do valuebetshistory.json (OK / KO) včetně skóre.
+# Dva samostatné jednoduché joby – stejný vzor jako ostatní boti v tomto repu.
 #
-# .NET 10 konzolová aplikace ze složky tools/ValueBetsBot.
+# translate : čte live.json + live2.json (READ-ONLY), dohledá kurzy Over 2.5
+#             z API-Football a zapíše valuetips.json. Běží každý den v 08:00 UTC
+#             (po Daily Tip Generatoru 06:00 a SureBets 07:00 UTC).
 #
-# Cron rozvrh (translate – okno 08:00–09:45 UTC = 10:00–11:45 lokálního času CEST):
-#   6 záložních cron slotů každých 15 minut. První úspěšný translate provede práci,
-#   ostatní jsou idempotentně přeskočeny díky guard kroku.
-#   Tím řešíme i přechod letního/zimního času i občasné přeskočení GH cronu.
+# evaluate  : pro skončené zápasy z valuetips.json zapíše výsledek + skóre
+#             do valuebetshistory.json a odstraní je z valuetips.json.
+#             Běží každou hodinu.
 #
 # SETUP:
 # 1. Secret API_FOOTBALL_KEY1 v Settings -> Secrets and variables -> Actions.
@@ -20,102 +18,70 @@ name: ValueBets Bot
 
 on:
   schedule:
-    - cron: '0  8 * * *'   # translate slot 1 – 08:00 UTC (10:00 CEST / 09:00 CET)
-    - cron: '15 8 * * *'   # translate slot 2 – 08:15 UTC
-    - cron: '30 8 * * *'   # translate slot 3 – 08:30 UTC
-    - cron: '45 8 * * *'   # translate slot 4 – 08:45 UTC
-    - cron: '0  9 * * *'   # translate slot 5 – 09:00 UTC (11:00 CEST / 10:00 CET)
-    - cron: '15 9 * * *'   # translate slot 6 – 09:15 UTC (záloha)
-    - cron: '0  * * * *'   # evaluate         – každou celou hodinu
-  workflow_dispatch:
-    inputs:
-      mode:
-        description: 'translate | evaluate | both'
-        required: true
-        default: 'both'
-        type: choice
-        options:
-          - translate
-          - evaluate
-          - both
+    - cron: '0 8 * * *'    # translate – každý den 08:00 UTC (10:00 CEST)
+    - cron: '0 * * * *'    # evaluate  – každou celou hodinu
+  workflow_dispatch:        # ruční spuštění tlačítkem na GitHubu
 
 permissions:
   contents: write
 
 jobs:
-  run-bot:
+  # ---------------------------------------------------------------------------
+  # JOB 1: translate – spustí se jen v 08:xx UTC
+  # ---------------------------------------------------------------------------
+  translate:
     runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_dispatch' || startsWith(github.event.schedule, '0 8')
 
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0      # potřebujeme historii pro guard krok
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '10.x'
 
-      - name: Decide mode
-        id: mode
-        run: |
-          set -e
-          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            value="${{ github.event.inputs.mode }}"
-            echo "Mode from manual dispatch: $value"
-          else
-            hour=$(date -u +%H)
-            min=$(date -u +%M)
-            # Translate = 08:00–09:59 UTC (okno 10:00–11:59 CEST).
-            # Vše ostatní = evaluate.
-            if [ "$hour" = "08" ] || [ "$hour" = "09" ]; then
-              value="translate"
-            else
-              value="evaluate"
-            fi
-            echo "Mode from schedule (UTC ${hour}:${min}): $value"
-          fi
-          echo "value=$value" >> "$GITHUB_OUTPUT"
-
-      - name: Skip if today's translate already ran
-        id: guard
-        if: steps.mode.outputs.value == 'translate' && github.event_name == 'schedule'
-        run: |
-          today=$(date -u +%Y-%m-%d)
-          if git log --since="${today}T00:00:00Z" --author="ValueBets Bot" --pretty=format:"%s" | grep -qE "valuebets bot: (translate|both)"; then
-            echo "Translate already ran today ($today) – skipping."
-            echo "skip=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "No translate commit found for $today – proceeding."
-            echo "skip=false" >> "$GITHUB_OUTPUT"
-          fi
-
       - name: Run translate
-        if: (steps.mode.outputs.value == 'translate' || steps.mode.outputs.value == 'both') && steps.guard.outputs.skip != 'true'
         env:
           API_FOOTBALL_KEY1: ${{ secrets.API_FOOTBALL_KEY1 }}
         run: dotnet run --project tools/ValueBetsBot/ValueBetsBot.csproj -c Release -- translate .
 
+      - name: Commit and push
+        run: |
+          git config user.name  "ValueBets Bot"
+          git config user.email "bot@valuebets.app"
+          git add valuetips.json
+          git diff --staged --quiet || git commit -m "💰 ValueBets tips $(date -u +%Y-%m-%d)"
+          git pull --rebase origin main
+          git push
+
+  # ---------------------------------------------------------------------------
+  # JOB 2: evaluate – spustí se každou hodinu (ne v 08:xx, to dělá translate)
+  # ---------------------------------------------------------------------------
+  evaluate:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_dispatch' || startsWith(github.event.schedule, '0 *')
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.x'
+
       - name: Run evaluate
-        if: steps.mode.outputs.value == 'evaluate' || steps.mode.outputs.value == 'both'
         env:
           API_FOOTBALL_KEY1: ${{ secrets.API_FOOTBALL_KEY1 }}
         run: dotnet run --project tools/ValueBetsBot/ValueBetsBot.csproj -c Release -- evaluate . --max-age-hours 48
 
-      - name: Commit & push
-        if: steps.guard.outputs.skip != 'true'
+      - name: Commit and push
         run: |
           git config user.name  "ValueBets Bot"
           git config user.email "bot@valuebets.app"
-          # Pojistka: NIKDY nepřibalit live.json / live2.json – ty patří jiné aplikaci.
-          git reset HEAD -- live.json live2.json 2>/dev/null || true
-          git checkout -- live.json live2.json 2>/dev/null || true
           git add valuetips.json valuebetshistory.json
-          if git diff --cached --quiet; then
-            echo "Nothing to commit."
-          else
-            git commit -m "valuebets bot: ${{ steps.mode.outputs.value }} $(date -u +%Y-%m-%d_%H-%M)"
-            git pull --rebase
-            git push
-          fi
+          git diff --staged --quiet || git commit -m "📊 ValueBets evaluate $(date -u +%Y-%m-%d)"
+          git pull --rebase origin main
+          git push
