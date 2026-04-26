@@ -1,5 +1,21 @@
 [
   {
+    "league": "IBL",
+    "homeTeam": "Rajawali Medan",
+    "awayTeam": "Dewa United",
+    "tip": "Over 146.5 (preLine 170.5)",
+    "odds": "",
+    "halftimeScore": "31:37 (68 pts)",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "basketball",
+    "kickoff": "2026-04-26T10:00:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-basketball",
+    "scoutStats": "Score: 5/10 | HT: 31:37 (68 pts) | Q1=41 Q2=27 (line 170.5, pace 80%) | PreLine: 170.5 | Proj: 149.8 | IBL"
+  },
+  {
     "league": "K League 2",
     "homeTeam": "Cheongju",
     "awayTeam": "Asan Mugunghwa",
