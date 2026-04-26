@@ -1,5 +1,21 @@
 [
   {
+    "league": "Super Ligi",
+    "homeTeam": "Karsiyaka",
+    "awayTeam": "Esenler Erokspor",
+    "tip": "Over 139.5 (preLine 171.5)",
+    "odds": "",
+    "halftimeScore": "31:31 (62 pts)",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "basketball",
+    "kickoff": "2026-04-26T10:00:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-basketball",
+    "scoutStats": "Score: 5/10 | HT: 31:31 (62 pts) | Q1=24 Q2=38 (line 171.5, pace 72%) | PreLine: 171.5 | Proj: 143 | Super Ligi"
+  },
+  {
     "league": "IBL",
     "homeTeam": "Rajawali Medan",
     "awayTeam": "Dewa United",
