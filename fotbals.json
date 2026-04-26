@@ -1,58 +1,23 @@
 [
   {
-    "League": "Victoria NPL",
-    "Match": "Sunshine Georgies vs Altona Magic",
+    "League": "Segunda División RFEF - Group 2",
+    "Match": "Real Zaragoza II vs Real Unión",
     "Tip": "Over 1.5",
-    "Odds": "1.20",
-    "Date": "2026-04-25T08:00:00+00:00"
+    "Odds": "1.18",
+    "Date": "2026-04-26T10:00:00+00:00"
   },
   {
-    "League": "Thai League 2",
-    "Match": "Mahasarakham United vs Khon Kaen United",
+    "League": "Regionalliga - Nordost",
+    "Match": "Chemnitzer FC vs ZFC Meuselwitz",
+    "Tip": "Over 1.5",
+    "Odds": "1.20",
+    "Date": "2026-04-26T12:00:00+00:00"
+  },
+  {
+    "League": "Segunda División",
+    "Match": "AD Ceuta FC vs Racing Santander",
     "Tip": "Over 1.5",
     "Odds": "1.15",
-    "Date": "2026-04-25T11:00:00+00:00"
-  },
-  {
-    "League": "League Two",
-    "Match": "Milton Keynes Dons vs Tranmere",
-    "Tip": "Over 1.5",
-    "Odds": "1.21",
-    "Date": "2026-04-25T11:30:00+00:00"
-  },
-  {
-    "League": "National League",
-    "Match": "Scunthorpe vs Eastleigh",
-    "Tip": "Over 1.5",
-    "Odds": "1.16",
-    "Date": "2026-04-25T11:30:00+00:00"
-  },
-  {
-    "League": "I Liga",
-    "Match": "ŁKS Łódź vs Stal Rzeszów",
-    "Tip": "Over 1.5",
-    "Odds": "1.16",
-    "Date": "2026-04-25T12:30:00+00:00"
-  },
-  {
-    "League": "Championship",
-    "Match": "Sheffield Utd vs Preston",
-    "Tip": "Over 1.5",
-    "Odds": "1.20",
-    "Date": "2026-04-25T14:00:00+00:00"
-  },
-  {
-    "League": "League One",
-    "Match": "Luton vs Barnsley",
-    "Tip": "Over 1.5",
-    "Odds": "1.16",
-    "Date": "2026-04-25T14:00:00+00:00"
-  },
-  {
-    "League": "Serie C - Girone A",
-    "Match": "Dolomiti Bellunesi vs Trento",
-    "Tip": "Over 1.5",
-    "Odds": "1.19",
-    "Date": "2026-04-25T18:30:00+00:00"
+    "Date": "2026-04-26T19:00:00+00:00"
   }
 ]
