@@ -1,5 +1,20 @@
 [
   {
+    "league": "Segunda División",
+    "homeTeam": "Leganes",
+    "awayTeam": "FC Andorra",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "0:1",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "kickoff": "2026-04-26T16:30:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-football",
+    "scoutStats": "Score: 11/14 | xG: 0.84(est) | Shots: 13/7 | Corners: 6 | Poss: 62% | Pre O2.5: 1.91"
+  },
+  {
     "league": "Pro A",
     "homeTeam": "Koblenz",
     "awayTeam": "Bayreuth",
@@ -7,11 +22,11 @@
     "odds": "",
     "halftimeScore": "32:38 (70 pts)",
     "liveOdds": "",
-    "finalScore": "75:89 (164 pts)",
-    "result": "✅ Won",
+    "finalScore": "",
+    "result": "",
     "sport": "basketball",
     "kickoff": "2026-04-26T15:00:00.000Z",
-    "resolvedAt": "2026-04-26T17:31:04.984Z",
+    "resolvedAt": "",
     "source": "scout-basketball",
     "scoutStats": "Score: 5/10 | HT: 32:38 (70 pts) | Q1=38 Q2=32 (line 175.5, pace 80%) | PreLine: 175.5 | Proj: 154.2 | Pro A"
   },
