@@ -6,5 +6,69 @@
     "Odds": "2.10",
     "Date": "2026-04-26T07:30:00+00:00",
     "FixtureId": 1510313
+  },
+  {
+    "League": "Segunda Divisi\u00F3n RFEF - Group 2 (Spain)",
+    "Match": "Real Zaragoza II vs Real Uni\u00F3n",
+    "Tip": "Over 2.5",
+    "Odds": "1.72",
+    "Date": "2026-04-26T10:00:00+00:00",
+    "FixtureId": 1432491
+  },
+  {
+    "League": "Ekstraklasa (Poland)",
+    "Match": "Wisla Plock vs Radomiak Radom",
+    "Tip": "Over 2.5",
+    "Odds": "2.01",
+    "Date": "2026-04-26T10:15:00+00:00",
+    "FixtureId": 1380652
+  },
+  {
+    "League": "Eredivisie (Netherlands)",
+    "Match": "Excelsior vs Utrecht",
+    "Tip": "Over 2.5",
+    "Odds": "1.78",
+    "Date": "2026-04-26T10:15:00+00:00",
+    "FixtureId": 1381137
+  },
+  {
+    "League": "Thai League 1 (Thailand)",
+    "Match": "Rayong FC vs Lamphun Warrior",
+    "Tip": "Over 2.5",
+    "Odds": "1.93",
+    "Date": "2026-04-26T11:00:00+00:00",
+    "FixtureId": 1491292
+  },
+  {
+    "League": "Liga I (Romania)",
+    "Match": "Uta Arad vs Farul Constanta",
+    "Tip": "Over 2.5",
+    "Odds": "1.95",
+    "Date": "2026-04-26T11:00:00+00:00",
+    "FixtureId": 1531531
+  },
+  {
+    "League": "Regionalliga - Nordost (Germany)",
+    "Match": "Chemnitzer FC vs ZFC Meuselwitz",
+    "Tip": "Over 2.5",
+    "Odds": "1.73",
+    "Date": "2026-04-26T12:00:00+00:00",
+    "FixtureId": 1407727
+  },
+  {
+    "League": "Premier League (Malta)",
+    "Match": "Zabbar St. Patrick vs Sliema Wanderers",
+    "Tip": "Over 2.5",
+    "Odds": "1.95",
+    "Date": "2026-04-26T13:00:00+00:00",
+    "FixtureId": 1534144
+  },
+  {
+    "League": "Primeira Liga (Portugal)",
+    "Match": "Estrela vs FC Porto",
+    "Tip": "Over 2.5",
+    "Odds": "1.87",
+    "Date": "2026-04-26T17:00:00+00:00",
+    "FixtureId": 1396511
   }
 ]
