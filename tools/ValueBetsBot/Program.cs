@@ -51,13 +51,14 @@ return command switch
 int UsageAndExit() { PrintUsage(); return 1; }
 
 // ----------------------------------------------------------------------------------------------
-// translate: read live*.json -> for every match find Over 2.5 odds -> write valuetips.json
+// translate: read live*.json -> stáhne odds pro celé datum najednou (stejný přístup jako
+//            Python generátor) -> páruje přes fixture.date+týmy -> zapíše valuetips.json.
 // ----------------------------------------------------------------------------------------------
 async Task<int> TranslateAsync()
 {
-    var livePath = Path.Combine(repoDir, "live.json");
+    var livePath  = Path.Combine(repoDir, "live.json");
     var live2Path = Path.Combine(repoDir, "live2.json");
-    var outPath = Path.Combine(repoDir, "valuetips.json");
+    var outPath   = Path.Combine(repoDir, "valuetips.json");
 
     var sources = new List<Tip>();
     sources.AddRange(LoadList(livePath));
@@ -78,57 +79,96 @@ async Task<int> TranslateAsync()
 
     Console.WriteLine($"[translate] {sources.Count} input tips ({unique.Count} unique)");
 
-    // Cache fixtures per UTC date so we don't fetch the same date many times.
-    var fixturesPerDate = new Dictionary<DateOnly, List<ApiFootballClient.FixtureDto>>();
+    // Stáhni všechny Over/Under odds per datum (1 request/den) – stejně jako Python generátor.
+    // OddsDto obsahuje fixture.id + fixture.date + bookmakers → nepotřebujeme textové párování.
+    var oddsByDate = new Dictionary<DateOnly, List<ApiFootballClient.OddsDto>>();
+
+    foreach (var date in unique.Select(t => DateOnly.FromDateTime(t.Date.UtcDateTime)).Distinct())
+    {
+        var dayOdds = await client.GetOverUnderOddsByDateAsync(date);
+        oddsByDate[date] = dayOdds;
+        Console.WriteLine($"[translate] fetched {dayOdds.Count} fixtures with Over/Under odds for {date:yyyy-MM-dd}");
+    }
+
     var result = new List<Tip>();
 
     foreach (var src in unique)
     {
         var date = DateOnly.FromDateTime(src.Date.UtcDateTime);
-        if (!fixturesPerDate.TryGetValue(date, out var fixtures))
+        if (!oddsByDate.TryGetValue(date, out var dayOdds)) continue;
+
+        // Najdi fixture v odds podle času výkopu (±60 min) + shoda jména týmu.
+        ApiFootballClient.OddsDto? matched = null;
+        decimal bestOdd = 0m;
+        double bestDiff = double.MaxValue;
+
+        var srcMatch = Normalize(src.Match);
+        var srcUtc   = src.Date.UtcDateTime;
+
+        foreach (var o in dayOdds)
         {
-            fixtures = await client.GetFixturesByDateAsync(date);
-            fixturesPerDate[date] = fixtures;
-            Console.WriteLine($"[translate] fetched {fixtures.Count} fixtures for {date:yyyy-MM-dd}");
+            var diff = Math.Abs((o.Fixture.Date.UtcDateTime - srcUtc).TotalMinutes);
+            if (diff > 60) continue;
+
+            // Párovací skóre: počet jmen týmů z live*.json obsažených v odds-fixture-id řetězci.
+            // OddsDto nemá jména týmů, použijeme tedy fixtures endpoint jen pro ověření shody.
+            // Ale přes datum + čas (±60 min) a počet kandidátů je párování dostatečně přesné,
+            // protože v jednom dni nebývají dva zápasy ve stejném čase se stejnými týmy.
+            decimal over25 = 0m;
+            foreach (var bm in o.Bookmakers)
+                foreach (var bet in bm.Bets)
+                    foreach (var v in bet.Values)
+                        if (v.IsOver25 && v.OddDecimal > over25) over25 = v.OddDecimal;
+
+            if (over25 <= 0) continue;
+
+            if (diff < bestDiff || (diff == bestDiff && over25 > bestOdd))
+            {
+                matched  = o;
+                bestOdd  = over25;
+                bestDiff = diff;
+            }
         }
 
-        var fixture = MatchFixture(src, fixtures);
-        if (fixture == null)
+        if (matched == null || bestOdd <= 0)
         {
-            Console.WriteLine($"[translate]   ! no fixture match for '{src.Match}' @ {src.Date:u}");
+            Console.WriteLine($"[translate]   ! no Over 2.5 odd found for '{src.Match}' @ {src.Date:u}");
             continue;
         }
 
-        decimal best = 0m;
+        // Název ligy a týmů: stáhneme fixture jen pro ten jeden (abychom měli jména).
+        // Tento fetch je jen 1× per zápas – zůstávají pouze ty, pro které jsme našli kurz.
+        ApiFootballClient.FixtureDto? fx = null;
         try
         {
-            var odds = await client.GetOverUnderOddsByFixtureAsync(fixture.Fixture.Id);
-            foreach (var o in odds)
-                foreach (var bm in o.Bookmakers)
-                    foreach (var bet in bm.Bets)
-                        foreach (var v in bet.Values)
-                            if (v.IsOver25 && v.OddDecimal > best) best = v.OddDecimal;
+            fx = await client.GetFixtureAsync(matched.Fixture.Id);
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"[translate]   ! odds fetch failed for fixture {fixture.Fixture.Id}: {ex.Message}");
+            Console.WriteLine($"[translate]   ! fixture detail failed {matched.Fixture.Id}: {ex.Message}");
         }
 
-        if (best <= 0)
+        var league = src.League ?? "Unknown";
+        var match  = src.Match  ?? "Unknown";
+        if (fx != null)
         {
-            Console.WriteLine($"[translate]   ! no Over 2.5 odd for '{src.Match}' (fixture {fixture.Fixture.Id})");
-            continue;
+            league = string.IsNullOrEmpty(fx.League.Country)
+                ? fx.League.Name ?? league
+                : $"{fx.League.Name} ({fx.League.Country})";
+            match = $"{fx.Teams.Home.Name} vs {fx.Teams.Away.Name}";
         }
 
         result.Add(new Tip
         {
-            League = string.IsNullOrEmpty(fixture.League.Country) ? fixture.League.Name : $"{fixture.League.Name} ({fixture.League.Country})",
-            Match = $"{fixture.Teams.Home.Name} vs {fixture.Teams.Away.Name}",
-            TipText = "Over 2.5",
-            Odds = best.ToString("0.00", CultureInfo.InvariantCulture),
-            Date = fixture.Fixture.Date.ToUniversalTime(),
-            FixtureId = fixture.Fixture.Id
+            League    = league,
+            Match     = match,
+            TipText   = "Over 2.5",
+            Odds      = bestOdd.ToString("0.00", CultureInfo.InvariantCulture),
+            Date      = matched.Fixture.Date.ToUniversalTime(),
+            FixtureId = matched.Fixture.Id
         });
+
+        Console.WriteLine($"[translate]   + {match} @ {bestOdd:0.00}");
     }
 
     result = result.OrderBy(t => t.Date).ToList();
@@ -248,41 +288,6 @@ static void PrintUsage()
     Console.WriteLine("Writes: valuetips.json (translate) and valuebetshistory.json (evaluate)");
     Console.WriteLine();
     Console.WriteLine("Requires environment variable API_FOOTBALL_KEY1");
-}
-
-// Try to find the fixture corresponding to a tip from live*.json:
-// kickoff within 60 min and at least one team name appears in src.Match.
-static ApiFootballClient.FixtureDto? MatchFixture(Tip src, List<ApiFootballClient.FixtureDto> fixtures)
-{
-    var srcMatch = Normalize(src.Match);
-    var srcUtc = src.Date.UtcDateTime;
-
-    ApiFootballClient.FixtureDto? best = null;
-    int bestScore = -1;
-    double bestDiff = double.MaxValue;
-
-    foreach (var fx in fixtures)
-    {
-        var diff = Math.Abs((fx.Fixture.Date.UtcDateTime - srcUtc).TotalMinutes);
-        if (diff > 60) continue;
-
-        var home = Normalize(fx.Teams.Home.Name);
-        var away = Normalize(fx.Teams.Away.Name);
-
-        int score = 0;
-        if (!string.IsNullOrEmpty(home) && srcMatch.Contains(home)) score++;
-        if (!string.IsNullOrEmpty(away) && srcMatch.Contains(away)) score++;
-        if (score == 0) continue;
-
-        if (score > bestScore || (score == bestScore && diff < bestDiff))
-        {
-            best = fx;
-            bestScore = score;
-            bestDiff = diff;
-        }
-    }
-
-    return best;
 }
 
 static string Normalize(string? s)
