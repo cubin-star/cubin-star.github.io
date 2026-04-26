@@ -1,74 +1,82 @@
 [
   {
-    "League": "K League 2 (South-Korea)",
-    "Match": "Cheongju vs Asan Mugunghwa",
+    "League": "Ekstraklasa (Poland)",
+    "Match": "Wisla Plock vs Radomiak Radom",
     "Tip": "Over 2.5",
-    "Odds": "2.10",
-    "Date": "2026-04-26T07:30:00+00:00",
-    "FixtureId": 1510313
-  },
-  {
-    "League": "Segunda Divisi\u00F3n RFEF - Group 2 (Spain)",
-    "Match": "Real Zaragoza II vs Real Uni\u00F3n",
-    "Tip": "Over 2.5",
-    "Odds": "1.72",
-    "Date": "2026-04-26T10:00:00+00:00",
-    "FixtureId": 1432491
+    "Odds": "2.02",
+    "Date": "2026-04-26T10:15:00+00:00",
+    "FixtureId": 1380652
   },
   {
     "League": "Ekstraklasa (Poland)",
     "Match": "Wisla Plock vs Radomiak Radom",
     "Tip": "Over 2.5",
-    "Odds": "2.01",
+    "Odds": "2.02",
     "Date": "2026-04-26T10:15:00+00:00",
     "FixtureId": 1380652
   },
   {
-    "League": "Eredivisie (Netherlands)",
-    "Match": "Excelsior vs Utrecht",
+    "League": "Ekstraklasa (Poland)",
+    "Match": "Wisla Plock vs Radomiak Radom",
     "Tip": "Over 2.5",
-    "Odds": "1.78",
+    "Odds": "2.02",
     "Date": "2026-04-26T10:15:00+00:00",
-    "FixtureId": 1381137
+    "FixtureId": 1380652
   },
   {
-    "League": "Thai League 1 (Thailand)",
-    "Match": "Rayong FC vs Lamphun Warrior",
+    "League": "Serie A (Italy)",
+    "Match": "Fiorentina vs Sassuolo",
     "Tip": "Over 2.5",
-    "Odds": "1.93",
-    "Date": "2026-04-26T11:00:00+00:00",
-    "FixtureId": 1491292
+    "Odds": "1.94",
+    "Date": "2026-04-26T10:30:00+00:00",
+    "FixtureId": 1378196
   },
   {
-    "League": "Liga I (Romania)",
-    "Match": "Uta Arad vs Farul Constanta",
+    "League": "Serie A (Italy)",
+    "Match": "Fiorentina vs Sassuolo",
     "Tip": "Over 2.5",
-    "Odds": "1.95",
-    "Date": "2026-04-26T11:00:00+00:00",
-    "FixtureId": 1531531
+    "Odds": "1.94",
+    "Date": "2026-04-26T10:30:00+00:00",
+    "FixtureId": 1378196
   },
   {
-    "League": "Regionalliga - Nordost (Germany)",
-    "Match": "Chemnitzer FC vs ZFC Meuselwitz",
+    "League": "Ekstraklasa (Poland)",
+    "Match": "Widzew \u0141\u00F3d\u017A vs Motor Lublin",
     "Tip": "Over 2.5",
-    "Odds": "1.73",
-    "Date": "2026-04-26T12:00:00+00:00",
-    "FixtureId": 1407727
+    "Odds": "1.80",
+    "Date": "2026-04-26T12:45:00+00:00",
+    "FixtureId": 1380651
   },
   {
-    "League": "Premier League (Malta)",
-    "Match": "Zabbar St. Patrick vs Sliema Wanderers",
+    "League": "Serie A (Italy)",
+    "Match": "Genoa vs Como",
     "Tip": "Over 2.5",
-    "Odds": "1.95",
+    "Odds": "2.07",
     "Date": "2026-04-26T13:00:00+00:00",
-    "FixtureId": 1534144
+    "FixtureId": 1378197
   },
   {
-    "League": "Primeira Liga (Portugal)",
-    "Match": "Estrela vs FC Porto",
+    "League": "NB I (Hungary)",
+    "Match": "Ferencvarosi TC vs Paks",
     "Tip": "Over 2.5",
-    "Odds": "1.87",
-    "Date": "2026-04-26T17:00:00+00:00",
-    "FixtureId": 1396511
+    "Odds": "1.43",
+    "Date": "2026-04-26T15:00:00+00:00",
+    "FixtureId": 1380355
+  },
+  {
+    "League": "NB I (Hungary)",
+    "Match": "Debreceni VSC vs Gyori ETO FC",
+    "Tip": "Over 2.5",
+    "Odds": "1.57",
+    "Date": "2026-04-26T17:30:00+00:00",
+    "FixtureId": 1380354
+  },
+  {
+    "League": "Serie A (Italy)",
+    "Match": "AC Milan vs Juventus",
+    "Tip": "Over 2.5",
+    "Odds": "2.12",
+    "Date": "2026-04-26T18:45:00+00:00",
+    "FixtureId": 1378199
   }
 ]
