@@ -1,50 +1,50 @@
 [
   {
-    "league": "K League 2",
-    "match": "Cheongju vs Asan Mugunghwa",
-    "kickoff": "2026-04-26T07:30:00+00:00",
-    "tip": "Over 2.5",
-    "odds": "1.98",
-    "group": 1
-  },
-  {
-    "league": "J1 League",
-    "match": "V-varen Nagasaki vs Gamba Osaka",
-    "kickoff": "2026-04-25T09:30:00+00:00",
-    "tip": "Over 2.5",
-    "odds": "1.85",
-    "group": 1
-  },
-  {
-    "league": "I Liga",
-    "match": "Polonia Warszawa vs Chrobry Głogów",
-    "kickoff": "2026-04-25T17:30:00+00:00",
+    "league": "Primeira Liga",
+    "match": "Estrela vs FC Porto",
+    "kickoff": "2026-04-26T17:00:00+00:00",
     "tip": "Over 2.5",
     "odds": "1.83",
+    "group": 1
+  },
+  {
+    "league": "Premier League",
+    "match": "Zabbar St. Patrick vs Sliema Wanderers",
+    "kickoff": "2026-04-26T13:00:00+00:00",
+    "tip": "Over 2.5",
+    "odds": "1.92",
+    "group": 1
+  },
+  {
+    "league": "Ekstraklasa",
+    "match": "Wisla Plock vs Radomiak Radom",
+    "kickoff": "2026-04-26T10:15:00+00:00",
+    "tip": "Over 2.5",
+    "odds": "1.92",
     "group": 2
   },
   {
-    "league": "Primera División",
-    "match": "Comerciantes Unidos vs Sporting Cristal",
-    "kickoff": "2026-04-25T20:30:00+00:00",
+    "league": "Segunda División",
+    "match": "Granada CF vs Almeria",
+    "kickoff": "2026-04-26T14:15:00+00:00",
     "tip": "Over 2.5",
-    "odds": "1.99",
+    "odds": "1.82",
     "group": 2
   },
   {
-    "league": "Czech Liga",
-    "match": "Baník Ostrava vs Plzen",
-    "kickoff": "2026-04-25T14:00:00+00:00",
+    "league": "Thai League 1",
+    "match": "Rayong FC vs Lamphun Warrior",
+    "kickoff": "2026-04-26T11:00:00+00:00",
     "tip": "Over 2.5",
-    "odds": "1.81",
+    "odds": "1.87",
     "group": 3
   },
   {
-    "league": "National 2 - Group B",
-    "match": "Haguenau - Furiani-Agliani",
-    "kickoff": "2026-04-25T16:00:00+02:00",
+    "league": "Liga I",
+    "match": "Uta Arad vs Farul Constanta",
+    "kickoff": "2026-04-26T11:00:00+00:00",
     "tip": "Over 2.5",
-    "odds": "2.15",
+    "odds": "1.88",
     "group": 3
   }
 ]
