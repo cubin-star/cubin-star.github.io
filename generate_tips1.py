@@ -32,7 +32,7 @@ from zoneinfo import ZoneInfo
 API_KEY = os.environ.get("API_FOOTBALL_KEY1", "")
 BASE_URL = "https://v3.football.api-sports.io"
 MIN_ODDS = 1.70
-MAX_ODDS = 1.95
+MAX_ODDS = 1.90
 MIN_GAMES = 5
 NUM_TIPS = 3
 DELAY = 0.3
