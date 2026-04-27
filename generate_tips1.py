@@ -1,27 +1,22 @@
 """
-Ultimate Football Overs - Daily Tip Generator v17
+Ultimate Football Overs - Daily Tip Generator v18
 
-Logika (SureBets league-relative):
+Logika (Random):
   1. Blacklist (youth/reserve/amateur/women/esports)
   2. Liga filter: max 3. liga (Anglie: az 6. liga)
-  3. Kurzy Over 2.5 v rozmezi 1.80-2.00
+  3. Kurzy Over 2.5 v rozmezi 1.70-1.95
   4. 24h okno – jen zapasy v nasledujicich 24 hodinach
-  5. League-relative criteria (home/away split):
-     baseline = avg(h_for, a_for, h_agn, a_agn)
-     A) oba conceded >= 0.85*base + ofenzivni kontrast (jeden scored >= 1.10*base, druhy < 0.95*base)
-     B) oba scored >= 0.85*base + defenzivni kontrast (jeden conceded >= 1.10*base, druhy < 0.95*base)
-     + 2nd-half filtr (stejny A/B princip na 2H data)
-  6. Vyber: kvalifikovane zapasy -> prednost 16h okno (15:00-17:59 CET)
-     - kazdy zapas z jine ligy, vaha = score (kontrast)
-  7. Fallback: evropske prvni ligy, pak pool (unikatni ligy)
+  5. Nahodny vyber 3 zapasu – prednost top evropske prvni ligy
+     - z kazde souteze jen jeden zapas (zadne duplicitni souteze)
+     - ruske a beloruske souteze vylouceny
 
 API: https://www.api-football.com/ (7500 req/day)
 Env: API_FOOTBALL_KEY1
-Analyza: az 200 kandidatu, delay 0.3s
+Delay 0.3s
 
 Output:
   fotbal.json - 3 tips (Ultimate Football Overs)
-  live2.json  - all qualified tips (for external app)
+  live2.json  - same tips
 """
 
 import os
@@ -36,8 +31,8 @@ from zoneinfo import ZoneInfo
 
 API_KEY = os.environ.get("API_FOOTBALL_KEY1", "")
 BASE_URL = "https://v3.football.api-sports.io"
-MIN_ODDS = 1.80
-MAX_ODDS = 2.00
+MIN_ODDS = 1.70
+MAX_ODDS = 1.95
 MIN_GAMES = 5
 NUM_TIPS = 3
 DELAY = 0.3
@@ -77,6 +72,11 @@ EUROPEAN_COUNTRIES = {
     "azerbaijan", "moldova", "estonia", "latvia", "lithuania",
     "faroe islands", "gibraltar", "liechtenstein", "andorra", "san marino",
     "world",
+}
+
+TOP_EUROPEAN_COUNTRIES = {
+    "england", "spain", "germany", "italy", "france", "netherlands",
+    "portugal", "turkey", "belgium", "scotland",
 }
 
 
@@ -509,75 +509,60 @@ def _is_16h_window(m):
         return False
 
 
-def select_best_tips(qualified, pool, num=NUM_TIPS):
-    """Select best tips: prefer 16h window, then others, fallback from pool."""
-    print(f"\n  Kvalifikovano: {len(qualified)} zapasu")
+def select_best_tips(pool, num=NUM_TIPS):
+    """Random selection: prefer top European first leagues, one match per league."""
+    print(f"\n  Pool: {len(pool)} zapasu")
 
-    # Split into 16h window and others
-    q_16h = [m for m in qualified if _is_16h_window(m)]
-    q_other = [m for m in qualified if not _is_16h_window(m)]
-    print(f"  16h okno (15:00-17:59 CET): {len(q_16h)}, ostatni: {len(q_other)}")
-
+    used_leagues = set()
     selected = []
 
-    # 1) Pick from 16h window first
-    if q_16h:
-        selected = weighted_pick(q_16h, min(len(q_16h), num))
-        for m in selected:
-            m["_tag"] = "16h"
-        print(f"  Vybrano z 16h: {len(selected)}")
-        for m in selected:
-            print(f"    >>> [VYBRAN 16h] {m['Match']} ({m['League']}) - {m.get('detail','')}")
+    # 1) Top European first leagues (not second tier)
+    top_euro = [m for m in pool
+                if m.get("country", "").lower() in TOP_EUROPEAN_COUNTRIES
+                and not is_second_tier(m["League"])]
+    random.shuffle(top_euro)
+    for m in top_euro:
+        if len(selected) >= num:
+            break
+        if m["League"] in used_leagues:
+            continue
+        m["_tag"] = "top_euro"
+        selected.append(m)
+        used_leagues.add(m["League"])
 
-    # 2) Fill from remaining qualified (unique leagues)
-    if len(selected) < num and q_other:
-        used_leagues = {s["League"] for s in selected}
-        avail = [m for m in q_other if m["League"] not in used_leagues]
-        need = num - len(selected)
-        picks = weighted_pick(avail, need)
-        for m in picks:
-            m["_tag"] = "qualified"
-        selected.extend(picks)
-        print(f"  Doplneno z ostatnich: {len(picks)}, celkem: {len(selected)}")
-        for m in picks:
-            print(f"    >>> [VYBRAN] {m['Match']} ({m['League']}) - {m.get('detail','')}")
-
-    # 3) Fallback from pool (European top leagues first, then any)
+    # 2) Other European first leagues
     if len(selected) < num:
-        used_ids = {s["fixture_id"] for s in selected}
-        used_leagues = {s["League"] for s in selected}
-        remaining = [m for m in pool if m["fixture_id"] not in used_ids and m["League"] not in used_leagues]
-
-        euro_top = [m for m in remaining if m.get("is_european") and not is_second_tier(m["League"])]
-        random.shuffle(euro_top)
-        for m in euro_top:
+        other_euro = [m for m in pool
+                      if m.get("is_european")
+                      and not is_second_tier(m["League"])
+                      and m["League"] not in used_leagues]
+        random.shuffle(other_euro)
+        for m in other_euro:
             if len(selected) >= num:
                 break
             if m["League"] in used_leagues:
                 continue
-            m["_tag"] = "fallback"
+            m["_tag"] = "euro"
             selected.append(m)
             used_leagues.add(m["League"])
-            used_ids.add(m["fixture_id"])
 
-        if len(selected) < num:
-            rest = [m for m in remaining if m["fixture_id"] not in used_ids and m["League"] not in used_leagues]
-            random.shuffle(rest)
-            for m in rest:
-                if len(selected) >= num:
-                    break
-                if m["League"] in used_leagues:
-                    continue
-                m["_tag"] = "fallback"
-                selected.append(m)
-                used_leagues.add(m["League"])
+    # 3) Any remaining (unique leagues)
+    if len(selected) < num:
+        rest = [m for m in pool if m["League"] not in used_leagues]
+        random.shuffle(rest)
+        for m in rest:
+            if len(selected) >= num:
+                break
+            if m["League"] in used_leagues:
+                continue
+            m["_tag"] = "other"
+            selected.append(m)
+            used_leagues.add(m["League"])
 
-        fallback_picks = [m for m in selected if m.get("_tag") == "fallback"]
-        print(f"  Fallback: {len(fallback_picks)} doplneno, celkem: {len(selected)}")
-        for m in fallback_picks:
-            print(f"    >>> [FALLBACK] {m['Match']} ({m['League']}) - {m.get('detail','N/A')}")
+    print(f"  Vybrano: {len(selected)}")
+    for m in selected:
+        print(f"    >>> [{m.get('_tag', '?').upper()}] {m['Match']} ({m['League']})")
 
-    random.shuffle(selected)
     return selected[:num]
 
 
@@ -592,11 +577,10 @@ def main():
     today = now.strftime("%Y-%m-%d")
     tomorrow = (now + timedelta(days=1)).strftime("%Y-%m-%d")
 
-    print(f"== generate_tips1 v17 (SureBets criteria) ==")
+    print(f"== generate_tips1 v18 (Random selection) ==")
     print(f"Time: {now.strftime('%Y-%m-%d %H:%M UTC')}")
-    print(f"Over 2.5 | odds {MIN_ODDS}-{MAX_ODDS} | league-relative A/B + 2H filter")
-    print(f"Ratios: FLOOR={BOTH_FLOOR_R}, STRONG={STRONG_MIN_R}, CONTRAST<{CONTRAST_MAX_R}, minBase={MIN_BASELINE}, minAtk={MIN_ATTACK}")
-    print(f"Output: {OUTPUT_APP1} ({NUM_TIPS}), {OUTPUT_LIVE2} (all qualified)\n")
+    print(f"Over 2.5 | odds {MIN_ODDS}-{MAX_ODDS} | random, top European first leagues, 1 per competition")
+    print(f"Output: {OUTPUT_APP1} ({NUM_TIPS}), {OUTPUT_LIVE2}\n")
 
     # Fixtures
     fixtures_today = fetch_fixtures(today)
@@ -629,12 +613,8 @@ def main():
         print("No matches at all.")
         return
 
-    # Filter by SureBets criteria (league-relative A/B + 2H)
-    qualified = filter_by_criteria(candidates)
-    print(f"\n  Splnuje kriteria: {len(qualified)}/{len(candidates)}")
-
-    # Select (16h preference + fallback)
-    selected_raw = select_best_tips(qualified, candidates)
+    # Random selection (top European first leagues, 1 per competition)
+    selected_raw = select_best_tips(candidates)
 
     def fmt(tips):
         out = []
@@ -648,8 +628,8 @@ def main():
 
     app1_tips = fmt(selected_raw)
 
-    # live2.json – all qualified tips for the second app
-    live2_tips = fmt(qualified)
+    # live2.json – same tips
+    live2_tips = fmt(selected_raw)
 
     print(f"\n  {OUTPUT_APP1} ({len(app1_tips)} tips):")
     for t in app1_tips:
