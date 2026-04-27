@@ -1,23 +1,23 @@
 [
   {
-    "league": "Liga I",
-    "match": "Arges Pitesti - Universitatea Craiova",
-    "kickoff": "2026-04-27T19:30:00+02:00",
+    "league": "Serie A",
+    "match": "Lazio - Udinese",
+    "kickoff": "2026-04-27T20:45:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.46"
+    "odds": "2.23"
   },
   {
-    "league": "Iraqi League",
-    "match": "Al Quwa Al Jawiya - Newroz",
-    "kickoff": "2026-04-27T16:00:00+02:00",
+    "league": "Allsvenskan",
+    "match": "Kalmar FF - IF Elfsborg",
+    "kickoff": "2026-04-27T19:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.24"
+    "odds": "2.16"
   },
   {
-    "league": "Liga Pro",
-    "match": "Manta FC - Universidad Catolica",
-    "kickoff": "2026-04-27T23:30:00+02:00",
+    "league": "Premier League",
+    "match": "Epitsentr Dunayivtsi - Oleksandria",
+    "kickoff": "2026-04-27T12:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.13"
+    "odds": "2.09"
   }
 ]
