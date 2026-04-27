@@ -1,17 +1,17 @@
 [
   {
-    "League": "Süper Lig",
-    "Match": "Konyaspor vs Trabzonspor",
-    "Tip": "Over 2.5",
-    "Odds": "1.75",
-    "Date": "2026-04-27T17:00:00+00:00"
-  },
-  {
     "League": "Serie A",
     "Match": "Cagliari vs Atalanta",
     "Tip": "Over 2.5",
     "Odds": "1.85",
     "Date": "2026-04-27T16:30:00+00:00"
+  },
+  {
+    "League": "Süper Lig",
+    "Match": "Konyaspor vs Trabzonspor",
+    "Tip": "Over 2.5",
+    "Odds": "1.80",
+    "Date": "2026-04-27T17:00:00+00:00"
   },
   {
     "League": "Jupiler Pro League",
