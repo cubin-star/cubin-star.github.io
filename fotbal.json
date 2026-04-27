@@ -1,26 +1,25 @@
 [
   {
-    "League": "K League 2",
-    "Match": "Cheongju vs Asan Mugunghwa",
+    "League": "Super Liga",
+    "Match": "TSC Backa Topola vs Mladost Lucani",
     "Tip": "Over 2.5",
-    "Odds": "1.98",
-    "Date": "2026-04-26T07:30:00+00:00",
+    "Odds": "1.89",
+    "Date": "2026-04-27T17:00:00+00:00"
+  },
+  {
+    "League": "Liga Leumit",
+    "Match": "Hapoel Ramat Gan vs Bnei Yehuda",
+    "Tip": "Over 2.5",
+    "Odds": "1.84",
+    "Date": "2026-04-27T16:00:00+00:00",
     "qualified": true
   },
   {
-    "League": "Premier League",
-    "Match": "Zabbar St. Patrick vs Sliema Wanderers",
+    "League": "Division 1",
+    "Match": "Al Jandal vs Al Orubah",
     "Tip": "Over 2.5",
-    "Odds": "1.92",
-    "Date": "2026-04-26T13:00:00+00:00",
-    "qualified": true
-  },
-  {
-    "League": "Segunda División",
-    "Match": "Granada CF vs Almeria",
-    "Tip": "Over 2.5",
-    "Odds": "1.82",
-    "Date": "2026-04-26T14:15:00+00:00",
+    "Odds": "1.83",
+    "Date": "2026-04-27T17:50:00+00:00",
     "qualified": true
   }
 ]

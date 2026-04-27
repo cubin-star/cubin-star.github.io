@@ -1,61 +1,18 @@
 [
   {
-    "League": "Primeira Liga",
-    "Match": "Estrela vs FC Porto",
+    "League": "Division 1",
+    "Match": "Al Jandal vs Al Orubah",
     "Tip": "Over 2.5",
     "Odds": "1.83",
-    "Date": "2026-04-26T17:00:00+00:00"
-  },
-  {
-    "League": "Premier League",
-    "Match": "Zabbar St. Patrick vs Sliema Wanderers",
-    "Tip": "Over 2.5",
-    "Odds": "1.92",
-    "Date": "2026-04-26T13:00:00+00:00",
+    "Date": "2026-04-27T17:50:00+00:00",
     "qualified": true
   },
   {
-    "League": "Ekstraklasa",
-    "Match": "Wisla Plock vs Radomiak Radom",
+    "League": "Liga Leumit",
+    "Match": "Hapoel Ramat Gan vs Bnei Yehuda",
     "Tip": "Over 2.5",
-    "Odds": "1.92",
-    "Date": "2026-04-26T10:15:00+00:00"
-  },
-  {
-    "League": "Segunda División",
-    "Match": "Granada CF vs Almeria",
-    "Tip": "Over 2.5",
-    "Odds": "1.82",
-    "Date": "2026-04-26T14:15:00+00:00",
+    "Odds": "1.84",
+    "Date": "2026-04-27T16:00:00+00:00",
     "qualified": true
-  },
-  {
-    "League": "Thai League 1",
-    "Match": "Rayong FC vs Lamphun Warrior",
-    "Tip": "Over 2.5",
-    "Odds": "1.87",
-    "Date": "2026-04-26T11:00:00+00:00"
-  },
-  {
-    "League": "Liga I",
-    "Match": "Uta Arad vs Farul Constanta",
-    "Tip": "Over 2.5",
-    "Odds": "1.88",
-    "Date": "2026-04-26T11:00:00+00:00"
-  },
-  {
-    "League": "K League 2",
-    "Match": "Cheongju vs Asan Mugunghwa",
-    "Tip": "Over 2.5",
-    "Odds": "1.98",
-    "Date": "2026-04-26T07:30:00+00:00",
-    "qualified": true
-  },
-  {
-    "League": "Eredivisie",
-    "Match": "Excelsior vs Utrecht",
-    "Tip": "Over 2.5",
-    "Odds": "1.80",
-    "Date": "2026-04-26T10:15:00+00:00"
   }
 ]
