@@ -1,25 +1,23 @@
 [
   {
-    "League": "Super Liga",
-    "Match": "TSC Backa Topola vs Mladost Lucani",
+    "League": "La Liga",
+    "Match": "Espanyol vs Levante",
     "Tip": "Over 2.5",
-    "Odds": "1.89",
-    "Date": "2026-04-27T17:00:00+00:00"
+    "Odds": "1.92",
+    "Date": "2026-04-27T19:00:00+00:00"
   },
   {
-    "League": "Liga Leumit",
-    "Match": "Hapoel Ramat Gan vs Bnei Yehuda",
+    "League": "Süper Lig",
+    "Match": "Alanyaspor vs Samsunspor",
     "Tip": "Over 2.5",
-    "Odds": "1.84",
-    "Date": "2026-04-27T16:00:00+00:00",
-    "qualified": true
+    "Odds": "1.93",
+    "Date": "2026-04-27T14:00:00+00:00"
   },
   {
-    "League": "Division 1",
-    "Match": "Al Jandal vs Al Orubah",
+    "League": "Serie A",
+    "Match": "Cagliari vs Atalanta",
     "Tip": "Over 2.5",
-    "Odds": "1.83",
-    "Date": "2026-04-27T17:50:00+00:00",
-    "qualified": true
+    "Odds": "1.90",
+    "Date": "2026-04-27T16:30:00+00:00"
   }
 ]
