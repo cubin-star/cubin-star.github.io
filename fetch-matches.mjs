@@ -287,8 +287,11 @@ async function main() {
     console.log('Tier 4 (zbytek sveta): ' + tier4.length + '\n');
 
     const selected = [];
+    const usedLeagues = new Set();
     for (const m of [...tier1, ...tier2, ...tier3, ...tier4]) {
         if (selected.length >= PICK_COUNT) break;
+        if (usedLeagues.has(m.league)) continue;
+        usedLeagues.add(m.league);
         selected.push(m);
         console.log('   [T' + m.tier + '] ' + m.match + ' | ' + m.league + ' (' + m.country + ') | Over 2.5 @ ' + m.odds);
     }
