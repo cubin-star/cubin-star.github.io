@@ -1,5 +1,20 @@
 [
   {
+    "league": "Serie B",
+    "homeTeam": "Atletico Goianiense",
+    "awayTeam": "Avai",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "1:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "kickoff": "2026-04-26T23:30:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-football",
+    "scoutStats": "Score: 12/14 | xG: 2.33 | Shots: 25/10 | Corners: 7 | Poss: 59% | Pre O2.5: 2.25"
+  },
+  {
     "league": "Liga Pro",
     "homeTeam": "Orense SC",
     "awayTeam": "Barcelona SC",
