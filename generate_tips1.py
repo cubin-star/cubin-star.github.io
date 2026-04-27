@@ -416,17 +416,17 @@ def extract_candidates(odds_data, fixtures, min_odds=MIN_ODDS, max_odds=MAX_ODDS
         if not over25_odds:
             continue
 
-        avg = sum(over25_odds) / len(over25_odds)
+        best = max(over25_odds)
         candidates.append({
             "League": league_name,
             "Match": f"{fix['home']} vs {fix['away']}",
             "Tip": "Over 2.5",
-            "Odds": f"{avg:.2f}",
+            "Odds": f"{best:.2f}",
             "fixture_id": fid,
             "league_id": fix["league_id"],
             "country": country,
             "is_european": country in EUROPEAN_COUNTRIES,
-            "avg": avg,
+            "avg": best,
             "kickoff": fix.get("kickoff", ""),
         })
 
