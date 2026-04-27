@@ -402,21 +402,24 @@ def extract_candidates(odds_data, fixtures, min_odds=MIN_ODDS, max_odds=MAX_ODDS
         if is_low_tier_league(league_name, country):
             continue
 
-        over25_odds = []
+        over25_all = []
         for bm in item.get("bookmakers", []):
             for bet in bm.get("bets", []):
                 for val in bet.get("values", []):
                     if val.get("value") == "Over 2.5":
                         try:
                             odd = float(val.get("odd", 0))
-                            if min_odds <= odd <= max_odds:
-                                over25_odds.append(odd)
+                            if odd > 0:
+                                over25_all.append(odd)
                         except (ValueError, TypeError):
                             pass
-        if not over25_odds:
+        if not over25_all:
             continue
 
-        best = max(over25_odds)
+        best = max(over25_all)
+        if not (min_odds <= best <= max_odds):
+            continue
+
         candidates.append({
             "League": league_name,
             "Match": f"{fix['home']} vs {fix['away']}",
