@@ -510,52 +510,43 @@ def _is_16h_window(m):
 
 
 def select_best_tips(pool, num=NUM_TIPS):
-    """Random selection: prefer top European first leagues, one match per league."""
+    """Random selection priority:
+    1) Top European first leagues
+    2) Other European first leagues
+    3) Top European second leagues
+    4) Other European second leagues
+    5) Rest of the world
+    One match per competition."""
     print(f"\n  Pool: {len(pool)} zapasu")
 
     used_leagues = set()
     selected = []
 
-    # 1) Top European first leagues (not second tier)
-    top_euro = [m for m in pool
-                if m.get("country", "").lower() in TOP_EUROPEAN_COUNTRIES
-                and not is_second_tier(m["League"])]
-    random.shuffle(top_euro)
-    for m in top_euro:
+    groups = [
+        # 1) Top European first leagues
+        lambda m: m.get("country", "").lower() in TOP_EUROPEAN_COUNTRIES and not is_second_tier(m["League"]),
+        # 2) Other European first leagues
+        lambda m: m.get("is_european") and not is_second_tier(m["League"]),
+        # 3) Top European second leagues
+        lambda m: m.get("country", "").lower() in TOP_EUROPEAN_COUNTRIES and is_second_tier(m["League"]),
+        # 4) Other European second leagues
+        lambda m: m.get("is_european") and is_second_tier(m["League"]),
+        # 5) Rest of the world
+        lambda m: True,
+    ]
+    tags = ["top_euro", "euro", "top_euro_2nd", "euro_2nd", "other"]
+
+    for predicate, tag in zip(groups, tags):
         if len(selected) >= num:
             break
-        if m["League"] in used_leagues:
-            continue
-        m["_tag"] = "top_euro"
-        selected.append(m)
-        used_leagues.add(m["League"])
-
-    # 2) Other European first leagues
-    if len(selected) < num:
-        other_euro = [m for m in pool
-                      if m.get("is_european")
-                      and not is_second_tier(m["League"])
-                      and m["League"] not in used_leagues]
-        random.shuffle(other_euro)
-        for m in other_euro:
+        candidates = [m for m in pool if predicate(m) and m["League"] not in used_leagues]
+        random.shuffle(candidates)
+        for m in candidates:
             if len(selected) >= num:
                 break
             if m["League"] in used_leagues:
                 continue
-            m["_tag"] = "euro"
-            selected.append(m)
-            used_leagues.add(m["League"])
-
-    # 3) Any remaining (unique leagues)
-    if len(selected) < num:
-        rest = [m for m in pool if m["League"] not in used_leagues]
-        random.shuffle(rest)
-        for m in rest:
-            if len(selected) >= num:
-                break
-            if m["League"] in used_leagues:
-                continue
-            m["_tag"] = "other"
+            m["_tag"] = tag
             selected.append(m)
             used_leagues.add(m["League"])
 
