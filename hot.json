@@ -1,50 +1,50 @@
 [
   {
-    "league": "Primeira Liga",
-    "match": "Estrela vs FC Porto",
-    "kickoff": "2026-04-26T17:00:00+00:00",
+    "league": "Division 1",
+    "match": "Al Jandal vs Al Orubah",
+    "kickoff": "2026-04-27T17:50:00+00:00",
     "tip": "Over 2.5",
     "odds": "1.83",
     "group": 1
   },
   {
-    "league": "Premier League",
-    "match": "Zabbar St. Patrick vs Sliema Wanderers",
-    "kickoff": "2026-04-26T13:00:00+00:00",
+    "league": "Liga I",
+    "match": "Arges Pitesti - Universitatea Craiova",
+    "kickoff": "2026-04-27T19:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "1.92",
+    "odds": "2.46",
     "group": 1
   },
   {
-    "league": "Ekstraklasa",
-    "match": "Wisla Plock vs Radomiak Radom",
-    "kickoff": "2026-04-26T10:15:00+00:00",
+    "league": "Liga Leumit",
+    "match": "Hapoel Ramat Gan vs Bnei Yehuda",
+    "kickoff": "2026-04-27T16:00:00+00:00",
     "tip": "Over 2.5",
-    "odds": "1.92",
+    "odds": "1.84",
     "group": 2
   },
   {
-    "league": "Segunda División",
-    "match": "Granada CF vs Almeria",
-    "kickoff": "2026-04-26T14:15:00+00:00",
+    "league": "Iraqi League",
+    "match": "Al Quwa Al Jawiya - Newroz",
+    "kickoff": "2026-04-27T16:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "1.82",
+    "odds": "2.24",
     "group": 2
   },
   {
-    "league": "Thai League 1",
-    "match": "Rayong FC vs Lamphun Warrior",
-    "kickoff": "2026-04-26T11:00:00+00:00",
+    "league": "Primeira Liga",
+    "match": "GIL Vicente - Casa Pia",
+    "kickoff": "2026-04-27T21:15:00+02:00",
     "tip": "Over 2.5",
-    "odds": "1.87",
+    "odds": "2.10",
     "group": 3
   },
   {
-    "league": "Liga I",
-    "match": "Uta Arad vs Farul Constanta",
-    "kickoff": "2026-04-26T11:00:00+00:00",
+    "league": "Liga Pro",
+    "match": "Manta FC - Universidad Catolica",
+    "kickoff": "2026-04-27T23:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "1.88",
+    "odds": "2.13",
     "group": 3
   }
 ]
