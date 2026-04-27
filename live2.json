@@ -1,23 +1,23 @@
 [
   {
-    "League": "La Liga",
-    "Match": "Espanyol vs Levante",
+    "League": "Süper Lig",
+    "Match": "Konyaspor vs Trabzonspor",
     "Tip": "Over 2.5",
-    "Odds": "1.92",
-    "Date": "2026-04-27T19:00:00+00:00"
+    "Odds": "1.75",
+    "Date": "2026-04-27T17:00:00+00:00"
   },
   {
-    "League": "Süper Lig",
-    "Match": "Alanyaspor vs Samsunspor",
+    "League": "3. Lig - Play-offs",
+    "Match": "Çorluspor 1947 vs Bursa Yıldırımspor",
     "Tip": "Over 2.5",
-    "Odds": "1.93",
-    "Date": "2026-04-27T14:00:00+00:00"
+    "Odds": "1.84",
+    "Date": "2026-04-27T13:00:00+00:00"
   },
   {
     "League": "Serie A",
     "Match": "Cagliari vs Atalanta",
     "Tip": "Over 2.5",
-    "Odds": "1.90",
+    "Odds": "1.87",
     "Date": "2026-04-27T16:30:00+00:00"
   }
 ]
