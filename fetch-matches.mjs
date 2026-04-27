@@ -25,19 +25,76 @@ let reqCount = 0;
 let fixtureFetchErrors = 0;
 let fixtureFetchAttempts = 0;
 
-// --- Prioritní ligy ---
+// --- Prioritní ligy (název + country) ---
 // Tier 1: Hlavní evropské první ligy
-const TIER1_LEAGUES = new Set([
-    'Premier League',
-    'La Liga',
-    'Serie A',
-    'Bundesliga',
-    'Ligue 1',
-    'Eredivisie',
-    'Primeira Liga',
-    'Pro League',
-    'Scottish Premiership',
-    'Süper Lig',
+const TIER1 = [
+    ['Premier League',              'England'],
+    ['La Liga',                     'Spain'],
+    ['Serie A',                     'Italy'],
+    ['Bundesliga',                  'Germany'],
+    ['Ligue 1',                     'France'],
+    ['Eredivisie',                  'Netherlands'],
+    ['Primeira Liga',               'Portugal'],
+    ['Liga Portugal',               'Portugal'],
+    ['Pro League',                  'Belgium'],
+    ['Jupiler Pro League',          'Belgium'],
+    ['Scottish Premiership',        'Scotland'],
+    ['Premiership',                 'Scotland'],
+    ['Ekstraklasa',                 'Poland'],
+    ['Czech Liga',                  'Czech-Republic'],
+    ['Fortuna Liga',                'Czech-Republic'],
+    ['Super League 1',              'Greece'],
+    ['Super Liga',                  'Serbia'],
+    ['Austrian Football Bundesliga','Austria'],
+    ['Austrian Bundesliga',         'Austria'],
+    ['Eliteserien',                 'Norway'],
+    ['Allsvenskan',                 'Sweden'],
+    ['Superliga',                   'Denmark'],
+    ['Veikkausliiga',               'Finland'],
+    ['Super League',                'Switzerland'],
+    ['Liga I',                      'Romania'],
+];
+
+// Tier 2: Evropské druhé ligy
+const TIER2 = [
+    ['Championship',            'England'],
+    ['2. Bundesliga',           'Germany'],
+    ['Serie B',                 'Italy'],
+    ['LaLiga2',                 'Spain'],
+    ['Ligue 2',                 'France'],
+    ['Eerste Divisie',          'Netherlands'],
+    ['Scottish Championship',   'Scotland'],
+    ['1. Liga',                 'Czech-Republic'],
+    ['Fortuna 1. Liga',         'Slovakia'],
+    ['I Liga',                  'Poland'],
+    ['National League',         'England'],
+    ['League One',              'England'],
+    ['League Two',              'England'],
+    ['Challenger Pro League',   'Belgium'],
+    ['Liga de Honra',           'Portugal'],
+    ['2. Liga',                 'Austria'],
+    ['1. Division',             'Denmark'],
+];
+
+const TIER1_SET = new Set(TIER1.map(([n, c]) => n + '|' + c));
+const TIER2_SET = new Set(TIER2.map(([n, c]) => n + '|' + c));
+
+// Hlavní evropské země pro tier 3 prioritizaci
+const EUROPE_COUNTRIES = new Set([
+    'England','Spain','Germany','Italy','France','Netherlands','Portugal','Belgium',
+    'Greece','Turkey','Poland','Czech-Republic','Slovakia','Scotland','Switzerland',
+    'Austria','Sweden','Norway','Denmark','Finland','Serbia','Croatia','Ukraine',
+    'Romania','Hungary','Bulgaria','Slovenia','Bosnia And Herzegovina',
+]);
+
+function leagueTier(leagueName, country) {
+    const key = leagueName + '|' + country;
+    if (TIER1_SET.has(key)) return 1;
+    if (TIER2_SET.has(key)) return 2;
+    if (EUROPE_COUNTRIES.has(country)) return 3;
+    return 4;
+
+function maskKey(k) {
     'Liga Portugal',
     'Ekstraklasa',
     'Czech Liga',
@@ -81,8 +138,9 @@ const EUROPE_COUNTRIES = new Set([
 ]);
 
 function leagueTier(leagueName, country) {
-    if (TIER1_LEAGUES.has(leagueName)) return 1;
-    if (TIER2_LEAGUES.has(leagueName)) return 2;
+    const key = leagueName + '|' + country;
+    if (TIER1_SET.has(key)) return 1;
+    if (TIER2_SET.has(key)) return 2;
     if (EUROPE_COUNTRIES.has(country)) return 3;
     return 4;
 }
