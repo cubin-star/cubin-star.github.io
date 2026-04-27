@@ -179,8 +179,9 @@ def is_blocked_team(team_name):
 
 
 def is_second_tier(name):
+    """Returns True if the league is NOT the top first division (i.e. 2nd tier and below)."""
     return bool(re.search(
-        r"\b(2|II|segunda|championship|league two|league one|serie b|ligue 2|2\. liga|2\. bundesliga|eerste divisie|second|third|cup|pokal|coupe|copa|taca)\b",
+        r"\b(2|3|4|5|II|III|IV|V|segunda|tercera|championship|league two|league one|serie b|serie c|ligue 2|2\. liga|3\. liga|2\. bundesliga|3\. bundesliga|eerste divisie|second|third|play-?off|playoffs?|cup|pokal|coupe|copa|taca)\b",
         name, re.IGNORECASE
     ))
 
