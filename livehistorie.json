@@ -1,5 +1,21 @@
 [
   {
+    "league": "WCH U18",
+    "homeTeam": "Latvia U18",
+    "awayTeam": "Slovakia U18",
+    "tip": "Over 6.5",
+    "odds": "",
+    "halftimeScore": "1:2",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "hockey",
+    "kickoff": "2026-04-27T16:00:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-hockey",
+    "scoutStats": "Score: 9/12 | P1: 1:2 | GF: 6.7 GA: 5.3 | Proj: 6.6 → Over 6.5 | WCH U18"
+  },
+  {
     "league": "Liiga",
     "homeTeam": "SaiPa",
     "awayTeam": "KooKoo",
