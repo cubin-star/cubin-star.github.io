@@ -1,5 +1,55 @@
 [
   {
+    "sport": "football",
+    "league": "Segunda División",
+    "match": "AD Ceuta FC vs Racing Santander",
+    "tip": "Over 1.5",
+    "odds": "1.15",
+    "date": "2026-04-26T19:00:00+00:00",
+    "score": "0:0",
+    "result": "✗"
+  },
+  {
+    "sport": "hockey",
+    "league": "D1",
+    "match": "Caen vs Cholet",
+    "tip": "Over 3.5",
+    "odds": "1.16",
+    "date": "2026-04-26T18:00:00+00:00",
+    "score": "2:3",
+    "result": "✓"
+  },
+  {
+    "sport": "hockey",
+    "league": "Extraliga",
+    "match": "Nitra vs Slovan Bratislava",
+    "tip": "Over 3.5",
+    "odds": "1.17",
+    "date": "2026-04-26T16:00:00+00:00",
+    "score": "5:3",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "Regionalliga - Nordost",
+    "match": "Chemnitzer FC vs ZFC Meuselwitz",
+    "tip": "Over 1.5",
+    "odds": "1.20",
+    "date": "2026-04-26T12:00:00+00:00",
+    "score": "3:2",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "Segunda División RFEF - Group 2",
+    "match": "Real Zaragoza II vs Real Unión",
+    "tip": "Over 1.5",
+    "odds": "1.18",
+    "date": "2026-04-26T10:00:00+00:00",
+    "score": "3:1",
+    "result": "✓"
+  },
+  {
     "sport": "basketball",
     "league": "NBA",
     "match": "Atlanta Hawks vs New York Knicks",
@@ -1947,56 +1997,6 @@
     "odds": "1.30",
     "date": "2026-04-04T08:30:00+00:00",
     "score": "1:0",
-    "result": "✗"
-  },
-  {
-    "sport": "football",
-    "league": "Liga de Expansión MX",
-    "match": "Tepatitlán vs Alebrijes de Oaxaca",
-    "tip": "Over 1.5",
-    "odds": "1.20",
-    "date": "2026-04-04T02:00:00+00:00",
-    "score": "2:0",
-    "result": "✓"
-  },
-  {
-    "sport": "hockey",
-    "league": "AHL",
-    "match": "San Diego Gulls vs Bakersfield Condors",
-    "tip": "Over 3.5",
-    "odds": "1.13",
-    "date": "2026-04-04T02:00:00+00:00",
-    "score": "6:3",
-    "result": "✓"
-  },
-  {
-    "sport": "hockey",
-    "league": "NHL",
-    "match": "Anaheim Ducks vs St. Louis Blues",
-    "tip": "Over 3.5",
-    "odds": "1.11",
-    "date": "2026-04-04T02:00:00+00:00",
-    "score": "2:6",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Jupiler Pro League",
-    "match": "Antwerp vs Genk",
-    "tip": "Over 1.5",
-    "odds": "1.24",
-    "date": "2026-04-03T18:45:00+00:00",
-    "score": "1:2",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "III Liga - Group 2",
-    "match": "Elana Toruń vs Wda Świecie",
-    "tip": "Over 1.5",
-    "odds": "1.27",
-    "date": "2026-04-03T18:08:00+00:00",
-    "score": "0:1",
     "result": "✗"
   }
 ]
