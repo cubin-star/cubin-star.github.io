@@ -330,3 +330,5 @@ async function main() {
     }
 }
 
+main().catch(err => { console.error('Chyba:', err); process.exit(1); });
+
