@@ -1,50 +1,50 @@
 [
   {
-    "league": "Superliga",
-    "match": "AF Elbasani - Vllaznia Shkodër",
+    "league": "Ekstraklasa",
+    "match": "Piast Gliwice - Arka Gdynia",
     "kickoff": "2026-04-27T19:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.47",
+    "odds": "2.00",
     "group": 1
   },
   {
-    "league": "Süper Lig",
-    "match": "Alanyaspor - Samsunspor",
-    "kickoff": "2026-04-27T16:00:00+02:00",
+    "league": "La Liga",
+    "match": "Espanyol - Levante",
+    "kickoff": "2026-04-27T21:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "1.97",
+    "odds": "2.03",
     "group": 1
+  },
+  {
+    "league": "Jupiler Pro League",
+    "match": "Beerschot VA - Patro Eisden",
+    "kickoff": "2026-04-27T20:30:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "1.95",
+    "group": 2
+  },
+  {
+    "league": "Super Liga",
+    "match": "IMT Novi Beograd - Radnicki NIS",
+    "kickoff": "2026-04-27T17:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.08",
+    "group": 2
   },
   {
     "league": "Serie A",
-    "match": "Lazio - Udinese",
-    "kickoff": "2026-04-27T20:45:00+02:00",
+    "match": "Cagliari - Atalanta",
+    "kickoff": "2026-04-27T18:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.23",
-    "group": 2
-  },
-  {
-    "league": "Allsvenskan",
-    "match": "Kalmar FF - IF Elfsborg",
-    "kickoff": "2026-04-27T19:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.16",
-    "group": 2
-  },
-  {
-    "league": "Premier League",
-    "match": "Zorya Luhansk - Veres Rivne",
-    "kickoff": "2026-04-27T14:30:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.06",
+    "odds": "1.93",
     "group": 3
   },
   {
-    "league": "Super League",
-    "match": "Mash'al - Buxoro",
-    "kickoff": "2026-04-27T16:00:00+02:00",
+    "league": "Liga I",
+    "match": "Arges Pitesti - Universitatea Craiova",
+    "kickoff": "2026-04-27T19:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.40",
+    "odds": "2.42",
     "group": 3
   }
 ]
