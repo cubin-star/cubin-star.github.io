@@ -1,9 +1,23 @@
 [
   {
+    "league": "NBL",
+    "match": "Brno vs Decin",
+    "tip": "Over 151.5",
+    "odds": "1.16",
+    "date": "2026-04-28T16:00:00+00:00"
+  },
+  {
+    "league": "Eurocup",
+    "match": "JL Bourg vs Besiktas",
+    "tip": "Over 154.5",
+    "odds": "1.28",
+    "date": "2026-04-28T17:30:00+00:00"
+  },
+  {
     "league": "NBA",
-    "match": "Denver Nuggets vs Minnesota Timberwolves",
-    "tip": "Over 207.5",
-    "odds": "1.23",
-    "date": "2026-04-28T02:30:00+00:00"
+    "match": "New York Knicks vs Atlanta Hawks",
+    "tip": "Over 201.5",
+    "odds": "1.22",
+    "date": "2026-04-29T00:00:00+00:00"
   }
 ]
