@@ -1,5 +1,21 @@
 [
   {
+    "league": "Liga Leumit",
+    "homeTeam": "Ironi Eilat",
+    "awayTeam": "Maccabi Haifa",
+    "tip": "Over 152.5 (preLine 173.5)",
+    "odds": "",
+    "halftimeScore": "44:28 (72 pts)",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "basketball",
+    "kickoff": "2026-04-28T15:50:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-basketball",
+    "scoutStats": "Score: 5/10 | HT: 44:28 (72 pts) | Q1=25 Q2=47 (line 173.5, pace 83%) | PreLine: 173.5 | Proj: 155.8 | Liga Leumit"
+  },
+  {
     "league": "WHL",
     "homeTeam": "Penticton Vees",
     "awayTeam": "Everett Silvertips",
