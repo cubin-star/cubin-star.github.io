@@ -1,5 +1,21 @@
 [
   {
+    "league": "QMJHL",
+    "homeTeam": "Blainville-Boisbriand Armada",
+    "awayTeam": "Moncton Wildcats",
+    "tip": "Over 5.5",
+    "odds": "",
+    "halftimeScore": "1:1",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "hockey",
+    "kickoff": "2026-04-27T23:00:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-hockey",
+    "scoutStats": "Score: 9/12 | P1: 1:1 | GF: 8.7 GA: 5.2 | Proj: 6.1 → Over 5.5 | QMJHL"
+  },
+  {
     "league": "WCH U18",
     "homeTeam": "Latvia U18",
     "awayTeam": "Slovakia U18",
