@@ -515,11 +515,12 @@ def _is_16h_window(m):
 
 def select_best_tips(pool, num=NUM_TIPS):
     """Random selection priority:
-    1) Top European first leagues
+    1) Top European first leagues (Eng/Esp/Ger/Ita/Fra/Ned/Por/Tur/Bel/Sco)
     2) Other European first leagues
     3) Top European second leagues
-    4) Other European second leagues
-    5) Rest of the world
+    4) Other European second/lower leagues
+    5) Non-European first leagues (rest of world top divisions)
+    6) Everything else (cups, lower non-European)
     One match per competition."""
     print(f"\n  Pool: {len(pool)} zapasu")
 
@@ -528,19 +529,20 @@ def select_best_tips(pool, num=NUM_TIPS):
 
     groups = [
         # 1) Top European first leagues
-        lambda m: m.get("country", "").lower() in TOP_EUROPEAN_COUNTRIES and not is_second_tier(m["League"]),
+        ("top_euro",    lambda m: m.get("country", "").lower() in TOP_EUROPEAN_COUNTRIES and not is_second_tier(m["League"])),
         # 2) Other European first leagues
-        lambda m: m.get("is_european") and not is_second_tier(m["League"]),
+        ("euro",        lambda m: m.get("is_european") and not is_second_tier(m["League"])),
         # 3) Top European second leagues
-        lambda m: m.get("country", "").lower() in TOP_EUROPEAN_COUNTRIES and is_second_tier(m["League"]),
-        # 4) Other European second leagues
-        lambda m: m.get("is_european") and is_second_tier(m["League"]),
-        # 5) Rest of the world
-        lambda m: True,
+        ("top_euro_2nd",lambda m: m.get("country", "").lower() in TOP_EUROPEAN_COUNTRIES and is_second_tier(m["League"])),
+        # 4) Other European second/lower leagues
+        ("euro_2nd",    lambda m: m.get("is_european") and is_second_tier(m["League"])),
+        # 5) Non-European first leagues (rest of world, top division)
+        ("world_1st",   lambda m: not m.get("is_european") and not is_second_tier(m["League"])),
+        # 6) Everything else
+        ("other",       lambda m: True),
     ]
-    tags = ["top_euro", "euro", "top_euro_2nd", "euro_2nd", "other"]
 
-    for predicate, tag in zip(groups, tags):
+    for tag, predicate in groups:
         if len(selected) >= num:
             break
         candidates = [m for m in pool if predicate(m) and m["League"] not in used_leagues]
