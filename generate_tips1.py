@@ -204,11 +204,10 @@ def is_low_tier_league(name, country):
     name_lower = name.lower()
     country_lower = country.lower()
     
-    # England special case: allow up to 6th tier
+    # England special case: allow up to 5th tier (National League)
     if country_lower == "england":
-        # Block only below National League North/South (7th tier and lower)
-        # Patterns for regional/lower divisions
-        if re.search(r"\b(division 1|isthmian|northern premier|southern league|regional|counties)\b", name_lower):
+        # Block 6th tier and below (National League North/South and lower)
+        if re.search(r"\b(non.?league|northern|southern|isthmian|division 1|northern premier|southern league|regional|counties|vanarama)\b", name_lower):
             return True
         return False
     
@@ -394,12 +393,16 @@ def extract_candidates(odds_data, fixtures, min_odds=MIN_ODDS, max_odds=MAX_ODDS
         league_name = fix.get("league", "?")
 
         if country in EXCLUDED_COUNTRIES or country in BLOCKED_AFRICAN:
+            print(f"    SKIP [country blocked] {league_name}: {fix['home']} vs {fix['away']}")
             continue
         if is_blocked_league(league_name):
+            print(f"    SKIP [blocked league] {league_name}: {fix['home']} vs {fix['away']}")
             continue
         if is_blocked_team(fix.get("home", "")) or is_blocked_team(fix.get("away", "")):
+            print(f"    SKIP [blocked team] {league_name}: {fix['home']} vs {fix['away']}")
             continue
         if is_low_tier_league(league_name, country):
+            print(f"    SKIP [low tier] {league_name}: {fix['home']} vs {fix['away']}")
             continue
 
         over25_all = []
@@ -414,11 +417,15 @@ def extract_candidates(odds_data, fixtures, min_odds=MIN_ODDS, max_odds=MAX_ODDS
                         except (ValueError, TypeError):
                             pass
         if not over25_all:
+            print(f"    SKIP [no Over2.5 odds in API] {league_name}: {fix['home']} vs {fix['away']}")
             continue
 
         best = max(over25_all)
         if not (min_odds <= best <= max_odds):
+            print(f"    SKIP [odds {best:.2f} outside {min_odds}-{max_odds}] {league_name}: {fix['home']} vs {fix['away']}")
             continue
+
+        print(f"    OK   [odds {best:.2f}] {league_name}: {fix['home']} vs {fix['away']}")
 
         candidates.append({
             "League": league_name,
