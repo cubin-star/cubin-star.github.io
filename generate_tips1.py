@@ -181,57 +181,45 @@ def is_blocked_team(team_name):
 def is_second_tier(name):
     """Returns True if the league is NOT the top first division (i.e. 2nd tier and below)."""
     return bool(re.search(
-        r"\b(2|3|4|5|II|III|IV|V|segunda|tercera|championship|league two|league one|serie b|serie c|ligue 2|2\. liga|3\. liga|2\. bundesliga|3\. bundesliga|eerste divisie|second|third|play-?off|playoffs?|cup|pokal|coupe|copa|taca|non.?league|non league|northern|southern|isthmian|nacional b|promotion)\b",
+        r"\b(2|3|4|5|II|III|IV|V|segunda|tercera|championship|league two|league one|serie b|serie c|ligue 2|2\. liga|3\. liga|2\. bundesliga|3\. bundesliga|eerste divisie|second|third|northern|southern|non.?league|nacional b|promotion)\b",
         name, re.IGNORECASE
     ))
 
 
 def is_low_tier_league(name, country):
     """
-    Filter out leagues below 3rd tier (4th+ tier).
-    Exception: England allows up to 6th tier (National League North/South).
-    
-    Examples:
-    - England: Premier League, Championship, League One, League Two, National League, National League North/South (OK)
-             : Below National League North/South (blocked)
-    - Other: 1st, 2nd, 3rd tier (OK), 4th+ tier (blocked)
-    
-    Common patterns for 4th+ tier:
-    - "4", "IV", "Quarta", "Cuarta", "4. Liga", "Division 4"
-    - "5", "V", "Quinta", "5. Liga", "Division 5"
-    - Regional leagues, third division, fourth division, etc.
+    Block 3rd tier and below for all countries.
+    England exception: allow up to National League (5th tier), block National League N/S and lower.
     """
     name_lower = name.lower()
     country_lower = country.lower()
-    
-    # England special case: allow up to 5th tier (National League)
+
+    # England: block National League North/South (6th) and below
     if country_lower == "england":
-        # Block 6th tier and below (National League North/South and lower)
         if re.search(r"\b(non.?league|northern|southern|isthmian|division 1|northern premier|southern league|regional|counties|vanarama)\b", name_lower):
             return True
         return False
-    
-    # For all other countries: block 4th tier and below
-    # Patterns for 4th+ tier
+
+    # All other countries: block 3rd tier and below
     patterns = [
-        r"\b(4|IV|quarta|cuarta|fourth|czwarta|vierde)\b",  # 4th tier
-        r"\b(5|V|quinta|quinta|fifth|piąta|vijfde)\b",       # 5th tier
-        r"\b(6|VI|sexta|sixth|szósta)\b",                     # 6th tier
-        r"\b(7|VII|seventh|siódma)\b",                        # 7th tier
-        r"\b4\.\s*(liga|division|divisie)\b",                 # "4. Liga" etc
-        r"\b5\.\s*(liga|division|divisie)\b",
-        r"\btercera\s+division\b",                            # Spain 4th tier
-        r"\btercera\s+rfef\b",                                # Spain 5th tier
-        r"\bserie\s+d\b",                                     # Italy 4th tier
-        r"\bregional\b",                                      # Regional leagues
-        r"\bdistrict\b",                                      # District leagues
-        r"\bprovincial\b",                                    # Provincial leagues
+        r"\b3\.\s*(lig|liga|division|divisie|ligue)\b",      # "3. Lig", "3. Liga" etc
+        r"\b(3|III)\b.*\b(lig|liga|division)\b",             # "3 Liga", "III Liga"
+        r"\blig\s*3\b",                                       # "Lig 3"
+        r"\b(4|IV|5|V|6|VI|7|VII)\b",                        # 4th tier and below
+        r"\b4\.\s*(liga|division|divisie|lig)\b",
+        r"\b5\.\s*(liga|division|divisie|lig)\b",
+        r"\btercera\b",                                       # Spain 3rd/4th
+        r"\bserie\s+[cd]\b",                                  # Italy 3rd/4th
+        r"\bregional\b",
+        r"\bdistrict\b",
+        r"\bprovincial\b",
+        r"\bplay.?off\b",                                     # play-offs are not main league
     ]
-    
+
     for pattern in patterns:
         if re.search(pattern, name_lower):
             return True
-    
+
     return False
 
 
