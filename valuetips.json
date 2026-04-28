@@ -1,21 +1,5 @@
 [
   {
-    "League": "League One",
-    "Match": "Northampton vs Barnsley",
-    "Tip": "Over 2.5",
-    "Odds": "1.75",
-    "Date": "2026-04-28T18:45:00+00:00",
-    "FixtureId": 1387576
-  },
-  {
-    "League": "Championship",
-    "Match": "Southampton vs Ipswich",
-    "Tip": "Over 2.5",
-    "Odds": "1.75",
-    "Date": "2026-04-28T18:45:00+00:00",
-    "FixtureId": 1387028
-  },
-  {
     "League": "J1 League",
     "Match": "Urawa vs Kawasaki Frontale",
     "Tip": "Over 2.5",
