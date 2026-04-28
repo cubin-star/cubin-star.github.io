@@ -1,5 +1,21 @@
 [
   {
+    "league": "WHL",
+    "homeTeam": "Penticton Vees",
+    "awayTeam": "Everett Silvertips",
+    "tip": "Over 5.5",
+    "odds": "",
+    "halftimeScore": "1:1",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "hockey",
+    "kickoff": "2026-04-28T02:05:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-hockey",
+    "scoutStats": "Score: 9/12 | P1: 1:1 | GF: 8.0 GA: 5.2 | Proj: 6 → Over 5.5 | WHL"
+  },
+  {
     "league": "ECHL",
     "homeTeam": "Idaho Steelheads",
     "awayTeam": "Allen Americans",
