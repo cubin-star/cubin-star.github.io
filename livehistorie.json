@@ -1,5 +1,21 @@
 [
   {
+    "league": "Euroleague",
+    "homeTeam": "Valencia",
+    "awayTeam": "Panathinaikos",
+    "tip": "Over 152.5 (preLine 175.5)",
+    "odds": "",
+    "halftimeScore": "32:39 (71 pts)",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "basketball",
+    "kickoff": "2026-04-28T18:45:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-basketball",
+    "scoutStats": "Score: 6/10 | HT: 32:39 (71 pts) | Q1=38 Q2=33 (line 175.5, pace 81%) | PreLine: 175.5 | Proj: 155.8 | Euroleague"
+  },
+  {
     "league": "DEL",
     "homeTeam": "Adler Mannheim",
     "awayTeam": "Eisbaren Berlin",
