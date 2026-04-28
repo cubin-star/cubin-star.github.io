@@ -1,34 +1,42 @@
 [
   {
-    "League": "Liga 1",
-    "Match": "Bali United vs PSM Makassar",
+    "League": "Liga Revela\u00E7\u00E3o U23",
+    "Match": "Torreense U23 vs Sporting Braga U23",
     "Tip": "Over 2.5",
-    "Odds": "1.75",
-    "Date": "2026-04-27T08:30:00+00:00",
-    "FixtureId": 0
+    "Odds": "1.71",
+    "Date": "2026-04-28T16:30:00+00:00",
+    "FixtureId": 1498032
   },
   {
-    "League": "Liga Leumit",
-    "Match": "Hapoel Ramat Gan vs Bnei Yehuda",
-    "Tip": "Over 2.5",
-    "Odds": "1.84",
-    "Date": "2026-04-27T16:00:00+00:00",
-    "FixtureId": 0
-  },
-  {
-    "League": "Division 1",
-    "Match": "Al Jandal vs Al Orubah",
-    "Tip": "Over 2.5",
-    "Odds": "1.83",
-    "Date": "2026-04-27T17:50:00+00:00",
-    "FixtureId": 0
-  },
-  {
-    "League": "NB II",
-    "Match": "Budapest Honved vs Soroksar",
+    "League": "Liga Revela\u00E7\u00E3o U23",
+    "Match": "Santa Clara U23 vs Sporting CP U23",
     "Tip": "Over 2.5",
     "Odds": "1.68",
-    "Date": "2026-04-27T18:00:00+00:00",
-    "FixtureId": 0
+    "Date": "2026-04-28T16:30:00+00:00",
+    "FixtureId": 1498033
+  },
+  {
+    "League": "League One",
+    "Match": "Northampton vs Barnsley",
+    "Tip": "Over 2.5",
+    "Odds": "1.75",
+    "Date": "2026-04-28T18:45:00+00:00",
+    "FixtureId": 1387576
+  },
+  {
+    "League": "Championship",
+    "Match": "Southampton vs Ipswich",
+    "Tip": "Over 2.5",
+    "Odds": "1.75",
+    "Date": "2026-04-28T18:45:00+00:00",
+    "FixtureId": 1387028
+  },
+  {
+    "League": "J1 League",
+    "Match": "Urawa vs Kawasaki Frontale",
+    "Tip": "Over 2.5",
+    "Odds": "1.71",
+    "Date": "2026-04-29T06:00:00+00:00",
+    "FixtureId": 1504776
   }
 ]
