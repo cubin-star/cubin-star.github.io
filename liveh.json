@@ -1,1 +1,30 @@
-[]
+[
+  {
+    "league": "2. Liga",
+    "match": "AZ Havirov vs Prostejov",
+    "tip": "Over 6.5",
+    "odds": "1.76",
+    "date": "2026-04-28T15:30:00+00:00"
+  },
+  {
+    "league": "Extraliga",
+    "match": "Slovan Bratislava vs Nitra",
+    "tip": "Over 5.5",
+    "odds": "1.98",
+    "date": "2026-04-28T16:30:00+00:00"
+  },
+  {
+    "league": "SHL",
+    "match": "Rögle vs Skellefteå",
+    "tip": "Over 4.5",
+    "odds": "1.70",
+    "date": "2026-04-28T17:00:00+00:00"
+  },
+  {
+    "league": "DEL",
+    "match": "Adler Mannheim vs Eisbaren Berlin",
+    "tip": "Over 5.5",
+    "odds": "1.79",
+    "date": "2026-04-28T17:30:00+00:00"
+  }
+]
