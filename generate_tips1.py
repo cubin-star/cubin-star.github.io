@@ -613,11 +613,13 @@ def main():
 
     def fmt(tips):
         out = []
-        for t in tips:
+        for i, t in enumerate(tips):
             entry = {"League": t["League"], "Match": t["Match"], "Tip": t["Tip"], "Odds": t["Odds"], "Date": t.get("kickoff", "")}
             tag = t.get("_tag", "")
             if tag in ("16h", "qualified"):
                 entry["qualified"] = True
+            if i >= 2:
+                entry["locked"] = True
             out.append(entry)
         return out
 
