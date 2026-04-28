@@ -1,14 +1,15 @@
 [
   {
-    "league": "Liiga",
-    "match": "Ilves vs Tappara",
+    "league": "2. Liga",
+    "match": "AZ Havirov vs Prostejov",
     "tip": "Over 5.5",
-    "odds": "2.05"
+    "odds": "4.7",
+    "qualified15": true
   },
   {
-    "league": "Liiga",
-    "match": "SaiPa vs KooKoo",
+    "league": "Extraliga",
+    "match": "Slovan Bratislava vs Nitra",
     "tip": "Over 5.5",
-    "odds": "1.9"
+    "odds": "1.95"
   }
 ]
