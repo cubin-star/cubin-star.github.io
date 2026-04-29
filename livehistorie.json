@@ -1,5 +1,20 @@
 [
   {
+    "league": "CONMEBOL Sudamericana",
+    "homeTeam": "O'Higgins",
+    "awayTeam": "Boston River",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "1:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "kickoff": "2026-04-29T02:00:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-football",
+    "scoutStats": "Score: 12/14 | xG: 1.15 | Shots: 13/6 | Corners: 6 | Poss: 64% | Pre O2.5: 2.1"
+  },
+  {
     "league": "Euroleague",
     "homeTeam": "Valencia",
     "awayTeam": "Panathinaikos",
