@@ -1,5 +1,21 @@
 [
   {
+    "league": "Commissioners Cup",
+    "homeTeam": "NLEX Road Warriors",
+    "awayTeam": "Rain or Shine Elasto Painters",
+    "tip": "Over 186.5 (preLine 216.5)",
+    "odds": "",
+    "halftimeScore": "37:49 (86 pts)",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "basketball",
+    "kickoff": "2026-04-29T11:30:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-basketball",
+    "scoutStats": "Score: 6/10 | HT: 37:49 (86 pts) | Q1=41 Q2=45 (line 216.5, pace 79%) | PreLine: 216.5 | Proj: 189.8 | Commissioners Cup"
+  },
+  {
     "league": "CONMEBOL Sudamericana",
     "homeTeam": "O'Higgins",
     "awayTeam": "Boston River",
