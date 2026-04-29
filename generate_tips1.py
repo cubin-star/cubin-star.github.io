@@ -622,8 +622,11 @@ def main():
 
     app1_tips = fmt(selected_raw)
 
-    # live2.json – same tips
-    live2_tips = fmt(selected_raw)
+    # live2.json – 3 different random tips from remaining pool (same filters)
+    used_ids = {t["fixture_id"] for t in selected_raw}
+    remaining_pool = [m for m in candidates if m["fixture_id"] not in used_ids]
+    live2_raw = select_best_tips(remaining_pool, num=NUM_TIPS)
+    live2_tips = fmt(live2_raw)
 
     print(f"\n  {OUTPUT_APP1} ({len(app1_tips)} tips):")
     for t in app1_tips:
