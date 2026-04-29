@@ -1,12 +1,14 @@
-# ValueBets Bot – TRANSLATE
-# Čte live.json + live2.json, doplní FixtureId a zapíše valuetips.json.
-# Běží každý den v 08:00 UTC (= 10:00 CEST, po Daily Tip Generatoru 06:00 a SureBets 07:00).
+# ValueBets Bot – EVALUATE
+# Čte tipy přímo z live2.json, vyhodnotí zápasy u nichž nastalo 8:00 UTC
+# následujícího dne po výkopu, a zapíše výsledky + ROI do:
+#   valuebetshistory.json
+#   valuebetsroi.json
 #
 # SETUP:
 # 1. Secret API_FOOTBALL_KEY1 v Settings -> Secrets and variables -> Actions.
 # 2. Settings -> Actions -> General: "Read and write permissions" pro GITHUB_TOKEN.
 
-name: ValueBets Translate
+name: ValueBets Evaluate
 
 on:
   schedule:
@@ -17,7 +19,7 @@ permissions:
   contents: write
 
 jobs:
-  translate:
+  evaluate:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
@@ -28,16 +30,16 @@ jobs:
         with:
           dotnet-version: '10.x'
 
-      - name: Run translate
+      - name: Run evaluate
         env:
           API_FOOTBALL_KEY1: ${{ secrets.API_FOOTBALL_KEY1 }}
-        run: dotnet run --project tools/ValueBetsBot/ValueBetsBot.csproj -c Release -- translate .
+        run: dotnet run --project tools/ValueBetsBot/ValueBetsBot.csproj -c Release -- evaluate .
 
       - name: Commit and push
         run: |
           git config user.name  "ValueBets Bot"
           git config user.email "bot@valuebets.app"
-          git add valuetips.json
-          git diff --staged --quiet || git commit -m "💰 ValueBets tips $(date -u +%Y-%m-%d)"
+          git add valuebetshistory.json valuebetsroi.json
+          git diff --staged --quiet || git commit -m "📊 ValueBets results $(date -u +%Y-%m-%d)"
           git pull --rebase origin main
           git push
