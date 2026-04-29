@@ -31,8 +31,8 @@ from zoneinfo import ZoneInfo
 
 API_KEY = os.environ.get("API_FOOTBALL_KEY1", "")
 BASE_URL = "https://v3.football.api-sports.io"
-MIN_ODDS = 1.70
-MAX_ODDS = 1.85
+MIN_ODDS = 1.75
+MAX_ODDS = 1.95
 MIN_GAMES = 5
 NUM_TIPS = 3
 DELAY = 0.3
@@ -625,7 +625,7 @@ def main():
     # live2.json – 3 different random tips from remaining pool (same filters)
     used_ids = {t["fixture_id"] for t in selected_raw}
     remaining_pool = [m for m in candidates if m["fixture_id"] not in used_ids]
-    live2_raw = select_best_tips(remaining_pool, num=NUM_TIPS)
+    live2_raw = select_best_tips(remaining_pool, num=4)
     live2_tips = fmt(live2_raw)
 
     print(f"\n  {OUTPUT_APP1} ({len(app1_tips)} tips):")
