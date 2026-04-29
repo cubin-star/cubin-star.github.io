@@ -2,6 +2,76 @@
   {
     "sport": "basketball",
     "league": "NBA",
+    "match": "New York Knicks vs Atlanta Hawks",
+    "tip": "Over 201.5",
+    "odds": "1.22",
+    "date": "2026-04-29T00:00:00+00:00",
+    "score": "126:97",
+    "result": "✓"
+  },
+  {
+    "sport": "hockey",
+    "league": "DEL",
+    "match": "Adler Mannheim vs Eisbaren Berlin",
+    "tip": "Over 3.5",
+    "odds": "1.12",
+    "date": "2026-04-28T17:30:00+00:00",
+    "score": "1:5",
+    "result": "✓"
+  },
+  {
+    "sport": "basketball",
+    "league": "Eurocup",
+    "match": "JL Bourg vs Besiktas",
+    "tip": "Over 154.5",
+    "odds": "1.28",
+    "date": "2026-04-28T17:30:00+00:00",
+    "score": "73:71",
+    "result": "✗"
+  },
+  {
+    "sport": "hockey",
+    "league": "SHL",
+    "match": "Rögle vs Skellefteå",
+    "tip": "Over 3.5",
+    "odds": "1.27",
+    "date": "2026-04-28T17:00:00+00:00",
+    "score": "2:1",
+    "result": "✗"
+  },
+  {
+    "sport": "football",
+    "league": "Liga Revelação U23",
+    "match": "Torreense U23 vs Sporting Braga U23",
+    "tip": "Over 1.5",
+    "odds": "1.18",
+    "date": "2026-04-28T16:30:00+00:00",
+    "score": "1:1",
+    "result": "✓"
+  },
+  {
+    "sport": "basketball",
+    "league": "NBL",
+    "match": "Brno vs Decin",
+    "tip": "Over 151.5",
+    "odds": "1.16",
+    "date": "2026-04-28T16:00:00+00:00",
+    "score": "89:98",
+    "result": "✓"
+  },
+  {
+    "sport": "hockey",
+    "league": "2. Liga",
+    "match": "AZ Havirov vs Prostejov",
+    "tip": "Over 4.5",
+    "odds": "1.15",
+    "date": "2026-04-28T15:30:00+00:00",
+    "score": "3:2",
+    "result": "✓"
+  },
+  {
+    "sport": "basketball",
+    "league": "NBA",
     "match": "Denver Nuggets vs Minnesota Timberwolves",
     "tip": "Over 207.5",
     "odds": "1.23",
@@ -1927,76 +1997,6 @@
     "odds": "1.55",
     "date": "2026-04-04T13:50:00+00:00",
     "score": "82:94",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Super Liga",
-    "match": "FK Košice vs Skalica",
-    "tip": "Over 1.5",
-    "odds": "1.22",
-    "date": "2026-04-04T13:30:00+00:00",
-    "score": "2:0",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Czech Liga",
-    "match": "Dukla Praha vs Pardubice",
-    "tip": "Over 1.5",
-    "odds": "1.36",
-    "date": "2026-04-04T13:00:00+00:00",
-    "score": "0:2",
-    "result": "✓"
-  },
-  {
-    "sport": "basketball",
-    "league": "Basket League",
-    "match": "Panionios vs Iraklis",
-    "tip": "Over 156.5",
-    "odds": "1.40",
-    "date": "2026-04-04T13:00:00+00:00",
-    "score": "103:77",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Serie C - Girone C",
-    "match": "Siracusa vs Atalanta II",
-    "tip": "Over 1.5",
-    "odds": "1.22",
-    "date": "2026-04-04T12:30:00+00:00",
-    "score": "3:3",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "3. Liga",
-    "match": "Hansa Rostock vs FC Viktoria Köln",
-    "tip": "Over 1.5",
-    "odds": "1.20",
-    "date": "2026-04-04T12:00:00+00:00",
-    "score": "2:3",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Liga I",
-    "match": "Oţelul vs AFC Hermannstadt",
-    "tip": "Over 1.5",
-    "odds": "1.40",
-    "date": "2026-04-04T12:00:00+00:00",
-    "score": "2:0",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Süper Lig",
-    "match": "Gençlerbirliği S.K. vs Göztepe",
-    "tip": "Over 1.5",
-    "odds": "1.40",
-    "date": "2026-04-04T11:30:00+00:00",
-    "score": "0:2",
     "result": "✓"
   }
 ]
