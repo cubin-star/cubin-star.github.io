@@ -1,15 +1,14 @@
 [
   {
-    "league": "2. Liga",
-    "match": "AZ Havirov vs Prostejov",
+    "league": "NHL",
+    "match": "Tampa Bay Lightning vs Montreal Canadiens",
     "tip": "Over 5.5",
-    "odds": "4.7",
-    "qualified15": true
+    "odds": "1.75"
   },
   {
-    "league": "Extraliga",
-    "match": "Slovan Bratislava vs Nitra",
+    "league": "WCH IB",
+    "match": "Netherlands vs Romania",
     "tip": "Over 5.5",
-    "odds": "1.95"
+    "odds": "1.8"
   }
 ]
