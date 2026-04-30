@@ -1,9 +1,30 @@
 [
   {
+    "league": "Euroleague",
+    "match": "Fenerbahce vs Zalgiris Kaunas",
+    "tip": "Over 162",
+    "odds": "1.90",
+    "date": "2026-04-30T17:45:00+00:00"
+  },
+  {
+    "league": "Premier league",
+    "match": "Grindavik vs Valur",
+    "tip": "Over 169",
+    "odds": "1.86",
+    "date": "2026-04-30T19:15:00+00:00"
+  },
+  {
     "league": "NBA",
-    "match": "Cleveland Cavaliers vs Toronto Raptors",
-    "tip": "Over 216.5",
-    "odds": "1.93",
-    "date": "2026-04-29T23:30:00+00:00"
+    "match": "Atlanta Hawks vs New York Knicks",
+    "tip": "Over 213",
+    "odds": "1.90",
+    "date": "2026-04-30T23:00:00+00:00"
+  },
+  {
+    "league": "NBA",
+    "match": "Minnesota Timberwolves vs Denver Nuggets",
+    "tip": "Over 223.5",
+    "odds": "1.88",
+    "date": "2026-05-01T01:30:00+00:00"
   }
 ]
