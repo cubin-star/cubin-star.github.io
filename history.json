@@ -2,6 +2,26 @@
   {
     "sport": "basketball",
     "league": "NBA",
+    "match": "Cleveland Cavaliers vs Toronto Raptors",
+    "tip": "Over 201.5",
+    "odds": "1.22",
+    "date": "2026-04-29T23:30:00+00:00",
+    "score": "125:120",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "NWSL Women",
+    "match": "Washington Spirit W vs Racing Louisville W",
+    "tip": "Over 1.5",
+    "odds": "1.16",
+    "date": "2026-04-29T23:00:00+00:00",
+    "score": "1:0",
+    "result": "✗"
+  },
+  {
+    "sport": "basketball",
+    "league": "NBA",
     "match": "New York Knicks vs Atlanta Hawks",
     "tip": "Over 201.5",
     "odds": "1.22",
@@ -1977,26 +1997,6 @@
     "odds": "1.21",
     "date": "2026-04-04T14:00:00+00:00",
     "score": "1:1",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "2. SNL",
-    "match": "Dravinja vs Brinje-Grosuplje",
-    "tip": "Over 1.5",
-    "odds": "1.22",
-    "date": "2026-04-04T14:00:00+00:00",
-    "score": "1:1",
-    "result": "✓"
-  },
-  {
-    "sport": "basketball",
-    "league": "LKL",
-    "match": "Lietkabelis vs Zalgiris Kaunas",
-    "tip": "Over 160.5",
-    "odds": "1.55",
-    "date": "2026-04-04T13:50:00+00:00",
-    "score": "82:94",
     "result": "✓"
   }
 ]
