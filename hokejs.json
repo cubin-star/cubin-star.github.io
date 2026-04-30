@@ -1,1 +1,23 @@
-[]
+[
+  {
+    "league": "Liiga",
+    "match": "SaiPa vs Ilves",
+    "tip": "Over 3.5",
+    "odds": "1.12",
+    "date": "2026-04-30T15:30:00+00:00"
+  },
+  {
+    "league": "SHL",
+    "match": "Rögle vs Skellefteå",
+    "tip": "Over 3.5",
+    "odds": "1.30",
+    "date": "2026-04-30T17:00:00+00:00"
+  },
+  {
+    "league": "DEL",
+    "match": "Eisbaren Berlin vs Adler Mannheim",
+    "tip": "Over 3.5",
+    "odds": "1.12",
+    "date": "2026-04-30T17:30:00+00:00"
+  }
+]
