@@ -1,50 +1,50 @@
 [
   {
-    "league": "National League - North",
-    "match": "Macclesfield - Chester",
-    "kickoff": "2026-04-29T20:45:00+02:00",
+    "league": "1. Division",
+    "match": "Esbjerg - AC Horsens",
+    "kickoff": "2026-04-30T19:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "1.97",
+    "group": 1
+  },
+  {
+    "league": "National 1",
+    "match": "Concarneau - Gobelins",
+    "kickoff": "2026-04-30T19:30:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.06",
+    "group": 1
+  },
+  {
+    "league": "Liga II",
+    "match": "FC Voluntari - Bihor Oradea",
+    "kickoff": "2026-04-30T18:00:00+02:00",
     "tip": "Over 2.5",
     "odds": "1.94",
-    "group": 1
-  },
-  {
-    "league": "Cup",
-    "match": "CSKA Sofia - Ludogorets",
-    "kickoff": "2026-04-29T18:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.08",
-    "group": 1
-  },
-  {
-    "league": "Gamma Ethniki - Promotion Group",
-    "match": "Aris Petroupolis - Zakynthos",
-    "kickoff": "2026-04-29T15:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.28",
     "group": 2
   },
   {
     "league": "Cup",
-    "match": "FC Noah - Ararat-Armenia",
-    "kickoff": "2026-04-29T16:30:00+02:00",
+    "match": "Lokomotiv Plovdiv - Arda Kardzhali",
+    "kickoff": "2026-04-30T18:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "1.90",
+    "odds": "2.34",
     "group": 2
   },
   {
-    "league": "Tercera División RFEF - Group 11",
-    "match": "Llosetense - Mercadal",
-    "kickoff": "2026-04-29T16:00:00+02:00",
+    "league": "2. SNL",
+    "match": "Dravinja - Krka",
+    "kickoff": "2026-04-30T17:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "1.95",
+    "odds": "1.92",
     "group": 3
   },
   {
-    "league": "Campionato",
-    "match": "Cosmos - Pennarossa",
-    "kickoff": "2026-04-29T20:45:00+02:00",
+    "league": "Second League",
+    "match": "Masar - Proxy",
+    "kickoff": "2026-04-30T15:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "1.95",
+    "odds": "2.35",
     "group": 3
   }
 ]
