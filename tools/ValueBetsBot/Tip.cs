@@ -17,4 +17,15 @@ public class Tip
     [JsonIgnore]
     public decimal OddsValue =>
         decimal.TryParse(Odds, NumberStyles.Any, CultureInfo.InvariantCulture, out var v) ? v : 0m;
+
+    [JsonIgnore]
+    public decimal Stake => 50m;
+
+    [JsonIgnore]
+    public decimal Profit => Result switch
+    {
+        "OK" => Math.Round(OddsValue * Stake - Stake, 2),
+        "KO" => -Stake,
+        _ => 0m
+    };
 }

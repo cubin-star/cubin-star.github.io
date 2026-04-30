@@ -3,9 +3,10 @@ using System.Text.Json;
 using ValueBetsBot;
 
 // USAGE:
-//   ValueBetsBot translate <repo-dir>            -- read live.json + live2.json, build valuetips.json (Over 2.5)
-//   ValueBetsBot evaluate  <repo-dir> [--max-age-hours 48]  -- move finished bets to valuebetshistory.json
-//                                                              and remove them from valuetips.json
+//   ValueBetsBot evaluate <repo-dir>
+//     -- reads tips directly from live2.json (Over 2.5 odds),
+//        evaluates matches whose kickoff date + next-day 08:00 UTC has passed,
+//        and appends results to valuebetshistory.json.
 //
 // Required env var: API_FOOTBALL_KEY1
 //
@@ -43,148 +44,91 @@ using var client = new ApiFootballClient(apiKey);
 
 return command switch
 {
-    "translate" => await TranslateAsync(),
-    "evaluate"  => await EvaluateAsync(),
+    "evaluate" => await EvaluateAsync(),
     _ => UsageAndExit()
 };
 
 int UsageAndExit() { PrintUsage(); return 1; }
 
 // ----------------------------------------------------------------------------------------------
-// translate: přepiš live*.json do valuetips.json.
-//   live2.json → kurzy Over 2.5 přímo, live.json → odhadni Over 2.5 = odds × 1.45.
-//   FixtureId doplní 1 API request per datum (/fixtures?date=...) kvůli evaluate.
-// ----------------------------------------------------------------------------------------------
-async Task<int> TranslateAsync()
-{
-    var livePath  = Path.Combine(repoDir, "live.json");
-    var live2Path = Path.Combine(repoDir, "live2.json");
-    var outPath   = Path.Combine(repoDir, "valuetips.json");
-
-    var result = new List<Tip>();
-
-    // live2.json – kurzy Over 2.5 přímo.
-    foreach (var t in LoadList(live2Path))
-    {
-        result.Add(new Tip { League = t.League, Match = t.Match, TipText = "Over 2.5", Odds = t.Odds, Date = t.Date });
-        Console.WriteLine($"[translate] live2 → {t.Match} @ {t.Odds}");
-    }
-
-    // live.json – odhadni Over 2.5 = Over 1.5 odds × 1.45.
-    foreach (var t in LoadList(livePath))
-    {
-        var over15 = t.OddsValue;
-        var over25 = over15 > 0 ? Math.Round(over15 * 1.45m, 2) : 0m;
-        result.Add(new Tip { League = t.League, Match = t.Match, TipText = "Over 2.5",
-            Odds = over25.ToString("0.00", CultureInfo.InvariantCulture), Date = t.Date });
-        Console.WriteLine($"[translate] live  → {t.Match} @ {over25:0.00} (z Over 1.5 {over15:0.00})");
-    }
-
-    // Deduplicate.
-    result = result
-        .GroupBy(t => $"{Normalize(t.Match)}|{t.Date.UtcDateTime:yyyyMMddHHmm}")
-        .Select(g => g.First())
-        .ToList();
-
-    // Doplň FixtureId pomocí /fixtures?date= (1 request per datum) – nutné pro evaluate.
-    var fixturesPerDate = new Dictionary<DateOnly, List<ApiFootballClient.FixtureDto>>();
-    foreach (var date in result.Select(t => DateOnly.FromDateTime(t.Date.UtcDateTime)).Distinct())
-    {
-        var fixtures = await client.GetFixturesByDateAsync(date);
-        fixturesPerDate[date] = fixtures;
-        Console.WriteLine($"[translate] fetched {fixtures.Count} fixtures for {date:yyyy-MM-dd} (for FixtureId)");
-    }
-
-    foreach (var tip in result)
-    {
-        var date = DateOnly.FromDateTime(tip.Date.UtcDateTime);
-        if (!fixturesPerDate.TryGetValue(date, out var fixtures)) continue;
-
-        var srcUtc   = tip.Date.UtcDateTime;
-        var srcMatch = Normalize(tip.Match);
-
-        ApiFootballClient.FixtureDto? best = null;
-        int bestScore = -1; double bestDiff = double.MaxValue;
-
-        foreach (var fx in fixtures)
-        {
-            var diff = Math.Abs((fx.Fixture.Date.UtcDateTime - srcUtc).TotalMinutes);
-            if (diff > 60) continue;
-            var home = Normalize(fx.Teams.Home.Name);
-            var away = Normalize(fx.Teams.Away.Name);
-            int score = 0;
-            if (!string.IsNullOrEmpty(home) && srcMatch.Contains(home)) score++;
-            if (!string.IsNullOrEmpty(away) && srcMatch.Contains(away)) score++;
-            if (score == 0) continue;
-            if (score > bestScore || (score == bestScore && diff < bestDiff))
-            { best = fx; bestScore = score; bestDiff = diff; }
-        }
-
-        if (best != null)
-        {
-            tip.FixtureId = best.Fixture.Id;
-            Console.WriteLine($"[translate]   FixtureId {best.Fixture.Id} → {tip.Match}");
-        }
-        else
-        {
-            Console.WriteLine($"[translate]   ! no fixture id for '{tip.Match}'");
-        }
-    }
-
-    result = result.OrderBy(t => t.Date).ToList();
-    File.WriteAllText(outPath, JsonSerializer.Serialize(result, jsonOptions));
-    Console.WriteLine($"[translate] wrote valuetips.json ({result.Count} tips)");
-    return 0;
-}
-
-// ----------------------------------------------------------------------------------------------
-// evaluate: for tips in valuetips.json that finished (>= 2 h after kickoff ≈ 1 h after end),
-//           fetch the result, append the entry to valuebetshistory.json with an OK/KO marker
-//           and remove it from valuetips.json (so the pending list only contains open tips).
+// evaluate: čte tipy přímo z live2.json, vyhodnocuje zápasy, u nichž již nastalo
+//           8:00 UTC následujícího dne po výkopu. Výsledky zapisuje do valuebetshistory.json.
 // ----------------------------------------------------------------------------------------------
 async Task<int> EvaluateAsync()
 {
-    var maxAgeHours = int.TryParse(ParseOption(args, "--max-age-hours"), out var m) ? m : 48;
-
-    var tipsPath = Path.Combine(repoDir, "valuetips.json");
+    var live2Path   = Path.Combine(repoDir, "live2.json");
     var historyPath = Path.Combine(repoDir, "valuebetshistory.json");
 
-    var pending = LoadList(tipsPath);
+    var tips    = LoadList(live2Path);
     var history = LoadList(historyPath);
 
-    var existingIds = history.Where(t => t.FixtureId != 0).Select(t => t.FixtureId).ToHashSet();
-    var evaluatedIds = new HashSet<long>();
+    // Klíč pro deduplikaci: normalizovaný název zápasu + datum (den) v UTC.
+    var existingKeys = history
+        .Select(t => HistoryKey(t))
+        .ToHashSet(StringComparer.Ordinal);
+
     var nowUtc = DateTimeOffset.UtcNow;
     int added = 0;
 
-    foreach (var tip in pending)
+    // Načti fixtures jen pro data, která skutečně potřebujeme (1 request per datum).
+    var datesToFetch = tips
+        .Where(t => t.Date != default && nowUtc >= EvalTime(t.Date) && !existingKeys.Contains(HistoryKey(t)))
+        .Select(t => DateOnly.FromDateTime(t.Date.UtcDateTime))
+        .Distinct()
+        .ToList();
+
+    var fixturesPerDate = new Dictionary<DateOnly, List<ApiFootballClient.FixtureDto>>();
+    foreach (var date in datesToFetch)
     {
-        if (tip.FixtureId == 0) continue;
-        if (existingIds.Contains(tip.FixtureId)) continue;
+        var fixtures = await client.GetFixturesByDateAsync(date);
+        fixturesPerDate[date] = fixtures;
+        Console.WriteLine($"[evaluate] fetched {fixtures.Count} fixtures for {date:yyyy-MM-dd}");
+    }
+
+    foreach (var tip in tips)
+    {
         if (tip.Date == default) continue;
 
-        if (nowUtc < tip.Date.AddHours(2)) continue;
-        if (nowUtc > tip.Date.AddHours(maxAgeHours)) continue;
+        // Vyhodnocovat teprve od 8:00 UTC následujícího dne.
+        if (nowUtc < EvalTime(tip.Date)) continue;
+
+        var key = HistoryKey(tip);
+        if (existingKeys.Contains(key)) continue;
+
+        // Najdi FixtureId přes seznam zápasů daného dne.
+        var date = DateOnly.FromDateTime(tip.Date.UtcDateTime);
+        if (!fixturesPerDate.TryGetValue(date, out var dayFixtures))
+        {
+            Console.WriteLine($"[evaluate] ! no fixture list for {date:yyyy-MM-dd}, skipping '{tip.Match}'");
+            continue;
+        }
+
+        var fixtureId = FindFixtureId(tip, dayFixtures);
+        if (fixtureId == 0)
+        {
+            Console.WriteLine($"[evaluate] ! no fixture id for '{tip.Match}'");
+            continue;
+        }
 
         ApiFootballClient.FixtureDto? fx;
         try
         {
-            fx = await client.GetFixtureAsync(tip.FixtureId);
+            fx = await client.GetFixtureAsync(fixtureId);
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"[evaluate] ! fixture fetch failed {tip.FixtureId}: {ex.Message}");
+            Console.WriteLine($"[evaluate] ! fixture fetch failed {fixtureId}: {ex.Message}");
             continue;
         }
         if (fx == null) continue;
         if (fx.Fixture.Status.Short is not ("FT" or "AET" or "PEN")) continue;
 
         int total = (fx.Goals.Home ?? 0) + (fx.Goals.Away ?? 0);
-        tip.Result = total >= 3 ? "OK" : "KO";
-        tip.Score = $"{fx.Goals.Home ?? 0}:{fx.Goals.Away ?? 0}";
+        tip.FixtureId = fixtureId;
+        tip.Result    = total >= 3 ? "OK" : "KO";
+        tip.Score     = $"{fx.Goals.Home ?? 0}:{fx.Goals.Away ?? 0}";
         history.Add(tip);
-        existingIds.Add(tip.FixtureId);
-        evaluatedIds.Add(tip.FixtureId);
+        existingKeys.Add(key);
         added++;
 
         Console.WriteLine($"[evaluate] {tip.Match} -> {total} goals -> {tip.Result}");
@@ -194,23 +138,92 @@ async Task<int> EvaluateAsync()
     File.WriteAllText(historyPath, JsonSerializer.Serialize(history, jsonOptions));
     Console.WriteLine($"[evaluate] history now has {history.Count} entries (+{added})");
 
-    // Remove just-evaluated tips (and any leftovers already in history) from valuetips.json
-    // so that the pending list only contains tips that are still open.
-    var remaining = pending
-        .Where(t => t.FixtureId == 0 || (!evaluatedIds.Contains(t.FixtureId) && !existingIds.Contains(t.FixtureId)))
-        .OrderBy(t => t.Date)
-        .ToList();
-    int removed = pending.Count - remaining.Count;
-    if (removed > 0)
-    {
-        File.WriteAllText(tipsPath, JsonSerializer.Serialize(remaining, jsonOptions));
-        Console.WriteLine($"[evaluate] valuetips.json: removed {removed} evaluated tip(s), {remaining.Count} remain");
-    }
-    else
-    {
-        Console.WriteLine($"[evaluate] valuetips.json unchanged ({remaining.Count} tips pending)");
-    }
+    // Přepočítej ROI a zapiš do valuebetsroi.json.
+    WriteRoi(repoDir, history, jsonOptions);
+
     return 0;
+}
+
+// 8:00 UTC následujícího kalendářního dne po výkopu.
+static DateTimeOffset EvalTime(DateTimeOffset kickoff)
+{
+    var nextDay = kickoff.UtcDateTime.Date.AddDays(1);
+    return new DateTimeOffset(nextDay.Year, nextDay.Month, nextDay.Day, 8, 0, 0, TimeSpan.Zero);
+}
+
+static string HistoryKey(Tip t) =>
+    $"{Normalize(t.Match)}|{t.Date.UtcDateTime:yyyyMMdd}";
+
+static long FindFixtureId(Tip tip, List<ApiFootballClient.FixtureDto> fixtures)
+{
+    var srcUtc   = tip.Date.UtcDateTime;
+    var srcMatch = Normalize(tip.Match);
+
+    ApiFootballClient.FixtureDto? best = null;
+    int bestScore = -1; double bestDiff = double.MaxValue;
+
+    foreach (var fx in fixtures)
+    {
+        var diff = Math.Abs((fx.Fixture.Date.UtcDateTime - srcUtc).TotalMinutes);
+        if (diff > 60) continue;
+        var home = Normalize(fx.Teams.Home.Name);
+        var away = Normalize(fx.Teams.Away.Name);
+        int score = 0;
+        if (!string.IsNullOrEmpty(home) && srcMatch.Contains(home)) score++;
+        if (!string.IsNullOrEmpty(away) && srcMatch.Contains(away)) score++;
+        if (score == 0) continue;
+        if (score > bestScore || (score == bestScore && diff < bestDiff))
+        { best = fx; bestScore = score; bestDiff = diff; }
+    }
+
+    return best?.Fixture.Id ?? 0;
+}
+
+// ----------------------------------------------------------------------------------------------
+// WriteRoi: přepočítá ROI ze všech vyhodnocených tipů a uloží valuebetsroi.json.
+// ----------------------------------------------------------------------------------------------
+
+static void WriteRoi(string repoDir, List<Tip> history, JsonSerializerOptions jsonOptions)
+{
+    var settled = history.Where(t => t.Result is "OK" or "KO").ToList();
+
+    var roiPath = Path.Combine(repoDir, "valuebetsroi.json");
+
+    if (settled.Count == 0)
+    {
+        File.WriteAllText(roiPath, JsonSerializer.Serialize(new RoiStats(), jsonOptions));
+        Console.WriteLine("[roi] no settled bets yet, wrote empty stats");
+        return;
+    }
+
+    var ok          = settled.Count(t => t.Result == "OK");
+    var ko          = settled.Count(t => t.Result == "KO");
+    var totalStake  = settled.Sum(t => t.Stake);
+    var totalProfit = settled.Sum(t => t.Profit);
+    var roi         = totalStake == 0 ? 0m : Math.Round(totalProfit / totalStake * 100m, 2);
+
+    var cutoff30    = DateTimeOffset.UtcNow.AddDays(-30);
+    var last30      = settled.Where(t => t.Date >= cutoff30).ToList();
+    var stake30     = last30.Sum(t => t.Stake);
+    var profit30    = last30.Sum(t => t.Profit);
+    var roi30       = stake30 == 0 ? 0m : Math.Round(profit30 / stake30 * 100m, 2);
+
+    var stats = new RoiStats
+    {
+        TotalBets     = settled.Count,
+        OK            = ok,
+        KO            = ko,
+        TotalStake    = totalStake,
+        TotalProfit   = Math.Round(totalProfit, 2),
+        ROI           = roi,
+        Last30Bets    = last30.Count,
+        Last30Profit  = Math.Round(profit30, 2),
+        ROILast30Days = roi30,
+        UpdatedUtc    = DateTimeOffset.UtcNow
+    };
+
+    File.WriteAllText(roiPath, JsonSerializer.Serialize(stats, jsonOptions));
+    Console.WriteLine($"[roi] {settled.Count} bets | OK {ok} / KO {ko} | profit {totalProfit:+0.00;-0.00} | ROI {roi:0.00} %");
 }
 
 // ----------------------------------------------------------------------------------------------
@@ -231,21 +244,16 @@ static List<Tip> LoadList(string path)
     }
 }
 
-static string? ParseOption(string[] args, string name)
-{
-    for (int i = 0; i < args.Length - 1; i++)
-        if (args[i] == name) return args[i + 1];
-    return null;
-}
-
 static void PrintUsage()
 {
     Console.WriteLine("Usage:");
-    Console.WriteLine("  ValueBetsBot translate <repo-dir>");
-    Console.WriteLine("  ValueBetsBot evaluate  <repo-dir> [--max-age-hours 48]");
+    Console.WriteLine("  ValueBetsBot evaluate <repo-dir>");
     Console.WriteLine();
-    Console.WriteLine("Reads:  live.json, live2.json (READ-ONLY) and valuetips.json");
-    Console.WriteLine("Writes: valuetips.json (translate) and valuebetshistory.json (evaluate)");
+    Console.WriteLine("Reads:  live2.json (READ-ONLY) – Over 2.5 tipy");
+    Console.WriteLine("Writes: valuebetshistory.json – vyhodnocené zápasy");
+    Console.WriteLine();
+    Console.WriteLine("Vyhodnocení probíhá pro zápasy, u nichž nastalo 8:00 UTC");
+    Console.WriteLine("následujícího kalendářního dne po výkopu.");
     Console.WriteLine();
     Console.WriteLine("Requires environment variable API_FOOTBALL_KEY1");
 }
@@ -260,4 +268,41 @@ static string Normalize(string? s)
         else sb.Append(' ');
     }
     return System.Text.RegularExpressions.Regex.Replace(sb.ToString(), "\\s+", " ").Trim();
+}
+
+// ----------------------------------------------------------------------------------------------
+// ROI stats – zapisuje se do valuebetsroi.json
+// ----------------------------------------------------------------------------------------------
+
+public record RoiStats
+{
+    [System.Text.Json.Serialization.JsonPropertyName("TotalBets")]
+    public int TotalBets { get; init; }
+
+    [System.Text.Json.Serialization.JsonPropertyName("OK")]
+    public int OK { get; init; }
+
+    [System.Text.Json.Serialization.JsonPropertyName("KO")]
+    public int KO { get; init; }
+
+    [System.Text.Json.Serialization.JsonPropertyName("TotalStake")]
+    public decimal TotalStake { get; init; }
+
+    [System.Text.Json.Serialization.JsonPropertyName("TotalProfit")]
+    public decimal TotalProfit { get; init; }
+
+    [System.Text.Json.Serialization.JsonPropertyName("ROI")]
+    public decimal ROI { get; init; }
+
+    [System.Text.Json.Serialization.JsonPropertyName("Last30Bets")]
+    public int Last30Bets { get; init; }
+
+    [System.Text.Json.Serialization.JsonPropertyName("Last30Profit")]
+    public decimal Last30Profit { get; init; }
+
+    [System.Text.Json.Serialization.JsonPropertyName("ROILast30Days")]
+    public decimal ROILast30Days { get; init; }
+
+    [System.Text.Json.Serialization.JsonPropertyName("UpdatedUtc")]
+    public DateTimeOffset UpdatedUtc { get; init; }
 }
