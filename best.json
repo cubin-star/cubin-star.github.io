@@ -1,23 +1,23 @@
 [
   {
-    "league": "Second League",
-    "match": "Masar - Proxy",
-    "kickoff": "2026-04-30T15:30:00+02:00",
+    "league": "Serie A",
+    "match": "Pisa - Lecce",
+    "kickoff": "2026-05-01T20:45:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.35"
+    "odds": "2.45"
   },
   {
-    "league": "Cup",
-    "match": "Lokomotiv Plovdiv - Arda Kardzhali",
-    "kickoff": "2026-04-30T18:00:00+02:00",
+    "league": "Liga 3",
+    "match": "Trofense - Amarante",
+    "kickoff": "2026-05-01T16:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.34"
+    "odds": "2.44"
   },
   {
-    "league": "National 1",
-    "match": "Concarneau - Gobelins",
-    "kickoff": "2026-04-30T19:30:00+02:00",
+    "league": "First League",
+    "match": "Septemvri Sofia - Montana",
+    "kickoff": "2026-05-01T16:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.06"
+    "odds": "2.22"
   }
 ]
