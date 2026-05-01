@@ -2,6 +2,86 @@
   {
     "sport": "basketball",
     "league": "NBA",
+    "match": "Minnesota Timberwolves vs Denver Nuggets",
+    "tip": "Over 211.5",
+    "odds": "1.22",
+    "date": "2026-05-01T01:30:00+00:00",
+    "score": "110:98",
+    "result": "✗"
+  },
+  {
+    "sport": "basketball",
+    "league": "Premier league",
+    "match": "Grindavik vs Valur",
+    "tip": "Over 153.5",
+    "odds": "1.16",
+    "date": "2026-04-30T19:15:00+00:00",
+    "score": "93:67",
+    "result": "✓"
+  },
+  {
+    "sport": "basketball",
+    "league": "Euroleague",
+    "match": "Fenerbahce vs Zalgiris Kaunas",
+    "tip": "Over 151.5",
+    "odds": "1.29",
+    "date": "2026-04-30T17:45:00+00:00",
+    "score": "86:74",
+    "result": "✓"
+  },
+  {
+    "sport": "hockey",
+    "league": "DEL",
+    "match": "Eisbaren Berlin vs Adler Mannheim",
+    "tip": "Over 3.5",
+    "odds": "1.12",
+    "date": "2026-04-30T17:30:00+00:00",
+    "score": "3:4",
+    "result": "✓"
+  },
+  {
+    "sport": "hockey",
+    "league": "SHL",
+    "match": "Rögle vs Skellefteå",
+    "tip": "Over 3.5",
+    "odds": "1.30",
+    "date": "2026-04-30T17:00:00+00:00",
+    "score": "2:3",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "Professional League",
+    "match": "Al-Shabab vs Saham",
+    "tip": "Over 1.5",
+    "odds": "1.21",
+    "date": "2026-04-30T16:20:00+00:00",
+    "score": "3:0",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "Second Division",
+    "match": "Al Mesaimeer vs Muaither SC",
+    "tip": "Over 1.5",
+    "odds": "1.15",
+    "date": "2026-04-30T16:00:00+00:00",
+    "score": "1:3",
+    "result": "✓"
+  },
+  {
+    "sport": "hockey",
+    "league": "Liiga",
+    "match": "SaiPa vs Ilves",
+    "tip": "Over 3.5",
+    "odds": "1.12",
+    "date": "2026-04-30T15:30:00+00:00",
+    "score": "7:2",
+    "result": "✓"
+  },
+  {
+    "sport": "basketball",
+    "league": "NBA",
     "match": "Cleveland Cavaliers vs Toronto Raptors",
     "tip": "Over 201.5",
     "odds": "1.22",
@@ -1917,86 +1997,6 @@
     "odds": "1.58",
     "date": "2026-04-04T16:00:00+00:00",
     "score": "101:58",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Division 1",
-    "match": "Al Baten vs Al Orubah",
-    "tip": "Over 1.5",
-    "odds": "1.22",
-    "date": "2026-04-04T15:55:00+00:00",
-    "score": "1:3",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "HNL",
-    "match": "NK Slaven Belupo vs HNK Rijeka",
-    "tip": "Over 1.5",
-    "odds": "1.36",
-    "date": "2026-04-04T15:45:00+00:00",
-    "score": "0:2",
-    "result": "✓"
-  },
-  {
-    "sport": "basketball",
-    "league": "NBL",
-    "match": "NH Ostrava vs Brno",
-    "tip": "Over 166.5",
-    "odds": "1.52",
-    "date": "2026-04-04T15:30:00+00:00",
-    "score": "77:102",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Ligue 1",
-    "match": "Strasbourg vs Nice",
-    "tip": "Over 1.5",
-    "odds": "1.20",
-    "date": "2026-04-04T15:00:00+00:00",
-    "score": "3:1",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Campeonato de Portugal Prio - Group D",
-    "match": "O Elvas vs FC Serpa",
-    "tip": "Over 1.5",
-    "odds": "1.35",
-    "date": "2026-04-04T15:00:00+00:00",
-    "score": "3:2",
-    "result": "✓"
-  },
-  {
-    "sport": "basketball",
-    "league": "Liga A",
-    "match": "San Lorenzo vs Boca Juniors",
-    "tip": "Over 156",
-    "odds": "1.57",
-    "date": "2026-04-04T14:30:00+00:00",
-    "score": "77:83",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Championship",
-    "match": "Dunfermline vs Morton",
-    "tip": "Over 1.5",
-    "odds": "1.30",
-    "date": "2026-04-04T14:00:00+00:00",
-    "score": "3:1",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "League Two",
-    "match": "Stranraer vs Dumbarton",
-    "tip": "Over 1.5",
-    "odds": "1.21",
-    "date": "2026-04-04T14:00:00+00:00",
-    "score": "1:1",
     "result": "✓"
   }
 ]
