@@ -144,11 +144,12 @@ async Task<int> EvaluateAsync()
     return 0;
 }
 
-// 8:00 UTC následujícího kalendářního dne po výkopu.
+// 5:00 UTC následujícího kalendářního dne po výkopu
+// (musí proběhnout dřív, než se live2.json přepíše novými tipy ~06:00 UTC).
 static DateTimeOffset EvalTime(DateTimeOffset kickoff)
 {
     var nextDay = kickoff.UtcDateTime.Date.AddDays(1);
-    return new DateTimeOffset(nextDay.Year, nextDay.Month, nextDay.Day, 8, 0, 0, TimeSpan.Zero);
+    return new DateTimeOffset(nextDay.Year, nextDay.Month, nextDay.Day, 5, 0, 0, TimeSpan.Zero);
 }
 
 static string HistoryKey(Tip t) =>

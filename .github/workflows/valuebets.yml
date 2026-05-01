@@ -12,7 +12,7 @@ name: ValueBets Evaluate
 
 on:
   schedule:
-    - cron: '0 8 * * *'    # každý den 08:00 UTC
+    - cron: '0 5 * * *'    # každý den 05:00 UTC – PŘED přepsáním live2.json novými tipy (~06:00 UTC)
   workflow_dispatch:
 
 permissions:
