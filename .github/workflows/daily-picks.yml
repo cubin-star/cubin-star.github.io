@@ -1,5 +1,6 @@
 # Denní aktualizace hot.json – výběr 6 fotbalových zápasů (Over, kurz 2.2-3.0)
 # Spouští se každý den v 7:00 UTC (= 9:00 CEST / 8:00 CET)
+# Bot před výběrem přečte fotbal.json a live2.json a vyhne se duplicitám.
 
 name: Daily Picks Bot
 
