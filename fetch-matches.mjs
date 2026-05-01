@@ -1,15 +1,20 @@
-import { writeFileSync } from 'fs';
+import { writeFileSync, existsSync, readFileSync } from 'fs';
 
 const API_KEY = process.env.API_FOOTBALL_KEY1;
 if (!API_KEY) { console.error('Chybi API_FOOTBALL_KEY1 env promenna.'); process.exit(1); }
 
 const FOOTBALL_API = 'https://v3.football.api-sports.io';
-const MIN_ODDS = 1.9;
+const MIN_ODDS = 2.1;
 const MAX_ODDS = 2.5;
 const PICK_COUNT = 6;
 const EXCLUDED_COUNTRIES = new Set(['Russia', 'Belarus']);
 const TZ = 'Europe/Prague';
 const USER_AGENT = 'kombik-bot/1.0 (+github-actions)';
+// Zdroje (URL), jejichz zapasy NESMI byt vybrany (jine boty vybiraji podobne) -> dedup
+const DEDUP_URLS = [
+    'https://raw.githubusercontent.com/cubin-star/cubin-star.github.io/main/fotbal.json',
+    'https://raw.githubusercontent.com/cubin-star/cubin-star.github.io/main/live2.json',
+];
 
 let reqCount = 0;
 let fixtureFetchErrors = 0;
@@ -54,6 +59,60 @@ function sleep(ms){return new Promise(r=>setTimeout(r,ms));}
 function shuffle(arr){for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]];}return arr;}
 function fmtDate(d){return d.toISOString().split('T')[0];}
 
+// --- Deduplikace proti existujicim json souborum jinych botu -----------------
+function normTeam(s){return String(s||'').toLowerCase().replace(/\s+/g,' ').trim();}
+function normDate(s){return String(s||'').slice(0,10);}
+function matchKeysFromEntry(m){
+    const keys=[];
+    const id=m?.fixtureId??m?.fixture?.id??m?.id;
+    if(id!==undefined&&id!==null&&id!=='')keys.push('id:'+id);
+    // 'match' bywa "Home - Away"
+    let home=m?.home??m?.teams?.home?.name;
+    let away=m?.away??m?.teams?.away?.name;
+    if((!home||!away)&&typeof m?.match==='string'&&m.match.includes(' - ')){
+        const [h,a]=m.match.split(' - ');home=home||h;away=away||a;
+    }
+    const date=normDate(m?.kickoff??m?.fixture?.date??m?.date);
+    if(home&&away&&date)keys.push('na:'+normTeam(home)+'|'+normTeam(away)+'|'+date);
+    if(home&&away)keys.push('teams:'+normTeam(home)+'|'+normTeam(away));
+    return keys;
+}
+function loadDedupKeysFromFiles(paths){
+    const set=new Set();
+    for(const p of paths){
+        if(!existsSync(p)){console.log('Dedup: '+p+' neexistuje, preskakuji.');continue;}
+        try{
+            const raw=readFileSync(p,'utf-8');
+            const data=JSON.parse(raw);
+            const arr=Array.isArray(data)?data:(data.matches??data.items??data.picks??[]);
+            let n=0;
+            for(const m of arr){for(const k of matchKeysFromEntry(m)){set.add(k);}n++;}
+            console.log('Dedup: '+p+' -> '+n+' zaznamu, '+set.size+' klicu celkem');
+        }catch(e){console.warn('Dedup: nelze precist '+p+': '+e.message);}
+    }
+    return set;
+}
+function isDuplicate(candidate,dedupSet){
+    for(const k of matchKeysFromEntry(candidate)){if(dedupSet.has(k))return true;}
+    return false;
+}
+async function loadDedupKeysFromUrls(urls){
+    const set=new Set();
+    for(const u of urls){
+        try{
+            const res=await fetch(u,{headers:{'Accept':'application/json','User-Agent':USER_AGENT,'Cache-Control':'no-cache'}});
+            if(!res.ok){console.warn('Dedup: '+u+' HTTP '+res.status+', preskakuji.');continue;}
+            const data=await res.json();
+            const arr=Array.isArray(data)?data:(data.matches??data.items??data.picks??[]);
+            let n=0;
+            for(const m of arr){for(const k of matchKeysFromEntry(m)){set.add(k);}n++;}
+            console.log('Dedup: '+u+' -> '+n+' zaznamu, '+set.size+' klicu celkem');
+        }catch(e){console.warn('Dedup: nelze stahnout '+u+': '+e.message);}
+    }
+    return set;
+}
+// ---------------------------------------------------------------------------
+
 async function apiFetch(path){
     const url=FOOTBALL_API+path;
     for(let attempt=1;attempt<=3;attempt++){
@@ -92,6 +151,11 @@ function balanceGroups(picks){
 
 async function main(){
     console.log('Kombik Bot - fetch-matches\n');
+
+    // 1) Nacti existujici vybery jinych botu (fotbal.json, live2.json z GitHubu) -> dedup set
+    const dedupSet=await loadDedupKeysFromUrls(DEDUP_URLS);
+    console.log('Dedup klicu celkem: '+dedupSet.size+'\n');
+
     const now=new Date(),max24h=new Date(now.getTime()+24*60*60*1000);
     console.log('Window: '+now.toUTCString()+' -> '+max24h.toUTCString()+' (24h)\n');
     const dates=new Set();
@@ -107,8 +171,18 @@ async function main(){
     console.log('   '+leagueMap.size+' leagues\n');
     const candidateMap=new Map();
     for(const[,lg]of leagueMap){for(const d of lg.dates){const oddsData=await getLeagueOdds(lg.id,lg.season,d);for(const entry of oddsData){const fix=fixtureMap.get(entry.fixture?.id);if(!fix)continue;const mKey=fix.fixture.id;for(const bm of entry.bookmakers||[]){for(const bet of bm.bets||[]){for(const v of bet.values||[]){if(v.value!=='Over 2.5')continue;const odd=parseFloat(v.odd);if(isNaN(odd)||odd<MIN_ODDS||odd>MAX_ODDS)continue;if(!candidateMap.has(mKey))candidateMap.set(mKey,{fixtureId:mKey,league:lg.name,country:lg.country,match:fix.teams.home.name+' - '+fix.teams.away.name,kickoff:fix.fixture.date,tip:'Over 2.5',tier:leagueTier(lg.name,lg.country),allOdds:[]});candidateMap.get(mKey).allOdds.push(odd);}}}};await sleep(450);}}
-    const pool=[...candidateMap.values()].map(m=>({...m,odds:(m.allOdds.reduce((a,b)=>a+b,0)/m.allOdds.length).toFixed(2)}));
+    let pool=[...candidateMap.values()].map(m=>({...m,odds:(m.allOdds.reduce((a,b)=>a+b,0)/m.allOdds.length).toFixed(2)}));
     console.log('Candidates: '+pool.length+' (Over 2.5, odds '+MIN_ODDS+'-'+MAX_ODDS+')');
+
+    // 2) Odfiltruj zapasy, ktere uz vybral fotbal.json / live2.json
+    if(dedupSet.size>0){
+        const before=pool.length;
+        const removed=[];
+        pool=pool.filter(m=>{if(isDuplicate(m,dedupSet)){removed.push(m);return false;}return true;});
+        console.log('Dedup: odstraneno '+(before-pool.length)+' duplicit (vs fotbal.json/live2.json)');
+        for(const m of removed)console.log('   - DUP: '+m.match+' | '+m.league);
+    }
+
     const tier1=shuffle(pool.filter(m=>m.tier===1)),tier2=shuffle(pool.filter(m=>m.tier===2)),tier3=shuffle(pool.filter(m=>m.tier===3)),tier4=shuffle(pool.filter(m=>m.tier===4));
     console.log('Tier 1: '+tier1.length+', Tier 2: '+tier2.length+', Tier 3: '+tier3.length+', Tier 4: '+tier4.length+'\n');
     const selected=[],usedLeagues=new Set();
