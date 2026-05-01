@@ -1,5 +1,21 @@
 [
   {
+    "league": "Pro B",
+    "homeTeam": "Nantes",
+    "awayTeam": "St. Chamond",
+    "tip": "Over 145.5 (preLine 165.5)",
+    "odds": "",
+    "halftimeScore": "45:24 (69 pts)",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "basketball",
+    "kickoff": "2026-05-01T18:00:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-basketball",
+    "scoutStats": "Score: 5/10 | HT: 45:24 (69 pts) | Q1=29 Q2=40 (line 165.5, pace 83%) | PreLine: 165.5 | Proj: 149 | Pro B"
+  },
+  {
     "league": "SHL",
     "homeTeam": "Rögle",
     "awayTeam": "Skellefteå",
