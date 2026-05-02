@@ -41,6 +41,25 @@ ODDS_TOLERANCE = 0.30    # max deviation from target odds
 EXCLUDED_COUNTRIES = {"russia", "belarus"}
 AMERICAN_COUNTRIES = {"usa", "canada", "us", "united states", "world"}
 
+# Ženské soutěže – blokovat napříč všemi zeměmi (klíčová slova v názvu ligy)
+EXCLUDED_LEAGUE_KEYWORDS = (
+    "women", "woman", "ladies", "féminine", "feminine",
+    "frauen", "femenino", "femenina", "femminile",
+    "kvinnor", "naisten", "kobiet", "ženy", "zeny", "ženská", "zenska",
+    "u20", "u-20", "u18", "u-18", "u17", "u-17", "u16", "u-16",
+    "junior", "juniors", "juvenil",
+)
+
+# === Stats-first absolutní gate + value-gate (NEW v3) ===
+# Pevné cílové linie per region: (selection_line, output_line, min_expected_total)
+# US (NHL/AHL): vyšší skórování → cílí Over 6.5, tipuje Over 4.5
+# EU (SHL/Liiga/Extraliga/DEL/...): nižší skórování → cílí Over 5.5, tipuje Over 3.5
+TARGET_LINES_BY_REGION = {
+    "US": {"sel_line": 6.5, "out_line": 4.5, "min_expected": 6.5},
+    "EU": {"sel_line": 5.5, "out_line": 3.5, "min_expected": 5.8},
+}
+MIN_ODDS_OUT = 1.25      # value-gate: kurz na výstupní linii musí být >= 1.25
+
 # Dynamic line selection (like basketball bot)
 SELECTION_ODDS = 1.80    # find Over line where odds ≈ 1.80 (aggressive)
 OUTPUT_ODDS = 1.22       # find safer Over line where odds ≈ 1.22 (safe – bigger cushion)
@@ -110,6 +129,11 @@ HIGH_EXPECTED_R_EU = 1.18   # expected >= out_line × 1.18 → propustit jako va
 
 request_count = 0
 
+# In-memory cache pro opakovaná API volání (NEW v3)
+_TEAM_STATS_CACHE = {}
+_TEAM_GAMES_CACHE = {}
+_H2H_CACHE = {}
+
 
 # ===== API =====
 
@@ -172,13 +196,18 @@ def fetch_odds(game_id):
 
 def fetch_team_stats(league_id, season, team_id):
     """Fetch team statistics (goals scored/conceded averages)."""
+    key = (league_id, season, team_id)
+    if key in _TEAM_STATS_CACHE:
+        return _TEAM_STATS_CACHE[key]
     time.sleep(DELAY)
     data = api_get("teams/statistics", {
         "league": str(league_id),
         "season": str(season),
         "team": str(team_id),
     })
-    return data.get("response")
+    res = data.get("response")
+    _TEAM_STATS_CACHE[key] = res
+    return res
 
 
 def _parse_period(period_val):
@@ -201,6 +230,9 @@ def _parse_period(period_val):
 
 def fetch_team_games(team_id, league_id, season):
     """Fetch all finished games for a team in given league+season."""
+    key = (team_id, league_id, season)
+    if key in _TEAM_GAMES_CACHE:
+        return _TEAM_GAMES_CACHE[key]
     time.sleep(DELAY)
     data = api_get("games", {
         "team": str(team_id),
@@ -248,11 +280,15 @@ def fetch_team_games(team_id, league_id, season):
         except (ValueError, TypeError):
             pass
     finished.sort(key=lambda x: x["timestamp"], reverse=True)
+    _TEAM_GAMES_CACHE[key] = finished
     return finished
 
 
 def fetch_h2h(home_id, away_id):
     """Fetch head-to-head history between two teams."""
+    key = tuple(sorted((home_id, away_id)))
+    if key in _H2H_CACHE:
+        return _H2H_CACHE[key]
     time.sleep(DELAY)
     data = api_get("games", {"h2h": f"{home_id}-{away_id}"})
     results = []
@@ -273,7 +309,66 @@ def fetch_h2h(home_id, away_id):
         except (ValueError, TypeError):
             pass
     results.sort(key=lambda x: x["timestamp"], reverse=True)
+    _H2H_CACHE[key] = results
     return results
+
+
+def find_fixed_over_odds(odds_data, sel_line, out_line):
+    """
+    NEW v3 (stats-first): Hledá kurzy pro PEVNÉ linie sel_line a out_line
+    místo dynamického hledání podle kurzu.
+    Vrací průměrné kurzy napříč všemi bookmakery + BTS 2+ pokud dostupné.
+
+    Returns: (sel_odd_avg, out_odd_avg, bts2_odd) – každý může být None.
+    """
+    sel_odds = []
+    out_odds = []
+    bts2_odd = None
+
+    for resp in odds_data:
+        for bk in resp.get("bookmakers", []):
+            for bet in bk.get("bets", []):
+                bet_id = bet.get("id")
+                bet_name = bet.get("name", "").lower()
+
+                # --- Cross-market: BTS 2+ ---
+                if bts2_odd is None and "both teams" in bet_name:
+                    is_bts2 = ("2" in bet_name and "1.5" not in bet_name and "score" in bet_name) \
+                              or ("over 1.5" in bet_name) \
+                              or ("score 2" in bet_name)
+                    if is_bts2:
+                        for val in bet.get("values", []):
+                            v = str(val.get("value", "")).lower()
+                            if v in ("yes", "y") or v.startswith("yes"):
+                                try:
+                                    bts2_odd = float(val.get("odd", "0"))
+                                    break
+                                except (ValueError, TypeError):
+                                    pass
+
+                # --- Main: Over/Under full game (Bet 4 / 52) ---
+                if bet_id in (4, 52) or ("over/under" in bet_name and "period" not in bet_name):
+                    if "period" in bet_name:
+                        continue
+                    for val in bet.get("values", []):
+                        v = str(val.get("value", ""))
+                        if not v.lower().startswith("over"):
+                            continue
+                        try:
+                            line = float(v.split()[-1])
+                            odd = float(val.get("odd", "0"))
+                            if odd <= 0:
+                                continue
+                            if abs(line - sel_line) < 0.01:
+                                sel_odds.append(odd)
+                            elif abs(line - out_line) < 0.01:
+                                out_odds.append(odd)
+                        except (ValueError, IndexError):
+                            pass
+
+    sel_avg = (sum(sel_odds) / len(sel_odds)) if sel_odds else None
+    out_avg = (sum(out_odds) / len(out_odds)) if out_odds else None
+    return sel_avg, out_avg, bts2_odd
 
 
 # ===== ODDS PARSING =====
@@ -365,7 +460,7 @@ def _sf(val, default=0.0):
         return default
 
 
-def meets_criteria(home_stats, away_stats, selection_line, output_line, is_eu=False):
+def meets_criteria(home_stats, away_stats, selection_line, output_line, is_eu=False, min_expected_abs=None):
     """
     League-relative hockey criteria (home/away split) + expected total vs line.
     Baseline = avg of h_for, a_for, h_agn, a_agn → adapts to any league.
@@ -405,6 +500,11 @@ def meets_criteria(home_stats, away_stats, selection_line, output_line, is_eu=Fa
 
     # Expected total from venue matchup
     expected = (h_for + a_agn + a_for + h_agn) / 2
+
+    # NEW v3: absolutní gate – expected musí překročit pevný práh per region
+    if min_expected_abs is not None and expected < min_expected_abs:
+        return False, (f"expected abs low: {expected:.2f} < {min_expected_abs:.2f} "
+                       f"(stats-first gate)"), 0.0
 
     # Check expected vs OUTPUT line (what we actually bet on, not the aggressive selection line)
     expected_ratio = EXPECTED_VS_OUTPUT_R_EU if is_eu else EXPECTED_VS_OUTPUT_R_US
@@ -767,6 +867,14 @@ def compute_quality_score(home_form, away_form, h2h_games,
     return pts, ", ".join(reasons) if reasons else "no bonuses"
 
 
+def _is_excluded_league(league_name):
+    """True pokud název ligy obsahuje zakázané klíčové slovo (ženy, mládež)."""
+    if not league_name:
+        return False
+    name = league_name.lower()
+    return any(kw in name for kw in EXCLUDED_LEAGUE_KEYWORDS)
+
+
 # ===== MAIN =====
 
 def main():
@@ -779,19 +887,13 @@ def main():
     tomorrow = (now + timedelta(days=1)).strftime("%Y-%m-%d")
     cutoff = now + timedelta(hours=24)
 
-    print("== SureBets Hockey Bot v2 ==")
+    print("== SureBets Hockey Bot v3 (stats-first) ==")
     print(f"Time: {now.strftime('%Y-%m-%d %H:%M UTC')}")
-    print(f"Dynamic lines: sel@~{SELECTION_ODDS} → safe@~{OUTPUT_ODDS} (tol={ODDS_TOLERANCE})")
-    print(f"MIN_BASELINE: {MIN_BASELINE} | EXP_VS_OUT: US={EXPECTED_VS_OUTPUT_R_US} EU={EXPECTED_VS_OUTPUT_R_EU}")
-    print(f"Variants: A(contr offense) B(contr defense) C(both open) + P2+P3 contrast")
-    print(f"  A/B: FLOOR={BOTH_FLOOR_R}, STRONG={STRONG_MIN_R}, CONTRAST<{CONTRAST_MAX_R}")
-    print(f"  C: offense>={BOTH_OFFENSE_R}×base, concede>={BOTH_CONCEDE_R}×base")
-    print(f"Enhanced US: form>={RECENT_FLOOR_R_US}, over>={MIN_OVER_HIT_RATE_US:.0%}, "
-          f"SD<={MAX_TOTAL_SD_US}, P2+P3>={LATE_PERIOD_MIN_R_US:.0%}, OT<={MAX_OT_RATE_US:.0%}")
-    print(f"Enhanced EU: form>={RECENT_FLOOR_R_EU}, over>={MIN_OVER_HIT_RATE_EU:.0%}, "
-          f"SD<={MAX_TOTAL_SD_EU}, P2+P3>={LATE_PERIOD_MIN_R_EU:.0%}, OT<={MAX_OT_RATE_EU:.0%}")
-    print(f"Common: H2H>={H2H_OVER_R}×line, rest>={MIN_REST_HOURS}h (0=off), "
-          f"BTS2+ bonus@<={BTS2_BONUS_ODDS} (×{BTS2_BONUS_MULT})\n")
+    print(f"Fixed lines: US sel={TARGET_LINES_BY_REGION['US']['sel_line']} → out={TARGET_LINES_BY_REGION['US']['out_line']} (min_exp={TARGET_LINES_BY_REGION['US']['min_expected']})")
+    print(f"             EU sel={TARGET_LINES_BY_REGION['EU']['sel_line']} → out={TARGET_LINES_BY_REGION['EU']['out_line']} (min_exp={TARGET_LINES_BY_REGION['EU']['min_expected']})")
+    print(f"Value-gate: out odds >= {MIN_ODDS_OUT}")
+    print(f"Excluded: countries={EXCLUDED_COUNTRIES} + women/youth keywords")
+    print(f"Quality: min Q={MIN_QUALITY_SCORE}/10, max {MAX_TIPS_PER_DAY} tips/day\n")
 
     # 1. Fetch games
     games_today = fetch_games(today)
@@ -804,124 +906,157 @@ def main():
         print("No games found.")
         with open(OUTPUT, "w", encoding="utf-8") as f:
             json.dump([], f)
+        with open(OUTPUT_LIVE, "w", encoding="utf-8") as f:
+            json.dump([], f)
         return
 
-    # 2. Filter by time window + country
+    # 2. Filter by time window + country + league blacklist (RU/BY/women/youth)
     filtered = {}
+    excluded_women = 0
     for gid, g in all_games.items():
         ts = datetime.fromtimestamp(g["timestamp"], tz=timezone.utc)
         country = g.get("country", "").lower()
-        if ts >= now and ts <= cutoff and country not in EXCLUDED_COUNTRIES:
-            filtered[gid] = g
-    print(f"  After filter (24h, no RU/BY): {len(filtered)} games\n")
+        if ts < now or ts > cutoff:
+            continue
+        if country in EXCLUDED_COUNTRIES:
+            continue
+        if _is_excluded_league(g.get("league", "")):
+            excluded_women += 1
+            continue
+        filtered[gid] = g
+    print(f"  After filter (24h, no RU/BY, no women/youth [{excluded_women} blocked]): {len(filtered)} games\n")
 
-    # 3. Fetch odds – dynamic line discovery
-    candidates = []
-    print(f"  Fetching odds for {len(filtered)} games...")
-    for i, (gid, g) in enumerate(filtered.items()):
-        label = f"{g['home']} vs {g['away']}"
-        print(f"  [{i+1}/{len(filtered)}] {label[:45]:.<47s}", end="")
-        odds_data = fetch_odds(gid)
-        sel, out, bts2_odd = find_over_lines(odds_data)
-        if sel and out:
-            bts_str = f" BTS2={bts2_odd:.2f}" if bts2_odd is not None else ""
-            print(f" sel={sel['label']}@{sel['odd_str']} → out={out['label']}@{out['odd_str']}{bts_str} ✓")
-            country = g.get("country", "").lower()
-            is_eu = country not in AMERICAN_COUNTRIES
-            candidates.append({
-                "game_id": gid,
-                "league": g["league"],
-                "league_id": g["league_id"],
-                "season": g["season"],
-                "match": f"{g['home']} vs {g['away']}",
-                "home_id": g["home_id"],
-                "away_id": g["away_id"],
-                "country": country,
-                "is_eu": is_eu,
-                "sel_line": sel["line"],
-                "sel_label": sel["label"],
-                "sel_odds": sel["odd_str"],
-                "out_line": out["line"],
-                "out_label": out["label"],
-                "out_odds": out["odd_str"],
-                "bts2_odd": bts2_odd,
-                "timestamp": g["timestamp"],
-            })
-        else:
-            print(" no lines found")
-
-    print(f"\n  {len(candidates)} candidates\n")
-
-    if not candidates:
-        print("No qualifying matches.")
+    if not filtered:
         with open(OUTPUT, "w", encoding="utf-8") as f:
             json.dump([], f)
         with open(OUTPUT_LIVE, "w", encoding="utf-8") as f:
             json.dump([], f)
         return
 
-    # 4. Two-phase analysis: basic venue stats → enhanced form+H2H+periods
-    results = []
-    print(f"  Analyzing {len(candidates)} candidates...")
-    for i, c in enumerate(candidates):
-        print(f"  [{i+1}/{len(candidates)}] {c['match'][:45]:.<47s}", end="")
+    # 3. STATS-FIRST: kvalifikuj všechny zápasy podle statistik s pevnými liniemi
+    #    Teprve po kvalifikaci stahuj kurzy → šetří API a respektuje stats-first filozofii.
+    qualified = []
+    print(f"  [STATS-FIRST] Analyzing {len(filtered)} games on stats only...")
+    for i, (gid, g) in enumerate(filtered.items()):
+        country = g.get("country", "").lower()
+        is_eu = country not in AMERICAN_COUNTRIES
+        region = "EU" if is_eu else "US"
+        cfg = TARGET_LINES_BY_REGION[region]
+        sel_line = cfg["sel_line"]
+        out_line = cfg["out_line"]
+        min_exp = cfg["min_expected"]
+
+        match_label = f"{g['home']} vs {g['away']}"
+        print(f"  [{i+1}/{len(filtered)}] [{region}] {match_label[:40]:.<42s}", end="")
+
         try:
-            # Phase 1: Basic venue criteria
-            home_stats = fetch_team_stats(c["league_id"], c["season"], c["home_id"])
-            away_stats = fetch_team_stats(c["league_id"], c["season"], c["away_id"])
-            ok, detail, score = meets_criteria(home_stats, away_stats, c["sel_line"], c["out_line"], is_eu=c["is_eu"])
+            home_stats = fetch_team_stats(g["league_id"], g["season"], g["home_id"])
+            away_stats = fetch_team_stats(g["league_id"], g["season"], g["away_id"])
+            ok, detail, score = meets_criteria(
+                home_stats, away_stats, sel_line, out_line,
+                is_eu=is_eu, min_expected_abs=min_exp)
             if not ok:
-                print(f" fail ({detail})")
+                print(f" basic fail ({detail})")
                 continue
 
-            # Phase 2: Enhanced criteria (recent form, H2H, consistency, rest, periods)
-            print(f" basic✓", end="")
-            home_games = fetch_team_games(c["home_id"], c["league_id"], c["season"])
-            away_games = fetch_team_games(c["away_id"], c["league_id"], c["season"])
-            h2h = fetch_h2h(c["home_id"], c["away_id"])
-            home_form = analyze_recent_form(home_games, c["home_id"])
-            away_form = analyze_recent_form(away_games, c["away_id"])
+            home_games = fetch_team_games(g["home_id"], g["league_id"], g["season"])
+            away_games = fetch_team_games(g["away_id"], g["league_id"], g["season"])
+            h2h = fetch_h2h(g["home_id"], g["away_id"])
+            home_form = analyze_recent_form(home_games, g["home_id"])
+            away_form = analyze_recent_form(away_games, g["away_id"])
             qpts, qdetail = compute_quality_score(
                 home_form, away_form, h2h,
-                c["sel_line"], c["out_line"], c.get("bts2_odd"), c["is_eu"])
+                sel_line, out_line, None, is_eu)
             ok2, detail2 = meets_enhanced_criteria(
                 home_form, away_form, h2h,
-                c["sel_line"], c["out_line"], c["timestamp"], is_eu=c["is_eu"], quality_score=qpts)
+                sel_line, out_line, g["timestamp"],
+                is_eu=is_eu, quality_score=qpts)
             if not ok2:
                 print(f" enhanced fail ({detail2})")
                 continue
-
-            # Cross-market konfirmace: BTS 2+ bonus do skóre
-            bts2 = c.get("bts2_odd")
-            if bts2 is not None and bts2 <= BTS2_BONUS_ODDS:
-                score *= BTS2_BONUS_MULT
-                detail2 += f" | BTS2+={bts2:.2f}★"
-
-            # Quality score – body za kvalitní (nepovinná) kritéria
             if qpts < MIN_QUALITY_SCORE:
-                print(f" quality fail (Q={qpts}/{MIN_QUALITY_SCORE}: {qdetail})")
+                print(f" Q fail ({qpts}/{MIN_QUALITY_SCORE})")
                 continue
 
-            region = "EU" if c["is_eu"] else "US"
-            print(f" ★ [{region}] Q={qpts} {detail}")
-            print(f"       enhanced: {detail2}")
-            print(f"       quality: {qdetail}")
-            print(f"       → {c['sel_label']}@{c['sel_odds']} → OUTPUT: {c['out_label']}@{c['out_odds']}")
-            kickoff = datetime.fromtimestamp(c["timestamp"], tz=timezone.utc).strftime("%Y-%m-%dT%H:%M:%S+00:00")
-            results.append({
-                "league": c["league"],
-                "match": c["match"],
-                "tip": c["out_label"],
-                "odds": c["out_odds"],
-                "date": kickoff,
-                "_score": score,
-                "_quality": qpts,
-                "_league_id": c["league_id"],
-                "_sel_label": c["sel_label"],
-                "_sel_odds": c["sel_odds"],
+            print(f" ✓ Q={qpts}")
+            qualified.append({
+                "game_id": gid,
+                "league": g["league"],
+                "league_id": g["league_id"],
+                "season": g["season"],
+                "match": match_label,
+                "home_id": g["home_id"],
+                "away_id": g["away_id"],
+                "country": country,
+                "is_eu": is_eu,
+                "region": region,
+                "sel_line": sel_line,
+                "out_line": out_line,
+                "timestamp": g["timestamp"],
+                "score": score,
+                "quality": qpts,
+                "stats_detail": detail,
+                "enh_detail": detail2,
+                "qual_detail": qdetail,
             })
         except Exception as exc:
             print(f" ERROR: {exc}")
+
+    print(f"\n  Stats-qualified: {len(qualified)} matches\n")
+
+    if not qualified:
+        print("No stats-qualified matches.")
+        with open(OUTPUT, "w", encoding="utf-8") as f:
+            json.dump([], f)
+        with open(OUTPUT_LIVE, "w", encoding="utf-8") as f:
+            json.dump([], f)
+        return
+
+    # 4. ODDS-SECOND: stáhni kurzy jen pro kvalifikované, zkontroluj value-gate
+    results = []
+    print(f"  [ODDS-SECOND] Fetching odds for {len(qualified)} qualified...")
+    for i, c in enumerate(qualified):
+        print(f"  [{i+1}/{len(qualified)}] [{c['region']}] {c['match'][:40]:.<42s}", end="")
+        odds_data = fetch_odds(c["game_id"])
+        sel_avg, out_avg, bts2_odd = find_fixed_over_odds(
+            odds_data, c["sel_line"], c["out_line"])
+
+        if out_avg is None:
+            print(f" no out odds for Over {c['out_line']}")
+            continue
+        if out_avg < MIN_ODDS_OUT:
+            print(f" odds too low: {out_avg:.2f} < {MIN_ODDS_OUT}")
+            continue
+
+        score = c["score"]
+        bts_str = ""
+        if bts2_odd is not None and bts2_odd <= BTS2_BONUS_ODDS:
+            score *= BTS2_BONUS_MULT
+            bts_str = f" BTS2+={bts2_odd:.2f}★"
+
+        sel_label = f"Over {c['sel_line']}"
+        out_label = f"Over {c['out_line']}"
+        sel_odds_str = f"{sel_avg:.2f}" if sel_avg is not None else "N/A"
+        out_odds_str = f"{out_avg:.2f}"
+
+        print(f" ★ Q={c['quality']} sel={sel_label}@{sel_odds_str} → out={out_label}@{out_odds_str}{bts_str}")
+        print(f"       stats: {c['stats_detail']}")
+        print(f"       enh:   {c['enh_detail']}")
+        print(f"       qual:  {c['qual_detail']}")
+
+        kickoff = datetime.fromtimestamp(c["timestamp"], tz=timezone.utc).strftime("%Y-%m-%dT%H:%M:%S+00:00")
+        results.append({
+            "league": c["league"],
+            "match": c["match"],
+            "tip": out_label,
+            "odds": out_odds_str,
+            "date": kickoff,
+            "_score": score,
+            "_quality": c["quality"],
+            "_league_id": c["league_id"],
+            "_sel_label": sel_label,
+            "_sel_odds": sel_odds_str,
+        })
 
     # 5a. Write liveh.json – ALL qualifying matches with PRE-MATCH SELECTION line
     live_results = sorted(results, key=lambda r: r["date"])
@@ -934,24 +1069,22 @@ def main():
     } for r in live_results]
     with open(OUTPUT_LIVE, "w", encoding="utf-8") as f:
         json.dump(live_out, f, indent=2, ensure_ascii=False)
-    print(f"  Live: {len(live_out)} match(es) → {OUTPUT_LIVE}")
+    print(f"\n  Live: {len(live_out)} match(es) → {OUTPUT_LIVE}")
 
     # 5b. Best per league – keep only the top match from each league
-    # Use league_id (not name) as key – e.g. Czech & Slovak "Extraliga" are different
     before = len(results)
     best_per_league = {}
     for r in results:
         lg_id = r["_league_id"]
-        # Tiebreak: nejdřív quality, pak score
         rank = (r["_quality"], r["_score"])
         cur_rank = (best_per_league[lg_id]["_quality"], best_per_league[lg_id]["_score"]) if lg_id in best_per_league else (-1, -1)
         if rank > cur_rank:
             best_per_league[lg_id] = r
     results = list(best_per_league.values())
     if before > len(results):
-        print(f"\n  Dedup: {before} → {len(results)} (best per league by Q+score)")
+        print(f"  Dedup: {before} → {len(results)} (best per league by Q+score)")
 
-    # 5c. Globální TOP-N podle (quality, score) – kvalita > kvantita
+    # 5c. Globální TOP-N podle (quality, score)
     if len(results) > MAX_TIPS_PER_DAY:
         results.sort(key=lambda r: (r["_quality"], r["_score"]), reverse=True)
         before_n = len(results)
