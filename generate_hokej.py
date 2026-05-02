@@ -460,7 +460,7 @@ def _sf(val, default=0.0):
         return default
 
 
-def meets_criteria(home_stats, away_stats, selection_line, output_line, is_eu=False, min_expected_abs=None):
+def meets_criteria(home_stats, away_stats, selection_line, output_line, is_eu=False, min_expected_abs=None, is_national=False):
     """
     League-relative hockey criteria (home/away split) + expected total vs line.
     Baseline = avg of h_for, a_for, h_agn, a_agn → adapts to any league.
@@ -475,7 +475,8 @@ def meets_criteria(home_stats, away_stats, selection_line, output_line, is_eu=Fa
 
     h_played = int(_sf(home_stats.get("games", {}).get("played", {}).get("all", 0)))
     a_played = int(_sf(away_stats.get("games", {}).get("played", {}).get("all", 0)))
-    if h_played < MIN_GAMES or a_played < MIN_GAMES:
+    # Národní týmy mají málo zápasů (turnaje) – MIN_GAMES neaplikujeme
+    if not is_national and (h_played < MIN_GAMES or a_played < MIN_GAMES):
         return False, f"few games: {h_played}/{a_played}", 0.0
 
     # Home team → home split, Away team → away split
@@ -564,15 +565,17 @@ def meets_criteria(home_stats, away_stats, selection_line, output_line, is_eu=Fa
                    f"exp={expected:.1f})"), 0.0
 
 
-def analyze_recent_form(games, team_id, n=RECENT_N):
+def analyze_recent_form(games, team_id, n=RECENT_N, is_national=False):
     """Analyze last N finished games for a team.
     Returns dict with avg_total, totals, std_dev, last_game_ts, n_games,
     and period-by-period stats.
-    Returns None if insufficient data."""
+    Returns None if insufficient data.
+    Pro národní týmy (státy) povolujeme menší vzorek (turnaje mají málo zápasů)."""
     if not games:
         return None
     last_n = games[:n]
-    if len(last_n) < MIN_GAMES:
+    min_required = 2 if is_national else MIN_GAMES
+    if len(last_n) < min_required:
         return None
 
     totals = [g["total"] for g in last_n]
@@ -875,6 +878,26 @@ def _is_excluded_league(league_name):
     return any(kw in name for kw in EXCLUDED_LEAGUE_KEYWORDS)
 
 
+# Klíčová slova označující soutěže národních týmů (státy)
+# – mají málo zápasů v sezoně (turnaje), proto neaplikujeme MIN_GAMES
+NATIONAL_TEAM_KEYWORDS = (
+    "world championship", "world cup", "olympic", "olympics",
+    "euro hockey tour", "eht", "iihf", "national",
+    "karjala", "channel one", "sweden hockey games", "beijer hockey games",
+    "czech hockey games", "czech games", "deutschland cup", "germany cup",
+    "spengler",  # Spengler Cup je klubový, ale s krátkým rozpisem
+    "friendlies", "friendly",
+)
+
+
+def _is_national_team_league(league_name):
+    """True pokud jde o reprezentační soutěž (státy) – přeskakujeme MIN_GAMES."""
+    if not league_name:
+        return False
+    name = league_name.lower()
+    return any(kw in name for kw in NATIONAL_TEAM_KEYWORDS)
+
+
 # ===== MAIN =====
 
 def main():
@@ -941,20 +964,22 @@ def main():
         country = g.get("country", "").lower()
         is_eu = country not in AMERICAN_COUNTRIES
         region = "EU" if is_eu else "US"
+        is_national = _is_national_team_league(g.get("league", ""))
         cfg = TARGET_LINES_BY_REGION[region]
         sel_line = cfg["sel_line"]
         out_line = cfg["out_line"]
         min_exp = cfg["min_expected"]
 
         match_label = f"{g['home']} vs {g['away']}"
-        print(f"  [{i+1}/{len(filtered)}] [{region}] {match_label[:40]:.<42s}", end="")
+        nat_tag = " [NAT]" if is_national else ""
+        print(f"  [{i+1}/{len(filtered)}] [{region}]{nat_tag} {match_label[:40]:.<42s}", end="")
 
         try:
             home_stats = fetch_team_stats(g["league_id"], g["season"], g["home_id"])
             away_stats = fetch_team_stats(g["league_id"], g["season"], g["away_id"])
             ok, detail, score = meets_criteria(
                 home_stats, away_stats, sel_line, out_line,
-                is_eu=is_eu, min_expected_abs=min_exp)
+                is_eu=is_eu, min_expected_abs=min_exp, is_national=is_national)
             if not ok:
                 print(f" basic fail ({detail})")
                 continue
@@ -962,8 +987,8 @@ def main():
             home_games = fetch_team_games(g["home_id"], g["league_id"], g["season"])
             away_games = fetch_team_games(g["away_id"], g["league_id"], g["season"])
             h2h = fetch_h2h(g["home_id"], g["away_id"])
-            home_form = analyze_recent_form(home_games, g["home_id"])
-            away_form = analyze_recent_form(away_games, g["away_id"])
+            home_form = analyze_recent_form(home_games, g["home_id"], is_national=is_national)
+            away_form = analyze_recent_form(away_games, g["away_id"], is_national=is_national)
             qpts, qdetail = compute_quality_score(
                 home_form, away_form, h2h,
                 sel_line, out_line, None, is_eu)
