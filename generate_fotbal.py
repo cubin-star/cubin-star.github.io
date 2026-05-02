@@ -3,8 +3,13 @@
 SureBets Football Bot – generates fotbals.json
 Runs daily at 7:00 UTC via GitHub Actions.
 
-Criteria (Variant A or B) → qualifies for Over 2.5 potential
-→ output Over 1.5 with odds 1.15–1.21 from API (filtered from Over 2.5 @ 1.60–1.80)
+NEW STRATEGY (stats-first):
+  1. Statisticky najdi zápasy s vysokým potenciálem na Over 3.5
+     (expected total ≥ 3.0 gólů, ready_35 ≥ 0.85, + 2H aktivita)
+  2. U vybraných ověř, že kurz Over 1.5 je ≥ 1.20 (value-gate)
+  3. Tipni Over 1.5 jako "tutovku" (P ~ 90 %+)
+
+Tips.json zachovává starou Over 2.5 logiku (kurz 1.60–1.80) jako vedlejší výstup.
 
 SETUP:
   1. Copy this file to the root of cubin-star/cubin-star.github.io
@@ -30,11 +35,24 @@ OUTPUT_LIVE = "live.json"
 OUTPUT_TIPS = "tips.json"
 MAX_TIPS = 2
 
-MIN_ODDS = 1.60
+MIN_ODDS = 1.60          # Over 2.5 range (used only for tips.json filler)
 MAX_ODDS = 1.80
-MIN_ODDS_15 = 1.15
-MAX_ODDS_15 = 1.21
-MIN_GAMES = 5
+MIN_ODDS_15_OUT = 1.20   # NEW: value-gate na výstupu (Over 1.5 musí být ≥ 1.20)
+MIN_GAMES = 6            # zvýšeno z 5 → spolehlivější vzorek
+
+# === Stats-first kritéria pro "kandidáta na Over 3.5" ===
+# Cíl: expected total ≥ 3.0 gólů (P(Over 3.5) ~ 35 %, P(Over 1.5) ~ 90 %+)
+MIN_TOTAL_AVG = 3.00     # tvrdý gate: (h_for+a_for+h_agn+a_agn)/2 ≥ 3.0
+MIN_DEFENSE_LEAK = 1.00  # aspoň jeden tým inkasuje ≥ 1.0 g/z (musí být odkud góly brát)
+MIN_READY_35 = 0.85      # kompozitní index "Over 3.5 readiness"
+
+# League-relative ratios (mírně zostřeno proti původnímu Over 2.5 botu)
+BOTH_FLOOR_R = 0.85      # oba alespoň 85% baseline
+STRONG_MIN_R = 1.15      # "výrazný" tým 115%+ baseline (z 1.10)
+CONTRAST_MAX_R = 0.95    # protějšek pod 95% baseline
+MIN_BASELINE = 1.40      # zvýšeno z 1.25 → expected ~3.0+ gólů celkem
+MIN_ATTACK = 0.95        # zvýšeno z 0.80 → oba reálně střílí
+MIN_2H_BASELINE = 0.55   # zvýšeno z 0.45 → 2H aktivita
 
 EXCLUDED_COUNTRIES = {"russia", "belarus"}
 
@@ -48,18 +66,6 @@ EXCLUDED_LEAGUES = {
 ALLOWED_LEAGUES_BY_COUNTRY = {
     "poland": {"Superliga", "Ekstraklasa", "I Liga"},
 }
-
-# Football criteria – league-relative (ratios of game baseline)
-# Baseline = průměr 4 per-team hodnot (h_for, a_for, h_agn, a_agn)
-# → automaticky se přizpůsobí úrovni ligy (Eredivisie ~1.6, Ligue 1 ~1.2, atd.)
-BOTH_FLOOR_R = 0.85      # oba alespoň 85% baseline
-STRONG_MIN_R = 1.10      # "výrazný" tým 110%+ baseline
-CONTRAST_MAX_R = 0.95    # protějšek pod 95% baseline (kontrast ≥ 15%)
-MIN_BASELINE = 1.25      # minimum avg per-team stat → expected ~2.5+ gólů celkem
-MIN_ATTACK = 0.80        # oba týmy musí střílet ≥ 0.8 g/z (žádný "mrtvý" útok)
-# 2nd-half filter: stejný A/B princip aplikovaný na 2. poločas
-# Používá stejné poměry (BOTH_FLOOR_R, STRONG_MIN_R, CONTRAST_MAX_R) ale na 2H data
-MIN_2H_BASELINE = 0.45     # minimum 2H baseline (avg scored+conceded ve 2H)
 
 request_count = 0
 
@@ -196,10 +202,19 @@ def get_half_stats(team_data, side):
 
 def meets_criteria(pred):
     """
-    League-relative football criteria (home/away split).
-    Baseline = avg of h_for, a_for, h_agn, a_agn → adapts to any league.
-    A) oba conceded >= FLOOR_R * base  AND  (jeden scored >= STRONG_R * base + druhy < CONTRAST_R * base)
-    B) oba scored  >= FLOOR_R * base  AND  (jeden conceded >= STRONG_R * base + druhy < CONTRAST_R * base)
+    Stats-first kritéria: kandidát na Over 3.5 → tutovka Over 1.5.
+
+    Brány (zápas musí projít VŠEMI):
+      1) Absolutní gate: expected total ≥ MIN_TOTAL_AVG (3.0 gólů)
+                       + aspoň jeden tým inkasuje ≥ MIN_DEFENSE_LEAK
+                       + oba útočí ≥ MIN_ATTACK
+                       + baseline ≥ MIN_BASELINE
+                       + odehráno ≥ MIN_GAMES
+      2) Profilový kontrast (Variant A nebo B na celkových datech)
+      3) 2H aktivita (Variant A nebo B na 2H datech)
+      4) Kompozitní skóre ready_35 ≥ MIN_READY_35
+
+    Vrací: (ok, detail_str, score)
     """
     home = pred.get("teams", {}).get("home", {})
     away = pred.get("teams", {}).get("away", {})
@@ -220,112 +235,102 @@ def meets_criteria(pred):
     if h_for == 0 and a_for == 0:
         return False, "", 0.0
 
-    # Oba týmy musí mít minimální útočný výkon – žádný "mrtvý" útok
+    # === BRÁNA 1: Absolutní gate ===
     if h_for < MIN_ATTACK or a_for < MIN_ATTACK:
-        return False, f"weak attack: {h_for:.1f}/{a_for:.1f} (min {MIN_ATTACK})", 0.0
+        return False, f"weak attack: {h_for:.2f}/{a_for:.2f} (min {MIN_ATTACK})", 0.0
 
-    # Game baseline = průměrná per-team úroveň scoringu v tomto matchupu
+    # Expected total = h_for (góly domácích) + a_for (góly hostů)
+    #                  + průměrná inkasovaná stránka (sanity přes obranu)
+    # Použijeme klasický odhad: total = (h_for + a_agn)/2 + (a_for + h_agn)/2
+    total_avg = (h_for + a_agn) / 2 + (a_for + h_agn) / 2
+    if total_avg < MIN_TOTAL_AVG:
+        return False, f"total too low: {total_avg:.2f} < {MIN_TOTAL_AVG}", 0.0
+
+    if max(h_agn, a_agn) < MIN_DEFENSE_LEAK:
+        return False, f"no defense leak: {h_agn:.2f}/{a_agn:.2f} (need ≥{MIN_DEFENSE_LEAK})", 0.0
+
     baseline = (h_for + a_for + h_agn + a_agn) / 4
-    if baseline == 0:
-        return False, "", 0.0
     if baseline < MIN_BASELINE:
         return False, f"baseline too low: {baseline:.2f} < {MIN_BASELINE}", 0.0
 
+    # === BRÁNA 2: Profilový kontrast (Variant A/B) ===
     both_floor = baseline * BOTH_FLOOR_R
     strong_min = baseline * STRONG_MIN_R
     contrast_max = baseline * CONTRAST_MAX_R
 
-    # A) oba inkasují >= floor + ofenzivní kontrast (jeden >= strong, druhý < contrast)
     variant_a = (
         h_agn >= both_floor and a_agn >= both_floor
         and ((h_for >= strong_min and a_for < contrast_max)
              or (a_for >= strong_min and h_for < contrast_max))
     )
-
-    # B) oba střílí >= floor + defenzivní kontrast (jeden >= strong, druhý < contrast)
     variant_b = (
         h_for >= both_floor and a_for >= both_floor
         and ((h_agn >= strong_min and a_agn < contrast_max)
              or (a_agn >= strong_min and h_agn < contrast_max))
     )
+    # Variant C (NEW): "open shootout" – oba dost útočí I dost inkasují
+    # → nepotřebuje kontrast, stačí že obě strany jsou nad floor v obou metrikách
+    variant_c = (
+        h_for >= both_floor and a_for >= both_floor
+        and h_agn >= both_floor and a_agn >= both_floor
+    )
 
-    if variant_a or variant_b:
-        # 2nd-half filter: stejný A/B princip na 2H data (scored + conceded)
-        h2f = get_half_stats(home, "for")
-        a2f = get_half_stats(away, "for")
-        h2a = get_half_stats(home, "against")
-        a2a = get_half_stats(away, "against")
+    if not (variant_a or variant_b or variant_c):
+        return False, (f"profile fail: scored {h_for:.2f}/{a_for:.2f}, "
+                       f"conceded {h_agn:.2f}/{a_agn:.2f} (base={baseline:.2f})"), 0.0
 
-        if not h2f or not a2f or not h2a or not a2a:
-            return False, "no minute breakdown", 0.0
+    # === BRÁNA 3: 2H aktivita ===
+    h2f = get_half_stats(home, "for")
+    a2f = get_half_stats(away, "for")
+    h2a = get_half_stats(home, "against")
+    a2a = get_half_stats(away, "against")
 
-        h_scr_2h = h2f["avg_second"]   # domácí střílí ve 2H
-        a_scr_2h = a2f["avg_second"]   # hosté střílí ve 2H
-        h_con_2h = h2a["avg_second"]   # domácí inkasují ve 2H
-        a_con_2h = a2a["avg_second"]   # hosté inkasují ve 2H
+    if not h2f or not a2f or not h2a or not a2a:
+        return False, "no minute breakdown", 0.0
 
-        # 2H baseline (stejný koncept jako celkový baseline)
-        base_2h = (h_scr_2h + a_scr_2h + h_con_2h + a_con_2h) / 4
-        if base_2h < MIN_2H_BASELINE:
-            return False, (f"2H low base: {base_2h:.2f} < {MIN_2H_BASELINE} "
-                           f"(scr {h_scr_2h:.2f}/{a_scr_2h:.2f}, con {h_con_2h:.2f}/{a_con_2h:.2f})"), 0.0
+    h_scr_2h = h2f["avg_second"]
+    a_scr_2h = a2f["avg_second"]
+    h_con_2h = h2a["avg_second"]
+    a_con_2h = a2a["avg_second"]
 
-        # Stejné poměry jako hlavní A/B, aplikované na 2H baseline
-        floor_2h = base_2h * BOTH_FLOOR_R
-        strong_2h = base_2h * STRONG_MIN_R
-        contrast_2h = base_2h * CONTRAST_MAX_R
+    base_2h = (h_scr_2h + a_scr_2h + h_con_2h + a_con_2h) / 4
+    if base_2h < MIN_2H_BASELINE:
+        return False, (f"2H low base: {base_2h:.2f} < {MIN_2H_BASELINE}"), 0.0
 
-        # 2H Varianta A: oba inkasují ve 2H >= floor + ofenzivní kontrast ve 2H
-        var_2h_a = (
-            h_con_2h >= floor_2h and a_con_2h >= floor_2h
-            and ((h_scr_2h >= strong_2h and a_scr_2h < contrast_2h)
-                 or (a_scr_2h >= strong_2h and h_scr_2h < contrast_2h))
-        )
+    # === BRÁNA 4: Kompozitní ready_35 score ===
+    # 0.50 expected total, 0.20 min(útok), 0.15 max(obrana inkasuje), 0.10 2H base, 0.05 zatím 0
+    ready_35 = (
+        0.50 * (total_avg / 3.5)
+        + 0.20 * (min(h_for, a_for) / 1.0)
+        + 0.15 * (max(h_agn, a_agn) / 1.5)
+        + 0.10 * (base_2h / 1.0)
+        + 0.05 * 1.0  # placeholder pro budoucí BTTS%
+    )
+    if ready_35 < MIN_READY_35:
+        return False, f"ready_35 too low: {ready_35:.2f} < {MIN_READY_35}", 0.0
 
-        # 2H Varianta B: oba střílí ve 2H >= floor + defenzivní kontrast ve 2H
-        var_2h_b = (
-            h_scr_2h >= floor_2h and a_scr_2h >= floor_2h
-            and ((h_con_2h >= strong_2h and a_con_2h < contrast_2h)
-                 or (a_con_2h >= strong_2h and h_con_2h < contrast_2h))
-        )
-
-        if not (var_2h_a or var_2h_b):
-            tag_2h = "2H-A" if not var_2h_a else "2H-B"
-            return False, (f"2H contrast fail: scr {h_scr_2h:.2f}/{a_scr_2h:.2f}, "
-                           f"con {h_con_2h:.2f}/{a_con_2h:.2f} "
-                           f"(2Hbase={base_2h:.2f}, floor={floor_2h:.2f}, strong={strong_2h:.2f})"), 0.0
-
-        tag = "A" if variant_a else "B"
-        tag_2h = "2A" if var_2h_a else "2B"
-        if variant_a:
-            s = sorted([h_for, a_for])
-        else:
-            s = sorted([h_agn, a_agn])
-        score = s[1] / s[0] if s[0] > 0 else 99.0
-        detail = (f"[{tag}+{tag_2h}] scored {h_for:.1f}/{a_for:.1f}, conceded {h_agn:.1f}/{a_agn:.1f} "
-                  f"| 2H: scr={h_scr_2h:.2f}/{a_scr_2h:.2f} con={h_con_2h:.2f}/{a_con_2h:.2f} "
-                  f"(base={baseline:.2f}, 2Hb={base_2h:.2f}, score={score:.2f})")
-        return True, detail, score
-
-    return False, f"stats fail: scored {h_for:.1f}/{a_for:.1f}, conceded {h_agn:.1f}/{a_agn:.1f} (base={baseline:.2f})", 0.0
+    tag = "A" if variant_a else ("B" if variant_b else "C")
+    detail = (f"[{tag}] total={total_avg:.2f} ready={ready_35:.2f} "
+              f"| scored {h_for:.2f}/{a_for:.2f}, conceded {h_agn:.2f}/{a_agn:.2f} "
+              f"| 2H base={base_2h:.2f} (base={baseline:.2f})")
+    return True, detail, ready_35
 
 
 # ===== CANDIDATES =====
 
-def extract_candidates(odds_data, fixtures):
-    """Find fixtures with Over 2.5 odds in range (avg across all bookmakers)
-    and Over 1.5 odds available.  Same logic as Kombik fetch-matches.mjs."""
-    candidates = []
-
+def compute_odds_for_fixtures(odds_data, fixture_ids):
+    """
+    Z odds dat (per liga+datum) spočítá průměrný kurz Over 1.5 a Over 2.5
+    napříč všemi bookmakery – pouze pro vybrané fixture_ids.
+    Vrací: { fixture_id: {"o15": float|None, "o25": float|None} }
+    """
+    result = {}
     for item in odds_data:
         fid = item.get("fixture", {}).get("id")
-        fix = fixtures.get(fid)
-        if not fix:
+        if fid not in fixture_ids:
             continue
-
-        # Collect ALL in-range Over 2.5 odds from every bookmaker (like Kombik)
-        all_over25 = []
-        all_over15 = []
+        all_o15 = []
+        all_o25 = []
         for bk in item.get("bookmakers", []):
             for bet in bk.get("bets", []):
                 for val in bet.get("values", []):
@@ -334,34 +339,15 @@ def extract_candidates(odds_data, fixtures):
                         odd_val = float(val.get("odd", "0"))
                     except (ValueError, TypeError):
                         continue
-                    if v == "Over 2.5" and MIN_ODDS <= odd_val <= MAX_ODDS:
-                        all_over25.append(odd_val)
                     if v == "Over 1.5" and odd_val > 0:
-                        all_over15.append(odd_val)
-
-        if not all_over25 or not all_over15:
-            continue
-
-        avg_over25 = sum(all_over25) / len(all_over25)
-        avg_over15 = sum(all_over15) / len(all_over15)
-
-        if avg_over15 < MIN_ODDS_15 or avg_over15 > MAX_ODDS_15:
-            continue
-
-        candidates.append({
-            "fixture_id": fid,
-            "League": fix["league"],
-            "Match": f"{fix['home']} vs {fix['away']}",
-            "Odds_25": f"{avg_over25:.2f}",
-            "Odds_15": f"{avg_over15:.2f}",
-            "kickoff": fix["kickoff"],
-            "home_id": fix.get("home_id", 0),
-            "away_id": fix.get("away_id", 0),
-            "league_id": fix.get("league_id", 0),
-            "season": fix.get("season", 2025),
-        })
-
-    return candidates
+                        all_o15.append(odd_val)
+                    elif v == "Over 2.5" and odd_val > 0:
+                        all_o25.append(odd_val)
+        result[fid] = {
+            "o15": (sum(all_o15) / len(all_o15)) if all_o15 else None,
+            "o25": (sum(all_o25) / len(all_o25)) if all_o25 else None,
+        }
+    return result
 
 
 # ===== MAIN =====
@@ -375,11 +361,10 @@ def main():
     today = now.strftime("%Y-%m-%d")
     tomorrow = (now + timedelta(days=1)).strftime("%Y-%m-%d")
 
-    print("== SureBets Football Bot ==")
+    print("== SureBets Football Bot (stats-first / Over 3.5 → Over 1.5) ==")
     print(f"Time: {now.strftime('%Y-%m-%d %H:%M UTC')}")
-    print(f"Select: Over 2.5 odds {MIN_ODDS}–{MAX_ODDS} + Variant A/B (league-relative)")
-    print(f"Ratios (× game baseline): FLOOR={BOTH_FLOOR_R}, STRONG={STRONG_MIN_R}, CONTRAST<{CONTRAST_MAX_R}")
-    print(f"Output: Over 1.5 with odds {MIN_ODDS_15}–{MAX_ODDS_15}\n")
+    print(f"Stats gate: total≥{MIN_TOTAL_AVG}, baseline≥{MIN_BASELINE}, ready_35≥{MIN_READY_35}")
+    print(f"Odds gate:  Over 1.5 ≥ {MIN_ODDS_15_OUT}\n")
 
     # 1. Fixtures
     fixtures_today = fetch_fixtures(today)
@@ -421,84 +406,104 @@ def main():
             if league not in ALLOWED_LEAGUES_BY_COUNTRY[country]:
                 continue
         filtered[fid] = fix
-    print(f"  After filter (24h, country/league): {len(filtered)} fixtures")
+    print(f"  After filter (24h, country/league): {len(filtered)} fixtures\n")
 
-    # 3. Group fixtures by league (same as Kombik: league.id + league.season)
-    league_map = {}
-    for fid, fix in filtered.items():
-        key = f"{fix['league_id']}_{fix['season']}"
-        if key not in league_map:
-            league_map[key] = {
-                "league_id": fix["league_id"],
-                "season": fix["season"],
-                "name": fix["league"],
-                "dates": set(),
-            }
-        date_part = fix["kickoff"][:10] if fix["kickoff"] else today
-        league_map[key]["dates"].add(date_part)
-    print(f"  Leagues: {len(league_map)}\n")
-
-    # 4. Fetch odds per league+date (same approach as Kombik)
-    print(f"  Fetching odds for {len(league_map)} leagues...")
-    all_odds = []
-    for i, (key, lg) in enumerate(league_map.items()):
-        for d in sorted(lg["dates"]):
-            print(f"  [{i+1}/{len(league_map)}] {lg['name'][:40]} ({d})...", end="")
-            items = fetch_league_odds(lg["league_id"], lg["season"], d)
-            all_odds.extend(items)
-            print(f" {len(items)}")
-    print(f"  Total odds entries: {len(all_odds)}\n")
-
-    # 5. Extract candidates from odds
-    candidates = extract_candidates(all_odds, filtered)
-    print(f"  {len(candidates)} candidates (Over 2.5 @ {MIN_ODDS}–{MAX_ODDS})\n")
-
-    # 6. Analyze candidates with predictions (1 API call = both teams)
-    results = []
-
-    if candidates:
-        print(f"  Analyzing {len(candidates)} candidates...")
-    for i, c in enumerate(candidates):
-        print(f"  [{i+1}/{len(candidates)}] {c['Match'][:45]:.<47s}", end="")
+    # 3. STATS-FIRST: zavolat predictions/stats na VŠECHNY filtered zápasy
+    print(f"  [Stage 1/3] Analyzing {len(filtered)} fixtures statistically...")
+    qualified = []  # zápasy, které prošly statistickým gate
+    for i, (fid, fix) in enumerate(filtered.items()):
+        match_str = f"{fix['home']} vs {fix['away']}"
+        print(f"  [{i+1}/{len(filtered)}] {match_str[:45]:.<47s}", end="")
         try:
-            pred = fetch_prediction(c["fixture_id"])
-            if not pred and c["home_id"] and c["away_id"]:
-                # Fallback: /predictions empty → try /teams/statistics
+            pred = fetch_prediction(fid)
+            if not pred and fix.get("home_id") and fix.get("away_id"):
                 print(" pred=∅", end="")
-                h_stats = fetch_team_stats(c["league_id"], c["season"], c["home_id"])
-                a_stats = fetch_team_stats(c["league_id"], c["season"], c["away_id"])
+                h_stats = fetch_team_stats(fix["league_id"], fix["season"], fix["home_id"])
+                a_stats = fetch_team_stats(fix["league_id"], fix["season"], fix["away_id"])
                 pred = build_pred_from_stats(h_stats, a_stats)
-            if pred:
-                ok, detail, score = meets_criteria(pred)
-                if ok:
-                    print(f" ★ {detail} | O2.5={c['Odds_25']} → O1.5={c['Odds_15']}")
-                    results.append({
-                        "League": c["League"],
-                        "Match": c["Match"],
-                        "Tip": "Over 1.5",
-                        "Odds": c["Odds_15"],
-                        "Date": c["kickoff"],
-                        "_score": score,
-                    })
-                else:
-                    print(f" fail ({detail})")
-            else:
+            if not pred:
                 print(" no data")
+                continue
+            ok, detail, score = meets_criteria(pred)
+            if ok:
+                print(f" ★ {detail}")
+                qualified.append({
+                    "fixture_id": fid,
+                    "League": fix["league"],
+                    "Match": match_str,
+                    "kickoff": fix["kickoff"],
+                    "league_id": fix["league_id"],
+                    "season": fix["season"],
+                    "_score": score,
+                })
+            else:
+                print(f" fail ({detail})")
         except Exception as exc:
             print(f" ERROR: {exc}")
 
-    # 7a. Write live.json – ALL qualifying matches (no dedup)
+    print(f"\n  Stats-qualified: {len(qualified)} fixtures")
+
+    # 4. ODDS pouze pro kvalifikované zápasy (jen jejich ligy + datumy)
+    odds_map = {}
+    if qualified:
+        league_map = {}
+        for q in qualified:
+            key = f"{q['league_id']}_{q['season']}"
+            if key not in league_map:
+                league_map[key] = {
+                    "league_id": q["league_id"],
+                    "season": q["season"],
+                    "name": q["League"],
+                    "dates": set(),
+                }
+            date_part = q["kickoff"][:10] if q["kickoff"] else today
+            league_map[key]["dates"].add(date_part)
+
+        qualified_ids = {q["fixture_id"] for q in qualified}
+        print(f"\n  [Stage 2/3] Fetching odds for {len(league_map)} leagues "
+              f"(only stats-qualified)...")
+        all_odds = []
+        for i, (key, lg) in enumerate(league_map.items()):
+            for d in sorted(lg["dates"]):
+                print(f"  [{i+1}/{len(league_map)}] {lg['name'][:40]} ({d})...", end="")
+                items = fetch_league_odds(lg["league_id"], lg["season"], d)
+                all_odds.extend(items)
+                print(f" {len(items)}")
+        odds_map = compute_odds_for_fixtures(all_odds, qualified_ids)
+        print(f"  Total odds entries collected: {len(all_odds)}\n")
+
+    # 5. Value gate: Over 1.5 ≥ MIN_ODDS_15_OUT
+    print(f"  [Stage 3/3] Value gate (Over 1.5 ≥ {MIN_ODDS_15_OUT})...")
+    results = []
+    for q in qualified:
+        odds_info = odds_map.get(q["fixture_id"], {})
+        o15 = odds_info.get("o15")
+        o25 = odds_info.get("o25")
+        if o15 is None:
+            print(f"  ✗ {q['Match'][:50]}: no Over 1.5 odds available")
+            continue
+        if o15 < MIN_ODDS_15_OUT:
+            print(f"  ✗ {q['Match'][:50]}: O1.5={o15:.2f} < {MIN_ODDS_15_OUT}")
+            continue
+        print(f"  ✓ {q['Match'][:50]}: O1.5={o15:.2f} (score={q['_score']:.2f})")
+        results.append({
+            "League": q["League"],
+            "Match": q["Match"],
+            "Tip": "Over 1.5",
+            "Odds": f"{o15:.2f}",
+            "Date": q["kickoff"],
+            "_score": q["_score"],
+            "_o25": f"{o25:.2f}" if o25 else None,
+        })
+
+    # 6a. Write live.json – ALL value-gate-passing matches (no dedup)
     live_results = sorted(results, key=lambda r: r["Date"])
-    live_out = [{k: v for k, v in r.items() if k != "_score"} for r in live_results]
+    live_out = [{k: v for k, v in r.items() if not k.startswith("_")} for r in live_results]
     with open(OUTPUT_LIVE, "w", encoding="utf-8") as f:
         json.dump(live_out, f, indent=2, ensure_ascii=False)
-    print(f"  Live: {len(live_out)} match(es) \u2192 {OUTPUT_LIVE}")
+    print(f"\n  Live: {len(live_out)} match(es) \u2192 {OUTPUT_LIVE}")
 
-    # 7b. Best per league – keep only the top match from each league (for fotbals.json)
-    #    Normalize league names: "Serie D - Girone A" → "Serie D",
-    #    "Tercera RFEF - Group 3" → "Tercera RFEF", etc.
-    #    Exception: international tournaments (World Cup, Euro, Champions League, etc.)
-    #    keep their groups as separate competitions.
+    # 6b. Best per league – keep only the top match from each league (for fotbals.json)
     TOURNAMENT_KEYWORDS = (
         "world cup", "euro ", "european", "copa america", "africa cup",
         "asian cup", "nations league", "champions league", "europa league",
@@ -508,21 +513,19 @@ def main():
 
     def normalize_league(name):
         low = name.lower()
-        # Don't merge groups for international tournaments
         if any(kw in low for kw in TOURNAMENT_KEYWORDS):
             return name
-        # Strip group/girone/conference/division suffixes
         return re.sub(
             r'\s*[-–]\s*('
-            r'Gir(?:one|\.)\s*\w+'          # Serie D - Girone A/B/C
-            r'|Gr(?:oup|p\.?)\s*\w+'         # Group 1, Grp. A
-            r'|CFL\s*\w+'                    # 3. liga - CFL B
-            r'|Zone\s*\w+'                   # Zone Nord/Sud
-            r'|Conference\s*\w+'             # Conference North
-            r'|Division\s*\w+'               # Division A
-            r'|North(?:ern)?|South(?:ern)?'  # Northern/Southern
-            r'|East(?:ern)?|West(?:ern)?'    # Eastern/Western
-            r'|[A-I]'                        # single letter group: - A, - B, ..., - I
+            r'Gir(?:one|\.)\s*\w+'
+            r'|Gr(?:oup|p\.?)\s*\w+'
+            r'|CFL\s*\w+'
+            r'|Zone\s*\w+'
+            r'|Conference\s*\w+'
+            r'|Division\s*\w+'
+            r'|North(?:ern)?|South(?:ern)?'
+            r'|East(?:ern)?|West(?:ern)?'
+            r'|[A-I]'
             r')\s*$',
             '', name, flags=re.IGNORECASE
         ).strip()
@@ -533,86 +536,59 @@ def main():
         lg = normalize_league(r["League"])
         if lg not in best_per_league or r["_score"] > best_per_league[lg]["_score"]:
             best_per_league[lg] = r
-    results = list(best_per_league.values())
-    for r in results:
-        r.pop("_score", None)
-    if before > len(results):
-        print(f"\n  Dedup: {before} → {len(results)} (best per league, normalized)")
+    deduped = list(best_per_league.values())
+    if before > len(deduped):
+        print(f"  Dedup: {before} → {len(deduped)} (best per league, normalized)")
 
-    # 8. Sort by kickoff time and write fotbals.json
-    results.sort(key=lambda r: r["Date"])
+    # 7. Sort by kickoff time and write fotbals.json (bez interních polí)
+    deduped.sort(key=lambda r: r["Date"])
+    fotbals_out = [{k: v for k, v in r.items() if not k.startswith("_")} for r in deduped]
     with open(OUTPUT, "w", encoding="utf-8") as f:
-        json.dump(results, f, indent=2, ensure_ascii=False)
+        json.dump(fotbals_out, f, indent=2, ensure_ascii=False)
 
-    # 9. Write tips.json – always exactly 2 tips with Over 2.5
-    #    Priority: qualified results first, then fill from all candidates pool
-    odds_25_map = {(c["Match"], c["kickoff"]): c["Odds_25"] for c in candidates}
-
-    # 9a. Pick from qualified results (best-per-league)
-    qualified_pool = []
-    for r in results:
-        odds_25 = odds_25_map.get((r["Match"], r["Date"]))
-        if odds_25:
-            qualified_pool.append({**r, "_odds_25": odds_25})
-    selected = random.sample(qualified_pool, min(MAX_TIPS, len(qualified_pool)))
-
+    # 8. Write tips.json – 2 tipy preferovaně z kvalifikovaných zápasů s Over 2.5 v rozsahu
+    #    Priorita:
+    #      a) kvalifikovaný zápas (best-per-league) s Over 2.5 v pásmu MIN_ODDS–MAX_ODDS
+    #      b) jakýkoli kvalifikovaný zápas → tipnout Over 1.5 (bezpečnější)
     tips = []
     selected_keys = set()
-    for s in selected:
-        tips.append({
-            "League": s["League"],
-            "Match": s["Match"],
-            "Tip": "Over 2.5",
-            "Odds": s["_odds_25"],
-            "Date": s["Date"],
-        })
-        selected_keys.add((s["Match"], s["Date"]))
 
-    # 9b. If fewer than MAX_TIPS, fill from ALL candidates (Over 2.5 @ 1.60–1.80)
-    #      Prefer top European leagues, avoid duplicate leagues with already-selected tips.
-    PREFERRED_LEAGUES = {
-        "Premier League", "La Liga", "Bundesliga", "Serie A", "Ligue 1",
-        "Eredivisie", "Primeira Liga", "Super League", "Jupiler Pro League",
-        "Champions League", "Europa League", "Conference League",
-    }
-    if len(tips) < MAX_TIPS and candidates:
+    # 8a. Pokus: Over 2.5 z kvalifikovaných v pásmu 1.60–1.80
+    o25_pool = [
+        r for r in deduped
+        if r.get("_o25") and MIN_ODDS <= float(r["_o25"]) <= MAX_ODDS
+    ]
+    if o25_pool:
+        picks = random.sample(o25_pool, min(MAX_TIPS, len(o25_pool)))
+        for p in picks:
+            tips.append({
+                "League": p["League"],
+                "Match": p["Match"],
+                "Tip": "Over 2.5",
+                "Odds": p["_o25"],
+                "Date": p["Date"],
+            })
+            selected_keys.add((p["Match"], p["Date"]))
+
+    # 8b. Doplnit Over 1.5 z kvalifikovaných (různé ligy)
+    if len(tips) < MAX_TIPS:
         used_leagues = {t["League"] for t in tips}
         filler_pool = [
-            c for c in candidates
-            if (c["Match"], c["kickoff"]) not in selected_keys
-               and c["League"] not in used_leagues
+            r for r in deduped
+            if (r["Match"], r["Date"]) not in selected_keys
+               and r["League"] not in used_leagues
         ]
-        # Sort: preferred leagues first (shuffled within each group)
-        preferred = [c for c in filler_pool if c["League"] in PREFERRED_LEAGUES]
-        others = [c for c in filler_pool if c["League"] not in PREFERRED_LEAGUES]
-        random.shuffle(preferred)
-        random.shuffle(others)
-        sorted_pool = preferred + others
-
+        # seřadit podle score sestupně
+        filler_pool.sort(key=lambda r: r["_score"], reverse=True)
         need = MAX_TIPS - len(tips)
-        fillers = []
-        filler_leagues = set(used_leagues)
-        for c in sorted_pool:
-            if c["League"] not in filler_leagues:
-                fillers.append(c)
-                filler_leagues.add(c["League"])
-                if len(fillers) >= need:
-                    break
-        # Fallback: if not enough unique leagues, allow any remaining
-        if len(fillers) < need:
-            rest = [c for c in sorted_pool if c not in fillers]
-            fillers.extend(rest[:need - len(fillers)])
-
-        for f in fillers:
+        for r in filler_pool[:need]:
             tips.append({
-                "League": f["League"],
-                "Match": f["Match"],
-                "Tip": "Over 2.5",
-                "Odds": f["Odds_25"],
-                "Date": f["kickoff"],
+                "League": r["League"],
+                "Match": r["Match"],
+                "Tip": "Over 1.5",
+                "Odds": r["Odds"],
+                "Date": r["Date"],
             })
-        if fillers:
-            print(f"  Tips: {len(selected)} qualified + {len(fillers)} random filler(s) → {len(tips)} total")
 
     if tips:
         print(f"  Tips: {len(tips)} match(es) → {OUTPUT_TIPS}")
@@ -624,7 +600,8 @@ def main():
         json.dump(tips, f, indent=2, ensure_ascii=False)
 
     print(f"\n{'='*50}")
-    print(f"  Results: {len(results)} match(es) → {OUTPUT} + {OUTPUT_LIVE}")
+    print(f"  Results: {len(deduped)} match(es) → {OUTPUT}")
+    print(f"  Live:    {len(live_out)} match(es) → {OUTPUT_LIVE}")
     print(f"  Tips:    {len(tips)} match(es) → {OUTPUT_TIPS}")
     print(f"  API requests: {request_count} / 7500 ({request_count * 100 // 7500}%)")
 
