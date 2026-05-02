@@ -31,22 +31,6 @@
     "scoutStats": "Score: 5/10 | HT: 45:24 (69 pts) | Q1=29 Q2=40 (line 165.5, pace 83%) | PreLine: 165.5 | Proj: 149 | Pro B"
   },
   {
-    "league": "SHL",
-    "homeTeam": "Rögle",
-    "awayTeam": "Skellefteå",
-    "tip": "Over 5.5",
-    "odds": "",
-    "halftimeScore": "1:2",
-    "liveOdds": "",
-    "finalScore": "2:3",
-    "result": "❌ Lost",
-    "sport": "hockey",
-    "kickoff": "2026-04-30T17:00:00.000Z",
-    "resolvedAt": "2026-04-30T19:22:04.921Z",
-    "source": "scout-hockey",
-    "scoutStats": "Score: 8/12 | P1: 1:2 | GF: 5.6 GA: 3.8 | Proj: 6.4 → Over 5.5 | Last5: 0 | PreOdds: 1.53 | SHL"
-  },
-  {
     "league": "Liiga",
     "homeTeam": "SaiPa",
     "awayTeam": "Ilves",
@@ -63,22 +47,6 @@
     "scoutStats": "Score: 8/12 | P1: 1:1 | GF: 5.8 GA: 4.9 | Proj: 5.6 → Over 5.5 | Last5: 0 | PreOdds: 1.9 | Liiga"
   },
   {
-    "league": "Commissioners Cup",
-    "homeTeam": "NLEX Road Warriors",
-    "awayTeam": "Rain or Shine Elasto Painters",
-    "tip": "Over 186.5 (preLine 216.5)",
-    "odds": "",
-    "halftimeScore": "37:49 (86 pts)",
-    "liveOdds": "",
-    "finalScore": "92:90 (182 pts)",
-    "result": "❌ Lost",
-    "sport": "basketball",
-    "kickoff": "2026-04-29T11:30:00.000Z",
-    "resolvedAt": "2026-04-29T14:01:05.731Z",
-    "source": "scout-basketball",
-    "scoutStats": "Score: 6/10 | HT: 37:49 (86 pts) | Q1=41 Q2=45 (line 216.5, pace 79%) | PreLine: 216.5 | Proj: 189.8 | Commissioners Cup"
-  },
-  {
     "league": "CONMEBOL Sudamericana",
     "homeTeam": "O'Higgins",
     "awayTeam": "Boston River",
@@ -92,22 +60,6 @@
     "resolvedAt": "2026-04-29T03:58:05.465Z",
     "source": "scout-football",
     "scoutStats": "Score: 12/14 | xG: 1.15 | Shots: 13/6 | Corners: 6 | Poss: 64% | Pre O2.5: 2.1"
-  },
-  {
-    "league": "Euroleague",
-    "homeTeam": "Valencia",
-    "awayTeam": "Panathinaikos",
-    "tip": "Over 152.5 (preLine 175.5)",
-    "odds": "",
-    "halftimeScore": "32:39 (71 pts)",
-    "liveOdds": "",
-    "finalScore": "67:68 (135 pts)",
-    "result": "❌ Lost",
-    "sport": "basketball",
-    "kickoff": "2026-04-28T18:45:00.000Z",
-    "resolvedAt": "2026-04-28T21:16:04.954Z",
-    "source": "scout-basketball",
-    "scoutStats": "Score: 6/10 | HT: 32:39 (71 pts) | Q1=38 Q2=33 (line 175.5, pace 81%) | PreLine: 175.5 | Proj: 155.8 | Euroleague"
   },
   {
     "league": "DEL",
@@ -190,22 +142,6 @@
     "scoutStats": "Score: 9/12 | P1: 2:0 | GF: 7.1 GA: 6.0 | Proj: 6 → Over 5.5 | ECHL"
   },
   {
-    "league": "OHL",
-    "homeTeam": "Windsor Spitfires",
-    "awayTeam": "Kitchener Rangers",
-    "tip": "Over 6.5",
-    "odds": "",
-    "halftimeScore": "2:1",
-    "liveOdds": "",
-    "finalScore": "",
-    "result": "",
-    "sport": "hockey",
-    "kickoff": "2026-04-27T23:05:00.000Z",
-    "resolvedAt": "",
-    "source": "scout-hockey",
-    "scoutStats": "Score: 10/12 | P1: 2:1 | GF: 7.6 GA: 5.2 | Proj: 6.9 → Over 6.5 | OHL"
-  },
-  {
     "league": "WCH U18",
     "homeTeam": "Latvia U18",
     "awayTeam": "Slovakia U18",
@@ -281,22 +217,6 @@
     "resolvedAt": "2026-04-26T22:37:04.699Z",
     "source": "scout-football",
     "scoutStats": "Score: 8/14 | xG: 0.72(est) | Shots: 8/6 | Corners: 2 | Poss: 61% | Pre O2.5: 2.45"
-  },
-  {
-    "league": "Superliga",
-    "homeTeam": "Diablos",
-    "awayTeam": "Panteras",
-    "tip": "Over 146.5 (preLine 176.5)",
-    "odds": "",
-    "halftimeScore": "35:31 (66 pts)",
-    "liveOdds": "",
-    "finalScore": "77:65 (142 pts)",
-    "result": "❌ Lost",
-    "sport": "basketball",
-    "kickoff": "2026-04-26T18:00:00.000Z",
-    "resolvedAt": "2026-04-26T20:31:05.105Z",
-    "source": "scout-basketball",
-    "scoutStats": "Score: 5/10 | HT: 35:31 (66 pts) | Q1=36 Q2=30 (line 176.5, pace 75%) | PreLine: 176.5 | Proj: 149.8 | Superliga"
   },
   {
     "league": "National League",
@@ -376,22 +296,6 @@
     "scoutStats": "Score: 10/14 | xG: 0.99 | Shots: 16/5 | Corners: 9 | Poss: 51% | Pre O2.5: 1.53"
   },
   {
-    "league": "Super Ligi",
-    "homeTeam": "Karsiyaka",
-    "awayTeam": "Esenler Erokspor",
-    "tip": "Over 139.5 (preLine 171.5)",
-    "odds": "",
-    "halftimeScore": "31:31 (62 pts)",
-    "liveOdds": "",
-    "finalScore": "68:67 (135 pts)",
-    "result": "❌ Lost",
-    "sport": "basketball",
-    "kickoff": "2026-04-26T10:00:00.000Z",
-    "resolvedAt": "2026-04-26T12:31:06.945Z",
-    "source": "scout-basketball",
-    "scoutStats": "Score: 5/10 | HT: 31:31 (62 pts) | Q1=24 Q2=38 (line 171.5, pace 72%) | PreLine: 171.5 | Proj: 143 | Super Ligi"
-  },
-  {
     "league": "IBL",
     "homeTeam": "Rajawali Medan",
     "awayTeam": "Dewa United",
@@ -406,53 +310,6 @@
     "resolvedAt": "",
     "source": "scout-basketball",
     "scoutStats": "Score: 5/10 | HT: 31:37 (68 pts) | Q1=41 Q2=27 (line 170.5, pace 80%) | PreLine: 170.5 | Proj: 149.8 | IBL"
-  },
-  {
-    "league": "K League 2",
-    "homeTeam": "Cheongju",
-    "awayTeam": "Asan Mugunghwa",
-    "tip": "Over 0.5",
-    "odds": "1.98",
-    "halftimeScore": "0:0",
-    "liveOdds": "",
-    "finalScore": "0:0",
-    "result": "❌ Lost",
-    "sport": "football",
-    "kickoff": "2026-04-26T07:30:00.000Z",
-    "resolvedAt": "2026-04-26T09:31:05.838Z",
-    "source": "live2.json"
-  },
-  {
-    "league": "FPHL",
-    "homeTeam": "Columbus River Dragons",
-    "awayTeam": "Pee Dee IceCats",
-    "tip": "Over 5.5",
-    "odds": "",
-    "halftimeScore": "1:1",
-    "liveOdds": "",
-    "finalScore": "2:3",
-    "result": "❌ Lost",
-    "sport": "hockey",
-    "kickoff": "2026-04-25T23:05:00.000Z",
-    "resolvedAt": "2026-04-26T02:37:05.351Z",
-    "source": "scout-hockey",
-    "scoutStats": "Score: 9/12 | P1: 1:1 | GF: 7.3 GA: 6.6 | Proj: 6 → Over 5.5 | FPHL"
-  },
-  {
-    "league": "NHL",
-    "homeTeam": "Minnesota Wild",
-    "awayTeam": "Dallas Stars",
-    "tip": "Over 5.5",
-    "odds": "",
-    "halftimeScore": "1:1",
-    "liveOdds": "",
-    "finalScore": "3:2",
-    "result": "❌ Lost",
-    "sport": "hockey",
-    "kickoff": "2026-04-25T21:30:00.000Z",
-    "resolvedAt": "2026-04-26T00:58:06.751Z",
-    "source": "scout-hockey",
-    "scoutStats": "Score: 10/12 | P1: 1:1 | GF: 6.7 GA: 5.7 | Proj: 6 → Over 5.5 | NHL"
   },
   {
     "league": "I Liga",
@@ -529,22 +386,6 @@
     "resolvedAt": "2026-04-25T14:40:05.948Z",
     "source": "scout-football",
     "scoutStats": "Score: 7/14 | xG: 1.51 | Shots: 15/3 | Corners: 0 | Poss: 54% | Pre O2.5: 1.73"
-  },
-  {
-    "league": "Commissioners Cup",
-    "homeTeam": "Magnolia Hotshots",
-    "awayTeam": "Rain or Shine Elasto Painters",
-    "tip": "Over 177.5 (preLine 216.5)",
-    "odds": "",
-    "halftimeScore": "41:38 (79 pts)",
-    "liveOdds": "",
-    "finalScore": "82:91 (173 pts)",
-    "result": "❌ Lost",
-    "sport": "basketball",
-    "kickoff": "2026-04-25T11:30:00.000Z",
-    "resolvedAt": "2026-04-25T14:01:05.267Z",
-    "source": "scout-basketball",
-    "scoutStats": "Score: 6/10 | HT: 41:38 (79 pts) | Q1=45 Q2=34 (line 216.5, pace 73%) | PreLine: 216.5 | Proj: 181.4 | Commissioners Cup"
   },
   {
     "league": "WCH U18",
@@ -658,37 +499,6 @@
     "scoutStats": "Score: 9/10 | P1: 2:0 | GF: 6.9 GA: 5.6 | Proj: 6 → Over 5.5 | USHL"
   },
   {
-    "league": "AHL",
-    "homeTeam": "Rochester Americans",
-    "awayTeam": "Toronto Marlies",
-    "tip": "Over 5.5",
-    "odds": "",
-    "halftimeScore": "2:0",
-    "liveOdds": "",
-    "finalScore": "4:0",
-    "result": "❌ Lost",
-    "sport": "hockey",
-    "kickoff": "2026-04-24T23:05:00.000Z",
-    "resolvedAt": "2026-04-25T01:34:05.787Z",
-    "source": "scout-hockey",
-    "scoutStats": "Score: 10/10 | P1: 2:0 | GF: 6.1 GA: 6.4 | Proj: 6 → Over 5.5 | AHL"
-  },
-  {
-    "league": "Serie B",
-    "homeTeam": "Ponte Preta",
-    "awayTeam": "America Mineiro",
-    "tip": "Over 1.5",
-    "odds": "",
-    "halftimeScore": "1:0",
-    "liveOdds": "",
-    "finalScore": "1:0",
-    "result": "❌ Lost",
-    "kickoff": "2026-04-24T23:00:00.000Z",
-    "resolvedAt": "2026-04-25T01:01:06.006Z",
-    "source": "scout-football",
-    "scoutStats": "Score: 9/14 | xG: 1.00 | Shots: 11/4 | Corners: 2 | Poss: 62% | Pre O2.5: 2.35"
-  },
-  {
     "league": "Primeira Liga",
     "homeTeam": "Alverca",
     "awayTeam": "Arouca",
@@ -749,21 +559,6 @@
     "resolvedAt": "2026-04-24T20:01:06.531Z",
     "source": "scout-hockey",
     "scoutStats": "Score: 8/10 | P1: 1:2 | GF: 8.5 GA: 4.9 | Proj: 6.9 → Over 6.5 | Metal Ligaen"
-  },
-  {
-    "league": "Serie B",
-    "homeTeam": "Monza",
-    "awayTeam": "Modena",
-    "tip": "Over 1.5",
-    "odds": "",
-    "halftimeScore": "1:0",
-    "liveOdds": "",
-    "finalScore": "",
-    "result": "",
-    "kickoff": "2026-04-24T17:00:00.000Z",
-    "resolvedAt": "",
-    "source": "scout-football",
-    "scoutStats": "Score: 7/14 | xG: 0.62 | Shots: 12/4 | Corners: 4 | Poss: 52% | Pre O2.5: 1.8"
   },
   {
     "league": "Friendly International",
@@ -1524,38 +1319,6 @@
     "resolvedAt": "2026-04-19T03:10:05.905Z",
     "source": "scout-football",
     "scoutStats": "Score: 9/14 | xG: 1.13 | Shots: 8/4 | Corners: 5 | Poss: 55% | Pre O2.5: 1.62"
-  },
-  {
-    "league": "FPHL",
-    "homeTeam": "Monroe Moccasins",
-    "awayTeam": "Columbus River Dragons",
-    "tip": "Over 4.5",
-    "odds": "",
-    "halftimeScore": "1:0",
-    "liveOdds": "",
-    "finalScore": "3:0",
-    "result": "❌ Lost",
-    "sport": "hockey",
-    "kickoff": "2026-04-19T00:05:00.000Z",
-    "resolvedAt": "2026-04-19T03:04:06.640Z",
-    "source": "scout-hockey",
-    "scoutStats": "Score: 6/9 | P1: 1:0 | GF: 8.3 GA: 6.3 | Proj: 5.1 → Over 4.5 | FPHL"
-  },
-  {
-    "league": "ECHL",
-    "homeTeam": "Allen Americans",
-    "awayTeam": "Kansas City",
-    "tip": "Over 4.5",
-    "odds": "",
-    "halftimeScore": "1:0",
-    "liveOdds": "",
-    "finalScore": "2:1",
-    "result": "❌ Lost",
-    "sport": "hockey",
-    "kickoff": "2026-04-19T00:10:00.000Z",
-    "resolvedAt": "2026-04-19T02:58:05.899Z",
-    "source": "scout-hockey",
-    "scoutStats": "Score: 6/9 | P1: 1:0 | GF: 7.3 GA: 5.1 | Proj: 4.8 → Over 4.5 | ECHL"
   },
   {
     "league": "Serie B",
