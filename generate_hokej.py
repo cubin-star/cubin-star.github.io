@@ -1088,26 +1088,25 @@ def main():
         print(f"  [{i+1}/{len(filtered)}] [{region}] {match_label[:40]:.<42s}", end="")
 
         try:
-            home_stats = fetch_team_stats(g["league_id"], g["season"], g["home_id"])
-            away_stats = fetch_team_stats(g["league_id"], g["season"], g["away_id"])
-
-            # Pro národní týmy API často nevrací teams/statistics → fallback z odehraných zápasů.
-            # Navíc reprezentace mají různá league_id pro MS / EHT / friendlies / kvalifikace,
-            # takže fetch_team_games(league_id) může vrátit prázdno → zkusit napříč všemi soutěžemi.
+            # Pro národní týmy zcela přeskočit teams/statistics (skoro nikdy nevrací
+            # smysluplná data – buď prázdno, nebo objekt s nulami) a postavit stats
+            # přímo z odehraných zápasů napříč všemi soutěžemi (MS, EHT, friendlies,
+            # kvalifikace…) za aktuální + předchozí sezonu.
             home_games = None
             away_games = None
             if is_national:
                 seasons_to_try = [g["season"], g["season"] - 1]
-                if not home_stats:
-                    home_games = fetch_team_games(g["home_id"], g["league_id"], g["season"])
-                    if not home_games:
-                        home_games = fetch_team_games_all_leagues(g["home_id"], seasons_to_try)
-                    home_stats = build_stats_from_games(home_games, g["home_id"])
-                if not away_stats:
-                    away_games = fetch_team_games(g["away_id"], g["league_id"], g["season"])
-                    if not away_games:
-                        away_games = fetch_team_games_all_leagues(g["away_id"], seasons_to_try)
-                    away_stats = build_stats_from_games(away_games, g["away_id"])
+                home_games = fetch_team_games(g["home_id"], g["league_id"], g["season"])
+                if not home_games:
+                    home_games = fetch_team_games_all_leagues(g["home_id"], seasons_to_try)
+                away_games = fetch_team_games(g["away_id"], g["league_id"], g["season"])
+                if not away_games:
+                    away_games = fetch_team_games_all_leagues(g["away_id"], seasons_to_try)
+                home_stats = build_stats_from_games(home_games, g["home_id"])
+                away_stats = build_stats_from_games(away_games, g["away_id"])
+            else:
+                home_stats = fetch_team_stats(g["league_id"], g["season"], g["home_id"])
+                away_stats = fetch_team_stats(g["league_id"], g["season"], g["away_id"])
 
             ok, detail, score = meets_criteria(
                 home_stats, away_stats, sel_line, out_line,
@@ -1118,12 +1117,8 @@ def main():
 
             if home_games is None:
                 home_games = fetch_team_games(g["home_id"], g["league_id"], g["season"])
-                if is_national and not home_games:
-                    home_games = fetch_team_games_all_leagues(g["home_id"], [g["season"], g["season"] - 1])
             if away_games is None:
                 away_games = fetch_team_games(g["away_id"], g["league_id"], g["season"])
-                if is_national and not away_games:
-                    away_games = fetch_team_games_all_leagues(g["away_id"], [g["season"], g["season"] - 1])
             h2h = fetch_h2h(g["home_id"], g["away_id"])
             home_form = analyze_recent_form(home_games, g["home_id"], is_national=is_national)
             away_form = analyze_recent_form(away_games, g["away_id"], is_national=is_national)
