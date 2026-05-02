@@ -1,16 +1,6 @@
 [
   {
     "sport": "basketball",
-    "league": "NBA",
-    "match": "Minnesota Timberwolves vs Denver Nuggets",
-    "tip": "Over 211.5",
-    "odds": "1.22",
-    "date": "2026-05-01T01:30:00+00:00",
-    "score": "110:98",
-    "result": "✗"
-  },
-  {
-    "sport": "basketball",
     "league": "Premier league",
     "match": "Grindavik vs Valur",
     "tip": "Over 153.5",
@@ -90,16 +80,6 @@
     "result": "✓"
   },
   {
-    "sport": "football",
-    "league": "NWSL Women",
-    "match": "Washington Spirit W vs Racing Louisville W",
-    "tip": "Over 1.5",
-    "odds": "1.16",
-    "date": "2026-04-29T23:00:00+00:00",
-    "score": "1:0",
-    "result": "✗"
-  },
-  {
     "sport": "basketball",
     "league": "NBA",
     "match": "New York Knicks vs Atlanta Hawks",
@@ -118,26 +98,6 @@
     "date": "2026-04-28T17:30:00+00:00",
     "score": "1:5",
     "result": "✓"
-  },
-  {
-    "sport": "basketball",
-    "league": "Eurocup",
-    "match": "JL Bourg vs Besiktas",
-    "tip": "Over 154.5",
-    "odds": "1.28",
-    "date": "2026-04-28T17:30:00+00:00",
-    "score": "73:71",
-    "result": "✗"
-  },
-  {
-    "sport": "hockey",
-    "league": "SHL",
-    "match": "Rögle vs Skellefteå",
-    "tip": "Over 3.5",
-    "odds": "1.27",
-    "date": "2026-04-28T17:00:00+00:00",
-    "score": "2:1",
-    "result": "✗"
   },
   {
     "sport": "football",
@@ -181,16 +141,6 @@
   },
   {
     "sport": "football",
-    "league": "NB II",
-    "match": "Budapest Honved vs Soroksar",
-    "tip": "Over 1.5",
-    "odds": "1.16",
-    "date": "2026-04-27T18:00:00+00:00",
-    "score": "0:0",
-    "result": "✗"
-  },
-  {
-    "sport": "football",
     "league": "Liga 1",
     "match": "Bali United vs PSM Makassar",
     "tip": "Over 1.5",
@@ -198,16 +148,6 @@
     "date": "2026-04-27T08:30:00+00:00",
     "score": "2:0",
     "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Segunda División",
-    "match": "AD Ceuta FC vs Racing Santander",
-    "tip": "Over 1.5",
-    "odds": "1.15",
-    "date": "2026-04-26T19:00:00+00:00",
-    "score": "0:0",
-    "result": "✗"
   },
   {
     "sport": "hockey",
@@ -261,16 +201,6 @@
   },
   {
     "sport": "football",
-    "league": "Serie C - Girone A",
-    "match": "Dolomiti Bellunesi vs Trento",
-    "tip": "Over 1.5",
-    "odds": "1.19",
-    "date": "2026-04-25T18:30:00+00:00",
-    "score": "0:0",
-    "result": "✗"
-  },
-  {
-    "sport": "football",
     "league": "Championship",
     "match": "Sheffield Utd vs Preston",
     "tip": "Over 1.5",
@@ -321,16 +251,6 @@
   },
   {
     "sport": "football",
-    "league": "National League",
-    "match": "Scunthorpe vs Eastleigh",
-    "tip": "Over 1.5",
-    "odds": "1.16",
-    "date": "2026-04-25T11:30:00+00:00",
-    "score": "0:1",
-    "result": "✗"
-  },
-  {
-    "sport": "football",
     "league": "Thai League 2",
     "match": "Mahasarakham United vs Khon Kaen United",
     "tip": "Over 1.5",
@@ -358,26 +278,6 @@
     "date": "2026-04-24T18:00:00+00:00",
     "score": "1:2",
     "result": "✓"
-  },
-  {
-    "sport": "hockey",
-    "league": "National League",
-    "match": "Fribourg vs Davos",
-    "tip": "Over 3.5",
-    "odds": "1.26",
-    "date": "2026-04-24T18:00:00+00:00",
-    "score": "0:1",
-    "result": "✗"
-  },
-  {
-    "sport": "football",
-    "league": "Regionalliga - West",
-    "match": "Fortuna Düsseldorf II vs Sportfreunde Siegen",
-    "tip": "Over 1.5",
-    "odds": "1.20",
-    "date": "2026-04-24T17:30:00+00:00",
-    "score": "0:0",
-    "result": "✗"
   },
   {
     "sport": "hockey",
@@ -410,16 +310,6 @@
     "result": "✓"
   },
   {
-    "sport": "basketball",
-    "league": "Korisliiga",
-    "match": "Helsinki Seagulls vs Kataja",
-    "tip": "Over 157.5",
-    "odds": "1.27",
-    "date": "2026-04-24T15:30:00+00:00",
-    "score": "64:69",
-    "result": "✗"
-  },
-  {
     "sport": "football",
     "league": "Victoria NPL",
     "match": "St. Albans Saints vs South Melbourne",
@@ -448,16 +338,6 @@
     "date": "2026-04-23T15:00:00+00:00",
     "score": "4:2",
     "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Liga MX",
-    "match": "Necaxa vs Guadalajara Chivas",
-    "tip": "Over 1.5",
-    "odds": "1.17",
-    "date": "2026-04-23T03:05:00+00:00",
-    "score": "0:0",
-    "result": "✗"
   },
   {
     "sport": "football",
