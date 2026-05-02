@@ -12,7 +12,11 @@ name: ValueBets Evaluate
 
 on:
   schedule:
-    - cron: '0 5 * * *'    # každý den 05:00 UTC – PŘED přepsáním live2.json novými tipy (~06:00 UTC)
+    # Více slotů, aby GitHub některý určitě nesnědl. První, který doběhne, vyhodnotí včerejší tipy.
+    # Pozor: generate-tips.yml přepisuje live2.json v 06:00 UTC, takže musíme být HOTOVÍ před touto chvílí.
+    - cron: '7 4 * * *'    # 04:07 UTC – primary
+    - cron: '17 4 * * *'   # 04:17 UTC – záloha
+    - cron: '37 4 * * *'   # 04:37 UTC – druhá záloha
   workflow_dispatch:
 
 permissions:
