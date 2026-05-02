@@ -19,6 +19,7 @@ SETUP:
 """
 
 import json
+import math
 import os
 import random
 import re
@@ -45,6 +46,18 @@ MIN_GAMES = 6            # zvýšeno z 5 → spolehlivější vzorek
 MIN_TOTAL_AVG = 3.00     # tvrdý gate: (h_for+a_for+h_agn+a_agn)/2 ≥ 3.0
 MIN_DEFENSE_LEAK = 1.00  # aspoň jeden tým inkasuje ≥ 1.0 g/z (musí být odkud góly brát)
 MIN_READY_35 = 0.85      # kompozitní index "Over 3.5 readiness"
+
+# === NEW: Poissonova pravděpodobnost Over 3.5 (per varianta) ===
+# expected total (λ) → P(Over 3.5) přes nezávislé Poisson rozdělení.
+# Diferenciace podle profilu zápasu:
+#   B = oba útočí (strukturálně nejlepší pro Over 3.5) → volnější
+#   A = jeden silný útok + děravé obrany → default
+#   C = "open shootout" symetrie → přísnější (často klouže k 0:0)
+MIN_P35_BY_VARIANT = {
+    "A": 0.45,
+    "B": 0.43,
+    "C": 0.50,
+}
 
 # League-relative ratios (mírně zostřeno proti původnímu Over 2.5 botu)
 BOTH_FLOOR_R = 0.85      # oba alespoň 85% baseline
@@ -187,6 +200,27 @@ def _sf(val, default=0.0):
         return default
 
 
+def poisson_p_over(lam, line):
+    """P(total > line) pro nezáporný integer total ~ Poisson(lam).
+    Pro line=3.5 vrací P(total ≥ 4) = 1 - sum_{k=0..3} e^-λ λ^k / k!.
+    """
+    if lam <= 0:
+        return 0.0
+    k_max = int(math.floor(line))  # pro 3.5 → 3
+    cdf = 0.0
+    term = math.exp(-lam)  # k=0
+    cdf += term
+    for k in range(1, k_max + 1):
+        term *= lam / k
+        cdf += term
+    p = 1.0 - cdf
+    if p < 0.0:
+        return 0.0
+    if p > 1.0:
+        return 1.0
+    return p
+
+
 def get_half_stats(team_data, side):
     """Extract 1st/2nd half goal averages from minute breakdown."""
     minute = team_data.get("league", {}).get("goals", {}).get(side, {}).get("minute", {})
@@ -310,7 +344,15 @@ def meets_criteria(pred):
         return False, f"ready_35 too low: {ready_35:.2f} < {MIN_READY_35}", 0.0
 
     tag = "A" if variant_a else ("B" if variant_b else "C")
-    detail = (f"[{tag}] total={total_avg:.2f} ready={ready_35:.2f} "
+
+    # === BRÁNA 5: Poissonova P(Over 3.5) – diferenciovaná podle varianty ===
+    p35 = poisson_p_over(total_avg, 3.5)
+    min_p35 = MIN_P35_BY_VARIANT.get(tag, 0.45)
+    if p35 < min_p35:
+        return False, (f"[{tag}] p35 too low: {p35*100:.1f}% < {min_p35*100:.0f}% "
+                       f"(λ={total_avg:.2f})"), 0.0
+
+    detail = (f"[{tag}] total={total_avg:.2f} p35={p35*100:.0f}% ready={ready_35:.2f} "
               f"| scored {h_for:.2f}/{a_for:.2f}, conceded {h_agn:.2f}/{a_agn:.2f} "
               f"| 2H base={base_2h:.2f} (base={baseline:.2f})")
     return True, detail, ready_35
@@ -364,6 +406,8 @@ def main():
     print("== SureBets Football Bot (stats-first / Over 3.5 → Over 1.5) ==")
     print(f"Time: {now.strftime('%Y-%m-%d %H:%M UTC')}")
     print(f"Stats gate: total≥{MIN_TOTAL_AVG}, baseline≥{MIN_BASELINE}, ready_35≥{MIN_READY_35}")
+    print(f"P(O3.5) gate per variant: A≥{MIN_P35_BY_VARIANT['A']*100:.0f}%, "
+          f"B≥{MIN_P35_BY_VARIANT['B']*100:.0f}%, C≥{MIN_P35_BY_VARIANT['C']*100:.0f}%")
     print(f"Odds gate:  Over 1.5 ≥ {MIN_ODDS_15_OUT}\n")
 
     # 1. Fixtures
