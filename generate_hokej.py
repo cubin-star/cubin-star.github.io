@@ -57,6 +57,8 @@ EXCLUDED_LEAGUE_KEYWORDS = (
 TARGET_LINES_BY_REGION = {
     "US": {"sel_line": 6.5, "out_line": 4.5, "min_expected": 6.5},
     "EU": {"sel_line": 5.5, "out_line": 3.5, "min_expected": 5.8},
+    # Národní týmy jsou taktické, méně gólové → cílí jako EU
+    "NAT": {"sel_line": 5.5, "out_line": 3.5, "min_expected": 5.5},
 }
 MIN_ODDS_OUT = 1.25      # value-gate: kurz na výstupní linii musí být >= 1.25
 
@@ -889,6 +891,21 @@ NATIONAL_TEAM_KEYWORDS = (
     "friendlies", "friendly",
 )
 
+# Jména států – pokud OBĚ jména týmů jsou v této množině, jde o reprezentační zápas
+# (záchytná síť pro případy, kdy název ligy nepasuje na NATIONAL_TEAM_KEYWORDS)
+NATIONAL_TEAM_NAMES = {
+    "czech republic", "czechia", "slovakia", "sweden", "finland", "norway",
+    "denmark", "germany", "austria", "switzerland", "france", "italy",
+    "great britain", "united kingdom", "uk", "england", "ireland",
+    "poland", "ukraine", "belarus", "russia", "latvia", "lithuania",
+    "estonia", "romania", "hungary", "slovenia", "croatia", "serbia",
+    "netherlands", "belgium", "spain", "portugal", "iceland",
+    "kazakhstan", "japan", "south korea", "korea", "china", "chinese taipei",
+    "australia", "new zealand",
+    "usa", "united states", "canada", "mexico",
+    "bulgaria", "turkey", "israel", "georgia", "armenia",
+}
+
 
 def _is_national_team_league(league_name):
     """True pokud jde o reprezentační soutěž (státy) – přeskakujeme MIN_GAMES."""
@@ -896,6 +913,58 @@ def _is_national_team_league(league_name):
         return False
     name = league_name.lower()
     return any(kw in name for kw in NATIONAL_TEAM_KEYWORDS)
+
+
+def _is_national_team_match(home_name, away_name):
+    """True pokud OBĚ jména týmů odpovídají názvu státu (záchytná síť)."""
+    if not home_name or not away_name:
+        return False
+    h = home_name.strip().lower()
+    a = away_name.strip().lower()
+    return h in NATIONAL_TEAM_NAMES and a in NATIONAL_TEAM_NAMES
+
+
+def build_stats_from_games(games, team_id):
+    """NEW v3: Pro národní týmy (a obecně pro fallback) postaví minimální stats dict
+    ze seznamu odehraných zápasů – tvar kompatibilní s meets_criteria.
+    Rozdělí home/away split (home statistika = průměry z domácích zápasů týmu, atd.).
+
+    Vrací None pokud nejsou žádné zápasy.
+    """
+    if not games:
+        return None
+
+    home_for, home_agn, home_n = 0, 0, 0
+    away_for, away_agn, away_n = 0, 0, 0
+    for g in games:
+        if g["home_id"] == team_id:
+            home_for += g["home_total"]
+            home_agn += g["away_total"]
+            home_n += 1
+        elif g["away_id"] == team_id:
+            away_for += g["away_total"]
+            away_agn += g["home_total"]
+            away_n += 1
+
+    h_for_avg = (home_for / home_n) if home_n else 0.0
+    h_agn_avg = (home_agn / home_n) if home_n else 0.0
+    a_for_avg = (away_for / away_n) if away_n else 0.0
+    a_agn_avg = (away_agn / away_n) if away_n else 0.0
+
+    # Pokud má tým jen jeden split (např. jen venku), použij ho i pro chybějící stranu
+    if home_n == 0 and away_n > 0:
+        h_for_avg, h_agn_avg = a_for_avg, a_agn_avg
+    if away_n == 0 and home_n > 0:
+        a_for_avg, a_agn_avg = h_for_avg, h_agn_avg
+
+    total_played = home_n + away_n
+    return {
+        "games": {"played": {"all": total_played}},
+        "goals": {
+            "for": {"average": {"home": f"{h_for_avg:.2f}", "away": f"{a_for_avg:.2f}"}},
+            "against": {"average": {"home": f"{h_agn_avg:.2f}", "away": f"{a_agn_avg:.2f}"}},
+        },
+    }
 
 
 # ===== MAIN =====
@@ -914,6 +983,7 @@ def main():
     print(f"Time: {now.strftime('%Y-%m-%d %H:%M UTC')}")
     print(f"Fixed lines: US sel={TARGET_LINES_BY_REGION['US']['sel_line']} → out={TARGET_LINES_BY_REGION['US']['out_line']} (min_exp={TARGET_LINES_BY_REGION['US']['min_expected']})")
     print(f"             EU sel={TARGET_LINES_BY_REGION['EU']['sel_line']} → out={TARGET_LINES_BY_REGION['EU']['out_line']} (min_exp={TARGET_LINES_BY_REGION['EU']['min_expected']})")
+    print(f"             NAT sel={TARGET_LINES_BY_REGION['NAT']['sel_line']} → out={TARGET_LINES_BY_REGION['NAT']['out_line']} (min_exp={TARGET_LINES_BY_REGION['NAT']['min_expected']})")
     print(f"Value-gate: out odds >= {MIN_ODDS_OUT}")
     print(f"Excluded: countries={EXCLUDED_COUNTRIES} + women/youth keywords")
     print(f"Quality: min Q={MIN_QUALITY_SCORE}/10, max {MAX_TIPS_PER_DAY} tips/day\n")
@@ -962,21 +1032,37 @@ def main():
     print(f"  [STATS-FIRST] Analyzing {len(filtered)} games on stats only...")
     for i, (gid, g) in enumerate(filtered.items()):
         country = g.get("country", "").lower()
-        is_eu = country not in AMERICAN_COUNTRIES
-        region = "EU" if is_eu else "US"
-        is_national = _is_national_team_league(g.get("league", ""))
+        is_national = (_is_national_team_league(g.get("league", ""))
+                       or _is_national_team_match(g.get("home", ""), g.get("away", "")))
+        if is_national:
+            region = "NAT"
+            is_eu = True  # NAT používá EU prahy v meets_criteria
+        else:
+            is_eu = country not in AMERICAN_COUNTRIES
+            region = "EU" if is_eu else "US"
         cfg = TARGET_LINES_BY_REGION[region]
         sel_line = cfg["sel_line"]
         out_line = cfg["out_line"]
         min_exp = cfg["min_expected"]
 
         match_label = f"{g['home']} vs {g['away']}"
-        nat_tag = " [NAT]" if is_national else ""
-        print(f"  [{i+1}/{len(filtered)}] [{region}]{nat_tag} {match_label[:40]:.<42s}", end="")
+        print(f"  [{i+1}/{len(filtered)}] [{region}] {match_label[:40]:.<42s}", end="")
 
         try:
             home_stats = fetch_team_stats(g["league_id"], g["season"], g["home_id"])
             away_stats = fetch_team_stats(g["league_id"], g["season"], g["away_id"])
+
+            # Pro národní týmy API často nevrací teams/statistics → fallback z odehraných zápasů
+            home_games = None
+            away_games = None
+            if is_national and (not home_stats or not away_stats):
+                home_games = fetch_team_games(g["home_id"], g["league_id"], g["season"])
+                away_games = fetch_team_games(g["away_id"], g["league_id"], g["season"])
+                if not home_stats:
+                    home_stats = build_stats_from_games(home_games, g["home_id"])
+                if not away_stats:
+                    away_stats = build_stats_from_games(away_games, g["away_id"])
+
             ok, detail, score = meets_criteria(
                 home_stats, away_stats, sel_line, out_line,
                 is_eu=is_eu, min_expected_abs=min_exp, is_national=is_national)
@@ -984,8 +1070,10 @@ def main():
                 print(f" basic fail ({detail})")
                 continue
 
-            home_games = fetch_team_games(g["home_id"], g["league_id"], g["season"])
-            away_games = fetch_team_games(g["away_id"], g["league_id"], g["season"])
+            if home_games is None:
+                home_games = fetch_team_games(g["home_id"], g["league_id"], g["season"])
+            if away_games is None:
+                away_games = fetch_team_games(g["away_id"], g["league_id"], g["season"])
             h2h = fetch_h2h(g["home_id"], g["away_id"])
             home_form = analyze_recent_form(home_games, g["home_id"], is_national=is_national)
             away_form = analyze_recent_form(away_games, g["away_id"], is_national=is_national)
