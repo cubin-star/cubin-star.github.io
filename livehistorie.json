@@ -1,5 +1,21 @@
 [
   {
+    "league": "Friendly International",
+    "homeTeam": "Great Britain",
+    "awayTeam": "Italy",
+    "tip": "Over 5.5",
+    "odds": "",
+    "halftimeScore": "2:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "hockey",
+    "kickoff": "2026-05-02T18:00:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-hockey",
+    "scoutStats": "Score: 8/12 | P1: 2:0 | GF: 7.0 GA: 10.0 | Proj: 6.6 → Over 5.5 | Last5: 0 | PreOdds: 1.65 | Friendly International"
+  },
+  {
     "league": "Premiership",
     "homeTeam": "Kilmarnock",
     "awayTeam": "Dundee Utd",
