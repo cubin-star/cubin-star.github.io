@@ -134,6 +134,7 @@ request_count = 0
 # In-memory cache pro opakovaná API volání (NEW v3)
 _TEAM_STATS_CACHE = {}
 _TEAM_GAMES_CACHE = {}
+_TEAM_GAMES_ALL_CACHE = {}
 _H2H_CACHE = {}
 
 
@@ -230,19 +231,11 @@ def _parse_period(period_val):
     return None, None
 
 
-def fetch_team_games(team_id, league_id, season):
-    """Fetch all finished games for a team in given league+season."""
-    key = (team_id, league_id, season)
-    if key in _TEAM_GAMES_CACHE:
-        return _TEAM_GAMES_CACHE[key]
-    time.sleep(DELAY)
-    data = api_get("games", {
-        "team": str(team_id),
-        "league": str(league_id),
-        "season": str(season),
-    })
+def _parse_finished_games(api_response):
+    """Z API response vyparsuje seznam dokončených zápasů (FT/AOT/AP) v jednotném tvaru.
+    Sdílený parser pro fetch_team_games / fetch_team_games_all_leagues / fetch_h2h."""
     finished = []
-    for g in data.get("response", []):
+    for g in api_response:
         status = g.get("status", {}).get("short", "")
         if status not in ("FT", "AOT", "AP"):
             continue
@@ -251,7 +244,6 @@ def fetch_team_games(team_id, league_id, season):
         a_total = scores.get("away")
         if h_total is None or a_total is None:
             continue
-        # Period scores for period-by-period analysis
         periods = g.get("periods", {}) or {}
         try:
             entry = {
@@ -263,7 +255,6 @@ def fetch_team_games(team_id, league_id, season):
                 "total": int(h_total) + int(a_total),
                 "status_short": status,
             }
-            # Period data – hockey API returns strings like "2 - 1"
             p1_str = periods.get("first")
             p2_str = periods.get("second")
             p3_str = periods.get("third")
@@ -276,14 +267,62 @@ def fetch_team_games(team_id, league_id, season):
                     entry["p23_total"] = p2h + p2a + p3h + p3a
                     entry["p23_home"] = p2h + p3h
                     entry["p23_away"] = p2a + p3a
-                    # Regulation total (3 periods only, no OT) – for fair P2+P3 ratio
                     entry["reg_total"] = p1h + p1a + p2h + p2a + p3h + p3a
             finished.append(entry)
         except (ValueError, TypeError):
             pass
     finished.sort(key=lambda x: x["timestamp"], reverse=True)
+    return finished
+
+
+def fetch_team_games(team_id, league_id, season):
+    """Fetch all finished games for a team in given league+season."""
+    key = (team_id, league_id, season)
+    if key in _TEAM_GAMES_CACHE:
+        return _TEAM_GAMES_CACHE[key]
+    time.sleep(DELAY)
+    data = api_get("games", {
+        "team": str(team_id),
+        "league": str(league_id),
+        "season": str(season),
+    })
+    finished = _parse_finished_games(data.get("response", []))
     _TEAM_GAMES_CACHE[key] = finished
     return finished
+
+
+def fetch_team_games_all_leagues(team_id, seasons):
+    """NEW v3: Fetch finished games for a team ACROSS ALL leagues for given seasons.
+    Použití: národní týmy, kde league_id pro nadcházející turnaj nemá historii –
+    Česko/Švédsko hrají v různých league_id (MS, EHT, friendlies, kvalifikace…)
+    a běžný fetch_team_games(league_id) by vrátil prázdno.
+
+    Args:
+        team_id: ID týmu
+        seasons: iterable of season ints (např. [2025, 2024])
+    Returns: deduplikovaný seznam zápasů seřazený od nejnovějšího.
+    """
+    key = (team_id, tuple(sorted(seasons)))
+    if key in _TEAM_GAMES_ALL_CACHE:
+        return _TEAM_GAMES_ALL_CACHE[key]
+
+    seen = set()
+    merged = []
+    for season in seasons:
+        time.sleep(DELAY)
+        data = api_get("games", {
+            "team": str(team_id),
+            "season": str(season),
+        })
+        for entry in _parse_finished_games(data.get("response", [])):
+            sig = (entry["timestamp"], entry["home_id"], entry["away_id"])
+            if sig in seen:
+                continue
+            seen.add(sig)
+            merged.append(entry)
+    merged.sort(key=lambda x: x["timestamp"], reverse=True)
+    _TEAM_GAMES_ALL_CACHE[key] = merged
+    return merged
 
 
 def fetch_h2h(home_id, away_id):
@@ -1052,15 +1091,22 @@ def main():
             home_stats = fetch_team_stats(g["league_id"], g["season"], g["home_id"])
             away_stats = fetch_team_stats(g["league_id"], g["season"], g["away_id"])
 
-            # Pro národní týmy API často nevrací teams/statistics → fallback z odehraných zápasů
+            # Pro národní týmy API často nevrací teams/statistics → fallback z odehraných zápasů.
+            # Navíc reprezentace mají různá league_id pro MS / EHT / friendlies / kvalifikace,
+            # takže fetch_team_games(league_id) může vrátit prázdno → zkusit napříč všemi soutěžemi.
             home_games = None
             away_games = None
-            if is_national and (not home_stats or not away_stats):
-                home_games = fetch_team_games(g["home_id"], g["league_id"], g["season"])
-                away_games = fetch_team_games(g["away_id"], g["league_id"], g["season"])
+            if is_national:
+                seasons_to_try = [g["season"], g["season"] - 1]
                 if not home_stats:
+                    home_games = fetch_team_games(g["home_id"], g["league_id"], g["season"])
+                    if not home_games:
+                        home_games = fetch_team_games_all_leagues(g["home_id"], seasons_to_try)
                     home_stats = build_stats_from_games(home_games, g["home_id"])
                 if not away_stats:
+                    away_games = fetch_team_games(g["away_id"], g["league_id"], g["season"])
+                    if not away_games:
+                        away_games = fetch_team_games_all_leagues(g["away_id"], seasons_to_try)
                     away_stats = build_stats_from_games(away_games, g["away_id"])
 
             ok, detail, score = meets_criteria(
@@ -1072,8 +1118,12 @@ def main():
 
             if home_games is None:
                 home_games = fetch_team_games(g["home_id"], g["league_id"], g["season"])
+                if is_national and not home_games:
+                    home_games = fetch_team_games_all_leagues(g["home_id"], [g["season"], g["season"] - 1])
             if away_games is None:
                 away_games = fetch_team_games(g["away_id"], g["league_id"], g["season"])
+                if is_national and not away_games:
+                    away_games = fetch_team_games_all_leagues(g["away_id"], [g["season"], g["season"] - 1])
             h2h = fetch_h2h(g["home_id"], g["away_id"])
             home_form = analyze_recent_form(home_games, g["home_id"], is_national=is_national)
             away_form = analyze_recent_form(away_games, g["away_id"], is_national=is_national)
