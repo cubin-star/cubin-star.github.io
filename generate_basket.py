@@ -35,6 +35,31 @@ OUTPUT_LIVE = "liveb.json"
 EXCLUDED_COUNTRIES = {"russia", "belarus"}
 MIN_GAMES = 6
 
+# Ženské soutěže a mládež – blokovat napříč všemi zeměmi (klíčová slova v názvu ligy)
+EXCLUDED_LEAGUE_KEYWORDS = (
+    "women", "woman", "ladies", "féminine", "feminine",
+    "frauen", "femenino", "femenina", "femminile", "wnba",
+    "kvinnor", "naisten", "kobiet", "ženy", "zeny", "ženská", "zenska",
+    "u20", "u-20", "u19", "u-19", "u18", "u-18", "u17", "u-17", "u16", "u-16",
+    "junior", "juniors", "juvenil", "youth", "cadet",
+)
+
+# === Edge-first konfig (NEW v3) ===
+# Min. edge = (predicted_total − bookmaker_main_line) musí být >= MIN_EDGE,
+# aby bot zápas považoval za "mispriced". Per region (NBA / EU / ostatní).
+MIN_EDGE_BY_REGION = {
+    "NBA":   8.0,   # NBA má efektivní trh, kvalitní edge je 8+ bodů
+    "EU":    6.0,   # Euroliga, EuroCup, národní špičky – mírnější
+    "WORLD": 5.0,   # zbytek (FIBA, mezinárodní), nejméně přísné
+}
+
+# Value-gate na výstupní linii: nejnižší dostupná Over linie s průměrným kurzem
+# napříč bookmakery >= MIN_ODDS_OUT bude vystupovat.
+MIN_ODDS_OUT = 1.20
+
+# Klíčová slova pro detekci NBA (kvůli regionu prahů a TFM logice)
+NBA_KEYWORDS = ("nba",)
+
 # Target odds for line selection
 SELECTION_ODDS = 1.90   # find the Over line near this odds (aggressive – higher line)
 OUTPUT_ODDS = 1.22       # find the safer Over line near this odds (safe – bigger cushion)
@@ -252,6 +277,101 @@ def fetch_h2h(home_id, away_id):
 
 # ===== ODDS PARSING =====
 
+def find_main_line_and_all_overs(odds_data):
+    """Edge-first odds discovery.
+
+    Vrací (main_line_info, all_overs, home_tt_odd, away_tt_odd):
+      - main_line_info: dict {line, avg_odd, n} – hlavní bookmaker linie
+        (Over s kurzem nejblíž 1.90 napříč BK, agregováno přes BK).
+      - all_overs: list dictů [{line, avg_odd, n, label, odd_str}] seřazený dle 'line' vzestupně.
+        Každá linie obsahuje průměrný kurz napříč všemi bookmakery (n = počet BK).
+      - home_tt_odd, away_tt_odd: nejnižší Over kurz pro home/away team total.
+
+    Pokud nejsou dostupné Over linie u bet id 4, vrací (None, [], None, None).
+    """
+    by_line = {}  # line -> {sum, n, label}
+    home_tt = None
+    away_tt = None
+
+    for resp in odds_data:
+        for bk in resp.get("bookmakers", []):
+            for bet in bk.get("bets", []):
+                bet_id = bet.get("id")
+                bet_name = (bet.get("name") or "").lower()
+
+                # --- Cross-market: Home/Away Team Total ---
+                if "team total" in bet_name or (
+                    "total" in bet_name and ("home" in bet_name or "away" in bet_name)
+                ):
+                    is_home = "home" in bet_name
+                    is_away = "away" in bet_name
+                    if is_home or is_away:
+                        for val in bet.get("values", []):
+                            v = str(val.get("value", ""))
+                            if not v.lower().startswith("over"):
+                                continue
+                            try:
+                                odd = float(val.get("odd", "0"))
+                                if is_home and (home_tt is None or odd < home_tt):
+                                    home_tt = odd
+                                if is_away and (away_tt is None or odd < away_tt):
+                                    away_tt = odd
+                            except (ValueError, TypeError):
+                                pass
+
+                # --- Main: Over/Under full game (bet id 4) ---
+                if bet_id == 4:
+                    for val in bet.get("values", []):
+                        v = str(val.get("value", ""))
+                        if not v.lower().startswith("over"):
+                            continue
+                        try:
+                            line = float(v.split()[-1])
+                            odd = float(val.get("odd", "0"))
+                            if odd <= 1.0:
+                                continue
+                        except (ValueError, IndexError, TypeError):
+                            continue
+                        rec = by_line.setdefault(line, {
+                            "sum": 0.0, "n": 0, "label": v,
+                            "odd_str_first": str(val.get("odd")),
+                        })
+                        rec["sum"] += odd
+                        rec["n"] += 1
+
+    if not by_line:
+        return None, [], home_tt, away_tt
+
+    all_overs = []
+    for line, rec in by_line.items():
+        avg_odd = rec["sum"] / rec["n"]
+        all_overs.append({
+            "line": line,
+            "avg_odd": avg_odd,
+            "n": rec["n"],
+            "label": rec["label"],
+            "odd_str": f"{avg_odd:.2f}",
+        })
+    all_overs.sort(key=lambda x: x["line"])
+
+    # Hlavní linie = Over kurz nejblíž 1.90 (typický spravedlivý market)
+    main = min(all_overs, key=lambda x: abs(x["avg_odd"] - 1.90))
+    return main, all_overs, home_tt, away_tt
+
+
+def pick_lowest_value_over(all_overs, min_odds, max_line=None):
+    """Vrátí nejnižší Over linii, jejíž průměrný kurz >= min_odds.
+    Pokud max_line je zadáno, omezí výběr na linie <= max_line.
+    Vrací None pokud žádná nevyhovuje."""
+    candidates = [
+        o for o in all_overs
+        if o["avg_odd"] >= min_odds and (max_line is None or o["line"] <= max_line)
+    ]
+    if not candidates:
+        return None
+    return min(candidates, key=lambda x: x["line"])
+
+
 def find_over_lines(odds_data):
     """Find selection line (odds ≈ 1.80) and output line (odds ≈ 1.45).
     Returns (selection, output, home_tt_over, away_tt_over) where the team-total
@@ -331,20 +451,104 @@ def _sf(val, default=0.0):
         return default
 
 
-def meets_criteria(home_stats, away_stats, selection_line, is_playoff=False):
-    """Basketball criteria – venue-specific matchup vs. bookmaker line.
+def _is_excluded_league(league_name, country_name=""):
+    """True pokud liga je ženská / mládežnická / RU / BY → bot ji ani neprohledává."""
+    name = (league_name or "").lower()
+    country = (country_name or "").lower()
+    if country in EXCLUDED_COUNTRIES:
+        return True
+    for kw in EXCLUDED_LEAGUE_KEYWORDS:
+        if kw in name:
+            return True
+    return False
 
-    Uses home/away splits to calculate matchup-specific expected total,
-    then checks if it meaningfully exceeds the bookmaker's selection line.
-    This finds matches where the bookmaker underpriced the Over.
 
-    1. Overall stats → league baseline
-    2. Home/away venue splits → matchup expected total
-    3. Both teams must score >= BOTH_FLOOR_R * half_line at their venue
-    4. Both teams' venue offense >= league avg per team * OFFENSE_VS_LEAGUE_R
-    5. Matchup expected must exceed selection_line * EXPECTED_MIN_R
-       (+ PLAYOFF_EXPECTED_BONUS pokud is_playoff – playoff má nižší totaly)
-    6. Score = expected / selection_line (ranking)
+def _classify_region(league_name, country_name=""):
+    """Vrátí region klíč pro MIN_EDGE_BY_REGION: 'NBA' / 'EU' / 'WORLD'."""
+    name = (league_name or "").lower()
+    country = (country_name or "").lower()
+    for kw in NBA_KEYWORDS:
+        if kw in name:
+            return "NBA"
+    eu_countries = {
+        "spain", "italy", "germany", "france", "greece", "turkey", "serbia",
+        "lithuania", "latvia", "estonia", "poland", "czech-republic", "czech republic",
+        "slovenia", "croatia", "israel", "belgium", "netherlands", "portugal",
+        "austria", "switzerland", "hungary", "romania", "bulgaria", "ukraine",
+        "finland", "sweden", "norway", "denmark", "iceland",
+        "united kingdom", "great britain", "england", "scotland",
+    }
+    eu_keywords = ("euroleague", "eurocup", "euro cup", "champions league", "fiba europe")
+    if country in eu_countries:
+        return "EU"
+    for kw in eu_keywords:
+        if kw in name:
+            return "EU"
+    return "WORLD"
+
+
+def predict_total(home_stats, away_stats, home_form=None, away_form=None,
+                  is_playoff=False):
+    """Vrátí (predicted_total, components_detail) nebo (None, reason).
+
+    Predikce je váženým průměrem dvou nezávislých signálů:
+      - venue_expected: home offense AT HOME + away defense AWAY +
+                        away offense AWAY + home defense AT HOME (děleno 2)
+      - form_expected: průměr posledních N total skóre obou týmů (váha 50/50)
+
+    Váhy: venue 0.6, form 0.4. Pokud form chybí, použije se jen venue.
+    Playoff zápasy se srážejí o 3 body (taktika, méně risku).
+    """
+    if not home_stats or not away_stats:
+        return None, "no stats"
+
+    h_for = _sf(home_stats.get("points", {}).get("for", {}).get("average", {}).get("all"))
+    a_for = _sf(away_stats.get("points", {}).get("for", {}).get("average", {}).get("all"))
+    h_agn = _sf(home_stats.get("points", {}).get("against", {}).get("average", {}).get("all"))
+    a_agn = _sf(away_stats.get("points", {}).get("against", {}).get("average", {}).get("all"))
+
+    if h_for == 0 or a_for == 0:
+        return None, "no points stats"
+
+    h_for_h = _sf(home_stats.get("points", {}).get("for", {}).get("average", {}).get("home")) or h_for
+    a_for_a = _sf(away_stats.get("points", {}).get("for", {}).get("average", {}).get("away")) or a_for
+    h_agn_h = _sf(home_stats.get("points", {}).get("against", {}).get("average", {}).get("home")) or h_agn
+    a_agn_a = _sf(away_stats.get("points", {}).get("against", {}).get("average", {}).get("away")) or a_agn
+
+    venue_expected = (h_for_h + a_agn_a + a_for_a + h_agn_h) / 2
+
+    form_expected = None
+    if home_form and away_form:
+        h_avg = home_form.get("avg_total")
+        a_avg = away_form.get("avg_total")
+        if h_avg and a_avg:
+            form_expected = (h_avg + a_avg) / 2
+
+    if form_expected is not None:
+        predicted = 0.6 * venue_expected + 0.4 * form_expected
+        detail = (f"pred={predicted:.1f} "
+                  f"(venue={venue_expected:.1f}*0.6 + form={form_expected:.1f}*0.4)")
+    else:
+        predicted = venue_expected
+        detail = f"pred={predicted:.1f} (venue only)"
+
+    if is_playoff:
+        predicted -= 3.0
+        detail += " [PO -3]"
+
+    return predicted, detail
+
+
+def meets_criteria(home_stats, away_stats, selection_line, is_playoff=False,
+                   predicted_total=None, min_edge=None):
+    """Basketball criteria – edge-first (v3) s fallback na původní expected_r logiku.
+
+    Pokud je předán `predicted_total` a `min_edge`:
+      - kontroluje venue floor / defense floor (ne agresivně),
+      - vyžaduje (predicted_total - selection_line) >= min_edge.
+
+    Jinak (legacy) používá expected_r * selection_line.
+    Vrací (ok, detail, score) – score se používá pro řazení.
     """
     if not home_stats or not away_stats:
         return False, "", 0.0
@@ -353,6 +557,7 @@ def meets_criteria(home_stats, away_stats, selection_line, is_playoff=False):
     a_played = int(_sf(away_stats.get("games", {}).get("played", {}).get("all", 0)))
     if h_played < MIN_GAMES or a_played < MIN_GAMES:
         return False, f"few games: {h_played}/{a_played}", 0.0
+
 
     # Overall stats (league baseline)
     h_for = _sf(home_stats.get("points", {}).get("for", {}).get("average", {}).get("all"))
@@ -401,8 +606,22 @@ def meets_criteria(home_stats, away_stats, selection_line, is_playoff=False):
         return False, (f"defense too tight: concede {h_agn_h:.0f}/{a_agn_a:.0f} "
                        f"(min {concede_floor:.0f})"), 0.0
 
-    # --- Check 3: Matchup expected must exceed bookmaker line ---
-    # Playoff/play-in zápasy mají historicky o ~5 % nižší totaly (taktika, méně risku)
+    # --- Check 3: Edge-first nebo legacy expected_r ---
+    if predicted_total is not None and min_edge is not None:
+        edge = predicted_total - selection_line
+        po_tag = " [PO]" if is_playoff else ""
+        if edge < min_edge:
+            return False, (f"venue {h_for_h:.0f}+{a_for_a:.0f} conc {h_agn_h:.0f}+{a_agn_a:.0f}{po_tag} "
+                           f"(pred={predicted_total:.1f} − line={selection_line:.1f} "
+                           f"= edge={edge:+.1f} < min_edge={min_edge:.1f}, league={league_avg:.0f})"), 0.0
+        # score = velikost edge (pro ranking) – víc bodů edge = silnější tip
+        score = edge
+        detail = (f"venue {h_for_h:.0f}+{a_for_a:.0f} conc {h_agn_h:.0f}+{a_agn_a:.0f}{po_tag} "
+                  f"EDGE={edge:+.1f} (pred={predicted_total:.1f} vs line={selection_line:.1f}, "
+                  f"league={league_avg:.0f})")
+        return True, detail, score
+
+    # Legacy větev (bez edge)
     expected_r = EXPECTED_MIN_R + (PLAYOFF_EXPECTED_BONUS if is_playoff else 0.0)
     min_expected = selection_line * expected_r
     if expected < min_expected:
@@ -717,21 +936,15 @@ def main():
     tomorrow = (now + timedelta(days=1)).strftime("%Y-%m-%d")
     cutoff = now + timedelta(hours=24)
 
-    print("== SureBets Basketball Bot ==")
+    print("== SureBets Basketball Bot (v3 edge-first) ==")
     print(f"Time: {now.strftime('%Y-%m-%d %H:%M UTC')}")
-    print(f"Select: Over @ ~{SELECTION_ODDS} odds → Output: Over @ ~{OUTPUT_ODDS} odds")
-    print(f"MIN_HALF_LINE: {MIN_HALF_LINE}, BOTH_FLOOR_R: {BOTH_FLOOR_R}, EXPECTED_MIN_R: {EXPECTED_MIN_R}")
-    print(f"Criteria: venue_expected >= line*{EXPECTED_MIN_R}, "
-          f"venue offense >= half*{BOTH_FLOOR_R} & >= league/team*{OFFENSE_VS_LEAGUE_R}, "
-          f"defense concede >= half*{BOTH_CONCEDE_FLOOR_R}")
-    print(f"Enhanced: form>={RECENT_FLOOR_R}*line, over>={MIN_OVER_HIT_RATE:.0%}@safe, "
-          f"SD<={MAX_TOTAL_SD:.0f}, H2H>={H2H_OVER_R}*line, rest>={MIN_REST_HOURS}h (0=off), "
-          f"2H>={MIN_2H_RATIO:.0%}, 2Hbase>={MIN_2H_BASELINE:.0f}, "
-          f"Q1>={MIN_Q1_RATIO:.0%}, blow<={MAX_BLOWOUT_RATE:.0%}@>{BLOWOUT_MARGIN}, "
-          f"form_gap<={MAX_FORM_GAP:.0f}, "
-          f"H2H HARD<{H2H_HARD_FAIL_R}*line@n>={H2H_HARD_FAIL_MIN_N}, "
-          f"PO bonus +{PLAYOFF_EXPECTED_BONUS}, "
-          f"TT bonus@<={TT_BONUS_ODDS} (×{TT_BONUS_MULT})\n")
+    print(f"Strategy: estimate fair total → detect bookmaker mispricing →")
+    print(f"          output LOWEST Over line with avg odds >= {MIN_ODDS_OUT}")
+    print(f"Min edge by region: NBA={MIN_EDGE_BY_REGION['NBA']}, "
+          f"EU={MIN_EDGE_BY_REGION['EU']}, WORLD={MIN_EDGE_BY_REGION['WORLD']}")
+    print(f"Excluded: countries={sorted(EXCLUDED_COUNTRIES)}, "
+          f"women/youth keywords ({len(EXCLUDED_LEAGUE_KEYWORDS)})")
+    print(f"Quality min={MIN_QUALITY_SCORE}, top-N/day={MAX_TIPS_PER_DAY}\n")
 
     # 1. Fetch games
     games_today = fetch_games(today)
@@ -744,128 +957,164 @@ def main():
         print("No games found.")
         with open(OUTPUT, "w", encoding="utf-8") as f:
             json.dump([], f)
+        with open(OUTPUT_LIVE, "w", encoding="utf-8") as f:
+            json.dump([], f)
         return
 
-    # 2. Filter by time window + country
+    # 2. Filter: time window + country + women/youth blacklist
     filtered = {}
+    skipped_excl = 0
     for gid, g in all_games.items():
         ts = datetime.fromtimestamp(g["timestamp"], tz=timezone.utc)
-        country = g.get("country", "").lower()
-        if ts >= now and ts <= cutoff and country not in EXCLUDED_COUNTRIES:
-            filtered[gid] = g
-    print(f"  After filter (24h, no RU/BY): {len(filtered)} games\n")
+        if ts < now or ts > cutoff:
+            continue
+        if _is_excluded_league(g.get("league", ""), g.get("country", "")):
+            skipped_excl += 1
+            continue
+        filtered[gid] = g
+    print(f"  After filter (24h, RU/BY/women/youth blocked={skipped_excl}): "
+          f"{len(filtered)} games\n")
 
-    # 3. Fetch odds, find selection + output lines
-    candidates = []
-    print(f"  Fetching odds for {len(filtered)} games...")
-    for i, (gid, g) in enumerate(filtered.items()):
-        label = f"{g['home']} vs {g['away']}"
-        print(f"  [{i+1}/{len(filtered)}] {label[:45]:.<47s}", end="")
-        odds_data = fetch_odds(gid)
-        sel, out, h_tt, a_tt = find_over_lines(odds_data)
-        if sel and out:
-            tt_str = ""
-            if h_tt is not None or a_tt is not None:
-                tt_str = f" TT={h_tt or '-'}/{a_tt or '-'}"
-            print(f" sel={sel['label']}@{sel['odd_str']} → out={out['label']}@{out['odd_str']}{tt_str} ✓")
-            league_lower = (g["league"] or "").lower()
-            is_playoff = any(kw in league_lower for kw in PLAYOFF_KEYWORDS)
-            candidates.append({
-                "game_id": gid,
-                "league": g["league"],
-                "league_id": g["league_id"],
-                "season": g["season"],
-                "match": f"{g['home']} vs {g['away']}",
-                "home_id": g["home_id"],
-                "away_id": g["away_id"],
-                "is_playoff": is_playoff,
-                "sel_line": sel["line"],
-                "sel_label": sel["label"],
-                "sel_odds": sel["odd_str"],
-                "out_line": out["line"],
-                "out_label": out["label"],
-                "out_odds": out["odd_str"],
-                "home_tt_odd": h_tt,
-                "away_tt_odd": a_tt,
-                "timestamp": g["timestamp"],
-            })
-        else:
-            print(" no lines found")
-
-    print(f"\n  {len(candidates)} candidates\n")
-
-    if not candidates:
-        print("No qualifying matches.")
+    if not filtered:
         with open(OUTPUT, "w", encoding="utf-8") as f:
             json.dump([], f)
         with open(OUTPUT_LIVE, "w", encoding="utf-8") as f:
             json.dump([], f)
         return
 
-    # 4. Analyze team stats (two-phase: basic venue → enhanced form+H2H)
-    results = []
-    print(f"  Analyzing {len(candidates)} candidates...")
-    for i, c in enumerate(candidates):
-        print(f"  [{i+1}/{len(candidates)}] {c['match'][:45]:.<47s}", end="")
+    # 3. STATS-FIRST: spočítat predikci pro každý zápas, fail-fast bez stats
+    qualified = []
+    print(f"  [Phase 1] Computing predicted total for {len(filtered)} games...")
+    for i, (gid, g) in enumerate(filtered.items()):
+        label = f"{g['home']} vs {g['away']}"
+        print(f"  [{i+1}/{len(filtered)}] {label[:45]:.<47s}", end="")
         try:
-            # Phase 1: Basic venue criteria
-            home_stats = fetch_team_stats(c["league_id"], c["season"], c["home_id"])
-            away_stats = fetch_team_stats(c["league_id"], c["season"], c["away_id"])
-            ok, detail, score = meets_criteria(home_stats, away_stats, c["sel_line"], is_playoff=c.get("is_playoff", False))
-            if not ok:
-                print(f" fail ({detail})")
+            home_stats = fetch_team_stats(g["league_id"], g["season"], g["home_id"])
+            away_stats = fetch_team_stats(g["league_id"], g["season"], g["away_id"])
+            home_games = fetch_team_games(g["home_id"], g["league_id"], g["season"])
+            away_games = fetch_team_games(g["away_id"], g["league_id"], g["season"])
+            home_form = analyze_recent_form(home_games, g["home_id"])
+            away_form = analyze_recent_form(away_games, g["away_id"])
+
+            league_lower = (g["league"] or "").lower()
+            is_playoff = any(kw in league_lower for kw in PLAYOFF_KEYWORDS)
+
+            predicted, pred_detail = predict_total(
+                home_stats, away_stats, home_form, away_form, is_playoff=is_playoff)
+            if predicted is None:
+                print(f" no stats ({pred_detail})")
                 continue
 
-            # Phase 2: Enhanced criteria (recent form, H2H, consistency, rest)
-            print(f" basic✓", end="")
-            home_games = fetch_team_games(c["home_id"], c["league_id"], c["season"])
-            away_games = fetch_team_games(c["away_id"], c["league_id"], c["season"])
+            region = _classify_region(g["league"], g.get("country", ""))
+            min_edge = MIN_EDGE_BY_REGION.get(region, MIN_EDGE_BY_REGION["WORLD"])
+            print(f" {pred_detail} [{region} need edge>={min_edge}]")
+
+            qualified.append({
+                "game_id": gid, "league": g["league"], "league_id": g["league_id"],
+                "season": g["season"], "match": label,
+                "home_id": g["home_id"], "away_id": g["away_id"],
+                "country": g.get("country", ""),
+                "is_playoff": is_playoff, "region": region,
+                "predicted": predicted, "min_edge": min_edge,
+                "home_stats": home_stats, "away_stats": away_stats,
+                "home_form": home_form, "away_form": away_form,
+                "home_games": home_games, "away_games": away_games,
+                "timestamp": g["timestamp"],
+            })
+        except Exception as exc:
+            print(f" ERROR: {exc}")
+
+    print(f"\n  Stats-qualified: {len(qualified)} of {len(filtered)} games\n")
+
+    if not qualified:
+        with open(OUTPUT, "w", encoding="utf-8") as f:
+            json.dump([], f)
+        with open(OUTPUT_LIVE, "w", encoding="utf-8") as f:
+            json.dump([], f)
+        return
+
+    # 4. ODDS + EDGE GATE: pro každý kvalifikovaný zápas najdi main line + edge
+    results = []
+    print(f"  [Phase 2] Fetching odds & checking edge for {len(qualified)} games...")
+    for i, c in enumerate(qualified):
+        print(f"  [{i+1}/{len(qualified)}] {c['match'][:45]:.<47s}", end="")
+        try:
+            odds_data = fetch_odds(c["game_id"])
+            main_line, all_overs, h_tt, a_tt = find_main_line_and_all_overs(odds_data)
+            if main_line is None:
+                print(" no odds")
+                continue
+
+            sel_line = main_line["line"]
+            edge = c["predicted"] - sel_line
+            if edge < c["min_edge"]:
+                print(f" no edge (pred={c['predicted']:.1f} − line={sel_line:.1f} "
+                      f"= {edge:+.1f} < {c['min_edge']:.1f})")
+                continue
+
+            # Najdi výstupní linii: nejnižší dostupný Over s avg_odd >= MIN_ODDS_OUT,
+            # bezpečnostní limit – jen linie pod main_line (jinak nemá smysl).
+            out_line = pick_lowest_value_over(all_overs, MIN_ODDS_OUT, max_line=sel_line)
+            if out_line is None:
+                print(f" edge OK (+{edge:.1f}) but no value Over >= {MIN_ODDS_OUT}")
+                continue
+            if out_line["line"] >= sel_line:
+                # ochrana – kupujeme nižší linii
+                print(f" out line {out_line['line']} not below main {sel_line}")
+                continue
+
+            # Edge-first criteria gate (lehké venue/defense floory)
+            ok, detail, score = meets_criteria(
+                c["home_stats"], c["away_stats"], sel_line,
+                is_playoff=c["is_playoff"],
+                predicted_total=c["predicted"], min_edge=c["min_edge"])
+            if not ok:
+                print(f" criteria fail ({detail})")
+                continue
+
+            # Enhanced filtry (consistency, H2H, blowout, atd.) – ponecháno z v2
             h2h = fetch_h2h(c["home_id"], c["away_id"])
-            home_form = analyze_recent_form(home_games, c["home_id"])
-            away_form = analyze_recent_form(away_games, c["away_id"])
             ok2, detail2 = meets_enhanced_criteria(
-                home_form, away_form, h2h,
-                c["sel_line"], c["out_line"], c["timestamp"])
+                c["home_form"], c["away_form"], h2h,
+                sel_line, out_line["line"], c["timestamp"])
             if not ok2:
                 print(f" enhanced fail ({detail2})")
                 continue
 
-            # Cross-market konfirmace: oba Team Total Over kurzy levné = bonus do skóre
-            h_tt = c.get("home_tt_odd")
-            a_tt = c.get("away_tt_odd")
+            # TT konfirmace bonus
             if (h_tt is not None and a_tt is not None
                     and h_tt <= TT_BONUS_ODDS and a_tt <= TT_BONUS_ODDS):
                 score *= TT_BONUS_MULT
                 detail2 += f" | TT={h_tt:.2f}/{a_tt:.2f}★"
 
-            # Quality score – body za kvalitní (nepovinná) kritéria
             qpts, qdetail = compute_quality_score(
-                home_form, away_form, h2h,
-                c["sel_line"], c["out_line"], h_tt, a_tt)
+                c["home_form"], c["away_form"], h2h,
+                sel_line, out_line["line"], h_tt, a_tt)
             if qpts < MIN_QUALITY_SCORE:
                 print(f" quality fail (Q={qpts}/{MIN_QUALITY_SCORE}: {qdetail})")
                 continue
 
-            print(f" ★ Q={qpts} {detail}")
+            print(f" ★ EDGE+{edge:.1f} Q={qpts} → {out_line['label']}@{out_line['odd_str']}")
+            print(f"       {detail}")
             print(f"       enhanced: {detail2}")
             print(f"       quality: {qdetail}")
-            print(f"       → {c['sel_label']}@{c['sel_odds']} → OUTPUT: {c['out_label']}@{c['out_odds']}")
             kickoff = datetime.fromtimestamp(c["timestamp"], tz=timezone.utc).strftime("%Y-%m-%dT%H:%M:%S+00:00")
             results.append({
                 "league": c["league"],
                 "match": c["match"],
-                "tip": c["out_label"],
-                "odds": c["out_odds"],
+                "tip": out_line["label"],
+                "odds": out_line["odd_str"],
                 "date": kickoff,
                 "_score": score,
                 "_quality": qpts,
-                "_sel_label": c["sel_label"],
-                "_sel_odds": c["sel_odds"],
+                "_sel_label": main_line["label"],
+                "_sel_odds": main_line["odd_str"],
+                "_edge": edge,
             })
         except Exception as exc:
             print(f" ERROR: {exc}")
 
-    # 5a. Write liveb.json – ALL qualifying matches with PRE-MATCH SELECTION line
+    # 5a. liveb.json – všechny qualifying zápasy s pre-match SELECTION (main) line
     live_results = sorted(results, key=lambda r: r["date"])
     live_out = [{
         "league": r["league"],
@@ -876,36 +1125,35 @@ def main():
     } for r in live_results]
     with open(OUTPUT_LIVE, "w", encoding="utf-8") as f:
         json.dump(live_out, f, indent=2, ensure_ascii=False)
-    print(f"  Live: {len(live_out)} match(es) \u2192 {OUTPUT_LIVE}")
+    print(f"\n  Live: {len(live_out)} match(es) \u2192 {OUTPUT_LIVE}")
 
-    # 5b. Best per league – keep only the top match from each league (by Q+score)
+    # 5b. Best per league
     before = len(results)
     best_per_league = {}
     for r in results:
         lg = r["league"]
-        rank = (r["_quality"], r["_score"])
-        cur_rank = (best_per_league[lg]["_quality"], best_per_league[lg]["_score"]) if lg in best_per_league else (-1, -1)
+        rank = (r["_quality"], r["_score"], r["_edge"])
+        cur_rank = (best_per_league[lg]["_quality"], best_per_league[lg]["_score"], best_per_league[lg]["_edge"]) if lg in best_per_league else (-1, -1, -1)
         if rank > cur_rank:
             best_per_league[lg] = r
     results = list(best_per_league.values())
     if before > len(results):
-        print(f"\n  Dedup: {before} → {len(results)} (best per league by Q+score)")
+        print(f"  Dedup: {before} → {len(results)} (best per league by Q+score+edge)")
 
-    # 5c. Globální TOP-N podle (quality, score) – kvalita > kvantita
+    # 5c. Globální TOP-N
     if len(results) > MAX_TIPS_PER_DAY:
-        results.sort(key=lambda r: (r["_quality"], r["_score"]), reverse=True)
+        results.sort(key=lambda r: (r["_quality"], r["_edge"], r["_score"]), reverse=True)
         before_n = len(results)
         results = results[:MAX_TIPS_PER_DAY]
         print(f"  Top-N filter: {before_n} → {len(results)} (max {MAX_TIPS_PER_DAY}/day)")
 
-    # Cleanup interních polí
     for r in results:
         r.pop("_score", None)
         r.pop("_quality", None)
         r.pop("_sel_label", None)
         r.pop("_sel_odds", None)
+        r.pop("_edge", None)
 
-    # 6. Sort by kickoff time and write output
     results.sort(key=lambda r: r["date"])
     with open(OUTPUT, "w", encoding="utf-8") as f:
         json.dump(results, f, indent=2, ensure_ascii=False)
