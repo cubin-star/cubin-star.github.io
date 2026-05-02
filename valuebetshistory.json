@@ -1,1 +1,42 @@
-[]
+[
+  {
+    "League": "La Liga",
+    "Match": "Girona vs Mallorca",
+    "Tip": "Over 2.5",
+    "Odds": "1.89",
+    "Date": "2026-05-01T19:00:00+00:00",
+    "FixtureId": 1391154,
+    "Result": "KO",
+    "Score": "0:1"
+  },
+  {
+    "League": "First Division",
+    "Match": "Wexford vs Finn Harps",
+    "Tip": "Over 2.5",
+    "Odds": "1.87",
+    "Date": "2026-05-01T18:45:00+00:00",
+    "FixtureId": 1492884,
+    "Result": "KO",
+    "Score": "2:0"
+  },
+  {
+    "League": "National 1",
+    "Match": "Fleury 91 vs Le Puy Foot",
+    "Tip": "Over 2.5",
+    "Odds": "1.90",
+    "Date": "2026-05-01T17:30:00+00:00",
+    "FixtureId": 1423085,
+    "Result": "OK",
+    "Score": "4:0"
+  },
+  {
+    "League": "Challenge League",
+    "Match": "Stade Nyonnais vs FC WIL 1900",
+    "Tip": "Over 2.5",
+    "Odds": "1.88",
+    "Date": "2026-05-01T17:30:00+00:00",
+    "FixtureId": 1491430,
+    "Result": "KO",
+    "Score": "0:1"
+  }
+]
