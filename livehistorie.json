@@ -1,20 +1,5 @@
 [
   {
-    "league": "Bundesliga",
-    "homeTeam": "Ried",
-    "awayTeam": "FC BW Linz",
-    "tip": "Over 1.5",
-    "odds": "",
-    "halftimeScore": "1:0",
-    "liveOdds": "",
-    "finalScore": "",
-    "result": "",
-    "kickoff": "2026-05-02T15:00:00.000Z",
-    "resolvedAt": "",
-    "source": "scout-football",
-    "scoutStats": "Score: 11/14 | xG: 1.62 | Shots: 17/4 | Corners: 5 | Poss: 58% | Pre O2.5: 2"
-  },
-  {
     "league": "Premiership",
     "homeTeam": "Kilmarnock",
     "awayTeam": "Dundee Utd",
@@ -22,10 +7,10 @@
     "odds": "",
     "halftimeScore": "1:0",
     "liveOdds": "",
-    "finalScore": "",
-    "result": "",
+    "finalScore": "3:0",
+    "result": "✅ Won",
     "kickoff": "2026-05-02T14:00:00.000Z",
-    "resolvedAt": "",
+    "resolvedAt": "2026-05-02T15:56:49.300Z",
     "source": "scout-football",
     "scoutStats": "Score: 12/14 | xG: 2.70 | Shots: 16/7 | Corners: 8 | Poss: 51% | Pre O2.5: 1.7"
   },
