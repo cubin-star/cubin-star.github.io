@@ -1,5 +1,15 @@
 [
   {
+    "sport": "football",
+    "league": "1 Lyga",
+    "match": "Babrungas vs BFA",
+    "tip": "Over 1.5",
+    "odds": "1.17",
+    "date": "2026-05-01T15:00:00+00:00",
+    "score": "4:0",
+    "result": "✓"
+  },
+  {
     "sport": "basketball",
     "league": "Premier league",
     "match": "Grindavik vs Valur",
