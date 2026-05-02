@@ -1,5 +1,20 @@
 [
   {
+    "league": "Serie A",
+    "homeTeam": "Botafogo",
+    "awayTeam": "Remo",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "1:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "kickoff": "2026-05-02T19:00:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-football",
+    "scoutStats": "Score: 12/14 | xG: 1.49 | Shots: 14/6 | Corners: 9 | Poss: 52% | Pre O2.5: 1.8"
+  },
+  {
     "league": "Friendly International",
     "homeTeam": "Great Britain",
     "awayTeam": "Italy",
