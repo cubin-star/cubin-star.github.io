@@ -1,5 +1,20 @@
 [
   {
+    "league": "NWSL Women",
+    "homeTeam": "Chicago Red Stars W",
+    "awayTeam": "Portland Thorns W",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "0:1",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "kickoff": "2026-05-03T17:00:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-football",
+    "scoutStats": "Score: 11/14 | xG: 0.72(est) | Shots: 18/6 | Corners: 11 | Poss: 52% | Pre O2.5: 1.65"
+  },
+  {
     "league": "NBL1 East",
     "homeTeam": "Penrith P.",
     "awayTeam": "Sydney Comets",
