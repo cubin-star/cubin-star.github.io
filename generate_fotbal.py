@@ -6,7 +6,7 @@ Runs daily at 7:00 UTC via GitHub Actions.
 NEW STRATEGY (stats-first):
   1. Statisticky najdi zápasy s vysokým potenciálem na Over 3.5
      (expected total ≥ 3.0 gólů, ready_35 ≥ 0.85, + 2H aktivita)
-  2. U vybraných ověř, že kurz Over 1.5 je ≥ 1.20 (value-gate)
+  2. U vybraných ověř, že kurz Over 1.5 je ≥ 1.12 (value-gate)
   3. Tipni Over 1.5 jako "tutovku" (P ~ 90 %+)
 
 Tips.json zachovává starou Over 2.5 logiku (kurz 1.60–1.80) jako vedlejší výstup.
@@ -38,7 +38,7 @@ MAX_TIPS = 2
 
 MIN_ODDS = 1.60          # Over 2.5 range (used only for tips.json filler)
 MAX_ODDS = 1.80
-MIN_ODDS_15_OUT = 1.20   # NEW: value-gate na výstupu (Over 1.5 musí být ≥ 1.20)
+MIN_ODDS_15_OUT = 1.12   # NEW: value-gate na výstupu (Over 1.5 musí být ≥ 1.12)
 MIN_GAMES = 6            # zvýšeno z 5 → spolehlivější vzorek
 
 # === Stats-first kritéria pro "kandidáta na Over 3.5" ===
