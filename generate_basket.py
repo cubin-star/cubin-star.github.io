@@ -359,13 +359,23 @@ def find_main_line_and_all_overs(odds_data):
     return main, all_overs, home_tt, away_tt
 
 
+def _is_half_line(line):
+    """True pokud linie končí na .5 (např. 197.5). Toleruje float chyby."""
+    frac = abs(line - math.floor(line) - 0.5)
+    return frac < 1e-6
+
+
 def pick_lowest_value_over(all_overs, min_odds, max_line=None):
     """Vrátí nejnižší Over linii, jejíž průměrný kurz >= min_odds.
     Pokud max_line je zadáno, omezí výběr na linie <= max_line.
+    Vrací pouze linie končící na .5 (basketbalový tip nesmí být celé číslo –
+    vyhneme se push, např. 197.5 ano, 197 ne).
     Vrací None pokud žádná nevyhovuje."""
     candidates = [
         o for o in all_overs
-        if o["avg_odd"] >= min_odds and (max_line is None or o["line"] <= max_line)
+        if o["avg_odd"] >= min_odds
+        and (max_line is None or o["line"] <= max_line)
+        and _is_half_line(o["line"])
     ]
     if not candidates:
         return None
