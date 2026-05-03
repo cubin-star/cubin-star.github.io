@@ -59,6 +59,16 @@ MIN_P35_BY_VARIANT = {
     "C": 0.50,
 }
 
+# === Asymetrický defenzivní filtr (chrání před "1:0 pastmi") ===
+# Pokud má jeden tým výrazně lepší obranu (= nízké inkasované g/z), zápas snadno
+# sklouzne k 0:0 / 1:0, i když celkové expected total vypadá dobře.
+# Příklad: Lugano (1.10 inkasuje) vs YB (2.40 inkasuje) → λ=3.55 vypadalo solidně,
+# ale Lugano zavřelo zápas 1:0. Proto: pokud min(h_agn,a_agn) < threshold,
+# zvedneme práh p35 o bonus (přísnější propuštění).
+ASYMMETRIC_DEF_THRESHOLD = 1.30   # g/z – pokud lepší obrana je pod tímto, je "tight"
+ASYMMETRIC_DEF_GAP_MIN = 0.80     # rozdíl obran (slabší - silnější) ≥ 0.80 g/z = výrazná asymetrie
+ASYMMETRIC_P35_BONUS = 0.07       # +7 pp k MIN_P35_BY_VARIANT[tag]
+
 # League-relative ratios (mírně zostřeno proti původnímu Over 2.5 botu)
 BOTH_FLOOR_R = 0.85      # oba alespoň 85% baseline
 STRONG_MIN_R = 1.15      # "výrazný" tým 115%+ baseline (z 1.10)
@@ -348,13 +358,25 @@ def meets_criteria(pred):
     # === BRÁNA 5: Poissonova P(Over 3.5) – diferenciovaná podle varianty ===
     p35 = poisson_p_over(total_avg, 3.5)
     min_p35 = MIN_P35_BY_VARIANT.get(tag, 0.45)
+
+    # Asymetrický defenzivní filtr: pokud jeden tým má výrazně lepší obranu
+    # (lepší obrana < threshold A rozdíl obran ≥ gap_min), zvedneme práh p35.
+    # Chrání před scénáři typu "silnější obrana zavře zápas 1:0".
+    def_min = min(h_agn, a_agn)
+    def_gap = abs(h_agn - a_agn)
+    asym_tag = ""
+    if def_min < ASYMMETRIC_DEF_THRESHOLD and def_gap >= ASYMMETRIC_DEF_GAP_MIN:
+        min_p35 += ASYMMETRIC_P35_BONUS
+        asym_tag = f" ASYM(def_min={def_min:.2f},gap={def_gap:.2f},+{ASYMMETRIC_P35_BONUS*100:.0f}pp)"
+
     if p35 < min_p35:
         return False, (f"[{tag}] p35 too low: {p35*100:.1f}% < {min_p35*100:.0f}% "
-                       f"(λ={total_avg:.2f})"), 0.0
+                       f"(λ={total_avg:.2f}){asym_tag}"), 0.0
 
-    detail = (f"[{tag}] total={total_avg:.2f} p35={p35*100:.0f}% ready={ready_35:.2f} "
+    detail = (f"[{tag}] total={total_avg:.2f} p35={p35*100:.0f}%≥{min_p35*100:.0f}% "
+              f"ready={ready_35:.2f} "
               f"| scored {h_for:.2f}/{a_for:.2f}, conceded {h_agn:.2f}/{a_agn:.2f} "
-              f"| 2H base={base_2h:.2f} (base={baseline:.2f})")
+              f"| 2H base={base_2h:.2f} (base={baseline:.2f}){asym_tag}")
     return True, detail, ready_35
 
 
