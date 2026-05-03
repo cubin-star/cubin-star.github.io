@@ -1,5 +1,45 @@
 [
   {
+    "League": "Serie A",
+    "Match": "Atalanta vs Genoa",
+    "Tip": "Over 2.5",
+    "Odds": "1.87",
+    "Date": "2026-05-02T18:45:00+00:00",
+    "FixtureId": 1378204,
+    "Result": "KO",
+    "Score": "0:0"
+  },
+  {
+    "League": "Jupiler Pro League",
+    "Match": "Charleroi vs Genk",
+    "Tip": "Over 2.5",
+    "Odds": "1.75",
+    "Date": "2026-05-02T16:15:00+00:00",
+    "FixtureId": 1536951,
+    "Result": "KO",
+    "Score": "2:0"
+  },
+  {
+    "League": "Premiership",
+    "Match": "Dundee vs ST Mirren",
+    "Tip": "Over 2.5",
+    "Odds": "1.93",
+    "Date": "2026-05-02T14:00:00+00:00",
+    "FixtureId": 1540009,
+    "Result": "KO",
+    "Score": "1:0"
+  },
+  {
+    "League": "1. Lig",
+    "Match": "Bodrum FK vs Sar\u0131yer",
+    "Tip": "Over 2.5",
+    "Odds": "1.85",
+    "Date": "2026-05-02T13:00:00+00:00",
+    "FixtureId": 1398686,
+    "Result": "KO",
+    "Score": "0:1"
+  },
+  {
     "League": "La Liga",
     "Match": "Girona vs Mallorca",
     "Tip": "Over 2.5",
