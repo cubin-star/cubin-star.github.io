@@ -1,32 +1,32 @@
 [
   {
-    "League": "Premiership",
-    "Match": "Dundee vs ST Mirren",
+    "League": "Ligue 1",
+    "Match": "Strasbourg vs Toulouse",
     "Tip": "Over 2.5",
-    "Odds": "1.93",
-    "Date": "2026-05-02T14:00:00+00:00"
+    "Odds": "1.87",
+    "Date": "2026-05-03T15:15:00+00:00"
   },
   {
-    "League": "1. Lig",
-    "Match": "Bodrum FK vs Sarıyer",
+    "League": "Premier League",
+    "Match": "Aston Villa vs Tottenham",
     "Tip": "Over 2.5",
-    "Odds": "1.85",
-    "Date": "2026-05-02T13:00:00+00:00"
+    "Odds": "1.81",
+    "Date": "2026-05-03T18:00:00+00:00"
   },
   {
     "League": "Serie A",
-    "Match": "Atalanta vs Genoa",
+    "Match": "Sassuolo vs AC Milan",
     "Tip": "Over 2.5",
-    "Odds": "1.87",
-    "Date": "2026-05-02T18:45:00+00:00",
+    "Odds": "1.78",
+    "Date": "2026-05-03T13:00:00+00:00",
     "locked": true
   },
   {
-    "League": "Jupiler Pro League",
-    "Match": "Charleroi vs Genk",
+    "League": "La Liga",
+    "Match": "Real Betis vs Oviedo",
     "Tip": "Over 2.5",
-    "Odds": "1.75",
-    "Date": "2026-05-02T16:15:00+00:00",
+    "Odds": "1.94",
+    "Date": "2026-05-03T16:30:00+00:00",
     "locked": true
   }
 ]
