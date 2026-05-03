@@ -244,6 +244,39 @@ def get_half_stats(team_data, side):
             "avg_first": first_half / played, "avg_second": second_half / played, "played": played}
 
 
+def estimate_o25_from_o15(o15):
+    """Dopočte odhadovaný kurz Over 2.5 z kurzu Over 1.5 přes Poissonovu inverzi.
+
+    Postup:
+      1. Implicitní pravděpodobnost P(O1.5) ≈ 1/o15.
+      2. Najdi λ (expected total) tak, aby P_Poisson(X≥2 | λ) = P(O1.5).
+      3. Spočítej P(O2.5) = P(X≥3 | λ) a vrať odhad o25 ≈ 1/P(O2.5).
+    Bez korekce bookmakerské marže – pro orientační účely tips.json to stačí.
+    Vrací None pokud o15 mimo rozumný rozsah."""
+    if o15 is None or o15 <= 1.001:
+        return None
+    p_o15 = 1.0 / o15
+    if not (0.05 < p_o15 < 0.999):
+        return None
+
+    # Binární search λ tak, aby poisson_p_over(λ, 1.5) ≈ p_o15
+    lo, hi = 0.1, 12.0
+    for _ in range(60):
+        mid = (lo + hi) / 2
+        if poisson_p_over(mid, 1.5) < p_o15:
+            lo = mid
+        else:
+            hi = mid
+    lam = (lo + hi) / 2
+
+    p_o25 = poisson_p_over(lam, 2.5)
+    if p_o25 <= 1e-6:
+        return None
+    o25 = 1.0 / p_o25
+    # Bezpečné meze pro výstup
+    return max(1.05, min(o25, 25.0))
+
+
 def meets_criteria(pred):
     """
     Stats-first kritéria: kandidát na Over 3.5 → tutovka Over 1.5.
@@ -493,6 +526,9 @@ def main():
             ok, detail, score = meets_criteria(pred)
             if ok:
                 print(f" ★ {detail}")
+                # Extrahuj variant tag (A/B/C) z prvních znaků detailu
+                m_var = re.match(r"\[([ABC])\]", detail)
+                variant = m_var.group(1) if m_var else "?"
                 qualified.append({
                     "fixture_id": fid,
                     "League": fix["league"],
@@ -501,6 +537,7 @@ def main():
                     "league_id": fix["league_id"],
                     "season": fix["season"],
                     "_score": score,
+                    "_variant": variant,
                 })
             else:
                 print(f" fail ({detail})")
@@ -560,7 +597,9 @@ def main():
             "Odds": f"{o15:.2f}",
             "Date": q["kickoff"],
             "_score": q["_score"],
+            "_o15": o15,
             "_o25": f"{o25:.2f}" if o25 else None,
+            "_variant": q.get("_variant", "?"),
         })
 
     # 6a. Write live.json – ALL value-gate-passing matches (no dedup)
@@ -613,49 +652,56 @@ def main():
     with open(OUTPUT, "w", encoding="utf-8") as f:
         json.dump(fotbals_out, f, indent=2, ensure_ascii=False)
 
-    # 8. Write tips.json – 2 tipy preferovaně z kvalifikovaných zápasů s Over 2.5 v rozsahu
-    #    Priorita:
-    #      a) kvalifikovaný zápas (best-per-league) s Over 2.5 v pásmu MIN_ODDS–MAX_ODDS
-    #      b) jakýkoli kvalifikovaný zápas → tipnout Over 1.5 (bezpečnější)
+    # 8. Write tips.json – max MAX_TIPS tipů, primárně z varianty A.
+    #    Logika:
+    #      a) Vyber zápasy s _variant == "A" (nejsilnější profil – oba útočí + obrany inkasují)
+    #      b) Pro každý dopočti odhadovaný kurz Over 2.5 z Over 1.5 přes Poisson
+    #         (nemusíme ho hledat v API – inverzí z o15)
+    #      c) Pokud A pool < MAX_TIPS, doplň náhodným zápasem z deduped (i jiné varianty)
+    #         – opět tipnut Over 2.5 (dopočet z o15)
     tips = []
     selected_keys = set()
 
-    # 8a. Pokus: Over 2.5 z kvalifikovaných v pásmu 1.60–1.80
-    o25_pool = [
-        r for r in deduped
-        if r.get("_o25") and MIN_ODDS <= float(r["_o25"]) <= MAX_ODDS
-    ]
-    if o25_pool:
-        picks = random.sample(o25_pool, min(MAX_TIPS, len(o25_pool)))
-        for p in picks:
-            tips.append({
-                "League": p["League"],
-                "Match": p["Match"],
-                "Tip": "Over 2.5",
-                "Odds": p["_o25"],
-                "Date": p["Date"],
-            })
-            selected_keys.add((p["Match"], p["Date"]))
+    a_pool = [r for r in deduped if r.get("_variant") == "A"]
+    random.shuffle(a_pool)
+    for r in a_pool[:MAX_TIPS]:
+        o25_est = estimate_o25_from_o15(r.get("_o15"))
+        if o25_est is None:
+            continue
+        tips.append({
+            "League": r["League"],
+            "Match": r["Match"],
+            "Tip": "Over 2.5",
+            "Odds": f"{o25_est:.2f}",
+            "Date": r["Date"],
+        })
+        selected_keys.add((r["Match"], r["Date"]))
 
-    # 8b. Doplnit Over 1.5 z kvalifikovaných (různé ligy)
+    # 8b. Doplnit chybějící náhodnými zápasy z ostatních (B/C/?) – opět Over 2.5
     if len(tips) < MAX_TIPS:
         used_leagues = {t["League"] for t in tips}
         filler_pool = [
             r for r in deduped
             if (r["Match"], r["Date"]) not in selected_keys
                and r["League"] not in used_leagues
+               and r.get("_o15") is not None
         ]
-        # seřadit podle score sestupně
-        filler_pool.sort(key=lambda r: r["_score"], reverse=True)
+        random.shuffle(filler_pool)
         need = MAX_TIPS - len(tips)
-        for r in filler_pool[:need]:
+        for r in filler_pool:
+            if need <= 0:
+                break
+            o25_est = estimate_o25_from_o15(r.get("_o15"))
+            if o25_est is None:
+                continue
             tips.append({
                 "League": r["League"],
                 "Match": r["Match"],
-                "Tip": "Over 1.5",
-                "Odds": r["Odds"],
+                "Tip": "Over 2.5",
+                "Odds": f"{o25_est:.2f}",
                 "Date": r["Date"],
             })
+            need -= 1
 
     if tips:
         print(f"  Tips: {len(tips)} match(es) → {OUTPUT_TIPS}")
