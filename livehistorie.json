@@ -1,8 +1,8 @@
 [
   {
     "league": "Serie A",
-    "homeTeam": "Flamengo",
-    "awayTeam": "Vasco DA Gama",
+    "homeTeam": "Sao Paulo",
+    "awayTeam": "Bahia",
     "tip": "Over 1.5",
     "odds": "",
     "halftimeScore": "1:0",
@@ -12,7 +12,7 @@
     "kickoff": "2026-05-03T19:00:00.000Z",
     "resolvedAt": "",
     "source": "scout-football",
-    "scoutStats": "Score: 11/14 | xG: 1.48 | Shots: 15/5 | Corners: 5 | Poss: 56% | Pre O2.5: 1.85"
+    "scoutStats": "Score: 13/14 | xG: 1.30 | Shots: 20/5 | Corners: 13 | Poss: 60% | Pre O2.5: 2"
   },
   {
     "league": "NWSL Women",
