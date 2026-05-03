@@ -1,5 +1,21 @@
 [
   {
+    "league": "NBL1 East",
+    "homeTeam": "Penrith P.",
+    "awayTeam": "Sydney Comets",
+    "tip": "Over 139.5 (preLine 159.5)",
+    "odds": "",
+    "halftimeScore": "29:37 (66 pts)",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "basketball",
+    "kickoff": "2026-05-03T04:30:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-basketball",
+    "scoutStats": "Score: 6/10 | HT: 29:37 (66 pts) | Q1=23 Q2=43 (line 159.5, pace 83%) | PreLine: 159.5 | Proj: 143 | NBL1 East"
+  },
+  {
     "league": "Serie A",
     "homeTeam": "Botafogo",
     "awayTeam": "Remo",
