@@ -526,7 +526,8 @@ def main():
         if o15 is None:
             print(f"  ✗ {q['Match'][:50]}: no Over 1.5 odds available")
             continue
-        if o15 < MIN_ODDS_15_OUT:
+        # Tolerance 0.005 – kurz 1.119 zaokrouhlený na 1.12 by jinak spadl pod práh.
+        if o15 < MIN_ODDS_15_OUT - 0.005:
             print(f"  ✗ {q['Match'][:50]}: O1.5={o15:.2f} < {MIN_ODDS_15_OUT}")
             continue
         print(f"  ✓ {q['Match'][:50]}: O1.5={o15:.2f} (score={q['_score']:.2f})")
