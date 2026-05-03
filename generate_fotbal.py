@@ -33,6 +33,7 @@ BASE_URL = "https://v3.football.api-sports.io"
 DELAY = 0.3
 OUTPUT = "fotbals.json"
 OUTPUT_LIVE = "live.json"
+OUTPUT_LIVE2 = "live2.json"
 OUTPUT_TIPS = "tips.json"
 MAX_TIPS = 2
 
@@ -478,6 +479,8 @@ def main():
             json.dump([], f)
         with open(OUTPUT_LIVE, "w", encoding="utf-8") as f:
             json.dump([], f)
+        with open(OUTPUT_LIVE2, "w", encoding="utf-8") as f:
+            json.dump([], f)
         with open(OUTPUT_TIPS, "w", encoding="utf-8") as f:
             json.dump([], f)
         return
@@ -609,6 +612,26 @@ def main():
         json.dump(live_out, f, indent=2, ensure_ascii=False)
     print(f"\n  Live: {len(live_out)} match(es) \u2192 {OUTPUT_LIVE}")
 
+    # 6a-2. Write live2.json – VŠECHNY zápasy varianty A s tipem Over 2.5
+    #       Kurz Over 2.5 dopočítán z Over 1.5 přes Poissonovu inverzi.
+    live2_out = []
+    for r in sorted(results, key=lambda r: r["Date"]):
+        if r.get("_variant") != "A":
+            continue
+        o25_est = estimate_o25_from_o15(r.get("_o15"))
+        if o25_est is None:
+            continue
+        live2_out.append({
+            "League": r["League"],
+            "Match": r["Match"],
+            "Tip": "Over 2.5",
+            "Odds": f"{o25_est:.2f}",
+            "Date": r["Date"],
+        })
+    with open(OUTPUT_LIVE2, "w", encoding="utf-8") as f:
+        json.dump(live2_out, f, indent=2, ensure_ascii=False)
+    print(f"  Live2 (variant A, Over 2.5): {len(live2_out)} match(es) \u2192 {OUTPUT_LIVE2}")
+
     # 6b. Best per league – keep only the top match from each league (for fotbals.json)
     TOURNAMENT_KEYWORDS = (
         "world cup", "euro ", "european", "copa america", "africa cup",
@@ -715,6 +738,7 @@ def main():
     print(f"\n{'='*50}")
     print(f"  Results: {len(deduped)} match(es) → {OUTPUT}")
     print(f"  Live:    {len(live_out)} match(es) → {OUTPUT_LIVE}")
+    print(f"  Live2:   {len(live2_out)} match(es) → {OUTPUT_LIVE2}")
     print(f"  Tips:    {len(tips)} match(es) → {OUTPUT_TIPS}")
     print(f"  API requests: {request_count} / 7500 ({request_count * 100 // 7500}%)")
 
