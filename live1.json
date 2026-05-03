@@ -1,93 +1,107 @@
 [
   {
-    "league": "Primeira Liga",
-    "match": "Arouca - Santa Clara",
-    "kickoff": "2026-05-02T16:30:00+02:00",
+    "league": "Ekstraklasa",
+    "match": "Zaglebie Lubin - Cracovia Krakow",
+    "kickoff": "2026-05-03T14:45:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.37"
+    "odds": "2.24"
   },
   {
-    "league": "Super League 1",
-    "match": "Panserraikos - Larisa",
-    "kickoff": "2026-05-02T16:30:00+02:00",
+    "league": "La Liga",
+    "match": "Getafe - Rayo Vallecano",
+    "kickoff": "2026-05-03T16:15:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.32"
+    "odds": "2.50"
   },
   {
     "league": "Serie A",
-    "match": "Como - Napoli",
-    "kickoff": "2026-05-02T18:00:00+02:00",
+    "match": "Bologna - Cagliari",
+    "kickoff": "2026-05-03T12:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.16"
+    "odds": "2.15"
   },
   {
-    "league": "Czech Liga",
-    "match": "Zlin - Dukla Praha",
-    "kickoff": "2026-05-02T15:00:00+02:00",
+    "league": "Super League 1",
+    "match": "OFI - Aris Thessalonikis",
+    "kickoff": "2026-05-03T16:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.12"
+  },
+  {
+    "league": "Super League 1",
+    "match": "PAOK - Olympiakos Piraeus",
+    "kickoff": "2026-05-03T18:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.33"
+  },
+  {
+    "league": "Allsvenskan",
+    "match": "IF Elfsborg - AIK Stockholm",
+    "kickoff": "2026-05-03T16:30:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.10"
+  },
+  {
+    "league": "Primeira Liga",
+    "match": "Casa Pia - Tondela",
+    "kickoff": "2026-05-03T16:30:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.19"
+  },
+  {
+    "league": "Liga I",
+    "match": "Petrolul Ploiesti - Uta Arad",
+    "kickoff": "2026-05-03T17:15:00+02:00",
     "tip": "Over 2.5",
     "odds": "2.18"
   },
   {
     "league": "Super League 1",
-    "match": "Asteras Tripolis - Atromitos",
-    "kickoff": "2026-05-02T18:30:00+02:00",
+    "match": "Panathinaikos - AEK Athens FC",
+    "kickoff": "2026-05-03T20:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.19"
+  },
+  {
+    "league": "Liga I",
+    "match": "Universitatea Craiova - Dinamo Bucuresti",
+    "kickoff": "2026-05-03T20:00:00+02:00",
     "tip": "Over 2.5",
     "odds": "2.13"
   },
   {
-    "league": "Serie A",
-    "match": "Udinese - Torino",
-    "kickoff": "2026-05-02T15:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.14"
-  },
-  {
-    "league": "Super League 1",
-    "match": "Panetolikos - Kifisia",
-    "kickoff": "2026-05-02T16:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.33"
-  },
-  {
-    "league": "Liga I",
-    "match": "Universitatea Cluj - Arges Pitesti",
-    "kickoff": "2026-05-02T19:30:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.15"
-  },
-  {
-    "league": "Primeira Liga",
-    "match": "Moreirense - Estrela",
-    "kickoff": "2026-05-02T16:30:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.23"
-  },
-  {
-    "league": "League Two",
-    "match": "Barrow - Newport County",
-    "kickoff": "2026-05-02T16:00:00+02:00",
+    "league": "Super Liga",
+    "match": "Javor - IMT Novi Beograd",
+    "kickoff": "2026-05-03T19:30:00+02:00",
     "tip": "Over 2.5",
     "odds": "2.12"
   },
   {
-    "league": "Ligue 2",
-    "match": "Boulogne - Annecy",
-    "kickoff": "2026-05-02T20:00:00+02:00",
+    "league": "Czech Liga",
+    "match": "Teplice - Slovácko",
+    "kickoff": "2026-05-03T13:00:00+02:00",
     "tip": "Over 2.5",
     "odds": "2.12"
   },
   {
-    "league": "League One",
-    "match": "Stevenage - Wigan",
-    "kickoff": "2026-05-02T16:00:00+02:00",
+    "league": "Ligue 1",
+    "match": "Auxerre - Angers",
+    "kickoff": "2026-05-03T17:15:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.22"
+    "odds": "2.12"
   },
   {
-    "league": "League Two",
-    "match": "Gillingham - Shrewsbury",
-    "kickoff": "2026-05-02T16:00:00+02:00",
+    "league": "Bundesliga",
+    "match": "FC St. Pauli - FSV Mainz 05",
+    "kickoff": "2026-05-03T15:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.11"
+    "odds": "2.10"
+  },
+  {
+    "league": "I Liga",
+    "match": "Ruch Chorzów - Odra Opole",
+    "kickoff": "2026-05-03T14:30:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.12"
   }
 ]

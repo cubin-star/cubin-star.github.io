@@ -1,50 +1,50 @@
 [
   {
-    "league": "Primeira Liga",
-    "match": "Arouca - Santa Clara",
-    "kickoff": "2026-05-02T16:30:00+02:00",
+    "league": "Ekstraklasa",
+    "match": "Zaglebie Lubin - Cracovia Krakow",
+    "kickoff": "2026-05-03T14:45:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.37",
+    "odds": "2.24",
     "group": 1
   },
   {
-    "league": "League Two",
-    "match": "Barrow - Newport County",
-    "kickoff": "2026-05-02T16:00:00+02:00",
+    "league": "Super League 1",
+    "match": "OFI - Aris Thessalonikis",
+    "kickoff": "2026-05-03T16:00:00+02:00",
     "tip": "Over 2.5",
     "odds": "2.12",
     "group": 1
   },
   {
-    "league": "Super League 1",
-    "match": "Panserraikos - Larisa",
-    "kickoff": "2026-05-02T16:30:00+02:00",
+    "league": "La Liga",
+    "match": "Getafe - Rayo Vallecano",
+    "kickoff": "2026-05-03T16:15:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.32",
+    "odds": "2.50",
     "group": 2
   },
   {
-    "league": "Liga I",
-    "match": "Universitatea Cluj - Arges Pitesti",
-    "kickoff": "2026-05-02T19:30:00+02:00",
+    "league": "Allsvenskan",
+    "match": "IF Elfsborg - AIK Stockholm",
+    "kickoff": "2026-05-03T16:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.15",
+    "odds": "2.10",
     "group": 2
   },
   {
     "league": "Serie A",
-    "match": "Como - Napoli",
-    "kickoff": "2026-05-02T18:00:00+02:00",
+    "match": "Bologna - Cagliari",
+    "kickoff": "2026-05-03T12:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.16",
+    "odds": "2.15",
     "group": 3
   },
   {
-    "league": "Czech Liga",
-    "match": "Zlin - Dukla Praha",
-    "kickoff": "2026-05-02T15:00:00+02:00",
+    "league": "Primeira Liga",
+    "match": "Casa Pia - Tondela",
+    "kickoff": "2026-05-03T16:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.18",
+    "odds": "2.19",
     "group": 3
   }
 ]
