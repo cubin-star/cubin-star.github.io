@@ -9,74 +9,10 @@
   },
   {
     "sport": "football",
-    "league": "Segunda Liga",
-    "match": "Oliveirense vs Lusitânia Lourosa",
-    "tip": "Over 1.5",
-    "odds": "1.27",
-    "date": "2026-05-02T10:00:00+00:00"
-  },
-  {
-    "sport": "football",
-    "league": "NB I",
-    "match": "MTK Budapest vs Nyiregyhaza",
-    "tip": "Over 1.5",
-    "odds": "1.21",
-    "date": "2026-05-02T11:00:00+00:00"
-  },
-  {
-    "sport": "football",
-    "league": "Campionato Primavera - 1",
-    "match": "Genoa U20 vs Cesena U20",
-    "tip": "Over 1.5",
-    "odds": "1.21",
-    "date": "2026-05-02T13:00:00+00:00"
-  },
-  {
-    "sport": "football",
-    "league": "I-League",
-    "match": "Shillong Lajong vs Chanmari",
-    "tip": "Over 1.5",
-    "odds": "1.22",
-    "date": "2026-05-02T13:00:00+00:00"
-  },
-  {
-    "sport": "football",
-    "league": "Premiership",
-    "match": "Falkirk vs Motherwell",
-    "tip": "Over 1.5",
-    "odds": "1.24",
-    "date": "2026-05-02T14:00:00+00:00"
-  },
-  {
-    "sport": "football",
-    "league": "Jupiler Pro League",
-    "match": "Charleroi vs Genk",
-    "tip": "Over 1.5",
-    "odds": "1.21",
-    "date": "2026-05-02T16:15:00+00:00"
-  },
-  {
-    "sport": "football",
-    "league": "USL Championship",
-    "match": "Rhode Island vs Birmingham Legion",
-    "tip": "Over 1.5",
-    "odds": "1.24",
-    "date": "2026-05-02T23:30:00+00:00"
-  },
-  {
-    "sport": "football",
     "league": "K League 2",
     "match": "Paju Citizen vs Cheongju",
     "tip": "Over 1.5",
     "odds": "1.35",
     "date": "2026-05-03T07:30:00+00:00"
-  },
-  {
-    "sport": "basketball",
-    "league": "NBA",
-    "match": "Boston Celtics vs Philadelphia 76ers",
-    "tip": "Over 195.5",
-    "odds": "1.28",
-    "date": "2026-05-02T23:30:00+00:00"
   }
 ]
