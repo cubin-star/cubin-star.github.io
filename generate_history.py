@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 SureBets History Evaluator – generates history.json
-Runs daily at 6:50 UTC via GitHub Actions (before the generators).
+Runs daily at 5:50 UTC via GitHub Actions (before the generators).
 
 Reads current prediction files (fotbals.json, hokejs.json, baskets.json),
 checks finished matches via API, evaluates tips (✓ / ✗), and appends
@@ -37,8 +37,15 @@ FOOTBALL_URL = "https://v3.football.api-sports.io"
 HOCKEY_URL = "https://v1.hockey.api-sports.io"
 BASKETBALL_URL = "https://v1.basketball.api-sports.io"
 
-# Wait this long after kickoff before trying to evaluate
-MATCH_BUFFER = timedelta(hours=2)
+# Wait this long after kickoff before trying to evaluate.
+# Basketball/hockey games can run ~2.5 h (incl. OT) and the API may report
+# the final status with some delay, so they need a longer buffer than football.
+MATCH_BUFFER = {
+    "football":   timedelta(hours=2),
+    "hockey":     timedelta(hours=3),
+    "basketball": timedelta(hours=3),
+}
+DEFAULT_MATCH_BUFFER = timedelta(hours=2)
 
 request_count = 0
 
@@ -378,7 +385,8 @@ def main():
 
         # Skip items whose kickoff + buffer is still in the future
         kickoff = parse_kickoff(date_str)
-        if kickoff and (kickoff + MATCH_BUFFER) > now:
+        buffer = MATCH_BUFFER.get(sport, DEFAULT_MATCH_BUFFER)
+        if kickoff and (kickoff + buffer) > now:
             still_pending.append(item)
             continue
 
