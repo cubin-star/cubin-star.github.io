@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 SureBets Football Bot – generates fotbals.json
-Runs daily at 7:00 UTC via GitHub Actions.
+Runs daily at 6:00 UTC via GitHub Actions.
 
 NEW STRATEGY (stats-first):
   1. Statisticky najdi zápasy s vysokým potenciálem na Over 3.5
