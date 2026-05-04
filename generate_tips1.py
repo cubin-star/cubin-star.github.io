@@ -570,7 +570,7 @@ def main():
     print(f"== generate_tips1 v18 (Random selection) ==")
     print(f"Time: {now.strftime('%Y-%m-%d %H:%M UTC')}")
     print(f"Over 2.5 | odds {MIN_ODDS}-{MAX_ODDS} | random, top European first leagues, 1 per competition")
-    print(f"Output: {OUTPUT_APP1} ({NUM_TIPS}), {OUTPUT_LIVE2}\n")
+    print(f"Output: {OUTPUT_APP1} ({NUM_TIPS})\n")
 
     # Fixtures
     fixtures_today = fetch_fixtures(today)
