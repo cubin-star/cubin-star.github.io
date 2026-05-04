@@ -1,12 +1,12 @@
 {
-  "TotalBets": 8,
-  "OK": 1,
-  "KO": 7,
-  "TotalStake": 400,
-  "TotalProfit": -305.00,
-  "ROI": -76.25,
-  "Last30Bets": 8,
-  "Last30Profit": -305.00,
-  "ROILast30Days": -76.25,
-  "UpdatedUtc": "2026-05-03T05:42:53.8102392+00:00"
+  "TotalBets": 12,
+  "OK": 4,
+  "KO": 8,
+  "TotalStake": 600,
+  "TotalProfit": -224.00,
+  "ROI": -37.33,
+  "Last30Bets": 12,
+  "Last30Profit": -224.00,
+  "ROILast30Days": -37.33,
+  "UpdatedUtc": "2026-05-04T05:19:38.0319655+00:00"
 }
