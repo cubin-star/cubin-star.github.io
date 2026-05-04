@@ -1,4 +1,4 @@
-# SureBets Daily Hockey Tips – runs every day at 7:00 AM UTC
+# SureBets Daily Hockey Tips – runs every day at 6:00 AM UTC
 # Fetches odds from Hockey API, selects Over 5.5 tips using
 # Variant A/B goal criteria, and commits hokejs.json to GitHub Pages.
 #
@@ -14,8 +14,8 @@ name: SureBets Daily Hockey Tips
 
 on:
   schedule:
-    # Every day at 7:00 AM UTC
-    - cron: '0 7 * * *'
+    # Every day at 6:00 AM UTC
+    - cron: '0 6 * * *'
   workflow_dispatch:
     # Allow manual trigger from GitHub UI
 
