@@ -11,16 +11,6 @@
   },
   {
     "sport": "football",
-    "league": "Super League",
-    "match": "FC Lugano vs BSC Young Boys",
-    "tip": "Over 1.5",
-    "odds": "1.14",
-    "date": "2026-05-03T14:30:00+00:00",
-    "score": "1:0",
-    "result": "✗"
-  },
-  {
-    "sport": "football",
     "league": "First Amateur Division",
     "match": "Rochefort vs Excelsior Virton",
     "tip": "Over 1.5",
@@ -28,16 +18,6 @@
     "date": "2026-05-03T13:00:00+00:00",
     "score": "3:5",
     "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "K League 2",
-    "match": "Paju Citizen vs Cheongju",
-    "tip": "Over 1.5",
-    "odds": "1.35",
-    "date": "2026-05-03T07:30:00+00:00",
-    "score": "0:0",
-    "result": "✗"
   },
   {
     "sport": "football",
