@@ -85,6 +85,45 @@ EXCLUDED_LEAGUES = {
     "2. liga",           # 2. Slovenská liga
 }
 
+# === FALLBACK pro tips.json: random Over 2.5 z TOP lig ===
+# Pokud po A-poolu i prvním filleru zbývá místo v tips.json, doplníme
+# úplně random zápas(y) z TOP first-tier evropských + významných světových
+# lig s reálným kurzem Over 2.5 v rozmezí TIPS_FB_MIN_ODDS..TIPS_FB_MAX_ODDS.
+TIPS_FB_MIN_ODDS = 1.70
+TIPS_FB_MAX_ODDS = 1.90
+TIPS_FB_MAX_ATTEMPTS = 8   # max počet zápasů, u kterých zkusíme načíst odds
+
+# API-Football league IDs – first-tier ligy (TOP 5 + top evropské + světové)
+TIPS_FB_TOP_LEAGUE_IDS = {
+    39,   # Premier League (England)
+    140,  # La Liga (Spain)
+    135,  # Serie A (Italy)
+    78,   # Bundesliga (Germany)
+    61,   # Ligue 1 (France)
+    88,   # Eredivisie (Netherlands)
+    94,   # Primeira Liga (Portugal)
+    144,  # Jupiler Pro League (Belgium)
+    203,  # Süper Lig (Turkey)
+    197,  # Super League (Greece)
+    207,  # Super League (Switzerland)
+    218,  # Bundesliga (Austria)
+    119,  # Superliga (Denmark)
+    103,  # Eliteserien (Norway)
+    113,  # Allsvenskan (Sweden)
+    106,  # Ekstraklasa (Poland)
+    345,  # Czech Liga (Czech Republic)
+    71,   # Brasileirão Série A (Brazil)
+    128,  # Liga Profesional (Argentina)
+    253,  # MLS (USA)
+    262,  # Liga MX (Mexico)
+    98,   # J1 League (Japan)
+    292,  # K League 1 (South Korea)
+    188,  # A-League (Australia)
+    2,    # UEFA Champions League
+    3,    # UEFA Europa League
+    848,  # UEFA Europa Conference League
+}
+
 # Country-specific whitelist – if a country is listed here,
 # only the specified leagues are allowed (all others blocked)
 ALLOWED_LEAGUES_BY_COUNTRY = {
@@ -448,6 +487,88 @@ def compute_odds_for_fixtures(odds_data, fixture_ids):
     return result
 
 
+def pick_random_top_league_tips(all_fixtures, exclude_keys, exclude_leagues, need):
+    """
+    FALLBACK pro tips.json: úplně random Over 2.5 z TOP first-tier lig.
+
+    Z dostupných fixtures (24h okno) vybere náhodně zápasy z TIPS_FB_TOP_LEAGUE_IDS,
+    načte jejich Over 2.5 kurzy a vrátí ty s kurzem v rozmezí
+    TIPS_FB_MIN_ODDS..TIPS_FB_MAX_ODDS. Maximum: ``need`` zápasů.
+    """
+    if need <= 0 or not all_fixtures:
+        return []
+
+    now2 = datetime.now(timezone.utc)
+    cutoff = now2 + timedelta(hours=24)
+
+    # 1) Kandidáti: jen TOP ligy + 24h okno + nejsou už použiti
+    candidates = []
+    for fid, fix in all_fixtures.items():
+        if fix.get("league_id") not in TIPS_FB_TOP_LEAGUE_IDS:
+            continue
+        match_str = f"{fix.get('home', '?')} vs {fix.get('away', '?')}"
+        kickoff_str = fix.get("kickoff", "")
+        if (match_str, kickoff_str) in exclude_keys:
+            continue
+        if fix.get("league", "") in exclude_leagues:
+            continue
+        if kickoff_str:
+            try:
+                kdt = datetime.fromisoformat(kickoff_str.replace("Z", "+00:00"))
+                if kdt < now2 or kdt > cutoff:
+                    continue
+            except ValueError:
+                pass
+        candidates.append((fid, fix))
+
+    if not candidates:
+        print("  Tips fallback: no fixtures in TOP leagues for next 24h")
+        return []
+
+    random.shuffle(candidates)
+    print(f"  Tips fallback: trying random Over 2.5 from {len(candidates)} TOP-league fixtures "
+          f"(odds {TIPS_FB_MIN_ODDS}-{TIPS_FB_MAX_ODDS}, need={need})...")
+
+    picked = []
+    used_leagues = set()
+    attempts = 0
+    for fid, fix in candidates:
+        if len(picked) >= need:
+            break
+        if attempts >= TIPS_FB_MAX_ATTEMPTS:
+            break
+        attempts += 1
+        league_name = fix.get("league", "?")
+        if league_name in used_leagues:
+            continue
+        date_part = fix.get("kickoff", today_str())[:10]
+        items = fetch_league_odds(fix["league_id"], fix["season"], date_part)
+        odds_map = compute_odds_for_fixtures(items, {fid})
+        o25 = odds_map.get(fid, {}).get("o25")
+        match_str = f"{fix.get('home', '?')} vs {fix.get('away', '?')}"
+        if o25 is None:
+            print(f"    - {match_str[:50]}: no Over 2.5 odds")
+            continue
+        if not (TIPS_FB_MIN_ODDS <= o25 <= TIPS_FB_MAX_ODDS):
+            print(f"    - {match_str[:50]}: O2.5={o25:.2f} mimo rozsah")
+            continue
+        print(f"    \u2713 {match_str[:50]}: O2.5={o25:.2f} ({league_name})")
+        picked.append({
+            "League": league_name,
+            "Match": match_str,
+            "Tip": "Over 2.5",
+            "Odds": f"{o25:.2f}",
+            "Date": fix.get("kickoff", ""),
+        })
+        used_leagues.add(league_name)
+
+    return picked
+
+
+def today_str():
+    return datetime.now(timezone.utc).strftime("%Y-%m-%d")
+
+
 # ===== MAIN =====
 
 def main():
@@ -725,6 +846,22 @@ def main():
                 "Date": r["Date"],
             })
             need -= 1
+
+    # 8c. FALLBACK: pokud po 8a + 8b stále chybí tipy (typicky když dnes
+    #     žádné A varianty neprošly a `deduped` je prázdný/malý), doplň
+    #     úplně random Over 2.5 z TOP first-tier lig s reálným kurzem
+    #     v rozmezí TIPS_FB_MIN_ODDS..TIPS_FB_MAX_ODDS.
+    if len(tips) < MAX_TIPS:
+        need = MAX_TIPS - len(tips)
+        exclude_keys = set(selected_keys)
+        for t in tips:
+            exclude_keys.add((t["Match"], t["Date"]))
+        exclude_leagues = {t["League"] for t in tips}
+        random_picks = pick_random_top_league_tips(
+            all_fixtures, exclude_keys, exclude_leagues, need)
+        for p in random_picks:
+            tips.append(p)
+            selected_keys.add((p["Match"], p["Date"]))
 
     if tips:
         print(f"  Tips: {len(tips)} match(es) → {OUTPUT_TIPS}")
