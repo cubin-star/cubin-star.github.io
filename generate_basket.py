@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 SureBets Basketball Bot – generates baskets.json
-Runs daily at 7:00 UTC via GitHub Actions.
+Runs daily at 6:00 UTC via GitHub Actions.
 
 Basketball has no fixed Over line – each game has its own.
 1. Find "selection line" (Over where odds ≈ 1.90) – aggressive, high line
