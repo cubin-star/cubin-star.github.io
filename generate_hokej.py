@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 SureBets Hockey Bot v2 – generates hokejs.json
-Runs daily at 7:00 UTC via GitHub Actions.
+Runs daily at 6:00 UTC via GitHub Actions.
 
 v2 improvements over v1:
   1. Dynamic lines – finds selection (odds ≈ 1.80) & safe (odds ≈ 1.30)
