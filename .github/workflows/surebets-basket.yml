@@ -1,4 +1,4 @@
-# SureBets Daily Basketball Tips – runs every day at 7:00 AM UTC
+# SureBets Daily Basketball Tips – runs every day at 6:00 AM UTC
 # Each game has its own Over/Under line. The bot:
 # 1. Finds the "selection line" (Over @ ~1.80 odds)
 # 2. Applies Variant A/B with dynamic thresholds
@@ -16,8 +16,8 @@ name: SureBets Daily Basketball Tips
 
 on:
   schedule:
-    # Every day at 7:00 AM UTC
-    - cron: '0 7 * * *'
+    # Every day at 6:00 AM UTC
+    - cron: '0 6 * * *'
   workflow_dispatch:
     # Allow manual trigger from GitHub UI
 
