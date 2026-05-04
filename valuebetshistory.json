@@ -1,1 +1,42 @@
-[]
+[
+  {
+    "League": "Premier League",
+    "Match": "Aston Villa vs Tottenham",
+    "Tip": "Over 2.5",
+    "Odds": "1.81",
+    "Date": "2026-05-03T18:00:00+00:00",
+    "FixtureId": 1379310,
+    "Result": "OK",
+    "Score": "1:2"
+  },
+  {
+    "League": "La Liga",
+    "Match": "Real Betis vs Oviedo",
+    "Tip": "Over 2.5",
+    "Odds": "1.94",
+    "Date": "2026-05-03T16:30:00+00:00",
+    "FixtureId": 1391150,
+    "Result": "OK",
+    "Score": "3:0"
+  },
+  {
+    "League": "Ligue 1",
+    "Match": "Strasbourg vs Toulouse",
+    "Tip": "Over 2.5",
+    "Odds": "1.87",
+    "Date": "2026-05-03T15:15:00+00:00",
+    "FixtureId": 1387985,
+    "Result": "OK",
+    "Score": "1:2"
+  },
+  {
+    "League": "Serie A",
+    "Match": "Sassuolo vs AC Milan",
+    "Tip": "Over 2.5",
+    "Odds": "1.78",
+    "Date": "2026-05-03T13:00:00+00:00",
+    "FixtureId": 1378212,
+    "Result": "KO",
+    "Score": "2:0"
+  }
+]
