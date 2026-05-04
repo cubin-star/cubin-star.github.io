@@ -1,7 +1,7 @@
-# SureBets History Evaluator – runs every day at 6:50 AM UTC
+# SureBets History Evaluator – runs every day at 5:50 AM UTC
 # Evaluates yesterday's predictions (fotbals.json, hokejs.json, baskets.json)
 # by checking final scores via API, then writes history.json.
-# Must run BEFORE the generators (which overwrite prediction files at 7:00).
+# Must run BEFORE the generators (which overwrite prediction files at 6:00).
 #
 # SETUP:
 # 1. Copy this file to your GitHub Pages repo:
@@ -17,8 +17,8 @@ name: SureBets History Evaluator
 
 on:
   schedule:
-    # Every day at 6:50 AM UTC (10 min before generators)
-    - cron: '50 6 * * *'
+    # Every day at 5:50 AM UTC (10 min before generators)
+    - cron: '50 5 * * *'
   workflow_dispatch:
     # Allow manual trigger from GitHub UI
 
