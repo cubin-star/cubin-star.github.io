@@ -1,8 +1,8 @@
 [
   {
-    "league": "CONMEBOL Sudamericana",
-    "homeTeam": "Juventud",
-    "awayTeam": "Atletico-MG",
+    "league": "CONMEBOL Libertadores",
+    "homeTeam": "Sporting Cristal",
+    "awayTeam": "Palmeiras",
     "tip": "Over 1.5",
     "odds": "",
     "halftimeScore": "0:1",
@@ -12,7 +12,7 @@
     "kickoff": "2026-05-05T22:00:00.000Z",
     "resolvedAt": "",
     "source": "scout-football",
-    "scoutStats": "Score: 13/14 | xG: 1.51 | Shots: 15/7 | Corners: 5 | Poss: 60% | Pre O2.5: 2.25"
+    "scoutStats": "Score: 14/14 | xG: 1.23 | Shots: 22/6 | Corners: 10 | Poss: 67% | Pre O2.5: 1.95"
   },
   {
     "league": "NBA",
