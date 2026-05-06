@@ -1,50 +1,50 @@
 [
   {
-    "league": "First League",
-    "match": "Beroe - Montana",
-    "kickoff": "2026-05-05T16:30:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.25",
-    "group": 1
-  },
-  {
-    "league": "Reserve League",
-    "match": "Independiente Res. - Ferro 2",
-    "kickoff": "2026-05-05T20:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.13",
-    "group": 1
-  },
-  {
-    "league": "J2/J3 League",
-    "match": "Vanraure Hachinohe - Shonan Bellmare",
-    "kickoff": "2026-05-06T07:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.29",
-    "group": 2
-  },
-  {
-    "league": "Liga Leumit",
-    "match": "Kafr Qasim - Hapoel Acre",
-    "kickoff": "2026-05-05T18:00:00+02:00",
+    "league": "Liga II",
+    "match": "Corvinul Hunedoara - FC Voluntari",
+    "kickoff": "2026-05-06T17:30:00+02:00",
     "tip": "Over 2.5",
     "odds": "2.10",
+    "group": 1
+  },
+  {
+    "league": "Copa Sul-Sudeste",
+    "match": "São Bernardo - Caxias",
+    "kickoff": "2026-05-07T02:30:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.44",
+    "group": 1
+  },
+  {
+    "league": "First League",
+    "match": "Spartak Varna - Dobrudzha",
+    "kickoff": "2026-05-06T19:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.17",
     "group": 2
   },
   {
-    "league": "CONMEBOL Sudamericana",
-    "match": "Deportivo Cuenca - San Lorenzo",
-    "kickoff": "2026-05-06T04:00:00+02:00",
+    "league": "Copa Norte",
+    "match": "Águia de Marabá - Paysandu",
+    "kickoff": "2026-05-07T00:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.49",
+    "odds": "2.15",
+    "group": 2
+  },
+  {
+    "league": "Erovnuli Liga 2",
+    "match": "Merani Martvili - Shturmi",
+    "kickoff": "2026-05-06T14:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.12",
     "group": 3
   },
   {
-    "league": "Erovnuli Liga",
-    "match": "Torpedo Kutaisi - Rustavi",
-    "kickoff": "2026-05-05T18:00:00+02:00",
+    "league": "Paulista - A4",
+    "match": "Penapolense - Inter de Bebedouro",
+    "kickoff": "2026-05-07T01:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.10",
+    "odds": "2.25",
     "group": 3
   }
 ]
