@@ -1,24 +1,24 @@
 [
   {
-    "League": "A Lyga",
-    "Match": "Kauno Žalgiris vs Džiugas Telšiai",
+    "League": "1. Division",
+    "Match": "Aris vs Apoel Nicosia",
     "Tip": "Over 2.5",
-    "Odds": "1.81",
-    "Date": "2026-05-05T15:45:00+00:00"
+    "Odds": "1.77",
+    "Date": "2026-05-06T16:00:00+00:00"
   },
   {
-    "League": "CONMEBOL Sudamericana",
-    "Match": "Puerto Cabello vs Cienciano",
+    "League": "First League",
+    "Match": "Slavia Sofia vs Septemvri Sofia",
     "Tip": "Over 2.5",
-    "Odds": "1.95",
-    "Date": "2026-05-06T00:30:00+00:00"
+    "Odds": "1.85",
+    "Date": "2026-05-06T14:30:00+00:00"
   },
   {
-    "League": "Veikkausliiga",
-    "Match": "Gnistan vs Inter Turku",
+    "League": "Superliga",
+    "Match": "Dinamo Tirana vs Vora",
     "Tip": "Over 2.5",
-    "Odds": "1.82",
-    "Date": "2026-05-05T16:00:00+00:00",
+    "Odds": "1.83",
+    "Date": "2026-05-06T14:00:00+00:00",
     "locked": true
   }
 ]
