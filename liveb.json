@@ -1,1 +1,16 @@
-[]
+[
+  {
+    "league": "CBA",
+    "match": "Beijing vs Guangdong",
+    "tip": "Over 170.25",
+    "odds": "1.90",
+    "date": "2026-05-06T11:35:00+00:00"
+  },
+  {
+    "league": "BNXT League",
+    "match": "Leuven Bears vs Zwolle",
+    "tip": "Over 159.25",
+    "odds": "1.90",
+    "date": "2026-05-06T18:30:00+00:00"
+  }
+]
