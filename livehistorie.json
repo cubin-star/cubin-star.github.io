@@ -1,5 +1,21 @@
 [
   {
+    "league": "TBL",
+    "homeTeam": "Konya BBSK",
+    "awayTeam": "Fenerbahce 2",
+    "tip": "Over 156.5 (preLine 176.75)",
+    "odds": "",
+    "halftimeScore": "48:26 (74 pts)",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "basketball",
+    "kickoff": "2026-05-06T14:00:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-basketball",
+    "scoutStats": "Score: 6/10 | HT: 48:26 (74 pts) | Q1=30 Q2=44 (line 176.75, pace 84%) | PreLine: 176.75 | Proj: 159.5 | TBL"
+  },
+  {
     "league": "CONMEBOL Libertadores",
     "homeTeam": "Sporting Cristal",
     "awayTeam": "Palmeiras",
