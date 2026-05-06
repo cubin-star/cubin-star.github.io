@@ -91,9 +91,10 @@ EXCLUDED_LEAGUES = {
 # lig s reálným kurzem Over 2.5 v rozmezí TIPS_FB_MIN_ODDS..TIPS_FB_MAX_ODDS.
 TIPS_FB_MIN_ODDS = 1.70
 TIPS_FB_MAX_ODDS = 1.90
-TIPS_FB_MAX_ATTEMPTS = 8   # max počet zápasů, u kterých zkusíme načíst odds
+TIPS_FB_MAX_ATTEMPTS = 25  # max počet zápasů, u kterých zkusíme načíst odds
 
 # API-Football league IDs – first-tier ligy (TOP 5 + top evropské + světové)
+# Ty mají v poolu PRIORITU (zkouší se jako první).
 TIPS_FB_TOP_LEAGUE_IDS = {
     39,   # Premier League (England)
     140,  # La Liga (Spain)
@@ -124,7 +125,33 @@ TIPS_FB_TOP_LEAGUE_IDS = {
     848,  # UEFA Europa Conference League
 }
 
-# Country-specific whitelist – if a country is listed here,
+# Druholigové / sekundární soutěže – použijí se až když TOP nestačí.
+TIPS_FB_SECOND_TIER_LEAGUE_IDS = {
+    40,   # Championship (England)
+    141,  # La Liga 2 (Spain)
+    136,  # Serie B (Italy)
+    79,   # 2. Bundesliga (Germany)
+    62,   # Ligue 2 (France)
+    89,   # Eerste Divisie (Netherlands)
+    95,   # Liga Portugal 2
+    145,  # Challenger Pro League (Belgium)
+    204,  # 1. Lig (Turkey)
+    208,  # Challenge League (Switzerland)
+    219,  # 2. Liga (Austria)
+    120,  # 1st Division (Denmark)
+    104,  # OBOS-ligaen (Norway)
+    114,  # Superettan (Sweden)
+    107,  # I Liga (Poland)
+    346,  # FNL (Czech Republic)
+    72,   # Brasileirão Série B (Brazil)
+    129,  # Primera Nacional (Argentina)
+    254,  # USL Championship (USA)
+    263,  # Liga de Expansión MX (Mexico)
+    99,   # J2 League (Japan)
+    293,  # K League 2 (South Korea)
+}
+
+# Country-specific whitelist
 # only the specified leagues are allowed (all others blocked)
 ALLOWED_LEAGUES_BY_COUNTRY = {
     "poland": {"Superliga", "Ekstraklasa", "I Liga"},
@@ -501,10 +528,17 @@ def pick_random_top_league_tips(all_fixtures, exclude_keys, exclude_leagues, nee
     now2 = datetime.now(timezone.utc)
     cutoff = now2 + timedelta(hours=24)
 
-    # 1) Kandidáti: jen TOP ligy + 24h okno + nejsou už použiti
-    candidates = []
+    # 1) Kandidáti: TOP + 2nd-tier ligy + 24h okno + nejsou už použiti.
+    #    Rozlišujeme 'tier' (1 = first-tier, 2 = second-tier) kvůli prioritizaci.
+    top_candidates = []
+    second_candidates = []
     for fid, fix in all_fixtures.items():
-        if fix.get("league_id") not in TIPS_FB_TOP_LEAGUE_IDS:
+        lid = fix.get("league_id")
+        if lid in TIPS_FB_TOP_LEAGUE_IDS:
+            tier = 1
+        elif lid in TIPS_FB_SECOND_TIER_LEAGUE_IDS:
+            tier = 2
+        else:
             continue
         match_str = f"{fix.get('home', '?')} vs {fix.get('away', '?')}"
         kickoff_str = fix.get("kickoff", "")
@@ -519,15 +553,18 @@ def pick_random_top_league_tips(all_fixtures, exclude_keys, exclude_leagues, nee
                     continue
             except ValueError:
                 pass
-        candidates.append((fid, fix))
+        (top_candidates if tier == 1 else second_candidates).append((fid, fix))
 
-    if not candidates:
-        print("  Tips fallback: no fixtures in TOP leagues for next 24h")
+    if not top_candidates and not second_candidates:
+        print("  Tips fallback: no fixtures in TOP / 2nd-tier leagues for next 24h")
         return []
 
-    random.shuffle(candidates)
-    print(f"  Tips fallback: trying random Over 2.5 from {len(candidates)} TOP-league fixtures "
-          f"(odds {TIPS_FB_MIN_ODDS}-{TIPS_FB_MAX_ODDS}, need={need})...")
+    random.shuffle(top_candidates)
+    random.shuffle(second_candidates)
+    candidates = top_candidates + second_candidates  # 1. ligy mají prioritu
+    print(f"  Tips fallback: trying random Over 2.5 from "
+          f"{len(top_candidates)} TOP + {len(second_candidates)} 2nd-tier fixtures "
+          f"(odds {TIPS_FB_MIN_ODDS}-{TIPS_FB_MAX_ODDS}, need={need}, max_attempts={TIPS_FB_MAX_ATTEMPTS})...")
 
     picked = []
     used_leagues = set()
@@ -734,20 +771,25 @@ def main():
     print(f"\n  Live: {len(live_out)} match(es) \u2192 {OUTPUT_LIVE}")
 
     # 6a-2. Write live2.json – VŠECHNY zápasy varianty A s tipem Over 2.5
-    #       Kurz Over 2.5 dopočítán z Over 1.5 přes Poissonovu inverzi.
+    #       Iterujeme `qualified` (= prošlo statistickým gate), ne `results`,
+    #       protože live2 má vlastní účel a nemá ho omezovat value gate na O1.5.
+    #       Kurz Over 2.5 dopočítán z Over 1.5 přes Poissonovu inverzi (když o15 chybí,
+    #       zápas se přeskočí – bez kurzu nemá odhad smysl).
     live2_out = []
-    for r in sorted(results, key=lambda r: r["Date"]):
-        if r.get("_variant") != "A":
-            continue
-        o25_est = estimate_o25_from_o15(r.get("_o15"))
+    live2_qualified_a = [q for q in qualified if q.get("_variant") == "A"]
+    live2_qualified_a.sort(key=lambda q: q.get("kickoff", ""))
+    for q in live2_qualified_a:
+        o15 = odds_map.get(q["fixture_id"], {}).get("o15")
+        o25_est = estimate_o25_from_o15(o15)
         if o25_est is None:
+            print(f"  ⚠ live2 skip {q['Match'][:50]}: o15={o15} → nelze dopočíst O2.5")
             continue
         live2_out.append({
-            "League": r["League"],
-            "Match": r["Match"],
+            "League": q["League"],
+            "Match": q["Match"],
             "Tip": "Over 2.5",
             "Odds": f"{o25_est:.2f}",
-            "Date": r["Date"],
+            "Date": q["kickoff"],
         })
     with open(OUTPUT_LIVE2, "w", encoding="utf-8") as f:
         json.dump(live2_out, f, indent=2, ensure_ascii=False)
