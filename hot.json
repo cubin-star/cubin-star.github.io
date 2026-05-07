@@ -1,50 +1,50 @@
 [
   {
-    "league": "Liga II",
-    "match": "Corvinul Hunedoara - FC Voluntari",
-    "kickoff": "2026-05-06T17:30:00+02:00",
+    "league": "Prva Liga",
+    "match": "Dubočica - FAP",
+    "kickoff": "2026-05-07T17:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.10",
+    "odds": "2.11",
     "group": 1
   },
   {
-    "league": "Copa Sul-Sudeste",
-    "match": "São Bernardo - Caxias",
-    "kickoff": "2026-05-07T02:30:00+02:00",
+    "league": "Second League",
+    "match": "Dayrout - Masar",
+    "kickoff": "2026-05-07T15:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.44",
+    "odds": "2.40",
     "group": 1
   },
   {
-    "league": "First League",
-    "match": "Spartak Varna - Dobrudzha",
-    "kickoff": "2026-05-06T19:00:00+02:00",
+    "league": "Premier League",
+    "match": "National Bank of Egypt - Ismaily SC",
+    "kickoff": "2026-05-07T19:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.17",
+    "odds": "2.39",
     "group": 2
   },
   {
-    "league": "Copa Norte",
-    "match": "Águia de Marabá - Paysandu",
-    "kickoff": "2026-05-07T00:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.15",
-    "group": 2
-  },
-  {
-    "league": "Erovnuli Liga 2",
-    "match": "Merani Martvili - Shturmi",
-    "kickoff": "2026-05-06T14:00:00+02:00",
+    "league": "Botola Pro",
+    "match": "FAR Rabat - Olympique Safi",
+    "kickoff": "2026-05-07T22:00:00+02:00",
     "tip": "Over 2.5",
     "odds": "2.12",
+    "group": 2
+  },
+  {
+    "league": "Copa do Nordeste",
+    "match": "Confiança - Fortaleza EC",
+    "kickoff": "2026-05-08T00:30:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.25",
     "group": 3
   },
   {
-    "league": "Paulista - A4",
-    "match": "Penapolense - Inter de Bebedouro",
-    "kickoff": "2026-05-07T01:00:00+02:00",
+    "league": "Ligue 1",
+    "match": "MC Oran - ASO Chlef",
+    "kickoff": "2026-05-07T21:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.25",
+    "odds": "2.23",
     "group": 3
   }
 ]
