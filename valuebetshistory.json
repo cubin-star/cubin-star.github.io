@@ -1,5 +1,15 @@
 [
   {
+    "League": "Super League",
+    "Match": "Yunnan Yukun vs Hangzhou Greentown",
+    "Tip": "Over 2.5",
+    "Odds": "1.28",
+    "Date": "2026-05-06T12:00:00+00:00",
+    "FixtureId": 1523138,
+    "Result": "OK",
+    "Score": "1:2"
+  },
+  {
     "League": "Premier League",
     "Match": "Aston Villa vs Tottenham",
     "Tip": "Over 2.5",
