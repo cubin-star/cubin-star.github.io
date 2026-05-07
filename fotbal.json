@@ -1,24 +1,24 @@
 [
   {
-    "League": "1. Division",
-    "Match": "Aris vs Apoel Nicosia",
+    "League": "1. Lig",
+    "Match": "Bodrum FK vs Pendikspor",
     "Tip": "Over 2.5",
-    "Odds": "1.77",
-    "Date": "2026-05-06T16:00:00+00:00"
+    "Odds": "1.93",
+    "Date": "2026-05-07T17:00:00+00:00"
   },
   {
-    "League": "First League",
-    "Match": "Slavia Sofia vs Septemvri Sofia",
+    "League": "Virsliga",
+    "Match": "Auda vs Grobiņa",
     "Tip": "Over 2.5",
-    "Odds": "1.85",
-    "Date": "2026-05-06T14:30:00+00:00"
+    "Odds": "1.82",
+    "Date": "2026-05-07T17:00:00+00:00"
   },
   {
-    "League": "Superliga",
-    "Match": "Dinamo Tirana vs Vora",
+    "League": "UEFA Europa League",
+    "Match": "Aston Villa vs Nottingham Forest",
     "Tip": "Over 2.5",
-    "Odds": "1.83",
-    "Date": "2026-05-06T14:00:00+00:00",
+    "Odds": "1.94",
+    "Date": "2026-05-07T19:00:00+00:00",
     "locked": true
   }
 ]
