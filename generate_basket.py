@@ -55,7 +55,9 @@ MIN_EDGE_BY_REGION = {
 
 # Value-gate na výstupní linii: nejnižší dostupná Over linie s průměrným kurzem
 # napříč bookmakery >= MIN_ODDS_OUT bude vystupovat.
-MIN_ODDS_OUT = 1.20
+# Zvýšeno z 1.20 → 1.30: kurzy ≤ 1.28 (např. Leuven-Zwolle 148.5@1.28 = 130 fakt.)
+# představují příliš malý value cushion vůči naší edge přesnosti (~±10 bodů).
+MIN_ODDS_OUT = 1.30
 
 # Klíčová slova pro detekci NBA (kvůli regionu prahů a TFM logice)
 NBA_KEYWORDS = ("nba",)
@@ -76,6 +78,9 @@ RECENT_N = 10               # rolling window: last N finished games
 RECENT_FLOOR_R = 0.97       # rolling avg total of last N games >= 97% of selection_line
 MIN_OVER_HIT_RATE = 0.60    # >= 60% of last N games had total >= safe_line (each team)
 MAX_TOTAL_SD = 22.0         # max std dev of game totals – uvolněno z 20 (evro ligy mají vyšší)
+MIN_TOTAL_SD = 13.0         # NOVÉ: min SD obou týmů – pod 13 = extrémně defenzivní/pomalý
+                            # tým, který "drží" zápas pod linií (Zwolle SD=11 → 130 v 148.5).
+                            # Beijing-Guangdong měli SD 18/21 = zdravá variabilita.
 H2H_MIN_GAMES = 2           # min H2H finished games to apply H2H filter
 H2H_OVER_R = 0.92           # H2H avg total >= 92% of selection_line
 MIN_REST_HOURS = 0           # 0 = vypnuto (back-to-back filtr deaktivován)
@@ -97,7 +102,7 @@ BLOWOUT_MARGIN = 25           # rozdíl > 25 bodů = blowout
 MAX_BLOWOUT_RATE = 0.40       # max 40 % posledních H2H smí být blowouty
 
 # Cross-market konfirmace: oba team totaly Over levné = bookmaker vidí oba aktivní
-TT_BONUS_ODDS = 1.95          # pokud oba Team Total Over kurzy <= 1.95
+TT_BONUS_ODDS = 1.75          # zpřísněno z 1.95 – kurz blízko 2.00 není konfirmace
 TT_BONUS_MULT = 1.15          # multiplikátor skóre při konfirmaci
 
 # Quality score system – pouští jen TOP zápasy splňující víc než jen základ
@@ -110,6 +115,13 @@ MAX_TIPS_PER_DAY = 3     # globální limit – nejlepších N podle skóre (kva
 # Důvod: bookmaker už ví o specifickém matchupu víc než naše recent form
 H2H_HARD_FAIL_R = 0.96       # H2H avg pod 96 % selection_line = past
 H2H_HARD_FAIL_MIN_N = 10     # min počet H2H pro hard fail (statistická významnost)
+
+# H2H minimální vzorek pro spolehlivý průměr – při n < tomto se H2H avg
+# musí rovnat ALESPOŇ selection_line (přísnější), jinak je vzorek statisticky
+# bezcenný. Leuven-Zwolle měli H2H=157 z n=5 (bookmaker 159 - prošlo H2H_OVER_R=0.92,
+# ale realita 130). Beijing-Guangdong měli n=52 → spolehlivé.
+H2H_RELIABLE_MIN_N = 10      # nad tímto vzorkem platí standardní H2H_OVER_R práh
+H2H_SMALL_SAMPLE_R = 1.00    # při n < H2H_RELIABLE_MIN_N: H2H avg >= 100 % selection_line
 
 # Playoff / play-in detekce – taktičtější zápasy mívají nižší totaly
 # Pokud název ligy obsahuje některý keyword, přidej rezervu na expected_min_r
@@ -753,6 +765,11 @@ def meets_enhanced_criteria(home_form, away_form, h2h_games,
         if h_sd > MAX_TOTAL_SD or a_sd > MAX_TOTAL_SD:
             return False, (f"inconsistent: SD {h_sd:.1f}/{a_sd:.1f} "
                            f"(max {MAX_TOTAL_SD:.0f})")
+        # Příliš nízká SD = defenzivní/pomalý tým držící zápas pod linií.
+        # Min(h_sd, a_sd) < MIN_TOTAL_SD => fail (Zwolle SD=11 → 130 v 148.5 line).
+        if min(h_sd, a_sd) < MIN_TOTAL_SD:
+            return False, (f"too defensive: min SD {min(h_sd, a_sd):.1f} < {MIN_TOTAL_SD:.0f} "
+                           f"(SD={h_sd:.1f}/{a_sd:.1f}, jeden tým drží tempo dolů)")
 
         # Check 3a: Form gap – velký rozdíl mezi týmy = různé tempo (chimérický průměr)
         # Příklad: jeden tým hraje 162, druhý 178 → "průměr" 170 je často spíš náhoda
@@ -828,11 +845,22 @@ def meets_enhanced_criteria(home_form, away_form, h2h_games,
     # --- Check 4: Head-to-Head ---
     if h2h_games and len(h2h_games) >= H2H_MIN_GAMES:
         h2h_avg = sum(g["total"] for g in h2h_games) / len(h2h_games)
-        h2h_min = selection_line * H2H_OVER_R
-        if h2h_avg < h2h_min:
-            return False, (f"H2H avg low: {h2h_avg:.0f} "
-                           f"(min {h2h_min:.0f}={H2H_OVER_R}*{selection_line:.0f}, "
-                           f"n={len(h2h_games)})")
+        # Při malém vzorku (n < H2H_RELIABLE_MIN_N) H2H průměr je statisticky
+        # nespolehlivý → vyžaduje přísnější práh (>= 100 % selection_line),
+        # jinak musíme H2H signál ignorovat. Leuven-Zwolle: H2H=157 z n=5,
+        # bookmaker 159 → prošlo 0.92 prahem ale realita 130.
+        if len(h2h_games) < H2H_RELIABLE_MIN_N:
+            small_min = selection_line * H2H_SMALL_SAMPLE_R
+            if h2h_avg < small_min:
+                return False, (f"H2H small sample: avg {h2h_avg:.0f} < {small_min:.0f} "
+                               f"({H2H_SMALL_SAMPLE_R}*{selection_line:.0f}, n={len(h2h_games)} "
+                               f"< {H2H_RELIABLE_MIN_N} = nespolehlivé)")
+        else:
+            h2h_min = selection_line * H2H_OVER_R
+            if h2h_avg < h2h_min:
+                return False, (f"H2H avg low: {h2h_avg:.0f} "
+                               f"(min {h2h_min:.0f}={H2H_OVER_R}*{selection_line:.0f}, "
+                               f"n={len(h2h_games)})")
 
         # H2H HARD FAIL – při dostatečném vzorku (n >= 10) je H2H silnější signál
         # než recent form. Pokud H2H avg < 96 % selection_line, bookmaker už ví víc
@@ -926,10 +954,12 @@ def compute_quality_score(home_form, away_form, h2h_games,
             pts += 1
             reasons.append("H2H≥sel(+1)")
 
-    # 7. TT silná konfirmace
-    if h_tt is not None and a_tt is not None and h_tt <= 1.85 and a_tt <= 1.85:
+    # 7. TT silná konfirmace – kurz musí být skutečně overově nakloněný (≤ 1.70).
+    # Dříve 1.85: prošlo i TT=1.01 (čistě neutrální line), což byl falešný bonus
+    # (Leuven-Zwolle TT=1.01/1.01★ → reálně Under).
+    if h_tt is not None and a_tt is not None and h_tt <= 1.70 and a_tt <= 1.70:
         pts += 1
-        reasons.append("TT≤1.85(+1)")
+        reasons.append("TT≤1.70(+1)")
 
     return pts, ", ".join(reasons) if reasons else "no bonuses"
 
