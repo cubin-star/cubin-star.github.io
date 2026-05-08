@@ -1,24 +1,24 @@
 [
   {
-    "League": "1. Lig",
-    "Match": "Bodrum FK vs Pendikspor",
+    "League": "Premiership",
+    "Match": "Arbroath vs Dunfermline",
     "Tip": "Over 2.5",
-    "Odds": "1.93",
-    "Date": "2026-05-07T17:00:00+00:00"
+    "Odds": "1.78",
+    "Date": "2026-05-08T18:30:00+00:00"
   },
   {
-    "League": "Virsliga",
-    "Match": "Auda vs Grobiņa",
+    "League": "Serie A",
+    "Match": "Torino vs Sassuolo",
     "Tip": "Over 2.5",
-    "Odds": "1.82",
-    "Date": "2026-05-07T17:00:00+00:00"
+    "Odds": "1.91",
+    "Date": "2026-05-08T18:45:00+00:00"
   },
   {
-    "League": "UEFA Europa League",
-    "Match": "Aston Villa vs Nottingham Forest",
+    "League": "1 Lyga",
+    "Match": "Jonava vs Neptūną Klaipėda",
     "Tip": "Over 2.5",
-    "Odds": "1.94",
-    "Date": "2026-05-07T19:00:00+00:00",
+    "Odds": "1.86",
+    "Date": "2026-05-08T16:00:00+00:00",
     "locked": true
   }
 ]
