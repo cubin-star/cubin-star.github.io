@@ -1,5 +1,15 @@
 [
   {
+    "sport": "football",
+    "league": "Copa Colombia",
+    "match": "Jaguares vs Real Soacha",
+    "tip": "Over 1.5",
+    "odds": "1.40",
+    "date": "2026-05-07T21:00:00+00:00",
+    "score": "1:2",
+    "result": "✓"
+  },
+  {
     "sport": "basketball",
     "league": "BNXT League",
     "match": "Leuven Bears vs Zwolle",
