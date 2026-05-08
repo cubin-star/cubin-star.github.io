@@ -55,9 +55,9 @@ MIN_READY_35 = 0.85      # kompozitní index "Over 3.5 readiness"
 #   A = jeden silný útok + děravé obrany → default
 #   C = "open shootout" symetrie → přísnější (často klouže k 0:0)
 MIN_P35_BY_VARIANT = {
-    "A": 0.45,
-    "B": 0.43,
-    "C": 0.50,
+    "A": 0.40,
+    "B": 0.40,
+    "C": 0.40,
 }
 
 # === Asymetrický defenzivní filtr (chrání před "1:0 pastmi") ===
@@ -370,11 +370,12 @@ def meets_criteria(pred):
     if h_played < MIN_GAMES or a_played < MIN_GAMES:
         return False, f"too few games: {h_played}/{a_played}", 0.0
 
-    # Home team → home split, Away team → away split
-    h_for = _sf(home.get("league", {}).get("goals", {}).get("for", {}).get("average", {}).get("home"))
-    a_for = _sf(away.get("league", {}).get("goals", {}).get("for", {}).get("average", {}).get("away"))
-    h_agn = _sf(home.get("league", {}).get("goals", {}).get("against", {}).get("average", {}).get("home"))
-    a_agn = _sf(away.get("league", {}).get("goals", {}).get("against", {}).get("average", {}).get("away"))
+    # Total (sezónní) průměry – robustnější vzorek než home/away split,
+    # který v API často chybí nebo má extrémně malý počet zápasů.
+    h_for = _sf(home.get("league", {}).get("goals", {}).get("for", {}).get("average", {}).get("total"))
+    a_for = _sf(away.get("league", {}).get("goals", {}).get("for", {}).get("average", {}).get("total"))
+    h_agn = _sf(home.get("league", {}).get("goals", {}).get("against", {}).get("average", {}).get("total"))
+    a_agn = _sf(away.get("league", {}).get("goals", {}).get("against", {}).get("average", {}).get("total"))
 
     if h_for == 0 and a_for == 0:
         return False, "", 0.0
@@ -836,9 +837,9 @@ def main():
         print(f"  Dedup: {before} → {len(deduped)} (best per league, normalized)")
 
     # 7. Sort by kickoff time and write fotbals.json (bez interních polí)
-    #    Filtr: zápasy s Over 1.5 < 1.17 přeskoč (odpovídá O2.5 ≤ 1.51 dle Poissonovy inverze).
+    #    Filtr: zápasy s Over 1.5 < 1.30 přeskoč (test – hledáme value zápasy s vyššími kurzy).
     deduped.sort(key=lambda r: r["Date"])
-    MIN_O15_FOTBALS = 1.17
+    MIN_O15_FOTBALS = 1.30
     fotbals_filtered = []
     for r in deduped:
         o15 = r.get("_o15")
