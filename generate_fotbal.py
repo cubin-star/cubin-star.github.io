@@ -859,12 +859,16 @@ def main():
     #         – opět tipnut Over 2.5 (dopočet z o15)
     tips = []
     selected_keys = set()
+    MIN_TIPS_O25 = 1.6  # zápas se do tips.json zapíše jen když dopočtený O2.5 ≥ 1.6
 
     a_pool = [r for r in deduped if r.get("_variant") == "A"]
     random.shuffle(a_pool)
     for r in a_pool[:MAX_TIPS]:
         o25_est = estimate_o25_from_o15(r.get("_o15"))
         if o25_est is None:
+            continue
+        if o25_est < MIN_TIPS_O25:
+            print(f"  ⚠ tips skip {r['Match'][:50]}: O2.5={o25_est:.2f} < {MIN_TIPS_O25}")
             continue
         tips.append({
             "League": r["League"],
@@ -891,6 +895,9 @@ def main():
                 break
             o25_est = estimate_o25_from_o15(r.get("_o15"))
             if o25_est is None:
+                continue
+            if o25_est < MIN_TIPS_O25:
+                print(f"  ⚠ tips skip {r['Match'][:50]}: O2.5={o25_est:.2f} < {MIN_TIPS_O25}")
                 continue
             tips.append({
                 "League": r["League"],
