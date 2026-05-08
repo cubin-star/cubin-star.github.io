@@ -1,5 +1,21 @@
 [
   {
+    "league": "Liiga",
+    "homeTeam": "KooKoo",
+    "awayTeam": "Tappara",
+    "tip": "Over 5.5",
+    "odds": "",
+    "halftimeScore": "1:2",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "hockey",
+    "kickoff": "2026-05-08T15:30:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-hockey",
+    "scoutStats": "Score: 11/12 | P1: 1:2 | GF: 6.5 GA: 4.3 | Proj: 6.6 → Over 5.5 | Last5: 0 | PreOdds: 2.1 | Liiga"
+  },
+  {
     "league": "CONMEBOL Libertadores",
     "homeTeam": "Sporting Cristal",
     "awayTeam": "Palmeiras",
