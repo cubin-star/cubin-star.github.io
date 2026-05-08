@@ -11,16 +11,6 @@
   },
   {
     "sport": "basketball",
-    "league": "BNXT League",
-    "match": "Leuven Bears vs Zwolle",
-    "tip": "Over 148.5",
-    "odds": "1.28",
-    "date": "2026-05-06T18:30:00+00:00",
-    "score": "69:61",
-    "result": "✗"
-  },
-  {
-    "sport": "basketball",
     "league": "CBA",
     "match": "Beijing vs Guangdong",
     "tip": "Over 162.5",
