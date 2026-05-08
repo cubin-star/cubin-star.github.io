@@ -784,6 +784,9 @@ def main():
         if o25_est is None:
             print(f"  ⚠ live2 skip {q['Match'][:50]}: o15={o15} → nelze dopočíst O2.5")
             continue
+        if o25_est <= 1.5:
+            print(f"  ⚠ live2 skip {q['Match'][:50]}: O2.5={o25_est:.2f} ≤ 1.5 → nízký kurz")
+            continue
         live2_out.append({
             "League": q["League"],
             "Match": q["Match"],
@@ -833,8 +836,17 @@ def main():
         print(f"  Dedup: {before} → {len(deduped)} (best per league, normalized)")
 
     # 7. Sort by kickoff time and write fotbals.json (bez interních polí)
+    #    Filtr: zápasy s Over 1.5 < 1.17 přeskoč (odpovídá O2.5 ≤ 1.51 dle Poissonovy inverze).
     deduped.sort(key=lambda r: r["Date"])
-    fotbals_out = [{k: v for k, v in r.items() if not k.startswith("_")} for r in deduped]
+    MIN_O15_FOTBALS = 1.17
+    fotbals_filtered = []
+    for r in deduped:
+        o15 = r.get("_o15")
+        if o15 is None or o15 < MIN_O15_FOTBALS:
+            print(f"  ⚠ fotbals skip {r['Match'][:50]}: O1.5={o15} < {MIN_O15_FOTBALS}")
+            continue
+        fotbals_filtered.append(r)
+    fotbals_out = [{k: v for k, v in r.items() if not k.startswith("_")} for r in fotbals_filtered]
     with open(OUTPUT, "w", encoding="utf-8") as f:
         json.dump(fotbals_out, f, indent=2, ensure_ascii=False)
 
