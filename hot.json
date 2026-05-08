@@ -1,50 +1,50 @@
 [
   {
-    "league": "Prva Liga",
-    "match": "Dubočica - FAP",
-    "kickoff": "2026-05-07T17:00:00+02:00",
+    "league": "Liga I",
+    "match": "CFR 1907 Cluj - Universitatea Craiova",
+    "kickoff": "2026-05-08T20:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.11",
+    "odds": "2.26",
     "group": 1
   },
   {
-    "league": "Second League",
-    "match": "Dayrout - Masar",
-    "kickoff": "2026-05-07T15:30:00+02:00",
+    "league": "Serie B",
+    "match": "Reggiana - Sampdoria",
+    "kickoff": "2026-05-08T20:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.40",
+    "odds": "2.12",
     "group": 1
   },
   {
-    "league": "Premier League",
-    "match": "National Bank of Egypt - Ismaily SC",
-    "kickoff": "2026-05-07T19:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.39",
-    "group": 2
-  },
-  {
-    "league": "Botola Pro",
-    "match": "FAR Rabat - Olympique Safi",
-    "kickoff": "2026-05-07T22:00:00+02:00",
+    "league": "Championship",
+    "match": "Hull City - Millwall",
+    "kickoff": "2026-05-08T21:00:00+02:00",
     "tip": "Over 2.5",
     "odds": "2.12",
     "group": 2
   },
   {
-    "league": "Copa do Nordeste",
-    "match": "Confiança - Fortaleza EC",
-    "kickoff": "2026-05-08T00:30:00+02:00",
+    "league": "Primera División RFEF - Group 2",
+    "match": "FC Cartagena - Alcorcon",
+    "kickoff": "2026-05-08T19:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.25",
+    "odds": "2.36",
+    "group": 2
+  },
+  {
+    "league": "First NL",
+    "match": "Karlovac 1919 - Rudes",
+    "kickoff": "2026-05-08T17:45:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.14",
     "group": 3
   },
   {
-    "league": "Ligue 1",
-    "match": "MC Oran - ASO Chlef",
-    "kickoff": "2026-05-07T21:00:00+02:00",
+    "league": "First League",
+    "match": "Lokomotiv Plovdiv - Arda Kardzhali",
+    "kickoff": "2026-05-08T16:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.23",
+    "odds": "2.26",
     "group": 3
   }
 ]

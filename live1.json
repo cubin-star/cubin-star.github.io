@@ -1,1 +1,23 @@
-[]
+[
+  {
+    "league": "Liga I",
+    "match": "CFR 1907 Cluj - Universitatea Craiova",
+    "kickoff": "2026-05-08T20:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.26"
+  },
+  {
+    "league": "Serie B",
+    "match": "Reggiana - Sampdoria",
+    "kickoff": "2026-05-08T20:30:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.12"
+  },
+  {
+    "league": "Championship",
+    "match": "Hull City - Millwall",
+    "kickoff": "2026-05-08T21:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.12"
+  }
+]
