@@ -40,11 +40,11 @@ MAX_TIPS = 2
 MIN_ODDS = 1.60          # Over 2.5 range (used only for tips.json filler)
 MAX_ODDS = 1.80
 MIN_ODDS_15_OUT = 1.12   # NEW: value-gate na výstupu (Over 1.5 musí být ≥ 1.12)
-MIN_GAMES = 6            # zvýšeno z 5 → spolehlivější vzorek
+MIN_GAMES = 5            # min. odehraných zápasů (sníženo 6→5 – chytí víc kandidátů bez ztráty kvality)
 
 # === Stats-first kritéria pro "kandidáta na Over 3.5" ===
 # Cíl: expected total ≥ 3.0 gólů (P(Over 3.5) ~ 35 %, P(Over 1.5) ~ 90 %+)
-MIN_TOTAL_AVG = 3.00     # tvrdý gate: (h_for+a_for+h_agn+a_agn)/2 ≥ 3.0
+MIN_TOTAL_AVG = 2.80     # tvrdý gate: (h_for+a_for+h_agn+a_agn)/2 ≥ 2.8 (sníženo 3.0→2.8)
 MIN_DEFENSE_LEAK = 1.00  # aspoň jeden tým inkasuje ≥ 1.0 g/z (musí být odkud góly brát)
 MIN_READY_35 = 0.85      # kompozitní index "Over 3.5 readiness"
 
