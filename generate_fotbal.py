@@ -839,7 +839,7 @@ def main():
     # 7. Sort by kickoff time and write fotbals.json (bez interních polí)
     #    Filtr: zápasy s Over 1.5 < 1.30 přeskoč (test – hledáme value zápasy s vyššími kurzy).
     deduped.sort(key=lambda r: r["Date"])
-    MIN_O15_FOTBALS = 1.30
+    MIN_O15_FOTBALS = 1.25
     fotbals_filtered = []
     for r in deduped:
         o15 = r.get("_o15")
