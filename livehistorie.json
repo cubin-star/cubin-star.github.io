@@ -1,5 +1,20 @@
 [
   {
+    "league": "Czech Liga",
+    "homeTeam": "Mlada Boleslav",
+    "awayTeam": "Zlin",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "1:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "kickoff": "2026-05-09T12:00:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-football",
+    "scoutStats": "Score: 12/14 | xG: 1.35 | Shots: 16/6 | Corners: 5 | Poss: 59% | Pre O2.5: 1.62"
+  },
+  {
     "league": "P. League+",
     "homeTeam": "Yankey Ark",
     "awayTeam": "Fubon Braves",
