@@ -1,5 +1,65 @@
 [
   {
+    "League": "1. Liga Promotion",
+    "Match": "Bulle vs Breitenrain",
+    "Tip": "Over 2.5",
+    "Odds": "1.35",
+    "Date": "2026-05-08T17:30:00+00:00",
+    "FixtureId": 1418720,
+    "Result": "KO",
+    "Score": "1:0"
+  },
+  {
+    "League": "Eliteserien",
+    "Match": "Ham-Kam vs Valerenga",
+    "Tip": "Over 2.5",
+    "Odds": "1.53",
+    "Date": "2026-05-08T17:00:00+00:00",
+    "FixtureId": 1494652,
+    "Result": "KO",
+    "Score": "1:0"
+  },
+  {
+    "League": "2. Bundesliga",
+    "Match": "SC Paderborn 07 vs Karlsruher SC",
+    "Tip": "Over 2.5",
+    "Odds": "1.28",
+    "Date": "2026-05-08T16:30:00+00:00",
+    "FixtureId": 1388909,
+    "Result": "OK",
+    "Score": "2:2"
+  },
+  {
+    "League": "3. liga - MSFL",
+    "Match": "Unie Hlubina vs Zbrojovka Brno II",
+    "Tip": "Over 2.5",
+    "Odds": "1.35",
+    "Date": "2026-05-08T14:30:00+00:00",
+    "FixtureId": 1487419,
+    "Result": "OK",
+    "Score": "1:2"
+  },
+  {
+    "League": "Victoria NPL",
+    "Match": "Oakleigh Cannons vs Dandenong Thunder",
+    "Tip": "Over 2.5",
+    "Odds": "1.45",
+    "Date": "2026-05-08T10:15:00+00:00",
+    "FixtureId": 1521928,
+    "Result": "KO",
+    "Score": "2:0"
+  },
+  {
+    "League": "South Australia State League 1",
+    "Match": "Eastern United vs Fulham United",
+    "Tip": "Over 2.5",
+    "Odds": "1.34",
+    "Date": "2026-05-08T10:15:00+00:00",
+    "FixtureId": 1527370,
+    "Result": "KO",
+    "Score": "0:0"
+  },
+  {
     "League": "Super League",
     "Match": "Yunnan Yukun vs Hangzhou Greentown",
     "Tip": "Over 2.5",
