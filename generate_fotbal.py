@@ -44,7 +44,7 @@ MIN_GAMES = 5            # min. odehraných zápasů (sníženo 6→5 – chytí
 
 # === Stats-first kritéria pro "kandidáta na Over 3.5" ===
 # Cíl: expected total ≥ 3.0 gólů (P(Over 3.5) ~ 35 %, P(Over 1.5) ~ 90 %+)
-MIN_TOTAL_AVG = 2.80     # tvrdý gate: (h_for+a_for+h_agn+a_agn)/2 ≥ 2.8 (sníženo 3.0→2.8)
+MIN_TOTAL_AVG = 2.60     # tvrdý gate: (h_for+a_for+h_agn+a_agn)/2 ≥ 2.6 (sníženo 2.8→2.6)
 MIN_DEFENSE_LEAK = 1.00  # aspoň jeden tým inkasuje ≥ 1.0 g/z (musí být odkud góly brát)
 MIN_READY_35 = 0.85      # kompozitní index "Over 3.5 readiness"
 
@@ -55,9 +55,9 @@ MIN_READY_35 = 0.85      # kompozitní index "Over 3.5 readiness"
 #   A = jeden silný útok + děravé obrany → default
 #   C = "open shootout" symetrie → přísnější (často klouže k 0:0)
 MIN_P35_BY_VARIANT = {
-    "A": 0.40,
-    "B": 0.40,
-    "C": 0.40,
+    "A": 0.30,
+    "B": 0.30,
+    "C": 0.30,
 }
 
 # === Asymetrický defenzivní filtr (chrání před "1:0 pastmi") ===
