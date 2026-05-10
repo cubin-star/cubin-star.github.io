@@ -1,37 +1,9 @@
 [
   {
-    "League": "3. liga - MSFL",
-    "Match": "Slovácko II vs Vsetín",
-    "Tip": "Over 1.5",
-    "Odds": "1.19",
-    "Date": "2026-05-10T08:15:00+00:00"
-  },
-  {
-    "League": "Liga II",
-    "Match": "Bihor Oradea vs CSA Steaua Bucureşti",
-    "Tip": "Over 1.5",
-    "Odds": "1.37",
-    "Date": "2026-05-10T08:30:00+00:00"
-  },
-  {
-    "League": "3. liga - CFL B",
-    "Match": "Teplice II vs Velké Hamry",
-    "Tip": "Over 1.5",
-    "Odds": "1.15",
-    "Date": "2026-05-10T09:00:00+00:00"
-  },
-  {
-    "League": "Júniores U19",
-    "Match": "Rio Ave U19 vs Sporting CP U19",
-    "Tip": "Over 1.5",
-    "Odds": "1.19",
-    "Date": "2026-05-10T10:00:00+00:00"
-  },
-  {
     "League": "Thai League 1",
     "Match": "Rayong FC vs Bangkok United",
     "Tip": "Over 1.5",
-    "Odds": "1.19",
+    "Odds": "1.15",
     "Date": "2026-05-10T11:00:00+00:00"
   },
   {
@@ -45,7 +17,7 @@
     "League": "2. Bundesliga",
     "Match": "Preußen Münster vs SV Darmstadt 98",
     "Tip": "Over 1.5",
-    "Odds": "1.17",
+    "Odds": "1.16",
     "Date": "2026-05-10T11:30:00+00:00"
   },
   {
@@ -73,7 +45,7 @@
     "League": "Super League",
     "Match": "Qingdao Jonoon vs Dalian Zhixing",
     "Tip": "Over 1.5",
-    "Odds": "1.22",
+    "Odds": "1.23",
     "Date": "2026-05-10T12:00:00+00:00"
   },
   {
@@ -87,7 +59,7 @@
     "League": "First League",
     "Match": "Makedonija GjP vs Tikveš",
     "Tip": "Over 1.5",
-    "Odds": "1.23",
+    "Odds": "1.25",
     "Date": "2026-05-10T14:00:00+00:00"
   },
   {
@@ -150,7 +122,7 @@
     "League": "Ligue 1",
     "Match": "Rennes vs Paris FC",
     "Tip": "Over 1.5",
-    "Odds": "1.14",
+    "Odds": "1.13",
     "Date": "2026-05-10T19:00:00+00:00"
   },
   {
@@ -185,14 +157,14 @@
     "League": "Major League Soccer",
     "Match": "Minnesota United FC vs Austin",
     "Tip": "Over 1.5",
-    "Odds": "1.20",
+    "Odds": "1.19",
     "Date": "2026-05-10T23:00:00+00:00"
   },
   {
     "League": "MLS Next Pro",
     "Match": "Austin II vs Tacoma Defiance",
     "Tip": "Over 1.5",
-    "Odds": "1.15",
+    "Odds": "1.14",
     "Date": "2026-05-11T00:30:00+00:00"
   }
 ]
