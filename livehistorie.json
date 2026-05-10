@@ -1,5 +1,20 @@
 [
   {
+    "league": "Czech Liga",
+    "homeTeam": "FK Jablonec",
+    "awayTeam": "Hradec Králové",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "0:1",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "kickoff": "2026-05-10T16:30:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-football",
+    "scoutStats": "Score: 7/9 | xG: 1.06 | Shots: 11/4 | Pre O2.5: 1.95"
+  },
+  {
     "league": "BBL",
     "homeTeam": "Trier",
     "awayTeam": "Syntainics MBC",
