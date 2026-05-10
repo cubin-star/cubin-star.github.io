@@ -1,1 +1,82 @@
-[]
+[
+  {
+    "League": "USL Championship",
+    "Match": "Louisville City vs Pittsburgh Riverhounds",
+    "Tip": "Over 2.5",
+    "Odds": "1.79",
+    "Date": "2026-05-09T23:00:00+00:00",
+    "FixtureId": 1493496,
+    "Result": "KO",
+    "Score": "0:2"
+  },
+  {
+    "League": "Segunda Divisi\u00F3n",
+    "Match": "Malaga vs Sporting Gijon",
+    "Tip": "Over 2.5",
+    "Odds": "1.61",
+    "Date": "2026-05-09T19:00:00+00:00",
+    "FixtureId": 1392191,
+    "Result": "OK",
+    "Score": "2:1"
+  },
+  {
+    "League": "Serie B",
+    "Match": "Goias vs Vila Nova",
+    "Tip": "Over 2.5",
+    "Odds": "2.30",
+    "Date": "2026-05-09T19:00:00+00:00",
+    "FixtureId": 1520674,
+    "Result": "KO",
+    "Score": "1:0"
+  },
+  {
+    "League": "Division 1",
+    "Match": "Al Zulfi vs Al-Raed",
+    "Tip": "Over 2.5",
+    "Odds": "1.58",
+    "Date": "2026-05-09T18:00:00+00:00",
+    "FixtureId": 1499109,
+    "Result": "OK",
+    "Score": "2:2"
+  },
+  {
+    "League": "Premier League",
+    "Match": "Sunderland vs Manchester United",
+    "Tip": "Over 2.5",
+    "Odds": "1.65",
+    "Date": "2026-05-09T14:00:00+00:00",
+    "FixtureId": 1379326,
+    "Result": "KO",
+    "Score": "0:0"
+  },
+  {
+    "League": "Super League Women",
+    "Match": "Club Brugge W vs Standard Liege W",
+    "Tip": "Over 2.5",
+    "Odds": "1.55",
+    "Date": "2026-05-09T14:00:00+00:00",
+    "FixtureId": 1537048,
+    "Result": "OK",
+    "Score": "2:1"
+  },
+  {
+    "League": "Superettan",
+    "Match": "Norrby IF vs Helsingborg",
+    "Tip": "Over 2.5",
+    "Odds": "1.75",
+    "Date": "2026-05-09T13:00:00+00:00",
+    "FixtureId": 1497554,
+    "Result": "OK",
+    "Score": "3:3"
+  },
+  {
+    "League": "Superettan",
+    "Match": "United Nordic vs Osters IF",
+    "Tip": "Over 2.5",
+    "Odds": "1.57",
+    "Date": "2026-05-09T11:00:00+00:00",
+    "FixtureId": 1497553,
+    "Result": "OK",
+    "Score": "4:2"
+  }
+]
