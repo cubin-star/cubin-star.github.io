@@ -78,12 +78,53 @@ MIN_BASELINE = 1.40      # zvýšeno z 1.25 → expected ~3.0+ gólů celkem
 MIN_ATTACK = 0.95        # zvýšeno z 0.80 → oba reálně střílí
 MIN_2H_BASELINE = 0.55   # zvýšeno z 0.45 → 2H aktivita
 
-EXCLUDED_COUNTRIES = {"russia", "belarus"}
+EXCLUDED_COUNTRIES = {
+    "russia",
+    "belarus",
+    "japan",
+    "south-korea",
+    "south korea",
+    "korea republic",
+}
 
 # League blacklist – exact league names from API
 EXCLUDED_LEAGUES = {
     "2. liga",           # 2. Slovenská liga
 }
+
+# Substring blacklist (case-insensitive) – matched against league name.
+# Slouží k blokaci celých kategorií soutěží (např. všech ženských).
+EXCLUDED_LEAGUE_SUBSTRINGS = (
+    "women",       # EN (UEFA Women's Champions League, NWSL Women, ...)
+    "féminine",    # FR
+    "feminine",    # FR (bez diakritiky)
+    "femenina",    # ES
+    "feminina",    # PT/IT
+    "frauen",      # DE
+    "ženy",        # CZ/SK
+    "zeny",        # CZ/SK (bez diakritiky)
+)
+
+
+def is_excluded_fixture(fix):
+    """Centrální filtr – platí pro VŠECHNY výstupní JSONy (fotbals/live/live2/tips).
+
+    Blokuje:
+      - země v EXCLUDED_COUNTRIES (Rusko, Bělorusko, Japonsko, Jižní Korea)
+      - ligy v EXCLUDED_LEAGUES (přesný název)
+      - všechny ženské soutěže (název obsahuje výraz z EXCLUDED_LEAGUE_SUBSTRINGS)
+    """
+    country = (fix.get("country") or "").lower()
+    if country in EXCLUDED_COUNTRIES:
+        return True
+    league = fix.get("league") or ""
+    if league in EXCLUDED_LEAGUES:
+        return True
+    league_lc = league.lower()
+    for needle in EXCLUDED_LEAGUE_SUBSTRINGS:
+        if needle in league_lc:
+            return True
+    return False
 
 # === FALLBACK pro tips.json: random Over 2.5 z TOP lig ===
 # Pokud po A-poolu i prvním filleru zbývá místo v tips.json, doplníme
@@ -117,8 +158,6 @@ TIPS_FB_TOP_LEAGUE_IDS = {
     128,  # Liga Profesional (Argentina)
     253,  # MLS (USA)
     262,  # Liga MX (Mexico)
-    98,   # J1 League (Japan)
-    292,  # K League 1 (South Korea)
     188,  # A-League (Australia)
     2,    # UEFA Champions League
     3,    # UEFA Europa League
@@ -147,8 +186,6 @@ TIPS_FB_SECOND_TIER_LEAGUE_IDS = {
     129,  # Primera Nacional (Argentina)
     254,  # USL Championship (USA)
     263,  # Liga de Expansión MX (Mexico)
-    99,   # J2 League (Japan)
-    293,  # K League 2 (South Korea)
 }
 
 # Country-specific whitelist
@@ -541,6 +578,8 @@ def pick_random_top_league_tips(all_fixtures, exclude_keys, exclude_leagues, nee
             tier = 2
         else:
             continue
+        if is_excluded_fixture(fix):
+            continue
         match_str = f"{fix.get('home', '?')} vs {fix.get('away', '?')}"
         kickoff_str = fix.get("kickoff", "")
         if (match_str, kickoff_str) in exclude_keys:
@@ -658,11 +697,9 @@ def main():
             except ValueError:
                 pass
         country = fix.get("country", "").lower()
-        if country in EXCLUDED_COUNTRIES:
+        if is_excluded_fixture(fix):
             continue
         league = fix.get("league", "")
-        if league in EXCLUDED_LEAGUES:
-            continue
         if country in ALLOWED_LEAGUES_BY_COUNTRY:
             if league not in ALLOWED_LEAGUES_BY_COUNTRY[country]:
                 continue
