@@ -1,72 +1,30 @@
 [
   {
-    "League": "Superettan",
-    "Match": "United Nordic vs Osters IF",
-    "Tip": "Over 2.5",
-    "Odds": "1.57",
-    "Date": "2026-05-09T11:00:00+00:00"
-  },
-  {
-    "League": "Superettan",
-    "Match": "Norrby IF vs Helsingborg",
-    "Tip": "Over 2.5",
-    "Odds": "1.75",
-    "Date": "2026-05-09T13:00:00+00:00"
-  },
-  {
-    "League": "Premier League",
-    "Match": "Sunderland vs Manchester United",
-    "Tip": "Over 2.5",
-    "Odds": "1.65",
-    "Date": "2026-05-09T14:00:00+00:00"
-  },
-  {
-    "League": "Super League Women",
-    "Match": "Club Brugge W vs Standard Liege W",
-    "Tip": "Over 2.5",
-    "Odds": "1.55",
-    "Date": "2026-05-09T14:00:00+00:00"
-  },
-  {
-    "League": "Division 1",
-    "Match": "Al Zulfi vs Al-Raed",
+    "League": "Liga 1",
+    "Match": "PSIM Yogyakarta vs Malut United",
     "Tip": "Over 2.5",
     "Odds": "1.58",
-    "Date": "2026-05-09T18:00:00+00:00"
+    "Date": "2026-05-10T12:00:00+00:00"
   },
   {
-    "League": "Segunda División",
-    "Match": "Malaga vs Sporting Gijon",
+    "League": "First League",
+    "Match": "Makedonija GjP vs Tikveš",
     "Tip": "Over 2.5",
-    "Odds": "1.61",
-    "Date": "2026-05-09T19:00:00+00:00"
+    "Odds": "1.68",
+    "Date": "2026-05-10T14:00:00+00:00"
   },
   {
-    "League": "Serie B",
-    "Match": "Goias vs Vila Nova",
+    "League": "Super League 1",
+    "Match": "Volos NFC vs Levadiakos",
     "Tip": "Over 2.5",
-    "Odds": "2.30",
-    "Date": "2026-05-09T19:00:00+00:00"
+    "Odds": "1.57",
+    "Date": "2026-05-10T14:00:00+00:00"
   },
   {
-    "League": "USL Championship",
-    "Match": "Louisville City vs Pittsburgh Riverhounds",
+    "League": "Serie A",
+    "Match": "Atletico-MG vs Botafogo",
     "Tip": "Over 2.5",
-    "Odds": "1.79",
-    "Date": "2026-05-09T23:00:00+00:00"
-  },
-  {
-    "League": "J1 League",
-    "Match": "Vissel Kobe vs Fagiano Okayama",
-    "Tip": "Over 2.5",
-    "Odds": "1.94",
-    "Date": "2026-05-10T05:00:00+00:00"
-  },
-  {
-    "League": "J2/J3 League",
-    "Match": "Matsumoto Yamaga vs Fujieda MYFC",
-    "Tip": "Over 2.5",
-    "Odds": "1.90",
-    "Date": "2026-05-10T05:00:00+00:00"
+    "Odds": "1.87",
+    "Date": "2026-05-10T19:00:00+00:00"
   }
 ]

@@ -1,51 +1,30 @@
 [
   {
-    "League": "Bundesliga",
-    "Match": "WSG Wattens vs FC BW Linz",
-    "Tip": "Over 1.5",
-    "Odds": "1.30",
-    "Date": "2026-05-09T15:00:00+00:00"
-  },
-  {
-    "League": "Serie B",
-    "Match": "Goias vs Vila Nova",
-    "Tip": "Over 1.5",
-    "Odds": "1.44",
-    "Date": "2026-05-09T19:00:00+00:00"
-  },
-  {
-    "League": "USL Championship",
-    "Match": "Louisville City vs Pittsburgh Riverhounds",
-    "Tip": "Over 1.5",
-    "Odds": "1.27",
-    "Date": "2026-05-09T23:00:00+00:00"
-  },
-  {
-    "League": "Serie A",
-    "Match": "Bahia vs Cruzeiro",
-    "Tip": "Over 1.5",
-    "Odds": "1.31",
-    "Date": "2026-05-10T00:00:00+00:00"
-  },
-  {
-    "League": "J2/J3 League",
-    "Match": "Matsumoto Yamaga vs Fujieda MYFC",
-    "Tip": "Over 1.5",
-    "Odds": "1.31",
-    "Date": "2026-05-10T05:00:00+00:00"
-  },
-  {
-    "League": "J1 League",
-    "Match": "Nagoya Grampus vs Kyoto Sanga",
-    "Tip": "Over 1.5",
-    "Odds": "1.28",
-    "Date": "2026-05-10T07:00:00+00:00"
-  },
-  {
     "League": "Liga II",
     "Match": "Bihor Oradea vs CSA Steaua Bucureşti",
     "Tip": "Over 1.5",
     "Odds": "1.37",
     "Date": "2026-05-10T08:30:00+00:00"
+  },
+  {
+    "League": "Serie D - Girone G",
+    "Match": "Trastevere vs Albalonga",
+    "Tip": "Over 1.5",
+    "Odds": "1.30",
+    "Date": "2026-05-10T14:00:00+00:00"
+  },
+  {
+    "League": "HNL",
+    "Match": "NK Slaven Belupo vs HNK Gorica",
+    "Tip": "Over 1.5",
+    "Odds": "1.28",
+    "Date": "2026-05-10T16:15:00+00:00"
+  },
+  {
+    "League": "Serie A",
+    "Match": "Atletico-MG vs Botafogo",
+    "Tip": "Over 1.5",
+    "Odds": "1.30",
+    "Date": "2026-05-10T19:00:00+00:00"
   }
 ]
