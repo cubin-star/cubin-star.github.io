@@ -1,93 +1,58 @@
 [
   {
+    "league": "Serie A",
+    "match": "Cremonese - Pisa",
+    "kickoff": "2026-05-10T15:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.19"
+  },
+  {
+    "league": "La Liga",
+    "match": "Oviedo - Getafe",
+    "kickoff": "2026-05-10T18:30:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.47"
+  },
+  {
+    "league": "Allsvenskan",
+    "match": "Kalmar FF - Halmstad",
+    "kickoff": "2026-05-10T14:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.10"
+  },
+  {
     "league": "Super Liga",
-    "match": "Železničar Pančevo - Radnik Surdulica",
-    "kickoff": "2026-05-09T17:30:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.23"
-  },
-  {
-    "league": "Super League 1",
-    "match": "Larisa - Asteras Tripolis",
-    "kickoff": "2026-05-09T16:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.31"
-  },
-  {
-    "league": "Czech Liga",
-    "match": "Dukla Praha - Slovácko",
-    "kickoff": "2026-05-09T14:00:00+02:00",
+    "match": "Radnicki NIS - Mladost Lucani",
+    "kickoff": "2026-05-10T18:30:00+02:00",
     "tip": "Over 2.5",
     "odds": "2.15"
   },
   {
-    "league": "Super League 1",
-    "match": "Atromitos - Panetolikos",
-    "kickoff": "2026-05-09T18:30:00+02:00",
+    "league": "Liga I",
+    "match": "Dinamo Bucuresti - Arges Pitesti",
+    "kickoff": "2026-05-10T18:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.14"
-  },
-  {
-    "league": "Serie A",
-    "match": "Cagliari - Udinese",
-    "kickoff": "2026-05-09T15:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.24"
-  },
-  {
-    "league": "Allsvenskan",
-    "match": "Degerfors IF - Mjallby AIF",
-    "kickoff": "2026-05-09T15:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.12"
+    "odds": "2.25"
   },
   {
     "league": "Super League 1",
-    "match": "Panserraikos - Kifisia",
-    "kickoff": "2026-05-09T15:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.31"
-  },
-  {
-    "league": "La Liga",
-    "match": "Sevilla - Espanyol",
-    "kickoff": "2026-05-09T16:15:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.31"
-  },
-  {
-    "league": "Czech Liga",
-    "match": "Teplice - Baník Ostrava",
-    "kickoff": "2026-05-09T14:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.14"
-  },
-  {
-    "league": "League One",
-    "match": "Stevenage - Stockport County",
-    "kickoff": "2026-05-09T16:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.24"
-  },
-  {
-    "league": "1. Division",
-    "match": "AC Horsens - Hillerød",
-    "kickoff": "2026-05-09T14:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.14"
-  },
-  {
-    "league": "Championship",
-    "match": "Middlesbrough - Southampton",
-    "kickoff": "2026-05-09T13:30:00+02:00",
+    "match": "Olympiakos Piraeus - PAOK",
+    "kickoff": "2026-05-10T18:30:00+02:00",
     "tip": "Over 2.5",
     "odds": "2.11"
   },
   {
-    "league": "Ligue 2",
-    "match": "Bastia - Le Mans",
-    "kickoff": "2026-05-09T20:00:00+02:00",
+    "league": "Serie A",
+    "match": "Fiorentina - Genoa",
+    "kickoff": "2026-05-10T15:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.10"
+    "odds": "2.13"
+  },
+  {
+    "league": "Liga I",
+    "match": "FC Botosani - Petrolul Ploiesti",
+    "kickoff": "2026-05-10T15:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.20"
   }
 ]
