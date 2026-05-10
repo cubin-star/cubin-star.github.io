@@ -70,6 +70,15 @@ ASYMMETRIC_DEF_THRESHOLD = 1.35   # g/z – pokud lepší obrana je pod tímto, 
 ASYMMETRIC_DEF_GAP_MIN = 0.80     # rozdíl obran (slabší - silnější) ≥ 0.80 g/z = výrazná asymetrie
 ASYMMETRIC_P35_BONUS = 0.07       # +7 pp k MIN_P35_BY_VARIANT[tag]
 
+# === Tight-both defensive filter (NEW) ===
+# Chrání před scénáři typu Sunderland–MU 0:0 nebo Yamaga–Fujieda 0:0:
+# OBĚ obrany jsou symetricky pevné (asym filtr neaktivní, protože gap je malý),
+# ale zápas se přesto snadno zavře 0:0 / 1:0. Když min(conc) ≤ TIGHT_BOTH_MIN_MAX
+# A ZÁROVEŇ max(conc) ≤ TIGHT_BOTH_MAX_MAX (= obě obrany pevné), zvedneme min_p35.
+TIGHT_BOTH_MIN_MAX = 1.30   # lepší z obou obran je pod tímto = tight
+TIGHT_BOTH_MAX_MAX = 1.50   # i horší z obou obran je pod tímto = obě tight
+TIGHT_BOTH_P35_BONUS = 0.10 # +10 pp k MIN_P35_BY_VARIANT[tag]
+
 # League-relative ratios (mírně zostřeno proti původnímu Over 2.5 botu)
 BOTH_FLOOR_R = 0.85      # oba alespoň 85% baseline
 STRONG_MIN_R = 1.15      # "výrazný" tým 115%+ baseline (z 1.10)
@@ -524,20 +533,29 @@ def meets_criteria(pred):
     # (lepší obrana < threshold A rozdíl obran ≥ gap_min), zvedneme práh p35.
     # Chrání před scénáři typu "silnější obrana zavře zápas 1:0".
     def_min = min(h_agn, a_agn)
+    def_max = max(h_agn, a_agn)
     def_gap = abs(h_agn - a_agn)
     asym_tag = ""
     if def_min < ASYMMETRIC_DEF_THRESHOLD and def_gap >= ASYMMETRIC_DEF_GAP_MIN:
         min_p35 += ASYMMETRIC_P35_BONUS
         asym_tag = f" ASYM(def_min={def_min:.2f},gap={def_gap:.2f},+{ASYMMETRIC_P35_BONUS*100:.0f}pp)"
 
+    # Tight-both filter: obě obrany symetricky pevné → vyšší riziko 0:0 / 1:0.
+    # Aktivuje se i když asym neaktivní (typicky malý gap mezi obranami).
+    tight_tag = ""
+    if def_min <= TIGHT_BOTH_MIN_MAX and def_max <= TIGHT_BOTH_MAX_MAX:
+        min_p35 += TIGHT_BOTH_P35_BONUS
+        tight_tag = (f" TIGHT(def_min={def_min:.2f},def_max={def_max:.2f},"
+                     f"+{TIGHT_BOTH_P35_BONUS*100:.0f}pp)")
+
     if p35 < min_p35:
         return False, (f"[{tag}] p35 too low: {p35*100:.1f}% < {min_p35*100:.0f}% "
-                       f"(λ={total_avg:.2f}){asym_tag}"), 0.0
+                       f"(λ={total_avg:.2f}){asym_tag}{tight_tag}"), 0.0
 
     detail = (f"[{tag}] total={total_avg:.2f} p35={p35*100:.0f}%≥{min_p35*100:.0f}% "
               f"ready={ready_35:.2f} "
               f"| scored {h_for:.2f}/{a_for:.2f}, conceded {h_agn:.2f}/{a_agn:.2f} "
-              f"| 2H base={base_2h:.2f} (base={baseline:.2f}){asym_tag}")
+              f"| 2H base={base_2h:.2f} (base={baseline:.2f}){asym_tag}{tight_tag}")
     return True, detail, ready_35
 
 
