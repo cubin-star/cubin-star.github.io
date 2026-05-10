@@ -66,7 +66,7 @@ MIN_P35_BY_VARIANT = {
 # Příklad: Lugano (1.10 inkasuje) vs YB (2.40 inkasuje) → λ=3.55 vypadalo solidně,
 # ale Lugano zavřelo zápas 1:0. Proto: pokud min(h_agn,a_agn) < threshold,
 # zvedneme práh p35 o bonus (přísnější propuštění).
-ASYMMETRIC_DEF_THRESHOLD = 1.30   # g/z – pokud lepší obrana je pod tímto, je "tight"
+ASYMMETRIC_DEF_THRESHOLD = 1.35   # g/z – pokud lepší obrana je pod tímto, je "tight" (zvýšeno 1.30→1.35)
 ASYMMETRIC_DEF_GAP_MIN = 0.80     # rozdíl obran (slabší - silnější) ≥ 0.80 g/z = výrazná asymetrie
 ASYMMETRIC_P35_BONUS = 0.07       # +7 pp k MIN_P35_BY_VARIANT[tag]
 
@@ -75,8 +75,17 @@ BOTH_FLOOR_R = 0.85      # oba alespoň 85% baseline
 STRONG_MIN_R = 1.15      # "výrazný" tým 115%+ baseline (z 1.10)
 CONTRAST_MAX_R = 0.95    # protějšek pod 95% baseline
 MIN_BASELINE = 1.40      # zvýšeno z 1.25 → expected ~3.0+ gólů celkem
-MIN_ATTACK = 0.95        # zvýšeno z 0.80 → oba reálně střílí
+MIN_ATTACK = 1.10        # zvýšeno z 0.95 → oba musí reálně střílet (filtruje "Goias" profily)
 MIN_2H_BASELINE = 0.55   # zvýšeno z 0.45 → 2H aktivita
+
+# === Pre-match xG gate (NEW) ===
+# Pokud API /predictions vrátí očekávané góly pro oba týmy (predictions.goals.home/away
+# jsou OBA > 0), vyžadujeme součet ≥ MIN_PREMATCH_XG_TOTAL. Tím se odfiltrují případy,
+# kdy sezónní průměry vypadají dobře, ale konkrétní zápas má pre-match xG nízké
+# (typicky když outsider venku nemá šanci → 1:0 past).
+# Pokud API hodnoty nevrátí (None / 0 / nečíselné) → gate se přeskočí (fallback na
+# původní logiku bez xG).
+MIN_PREMATCH_XG_TOTAL = 2.5
 
 EXCLUDED_COUNTRIES = {
     "russia",
@@ -417,6 +426,20 @@ def meets_criteria(pred):
     if h_for == 0 and a_for == 0:
         return False, "", 0.0
 
+    # === BRÁNA 0: Pre-match xG (pokud k dispozici z /predictions) ===
+    # API-Football vrací v "predictions.goals.home/away" očekávané góly pro daný
+    # konkrétní zápas (jinak sezónní průměry mohou skrývat slabou aktuální formu).
+    # Hodnoty mohou být float, string ("1.85"), nebo None ("-"). Akceptujeme jen
+    # případ, kdy OBA jsou platná čísla > 0; jinak gate přeskočíme (fallback).
+    pg = pred.get("predictions", {}).get("goals", {}) if isinstance(pred.get("predictions"), dict) else {}
+    xg_h = _sf(pg.get("home"), default=-1.0)
+    xg_a = _sf(pg.get("away"), default=-1.0)
+    if xg_h > 0 and xg_a > 0:
+        xg_total = xg_h + xg_a
+        if xg_total < MIN_PREMATCH_XG_TOTAL:
+            return False, (f"pre-match xG too low: {xg_h:.2f}+{xg_a:.2f}={xg_total:.2f} "
+                           f"< {MIN_PREMATCH_XG_TOTAL}"), 0.0
+
     # === BRÁNA 1: Absolutní gate ===
     if h_for < MIN_ATTACK or a_for < MIN_ATTACK:
         return False, f"weak attack: {h_for:.2f}/{a_for:.2f} (min {MIN_ATTACK})", 0.0
@@ -659,7 +682,11 @@ def main():
 
     print("== SureBets Football Bot (stats-first / Over 3.5 → Over 1.5) ==")
     print(f"Time: {now.strftime('%Y-%m-%d %H:%M UTC')}")
-    print(f"Stats gate: total≥{MIN_TOTAL_AVG}, baseline≥{MIN_BASELINE}, ready_35≥{MIN_READY_35}")
+    print(f"Stats gate: total≥{MIN_TOTAL_AVG}, baseline≥{MIN_BASELINE}, "
+          f"attack≥{MIN_ATTACK}, ready_35≥{MIN_READY_35}")
+    print(f"Pre-match xG gate (when available): total ≥ {MIN_PREMATCH_XG_TOTAL}")
+    print(f"Asymmetric def: threshold={ASYMMETRIC_DEF_THRESHOLD}, "
+          f"gap≥{ASYMMETRIC_DEF_GAP_MIN}, +{ASYMMETRIC_P35_BONUS*100:.0f}pp to p35")
     print(f"P(O3.5) gate per variant: A≥{MIN_P35_BY_VARIANT['A']*100:.0f}%, "
           f"B≥{MIN_P35_BY_VARIANT['B']*100:.0f}%, C≥{MIN_P35_BY_VARIANT['C']*100:.0f}%")
     print(f"Odds gate:  Over 1.5 ≥ {MIN_ODDS_15_OUT}\n")
