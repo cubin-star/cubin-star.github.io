@@ -1,5 +1,45 @@
 [
   {
+    "sport": "football",
+    "league": "Serie A",
+    "match": "Bahia vs Cruzeiro",
+    "tip": "Over 1.5",
+    "odds": "1.31",
+    "date": "2026-05-10T00:00:00+00:00",
+    "score": "1:2",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "USL Championship",
+    "match": "Louisville City vs Pittsburgh Riverhounds",
+    "tip": "Over 1.5",
+    "odds": "1.27",
+    "date": "2026-05-09T23:00:00+00:00",
+    "score": "0:2",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "Serie B",
+    "match": "Goias vs Vila Nova",
+    "tip": "Over 1.5",
+    "odds": "1.44",
+    "date": "2026-05-09T19:00:00+00:00",
+    "score": "1:0",
+    "result": "✗"
+  },
+  {
+    "sport": "football",
+    "league": "Bundesliga",
+    "match": "WSG Wattens vs FC BW Linz",
+    "tip": "Over 1.5",
+    "odds": "1.30",
+    "date": "2026-05-09T15:00:00+00:00",
+    "score": "1:1",
+    "result": "✓"
+  },
+  {
     "sport": "basketball",
     "league": "NBA",
     "match": "Minnesota Timberwolves vs San Antonio Spurs",
