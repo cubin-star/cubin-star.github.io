@@ -51,13 +51,12 @@ MIN_READY_35 = 0.85      # kompozitní index "Over 3.5 readiness"
 # === NEW: Poissonova pravděpodobnost Over 3.5 (per varianta) ===
 # expected total (λ) → P(Over 3.5) přes nezávislé Poisson rozdělení.
 # Diferenciace podle profilu zápasu:
-#   B = oba útočí (strukturálně nejlepší pro Over 3.5) → volnější
-#   A = jeden silný útok + děravé obrany → default
-#   C = "open shootout" symetrie → přísnější (často klouže k 0:0)
+#   A = jeden silný útok + děravé obrany → výchozí
+#   B = oba útočí + jedna obrana děravější (asymetrie v obraně)
+# (Variant C "open shootout" byl odstraněn – v praxi propadal.)
 MIN_P35_BY_VARIANT = {
     "A": 0.30,
     "B": 0.30,
-    "C": 0.30,
 }
 
 # === Asymetrický defenzivní filtr (chrání před "1:0 pastmi") ===
@@ -468,6 +467,9 @@ def meets_criteria(pred):
         return False, f"baseline too low: {baseline:.2f} < {MIN_BASELINE}", 0.0
 
     # === BRÁNA 2: Profilový kontrast (Variant A/B) ===
+    # Pozn.: Variant C ("open shootout" – oba útočí i inkasují, bez kontrastu) byl
+    # odstraněn z výběru, protože v praxi propadal (často Under 1.5). Necháváme jen
+    # asymetrické profily A (silný útok vs děravá obrana) a B (silná obrana vs slabá obrana).
     both_floor = baseline * BOTH_FLOOR_R
     strong_min = baseline * STRONG_MIN_R
     contrast_max = baseline * CONTRAST_MAX_R
@@ -482,14 +484,8 @@ def meets_criteria(pred):
         and ((h_agn >= strong_min and a_agn < contrast_max)
              or (a_agn >= strong_min and h_agn < contrast_max))
     )
-    # Variant C (NEW): "open shootout" – oba dost útočí I dost inkasují
-    # → nepotřebuje kontrast, stačí že obě strany jsou nad floor v obou metrikách
-    variant_c = (
-        h_for >= both_floor and a_for >= both_floor
-        and h_agn >= both_floor and a_agn >= both_floor
-    )
 
-    if not (variant_a or variant_b or variant_c):
+    if not (variant_a or variant_b):
         return False, (f"profile fail: scored {h_for:.2f}/{a_for:.2f}, "
                        f"conceded {h_agn:.2f}/{a_agn:.2f} (base={baseline:.2f})"), 0.0
 
@@ -523,7 +519,7 @@ def meets_criteria(pred):
     if ready_35 < MIN_READY_35:
         return False, f"ready_35 too low: {ready_35:.2f} < {MIN_READY_35}", 0.0
 
-    tag = "A" if variant_a else ("B" if variant_b else "C")
+    tag = "A" if variant_a else "B"
 
     # === BRÁNA 5: Poissonova P(Over 3.5) – diferenciovaná podle varianty ===
     p35 = poisson_p_over(total_avg, 3.5)
@@ -706,7 +702,7 @@ def main():
     print(f"Asymmetric def: threshold={ASYMMETRIC_DEF_THRESHOLD}, "
           f"gap≥{ASYMMETRIC_DEF_GAP_MIN}, +{ASYMMETRIC_P35_BONUS*100:.0f}pp to p35")
     print(f"P(O3.5) gate per variant: A≥{MIN_P35_BY_VARIANT['A']*100:.0f}%, "
-          f"B≥{MIN_P35_BY_VARIANT['B']*100:.0f}%, C≥{MIN_P35_BY_VARIANT['C']*100:.0f}%")
+          f"B≥{MIN_P35_BY_VARIANT['B']*100:.0f}%")
     print(f"Odds gate:  Over 1.5 ≥ {MIN_ODDS_15_OUT}\n")
 
     # 1. Fixtures
