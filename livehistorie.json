@@ -1,5 +1,21 @@
 [
   {
+    "league": "BBL",
+    "homeTeam": "Trier",
+    "awayTeam": "Syntainics MBC",
+    "tip": "Over 163.5 (preLine 186.5)",
+    "odds": "",
+    "halftimeScore": "35:42 (77 pts)",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "basketball",
+    "kickoff": "2026-05-10T14:30:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-basketball",
+    "scoutStats": "Score: 5/10 | HT: 35:42 (77 pts) | Q1=39 Q2=38 (line 186.5, pace 83%) | PreLine: 186.5 | Proj: 167 | BBL"
+  },
+  {
     "league": "Indian Super League",
     "homeTeam": "Jamshedpur",
     "awayTeam": "Bengaluru",
