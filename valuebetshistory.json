@@ -1,5 +1,35 @@
 [
   {
+    "League": "Serie A",
+    "Match": "Atletico-MG vs Botafogo",
+    "Tip": "Over 2.5",
+    "Odds": "1.87",
+    "Date": "2026-05-10T19:00:00+00:00",
+    "FixtureId": 1492250,
+    "Result": "KO",
+    "Score": "1:1"
+  },
+  {
+    "League": "First League",
+    "Match": "Makedonija GjP vs Tikve\u0161",
+    "Tip": "Over 2.5",
+    "Odds": "1.75",
+    "Date": "2026-05-10T14:00:00+00:00",
+    "FixtureId": 1531736,
+    "Result": "OK",
+    "Score": "1:4"
+  },
+  {
+    "League": "Super League 1",
+    "Match": "Volos NFC vs Levadiakos",
+    "Tip": "Over 2.5",
+    "Odds": "1.57",
+    "Date": "2026-05-10T14:00:00+00:00",
+    "FixtureId": 1537116,
+    "Result": "OK",
+    "Score": "0:3"
+  },
+  {
     "League": "USL Championship",
     "Match": "Louisville City vs Pittsburgh Riverhounds",
     "Tip": "Over 2.5",
