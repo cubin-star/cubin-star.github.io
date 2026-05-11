@@ -2,6 +2,76 @@
   {
     "sport": "football",
     "league": "Serie A",
+    "match": "Atletico-MG vs Botafogo",
+    "tip": "Over 1.5",
+    "odds": "1.30",
+    "date": "2026-05-10T19:00:00+00:00",
+    "score": "1:1",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "HNL",
+    "match": "NK Slaven Belupo vs HNK Gorica",
+    "tip": "Over 1.5",
+    "odds": "1.28",
+    "date": "2026-05-10T16:15:00+00:00",
+    "score": "1:0",
+    "result": "✗"
+  },
+  {
+    "sport": "football",
+    "league": "First League",
+    "match": "Makedonija GjP vs Tikveš",
+    "tip": "Over 1.5",
+    "odds": "1.25",
+    "date": "2026-05-10T14:00:00+00:00",
+    "score": "1:4",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "Serie D - Girone G",
+    "match": "Trastevere vs Albalonga",
+    "tip": "Over 1.5",
+    "odds": "1.30",
+    "date": "2026-05-10T14:00:00+00:00",
+    "score": "2:0",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "Liga II",
+    "match": "Bihor Oradea vs CSA Steaua Bucureşti",
+    "tip": "Over 1.5",
+    "odds": "1.37",
+    "date": "2026-05-10T08:30:00+00:00",
+    "score": "3:3",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "J1 League",
+    "match": "Nagoya Grampus vs Kyoto Sanga",
+    "tip": "Over 1.5",
+    "odds": "1.28",
+    "date": "2026-05-10T07:00:00+00:00",
+    "score": "3:0",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "J2/J3 League",
+    "match": "Matsumoto Yamaga vs Fujieda MYFC",
+    "tip": "Over 1.5",
+    "odds": "1.31",
+    "date": "2026-05-10T05:00:00+00:00",
+    "score": "0:0",
+    "result": "✗"
+  },
+  {
+    "sport": "football",
+    "league": "Serie A",
     "match": "Bahia vs Cruzeiro",
     "tip": "Over 1.5",
     "odds": "1.31",
