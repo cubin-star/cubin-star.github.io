@@ -1,5 +1,20 @@
 [
   {
+    "league": "Liga Leumit",
+    "homeTeam": "Maccabi Petah Tikva",
+    "awayTeam": "Hapoel Rishon LeZion",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "1:0 (66')",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "kickoff": "2026-05-11T16:00:00.000Z",
+    "resolvedAt": "",
+    "source": "tipper-football",
+    "scoutStats": "Liga Leumit | 66' 1:0 → need 1 more"
+  },
+  {
     "league": "Serie A",
     "homeTeam": "Vasco DA Gama",
     "awayTeam": "Atletico Paranaense",
