@@ -11,16 +11,6 @@
   },
   {
     "sport": "football",
-    "league": "HNL",
-    "match": "NK Slaven Belupo vs HNK Gorica",
-    "tip": "Over 1.5",
-    "odds": "1.28",
-    "date": "2026-05-10T16:15:00+00:00",
-    "score": "1:0",
-    "result": "✗"
-  },
-  {
-    "sport": "football",
     "league": "First League",
     "match": "Makedonija GjP vs Tikveš",
     "tip": "Over 1.5",
@@ -61,16 +51,6 @@
   },
   {
     "sport": "football",
-    "league": "J2/J3 League",
-    "match": "Matsumoto Yamaga vs Fujieda MYFC",
-    "tip": "Over 1.5",
-    "odds": "1.31",
-    "date": "2026-05-10T05:00:00+00:00",
-    "score": "0:0",
-    "result": "✗"
-  },
-  {
-    "sport": "football",
     "league": "Serie A",
     "match": "Bahia vs Cruzeiro",
     "tip": "Over 1.5",
@@ -91,16 +71,6 @@
   },
   {
     "sport": "football",
-    "league": "Serie B",
-    "match": "Goias vs Vila Nova",
-    "tip": "Over 1.5",
-    "odds": "1.44",
-    "date": "2026-05-09T19:00:00+00:00",
-    "score": "1:0",
-    "result": "✗"
-  },
-  {
-    "sport": "football",
     "league": "Bundesliga",
     "match": "WSG Wattens vs FC BW Linz",
     "tip": "Over 1.5",
@@ -118,16 +88,6 @@
     "date": "2026-05-09T01:30:00+00:00",
     "score": "108:115",
     "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Eliteserien",
-    "match": "Ham-Kam vs Valerenga",
-    "tip": "Over 1.5",
-    "odds": "1.18",
-    "date": "2026-05-08T17:00:00+00:00",
-    "score": "1:0",
-    "result": "✗"
   },
   {
     "sport": "football",
