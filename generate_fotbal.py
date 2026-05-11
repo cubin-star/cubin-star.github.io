@@ -98,10 +98,6 @@ MIN_PREMATCH_XG_TOTAL = 2.5
 EXCLUDED_COUNTRIES = {
     "russia",
     "belarus",
-    "japan",
-    "south-korea",
-    "south korea",
-    "korea republic",
 }
 
 # League blacklist – exact league names from API
@@ -127,7 +123,7 @@ def is_excluded_fixture(fix):
     """Centrální filtr – platí pro VŠECHNY výstupní JSONy (fotbals/live/live2/tips).
 
     Blokuje:
-      - země v EXCLUDED_COUNTRIES (Rusko, Bělorusko, Japonsko, Jižní Korea)
+      - země v EXCLUDED_COUNTRIES (Rusko, Bělorusko)
       - ligy v EXCLUDED_LEAGUES (přesný název)
       - všechny ženské soutěže (název obsahuje výraz z EXCLUDED_LEAGUE_SUBSTRINGS)
     """
@@ -175,6 +171,8 @@ TIPS_FB_TOP_LEAGUE_IDS = {
     128,  # Liga Profesional (Argentina)
     253,  # MLS (USA)
     262,  # Liga MX (Mexico)
+    98,   # J1 League (Japan)
+    292,  # K League 1 (South Korea)
     188,  # A-League (Australia)
     2,    # UEFA Champions League
     3,    # UEFA Europa League
@@ -203,6 +201,8 @@ TIPS_FB_SECOND_TIER_LEAGUE_IDS = {
     129,  # Primera Nacional (Argentina)
     254,  # USL Championship (USA)
     263,  # Liga de Expansión MX (Mexico)
+    99,   # J2 League (Japan)
+    293,  # K League 2 (South Korea)
 }
 
 # Country-specific whitelist
