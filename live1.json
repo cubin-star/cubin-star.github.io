@@ -1,23 +1,44 @@
 [
   {
-    "league": "Primeira Liga",
-    "match": "Tondela - Moreirense",
-    "kickoff": "2026-05-11T21:15:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.15"
-  },
-  {
-    "league": "Primeira Liga",
-    "match": "Santa Clara - Nacional",
-    "kickoff": "2026-05-11T21:15:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.12"
-  },
-  {
-    "league": "Ekstraklasa",
-    "match": "Cracovia Krakow - Radomiak Radom",
-    "kickoff": "2026-05-11T19:00:00+02:00",
+    "league": "Super League 1",
+    "match": "Kifisia - Atromitos",
+    "kickoff": "2026-05-12T18:00:00+02:00",
     "tip": "Over 2.5",
     "odds": "2.11"
+  },
+  {
+    "league": "Super League 1",
+    "match": "Asteras Tripolis - Panserraikos",
+    "kickoff": "2026-05-12T18:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.18"
+  },
+  {
+    "league": "Super League 1",
+    "match": "Panetolikos - Larisa",
+    "kickoff": "2026-05-12T18:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.22"
+  },
+  {
+    "league": "Czech Liga",
+    "match": "Zlin - Teplice",
+    "kickoff": "2026-05-12T17:30:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.37"
+  },
+  {
+    "league": "Serie B",
+    "match": "Modena - Juve Stabia",
+    "kickoff": "2026-05-12T18:45:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.26"
+  },
+  {
+    "league": "Serie B",
+    "match": "Catanzaro - Avellino",
+    "kickoff": "2026-05-12T21:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.15"
   }
 ]
