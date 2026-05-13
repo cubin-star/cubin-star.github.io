@@ -679,6 +679,100 @@ def pick_random_top_league_tips(all_fixtures, exclude_keys, exclude_leagues, nee
     return picked
 
 
+# === FALLBACK pro fotbals.json: random Over 1.5 z TOP/2nd-tier lig ===
+# Spouští se POUZE když po všech filtrech není ve fotbals.json žádný zápas.
+# Cíl: zapsat 2 zápasy s reálným kurzem Over 1.5 v rozumném pásmu okolo 1.25.
+FOTBALS_FB_TARGET_O15 = 1.25
+FOTBALS_FB_O15_MIN = 1.18   # tolerance dolů
+FOTBALS_FB_O15_MAX = 1.35   # tolerance nahoru
+FOTBALS_FB_NEED = 2
+FOTBALS_FB_MAX_ATTEMPTS = 30
+
+
+def pick_random_fotbals_fallback(all_fixtures, need=FOTBALS_FB_NEED):
+    """Záchranný fallback PRO fotbals.json (volat jen když je seznam prázdný).
+
+    Vybere ``need`` zápasů z TOP / 2nd-tier lig (24h okno, prošlé centrálním
+    filtrem ``is_excluded_fixture``) s reálným kurzem Over 1.5 v rozsahu
+    ``FOTBALS_FB_O15_MIN..FOTBALS_FB_O15_MAX``. Vrací list dictů ve stejném
+    tvaru jako standardní fotbals záznamy.
+    """
+    if need <= 0 or not all_fixtures:
+        return []
+
+    now2 = datetime.now(timezone.utc)
+    cutoff = now2 + timedelta(hours=24)
+
+    top_candidates = []
+    second_candidates = []
+    for fid, fix in all_fixtures.items():
+        lid = fix.get("league_id")
+        if lid in TIPS_FB_TOP_LEAGUE_IDS:
+            tier = 1
+        elif lid in TIPS_FB_SECOND_TIER_LEAGUE_IDS:
+            tier = 2
+        else:
+            continue
+        if is_excluded_fixture(fix):
+            continue
+        kickoff_str = fix.get("kickoff", "")
+        if kickoff_str:
+            try:
+                kdt = datetime.fromisoformat(kickoff_str.replace("Z", "+00:00"))
+                if kdt < now2 or kdt > cutoff:
+                    continue
+            except ValueError:
+                pass
+        (top_candidates if tier == 1 else second_candidates).append((fid, fix))
+
+    if not top_candidates and not second_candidates:
+        print("  Fotbals fallback: no fixtures in TOP / 2nd-tier leagues for next 24h")
+        return []
+
+    random.shuffle(top_candidates)
+    random.shuffle(second_candidates)
+    candidates = top_candidates + second_candidates
+    print(f"  Fotbals fallback: trying random Over 1.5 from "
+          f"{len(top_candidates)} TOP + {len(second_candidates)} 2nd-tier fixtures "
+          f"(odds {FOTBALS_FB_O15_MIN}-{FOTBALS_FB_O15_MAX}, need={need}, "
+          f"max_attempts={FOTBALS_FB_MAX_ATTEMPTS})...")
+
+    picked = []
+    used_leagues = set()
+    attempts = 0
+    for fid, fix in candidates:
+        if len(picked) >= need:
+            break
+        if attempts >= FOTBALS_FB_MAX_ATTEMPTS:
+            break
+        attempts += 1
+        league_name = fix.get("league", "?")
+        if league_name in used_leagues:
+            continue
+        date_part = fix.get("kickoff", today_str())[:10]
+        items = fetch_league_odds(fix["league_id"], fix["season"], date_part)
+        odds_map = compute_odds_for_fixtures(items, {fid})
+        o15 = odds_map.get(fid, {}).get("o15")
+        match_str = f"{fix.get('home', '?')} vs {fix.get('away', '?')}"
+        if o15 is None:
+            print(f"    - {match_str[:50]}: no Over 1.5 odds")
+            continue
+        if not (FOTBALS_FB_O15_MIN <= o15 <= FOTBALS_FB_O15_MAX):
+            print(f"    - {match_str[:50]}: O1.5={o15:.2f} mimo rozsah")
+            continue
+        print(f"    \u2713 {match_str[:50]}: O1.5={o15:.2f} ({league_name})")
+        picked.append({
+            "League": league_name,
+            "Match": match_str,
+            "Tip": "Over 1.5",
+            "Odds": f"{o15:.2f}",
+            "Date": fix.get("kickoff", ""),
+        })
+        used_leagues.add(league_name)
+
+    return picked
+
+
 def today_str():
     return datetime.now(timezone.utc).strftime("%Y-%m-%d")
 
@@ -926,6 +1020,14 @@ def main():
             continue
         fotbals_filtered.append(r)
     fotbals_out = [{k: v for k, v in r.items() if not k.startswith("_")} for r in fotbals_filtered]
+
+    # 7b. FOTBALS FALLBACK: pokud po všech filtrech není ani jeden zápas,
+    #     doplň 2 random Over 1.5 zápasy z TOP/2nd-tier lig (kurz ~1.25).
+    if not fotbals_out:
+        print(f"\n  ⚠ fotbals.json prázdný – spouštím fallback "
+              f"(target O1.5 ≈ {FOTBALS_FB_TARGET_O15})")
+        fotbals_out = pick_random_fotbals_fallback(all_fixtures, FOTBALS_FB_NEED)
+
     with open(OUTPUT, "w", encoding="utf-8") as f:
         json.dump(fotbals_out, f, indent=2, ensure_ascii=False)
 
@@ -1013,7 +1115,7 @@ def main():
         json.dump(tips, f, indent=2, ensure_ascii=False)
 
     print(f"\n{'='*50}")
-    print(f"  Results: {len(deduped)} match(es) → {OUTPUT}")
+    print(f"  Results: {len(fotbals_out)} match(es) → {OUTPUT}")
     print(f"  Live:    {len(live_out)} match(es) → {OUTPUT_LIVE}")
     print(f"  Live2:   {len(live2_out)} match(es) → {OUTPUT_LIVE2}")
     print(f"  Tips:    {len(tips)} match(es) → {OUTPUT_TIPS}")
