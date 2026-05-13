@@ -1,5 +1,20 @@
 [
   {
+    "league": "OFC Pro League",
+    "homeTeam": "Tahiti United",
+    "awayTeam": "Vanuatu United",
+    "tip": "Over 3.5",
+    "odds": "",
+    "halftimeScore": "1:2",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "kickoff": "2026-05-13T07:00:00.000Z",
+    "resolvedAt": "",
+    "source": "tipper-football",
+    "scoutStats": "OFC Pro League | 69' 1:2 → need 1 more"
+  },
+  {
     "league": "Cup",
     "homeTeam": "Al Hussein",
     "awayTeam": "Al Wihdat",
