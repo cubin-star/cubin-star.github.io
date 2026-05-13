@@ -1,23 +1,23 @@
 [
   {
-    "league": "Prva Liga",
-    "match": "FAP - Kabel Novi Sad",
-    "kickoff": "2026-05-12T17:00:00+02:00",
+    "league": "Premier League",
+    "match": "Kudrivka - Ruh Lviv",
+    "kickoff": "2026-05-13T12:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.40"
+    "odds": "2.21"
   },
   {
-    "league": "Czech Liga",
-    "match": "Zlin - Teplice",
-    "kickoff": "2026-05-12T17:30:00+02:00",
+    "league": "Cupa României",
+    "match": "Universitatea Cluj - Universitatea Craiova",
+    "kickoff": "2026-05-13T19:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.37"
+    "odds": "2.18"
   },
   {
-    "league": "Serie B",
-    "match": "Modena - Juve Stabia",
-    "kickoff": "2026-05-12T18:45:00+02:00",
+    "league": "La Liga",
+    "match": "Espanyol - Athletic Club",
+    "kickoff": "2026-05-13T19:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.26"
+    "odds": "2.17"
   }
 ]
