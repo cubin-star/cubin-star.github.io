@@ -55,9 +55,9 @@ MIN_EDGE_BY_REGION = {
 
 # Value-gate na výstupní linii: nejnižší dostupná Over linie s průměrným kurzem
 # napříč bookmakery >= MIN_ODDS_OUT bude vystupovat.
-# Zvýšeno z 1.20 → 1.30: kurzy ≤ 1.28 (např. Leuven-Zwolle 148.5@1.28 = 130 fakt.)
-# představují příliš malý value cushion vůči naší edge přesnosti (~±10 bodů).
-MIN_ODDS_OUT = 1.30
+# 1.30 bylo příliš přísné – většina value Over linií leží 1.22–1.28 a propadala.
+# Vracíme na 1.25 jako kompromis (cca 80 % implied prob., dost cushion).
+MIN_ODDS_OUT = 1.25
 
 # Klíčová slova pro detekci NBA (kvůli regionu prahů a TFM logice)
 NBA_KEYWORDS = ("nba",)
@@ -78,9 +78,9 @@ RECENT_N = 10               # rolling window: last N finished games
 RECENT_FLOOR_R = 0.97       # rolling avg total of last N games >= 97% of selection_line
 MIN_OVER_HIT_RATE = 0.60    # >= 60% of last N games had total >= safe_line (each team)
 MAX_TOTAL_SD = 22.0         # max std dev of game totals – uvolněno z 20 (evro ligy mají vyšší)
-MIN_TOTAL_SD = 13.0         # NOVÉ: min SD obou týmů – pod 13 = extrémně defenzivní/pomalý
-                            # tým, který "drží" zápas pod linií (Zwolle SD=11 → 130 v 148.5).
-                            # Beijing-Guangdong měli SD 18/21 = zdravá variabilita.
+MIN_TOTAL_SD = 11.0         # min SD obou týmů – pod 11 = extrémně defenzivní/pomalý
+                            # tým, který "drží" zápas pod linií. Sníženo z 13 (vyřazovalo
+                            # disciplinované týmy s normální variabilitou ~11–12).
 H2H_MIN_GAMES = 2           # min H2H finished games to apply H2H filter
 H2H_OVER_R = 0.92           # H2H avg total >= 92% of selection_line
 MIN_REST_HOURS = 0           # 0 = vypnuto (back-to-back filtr deaktivován)
@@ -113,7 +113,9 @@ MAX_TIPS_PER_DAY = 3     # globální limit – nejlepších N podle skóre (kva
 # H2H jako TVRDÝ filtr (ne jen bonus) – při dostatečném vzorku H2H
 # Pokud H2H avg < HARD_FAIL_R × selection_line a n >= MIN_N → automatický fail
 # Důvod: bookmaker už ví o specifickém matchupu víc než naše recent form
-H2H_HARD_FAIL_R = 0.96       # H2H avg pod 96 % selection_line = past
+# Sníženo z 0.96 → 0.92: bookmaker linie je často 4–5 % nad H2H průměrem (běžný
+# market noise) a 0.96 vyřazoval i jasné edge zápasy v NBA.
+H2H_HARD_FAIL_R = 0.92       # H2H avg pod 92 % selection_line = past
 H2H_HARD_FAIL_MIN_N = 10     # min počet H2H pro hard fail (statistická významnost)
 
 # H2H minimální vzorek pro spolehlivý průměr – při n < tomto se H2H avg
@@ -121,7 +123,9 @@ H2H_HARD_FAIL_MIN_N = 10     # min počet H2H pro hard fail (statistická význa
 # bezcenný. Leuven-Zwolle měli H2H=157 z n=5 (bookmaker 159 - prošlo H2H_OVER_R=0.92,
 # ale realita 130). Beijing-Guangdong měli n=52 → spolehlivé.
 H2H_RELIABLE_MIN_N = 10      # nad tímto vzorkem platí standardní H2H_OVER_R práh
-H2H_SMALL_SAMPLE_R = 1.00    # při n < H2H_RELIABLE_MIN_N: H2H avg >= 100 % selection_line
+# Při malém vzorku byl práh 1.00 příliš tvrdý – vyřazoval skoro všechny EU ligy,
+# kde se týmy potkávají 2× za sezónu a n bývá 4–6. 0.95 je rozumný kompromis.
+H2H_SMALL_SAMPLE_R = 0.95    # při n < H2H_RELIABLE_MIN_N: H2H avg >= 95 % selection_line
 
 # Playoff / play-in detekce – taktičtější zápasy mívají nižší totaly
 # Pokud název ligy obsahuje některý keyword, přidej rezervu na expected_min_r
@@ -131,7 +135,8 @@ PLAYOFF_EXPECTED_BONUS = 0.05  # +5 % rezerva na expected vs. line v playoff
 
 # Recent form rozdíl mezi týmy – velký rozdíl = různé tempo, neslučitelné styly
 # (jeden tým hraje 180, druhý 160 → průměr 170 je často chimér)
-MAX_FORM_GAP = 12.0          # |h_avg - a_avg| > 12 → fail (různé tempo)
+# 12 bylo moc přísné (NBA běžně útočný vs. defenzivní = 13–16 gap).
+MAX_FORM_GAP = 18.0          # |h_avg - a_avg| > 18 → fail (různé tempo)
 
 request_count = 0
 
