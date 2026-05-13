@@ -1,24 +1,24 @@
 [
   {
-    "League": "La Liga",
-    "Match": "Osasuna vs Atletico Madrid",
+    "League": "Türkiye Kupası",
+    "Match": "Gençlerbirliği S.K. vs Trabzonspor",
     "Tip": "Over 2.5",
-    "Odds": "1.89",
-    "Date": "2026-05-12T19:30:00+00:00"
+    "Odds": "1.88",
+    "Date": "2026-05-13T17:30:00+00:00"
   },
   {
-    "League": "Premiership",
-    "Match": "Aberdeen vs ST Mirren",
+    "League": "La Liga",
+    "Match": "Villarreal vs Sevilla",
     "Tip": "Over 2.5",
-    "Odds": "1.94",
-    "Date": "2026-05-12T18:45:00+00:00"
+    "Odds": "1.91",
+    "Date": "2026-05-13T17:00:00+00:00"
   },
   {
     "League": "Ligue 1",
-    "Match": "RED Star FC 93 vs Rodez",
+    "Match": "Stade Brestois 29 vs Strasbourg",
     "Tip": "Over 2.5",
-    "Odds": "1.87",
-    "Date": "2026-05-12T18:30:00+00:00",
+    "Odds": "1.84",
+    "Date": "2026-05-13T17:00:00+00:00",
     "locked": true
   }
 ]
