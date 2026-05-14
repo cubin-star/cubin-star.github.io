@@ -7,10 +7,10 @@
     "odds": "",
     "halftimeScore": "0:1",
     "liveOdds": "",
-    "finalScore": "",
-    "result": "",
+    "finalScore": "0:1",
+    "result": "❌ Lost",
     "kickoff": "2026-05-14T12:00:00.000Z",
-    "resolvedAt": "",
+    "resolvedAt": "2026-05-14T13:56:05.010Z",
     "source": "tipper-football",
     "scoutStats": "Division 2 - Västra Götaland | 53' 0:1 → need 2 more"
   },
