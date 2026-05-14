@@ -1,5 +1,15 @@
 [
   {
+    "League": "Super League 1",
+    "Match": "Levadiakos vs OFI",
+    "Tip": "Over 2.5",
+    "Odds": "1.54",
+    "Date": "2026-05-13T14:00:00+00:00",
+    "FixtureId": 1537117,
+    "Result": "OK",
+    "Score": "3:2"
+  },
+  {
     "League": "Serie A",
     "Match": "Atletico-MG vs Botafogo",
     "Tip": "Over 2.5",
