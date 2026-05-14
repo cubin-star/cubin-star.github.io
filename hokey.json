@@ -1,1 +1,14 @@
-[]
+[
+  {
+    "league": "ECHL",
+    "match": "Fort Wayne Komets vs Toledo Walleye",
+    "tip": "Over 5.5",
+    "odds": "2.04"
+  },
+  {
+    "league": "AHL",
+    "match": "Cleveland Monsters vs Toronto Marlies",
+    "tip": "Over 5.5",
+    "odds": "1.85"
+  }
+]
