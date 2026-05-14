@@ -1,24 +1,24 @@
 [
   {
-    "League": "Türkiye Kupası",
-    "Match": "Gençlerbirliği S.K. vs Trabzonspor",
-    "Tip": "Over 2.5",
-    "Odds": "1.88",
-    "Date": "2026-05-13T17:30:00+00:00"
-  },
-  {
     "League": "La Liga",
-    "Match": "Villarreal vs Sevilla",
+    "Match": "Girona vs Real Sociedad",
     "Tip": "Over 2.5",
-    "Odds": "1.91",
-    "Date": "2026-05-13T17:00:00+00:00"
+    "Odds": "1.81",
+    "Date": "2026-05-14T18:00:00+00:00"
   },
   {
-    "League": "Ligue 1",
-    "Match": "Stade Brestois 29 vs Strasbourg",
+    "League": "Cup",
+    "Match": "Union St. Gilloise vs Anderlecht",
     "Tip": "Over 2.5",
-    "Odds": "1.84",
-    "Date": "2026-05-13T17:00:00+00:00",
+    "Odds": "1.93",
+    "Date": "2026-05-14T13:00:00+00:00"
+  },
+  {
+    "League": "DBU Pokalen",
+    "Match": "FC Copenhagen vs FC Midtjylland",
+    "Tip": "Over 2.5",
+    "Odds": "1.92",
+    "Date": "2026-05-14T15:00:00+00:00",
     "locked": true
   }
 ]
