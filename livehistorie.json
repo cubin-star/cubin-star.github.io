@@ -1,5 +1,21 @@
 [
   {
+    "league": "CIBACOPA",
+    "homeTeam": "Venados de Mazatlan",
+    "awayTeam": "Toros Laguna",
+    "tip": "Over 188.5",
+    "odds": "",
+    "halftimeScore": "54:54",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "kickoff": "2026-05-14T03:15:00.000Z",
+    "resolvedAt": "",
+    "source": "tipper-basketball",
+    "sport": "basketball",
+    "scoutStats": "CIBACOPA | Q3 HT=108 | preLine=188.25 | projected=196.6"
+  },
+  {
     "league": "GFA League",
     "homeTeam": "Medina United",
     "awayTeam": "Fortune",
