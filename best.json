@@ -1,23 +1,23 @@
 [
   {
+    "league": "Division Intermedia",
+    "match": "Fernando De La Mora - Independiente F.b.c.",
+    "kickoff": "2026-05-15T00:30:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.35"
+  },
+  {
     "league": "Premier League",
     "match": "Kudrivka - Ruh Lviv",
-    "kickoff": "2026-05-13T12:00:00+02:00",
+    "kickoff": "2026-05-14T12:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.21"
+    "odds": "2.24"
   },
   {
-    "league": "Cupa României",
-    "match": "Universitatea Cluj - Universitatea Craiova",
-    "kickoff": "2026-05-13T19:00:00+02:00",
+    "league": "1. Division",
+    "match": "Hobro - Aarhus Fremad",
+    "kickoff": "2026-05-14T13:00:00+02:00",
     "tip": "Over 2.5",
     "odds": "2.18"
-  },
-  {
-    "league": "La Liga",
-    "match": "Espanyol - Athletic Club",
-    "kickoff": "2026-05-13T19:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.17"
   }
 ]
