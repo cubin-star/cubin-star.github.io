@@ -1228,13 +1228,10 @@ def main():
 
     print(f"\n  Stats-qualified: {len(qualified)} matches\n")
 
-    if not qualified:
-        print("No stats-qualified matches.")
-        with open(OUTPUT, "w", encoding="utf-8") as f:
-            json.dump([], f)
-        with open(OUTPUT_LIVE, "w", encoding="utf-8") as f:
-            json.dump([], f)
-        return
+    # POZN: dříve zde byl early return při qualified==0, který blokoval
+    # spuštění baskets/hokejs fallbacku (hod korunou). Teď necháme tok
+    # pokračovat – pokud je qualified prázdný, smyčka níže nic neudělá,
+    # liveh.json se zapíše jako [] a níže se vyhodnotí coin-toss fallback.
 
     # 4. ODDS-SECOND: stáhni kurzy jen pro kvalifikované, zkontroluj value-gate
     results = []
