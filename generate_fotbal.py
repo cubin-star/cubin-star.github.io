@@ -1022,11 +1022,13 @@ def main():
     fotbals_out = [{k: v for k, v in r.items() if not k.startswith("_")} for r in fotbals_filtered]
 
     # 7b. FOTBALS FALLBACK: pokud po všech filtrech není ani jeden zápas,
-    #     doplň 2 random Over 1.5 zápasy z TOP/2nd-tier lig (kurz ~1.25).
+    #     "hod si korunou" – přidej 1 nebo 2 random Over 1.5 zápasy (max 2)
+    #     z TOP/2nd-tier lig (kurz ~1.25).
     if not fotbals_out:
-        print(f"\n  ⚠ fotbals.json prázdný – spouštím fallback "
+        coin = random.choice([1, 2])
+        print(f"\n  ⚠ fotbals.json prázdný – hod korunou: need={coin} "
               f"(target O1.5 ≈ {FOTBALS_FB_TARGET_O15})")
-        fotbals_out = pick_random_fotbals_fallback(all_fixtures, FOTBALS_FB_NEED)
+        fotbals_out = pick_random_fotbals_fallback(all_fixtures, coin)
 
     with open(OUTPUT, "w", encoding="utf-8") as f:
         json.dump(fotbals_out, f, indent=2, ensure_ascii=False)
