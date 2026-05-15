@@ -1,5 +1,21 @@
 [
   {
+    "league": "World Championship",
+    "homeTeam": "Canada",
+    "awayTeam": "Sweden",
+    "tip": "Over 5.5",
+    "odds": "",
+    "halftimeScore": "2:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "kickoff": "2026-05-15T14:20:00.000Z",
+    "resolvedAt": "",
+    "source": "tipper-hockey",
+    "sport": "hockey",
+    "scoutStats": "World Championship | P2 3:2 → need 1 more"
+  },
+  {
     "league": "Western Australia State League 1",
     "homeTeam": "Curtin University",
     "awayTeam": "Murdoch Melville",
