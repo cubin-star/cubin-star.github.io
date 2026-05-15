@@ -1147,12 +1147,10 @@ def main():
 
     print(f"\n  Stats-qualified: {len(qualified)} of {len(filtered)} games\n")
 
-    if not qualified:
-        with open(OUTPUT, "w", encoding="utf-8") as f:
-            json.dump([], f)
-        with open(OUTPUT_LIVE, "w", encoding="utf-8") as f:
-            json.dump([], f)
-        return
+    # POZN: dříve zde byl early return při qualified==0, který blokoval
+    # spuštění baskets fallbacku (hod korunou). Teď necháme tok pokračovat –
+    # pokud je qualified prázdný, smyčka níže nic neudělá, liveb.json se
+    # zapíše jako [] a níže se vyhodnotí coin-toss fallback (0/1 zápas).
 
     # 4. ODDS + EDGE GATE: pro každý kvalifikovaný zápas najdi main line + edge
     results = []
