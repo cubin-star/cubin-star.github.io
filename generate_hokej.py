@@ -24,6 +24,7 @@ SETUP:
 import json
 import math
 import os
+import random
 import time
 import urllib.request
 from datetime import datetime, timedelta, timezone
@@ -1006,6 +1007,71 @@ def build_stats_from_games(games, team_id):
     }
 
 
+# === FALLBACK pro hokejs.json: random Over 3.5 ===
+# Spouští se POUZE když po všech filtrech není ve hokejs.json žádný zápas.
+# "Hod korunou" (coin toss) rozhodne, jestli se přidá 1 nebo 2 zápasy (max 2).
+HOKEJS_FB_TARGET_OUT = 1.25
+HOKEJS_FB_OUT_MIN = 1.18
+HOKEJS_FB_OUT_MAX = 1.35
+HOKEJS_FB_OUT_LINE = 3.5  # cílová Over linie pro fallback (EU/NAT default)
+HOKEJS_FB_MAX_ATTEMPTS = 25
+
+
+def pick_random_hokej_fallback(filtered_games, need):
+    """Záchranný fallback PRO hokejs.json (volat jen když je seznam prázdný).
+
+    Vybere ``need`` zápasů (1 nebo 2) z předfiltrovaných her (24h, bez RU/BY,
+    bez women/youth) s reálným kurzem Over 3.5 v rozsahu
+    ``HOKEJS_FB_OUT_MIN..HOKEJS_FB_OUT_MAX``. Vrací list dictů ve stejném tvaru
+    jako standardní hokej záznamy.
+    """
+    if need <= 0 or not filtered_games:
+        return []
+
+    candidates = list(filtered_games.items())
+    random.shuffle(candidates)
+    print(f"  Hokejs fallback: trying random Over {HOKEJS_FB_OUT_LINE} from "
+          f"{len(candidates)} fixtures (odds {HOKEJS_FB_OUT_MIN}-{HOKEJS_FB_OUT_MAX}, "
+          f"need={need}, max_attempts={HOKEJS_FB_MAX_ATTEMPTS})...")
+
+    picked = []
+    used_leagues = set()
+    attempts = 0
+    for gid, g in candidates:
+        if len(picked) >= need:
+            break
+        if attempts >= HOKEJS_FB_MAX_ATTEMPTS:
+            break
+        attempts += 1
+        league_name = g.get("league", "?")
+        if league_name in used_leagues:
+            continue
+        match_str = f"{g.get('home', '?')} vs {g.get('away', '?')}"
+        odds_data = fetch_odds(gid)
+        # Použij existující helper – sel_line nás zde nezajímá, jen out_line.
+        _sel, out_avg, _bts = find_fixed_over_odds(
+            odds_data, HOKEJS_FB_OUT_LINE, HOKEJS_FB_OUT_LINE)
+        if out_avg is None:
+            print(f"    - {match_str[:50]}: no Over {HOKEJS_FB_OUT_LINE} odds")
+            continue
+        if not (HOKEJS_FB_OUT_MIN <= out_avg <= HOKEJS_FB_OUT_MAX):
+            print(f"    - {match_str[:50]}: Over {HOKEJS_FB_OUT_LINE}={out_avg:.2f} mimo rozsah")
+            continue
+        kickoff = datetime.fromtimestamp(g["timestamp"], tz=timezone.utc)\
+            .strftime("%Y-%m-%dT%H:%M:%S+00:00")
+        print(f"    \u2713 {match_str[:50]}: Over {HOKEJS_FB_OUT_LINE}={out_avg:.2f} ({league_name})")
+        picked.append({
+            "league": league_name,
+            "match": match_str,
+            "tip": f"Over {HOKEJS_FB_OUT_LINE}",
+            "odds": f"{out_avg:.2f}",
+            "date": kickoff,
+        })
+        used_leagues.add(league_name)
+
+    return picked
+
+
 # ===== MAIN =====
 
 def main():
@@ -1256,6 +1322,15 @@ def main():
         r.pop("_league_id", None)
         r.pop("_sel_label", None)
         r.pop("_sel_odds", None)
+
+    # 5d. HOKEJS FALLBACK: pokud po všech filtrech není ani jeden zápas,
+    #     "hod si korunou" – přidej 1 nebo 2 random Over 3.5 zápasy (max 2)
+    #     z předfiltrovaných her (24h, bez RU/BY, bez women/youth).
+    if not results:
+        coin = random.choice([1, 2])
+        print(f"\n  ⚠ hokejs.json prázdný – hod korunou: need={coin} "
+              f"(target Over {HOKEJS_FB_OUT_LINE} ≈ {HOKEJS_FB_TARGET_OUT})")
+        results = pick_random_hokej_fallback(filtered, coin)
 
     # 6. Sort by kickoff time and write output
     results.sort(key=lambda r: r["date"])
