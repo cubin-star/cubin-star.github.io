@@ -1,1 +1,37 @@
-[]
+[
+  {
+    "League": "New South Wales NPL 2",
+    "Match": "Bankstown City Lions vs Newcastle Jets II",
+    "Tip": "Over 1.5",
+    "Odds": "1.12",
+    "Date": "2026-05-15T10:00:00+00:00"
+  },
+  {
+    "League": "Division 1",
+    "Match": "Al Arabi vs Gulf United",
+    "Tip": "Over 1.5",
+    "Odds": "1.14",
+    "Date": "2026-05-15T14:05:00+00:00"
+  },
+  {
+    "League": "New South Wales NPL",
+    "Match": "Western Sydney Wanderers U23 vs Blacktown City",
+    "Tip": "Over 1.5",
+    "Odds": "1.17",
+    "Date": "2026-05-16T05:00:00+00:00"
+  },
+  {
+    "League": "New South Wales NPL 2",
+    "Match": "Macarthur Rams vs Canterbury Bankstown",
+    "Tip": "Over 1.5",
+    "Odds": "1.18",
+    "Date": "2026-05-16T06:30:00+00:00"
+  },
+  {
+    "League": "New South Wales NPL",
+    "Match": "SD Raiders vs Sutherland Sharks",
+    "Tip": "Over 1.5",
+    "Odds": "1.19",
+    "Date": "2026-05-16T07:00:00+00:00"
+  }
+]
