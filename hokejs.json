@@ -1,1 +1,16 @@
-[]
+[
+  {
+    "league": "World Championship",
+    "match": "USA vs Switzerland",
+    "tip": "Over 3.5",
+    "odds": "1.24",
+    "date": "2026-05-15T18:20:00+00:00"
+  },
+  {
+    "league": "ECHL",
+    "match": "Toledo Walleye vs Fort Wayne Komets",
+    "tip": "Over 3.5",
+    "odds": "1.22",
+    "date": "2026-05-15T23:15:00+00:00"
+  }
+]
