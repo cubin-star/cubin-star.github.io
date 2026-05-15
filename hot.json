@@ -1,50 +1,50 @@
 [
   {
-    "league": "La Liga",
-    "match": "Valencia - Rayo Vallecano",
-    "kickoff": "2026-05-14T19:00:00+02:00",
+    "league": "Liga I",
+    "match": "Arges Pitesti - Rapid",
+    "kickoff": "2026-05-15T19:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.11",
+    "odds": "2.36",
     "group": 1
   },
   {
-    "league": "Premier League",
-    "match": "Kudrivka - Ruh Lviv",
-    "kickoff": "2026-05-14T12:00:00+02:00",
+    "league": "League Two",
+    "match": "Notts County - Chesterfield",
+    "kickoff": "2026-05-15T21:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.24",
+    "odds": "2.10",
     "group": 1
   },
   {
-    "league": "1. Division",
-    "match": "Hobro - Aarhus Fremad",
-    "kickoff": "2026-05-14T13:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.18",
-    "group": 2
-  },
-  {
-    "league": "Professional League",
-    "match": "Smail - Sohar",
-    "kickoff": "2026-05-14T17:20:00+02:00",
+    "league": "Ekstraklasa",
+    "match": "Korona Kielce - Widzew Łódź",
+    "kickoff": "2026-05-15T20:30:00+02:00",
     "tip": "Over 2.5",
     "odds": "2.14",
     "group": 2
   },
   {
-    "league": "Liga Leumit",
-    "match": "Hapoel Hadera - Hapoel Ra'anana",
-    "kickoff": "2026-05-14T18:00:00+02:00",
+    "league": "First NL",
+    "match": "Rudes - HNK Cibalia",
+    "kickoff": "2026-05-15T15:45:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.10",
+    "odds": "2.15",
+    "group": 2
+  },
+  {
+    "league": "Serie B",
+    "match": "Bari - Sudtirol",
+    "kickoff": "2026-05-15T20:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.37",
     "group": 3
   },
   {
-    "league": "Division Intermedia",
-    "match": "Fernando De La Mora - Independiente F.b.c.",
-    "kickoff": "2026-05-15T00:30:00+02:00",
+    "league": "Liga II",
+    "match": "CSA Steaua Bucureşti - FC Voluntari",
+    "kickoff": "2026-05-16T10:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.35",
+    "odds": "2.10",
     "group": 3
   }
 ]
