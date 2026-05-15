@@ -21,6 +21,7 @@ SETUP:
 import json
 import math
 import os
+import random
 import time
 import urllib.request
 from datetime import datetime, timedelta, timezone
@@ -969,6 +970,81 @@ def compute_quality_score(home_form, away_form, h2h_games,
     return pts, ", ".join(reasons) if reasons else "no bonuses"
 
 
+# === FALLBACK pro baskets.json: random Over s nízkým kurzem ===
+# Spouští se POUZE když po všech filtrech není v baskets.json žádný zápas.
+# "Hod korunou" rozhodne, jestli se přidá 0 nebo 1 zápas (max 1).
+# Idea: vezmi nějaký zápas, najdi jeho main line (~1.90, např. Over 180.5)
+# a vyber NEJNIŽŠÍ Over linii (např. 168.5) s kurzem v rozsahu kolem 1.25.
+BASKETS_FB_TARGET_OUT = 1.25
+BASKETS_FB_OUT_MIN = 1.18
+BASKETS_FB_OUT_MAX = 1.35
+BASKETS_FB_MAX_ATTEMPTS = 20
+
+
+def pick_random_basket_fallback(filtered_games, need):
+    """Záchranný fallback PRO baskets.json (volat jen když je seznam prázdný).
+
+    Náhodně projde předfiltrované zápasy (24h, bez RU/BY/women/youth), pro
+    každý stáhne kurzy, najde main line + všechny Over linie a vybere
+    nejnižší Over s kurzem v rozsahu ``BASKETS_FB_OUT_MIN..BASKETS_FB_OUT_MAX``
+    (výrazně pod main – tj. "bezpečný" Over kolem 1.25). Vrací max ``need`` záznamů
+    ve stejném tvaru jako standardní basket záznamy.
+    """
+    if need <= 0 or not filtered_games:
+        return []
+
+    candidates = list(filtered_games.items())
+    random.shuffle(candidates)
+    print(f"  Baskets fallback: hledám random Over s kurzem "
+          f"{BASKETS_FB_OUT_MIN}-{BASKETS_FB_OUT_MAX} v {len(candidates)} zápasech "
+          f"(need={need}, max_attempts={BASKETS_FB_MAX_ATTEMPTS})...")
+
+    picked = []
+    used_leagues = set()
+    attempts = 0
+    for gid, g in candidates:
+        if len(picked) >= need:
+            break
+        if attempts >= BASKETS_FB_MAX_ATTEMPTS:
+            break
+        attempts += 1
+        league_name = g.get("league", "?")
+        if league_name in used_leagues:
+            continue
+        match_str = f"{g.get('home', '?')} vs {g.get('away', '?')}"
+        odds_data = fetch_odds(gid)
+        main_line, all_overs, _h_tt, _a_tt = find_main_line_and_all_overs(odds_data)
+        if main_line is None or not all_overs:
+            print(f"    - {match_str[:50]}: no odds")
+            continue
+        # Nejnižší Over linie pod main_line s kurzem v cílovém rozsahu.
+        cap = main_line["line"]
+        candidates_overs = [
+            o for o in all_overs
+            if o["line"] < cap
+            and _is_half_line(o["line"])
+            and BASKETS_FB_OUT_MIN <= o["avg_odd"] <= BASKETS_FB_OUT_MAX
+        ]
+        if not candidates_overs:
+            print(f"    - {match_str[:50]}: žádný Over v {BASKETS_FB_OUT_MIN}-{BASKETS_FB_OUT_MAX} pod {cap}")
+            continue
+        chosen = min(candidates_overs, key=lambda x: x["line"])
+        kickoff = datetime.fromtimestamp(g["timestamp"], tz=timezone.utc)\
+            .strftime("%Y-%m-%dT%H:%M:%S+00:00")
+        print(f"    \u2713 {match_str[:50]}: main={main_line['label']}@{main_line['odd_str']}"
+              f" → {chosen['label']}@{chosen['odd_str']} ({league_name})")
+        picked.append({
+            "league": league_name,
+            "match": match_str,
+            "tip": chosen["label"],
+            "odds": chosen["odd_str"],
+            "date": kickoff,
+        })
+        used_leagues.add(league_name)
+
+    return picked
+
+
 # ===== MAIN =====
 
 def main():
@@ -1198,6 +1274,18 @@ def main():
         r.pop("_sel_label", None)
         r.pop("_sel_odds", None)
         r.pop("_edge", None)
+
+    # 5d. BASKETS FALLBACK: pokud po všech filtrech není ani jeden zápas,
+    #     "hod si korunou" – přidej 0 nebo 1 random zápas (max 1) s nejnižší
+    #     Over linií okolo kurzu 1.25 (např. main 180.5@1.90 → tip 168.5@1.25).
+    if not results:
+        coin = random.choice([0, 1])
+        if coin == 0:
+            print(f"\n  ⚠ baskets.json prázdný – hod korunou: need=0 (nic nepřidávám)")
+        else:
+            print(f"\n  ⚠ baskets.json prázdný – hod korunou: need=1 "
+                  f"(target Over ≈ {BASKETS_FB_TARGET_OUT})")
+            results = pick_random_basket_fallback(filtered, coin)
 
     results.sort(key=lambda r: r["date"])
     with open(OUTPUT, "w", encoding="utf-8") as f:
