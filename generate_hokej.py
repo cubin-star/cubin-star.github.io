@@ -413,6 +413,80 @@ def find_fixed_over_odds(odds_data, sel_line, out_line):
     return sel_avg, out_avg, bts2_odd
 
 
+def collect_all_over_odds(odds_data):
+    """Vrátí dict {line: avg_odd} pro všechny dostupné Over linie (full game).
+    Bere stejné bet_id/bet_name jako find_fixed_over_odds, ignoruje period markety.
+    """
+    by_line = {}
+    for resp in odds_data:
+        for bk in resp.get("bookmakers", []):
+            for bet in bk.get("bets", []):
+                bet_id = bet.get("id")
+                bet_name = bet.get("name", "").lower()
+                if not (bet_id in (4, 52) or ("over/under" in bet_name and "period" not in bet_name)):
+                    continue
+                if "period" in bet_name:
+                    continue
+                for val in bet.get("values", []):
+                    v = str(val.get("value", ""))
+                    if not v.lower().startswith("over"):
+                        continue
+                    try:
+                        line = float(v.split()[-1])
+                        odd = float(val.get("odd", "0"))
+                        if odd <= 1.001:
+                            continue
+                    except (ValueError, IndexError):
+                        continue
+                    by_line.setdefault(line, []).append(odd)
+    return {line: sum(v) / len(v) for line, v in by_line.items()}
+
+
+def _poisson_p_over(lam, line):
+    """P(X > line) pro Poisson(λ); 'line' je typicky .5 (např. 3.5, 5.5)."""
+    if lam <= 0:
+        return 0.0
+    # X > k  pro k = floor(line)
+    k = int(math.floor(line))
+    # cumulative P(X <= k) = sum_{i=0..k} e^-λ λ^i / i!
+    cum = 0.0
+    term = math.exp(-lam)
+    cum += term
+    for i in range(1, k + 1):
+        term *= lam / i
+        cum += term
+    return max(0.0, 1.0 - cum)
+
+
+def estimate_over_odds_from(known_line, known_odd, target_line):
+    """Z kurzu na ``known_line`` (např. Over 5.5) dopočte odhadovaný kurz na
+    ``target_line`` (např. Over 3.5) přes Poissonovu inverzi totalu.
+
+    Postup:
+      1. P(Over known_line) ≈ 1/known_odd (bez korekce marže – orientační).
+      2. Najdi λ tak, aby P_Poisson(X > known_line | λ) = P(Over known_line).
+      3. Vrať odhad target_odd ≈ 1 / P(X > target_line | λ).
+    """
+    if known_odd is None or known_odd <= 1.001:
+        return None
+    p_known = 1.0 / known_odd
+    if not (0.02 < p_known < 0.999):
+        return None
+    lo, hi = 0.1, 20.0
+    for _ in range(60):
+        mid = (lo + hi) / 2
+        if _poisson_p_over(mid, known_line) < p_known:
+            lo = mid
+        else:
+            hi = mid
+    lam = (lo + hi) / 2
+    p_target = _poisson_p_over(lam, target_line)
+    if p_target <= 1e-6:
+        return None
+    est = 1.0 / p_target
+    return max(1.02, min(est, 25.0))
+
+
 # ===== ODDS PARSING =====
 
 def find_over_lines(odds_data):
@@ -1048,18 +1122,41 @@ def pick_random_hokej_fallback(filtered_games, need):
             continue
         match_str = f"{g.get('home', '?')} vs {g.get('away', '?')}"
         odds_data = fetch_odds(gid)
-        # Použij existující helper – sel_line nás zde nezajímá, jen out_line.
+        # 1) Zkus přímo Over 3.5
         _sel, out_avg, _bts = find_fixed_over_odds(
             odds_data, HOKEJS_FB_OUT_LINE, HOKEJS_FB_OUT_LINE)
+        source_note = "direct"
+        # 2) Fallback: dopočti z jiné dostupné linie (preferuj 5.5, pak 4.5,
+        #    pak nejbližší vyšší, pak nejbližší nižší). API hokeje totiž běžně
+        #    Over 3.5 nemá – standardní linie bývá 5.5, někdy 4.5.
         if out_avg is None:
-            print(f"    - {match_str[:50]}: no Over {HOKEJS_FB_OUT_LINE} odds")
+            all_overs = collect_all_over_odds(odds_data)
+            if all_overs:
+                preferred = [5.5, 4.5, 6.5, 4.0, 5.0, 6.0]
+                source_line = None
+                for pl in preferred:
+                    if pl in all_overs:
+                        source_line = pl
+                        break
+                if source_line is None:
+                    # nejbližší linie k 3.5
+                    source_line = min(all_overs.keys(),
+                                      key=lambda l: abs(l - HOKEJS_FB_OUT_LINE))
+                est = estimate_over_odds_from(
+                    source_line, all_overs[source_line], HOKEJS_FB_OUT_LINE)
+                if est is not None:
+                    out_avg = est
+                    source_note = f"est from O{source_line}@{all_overs[source_line]:.2f}"
+        if out_avg is None:
+            print(f"    - {match_str[:50]}: no Over odds (ani přímo ani k odhadu)")
             continue
         if not (HOKEJS_FB_OUT_MIN <= out_avg <= HOKEJS_FB_OUT_MAX):
-            print(f"    - {match_str[:50]}: Over {HOKEJS_FB_OUT_LINE}={out_avg:.2f} mimo rozsah")
+            print(f"    - {match_str[:50]}: Over {HOKEJS_FB_OUT_LINE}={out_avg:.2f} mimo rozsah ({source_note})")
             continue
         kickoff = datetime.fromtimestamp(g["timestamp"], tz=timezone.utc)\
             .strftime("%Y-%m-%dT%H:%M:%S+00:00")
-        print(f"    \u2713 {match_str[:50]}: Over {HOKEJS_FB_OUT_LINE}={out_avg:.2f} ({league_name})")
+        print(f"    \u2713 {match_str[:50]}: Over {HOKEJS_FB_OUT_LINE}={out_avg:.2f} "
+              f"({source_note}, {league_name})")
         picked.append({
             "league": league_name,
             "match": match_str,
