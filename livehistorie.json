@@ -1,5 +1,20 @@
 [
   {
+    "league": "Western Australia State League 1",
+    "homeTeam": "Curtin University",
+    "awayTeam": "Murdoch Melville",
+    "tip": "Over 3.5",
+    "odds": "",
+    "halftimeScore": "1:1",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "kickoff": "2026-05-16T11:30:00.000Z",
+    "resolvedAt": "",
+    "source": "tipper-football",
+    "scoutStats": "Western Australia State League 1 | 74' 1:2 → need 1 more"
+  },
+  {
     "league": "Victoria NPL",
     "homeTeam": "Bentleigh Greens",
     "awayTeam": "Heidelberg United",
