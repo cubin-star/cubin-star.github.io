@@ -689,16 +689,24 @@ FOTBALS_FB_NEED = 2
 FOTBALS_FB_MAX_ATTEMPTS = 30
 
 
-def pick_random_fotbals_fallback(all_fixtures, need=FOTBALS_FB_NEED):
-    """Záchranný fallback PRO fotbals.json (volat jen když je seznam prázdný).
+def pick_random_fotbals_fallback(all_fixtures, need=FOTBALS_FB_NEED,
+                                  exclude_fids=None, exclude_leagues=None):
+    """Záchranný / doplňkový výběr PRO fotbals.json.
 
     Vybere ``need`` zápasů z TOP / 2nd-tier lig (24h okno, prošlé centrálním
     filtrem ``is_excluded_fixture``) s reálným kurzem Over 1.5 v rozsahu
     ``FOTBALS_FB_O15_MIN..FOTBALS_FB_O15_MAX``. Vrací list dictů ve stejném
     tvaru jako standardní fotbals záznamy.
+
+    ``exclude_fids`` / ``exclude_leagues`` – kolekce, které tato funkce
+    nesmí vybrat (typicky zápasy/ligy, které už v ``fotbals.json`` jsou,
+    aby se zamezilo duplicitám).
     """
     if need <= 0 or not all_fixtures:
         return []
+
+    exclude_fids = set(exclude_fids or ())
+    exclude_leagues = set(exclude_leagues or ())
 
     now2 = datetime.now(timezone.utc)
     cutoff = now2 + timedelta(hours=24)
@@ -706,6 +714,8 @@ def pick_random_fotbals_fallback(all_fixtures, need=FOTBALS_FB_NEED):
     top_candidates = []
     second_candidates = []
     for fid, fix in all_fixtures.items():
+        if fid in exclude_fids:
+            continue
         lid = fix.get("league_id")
         if lid in TIPS_FB_TOP_LEAGUE_IDS:
             tier = 1
@@ -738,7 +748,7 @@ def pick_random_fotbals_fallback(all_fixtures, need=FOTBALS_FB_NEED):
           f"max_attempts={FOTBALS_FB_MAX_ATTEMPTS})...")
 
     picked = []
-    used_leagues = set()
+    used_leagues = set(exclude_leagues)
     attempts = 0
     for fid, fix in candidates:
         if len(picked) >= need:
@@ -934,6 +944,7 @@ def main():
             "_o15": o15,
             "_o25": f"{o25:.2f}" if o25 else None,
             "_variant": q.get("_variant", "?"),
+            "_fid": q["fixture_id"],
         })
 
     # 6a. Write live.json – ALL value-gate-passing matches (no dedup)
@@ -972,6 +983,13 @@ def main():
     print(f"  Live2 (variant A, Over 2.5): {len(live2_out)} match(es) \u2192 {OUTPUT_LIVE2}")
 
     # 6b. Best per league – keep only the top match from each league (for fotbals.json)
+    #     POZN: do fotbals.json zapisujeme POUZE variantu A (nejsilnější profil –
+    #     oba útočí + obě obrany inkasují). Varianta B / C se do fotbals.json
+    #     nedostane (B i nadále jde do live.json, C je globálně vypnutá).
+    results_for_fotbals = [r for r in results if r.get("_variant") == "A"]
+    print(f"  Variant filter (only A for fotbals.json): "
+          f"{len(results)} → {len(results_for_fotbals)}")
+
     TOURNAMENT_KEYWORDS = (
         "world cup", "euro ", "european", "copa america", "africa cup",
         "asian cup", "nations league", "champions league", "europa league",
@@ -998,9 +1016,9 @@ def main():
             '', name, flags=re.IGNORECASE
         ).strip()
 
-    before = len(results)
+    before = len(results_for_fotbals)
     best_per_league = {}
-    for r in results:
+    for r in results_for_fotbals:
         lg = normalize_league(r["League"])
         if lg not in best_per_league or r["_score"] > best_per_league[lg]["_score"]:
             best_per_league[lg] = r
@@ -1009,9 +1027,9 @@ def main():
         print(f"  Dedup: {before} → {len(deduped)} (best per league, normalized)")
 
     # 7. Sort by kickoff time and write fotbals.json (bez interních polí)
-    #    Filtr: zápasy s Over 1.5 < 1.30 přeskoč (test – hledáme value zápasy s vyššími kurzy).
+    #    Filtr: zápasy s Over 1.5 < MIN_O15_FOTBALS přeskoč.
     deduped.sort(key=lambda r: r["Date"])
-    MIN_O15_FOTBALS = 1.25
+    MIN_O15_FOTBALS = 1.20
     fotbals_filtered = []
     for r in deduped:
         o15 = r.get("_o15")
@@ -1021,14 +1039,24 @@ def main():
         fotbals_filtered.append(r)
     fotbals_out = [{k: v for k, v in r.items() if not k.startswith("_")} for r in fotbals_filtered]
 
-    # 7b. FOTBALS FALLBACK: pokud po všech filtrech není ani jeden zápas,
-    #     "hod si korunou" – přidej 1 nebo 2 random Over 1.5 zápasy (max 2)
-    #     z TOP/2nd-tier lig (kurz ~1.25).
-    if not fotbals_out:
-        coin = random.choice([1, 2])
-        print(f"\n  ⚠ fotbals.json prázdný – hod korunou: need={coin} "
-              f"(target O1.5 ≈ {FOTBALS_FB_TARGET_O15})")
-        fotbals_out = pick_random_fotbals_fallback(all_fixtures, coin)
+    # 7b. COIN-TOSS BONUS: KAŽDÝ DEN přihoď 1 nebo 2 random Over 1.5 zápasy
+    #     (max 2) z TOP/2nd-tier lig s kurzem v pásmu FOTBALS_FB_O15_MIN..MAX
+    #     (~1.25). Tyto zápasy jdou navíc ke stávajícím – tedy i když bot vybral
+    #     zápasy podle kritérií, vždy se zápis doplní. Vyhneme se duplicitám
+    #     vůči už zařazeným zápasům (fixture_id i normalizovaná liga).
+    bonus_coin = random.choice([1, 2])
+    already_fids = {r["_fid"] for r in fotbals_filtered}
+    already_leagues = {normalize_league(r["League"]) for r in fotbals_filtered}
+    print(f"\n  ⚄ Coin-toss bonus: přidávám need={bonus_coin} random Over 1.5 zápas(y) "
+          f"(target O1.5 ≈ {FOTBALS_FB_TARGET_O15})")
+    bonus = pick_random_fotbals_fallback(
+        all_fixtures, bonus_coin,
+        exclude_fids=already_fids, exclude_leagues=already_leagues)
+    if bonus:
+        fotbals_out.extend(bonus)
+        print(f"  Bonus added: {len(bonus)} match(es) (total → {len(fotbals_out)})")
+    elif not fotbals_out:
+        print("  Coin-toss bonus selhal a fotbals.json by byl prázdný – zapisuji [].")
 
     with open(OUTPUT, "w", encoding="utf-8") as f:
         json.dump(fotbals_out, f, indent=2, ensure_ascii=False)
