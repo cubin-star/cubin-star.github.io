@@ -1,24 +1,24 @@
 [
   {
-    "League": "1. Lig",
-    "Match": "Çorum FK vs Bodrum FK",
+    "League": "Süper Lig",
+    "Match": "Samsunspor vs Göztepe",
     "Tip": "Over 2.5",
-    "Odds": "1.76",
-    "Date": "2026-05-15T17:00:00+00:00"
+    "Odds": "1.80",
+    "Date": "2026-05-16T17:00:00+00:00"
   },
   {
-    "League": "Premier League",
-    "Match": "Aston Villa vs Liverpool",
+    "League": "Primeira Liga",
+    "Match": "Arouca vs Tondela",
     "Tip": "Over 2.5",
-    "Odds": "1.76",
-    "Date": "2026-05-15T19:00:00+00:00"
+    "Odds": "1.88",
+    "Date": "2026-05-16T17:00:00+00:00"
   },
   {
-    "League": "National 1",
-    "Match": "Sochaux vs Le Puy Foot",
+    "League": "Premiership",
+    "Match": "Hibernian vs Motherwell",
     "Tip": "Over 2.5",
-    "Odds": "1.90",
-    "Date": "2026-05-15T17:30:00+00:00",
+    "Odds": "1.91",
+    "Date": "2026-05-16T11:30:00+00:00",
     "locked": true
   }
 ]
