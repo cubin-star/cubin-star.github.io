@@ -1,5 +1,20 @@
 [
   {
+    "league": "Major League Soccer",
+    "homeTeam": "CF Montreal",
+    "awayTeam": "Chicago Fire",
+    "tip": "Over 2.5",
+    "odds": "",
+    "halftimeScore": "0:1",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "kickoff": "2026-05-16T20:30:00.000Z",
+    "resolvedAt": "",
+    "source": "tipper-football",
+    "scoutStats": "Major League Soccer | 73' 0:2 → need 1 more"
+  },
+  {
     "league": "Persha Liga",
     "homeTeam": "Chornomorets",
     "awayTeam": "Livyi Bereh",
