@@ -1,50 +1,50 @@
 [
   {
+    "league": "Czech Liga",
+    "match": "Teplice - Dukla Praha",
+    "kickoff": "2026-05-16T17:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.25",
+    "group": 1
+  },
+  {
     "league": "Liga I",
-    "match": "Arges Pitesti - Rapid",
-    "kickoff": "2026-05-15T19:30:00+02:00",
+    "match": "Dinamo Bucuresti - CFR 1907 Cluj",
+    "kickoff": "2026-05-16T20:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.36",
+    "odds": "2.13",
     "group": 1
   },
   {
-    "league": "League Two",
-    "match": "Notts County - Chesterfield",
-    "kickoff": "2026-05-15T21:00:00+02:00",
+    "league": "Allsvenskan",
+    "match": "Halmstad - IF Elfsborg",
+    "kickoff": "2026-05-16T15:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.10",
-    "group": 1
-  },
-  {
-    "league": "Ekstraklasa",
-    "match": "Korona Kielce - Widzew Łódź",
-    "kickoff": "2026-05-15T20:30:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.14",
-    "group": 2
-  },
-  {
-    "league": "First NL",
-    "match": "Rudes - HNK Cibalia",
-    "kickoff": "2026-05-15T15:45:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.15",
+    "odds": "2.11",
     "group": 2
   },
   {
     "league": "Serie B",
-    "match": "Bari - Sudtirol",
-    "kickoff": "2026-05-15T20:00:00+02:00",
+    "match": "Juve Stabia - Monza",
+    "kickoff": "2026-05-16T20:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.37",
+    "odds": "2.32",
+    "group": 2
+  },
+  {
+    "league": "Super Liga",
+    "match": "Javor - Mladost Lucani",
+    "kickoff": "2026-05-16T20:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.22",
     "group": 3
   },
   {
-    "league": "Liga II",
-    "match": "CSA Steaua Bucureşti - FC Voluntari",
-    "kickoff": "2026-05-16T10:00:00+02:00",
+    "league": "Super League 1",
+    "match": "Larisa - Atromitos",
+    "kickoff": "2026-05-16T18:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.10",
+    "odds": "2.20",
     "group": 3
   }
 ]
