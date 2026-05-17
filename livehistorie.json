@@ -1,5 +1,20 @@
 [
   {
+    "league": "Major League Soccer",
+    "homeTeam": "Inter Miami",
+    "awayTeam": "Portland Timbers",
+    "tip": "Over 2.5",
+    "odds": "",
+    "halftimeScore": "2:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "kickoff": "2026-05-17T22:00:00.000Z",
+    "resolvedAt": "",
+    "source": "tipper-football",
+    "scoutStats": "Major League Soccer | 77' 2:0 → need 1 more"
+  },
+  {
     "league": "Primera División - Apertura",
     "homeTeam": "Albion FC",
     "awayTeam": "Wanderers",
