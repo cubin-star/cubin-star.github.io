@@ -2,6 +2,46 @@
   {
     "sport": "hockey",
     "league": "ECHL",
+    "match": "Allen Americans vs Kansas City",
+    "tip": "Over 3.5",
+    "odds": "1.19",
+    "date": "2026-05-17T00:10:00+00:00",
+    "score": "3:5",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "Serie D",
+    "match": "Lagarto vs Sergipe",
+    "tip": "Over 1.5",
+    "odds": "1.36",
+    "date": "2026-05-16T23:00:00+00:00",
+    "score": "1:1",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "Primera B",
+    "match": "Curico Unido vs Santiago Wanderers",
+    "tip": "Over 1.5",
+    "odds": "1.28",
+    "date": "2026-05-16T21:30:00+00:00",
+    "score": "0:3",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "1st League - FBiH",
+    "match": "Radnik Hadžići vs Igman Konjic",
+    "tip": "Over 1.5",
+    "odds": "1.28",
+    "date": "2026-05-16T15:00:00+00:00",
+    "score": "0:1",
+    "result": "✗"
+  },
+  {
+    "sport": "hockey",
+    "league": "ECHL",
     "match": "Toledo Walleye vs Fort Wayne Komets",
     "tip": "Over 3.5",
     "odds": "1.22",
