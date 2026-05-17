@@ -1074,7 +1074,9 @@ def main():
 
     a_pool = [r for r in deduped if r.get("_variant") == "A"]
     random.shuffle(a_pool)
-    for r in a_pool[:MAX_TIPS]:
+    for r in a_pool:
+        if len(tips) >= MAX_TIPS:
+            break
         o25_est = estimate_o25_from_o15(r.get("_o15"))
         if o25_est is None:
             continue
