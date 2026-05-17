@@ -1,6 +1,21 @@
 [
   {
     "league": "Major League Soccer",
+    "homeTeam": "Houston Dynamo",
+    "awayTeam": "Vancouver Whitecaps",
+    "tip": "Over 0.5",
+    "odds": "",
+    "halftimeScore": "0:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "kickoff": "2026-05-17T00:30:00.000Z",
+    "resolvedAt": "",
+    "source": "tipper-football",
+    "scoutStats": "Major League Soccer | 50' 0:0 → need 1 more"
+  },
+  {
+    "league": "Major League Soccer",
     "homeTeam": "CF Montreal",
     "awayTeam": "Chicago Fire",
     "tip": "Over 2.5",
