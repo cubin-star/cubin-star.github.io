@@ -1,5 +1,20 @@
 [
   {
+    "league": "HNL",
+    "homeTeam": "Istra 1961",
+    "awayTeam": "HNK Rijeka",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "0:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "kickoff": "2026-05-17T16:45:00.000Z",
+    "resolvedAt": "",
+    "source": "tipper-football",
+    "scoutStats": "HNL | 56' 0:0 → need 2 more"
+  },
+  {
     "league": "Super League 1",
     "homeTeam": "Panserraikos",
     "awayTeam": "Panetolikos",
