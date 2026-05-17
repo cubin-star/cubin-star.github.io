@@ -1,5 +1,20 @@
 [
   {
+    "league": "Super League 1",
+    "homeTeam": "Panserraikos",
+    "awayTeam": "Panetolikos",
+    "tip": "Over 2.5",
+    "odds": "",
+    "halftimeScore": "0:1",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "kickoff": "2026-05-17T12:00:00.000Z",
+    "resolvedAt": "",
+    "source": "tipper-football",
+    "scoutStats": "Super League 1 | 68' 1:1 → need 1 more"
+  },
+  {
     "league": "J2/J3 League",
     "homeTeam": "Biwako Shiga",
     "awayTeam": "Kitakyushu",
