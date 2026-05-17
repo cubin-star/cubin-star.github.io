@@ -1064,10 +1064,10 @@ def main():
     # 8. Write tips.json – max MAX_TIPS tipů, primárně z varianty A.
     #    Logika:
     #      a) Vyber zápasy s _variant == "A" (nejsilnější profil – oba útočí + obrany inkasují)
-    #      b) Pro každý dopočti odhadovaný kurz Over 2.5 z Over 1.5 přes Poisson
+    #         Pro každý dopočti odhadovaný kurz Over 2.5 z Over 1.5 přes Poisson
     #         (nemusíme ho hledat v API – inverzí z o15)
-    #      c) Pokud A pool < MAX_TIPS, doplň náhodným zápasem z deduped (i jiné varianty)
-    #         – opět tipnut Over 2.5 (dopočet z o15)
+    #      b) Pokud A pool < MAX_TIPS, doplň úplně random Over 2.5 z TOP first-tier lig
+    #         (skutečný kurz z API)
     tips = []
     selected_keys = set()
     MIN_TIPS_O25 = 1.6  # zápas se do tips.json zapíše jen když dopočtený O2.5 ≥ 1.6
@@ -1090,38 +1090,8 @@ def main():
         })
         selected_keys.add((r["Match"], r["Date"]))
 
-    # 8b. Doplnit chybějící náhodnými zápasy z ostatních (B/C/?) – opět Over 2.5
-    if len(tips) < MAX_TIPS:
-        used_leagues = {t["League"] for t in tips}
-        filler_pool = [
-            r for r in deduped
-            if (r["Match"], r["Date"]) not in selected_keys
-               and r["League"] not in used_leagues
-               and r.get("_o15") is not None
-        ]
-        random.shuffle(filler_pool)
-        need = MAX_TIPS - len(tips)
-        for r in filler_pool:
-            if need <= 0:
-                break
-            o25_est = estimate_o25_from_o15(r.get("_o15"))
-            if o25_est is None:
-                continue
-            if o25_est < MIN_TIPS_O25:
-                print(f"  ⚠ tips skip {r['Match'][:50]}: O2.5={o25_est:.2f} < {MIN_TIPS_O25}")
-                continue
-            tips.append({
-                "League": r["League"],
-                "Match": r["Match"],
-                "Tip": "Over 2.5",
-                "Odds": f"{o25_est:.2f}",
-                "Date": r["Date"],
-            })
-            need -= 1
-
-    # 8c. FALLBACK: pokud po 8a + 8b stále chybí tipy (typicky když dnes
-    #     žádné A varianty neprošly a `deduped` je prázdný/malý), doplň
-    #     úplně random Over 2.5 z TOP first-tier lig s reálným kurzem
+    # 8b. FALLBACK: pokud A pool nedodal MAX_TIPS, doplň úplně random
+    #     Over 2.5 z TOP first-tier lig s reálným kurzem
     #     v rozmezí TIPS_FB_MIN_ODDS..TIPS_FB_MAX_ODDS.
     if len(tips) < MAX_TIPS:
         need = MAX_TIPS - len(tips)
