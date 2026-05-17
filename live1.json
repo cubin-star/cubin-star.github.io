@@ -1,72 +1,65 @@
 [
   {
-    "league": "Czech Liga",
-    "match": "Teplice - Dukla Praha",
-    "kickoff": "2026-05-16T17:00:00+02:00",
+    "league": "Allsvenskan",
+    "match": "IF Brommapojkarna - Kalmar FF",
+    "kickoff": "2026-05-17T14:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.25"
+    "odds": "2.12"
   },
   {
-    "league": "Allsvenskan",
-    "match": "Halmstad - IF Elfsborg",
-    "kickoff": "2026-05-16T15:00:00+02:00",
+    "league": "Serie A",
+    "match": "Udinese - Cremonese",
+    "kickoff": "2026-05-17T20:45:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.11"
+    "odds": "2.12"
   },
   {
-    "league": "Allsvenskan",
-    "match": "Gais - Degerfors IF",
-    "kickoff": "2026-05-16T15:00:00+02:00",
+    "league": "Serie A",
+    "match": "Sassuolo - Lecce",
+    "kickoff": "2026-05-17T20:45:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.12"
+  },
+  {
+    "league": "Super League 1",
+    "match": "AEK Athens FC - Olympiakos Piraeus",
+    "kickoff": "2026-05-17T18:30:00+02:00",
     "tip": "Over 2.5",
     "odds": "2.13"
   },
   {
-    "league": "Super Liga",
-    "match": "Javor - Mladost Lucani",
-    "kickoff": "2026-05-16T20:00:00+02:00",
+    "league": "La Liga",
+    "match": "Athletic Club - Celta Vigo",
+    "kickoff": "2026-05-17T19:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.22"
+    "odds": "2.13"
   },
   {
-    "league": "Super League 1",
-    "match": "Larisa - Atromitos",
-    "kickoff": "2026-05-16T18:00:00+02:00",
+    "league": "La Liga",
+    "match": "Osasuna - Espanyol",
+    "kickoff": "2026-05-17T19:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.20"
-  },
-  {
-    "league": "Super League 1",
-    "match": "Panserraikos - Panetolikos",
-    "kickoff": "2026-05-16T18:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.34"
+    "odds": "2.40"
   },
   {
     "league": "Liga I",
-    "match": "Dinamo Bucuresti - CFR 1907 Cluj",
-    "kickoff": "2026-05-16T20:00:00+02:00",
+    "match": "Universitatea Craiova - Universitatea Cluj",
+    "kickoff": "2026-05-17T19:30:00+02:00",
     "tip": "Over 2.5",
     "odds": "2.13"
   },
   {
-    "league": "Super Liga",
-    "match": "FK Spartak Zdrepceva KRV - IMT Novi Beograd",
-    "kickoff": "2026-05-16T20:00:00+02:00",
+    "league": "Serie A",
+    "match": "Cagliari - Torino",
+    "kickoff": "2026-05-17T20:45:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.10"
+    "odds": "2.26"
   },
   {
     "league": "Serie B",
-    "match": "Juve Stabia - Monza",
-    "kickoff": "2026-05-16T20:00:00+02:00",
+    "match": "Catanzaro - Palermo",
+    "kickoff": "2026-05-17T20:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.32"
-  },
-  {
-    "league": "1. Division",
-    "match": "Hillerød - Esbjerg",
-    "kickoff": "2026-05-16T13:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.13"
+    "odds": "2.15"
   }
 ]
