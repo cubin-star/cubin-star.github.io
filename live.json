@@ -1,170 +1,86 @@
 [
   {
-    "League": "New South Wales NPL",
-    "Match": "SD Raiders vs Sutherland Sharks",
+    "League": "3. liga - CFL A",
+    "Match": "Admira Praha vs Dukla Praha II",
     "Tip": "Over 1.5",
-    "Odds": "1.20",
-    "Date": "2026-05-16T07:00:00+00:00"
+    "Odds": "1.16",
+    "Date": "2026-05-17T08:15:00+00:00"
   },
   {
-    "League": "Western Australia State League 1",
-    "Match": "Cockburn City vs Joondalup City",
-    "Tip": "Over 1.5",
-    "Odds": "1.14",
-    "Date": "2026-05-16T07:00:00+00:00"
-  },
-  {
-    "League": "K League 2",
-    "Match": "Seoul E-Land FC vs Yongin City",
-    "Tip": "Over 1.5",
-    "Odds": "1.23",
-    "Date": "2026-05-16T07:30:00+00:00"
-  },
-  {
-    "League": "Liga 1",
-    "Match": "Persik Kediri vs Persija",
-    "Tip": "Over 1.5",
-    "Odds": "1.21",
-    "Date": "2026-05-16T08:30:00+00:00"
-  },
-  {
-    "League": "Regionalliga - Bayern",
-    "Match": "Eichstätt vs Buchbach",
-    "Tip": "Over 1.5",
-    "Odds": "1.12",
-    "Date": "2026-05-16T12:00:00+00:00"
-  },
-  {
-    "League": "Regionalliga - Bayern",
-    "Match": "Vilzing vs Greuther Fürth II",
-    "Tip": "Over 1.5",
-    "Odds": "1.17",
-    "Date": "2026-05-16T12:00:00+00:00"
-  },
-  {
-    "League": "Regionalliga - Bayern",
-    "Match": "Illertissen vs Schwaben Augsburg",
-    "Tip": "Over 1.5",
-    "Odds": "1.13",
-    "Date": "2026-05-16T12:00:00+00:00"
-  },
-  {
-    "League": "Regionalliga - West",
-    "Match": "Paderborn II vs SV Rodinghausen",
+    "League": "1. Liga",
+    "Match": "Riga FC II vs Mārupe",
     "Tip": "Over 1.5",
     "Odds": "1.15",
-    "Date": "2026-05-16T12:00:00+00:00"
+    "Date": "2026-05-17T10:00:00+00:00"
   },
   {
-    "League": "Eliteserien",
-    "Match": "Brann vs KFUM Oslo",
+    "League": "Superettan",
+    "Match": "Ostersunds FK vs Sandviken",
     "Tip": "Over 1.5",
-    "Odds": "1.13",
-    "Date": "2026-05-16T12:00:00+00:00"
+    "Odds": "1.26",
+    "Date": "2026-05-17T11:00:00+00:00"
   },
   {
-    "League": "Tweede Divisie",
-    "Match": "Excelsior Maassluis vs Almere City II",
+    "League": "Ettan - Södra",
+    "Match": "Jonkopings Sodra vs Hässleholms IF",
     "Tip": "Over 1.5",
-    "Odds": "1.12",
-    "Date": "2026-05-16T13:30:00+00:00"
+    "Odds": "1.27",
+    "Date": "2026-05-17T11:00:00+00:00"
+  },
+  {
+    "League": "Allsvenskan",
+    "Match": "IF Brommapojkarna vs Kalmar FF",
+    "Tip": "Over 1.5",
+    "Odds": "1.32",
+    "Date": "2026-05-17T12:00:00+00:00"
+  },
+  {
+    "League": "Division 2 - Norra Svealand",
+    "Match": "Bollstanäs vs Falu BS",
+    "Tip": "Over 1.5",
+    "Odds": "1.15",
+    "Date": "2026-05-17T12:00:00+00:00"
+  },
+  {
+    "League": "Superliga",
+    "Match": "FC Copenhagen vs Randers FC",
+    "Tip": "Over 1.5",
+    "Odds": "1.14",
+    "Date": "2026-05-17T12:00:00+00:00"
   },
   {
     "League": "1. Liga Promotion",
-    "Match": "Breitenrain vs Basel II",
+    "Match": "Kreuzlingen vs Bavois",
     "Tip": "Over 1.5",
     "Odds": "1.12",
-    "Date": "2026-05-16T14:00:00+00:00"
+    "Date": "2026-05-17T13:00:00+00:00"
   },
   {
-    "League": "1. Division",
-    "Match": "ODD Ballklubb vs Moss",
+    "League": "3. liga - CFL B",
+    "Match": "Benátky nad Jizerou vs Pardubice II",
     "Tip": "Over 1.5",
-    "Odds": "1.16",
-    "Date": "2026-05-16T14:00:00+00:00"
+    "Odds": "1.14",
+    "Date": "2026-05-17T15:00:00+00:00"
   },
   {
-    "League": "Division 2 - Östra Götaland",
-    "Match": "Nosaby vs Sölvesborg",
+    "League": "1. SNL",
+    "Match": "Olimpija Ljubljana vs Radomlje",
     "Tip": "Over 1.5",
-    "Odds": "1.13",
-    "Date": "2026-05-16T14:00:00+00:00"
-  },
-  {
-    "League": "1st League - FBiH",
-    "Match": "Radnik Hadžići vs Igman Konjic",
-    "Tip": "Over 1.5",
-    "Odds": "1.28",
-    "Date": "2026-05-16T15:00:00+00:00"
-  },
-  {
-    "League": "FNL",
-    "Match": "Ústí nad Labem vs Slavia Praha II",
-    "Tip": "Over 1.5",
-    "Odds": "1.12",
-    "Date": "2026-05-16T15:00:00+00:00"
-  },
-  {
-    "League": "Czech Liga",
-    "Match": "Karviná vs Sigma Olomouc",
-    "Tip": "Over 1.5",
-    "Odds": "1.19",
-    "Date": "2026-05-16T15:00:00+00:00"
+    "Odds": "1.15",
+    "Date": "2026-05-17T15:30:00+00:00"
   },
   {
     "League": "Pro League",
-    "Match": "Al-Jazira vs Baniyas SC",
+    "Match": "Al Shabab vs Al-Ittihad FC",
     "Tip": "Over 1.5",
-    "Odds": "1.14",
-    "Date": "2026-05-16T15:30:00+00:00"
-  },
-  {
-    "League": "Süper Lig",
-    "Match": "Gaziantep FK vs Başakşehir",
-    "Tip": "Over 1.5",
-    "Odds": "1.12",
-    "Date": "2026-05-16T17:00:00+00:00"
+    "Odds": "1.13",
+    "Date": "2026-05-17T18:00:00+00:00"
   },
   {
     "League": "Brasileiro U20 A",
-    "Match": "Criciuma U20 vs Fluminense U20",
+    "Match": "América Mineiro U20 vs São Paulo U20",
     "Tip": "Over 1.5",
-    "Odds": "1.21",
-    "Date": "2026-05-16T18:00:00+00:00"
-  },
-  {
-    "League": "Major League Soccer",
-    "Match": "CF Montreal vs Chicago Fire",
-    "Tip": "Over 1.5",
-    "Odds": "1.18",
-    "Date": "2026-05-16T20:30:00+00:00"
-  },
-  {
-    "League": "Primera B",
-    "Match": "Curico Unido vs Santiago Wanderers",
-    "Tip": "Over 1.5",
-    "Odds": "1.28",
-    "Date": "2026-05-16T21:30:00+00:00"
-  },
-  {
-    "League": "Serie D",
-    "Match": "Lagarto vs Sergipe",
-    "Tip": "Over 1.5",
-    "Odds": "1.36",
-    "Date": "2026-05-16T23:00:00+00:00"
-  },
-  {
-    "League": "Major League Soccer",
-    "Match": "New York Red Bulls vs New York City FC",
-    "Tip": "Over 1.5",
-    "Odds": "1.16",
-    "Date": "2026-05-16T23:30:00+00:00"
-  },
-  {
-    "League": "New South Wales NPL 2",
-    "Match": "Central Coast II vs Hills Brumbies",
-    "Tip": "Over 1.5",
-    "Odds": "1.14",
-    "Date": "2026-05-17T05:00:00+00:00"
+    "Odds": "1.20",
+    "Date": "2026-05-17T18:00:00+00:00"
   }
 ]
