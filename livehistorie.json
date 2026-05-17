@@ -1,5 +1,20 @@
 [
   {
+    "league": "Liga MX",
+    "homeTeam": "Guadalajara Chivas",
+    "awayTeam": "Cruz Azul",
+    "tip": "Over 2.5",
+    "odds": "",
+    "halftimeScore": "1:1",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "kickoff": "2026-05-17T01:07:00.000Z",
+    "resolvedAt": "",
+    "source": "tipper-football",
+    "scoutStats": "Liga MX | 54' 1:1 → need 1 more"
+  },
+  {
     "league": "Major League Soccer",
     "homeTeam": "Houston Dynamo",
     "awayTeam": "Vancouver Whitecaps",
