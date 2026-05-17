@@ -1,5 +1,20 @@
 [
   {
+    "league": "Primera División - Apertura",
+    "homeTeam": "Albion FC",
+    "awayTeam": "Wanderers",
+    "tip": "Over 0.5",
+    "odds": "",
+    "halftimeScore": "0:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "kickoff": "2026-05-17T21:00:00.000Z",
+    "resolvedAt": "",
+    "source": "tipper-football",
+    "scoutStats": "Primera División - Apertura | 52' 0:0 → need 1 more"
+  },
+  {
     "league": "HNL",
     "homeTeam": "Istra 1961",
     "awayTeam": "HNK Rijeka",
