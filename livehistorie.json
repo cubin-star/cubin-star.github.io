@@ -1,5 +1,20 @@
 [
   {
+    "league": "Segunda División",
+    "homeTeam": "Leganes",
+    "awayTeam": "Huesca",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "0:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "kickoff": "2026-05-18T18:30:00.000Z",
+    "resolvedAt": "",
+    "source": "tipper-football",
+    "scoutStats": "Segunda División | 78' 1:0 → need 1 more"
+  },
+  {
     "league": "Ekstraklasa",
     "homeTeam": "Arka Gdynia",
     "awayTeam": "Nieciecza",
