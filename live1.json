@@ -1,65 +1,23 @@
 [
   {
-    "league": "Allsvenskan",
-    "match": "IF Brommapojkarna - Kalmar FF",
-    "kickoff": "2026-05-17T14:00:00+02:00",
+    "league": "Liga I",
+    "match": "Unirea Slobozia - Uta Arad",
+    "kickoff": "2026-05-18T19:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.12"
-  },
-  {
-    "league": "Serie A",
-    "match": "Udinese - Cremonese",
-    "kickoff": "2026-05-17T20:45:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.12"
-  },
-  {
-    "league": "Serie A",
-    "match": "Sassuolo - Lecce",
-    "kickoff": "2026-05-17T20:45:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.12"
-  },
-  {
-    "league": "Super League 1",
-    "match": "AEK Athens FC - Olympiakos Piraeus",
-    "kickoff": "2026-05-17T18:30:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.13"
-  },
-  {
-    "league": "La Liga",
-    "match": "Athletic Club - Celta Vigo",
-    "kickoff": "2026-05-17T19:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.13"
-  },
-  {
-    "league": "La Liga",
-    "match": "Osasuna - Espanyol",
-    "kickoff": "2026-05-17T19:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.40"
+    "odds": "2.17"
   },
   {
     "league": "Liga I",
-    "match": "Universitatea Craiova - Universitatea Cluj",
-    "kickoff": "2026-05-17T19:30:00+02:00",
+    "match": "Petrolul Ploiesti - Oţelul",
+    "kickoff": "2026-05-18T19:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.13"
+    "odds": "2.16"
   },
   {
-    "league": "Serie A",
-    "match": "Cagliari - Torino",
-    "kickoff": "2026-05-17T20:45:00+02:00",
+    "league": "Veikkausliiga",
+    "match": "Lahti - VPS",
+    "kickoff": "2026-05-18T17:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.26"
-  },
-  {
-    "league": "Serie B",
-    "match": "Catanzaro - Palermo",
-    "kickoff": "2026-05-17T20:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.15"
+    "odds": "2.20"
   }
 ]
