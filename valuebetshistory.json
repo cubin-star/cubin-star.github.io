@@ -1,5 +1,25 @@
 [
   {
+    "League": "Superettan",
+    "Match": "Ostersunds FK vs Sandviken",
+    "Tip": "Over 2.5",
+    "Odds": "1.76",
+    "Date": "2026-05-17T11:00:00+00:00",
+    "FixtureId": 1497574,
+    "Result": "OK",
+    "Score": "2:1"
+  },
+  {
+    "League": "Ettan - S\u00F6dra",
+    "Match": "Jonkopings Sodra vs H\u00E4ssleholms IF",
+    "Tip": "Over 2.5",
+    "Odds": "1.80",
+    "Date": "2026-05-17T11:00:00+00:00",
+    "FixtureId": 1504430,
+    "Result": "KO",
+    "Score": "2:0"
+  },
+  {
     "League": "Primera B",
     "Match": "Curico Unido vs Santiago Wanderers",
     "Tip": "Over 2.5",
