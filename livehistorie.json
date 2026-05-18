@@ -1,5 +1,20 @@
 [
   {
+    "league": "Ekstraklasa",
+    "homeTeam": "Arka Gdynia",
+    "awayTeam": "Nieciecza",
+    "tip": "Over 3.5",
+    "odds": "",
+    "halftimeScore": "1:1",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "kickoff": "2026-05-18T17:00:00.000Z",
+    "resolvedAt": "",
+    "source": "tipper-football",
+    "scoutStats": "Ekstraklasa | 54' 2:1 → need 1 more"
+  },
+  {
     "league": "Veikkausliiga",
     "homeTeam": "Lahti",
     "awayTeam": "VPS",
