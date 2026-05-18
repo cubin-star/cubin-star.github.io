@@ -1,5 +1,65 @@
 [
   {
+    "sport": "basketball",
+    "league": "NBA",
+    "match": "Detroit Pistons vs Cleveland Cavaliers",
+    "tip": "Over 194.5",
+    "odds": "1.26",
+    "date": "2026-05-18T00:00:00+00:00",
+    "score": "94:125",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "Serie A",
+    "match": "Udinese vs Cremonese",
+    "tip": "Over 1.5",
+    "odds": "1.34",
+    "date": "2026-05-17T18:45:00+00:00",
+    "score": "0:1",
+    "result": "✗"
+  },
+  {
+    "sport": "hockey",
+    "league": "World Championship",
+    "match": "Norway vs Slovenia",
+    "tip": "Over 3.5",
+    "odds": "1.24",
+    "date": "2026-05-17T18:20:00+00:00",
+    "score": "4:0",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "Premier League",
+    "match": "Brentford vs Crystal Palace",
+    "tip": "Over 1.5",
+    "odds": "1.20",
+    "date": "2026-05-17T14:00:00+00:00",
+    "score": "2:2",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "Superettan",
+    "match": "Ostersunds FK vs Sandviken",
+    "tip": "Over 1.5",
+    "odds": "1.26",
+    "date": "2026-05-17T11:00:00+00:00",
+    "score": "2:1",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "Ettan - Södra",
+    "match": "Jonkopings Sodra vs Hässleholms IF",
+    "tip": "Over 1.5",
+    "odds": "1.27",
+    "date": "2026-05-17T11:00:00+00:00",
+    "score": "2:0",
+    "result": "✓"
+  },
+  {
     "sport": "hockey",
     "league": "ECHL",
     "match": "Allen Americans vs Kansas City",
@@ -1937,36 +1997,6 @@
     "odds": "1.53",
     "date": "2026-04-04T16:00:00+00:00",
     "score": "99:72",
-    "result": "✓"
-  },
-  {
-    "sport": "basketball",
-    "league": "LPB",
-    "match": "Esgueira vs Imortal",
-    "tip": "Over 168",
-    "odds": "1.55",
-    "date": "2026-04-04T16:00:00+00:00",
-    "score": "97:83",
-    "result": "✓"
-  },
-  {
-    "sport": "basketball",
-    "league": "NB I A",
-    "match": "Szolnoki Olaj vs Atomeromu Paks",
-    "tip": "Over 164",
-    "odds": "1.54",
-    "date": "2026-04-04T16:00:00+00:00",
-    "score": "63:103",
-    "result": "✓"
-  },
-  {
-    "sport": "basketball",
-    "league": "Division A",
-    "match": "Keravnos vs AEL",
-    "tip": "Over 158",
-    "odds": "1.58",
-    "date": "2026-04-04T16:00:00+00:00",
-    "score": "101:58",
     "result": "✓"
   }
 ]
