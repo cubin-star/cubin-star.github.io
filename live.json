@@ -1,86 +1,30 @@
 [
   {
-    "League": "3. liga - CFL A",
-    "Match": "Admira Praha vs Dukla Praha II",
+    "League": "Ettan - Södra",
+    "Match": "Angelholms FF vs Kristianstad",
+    "Tip": "Over 1.5",
+    "Odds": "1.21",
+    "Date": "2026-05-18T17:00:00+00:00"
+  },
+  {
+    "League": "Ettan - Norra",
+    "Match": "AFC Eskilstuna vs Arlanda",
     "Tip": "Over 1.5",
     "Odds": "1.16",
-    "Date": "2026-05-17T08:15:00+00:00"
+    "Date": "2026-05-18T17:30:00+00:00"
   },
   {
-    "League": "1. Liga",
-    "Match": "Riga FC II vs Mārupe",
+    "League": "Primera B",
+    "Match": "Deportes Santa Cruz vs Deportes Temuco",
     "Tip": "Over 1.5",
-    "Odds": "1.15",
-    "Date": "2026-05-17T10:00:00+00:00"
+    "Odds": "1.25",
+    "Date": "2026-05-18T23:00:00+00:00"
   },
   {
-    "League": "Superettan",
-    "Match": "Ostersunds FK vs Sandviken",
+    "League": "Serie C",
+    "Match": "Botafogo PB vs Inter De Limeira",
     "Tip": "Over 1.5",
-    "Odds": "1.26",
-    "Date": "2026-05-17T11:00:00+00:00"
-  },
-  {
-    "League": "Ettan - Södra",
-    "Match": "Jonkopings Sodra vs Hässleholms IF",
-    "Tip": "Over 1.5",
-    "Odds": "1.27",
-    "Date": "2026-05-17T11:00:00+00:00"
-  },
-  {
-    "League": "Allsvenskan",
-    "Match": "IF Brommapojkarna vs Kalmar FF",
-    "Tip": "Over 1.5",
-    "Odds": "1.32",
-    "Date": "2026-05-17T12:00:00+00:00"
-  },
-  {
-    "League": "Division 2 - Norra Svealand",
-    "Match": "Bollstanäs vs Falu BS",
-    "Tip": "Over 1.5",
-    "Odds": "1.15",
-    "Date": "2026-05-17T12:00:00+00:00"
-  },
-  {
-    "League": "Superliga",
-    "Match": "FC Copenhagen vs Randers FC",
-    "Tip": "Over 1.5",
-    "Odds": "1.14",
-    "Date": "2026-05-17T12:00:00+00:00"
-  },
-  {
-    "League": "1. Liga Promotion",
-    "Match": "Kreuzlingen vs Bavois",
-    "Tip": "Over 1.5",
-    "Odds": "1.12",
-    "Date": "2026-05-17T13:00:00+00:00"
-  },
-  {
-    "League": "3. liga - CFL B",
-    "Match": "Benátky nad Jizerou vs Pardubice II",
-    "Tip": "Over 1.5",
-    "Odds": "1.14",
-    "Date": "2026-05-17T15:00:00+00:00"
-  },
-  {
-    "League": "1. SNL",
-    "Match": "Olimpija Ljubljana vs Radomlje",
-    "Tip": "Over 1.5",
-    "Odds": "1.15",
-    "Date": "2026-05-17T15:30:00+00:00"
-  },
-  {
-    "League": "Pro League",
-    "Match": "Al Shabab vs Al-Ittihad FC",
-    "Tip": "Over 1.5",
-    "Odds": "1.13",
-    "Date": "2026-05-17T18:00:00+00:00"
-  },
-  {
-    "League": "Brasileiro U20 A",
-    "Match": "América Mineiro U20 vs São Paulo U20",
-    "Tip": "Over 1.5",
-    "Odds": "1.20",
-    "Date": "2026-05-17T18:00:00+00:00"
+    "Odds": "1.40",
+    "Date": "2026-05-18T23:00:00+00:00"
   }
 ]
