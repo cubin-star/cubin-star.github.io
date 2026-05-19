@@ -143,9 +143,9 @@ def is_excluded_fixture(fix):
 # Pokud po A-poolu i prvním filleru zbývá místo v tips.json, doplníme
 # úplně random zápas(y) z TOP first-tier evropských + významných světových
 # lig s reálným kurzem Over 2.5 v rozmezí TIPS_FB_MIN_ODDS..TIPS_FB_MAX_ODDS.
-TIPS_FB_MIN_ODDS = 1.70
+TIPS_FB_MIN_ODDS = 1.60
 TIPS_FB_MAX_ODDS = 1.90
-TIPS_FB_MAX_ATTEMPTS = 25  # max počet zápasů, u kterých zkusíme načíst odds
+TIPS_FB_MAX_ATTEMPTS = 60  # max počet zápasů, u kterých zkusíme načíst odds
 
 # API-Football league IDs – first-tier ligy (TOP 5 + top evropské + světové)
 # Ty mají v poolu PRIORITU (zkouší se jako první).
@@ -646,35 +646,53 @@ def pick_random_top_league_tips(all_fixtures, exclude_keys, exclude_leagues, nee
     picked = []
     used_leagues = set()
     attempts = 0
-    for fid, fix in candidates:
-        if len(picked) >= need:
-            break
-        if attempts >= TIPS_FB_MAX_ATTEMPTS:
-            break
-        attempts += 1
-        league_name = fix.get("league", "?")
-        if league_name in used_leagues:
-            continue
-        date_part = fix.get("kickoff", today_str())[:10]
-        items = fetch_league_odds(fix["league_id"], fix["season"], date_part)
-        odds_map = compute_odds_for_fixtures(items, {fid})
-        o25 = odds_map.get(fid, {}).get("o25")
-        match_str = f"{fix.get('home', '?')} vs {fix.get('away', '?')}"
-        if o25 is None:
-            print(f"    - {match_str[:50]}: no Over 2.5 odds")
-            continue
-        if not (TIPS_FB_MIN_ODDS <= o25 <= TIPS_FB_MAX_ODDS):
-            print(f"    - {match_str[:50]}: O2.5={o25:.2f} mimo rozsah")
-            continue
-        print(f"    \u2713 {match_str[:50]}: O2.5={o25:.2f} ({league_name})")
-        picked.append({
-            "League": league_name,
-            "Match": match_str,
-            "Tip": "Over 2.5",
-            "Odds": f"{o25:.2f}",
-            "Date": fix.get("kickoff", ""),
-        })
-        used_leagues.add(league_name)
+    odds_cache = {}  # fid -> o25 (abychom v 2. průchodu neopakovali API)
+
+    def _try_pick(enforce_league_dedup):
+        nonlocal attempts
+        for fid, fix in candidates:
+            if len(picked) >= need:
+                return
+            if attempts >= TIPS_FB_MAX_ATTEMPTS:
+                return
+            attempts += 1
+            league_name = fix.get("league", "?")
+            if enforce_league_dedup and league_name in used_leagues:
+                continue
+            match_str = f"{fix.get('home', '?')} vs {fix.get('away', '?')}"
+            # přeskoč, pokud už vybráno v tomto fallbacku
+            if any(p["Match"] == match_str and p["Date"] == fix.get("kickoff", "") for p in picked):
+                continue
+            if fid in odds_cache:
+                o25 = odds_cache[fid]
+            else:
+                date_part = fix.get("kickoff", today_str())[:10]
+                items = fetch_league_odds(fix["league_id"], fix["season"], date_part)
+                odds_map = compute_odds_for_fixtures(items, {fid})
+                o25 = odds_map.get(fid, {}).get("o25")
+                odds_cache[fid] = o25
+            if o25 is None:
+                print(f"    - {match_str[:50]}: no Over 2.5 odds")
+                continue
+            if not (TIPS_FB_MIN_ODDS <= o25 <= TIPS_FB_MAX_ODDS):
+                print(f"    - {match_str[:50]}: O2.5={o25:.2f} mimo rozsah")
+                continue
+            print(f"    \u2713 {match_str[:50]}: O2.5={o25:.2f} ({league_name})")
+            picked.append({
+                "League": league_name,
+                "Match": match_str,
+                "Tip": "Over 2.5",
+                "Odds": f"{o25:.2f}",
+                "Date": fix.get("kickoff", ""),
+            })
+            used_leagues.add(league_name)
+
+    # 1. průchod – preferujeme různé ligy
+    _try_pick(enforce_league_dedup=True)
+    # 2. průchod – pokud stále chybí, povolíme duplicitní ligu
+    if len(picked) < need:
+        print(f"  Tips fallback: still need {need - len(picked)}, retrying without league dedup...")
+        _try_pick(enforce_league_dedup=False)
 
     return picked
 
