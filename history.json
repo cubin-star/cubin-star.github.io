@@ -1,5 +1,45 @@
 [
   {
+    "sport": "hockey",
+    "league": "NHL",
+    "match": "Buffalo Sabres vs Montreal Canadiens",
+    "tip": "Over 3.5",
+    "odds": "1.21",
+    "date": "2026-05-18T23:30:00+00:00",
+    "score": "2:3",
+    "result": "✓"
+  },
+  {
+    "sport": "hockey",
+    "league": "World Championship",
+    "match": "Sweden vs Czech Republic",
+    "tip": "Over 3.5",
+    "odds": "1.22",
+    "date": "2026-05-18T18:20:00+00:00",
+    "score": "3:4",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "Ettan - Södra",
+    "match": "Angelholms FF vs Kristianstad",
+    "tip": "Over 1.5",
+    "odds": "1.21",
+    "date": "2026-05-18T17:00:00+00:00",
+    "score": "0:1",
+    "result": "✗"
+  },
+  {
+    "sport": "football",
+    "league": "Ekstraklasa",
+    "match": "Arka Gdynia vs Nieciecza",
+    "tip": "Over 1.5",
+    "odds": "1.21",
+    "date": "2026-05-18T17:00:00+00:00",
+    "score": "2:3",
+    "result": "✓"
+  },
+  {
     "sport": "basketball",
     "league": "NBA",
     "match": "Detroit Pistons vs Cleveland Cavaliers",
@@ -1957,46 +1997,6 @@
     "odds": "1.46",
     "date": "2026-04-04T18:30:00+00:00",
     "score": "1:2",
-    "result": "✓"
-  },
-  {
-    "sport": "hockey",
-    "league": "Alps Hockey League",
-    "match": "KHL Sisak vs Merano",
-    "tip": "Over 3.5",
-    "odds": "1.13",
-    "date": "2026-04-04T17:30:00+00:00",
-    "score": "4:3",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Major League Soccer",
-    "match": "Toronto FC vs Colorado Rapids",
-    "tip": "Over 1.5",
-    "odds": "1.21",
-    "date": "2026-04-04T17:00:00+00:00",
-    "score": "3:2",
-    "result": "✓"
-  },
-  {
-    "sport": "basketball",
-    "league": "Pro A",
-    "match": "Bayreuth vs Bremerhaven",
-    "tip": "Over 158.5",
-    "odds": "1.50",
-    "date": "2026-04-04T17:00:00+00:00",
-    "score": "91:86",
-    "result": "✓"
-  },
-  {
-    "sport": "basketball",
-    "league": "Extraliga",
-    "match": "Slovan Bratislava vs BC Komarno",
-    "tip": "Over 157",
-    "odds": "1.53",
-    "date": "2026-04-04T16:00:00+00:00",
-    "score": "99:72",
     "result": "✓"
   }
 ]
