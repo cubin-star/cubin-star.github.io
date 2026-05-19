@@ -1,5 +1,21 @@
 [
   {
+    "league": "World Championship",
+    "homeTeam": "Italy",
+    "awayTeam": "Norway",
+    "tip": "Over 4.5",
+    "odds": "",
+    "halftimeScore": "0:1",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "kickoff": "2026-05-19T14:20:00.000Z",
+    "resolvedAt": "",
+    "source": "tipper-hockey",
+    "sport": "hockey",
+    "scoutStats": "World Championship | P2 0:3 → need 2 more"
+  },
+  {
     "league": "Segunda División",
     "homeTeam": "Leganes",
     "awayTeam": "Huesca",
