@@ -1,24 +1,24 @@
 [
   {
-    "League": "I Liga",
-    "Match": "Puszcza Niepołomice vs ŁKS Łódź",
+    "League": "Premier League",
+    "Match": "Chelsea vs Tottenham",
     "Tip": "Over 2.5",
-    "Odds": "1.95",
-    "Date": "2026-05-18T16:00:00+00:00"
+    "Odds": "1.75",
+    "Date": "2026-05-19T19:15:00+00:00"
   },
   {
-    "League": "Ettan - Södra",
-    "Match": "Angelholms FF vs Kristianstad",
+    "League": "Superettan",
+    "Match": "Helsingborg vs Varbergs BoIS FC",
     "Tip": "Over 2.5",
-    "Odds": "1.80",
-    "Date": "2026-05-18T17:00:00+00:00"
+    "Odds": "1.85",
+    "Date": "2026-05-19T17:00:00+00:00"
   },
   {
-    "League": "Liga I",
-    "Match": "AFC Hermannstadt vs FCSB",
+    "League": "CONMEBOL Libertadores",
+    "Match": "Always Ready vs Mirassol",
     "Tip": "Over 2.5",
-    "Odds": "1.94",
-    "Date": "2026-05-18T17:30:00+00:00",
+    "Odds": "1.92",
+    "Date": "2026-05-20T00:00:00+00:00",
     "locked": true
   }
 ]
