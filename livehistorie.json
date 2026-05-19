@@ -1,5 +1,20 @@
 [
   {
+    "league": "Premier League",
+    "homeTeam": "Chelsea",
+    "awayTeam": "Tottenham",
+    "tip": "Over 2.5",
+    "odds": "",
+    "halftimeScore": "1:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "kickoff": "2026-05-19T19:15:00.000Z",
+    "resolvedAt": "",
+    "source": "tipper-football",
+    "scoutStats": "Premier League | 68' 2:0 → need 1 more"
+  },
+  {
     "league": "World Championship",
     "homeTeam": "Italy",
     "awayTeam": "Norway",
