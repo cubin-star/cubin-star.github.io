@@ -1,23 +1,23 @@
 [
   {
-    "league": "Ligue 1",
-    "match": "USM Alger - Olympique Akbou",
-    "kickoff": "2026-05-19T21:00:00+02:00",
+    "league": "Copa Argentina",
+    "match": "Talleres Cordoba - Atletico Tucuman",
+    "kickoff": "2026-05-20T22:00:00+02:00",
     "tip": "Over 2.5",
     "odds": "2.36"
   },
   {
-    "league": "Super League",
-    "match": "Tianjin Teda - Henan Jianye",
-    "kickoff": "2026-05-19T13:35:00+02:00",
+    "league": "Copa Sul-Sudeste",
+    "match": "Volta Redonda - Avai",
+    "kickoff": "2026-05-21T00:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.31"
+    "odds": "2.33"
   },
   {
-    "league": "CONMEBOL Sudamericana",
-    "match": "Sao Paulo - Millonarios",
-    "kickoff": "2026-05-20T02:30:00+02:00",
+    "league": "Primeira Liga",
+    "match": "Torreense - Casa Pia",
+    "kickoff": "2026-05-20T19:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.24"
+    "odds": "2.19"
   }
 ]
