@@ -1,5 +1,55 @@
 [
   {
+    "sport": "basketball",
+    "league": "NBA",
+    "match": "New York Knicks vs Cleveland Cavaliers",
+    "tip": "Over 204.5",
+    "odds": "1.25",
+    "date": "2026-05-20T00:00:00+00:00",
+    "score": "115:104",
+    "result": "✓"
+  },
+  {
+    "sport": "hockey",
+    "league": "AHL",
+    "match": "Springfield Thunderbirds vs Wilkes-Barre/Scranton",
+    "tip": "Over 3.5",
+    "odds": "1.25",
+    "date": "2026-05-19T23:05:00+00:00",
+    "score": "1:2",
+    "result": "✗"
+  },
+  {
+    "sport": "football",
+    "league": "Jupiler Pro League",
+    "match": "KVC Westerlo vs Standard Liege",
+    "tip": "Over 1.5",
+    "odds": "1.20",
+    "date": "2026-05-19T18:30:00+00:00",
+    "score": "1:2",
+    "result": "✓"
+  },
+  {
+    "sport": "hockey",
+    "league": "World Championship",
+    "match": "Hungary vs Great Britain",
+    "tip": "Over 3.5",
+    "odds": "1.25",
+    "date": "2026-05-19T18:20:00+00:00",
+    "score": "5:0",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "Bundesliga",
+    "match": "Ried vs Wolfsberger AC",
+    "tip": "Over 1.5",
+    "odds": "1.28",
+    "date": "2026-05-19T16:30:00+00:00",
+    "score": "2:1",
+    "result": "✓"
+  },
+  {
     "sport": "hockey",
     "league": "NHL",
     "match": "Buffalo Sabres vs Montreal Canadiens",
@@ -1947,56 +1997,6 @@
     "odds": "1.15",
     "date": "2026-04-04T23:05:00+00:00",
     "score": "2:6",
-    "result": "✓"
-  },
-  {
-    "sport": "hockey",
-    "league": "NHL",
-    "match": "Carolina Hurricanes vs New York Islanders",
-    "tip": "Over 3.5",
-    "odds": "1.13",
-    "date": "2026-04-04T23:00:00+00:00",
-    "score": "4:3",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Primera Division",
-    "match": "Zacatecoluca vs FAS",
-    "tip": "Over 1.5",
-    "odds": "1.28",
-    "date": "2026-04-04T22:00:00+00:00",
-    "score": "1:6",
-    "result": "✓"
-  },
-  {
-    "sport": "basketball",
-    "league": "Super League",
-    "match": "KW Titans vs Windsor",
-    "tip": "Over 206.5",
-    "odds": "1.62",
-    "date": "2026-04-04T20:00:00+00:00",
-    "score": "99:109",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Primera División RFEF - Group 1",
-    "match": "Ponferradina vs Mérida AD",
-    "tip": "Over 1.5",
-    "odds": "1.44",
-    "date": "2026-04-04T19:00:00+00:00",
-    "score": "4:1",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "First League",
-    "match": "Mladost DG vs Arsenal Tivat",
-    "tip": "Over 1.5",
-    "odds": "1.46",
-    "date": "2026-04-04T18:30:00+00:00",
-    "score": "1:2",
     "result": "✓"
   }
 ]
