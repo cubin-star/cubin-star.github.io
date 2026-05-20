@@ -1,24 +1,24 @@
 [
   {
-    "League": "Premier League",
-    "Match": "Chelsea vs Tottenham",
+    "League": "Veikkausliiga",
+    "Match": "KuPS vs FF Jaro",
     "Tip": "Over 2.5",
     "Odds": "1.75",
-    "Date": "2026-05-19T19:15:00+00:00"
+    "Date": "2026-05-20T16:00:00+00:00"
   },
   {
-    "League": "Superettan",
-    "Match": "Helsingborg vs Varbergs BoIS FC",
+    "League": "Allsvenskan",
+    "Match": "Gais vs Hammarby FF",
+    "Tip": "Over 2.5",
+    "Odds": "1.95",
+    "Date": "2026-05-20T17:00:00+00:00"
+  },
+  {
+    "League": "Cup",
+    "Match": "TransINVEST Vilnius vs Hegelmann Litauen",
     "Tip": "Over 2.5",
     "Odds": "1.85",
-    "Date": "2026-05-19T17:00:00+00:00"
-  },
-  {
-    "League": "CONMEBOL Libertadores",
-    "Match": "Always Ready vs Mirassol",
-    "Tip": "Over 2.5",
-    "Odds": "1.92",
-    "Date": "2026-05-20T00:00:00+00:00",
+    "Date": "2026-05-20T16:00:00+00:00",
     "locked": true
   }
 ]
