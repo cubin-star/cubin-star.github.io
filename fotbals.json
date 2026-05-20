@@ -1,16 +1,16 @@
 [
   {
-    "League": "Jupiler Pro League",
-    "Match": "KVC Westerlo vs Standard Liege",
-    "Tip": "Over 1.5",
-    "Odds": "1.20",
-    "Date": "2026-05-19T18:30:00+00:00"
-  },
-  {
-    "League": "Bundesliga",
-    "Match": "Ried vs Wolfsberger AC",
+    "League": "Allsvenskan",
+    "Match": "Gais vs Hammarby FF",
     "Tip": "Over 1.5",
     "Odds": "1.28",
-    "Date": "2026-05-19T16:30:00+00:00"
+    "Date": "2026-05-20T17:00:00+00:00"
+  },
+  {
+    "League": "UEFA Europa League",
+    "Match": "SC Freiburg vs Aston Villa",
+    "Tip": "Over 1.5",
+    "Odds": "1.31",
+    "Date": "2026-05-20T19:00:00+00:00"
   }
 ]
