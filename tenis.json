@@ -1,21 +1,21 @@
 {
-  "updated_at": "20.05.2026 10:08",
+  "updated_at": "21.05.2026 10:10",
   "tips": [
     {
-      "league": "WTA - WTA Strasbourg, France Women Singles",
-      "match": "Navarro, Emma vs Jovic, Iva",
-      "tip": "Over20.5",
-      "odds": "1.77",
-      "date": "20.05.2026",
-      "time": "17:30"
-    },
-    {
-      "league": "WTA - French Open Women Singles",
-      "match": "Kudermetova, Polina vs Tomova, Viktoriya",
+      "league": "ATP - French Open Men Singles",
+      "match": "Galarneau, Alexis vs Cina, Federico",
       "tip": "Over20.5",
       "odds": "1.75",
-      "date": "20.05.2026",
-      "time": "14:40"
+      "date": "21.05.2026",
+      "time": "12:10"
+    },
+    {
+      "league": "WTA - WTA Rabat, Morocco Women Singles",
+      "match": "Marcinko, Petra vs Bouzas Maneiro, Jessica",
+      "tip": "Over20.5",
+      "odds": "1.75",
+      "date": "21.05.2026",
+      "time": "13:10"
     }
   ]
 }
