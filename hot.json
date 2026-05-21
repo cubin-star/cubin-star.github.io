@@ -1,50 +1,50 @@
 [
   {
-    "league": "Primeira Liga",
-    "match": "Torreense - Casa Pia",
-    "kickoff": "2026-05-20T19:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.19",
-    "group": 1
-  },
-  {
-    "league": "Erovnuli Liga 2",
-    "match": "Gareji - Merani Martvili",
-    "kickoff": "2026-05-20T14:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.19",
-    "group": 1
-  },
-  {
-    "league": "Serie C - Promotion - Play-offs",
-    "match": "Union Brescia - Casarano",
-    "kickoff": "2026-05-20T20:00:00+02:00",
+    "league": "Allsvenskan",
+    "match": "IF Elfsborg - Mjallby AIF",
+    "kickoff": "2026-05-21T19:00:00+02:00",
     "tip": "Over 2.5",
     "odds": "2.10",
-    "group": 2
+    "group": 1
   },
   {
-    "league": "Copa Argentina",
-    "match": "Talleres Cordoba - Atletico Tucuman",
-    "kickoff": "2026-05-20T22:00:00+02:00",
+    "league": "Premyer Liqa",
+    "match": "Qabala - Şamaxı FK",
+    "kickoff": "2026-05-21T16:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.36",
+    "odds": "2.37",
+    "group": 1
+  },
+  {
+    "league": "Premiership",
+    "match": "Partick - ST Mirren",
+    "kickoff": "2026-05-21T21:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.17",
     "group": 2
   },
   {
-    "league": "Copa Sul-Sudeste",
-    "match": "Volta Redonda - Avai",
-    "kickoff": "2026-05-21T00:00:00+02:00",
+    "league": "Première Division",
+    "match": "Stade Malien Bamako - Bougouni",
+    "kickoff": "2026-05-21T18:30:00+02:00",
     "tip": "Over 2.5",
     "odds": "2.33",
+    "group": 2
+  },
+  {
+    "league": "Super League 1",
+    "match": "Panetolikos - Asteras Tripolis",
+    "kickoff": "2026-05-21T18:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.20",
     "group": 3
   },
   {
-    "league": "Iraqi League",
-    "match": "Al Quwa Al Jawiya - Al Zawra'a",
-    "kickoff": "2026-05-20T19:00:00+02:00",
+    "league": "CONMEBOL Sudamericana",
+    "match": "Puerto Cabello - Juventud",
+    "kickoff": "2026-05-22T00:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.14",
+    "odds": "2.20",
     "group": 3
   }
 ]
