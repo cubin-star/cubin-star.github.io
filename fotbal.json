@@ -1,24 +1,24 @@
 [
   {
-    "League": "Veikkausliiga",
-    "Match": "KuPS vs FF Jaro",
+    "League": "Bundesliga",
+    "Match": "VfL Wolfsburg vs SC Paderborn 07",
     "Tip": "Over 2.5",
-    "Odds": "1.75",
-    "Date": "2026-05-20T16:00:00+00:00"
+    "Odds": "1.82",
+    "Date": "2026-05-21T18:30:00+00:00"
   },
   {
-    "League": "Allsvenskan",
-    "Match": "Gais vs Hammarby FF",
+    "League": "Jupiler Pro League",
+    "Match": "Gent vs Union St. Gilloise",
     "Tip": "Over 2.5",
-    "Odds": "1.95",
-    "Date": "2026-05-20T17:00:00+00:00"
+    "Odds": "1.93",
+    "Date": "2026-05-21T18:30:00+00:00"
   },
   {
-    "League": "Cup",
-    "Match": "TransINVEST Vilnius vs Hegelmann Litauen",
+    "League": "Super League 1",
+    "Match": "Atromitos vs Panserraikos",
     "Tip": "Over 2.5",
-    "Odds": "1.85",
-    "Date": "2026-05-20T16:00:00+00:00",
+    "Odds": "1.84",
+    "Date": "2026-05-21T15:00:00+00:00",
     "locked": true
   }
 ]
