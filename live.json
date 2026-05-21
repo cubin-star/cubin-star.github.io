@@ -1,37 +1,16 @@
 [
   {
-    "League": "Super League",
-    "Match": "Hangzhou Greentown vs Shandong Luneng",
+    "League": "Division 2 - Norra Götaland",
+    "Match": "Tord vs Skara",
     "Tip": "Over 1.5",
-    "Odds": "1.15",
-    "Date": "2026-05-20T12:00:00+00:00"
+    "Odds": "1.13",
+    "Date": "2026-05-21T17:00:00+00:00"
   },
   {
-    "League": "3. liga - MSFL",
-    "Match": "Frýdek-Místek vs Zlín II",
+    "League": "Pro League",
+    "Match": "Al-Hazm vs Al Taawon",
     "Tip": "Over 1.5",
-    "Odds": "1.12",
-    "Date": "2026-05-20T15:00:00+00:00"
-  },
-  {
-    "League": "3. liga - CFL A",
-    "Match": "Admira Praha vs České Budějovice II",
-    "Tip": "Over 1.5",
-    "Odds": "1.14",
-    "Date": "2026-05-20T15:00:00+00:00"
-  },
-  {
-    "League": "Liga Leumit",
-    "Match": "Hapoel Kfar Shalem vs Kiryat Yam SC",
-    "Tip": "Over 1.5",
-    "Odds": "1.15",
-    "Date": "2026-05-20T15:45:00+00:00"
-  },
-  {
-    "League": "Segunda División",
-    "Match": "Urena SC vs Club Atletico Barinas",
-    "Tip": "Over 1.5",
-    "Odds": "1.26",
-    "Date": "2026-05-20T19:30:00+00:00"
+    "Odds": "1.18",
+    "Date": "2026-05-21T18:00:00+00:00"
   }
 ]
