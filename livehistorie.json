@@ -1,5 +1,20 @@
 [
   {
+    "league": "US Open Cup",
+    "homeTeam": "Columbus Crew",
+    "awayTeam": "New York City FC",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "0:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "kickoff": "2026-05-20T23:30:00.000Z",
+    "resolvedAt": "",
+    "source": "tipper-football",
+    "scoutStats": "US Open Cup | 74' 1:0 → need 1 more"
+  },
+  {
     "league": "Premier League",
     "homeTeam": "Chelsea",
     "awayTeam": "Tottenham",
