@@ -1,8 +1,14 @@
 [
   {
-    "league": "AHL",
-    "match": "Toronto Marlies vs Cleveland Monsters",
+    "league": "World Championship",
+    "match": "Latvia vs Finland",
     "tip": "Over 5.5",
-    "odds": "1.75"
+    "odds": "1.91"
+  },
+  {
+    "league": "World Championship",
+    "match": "Denmark vs Slovakia",
+    "tip": "Over 5.5",
+    "odds": "2.12"
   }
 ]
