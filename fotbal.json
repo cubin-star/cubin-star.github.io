@@ -1,24 +1,24 @@
 [
   {
-    "League": "Bundesliga",
-    "Match": "VfL Wolfsburg vs SC Paderborn 07",
+    "League": "Coupe de France",
+    "Match": "Lens vs Nice",
     "Tip": "Over 2.5",
-    "Odds": "1.82",
-    "Date": "2026-05-21T18:30:00+00:00"
+    "Odds": "1.76",
+    "Date": "2026-05-22T19:00:00+00:00"
   },
   {
-    "League": "Jupiler Pro League",
-    "Match": "Gent vs Union St. Gilloise",
+    "League": "Türkiye Kupası",
+    "Match": "Trabzonspor vs Konyaspor",
     "Tip": "Over 2.5",
-    "Odds": "1.93",
-    "Date": "2026-05-21T18:30:00+00:00"
+    "Odds": "1.87",
+    "Date": "2026-05-22T17:45:00+00:00"
   },
   {
-    "League": "Super League 1",
-    "Match": "Atromitos vs Panserraikos",
+    "League": "Ettan - Södra",
+    "Match": "Kristianstad vs Hässleholms IF",
     "Tip": "Over 2.5",
-    "Odds": "1.84",
-    "Date": "2026-05-21T15:00:00+00:00",
+    "Odds": "1.81",
+    "Date": "2026-05-22T17:00:00+00:00",
     "locked": true
   }
 ]
