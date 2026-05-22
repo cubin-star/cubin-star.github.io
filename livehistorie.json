@@ -1,5 +1,20 @@
 [
   {
+    "league": "J1 League",
+    "homeTeam": "Machida Zelvia",
+    "awayTeam": "Urawa",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "1:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "kickoff": "2026-05-22T10:30:00.000Z",
+    "resolvedAt": "",
+    "source": "tipper-football",
+    "scoutStats": "J1 League | 54' 1:0 → need 1 more | Pre O2.5: 2.45"
+  },
+  {
     "league": "US Open Cup",
     "homeTeam": "Colorado Rapids",
     "awayTeam": "San Jose Earthquakes",
