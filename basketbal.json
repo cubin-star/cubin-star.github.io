@@ -1,14 +1,14 @@
 [
   {
+    "league": "Europe - Euroleague",
+    "match": "Olympiacos vs Fenerbahce",
+    "tip": "Over 160.5",
+    "odds": "1.80"
+  },
+  {
     "league": "Czech Republic - NBL",
     "match": "Brno vs Pardubice",
     "tip": "Over 165.5",
-    "odds": "1.79"
-  },
-  {
-    "league": "Poland - Energa Basket Liga",
-    "match": "Dziki Warszawa vs Trefl Sopot",
-    "tip": "Over 172.5",
-    "odds": "1.80"
+    "odds": "1.82"
   }
 ]
