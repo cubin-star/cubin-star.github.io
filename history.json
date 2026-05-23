@@ -1,5 +1,45 @@
 [
   {
+    "sport": "basketball",
+    "league": "NBA",
+    "match": "San Antonio Spurs vs Oklahoma City Thunder",
+    "tip": "Over 204.5",
+    "odds": "1.27",
+    "date": "2026-05-23T00:30:00+00:00",
+    "score": "108:123",
+    "result": "✓"
+  },
+  {
+    "sport": "hockey",
+    "league": "AHL",
+    "match": "Toronto Marlies vs Cleveland Monsters",
+    "tip": "Over 3.5",
+    "odds": "1.23",
+    "date": "2026-05-22T23:00:00+00:00",
+    "score": "5:2",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "Bundesliga",
+    "match": "Ried vs Rapid Vienna",
+    "tip": "Over 1.5",
+    "odds": "1.27",
+    "date": "2026-05-22T17:30:00+00:00",
+    "score": "2:1",
+    "result": "✓"
+  },
+  {
+    "sport": "basketball",
+    "league": "Euroleague",
+    "match": "Olympiacos vs Fenerbahce",
+    "tip": "Over 151.5",
+    "odds": "1.28",
+    "date": "2026-05-22T15:00:00+00:00",
+    "score": "79:61",
+    "result": "✗"
+  },
+  {
     "sport": "football",
     "league": "Liga MX",
     "match": "Cruz Azul vs U.N.A.M. - Pumas",
@@ -1957,46 +1997,6 @@
     "odds": "1.16",
     "date": "2026-04-05T18:45:00+00:00",
     "score": "2:1",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Ligat Ha'al",
-    "match": "Hapoel Haifa vs Maccabi Tel Aviv",
-    "tip": "Over 1.5",
-    "odds": "1.18",
-    "date": "2026-04-05T17:15:00+00:00",
-    "score": "1:4",
-    "result": "✓"
-  },
-  {
-    "sport": "basketball",
-    "league": "NBL",
-    "match": "Usti n. Labem vs Opava",
-    "tip": "Over 168",
-    "odds": "1.60",
-    "date": "2026-04-05T16:00:00+00:00",
-    "score": "98:95",
-    "result": "✓"
-  },
-  {
-    "sport": "basketball",
-    "league": "ABA League",
-    "match": "Buducnost vs Partizan Mozzart Bet",
-    "tip": "Over 164.5",
-    "odds": "1.53",
-    "date": "2026-04-05T16:00:00+00:00",
-    "score": "95:89",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Bundesliga",
-    "match": "Eintracht Frankfurt vs 1. FC Köln",
-    "tip": "Over 1.5",
-    "odds": "1.20",
-    "date": "2026-04-05T15:30:00+00:00",
-    "score": "2:2",
     "result": "✓"
   }
 ]
