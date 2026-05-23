@@ -1,24 +1,24 @@
 [
   {
-    "League": "Coupe de France",
-    "Match": "Lens vs Nice",
+    "League": "Primera División RFEF - Group 1",
+    "Match": "Unionistas de Salamanca vs Racing Ferrol",
     "Tip": "Over 2.5",
-    "Odds": "1.76",
-    "Date": "2026-05-22T19:00:00+00:00"
+    "Odds": "1.86",
+    "Date": "2026-05-23T16:30:00+00:00"
   },
   {
-    "League": "Türkiye Kupası",
-    "Match": "Trabzonspor vs Konyaspor",
+    "League": "Serie A",
+    "Match": "Lazio vs Pisa",
     "Tip": "Over 2.5",
-    "Odds": "1.87",
-    "Date": "2026-05-22T17:45:00+00:00"
+    "Odds": "1.88",
+    "Date": "2026-05-23T18:45:00+00:00"
   },
   {
-    "League": "Ettan - Södra",
-    "Match": "Kristianstad vs Hässleholms IF",
+    "League": "La Liga",
+    "Match": "Real Betis vs Levante",
     "Tip": "Over 2.5",
-    "Odds": "1.81",
-    "Date": "2026-05-22T17:00:00+00:00",
+    "Odds": "1.78",
+    "Date": "2026-05-23T19:00:00+00:00",
     "locked": true
   }
 ]
