@@ -1,16 +1,37 @@
 [
   {
+    "league": "Allsvenskan",
+    "match": "Kalmar FF - Degerfors IF",
+    "kickoff": "2026-05-23T15:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.16"
+  },
+  {
+    "league": "Ekstraklasa",
+    "match": "Cracovia Krakow - Korona Kielce",
+    "kickoff": "2026-05-23T17:30:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.14"
+  },
+  {
     "league": "Liga I",
-    "match": "CFR 1907 Cluj - Arges Pitesti",
-    "kickoff": "2026-05-22T19:30:00+02:00",
+    "match": "Chindia Targoviste - Farul Constanta",
+    "kickoff": "2026-05-23T16:30:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.12"
+  },
+  {
+    "league": "Ekstraklasa",
+    "match": "Widzew Łódź - Piast Gliwice",
+    "kickoff": "2026-05-23T17:30:00+02:00",
     "tip": "Over 2.5",
     "odds": "2.10"
   },
   {
-    "league": "Serie B",
-    "match": "Sudtirol - Bari",
-    "kickoff": "2026-05-22T20:00:00+02:00",
+    "league": "Championship",
+    "match": "Hull City - Middlesbrough",
+    "kickoff": "2026-05-23T16:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.26"
+    "odds": "2.17"
   }
 ]

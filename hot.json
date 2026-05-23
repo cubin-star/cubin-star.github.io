@@ -1,50 +1,50 @@
 [
   {
+    "league": "Allsvenskan",
+    "match": "Kalmar FF - Degerfors IF",
+    "kickoff": "2026-05-23T15:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.16",
+    "group": 1
+  },
+  {
+    "league": "Championship",
+    "match": "Hull City - Middlesbrough",
+    "kickoff": "2026-05-23T16:30:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.17",
+    "group": 1
+  },
+  {
+    "league": "Ekstraklasa",
+    "match": "Cracovia Krakow - Korona Kielce",
+    "kickoff": "2026-05-23T17:30:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.14",
+    "group": 2
+  },
+  {
+    "league": "Tercera División RFEF - Group 1",
+    "match": "Compostela - Villalbés",
+    "kickoff": "2026-05-23T18:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.19",
+    "group": 2
+  },
+  {
     "league": "Liga I",
-    "match": "CFR 1907 Cluj - Arges Pitesti",
-    "kickoff": "2026-05-22T19:30:00+02:00",
+    "match": "Chindia Targoviste - Farul Constanta",
+    "kickoff": "2026-05-23T16:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.10",
-    "group": 1
-  },
-  {
-    "league": "2. Division",
-    "match": "Brabrand - Skive",
-    "kickoff": "2026-05-22T19:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.31",
-    "group": 1
-  },
-  {
-    "league": "Serie B",
-    "match": "Sudtirol - Bari",
-    "kickoff": "2026-05-22T20:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.26",
-    "group": 2
-  },
-  {
-    "league": "First League",
-    "match": "Botev Vratsa - Beroe",
-    "kickoff": "2026-05-22T17:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.11",
-    "group": 2
-  },
-  {
-    "league": "First NL",
-    "match": "Sesvete - Bsk Bijelo Brdo",
-    "kickoff": "2026-05-22T13:45:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.18",
+    "odds": "2.12",
     "group": 3
   },
   {
-    "league": "Primera División RFEF - Group 2",
-    "match": "Marbella - Teruel",
-    "kickoff": "2026-05-22T18:30:00+02:00",
+    "league": "Persha Liga",
+    "match": "Prykarpattia - Ahrobiznes Volochysk",
+    "kickoff": "2026-05-23T12:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.16",
+    "odds": "2.36",
     "group": 3
   }
 ]
