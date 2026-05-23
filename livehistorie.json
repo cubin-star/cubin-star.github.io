@@ -1,5 +1,20 @@
 [
   {
+    "league": "Allsvenskan",
+    "homeTeam": "Kalmar FF",
+    "awayTeam": "Degerfors IF",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "1:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "kickoff": "2026-05-23T13:00:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-football",
+    "scoutStats": "Score: 9/9 | xG: 1.20(est) | Shots: 20/10 | 55' 1:0 | Pre O2.5: 2.1"
+  },
+  {
     "league": "J1 League",
     "homeTeam": "Kashiwa Reysol",
     "awayTeam": "JEF United Chiba",
