@@ -1,5 +1,20 @@
 [
   {
+    "league": "Ligat Ha'al",
+    "homeTeam": "Hapoel Beer Sheva",
+    "awayTeam": "Maccabi Haifa",
+    "tip": "Over 4.5",
+    "odds": "",
+    "halftimeScore": "1:2",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "kickoff": "2026-05-23T18:00:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-football",
+    "scoutStats": "Score: 9/9 | xG: 1.08(est) | Shots: 17/9 | 55' 1:3 | Pre O2.5: 1.5"
+  },
+  {
     "league": "Ekstraklasa",
     "homeTeam": "Legia Warszawa",
     "awayTeam": "Motor Lublin",
