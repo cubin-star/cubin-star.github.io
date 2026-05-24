@@ -1,100 +1,37 @@
 [
   {
-    "League": "K League 2",
-    "Match": "Gyeongnam FC vs Suwon City FC",
+    "League": "J1 League",
+    "Match": "Shimizu S-pulse vs Gamba Osaka",
     "Tip": "Over 1.5",
-    "Odds": "1.26",
-    "Date": "2026-05-23T07:30:00+00:00"
+    "Odds": "1.29",
+    "Date": "2026-05-24T08:00:00+00:00"
   },
   {
-    "League": "Liga 1",
-    "Match": "Persebaya Surabaya vs Persik Kediri",
-    "Tip": "Over 1.5",
-    "Odds": "1.17",
-    "Date": "2026-05-23T09:00:00+00:00"
-  },
-  {
-    "League": "Ettan - Södra",
-    "Match": "Rosengård vs Olympic",
-    "Tip": "Over 1.5",
-    "Odds": "1.17",
-    "Date": "2026-05-23T11:00:00+00:00"
-  },
-  {
-    "League": "Division 2 - Norra Götaland",
-    "Match": "IF Karlstad II vs Ahlafors",
-    "Tip": "Over 1.5",
-    "Odds": "1.14",
-    "Date": "2026-05-23T11:00:00+00:00"
-  },
-  {
-    "League": "Czech Liga",
-    "Match": "Sigma Olomouc vs Karviná",
-    "Tip": "Over 1.5",
-    "Odds": "1.17",
-    "Date": "2026-05-23T12:00:00+00:00"
-  },
-  {
-    "League": "Ettan - Norra",
-    "Match": "Stockholm Internazionale vs Karlberg",
-    "Tip": "Over 1.5",
-    "Odds": "1.20",
-    "Date": "2026-05-23T14:00:00+00:00"
-  },
-  {
-    "League": "Superettan",
-    "Match": "Falkenbergs FF vs IFK Varnamo",
-    "Tip": "Over 1.5",
-    "Odds": "1.23",
-    "Date": "2026-05-23T15:00:00+00:00"
-  },
-  {
-    "League": "1. SNL",
-    "Match": "Maribor vs Aluminij",
+    "League": "3. liga - CFL B",
+    "Match": "Teplice II vs Jablonec II",
     "Tip": "Over 1.5",
     "Odds": "1.13",
-    "Date": "2026-05-23T15:30:00+00:00"
+    "Date": "2026-05-24T09:00:00+00:00"
   },
   {
-    "League": "Serie D",
-    "Match": "Trem vs Tocantinópolis",
+    "League": "K League 2",
+    "Match": "Daegu FC vs Ansan Greeners",
     "Tip": "Over 1.5",
-    "Odds": "1.28",
-    "Date": "2026-05-23T19:00:00+00:00"
+    "Odds": "1.19",
+    "Date": "2026-05-24T10:00:00+00:00"
   },
   {
-    "League": "Serie A",
-    "Match": "Sao Paulo vs Botafogo",
+    "League": "First League",
+    "Match": "Pelister vs Bashkimi Kumanovo",
     "Tip": "Over 1.5",
-    "Odds": "1.26",
-    "Date": "2026-05-23T20:00:00+00:00"
+    "Odds": "1.19",
+    "Date": "2026-05-24T14:30:00+00:00"
   },
   {
-    "League": "Major League Soccer",
-    "Match": "Minnesota United FC vs Real Salt Lake",
+    "League": "Primera División",
+    "Match": "Sporting Cristal vs ADT",
     "Tip": "Over 1.5",
-    "Odds": "1.18",
-    "Date": "2026-05-23T20:30:00+00:00"
-  },
-  {
-    "League": "USL Championship",
-    "Match": "Miami FC vs Louisville City",
-    "Tip": "Over 1.5",
-    "Odds": "1.16",
-    "Date": "2026-05-23T23:00:00+00:00"
-  },
-  {
-    "League": "Major League Soccer",
-    "Match": "Chicago Fire vs Toronto FC",
-    "Tip": "Over 1.5",
-    "Odds": "1.14",
-    "Date": "2026-05-24T00:30:00+00:00"
-  },
-  {
-    "League": "J1 League",
-    "Match": "Tokyo Verdy vs Yokohama F. Marinos",
-    "Tip": "Over 1.5",
-    "Odds": "1.45",
-    "Date": "2026-05-24T05:00:00+00:00"
+    "Odds": "1.25",
+    "Date": "2026-05-24T16:00:00+00:00"
   }
 ]

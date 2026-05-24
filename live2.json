@@ -1,23 +1,16 @@
 [
   {
+    "League": "J1 League",
+    "Match": "Shimizu S-pulse vs Gamba Osaka",
+    "Tip": "Over 2.5",
+    "Odds": "1.84",
+    "Date": "2026-05-24T08:00:00+00:00"
+  },
+  {
     "League": "K League 2",
-    "Match": "Gyeongnam FC vs Suwon City FC",
+    "Match": "Daegu FC vs Ansan Greeners",
     "Tip": "Over 2.5",
-    "Odds": "1.76",
-    "Date": "2026-05-23T07:30:00+00:00"
-  },
-  {
-    "League": "Serie D",
-    "Match": "Trem vs Tocantinópolis",
-    "Tip": "Over 2.5",
-    "Odds": "1.83",
-    "Date": "2026-05-23T19:00:00+00:00"
-  },
-  {
-    "League": "Major League Soccer",
-    "Match": "Minnesota United FC vs Real Salt Lake",
-    "Tip": "Over 2.5",
-    "Odds": "1.53",
-    "Date": "2026-05-23T20:30:00+00:00"
+    "Odds": "1.56",
+    "Date": "2026-05-24T10:00:00+00:00"
   }
 ]
