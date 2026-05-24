@@ -1,5 +1,35 @@
 [
   {
+    "League": "Major League Soccer",
+    "Match": "Minnesota United FC vs Real Salt Lake",
+    "Tip": "Over 2.5",
+    "Odds": "1.53",
+    "Date": "2026-05-23T20:30:00+00:00",
+    "FixtureId": 1490317,
+    "Result": "KO",
+    "Score": "1:1"
+  },
+  {
+    "League": "Serie D",
+    "Match": "Trem vs Tocantin\u00F3polis",
+    "Tip": "Over 2.5",
+    "Odds": "1.83",
+    "Date": "2026-05-23T19:00:00+00:00",
+    "FixtureId": 1537979,
+    "Result": "OK",
+    "Score": "4:1"
+  },
+  {
+    "League": "K League 2",
+    "Match": "Gyeongnam FC vs Suwon City FC",
+    "Tip": "Over 2.5",
+    "Odds": "1.76",
+    "Date": "2026-05-23T07:30:00+00:00",
+    "FixtureId": 1510339,
+    "Result": "OK",
+    "Score": "3:2"
+  },
+  {
     "League": "Virsliga",
     "Match": "Auda vs FK Liepaja",
     "Tip": "Over 2.5",
