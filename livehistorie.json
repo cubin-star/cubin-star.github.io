@@ -1,5 +1,21 @@
 [
   {
+    "league": "World Championship",
+    "homeTeam": "Germany",
+    "awayTeam": "Great Britain",
+    "tip": "Over 6.5",
+    "odds": "",
+    "halftimeScore": "3:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "kickoff": "2026-05-25T18:20:00.000Z",
+    "resolvedAt": "",
+    "source": "tipper-hockey",
+    "sport": "hockey",
+    "scoutStats": "World Championship | P2 4:1 → need 2 more"
+  },
+  {
     "league": "Serie A",
     "homeTeam": "Hellas Verona",
     "awayTeam": "AS Roma",
