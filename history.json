@@ -1,5 +1,55 @@
 [
   {
+    "sport": "basketball",
+    "league": "NBA",
+    "match": "San Antonio Spurs vs Oklahoma City Thunder",
+    "tip": "Over 206.5",
+    "odds": "1.27",
+    "date": "2026-05-25T00:00:00+00:00",
+    "score": "103:82",
+    "result": "✗"
+  },
+  {
+    "sport": "football",
+    "league": "Jupiler Pro League",
+    "match": "Union St. Gilloise vs Anderlecht",
+    "tip": "Over 1.5",
+    "odds": "1.21",
+    "date": "2026-05-24T16:30:00+00:00",
+    "score": "5:1",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "Premier League",
+    "match": "Tottenham vs Everton",
+    "tip": "Over 1.5",
+    "odds": "1.24",
+    "date": "2026-05-24T15:00:00+00:00",
+    "score": "1:0",
+    "result": "✗"
+  },
+  {
+    "sport": "hockey",
+    "league": "World Championship",
+    "match": "Denmark vs Italy",
+    "tip": "Over 3.5",
+    "odds": "1.29",
+    "date": "2026-05-24T14:20:00+00:00",
+    "score": "3:2",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "J1 League",
+    "match": "Shimizu S-pulse vs Gamba Osaka",
+    "tip": "Over 1.5",
+    "odds": "1.29",
+    "date": "2026-05-24T08:00:00+00:00",
+    "score": "1:2",
+    "result": "✓"
+  },
+  {
     "sport": "football",
     "league": "Serie D",
     "match": "Trem vs Tocantinópolis",
@@ -1947,56 +1997,6 @@
     "odds": "1.18",
     "date": "2026-04-06T14:00:00+00:00",
     "score": "5:1",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "National League - North",
-    "match": "AFC Telford United vs Kidderminster Harriers",
-    "tip": "Over 1.5",
-    "odds": "1.20",
-    "date": "2026-04-06T14:00:00+00:00",
-    "score": "1:2",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Non League Premier - Isthmian",
-    "match": "Chichester City vs Burgess Hill Town",
-    "tip": "Over 1.5",
-    "odds": "1.19",
-    "date": "2026-04-06T14:00:00+00:00",
-    "score": "0:2",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Non League Premier - Southern South",
-    "match": "Havant & Wville vs Gosport Borough",
-    "tip": "Over 1.5",
-    "odds": "1.15",
-    "date": "2026-04-06T14:00:00+00:00",
-    "score": "4:0",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Ekstraklasa",
-    "match": "Radomiak Radom vs Motor Lublin",
-    "tip": "Over 1.5",
-    "odds": "1.21",
-    "date": "2026-04-06T12:45:00+00:00",
-    "score": "1:1",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "2. Liga",
-    "match": "SV Kapfenberg vs Rapid Wien II",
-    "tip": "Over 1.5",
-    "odds": "1.19",
-    "date": "2026-04-06T12:00:00+00:00",
-    "score": "0:2",
     "result": "✓"
   }
 ]
