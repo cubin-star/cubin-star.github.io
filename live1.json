@@ -1,30 +1,9 @@
 [
   {
-    "league": "Serie A",
-    "match": "Lecce - Genoa",
-    "kickoff": "2026-05-24T20:45:00+02:00",
+    "league": "League Two",
+    "match": "Notts County - Salford City",
+    "kickoff": "2026-05-25T16:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.33"
-  },
-  {
-    "league": "Liga I",
-    "match": "AFC Hermannstadt - FC Voluntari",
-    "kickoff": "2026-05-24T16:30:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.13"
-  },
-  {
-    "league": "Ligue 2",
-    "match": "Laval - Rouen",
-    "kickoff": "2026-05-24T17:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.21"
-  },
-  {
-    "league": "League One",
-    "match": "Bolton - Stockport County",
-    "kickoff": "2026-05-24T14:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.13"
+    "odds": "2.18"
   }
 ]

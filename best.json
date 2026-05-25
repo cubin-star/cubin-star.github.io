@@ -1,23 +1,23 @@
 [
   {
-    "league": "Tercera División RFEF - Group 6",
-    "match": "Saguntino - La Nucía",
-    "kickoff": "2026-05-24T18:00:00+02:00",
+    "league": "Torneo Federal A",
+    "match": "Bartolomé Mitre - Tucuman Central",
+    "kickoff": "2026-05-25T20:45:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.45"
-  },
-  {
-    "league": "Serie A",
-    "match": "Lecce - Genoa",
-    "kickoff": "2026-05-24T20:45:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.33"
+    "odds": "2.49"
   },
   {
     "league": "Ligue 2",
-    "match": "Laval - Rouen",
-    "kickoff": "2026-05-24T17:00:00+02:00",
+    "match": "Stade Gabesien - US Tataouine",
+    "kickoff": "2026-05-25T17:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.21"
+    "odds": "2.40"
+  },
+  {
+    "league": "Première Division",
+    "match": "Diarra - ASKO",
+    "kickoff": "2026-05-25T18:30:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.38"
   }
 ]
