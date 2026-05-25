@@ -1,5 +1,25 @@
 [
   {
+    "League": "K League 2",
+    "Match": "Daegu FC vs Ansan Greeners",
+    "Tip": "Over 2.5",
+    "Odds": "1.56",
+    "Date": "2026-05-24T10:00:00+00:00",
+    "FixtureId": 1510343,
+    "Result": "OK",
+    "Score": "3:0"
+  },
+  {
+    "League": "J1 League",
+    "Match": "Shimizu S-pulse vs Gamba Osaka",
+    "Tip": "Over 2.5",
+    "Odds": "1.84",
+    "Date": "2026-05-24T08:00:00+00:00",
+    "FixtureId": 1504828,
+    "Result": "OK",
+    "Score": "1:2"
+  },
+  {
     "League": "Major League Soccer",
     "Match": "Minnesota United FC vs Real Salt Lake",
     "Tip": "Over 2.5",
