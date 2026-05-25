@@ -1,14 +1,15 @@
 [
   {
     "league": "World Championship",
-    "match": "Great Britain vs Latvia",
+    "match": "Slovenia vs Italy",
     "tip": "Over 5.5",
-    "odds": "2.0"
+    "odds": "2.21",
+    "qualified15": true
   },
   {
-    "league": "AHL",
-    "match": "Cleveland Monsters vs Toronto Marlies",
+    "league": "World Championship",
+    "match": "Czech Republic vs Norway",
     "tip": "Over 5.5",
-    "odds": "1.91"
+    "odds": "2.05"
   }
 ]
