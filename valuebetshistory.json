@@ -1,5 +1,25 @@
 [
   {
+    "League": "Division Intermedia",
+    "Match": "General Caballero vs Guairena FC",
+    "Tip": "Over 2.5",
+    "Odds": "1.87",
+    "Date": "2026-05-25T22:30:00+00:00",
+    "FixtureId": 1544841,
+    "Result": "KO",
+    "Score": "0:0"
+  },
+  {
+    "League": "Liga Leumit",
+    "Match": "Maccabi Kabilio Jaffa vs Hapoel Hadera",
+    "Tip": "Over 2.5",
+    "Odds": "1.59",
+    "Date": "2026-05-25T16:00:00+00:00",
+    "FixtureId": 1541920,
+    "Result": "OK",
+    "Score": "6:1"
+  },
+  {
     "League": "K League 2",
     "Match": "Daegu FC vs Ansan Greeners",
     "Tip": "Over 2.5",
