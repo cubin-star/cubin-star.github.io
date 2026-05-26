@@ -44,9 +44,10 @@ MIN_GAMES = 5            # min. odehraných zápasů (sníženo 6→5 – chytí
 
 # === Stats-first kritéria pro "kandidáta na Over 3.5" ===
 # Cíl: expected total ≥ 3.0 gólů (P(Over 3.5) ~ 35 %, P(Over 1.5) ~ 90 %+)
-MIN_TOTAL_AVG = 2.60     # tvrdý gate: (h_for+a_for+h_agn+a_agn)/2 ≥ 2.6 (sníženo 2.8→2.6)
+# Varianta 1 (A+C) – zvýšené prahy podle backtestu (hit rate live2 65 % → 75 %).
+MIN_TOTAL_AVG = 2.95     # tvrdý gate: (h_for+a_for+h_agn+a_agn)/2 ≥ 2.95 (zvýšeno 2.60→2.95)
 MIN_DEFENSE_LEAK = 1.00  # aspoň jeden tým inkasuje ≥ 1.0 g/z (musí být odkud góly brát)
-MIN_READY_35 = 0.85      # kompozitní index "Over 3.5 readiness"
+MIN_READY_35 = 0.95      # kompozitní index "Over 3.5 readiness" (zvýšeno 0.85→0.95)
 
 # === NEW: Poissonova pravděpodobnost Over 3.5 (per varianta) ===
 # expected total (λ) → P(Over 3.5) přes nezávislé Poisson rozdělení.
@@ -74,15 +75,16 @@ ASYMMETRIC_P35_BONUS = 0.07       # +7 pp k MIN_P35_BY_VARIANT[tag]
 # OBĚ obrany jsou symetricky pevné (asym filtr neaktivní, protože gap je malý),
 # ale zápas se přesto snadno zavře 0:0 / 1:0. Když min(conc) ≤ TIGHT_BOTH_MIN_MAX
 # A ZÁROVEŇ max(conc) ≤ TIGHT_BOTH_MAX_MAX (= obě obrany pevné), zvedneme min_p35.
-TIGHT_BOTH_MIN_MAX = 1.30   # lepší z obou obran je pod tímto = tight
-TIGHT_BOTH_MAX_MAX = 1.50   # i horší z obou obran je pod tímto = obě tight
+# Varianta 1 (A+C) – rozšířená zóna podle backtestu (chytí Louisville 1.40/1.60 atd.).
+TIGHT_BOTH_MIN_MAX = 1.40   # lepší z obou obran je pod tímto = tight (zvýšeno 1.30→1.40)
+TIGHT_BOTH_MAX_MAX = 1.65   # i horší z obou obran je pod tímto = obě tight (zvýšeno 1.50→1.65)
 TIGHT_BOTH_P35_BONUS = 0.10 # +10 pp k MIN_P35_BY_VARIANT[tag]
 
 # League-relative ratios (mírně zostřeno proti původnímu Over 2.5 botu)
 BOTH_FLOOR_R = 0.85      # oba alespoň 85% baseline
 STRONG_MIN_R = 1.15      # "výrazný" tým 115%+ baseline (z 1.10)
 CONTRAST_MAX_R = 0.95    # protějšek pod 95% baseline
-MIN_BASELINE = 1.40      # zvýšeno z 1.25 → expected ~3.0+ gólů celkem
+MIN_BASELINE = 1.55      # zvýšeno 1.40→1.55 (Var. 1 / A+C – backtest)
 MIN_ATTACK = 1.10        # zvýšeno z 0.95 → oba musí reálně střílet (filtruje "Goias" profily)
 MIN_2H_BASELINE = 0.55   # zvýšeno z 0.45 → 2H aktivita
 
