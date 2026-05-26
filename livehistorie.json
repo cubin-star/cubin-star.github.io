@@ -1,5 +1,20 @@
 [
   {
+    "league": "CONMEBOL Sudamericana",
+    "homeTeam": "Millonarios",
+    "awayTeam": "O'Higgins",
+    "tip": "Over 3.5",
+    "odds": "",
+    "halftimeScore": "0:2",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "kickoff": "2026-05-26T22:00:00.000Z",
+    "resolvedAt": "",
+    "source": "scout-football",
+    "scoutStats": "Score: 9/9 | xG: 1.72 | Shots: 17/7 | 55' 1:2 | Pre O2.5: 2"
+  },
+  {
     "league": "Liga Pro",
     "homeTeam": "Aucas",
     "awayTeam": "Manta FC",
