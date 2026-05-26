@@ -1,16 +1,23 @@
 [
   {
-    "League": "Division Intermedia",
-    "Match": "General Caballero vs Guairena FC",
+    "League": "Virsliga",
+    "Match": "BFC Daugavpils vs Auda",
     "Tip": "Over 1.5",
-    "Odds": "1.30",
-    "Date": "2026-05-25T22:30:00+00:00"
+    "Odds": "1.20",
+    "Date": "2026-05-26T16:00:00+00:00"
   },
   {
-    "League": "Allsvenskan",
-    "Match": "IFK Goteborg vs Mjallby AIF",
+    "League": "Ligue 1",
+    "Match": "Saint Etienne vs Nice",
     "Tip": "Over 1.5",
-    "Odds": "1.30",
-    "Date": "2026-05-25T17:00:00+00:00"
+    "Odds": "1.24",
+    "Date": "2026-05-26T18:45:00+00:00"
+  },
+  {
+    "League": "2. Bundesliga",
+    "Match": "SpVgg Greuther Fürth vs Rot-Weiß Essen",
+    "Tip": "Over 1.5",
+    "Odds": "1.20",
+    "Date": "2026-05-26T18:30:00+00:00"
   }
 ]
