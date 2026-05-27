@@ -1,9 +1,16 @@
 [
   {
-    "league": "World Championship",
-    "match": "Norway vs Denmark",
+    "league": "AHL",
+    "match": "Wilkes-Barre/Scranton vs Toronto Marlies",
     "tip": "Over 3.5",
-    "odds": "1.28",
-    "date": "2026-05-26T10:20:00+00:00"
+    "odds": "1.24",
+    "date": "2026-05-27T23:05:00+00:00"
+  },
+  {
+    "league": "NHL",
+    "match": "Montreal Canadiens vs Carolina Hurricanes",
+    "tip": "Over 3.5",
+    "odds": "1.19",
+    "date": "2026-05-28T00:00:00+00:00"
   }
 ]
