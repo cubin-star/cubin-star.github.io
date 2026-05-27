@@ -1,24 +1,24 @@
 [
   {
-    "League": "Ligue 1",
-    "Match": "Saint Etienne vs Nice",
+    "League": "Tweede Divisie",
+    "Match": "ADO '20 vs FC Lisse",
+    "Tip": "Over 2.5",
+    "Odds": "1.75",
+    "Date": "2026-05-27T18:00:00+00:00"
+  },
+  {
+    "League": "Premier League",
+    "Match": "FC Urartu vs FC Noah",
     "Tip": "Over 2.5",
     "Odds": "1.80",
-    "Date": "2026-05-26T18:45:00+00:00"
+    "Date": "2026-05-27T15:00:00+00:00"
   },
   {
-    "League": "Superettan",
-    "Match": "Orebro SK vs Helsingborg",
+    "League": "CONMEBOL Sudamericana",
+    "Match": "Olimpia vs A. Italiano",
     "Tip": "Over 2.5",
-    "Odds": "1.89",
-    "Date": "2026-05-26T17:00:00+00:00"
-  },
-  {
-    "League": "Suomen Cup",
-    "Match": "Mariehamn vs Lahti",
-    "Tip": "Over 2.5",
-    "Odds": "1.88",
-    "Date": "2026-05-26T15:00:00+00:00",
+    "Odds": "1.87",
+    "Date": "2026-05-27T22:00:00+00:00",
     "locked": true
   }
 ]
