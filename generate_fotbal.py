@@ -591,16 +591,25 @@ def compute_odds_for_fixtures(odds_data, fixture_ids):
     return result
 
 
-def pick_random_top_league_tips(all_fixtures, exclude_keys, exclude_leagues, need):
+def pick_random_top_league_tips(all_fixtures, exclude_keys, exclude_leagues, need,
+                                  min_odds=None, max_odds=None, max_attempts=None):
     """
     FALLBACK pro tips.json: úplně random Over 2.5 z TOP first-tier lig.
 
     Z dostupných fixtures (24h okno) vybere náhodně zápasy z TIPS_FB_TOP_LEAGUE_IDS,
     načte jejich Over 2.5 kurzy a vrátí ty s kurzem v rozmezí
-    TIPS_FB_MIN_ODDS..TIPS_FB_MAX_ODDS. Maximum: ``need`` zápasů.
+    min_odds..max_odds (default: TIPS_FB_MIN_ODDS..TIPS_FB_MAX_ODDS).
+    Maximum: ``need`` zápasů.
     """
     if need <= 0 or not all_fixtures:
         return []
+
+    if min_odds is None:
+        min_odds = TIPS_FB_MIN_ODDS
+    if max_odds is None:
+        max_odds = TIPS_FB_MAX_ODDS
+    if max_attempts is None:
+        max_attempts = TIPS_FB_MAX_ATTEMPTS
 
     now2 = datetime.now(timezone.utc)
     cutoff = now2 + timedelta(hours=24)
@@ -643,7 +652,7 @@ def pick_random_top_league_tips(all_fixtures, exclude_keys, exclude_leagues, nee
     candidates = top_candidates + second_candidates  # 1. ligy mají prioritu
     print(f"  Tips fallback: trying random Over 2.5 from "
           f"{len(top_candidates)} TOP + {len(second_candidates)} 2nd-tier fixtures "
-          f"(odds {TIPS_FB_MIN_ODDS}-{TIPS_FB_MAX_ODDS}, need={need}, max_attempts={TIPS_FB_MAX_ATTEMPTS})...")
+          f"(odds {min_odds}-{max_odds}, need={need}, max_attempts={max_attempts})...")
 
     picked = []
     used_leagues = set()
@@ -655,7 +664,7 @@ def pick_random_top_league_tips(all_fixtures, exclude_keys, exclude_leagues, nee
         for fid, fix in candidates:
             if len(picked) >= need:
                 return
-            if attempts >= TIPS_FB_MAX_ATTEMPTS:
+            if attempts >= max_attempts:
                 return
             attempts += 1
             league_name = fix.get("league", "?")
@@ -676,7 +685,7 @@ def pick_random_top_league_tips(all_fixtures, exclude_keys, exclude_leagues, nee
             if o25 is None:
                 print(f"    - {match_str[:50]}: no Over 2.5 odds")
                 continue
-            if not (TIPS_FB_MIN_ODDS <= o25 <= TIPS_FB_MAX_ODDS):
+            if not (min_odds <= o25 <= max_odds):
                 print(f"    - {match_str[:50]}: O2.5={o25:.2f} mimo rozsah")
                 continue
             print(f"    \u2713 {match_str[:50]}: O2.5={o25:.2f} ({league_name})")
@@ -1113,25 +1122,50 @@ def main():
         selected_keys.add((r["Match"], r["Date"]))
 
     # 8b. FALLBACK: pokud A pool nedodal MAX_TIPS, doplň úplně random
-    #     Over 2.5 z TOP first-tier lig s reálným kurzem
-    #     v rozmezí TIPS_FB_MIN_ODDS..TIPS_FB_MAX_ODDS.
-    if len(tips) < MAX_TIPS:
+    #     Over 2.5 z TOP first-tier lig s reálným kurzem.
+    #     Postupně rozšiřujeme pásmo kurzů, abychom GARANTOVANĚ dosáhli MAX_TIPS:
+    #       1) 1.60–1.90 (preferované, hodnotové)
+    #       2) 1.45–2.20 (širší)
+    #       3) 1.30–2.80 (last resort, jakýkoli rozumný kurz)
+    odds_passes = [
+        (TIPS_FB_MIN_ODDS, TIPS_FB_MAX_ODDS, TIPS_FB_MAX_ATTEMPTS),
+        (1.45, 2.20, TIPS_FB_MAX_ATTEMPTS),
+        (1.30, 2.80, TIPS_FB_MAX_ATTEMPTS),
+    ]
+    for pass_idx, (lo, hi, ma) in enumerate(odds_passes, 1):
+        if len(tips) >= MAX_TIPS:
+            break
         need = MAX_TIPS - len(tips)
         exclude_keys = set(selected_keys)
         for t in tips:
             exclude_keys.add((t["Match"], t["Date"]))
         exclude_leagues = {t["League"] for t in tips}
+        if pass_idx > 1:
+            print(f"  Tips fallback pass {pass_idx}: rozšiřuji pásmo na {lo}-{hi}")
         random_picks = pick_random_top_league_tips(
-            all_fixtures, exclude_keys, exclude_leagues, need)
+            all_fixtures, exclude_keys, exclude_leagues, need,
+            min_odds=lo, max_odds=hi, max_attempts=ma)
         for p in random_picks:
             tips.append(p)
             selected_keys.add((p["Match"], p["Date"]))
 
-    if tips:
+    # 8c. Pokud i po všech průchodech chybí tipy (extrémně málo fixtures dne),
+    #     doplň placeholder záznamy, aby tips.json měl VŽDY MAX_TIPS položek.
+    while len(tips) < MAX_TIPS:
+        print(f"  ⚠ Tips: nepodařilo se najít {MAX_TIPS} reálných zápasů, "
+              f"doplňuji placeholder ({len(tips)+1}/{MAX_TIPS})")
+        tips.append({
+            "League": "-",
+            "Match": "No tip available.",
+            "Tip": "-",
+            "Odds": "-",
+            "Date": now.isoformat(),
+        })
+
+    if tips and tips[0]["Match"] != "No tip available.":
         print(f"  Tips: {len(tips)} match(es) → {OUTPUT_TIPS}")
     else:
-        tips = [{"League": "-", "Match": "No tips available today.", "Tip": "-", "Odds": "-", "Date": now.isoformat()}]
-        print(f"  Tips: no candidates at all → placeholder → {OUTPUT_TIPS}")
+        print(f"  Tips: only placeholders → {OUTPUT_TIPS}")
 
     with open(OUTPUT_TIPS, "w", encoding="utf-8") as f:
         json.dump(tips, f, indent=2, ensure_ascii=False)
