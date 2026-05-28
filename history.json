@@ -1,5 +1,35 @@
 [
   {
+    "sport": "hockey",
+    "league": "NHL",
+    "match": "Montreal Canadiens vs Carolina Hurricanes",
+    "tip": "Over 3.5",
+    "odds": "1.19",
+    "date": "2026-05-28T00:00:00+00:00",
+    "score": "0:4",
+    "result": "✓"
+  },
+  {
+    "sport": "hockey",
+    "league": "AHL",
+    "match": "Wilkes-Barre/Scranton vs Toronto Marlies",
+    "tip": "Over 3.5",
+    "odds": "1.24",
+    "date": "2026-05-27T23:05:00+00:00",
+    "score": "2:4",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "Czech Liga",
+    "match": "Artis vs Slovácko",
+    "tip": "Over 1.5",
+    "odds": "1.27",
+    "date": "2026-05-27T16:00:00+00:00",
+    "score": "1:4",
+    "result": "✓"
+  },
+  {
     "sport": "basketball",
     "league": "NBA",
     "match": "Oklahoma City Thunder vs San Antonio Spurs",
@@ -1967,36 +1997,6 @@
     "odds": "1.63",
     "date": "2026-04-08T18:30:00+00:00",
     "score": "92:82",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Stars League",
-    "match": "Al Shahaniya vs Al Shamal",
-    "tip": "Over 1.5",
-    "odds": "1.18",
-    "date": "2026-04-08T15:30:00+00:00",
-    "score": "2:0",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Liga Revelação U23",
-    "match": "Rio Ave U23 vs Marítimo U23",
-    "tip": "Over 1.5",
-    "odds": "1.19",
-    "date": "2026-04-08T14:00:00+00:00",
-    "score": "3:1",
-    "result": "✓"
-  },
-  {
-    "sport": "hockey",
-    "league": "AHL",
-    "match": "Texas Stars vs Iowa Wild",
-    "tip": "Over 3.5",
-    "odds": "1.15",
-    "date": "2026-04-08T00:00:00+00:00",
-    "score": "2:5",
     "result": "✓"
   }
 ]
