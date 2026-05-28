@@ -1,6 +1,22 @@
 [
   {
     "league": "World Championship",
+    "homeTeam": "Norway",
+    "awayTeam": "Latvia",
+    "tip": "Over 2.5",
+    "odds": "",
+    "halftimeScore": "0:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "hockey",
+    "kickoff": "2026-05-28T18:20:00.000Z",
+    "resolvedAt": "",
+    "source": "comeback-hockey",
+    "scoutStats": "Comeback 1:0 → Over 2.5 | P1: 0:0 P2-cumul: 1:0 | GF: 7.0 GA: 4.4 | Tier=3 | @BT | World Championship"
+  },
+  {
+    "league": "World Championship",
     "homeTeam": "Canada",
     "awayTeam": "USA",
     "tip": "Over 2.5",
