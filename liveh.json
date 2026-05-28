@@ -1,1 +1,23 @@
-[]
+[
+  {
+    "league": "World Championship",
+    "match": "Finland vs Czech Republic",
+    "tip": "Over 5.5",
+    "odds": "2.42",
+    "date": "2026-05-28T14:20:00+00:00"
+  },
+  {
+    "league": "World Championship",
+    "match": "Norway vs Latvia",
+    "tip": "Over 5.5",
+    "odds": "2.50",
+    "date": "2026-05-28T18:20:00+00:00"
+  },
+  {
+    "league": "World Championship",
+    "match": "Switzerland vs Sweden",
+    "tip": "Over 5.5",
+    "odds": "2.26",
+    "date": "2026-05-28T18:20:00+00:00"
+  }
+]
