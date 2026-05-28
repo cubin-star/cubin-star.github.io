@@ -1,5 +1,21 @@
 [
   {
+    "league": "World Championship",
+    "homeTeam": "Canada",
+    "awayTeam": "USA",
+    "tip": "Over 2.5",
+    "odds": "",
+    "halftimeScore": "1:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "hockey",
+    "kickoff": "2026-05-28T14:20:00.000Z",
+    "resolvedAt": "",
+    "source": "comeback-hockey",
+    "scoutStats": "Comeback 1:0 → Over 2.5 | P1: 1:0 P2-cumul: 1:0 | GF: 8.3 GA: 4.9 | Tier=3 | @BT | World Championship"
+  },
+  {
     "league": "CONMEBOL Sudamericana",
     "homeTeam": "Millonarios",
     "awayTeam": "O'Higgins",
