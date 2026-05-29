@@ -1,15 +1,14 @@
 [
   {
-    "league": "World Championship",
-    "match": "Switzerland vs Sweden",
+    "league": "AHL",
+    "match": "Wilkes-Barre/Scranton vs Toronto Marlies",
     "tip": "Over 5.5",
-    "odds": "2.15",
-    "qualified15": true
+    "odds": "2.05"
   },
   {
-    "league": "World Championship",
-    "match": "Norway vs Latvia",
+    "league": "ECHL",
+    "match": "Wheeling Nailers vs Florida Everblades",
     "tip": "Over 5.5",
-    "odds": "2.1"
+    "odds": "1.81"
   }
 ]
