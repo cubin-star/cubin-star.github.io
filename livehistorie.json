@@ -1,6 +1,22 @@
 [
   {
     "league": "Premier League",
+    "homeTeam": "Ghazl El Mehalla",
+    "awayTeam": "Haras El Hodood",
+    "tip": "Over 3.5",
+    "odds": "",
+    "halftimeScore": "2:1",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-05-29T17:00:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper 2:1 shootout | HT 2:1 | xG: 1.89 | Shots: 9/5 | losingXG: 0.98 losingSOT: 3 | @HT | Pre O2.5: 2.55"
+  },
+  {
+    "league": "Premier League",
     "homeTeam": "National Bank of Egypt",
     "awayTeam": "Al Ittihad",
     "tip": "Over 3.5",
