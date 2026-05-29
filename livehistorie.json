@@ -1,11 +1,11 @@
 [
   {
     "league": "Premier Division",
-    "homeTeam": "Drogheda United",
-    "awayTeam": "Waterford",
-    "tip": "Over 3.5",
+    "homeTeam": "Shelbourne",
+    "awayTeam": "Galway United",
+    "tip": "Over 1.5",
     "odds": "",
-    "halftimeScore": "1:2",
+    "halftimeScore": "0:0",
     "liveOdds": "",
     "finalScore": "",
     "result": "",
@@ -13,7 +13,7 @@
     "kickoff": "2026-05-29T18:45:00.000Z",
     "resolvedAt": "",
     "source": "whisper-football",
-    "scoutStats": "Whisper 1:2 shootout | HT 1:2 | xG: 1.45 | Shots: 16/6 | losingXG: 0.29 losingSOT: 2 | @46' | Pre O2.5: 1.9"
+    "scoutStats": "Whisper 0:0 pressure | HT 0:0 | xG: 1.30 | Shots: 13/3 | losingXG: 0.00 losingSOT: 0 | @HT | Pre O2.5: 1.9"
   },
   {
     "league": "Premier League",
