@@ -1,50 +1,50 @@
 [
   {
-    "league": "Primeira Liga",
-    "match": "Casa Pia - Torreense",
-    "kickoff": "2026-05-28T21:00:00+02:00",
+    "league": "Ligue 1",
+    "match": "Nice - Saint Etienne",
+    "kickoff": "2026-05-29T20:45:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.40",
+    "odds": "2.38",
     "group": 1
   },
   {
-    "league": "League One",
-    "match": "Shaanxi Union - Nanjing City",
-    "kickoff": "2026-05-29T09:00:00+02:00",
+    "league": "Prva Liga",
+    "match": "Kabel Novi Sad - Dinamo Jug",
+    "kickoff": "2026-05-29T17:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.14",
+    "odds": "2.16",
     "group": 1
   },
   {
-    "league": "First League",
-    "match": "Septemvri Sofia - Yantra 2019",
-    "kickoff": "2026-05-28T16:00:00+02:00",
+    "league": "First NL",
+    "match": "Rudes - Sesvete",
+    "kickoff": "2026-05-29T17:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.17",
+    "odds": "2.26",
     "group": 2
   },
   {
-    "league": "Premier League",
-    "match": "Awassa Kenema - Ethiopia Bunna",
-    "kickoff": "2026-05-28T14:00:00+02:00",
+    "league": "Ykkösliiga",
+    "match": "Haka - JIPPO",
+    "kickoff": "2026-05-29T17:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.31",
+    "odds": "2.19",
     "group": 2
   },
   {
-    "league": "Liga Femenina",
-    "match": "Real Santander W - Once Caldas W",
-    "kickoff": "2026-05-28T22:00:00+02:00",
+    "league": "2. Division",
+    "match": "Fremad Amager - Skive",
+    "kickoff": "2026-05-29T19:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.39",
+    "odds": "2.21",
     "group": 3
   },
   {
-    "league": "Premier League",
-    "match": "Zhenys - Kaspiy",
-    "kickoff": "2026-05-28T16:00:00+02:00",
+    "league": "Division Intermedia",
+    "match": "Independiente F.b.c. - 12 de Junio VH",
+    "kickoff": "2026-05-30T00:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.16",
+    "odds": "2.21",
     "group": 3
   }
 ]
