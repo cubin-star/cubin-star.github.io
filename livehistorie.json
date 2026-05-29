@@ -1,11 +1,11 @@
 [
   {
-    "league": "Eliteserien",
-    "homeTeam": "Aalesund",
-    "awayTeam": "Ham-Kam",
-    "tip": "Over 2.5",
+    "league": "Premier League",
+    "homeTeam": "National Bank of Egypt",
+    "awayTeam": "Al Ittihad",
+    "tip": "Over 3.5",
     "odds": "",
-    "halftimeScore": "1:1",
+    "halftimeScore": "1:2",
     "liveOdds": "",
     "finalScore": "",
     "result": "",
@@ -13,7 +13,7 @@
     "kickoff": "2026-05-29T17:00:00.000Z",
     "resolvedAt": "",
     "source": "whisper-football",
-    "scoutStats": "Whisper 1:1 open | HT 1:1 | xG: 1.63 | Shots: 14/7 | losingXG: 0.00 losingSOT: 0 | @HT | Pre O2.5: 1.62"
+    "scoutStats": "Whisper 1:2 shootout | HT 1:2 | xG: 2.23 | Shots: 12/5 | losingXG: 1.33 losingSOT: 3 | @HT | Pre O2.5: 2.45"
   },
   {
     "league": "World Championship",
