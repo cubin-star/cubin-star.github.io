@@ -1,5 +1,35 @@
 [
   {
+    "sport": "basketball",
+    "league": "NBA",
+    "match": "San Antonio Spurs vs Oklahoma City Thunder",
+    "tip": "Over 206.5",
+    "odds": "1.26",
+    "date": "2026-05-29T00:30:00+00:00",
+    "score": "118:91",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "I Liga",
+    "match": "Chrobry Głogów vs ŁKS Łódź",
+    "tip": "Over 1.5",
+    "odds": "1.27",
+    "date": "2026-05-28T15:30:00+00:00",
+    "score": "1:1",
+    "result": "✓"
+  },
+  {
+    "sport": "hockey",
+    "league": "World Championship",
+    "match": "Finland vs Czech Republic",
+    "tip": "Over 3.5",
+    "odds": "1.32",
+    "date": "2026-05-28T14:20:00+00:00",
+    "score": "4:1",
+    "result": "✓"
+  },
+  {
     "sport": "hockey",
     "league": "NHL",
     "match": "Montreal Canadiens vs Carolina Hurricanes",
@@ -1967,36 +1997,6 @@
     "odds": "1.41",
     "date": "2026-04-08T23:00:00+00:00",
     "score": "132:120",
-    "result": "✓"
-  },
-  {
-    "sport": "basketball",
-    "league": "Superliga",
-    "match": "Diablos vs Trotamundos",
-    "tip": "Over 164.5",
-    "odds": "1.65",
-    "date": "2026-04-08T23:00:00+00:00",
-    "score": "83:90",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "National League - North",
-    "match": "Marine vs Hereford",
-    "tip": "Over 1.5",
-    "odds": "1.18",
-    "date": "2026-04-08T18:45:00+00:00",
-    "score": "0:1",
-    "result": "✗"
-  },
-  {
-    "sport": "basketball",
-    "league": "ABA League 2",
-    "match": "Siroki Brijeg vs Helios Domzale",
-    "tip": "Over 161.5",
-    "odds": "1.63",
-    "date": "2026-04-08T18:30:00+00:00",
-    "score": "92:82",
     "result": "✓"
   }
 ]
