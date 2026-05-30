@@ -1,50 +1,50 @@
 [
   {
-    "league": "Ligue 1",
-    "match": "Nice - Saint Etienne",
-    "kickoff": "2026-05-29T20:45:00+02:00",
+    "league": "Veikkausliiga",
+    "match": "KuPS - Inter Turku",
+    "kickoff": "2026-05-30T16:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.38",
+    "odds": "2.11",
     "group": 1
   },
   {
-    "league": "Prva Liga",
-    "match": "Kabel Novi Sad - Dinamo Jug",
-    "kickoff": "2026-05-29T17:00:00+02:00",
+    "league": "Segunda División RFEF - Play-offs",
+    "match": "SS Reyes - UD Logroñés",
+    "kickoff": "2026-05-30T19:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.16",
+    "odds": "2.29",
     "group": 1
   },
   {
     "league": "First NL",
-    "match": "Rudes - Sesvete",
-    "kickoff": "2026-05-29T17:30:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.26",
-    "group": 2
-  },
-  {
-    "league": "Ykkösliiga",
-    "match": "Haka - JIPPO",
-    "kickoff": "2026-05-29T17:30:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.19",
-    "group": 2
-  },
-  {
-    "league": "2. Division",
-    "match": "Fremad Amager - Skive",
-    "kickoff": "2026-05-29T19:00:00+02:00",
+    "match": "Bsk Bijelo Brdo - Croatia Zmijavci",
+    "kickoff": "2026-05-30T16:00:00+02:00",
     "tip": "Over 2.5",
     "odds": "2.21",
+    "group": 2
+  },
+  {
+    "league": "Segunda Liga",
+    "match": "CF Os Belenenses - Farense",
+    "kickoff": "2026-05-30T21:30:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.18",
+    "group": 2
+  },
+  {
+    "league": "Tercera División RFEF - Group 15",
+    "match": "Izarra - Pamplona",
+    "kickoff": "2026-05-30T18:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.19",
     "group": 3
   },
   {
-    "league": "Division Intermedia",
-    "match": "Independiente F.b.c. - 12 de Junio VH",
-    "kickoff": "2026-05-30T00:30:00+02:00",
+    "league": "Tercera División RFEF - Group 11",
+    "match": "Peña Deportiva - Manacor",
+    "kickoff": "2026-05-30T16:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.21",
+    "odds": "2.19",
     "group": 3
   }
 ]
