@@ -1,14 +1,14 @@
 [
   {
-    "league": "AHL",
-    "match": "Wilkes-Barre/Scranton vs Toronto Marlies",
+    "league": "AIHL",
+    "match": "Perth vs Sydney Bears",
     "tip": "Over 5.5",
-    "odds": "2.05"
+    "odds": "2.1"
   },
   {
-    "league": "ECHL",
-    "match": "Wheeling Nailers vs Florida Everblades",
+    "league": "World Championship",
+    "match": "Switzerland vs Norway",
     "tip": "Over 5.5",
-    "odds": "1.81"
+    "odds": "2.1"
   }
 ]
