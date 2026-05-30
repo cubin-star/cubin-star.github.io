@@ -1,5 +1,21 @@
 [
   {
+    "league": "Super League",
+    "homeTeam": "Henan Jianye",
+    "awayTeam": "Hangzhou Greentown",
+    "tip": "Over 2.5",
+    "odds": "",
+    "halftimeScore": "0:1",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-05-30T11:00:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper 0:1 comeback | HT 0:1 | xG: 0.48(est) | Shots: 9/4 | losingXG: 0.36 losingSOT: 3 | @HT | Pre O2.5: 1.55"
+  },
+  {
     "league": "J1 League",
     "homeTeam": "Nagoya Grampus",
     "awayTeam": "Machida Zelvia",
