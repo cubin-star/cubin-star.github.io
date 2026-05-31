@@ -1,5 +1,21 @@
 [
   {
+    "league": "Segunda División",
+    "homeTeam": "Almeria",
+    "awayTeam": "Valladolid",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "0:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-05-31T16:30:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper 0:0 pressure | HT 0:0 | xG: 0.96(est) | Shots: 19/8 | losingXG: 0.00 losingSOT: 0 | @HT | Pre O2.5: 1.57"
+  },
+  {
     "league": "World Championship",
     "homeTeam": "Canada",
     "awayTeam": "Norway",
