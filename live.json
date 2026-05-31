@@ -1,51 +1,30 @@
 [
   {
-    "League": "K League 2",
-    "Match": "Yongin City vs Daegu FC",
+    "League": "3. liga - MSFL",
+    "Match": "Sigma Olomouc II vs Blansko",
     "Tip": "Over 1.5",
-    "Odds": "1.22",
-    "Date": "2026-05-30T07:30:00+00:00"
-  },
-  {
-    "League": "1. Liga U19",
-    "Match": "Slovácko U19 vs Baník Ostrava U19",
-    "Tip": "Over 1.5",
-    "Odds": "1.12",
-    "Date": "2026-05-30T09:00:00+00:00"
-  },
-  {
-    "League": "Virsliga",
-    "Match": "FK Liepaja vs Tukums",
-    "Tip": "Over 1.5",
-    "Odds": "1.15",
-    "Date": "2026-05-30T12:00:00+00:00"
+    "Odds": "1.13",
+    "Date": "2026-05-31T08:15:00+00:00"
   },
   {
     "League": "1. Division",
-    "Match": "Moss vs Stabaek",
+    "Match": "Bryne vs hodd",
     "Tip": "Over 1.5",
-    "Odds": "1.12",
-    "Date": "2026-05-30T14:00:00+00:00"
+    "Odds": "1.20",
+    "Date": "2026-05-31T15:00:00+00:00"
   },
   {
-    "League": "Division 2 - Norra Götaland",
-    "Match": "Tord vs Ahlafors",
-    "Tip": "Over 1.5",
-    "Odds": "1.14",
-    "Date": "2026-05-30T14:00:00+00:00"
-  },
-  {
-    "League": "Serie A",
-    "Match": "Bahia vs Botafogo",
+    "League": "Superettan",
+    "Match": "Helsingborg vs IFK Norrkoping",
     "Tip": "Over 1.5",
     "Odds": "1.21",
-    "Date": "2026-05-30T20:30:00+00:00"
+    "Date": "2026-05-31T15:00:00+00:00"
   },
   {
-    "League": "USL Championship",
-    "Match": "El Paso Locomotive vs Lexington",
+    "League": "Serie D",
+    "Match": "Tuna Luso vs Trem",
     "Tip": "Over 1.5",
-    "Odds": "1.17",
-    "Date": "2026-05-31T01:00:00+00:00"
+    "Odds": "1.20",
+    "Date": "2026-05-31T19:00:00+00:00"
   }
 ]
