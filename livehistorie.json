@@ -1,5 +1,21 @@
 [
   {
+    "league": "World Championship",
+    "homeTeam": "Canada",
+    "awayTeam": "Norway",
+    "tip": "Over 2.5",
+    "odds": "",
+    "halftimeScore": "0:1",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "hockey",
+    "kickoff": "2026-05-31T13:30:00.000Z",
+    "resolvedAt": "",
+    "source": "comeback-hockey",
+    "scoutStats": "Comeback 0:1 → Over 2.5 | P1: 0:1 P2-cumul: 0:1 | GF: 7.3 GA: 4.1 | Tier=3 | @BT | World Championship"
+  },
+  {
     "league": "Serie A",
     "homeTeam": "Gremio",
     "awayTeam": "Corinthians",
