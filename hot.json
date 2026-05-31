@@ -1,50 +1,50 @@
 [
   {
-    "league": "Veikkausliiga",
-    "match": "KuPS - Inter Turku",
-    "kickoff": "2026-05-30T16:00:00+02:00",
+    "league": "Campeonato de Portugal Prio - Promotion Round",
+    "match": "Oliveira Hospital - Atlético Malveira",
+    "kickoff": "2026-05-31T15:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.11",
+    "odds": "2.10",
+    "group": 1
+  },
+  {
+    "league": "Tercera División RFEF - Group 5",
+    "match": "Cornellà - Badalona",
+    "kickoff": "2026-05-31T18:15:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.48",
     "group": 1
   },
   {
     "league": "Segunda División RFEF - Play-offs",
-    "match": "SS Reyes - UD Logroñés",
-    "kickoff": "2026-05-30T19:00:00+02:00",
+    "match": "Real Oviedo II - CD Coria",
+    "kickoff": "2026-05-31T12:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.29",
-    "group": 1
-  },
-  {
-    "league": "First NL",
-    "match": "Bsk Bijelo Brdo - Croatia Zmijavci",
-    "kickoff": "2026-05-30T16:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.21",
+    "odds": "2.17",
     "group": 2
   },
   {
-    "league": "Segunda Liga",
-    "match": "CF Os Belenenses - Farense",
-    "kickoff": "2026-05-30T21:30:00+02:00",
+    "league": "Tercera División RFEF - Group 6",
+    "match": "La Nucía - Levante II",
+    "kickoff": "2026-05-31T19:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.18",
+    "odds": "2.25",
     "group": 2
   },
   {
-    "league": "Tercera División RFEF - Group 15",
-    "match": "Izarra - Pamplona",
-    "kickoff": "2026-05-30T18:00:00+02:00",
+    "league": "Primera División Femenina",
+    "match": "Espanyol W - Sevilla W",
+    "kickoff": "2026-05-31T16:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.19",
+    "odds": "2.17",
     "group": 3
   },
   {
-    "league": "Tercera División RFEF - Group 11",
-    "match": "Peña Deportiva - Manacor",
-    "kickoff": "2026-05-30T16:00:00+02:00",
+    "league": "Tercera División RFEF - Group 2",
+    "match": "Caudal - Covadonga",
+    "kickoff": "2026-05-31T18:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.19",
+    "odds": "2.24",
     "group": 3
   }
 ]
