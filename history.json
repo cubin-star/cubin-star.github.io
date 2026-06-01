@@ -1,6 +1,46 @@
 [
   {
     "sport": "football",
+    "league": "Serie D",
+    "match": "Tuna Luso vs Trem",
+    "tip": "Over 1.5",
+    "odds": "1.20",
+    "date": "2026-05-31T19:00:00+00:00",
+    "score": "1:0",
+    "result": "✗"
+  },
+  {
+    "sport": "football",
+    "league": "Serie A",
+    "match": "Palmeiras vs Chapecoense-sc",
+    "tip": "Over 1.5",
+    "odds": "1.19",
+    "date": "2026-05-31T19:00:00+00:00",
+    "score": "1:0",
+    "result": "✗"
+  },
+  {
+    "sport": "hockey",
+    "league": "World Championship",
+    "match": "Switzerland vs Finland",
+    "tip": "Over 3.5",
+    "odds": "1.38",
+    "date": "2026-05-31T18:20:00+00:00",
+    "score": "0:1",
+    "result": "✗"
+  },
+  {
+    "sport": "football",
+    "league": "Allsvenskan",
+    "match": "Vasteras SK FK vs IFK Goteborg",
+    "tip": "Over 1.5",
+    "odds": "1.25",
+    "date": "2026-05-31T12:00:00+00:00",
+    "score": "4:5",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
     "league": "Serie A",
     "match": "Bahia vs Botafogo",
     "tip": "Over 1.5",
@@ -1957,46 +1997,6 @@
     "odds": "1.12",
     "date": "2026-04-10T17:30:00+00:00",
     "score": "5:1",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Superliga",
-    "match": "Aarhus vs FC Nordsjaelland",
-    "tip": "Over 1.5",
-    "odds": "1.17",
-    "date": "2026-04-10T17:00:00+00:00",
-    "score": "1:1",
-    "result": "✓"
-  },
-  {
-    "sport": "basketball",
-    "league": "Extraliga",
-    "match": "Levice vs Spisski Rytieri",
-    "tip": "Over 166.5",
-    "odds": "1.50",
-    "date": "2026-04-10T17:00:00+00:00",
-    "score": "105:82",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "2. Bundesliga",
-    "match": "Karlsruher SC vs Arminia Bielefeld",
-    "tip": "Over 1.5",
-    "odds": "1.17",
-    "date": "2026-04-10T16:30:00+00:00",
-    "score": "4:1",
-    "result": "✓"
-  },
-  {
-    "sport": "hockey",
-    "league": "NHL",
-    "match": "Colorado Avalanche vs Calgary Flames",
-    "tip": "Over 3.5",
-    "odds": "1.09",
-    "date": "2026-04-10T01:00:00+00:00",
-    "score": "3:1",
     "result": "✓"
   }
 ]
