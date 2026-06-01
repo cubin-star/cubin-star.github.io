@@ -1,50 +1,50 @@
 [
   {
-    "league": "Campeonato de Portugal Prio - Promotion Round",
-    "match": "Oliveira Hospital - Atlético Malveira",
-    "kickoff": "2026-05-31T15:00:00+02:00",
+    "league": "Liga I",
+    "match": "FC Voluntari - AFC Hermannstadt",
+    "kickoff": "2026-06-01T19:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.10",
+    "odds": "2.15",
     "group": 1
   },
   {
-    "league": "Tercera División RFEF - Group 5",
-    "match": "Cornellà - Badalona",
-    "kickoff": "2026-05-31T18:15:00+02:00",
+    "league": "Persha Liga",
+    "match": "UCSA - Nyva Ternopil",
+    "kickoff": "2026-06-01T12:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.48",
+    "odds": "2.31",
     "group": 1
   },
   {
-    "league": "Segunda División RFEF - Play-offs",
-    "match": "Real Oviedo II - CD Coria",
-    "kickoff": "2026-05-31T12:00:00+02:00",
+    "league": "Botola Pro",
+    "match": "CODM Meknès - Olympique Dcheïra",
+    "kickoff": "2026-06-01T22:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.17",
+    "odds": "2.38",
     "group": 2
   },
   {
-    "league": "Tercera División RFEF - Group 6",
-    "match": "La Nucía - Levante II",
-    "kickoff": "2026-05-31T19:30:00+02:00",
+    "league": "Primera División - Apertura",
+    "match": "Boston River - Liverpool Montevideo",
+    "kickoff": "2026-06-01T20:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.25",
+    "odds": "2.14",
     "group": 2
   },
   {
-    "league": "Primera División Femenina",
-    "match": "Espanyol W - Sevilla W",
-    "kickoff": "2026-05-31T16:00:00+02:00",
+    "league": "League Cup",
+    "match": "AL Masry - Masr",
+    "kickoff": "2026-06-01T16:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.17",
+    "odds": "2.26",
     "group": 3
   },
   {
-    "league": "Tercera División RFEF - Group 2",
-    "match": "Caudal - Covadonga",
-    "kickoff": "2026-05-31T18:30:00+02:00",
+    "league": "Iraqi League",
+    "match": "Al Talaba - Al Karkh",
+    "kickoff": "2026-06-01T19:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.24",
+    "odds": "2.20",
     "group": 3
   }
 ]
