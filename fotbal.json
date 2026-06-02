@@ -1,24 +1,24 @@
 [
   {
-    "League": "Persha Liga",
-    "Match": "Probiy Horodenka vs Prykarpattia",
+    "League": "Friendlies",
+    "Match": "Croatia vs Belgium",
+    "Tip": "Over 2.5",
+    "Odds": "1.86",
+    "Date": "2026-06-02T16:00:00+00:00"
+  },
+  {
+    "League": "Iraqi League",
+    "Match": "Al Kahrabaa vs Al-Karma",
     "Tip": "Over 2.5",
     "Odds": "1.95",
-    "Date": "2026-06-01T10:00:00+00:00"
+    "Date": "2026-06-02T15:00:00+00:00"
   },
   {
-    "League": "Ettan - Norra",
-    "Match": "Arlanda vs Gefle IF",
+    "League": "USL League Two",
+    "Match": "Nona vs The Villages",
     "Tip": "Over 2.5",
-    "Odds": "1.85",
-    "Date": "2026-06-01T17:30:00+00:00"
-  },
-  {
-    "League": "Friendlies",
-    "Match": "Norway vs Sweden",
-    "Tip": "Over 2.5",
-    "Odds": "1.88",
-    "Date": "2026-06-01T17:00:00+00:00",
+    "Odds": "1.75",
+    "Date": "2026-06-02T23:00:00+00:00",
     "locked": true
   }
 ]
