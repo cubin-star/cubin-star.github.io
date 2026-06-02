@@ -1,9 +1,16 @@
 [
   {
-    "league": "AHL",
-    "match": "Toronto Marlies vs Wilkes-Barre/Scranton",
+    "league": "NHL",
+    "match": "Carolina Hurricanes vs Vegas Golden Knights",
     "tip": "Over 3.5",
-    "odds": "1.24",
-    "date": "2026-06-01T23:00:00+00:00"
+    "odds": "1.19",
+    "date": "2026-06-03T00:00:00+00:00"
+  },
+  {
+    "league": "AHL",
+    "match": "Chicago Wolves vs Colorado Eagles",
+    "tip": "Over 3.5",
+    "odds": "1.25",
+    "date": "2026-06-03T00:00:00+00:00"
   }
 ]
