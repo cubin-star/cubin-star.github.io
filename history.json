@@ -1,5 +1,15 @@
 [
   {
+    "sport": "hockey",
+    "league": "AHL",
+    "match": "Toronto Marlies vs Wilkes-Barre/Scranton",
+    "tip": "Over 3.5",
+    "odds": "1.24",
+    "date": "2026-06-01T23:00:00+00:00",
+    "score": "3:5",
+    "result": "✓"
+  },
+  {
     "sport": "football",
     "league": "Serie D",
     "match": "Tuna Luso vs Trem",
@@ -1987,16 +1997,6 @@
     "odds": "1.14",
     "date": "2026-04-10T23:00:00+00:00",
     "score": "6:7",
-    "result": "✓"
-  },
-  {
-    "sport": "hockey",
-    "league": "DEL",
-    "match": "Kolner vs Eisbaren Berlin",
-    "tip": "Over 3.5",
-    "odds": "1.12",
-    "date": "2026-04-10T17:30:00+00:00",
-    "score": "5:1",
     "result": "✓"
   }
 ]
