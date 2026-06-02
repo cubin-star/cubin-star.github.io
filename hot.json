@@ -1,50 +1,50 @@
 [
   {
-    "league": "Liga I",
-    "match": "FC Voluntari - AFC Hermannstadt",
-    "kickoff": "2026-06-01T19:30:00+02:00",
+    "league": "Serie C - Promotion - Play-offs",
+    "match": "Union Brescia - Ascoli",
+    "kickoff": "2026-06-02T21:15:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.15",
+    "odds": "2.44",
     "group": 1
   },
   {
-    "league": "Persha Liga",
-    "match": "UCSA - Nyva Ternopil",
-    "kickoff": "2026-06-01T12:00:00+02:00",
+    "league": "Reserve League",
+    "match": "Independiente Res. - Newell's Old Boys Res.",
+    "kickoff": "2026-06-02T20:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.31",
+    "odds": "2.17",
     "group": 1
   },
   {
-    "league": "Botola Pro",
-    "match": "CODM Meknès - Olympique Dcheïra",
-    "kickoff": "2026-06-01T22:00:00+02:00",
+    "league": "Friendlies",
+    "match": "Wales - Ghana",
+    "kickoff": "2026-06-02T20:45:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.38",
+    "odds": "2.18",
     "group": 2
   },
   {
-    "league": "Primera División - Apertura",
-    "match": "Boston River - Liverpool Montevideo",
-    "kickoff": "2026-06-01T20:00:00+02:00",
+    "league": "Première Division",
+    "match": "Afrique Football Élite - Diarra",
+    "kickoff": "2026-06-02T18:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.14",
+    "odds": "2.28",
     "group": 2
   },
   {
-    "league": "League Cup",
-    "match": "AL Masry - Masr",
-    "kickoff": "2026-06-01T16:00:00+02:00",
+    "league": "Copa Ecuador",
+    "match": "La Unión - Deportivo Cuenca",
+    "kickoff": "2026-06-02T22:30:00+02:00",
     "tip": "Over 2.5",
     "odds": "2.26",
     "group": 3
   },
   {
-    "league": "Iraqi League",
-    "match": "Al Talaba - Al Karkh",
-    "kickoff": "2026-06-01T19:30:00+02:00",
+    "league": "Copa do Nordeste",
+    "match": "Fortaleza EC - Vitoria",
+    "kickoff": "2026-06-03T02:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.20",
+    "odds": "2.21",
     "group": 3
   }
 ]
