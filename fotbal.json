@@ -1,24 +1,24 @@
 [
   {
     "League": "Friendlies",
-    "Match": "Croatia vs Belgium",
+    "Match": "Netherlands vs Algeria",
     "Tip": "Over 2.5",
-    "Odds": "1.86",
-    "Date": "2026-06-02T16:00:00+00:00"
+    "Odds": "1.76",
+    "Date": "2026-06-03T18:45:00+00:00"
   },
   {
-    "League": "Iraqi League",
-    "Match": "Al Kahrabaa vs Al-Karma",
+    "League": "USL Championship",
+    "Match": "Birmingham Legion vs Louisville City",
+    "Tip": "Over 2.5",
+    "Odds": "1.85",
+    "Date": "2026-06-04T00:00:00+00:00"
+  },
+  {
+    "League": "USL League One",
+    "Match": "Greenville Triumph vs Forward Madison",
     "Tip": "Over 2.5",
     "Odds": "1.95",
-    "Date": "2026-06-02T15:00:00+00:00"
-  },
-  {
-    "League": "USL League Two",
-    "Match": "Nona vs The Villages",
-    "Tip": "Over 2.5",
-    "Odds": "1.75",
-    "Date": "2026-06-02T23:00:00+00:00",
+    "Date": "2026-06-03T23:30:00+00:00",
     "locked": true
   }
 ]
