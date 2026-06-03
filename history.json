@@ -1,6 +1,26 @@
 [
   {
     "sport": "hockey",
+    "league": "NHL",
+    "match": "Carolina Hurricanes vs Vegas Golden Knights",
+    "tip": "Over 3.5",
+    "odds": "1.19",
+    "date": "2026-06-03T00:00:00+00:00",
+    "score": "4:5",
+    "result": "✓"
+  },
+  {
+    "sport": "hockey",
+    "league": "AHL",
+    "match": "Chicago Wolves vs Colorado Eagles",
+    "tip": "Over 3.5",
+    "odds": "1.25",
+    "date": "2026-06-03T00:00:00+00:00",
+    "score": "2:3",
+    "result": "✓"
+  },
+  {
+    "sport": "hockey",
     "league": "AHL",
     "match": "Toronto Marlies vs Wilkes-Barre/Scranton",
     "tip": "Over 3.5",
@@ -1977,26 +1997,6 @@
     "odds": "1.19",
     "date": "2026-04-11T12:00:00+00:00",
     "score": "1:4",
-    "result": "✓"
-  },
-  {
-    "sport": "basketball",
-    "league": "NKL",
-    "match": "Suduva-Mantinga vs Vilkaviskis",
-    "tip": "Over 155.5",
-    "odds": "1.58",
-    "date": "2026-04-11T11:10:00+00:00",
-    "score": "104:77",
-    "result": "✓"
-  },
-  {
-    "sport": "hockey",
-    "league": "AHL",
-    "match": "Laval Rocket vs Belleville Senators",
-    "tip": "Over 3.5",
-    "odds": "1.14",
-    "date": "2026-04-10T23:00:00+00:00",
-    "score": "6:7",
     "result": "✓"
   }
 ]
