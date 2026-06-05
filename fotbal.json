@@ -1,24 +1,24 @@
 [
   {
-    "League": "Friendlies",
-    "Match": "Mexico vs Serbia",
+    "League": "Ykkösliiga",
+    "Match": "KäPa vs Kooteepee",
     "Tip": "Over 2.5",
     "Odds": "1.78",
-    "Date": "2026-06-05T02:00:00+00:00"
+    "Date": "2026-06-05T16:00:00+00:00"
   },
   {
-    "League": "Botola Pro",
-    "Match": "FAR Rabat vs Difaa EL Jadida",
+    "League": "Ettan - Norra",
+    "Match": "FBK Karlstad vs IF Karlstad",
     "Tip": "Over 2.5",
-    "Odds": "1.88",
-    "Date": "2026-06-04T20:00:00+00:00"
+    "Odds": "1.80",
+    "Date": "2026-06-05T17:00:00+00:00"
   },
   {
-    "League": "Pro League A",
-    "Match": "Respublika FA vs Qiziriq",
+    "League": "Friendlies",
+    "Match": "Russia vs Burkina Faso",
     "Tip": "Over 2.5",
-    "Odds": "1.75",
-    "Date": "2026-06-04T13:00:00+00:00",
+    "Odds": "1.84",
+    "Date": "2026-06-05T17:00:00+00:00",
     "locked": true
   }
 ]
