@@ -1,6 +1,36 @@
 [
   {
     "sport": "basketball",
+    "league": "NBA",
+    "match": "San Antonio Spurs vs New York Knicks",
+    "tip": "Over 201.5",
+    "odds": "1.25",
+    "date": "2026-06-06T00:30:00+00:00",
+    "score": "104:105",
+    "result": "✓"
+  },
+  {
+    "sport": "hockey",
+    "league": "AHL",
+    "match": "Chicago Wolves vs Colorado Eagles",
+    "tip": "Over 3.5",
+    "odds": "1.25",
+    "date": "2026-06-06T00:00:00+00:00",
+    "score": "3:7",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "K League 2",
+    "match": "Daegu FC vs Paju Citizen",
+    "tip": "Over 1.5",
+    "odds": "1.22",
+    "date": "2026-06-05T10:30:00+00:00",
+    "score": "1:0",
+    "result": "✗"
+  },
+  {
+    "sport": "basketball",
     "league": "Superliga",
     "match": "Oberwart Gunners vs Kapfenberg Bulls",
     "tip": "Over 146.5",
@@ -1967,36 +1997,6 @@
     "odds": "1.60",
     "date": "2026-04-11T19:00:00+00:00",
     "score": "125:87",
-    "result": "✓"
-  },
-  {
-    "sport": "basketball",
-    "league": "NBL",
-    "match": "USK Prague vs Slavia Prague",
-    "tip": "Over 161.5",
-    "odds": "1.53",
-    "date": "2026-04-11T16:00:00+00:00",
-    "score": "76:81",
-    "result": "✗"
-  },
-  {
-    "sport": "basketball",
-    "league": "ABA League",
-    "match": "KK Bosna vs Igokea",
-    "tip": "Over 159",
-    "odds": "1.56",
-    "date": "2026-04-11T16:00:00+00:00",
-    "score": "86:89",
-    "result": "✓"
-  },
-  {
-    "sport": "hockey",
-    "league": "Extraliga",
-    "match": "Trinec vs Karlovy Vary",
-    "tip": "Over 3.5",
-    "odds": "1.30",
-    "date": "2026-04-11T14:30:00+00:00",
-    "score": "3:2",
     "result": "✓"
   }
 ]

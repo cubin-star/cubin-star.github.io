@@ -1,1 +1,18 @@
-[]
+[
+  {
+    "sport": "football",
+    "league": "J2/J3 League",
+    "match": "Omiya Ardija vs Kochi United",
+    "tip": "Over 1.5",
+    "odds": "1.21",
+    "date": "2026-06-06T05:00:00+00:00"
+  },
+  {
+    "sport": "football",
+    "league": "J1 League",
+    "match": "FC Tokyo vs Cerezo Osaka",
+    "tip": "Over 1.5",
+    "odds": "1.22",
+    "date": "2026-06-06T05:00:00+00:00"
+  }
+]
