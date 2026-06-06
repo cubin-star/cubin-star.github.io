@@ -1,50 +1,50 @@
 [
   {
-    "league": "Premier League",
-    "match": "Oleksandria - Livyi Bereh",
-    "kickoff": "2026-06-05T14:30:00+02:00",
+    "league": "Tercera División RFEF - Group 3",
+    "match": "Laredo - Tropezón",
+    "kickoff": "2026-06-06T18:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.14",
+    "odds": "2.24",
     "group": 1
   },
   {
-    "league": "GFA League",
-    "match": "Medina United - Hart Acedemy",
-    "kickoff": "2026-06-05T18:30:00+02:00",
+    "league": "Serie D",
+    "match": "Portuguesa - Portuguesa RJ",
+    "kickoff": "2026-06-06T20:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.45",
+    "odds": "2.24",
     "group": 1
   },
   {
-    "league": "J2/J3 League",
-    "match": "Jubilo Iwata - Osaka",
-    "kickoff": "2026-06-06T09:00:00+02:00",
+    "league": "Tercera División RFEF - Group 4",
+    "match": "Leioa - Derio",
+    "kickoff": "2026-06-06T19:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.21",
+    "odds": "2.13",
+    "group": 2
+  },
+  {
+    "league": "Primera División - Apertura",
+    "match": "Central Espanol - Racing Montevideo",
+    "kickoff": "2026-06-06T15:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.38",
     "group": 2
   },
   {
     "league": "Liga Pro Serie B",
-    "match": "Santo Domingo - 22 de Julio",
-    "kickoff": "2026-06-06T02:00:00+02:00",
+    "match": "LDU Portoviejo - Gualaceo SC",
+    "kickoff": "2026-06-06T23:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.17",
-    "group": 2
-  },
-  {
-    "league": "Friendlies",
-    "match": "Benin - Niger",
-    "kickoff": "2026-06-05T20:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.39",
+    "odds": "2.24",
     "group": 3
   },
   {
-    "league": "J1 League",
-    "match": "Yokohama F. Marinos - Shimizu S-pulse",
-    "kickoff": "2026-06-06T10:00:00+02:00",
+    "league": "Friendlies",
+    "match": "Armenia - Kazakhstan",
+    "kickoff": "2026-06-06T16:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.14",
+    "odds": "2.24",
     "group": 3
   }
 ]
