@@ -1,24 +1,24 @@
 [
   {
     "League": "Ykkösliiga",
-    "Match": "KäPa vs Kooteepee",
+    "Match": "EIF vs MP",
     "Tip": "Over 2.5",
-    "Odds": "1.78",
-    "Date": "2026-06-05T16:00:00+00:00"
-  },
-  {
-    "League": "Ettan - Norra",
-    "Match": "FBK Karlstad vs IF Karlstad",
-    "Tip": "Over 2.5",
-    "Odds": "1.80",
-    "Date": "2026-06-05T17:00:00+00:00"
+    "Odds": "1.76",
+    "Date": "2026-06-06T13:00:00+00:00"
   },
   {
     "League": "Friendlies",
-    "Match": "Russia vs Burkina Faso",
+    "Match": "Bolivia vs Scotland",
     "Tip": "Over 2.5",
-    "Odds": "1.84",
-    "Date": "2026-06-05T17:00:00+00:00",
+    "Odds": "1.79",
+    "Date": "2026-06-06T20:00:00+00:00"
+  },
+  {
+    "League": "2. Division",
+    "Match": "Brabrand vs Fremad Amager",
+    "Tip": "Over 2.5",
+    "Odds": "1.95",
+    "Date": "2026-06-06T12:00:00+00:00",
     "locked": true
   }
 ]
