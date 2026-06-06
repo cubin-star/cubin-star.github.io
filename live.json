@@ -1,44 +1,23 @@
 [
   {
-    "League": "K League 2",
-    "Match": "Daegu FC vs Paju Citizen",
+    "League": "New South Wales NPL 2",
+    "Match": "Mt Druitt Town vs Canterbury Bankstown",
     "Tip": "Over 1.5",
-    "Odds": "1.22",
-    "Date": "2026-06-05T10:30:00+00:00"
+    "Odds": "1.15",
+    "Date": "2026-06-06T09:00:00+00:00"
   },
   {
-    "League": "MLS Next Pro",
-    "Match": "Toronto II vs Huntsville City",
+    "League": "Division 2 - Västra Götaland",
+    "Match": "Torslanda vs Hestrafor",
     "Tip": "Over 1.5",
-    "Odds": "1.13",
-    "Date": "2026-06-05T23:00:00+00:00"
+    "Odds": "1.12",
+    "Date": "2026-06-06T11:00:00+00:00"
   },
   {
-    "League": "J2/J3 League",
-    "Match": "Omiya Ardija vs Kochi United",
-    "Tip": "Over 1.5",
-    "Odds": "1.21",
-    "Date": "2026-06-06T05:00:00+00:00"
-  },
-  {
-    "League": "J2/J3 League",
-    "Match": "Matsumoto Yamaga vs Nara Club",
-    "Tip": "Over 1.5",
-    "Odds": "1.22",
-    "Date": "2026-06-06T05:00:00+00:00"
-  },
-  {
-    "League": "New South Wales NPL",
-    "Match": "SD Raiders vs UNSW",
+    "League": "Ettan - Norra",
+    "Match": "Gefle IF vs Hammarby Talang",
     "Tip": "Over 1.5",
     "Odds": "1.17",
-    "Date": "2026-06-06T07:00:00+00:00"
-  },
-  {
-    "League": "New South Wales NPL 2",
-    "Match": "Dulwich Hill vs Central Coast II",
-    "Tip": "Over 1.5",
-    "Odds": "1.14",
-    "Date": "2026-06-06T07:00:00+00:00"
+    "Date": "2026-06-06T14:00:00+00:00"
   }
 ]
