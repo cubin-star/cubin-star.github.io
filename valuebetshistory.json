@@ -1,5 +1,15 @@
 [
   {
+    "League": "K League 2",
+    "Match": "Daegu FC vs Paju Citizen",
+    "Tip": "Over 2.5",
+    "Odds": "1.64",
+    "Date": "2026-06-05T10:30:00+00:00",
+    "FixtureId": 1510356,
+    "Result": "KO",
+    "Score": "1:0"
+  },
+  {
     "League": "Serie D",
     "Match": "Tuna Luso vs Trem",
     "Tip": "Over 2.5",
