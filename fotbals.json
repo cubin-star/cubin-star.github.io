@@ -1,9 +1,16 @@
 [
   {
-    "League": "J1 League",
-    "Match": "Yokohama F. Marinos vs Shimizu S-pulse",
+    "League": "Serie B",
+    "Match": "CRB vs São Bernardo",
     "Tip": "Over 1.5",
-    "Odds": "1.35",
-    "Date": "2026-06-06T08:00:00+00:00"
+    "Odds": "1.31",
+    "Date": "2026-06-07T19:00:00+00:00"
+  },
+  {
+    "League": "K League 2",
+    "Match": "Gimpo Citizen vs Jeonnam Dragons",
+    "Tip": "Over 1.5",
+    "Odds": "1.34",
+    "Date": "2026-06-07T10:30:00+00:00"
   }
 ]
