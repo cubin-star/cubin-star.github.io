@@ -1,6 +1,46 @@
 [
   {
     "sport": "basketball",
+    "league": "Superliga",
+    "match": "Kapfenberg Bulls vs Oberwart Gunners",
+    "tip": "Over 147.5",
+    "odds": "1.28",
+    "date": "2026-06-06T16:00:00+00:00",
+    "score": "94:80",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "J1 League",
+    "match": "Yokohama F. Marinos vs Shimizu S-pulse",
+    "tip": "Over 1.5",
+    "odds": "1.35",
+    "date": "2026-06-06T08:00:00+00:00",
+    "score": "3:0",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "J2/J3 League",
+    "match": "Omiya Ardija vs Kochi United",
+    "tip": "Over 1.5",
+    "odds": "1.21",
+    "date": "2026-06-06T05:00:00+00:00",
+    "score": "2:1",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "J1 League",
+    "match": "FC Tokyo vs Cerezo Osaka",
+    "tip": "Over 1.5",
+    "odds": "1.22",
+    "date": "2026-06-06T05:00:00+00:00",
+    "score": "1:3",
+    "result": "✓"
+  },
+  {
+    "sport": "basketball",
     "league": "NBA",
     "match": "San Antonio Spurs vs New York Knicks",
     "tip": "Over 201.5",
@@ -1957,46 +1997,6 @@
     "odds": "1.20",
     "date": "2026-04-12T07:00:00+00:00",
     "score": "0:2",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "A-League",
-    "match": "Melbourne City vs Wellington Phoenix",
-    "tip": "Over 1.5",
-    "odds": "1.20",
-    "date": "2026-04-12T05:00:00+00:00",
-    "score": "2:0",
-    "result": "✓"
-  },
-  {
-    "sport": "hockey",
-    "league": "NHL",
-    "match": "Winnipeg Jets vs Philadelphia Flyers",
-    "tip": "Over 4.5",
-    "odds": "1.40",
-    "date": "2026-04-11T23:00:00+00:00",
-    "score": "1:7",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "USL Super League",
-    "match": "Fort Lauderdale United W vs Sporting JAX W",
-    "tip": "Over 1.5",
-    "odds": "1.21",
-    "date": "2026-04-11T20:00:00+00:00",
-    "score": "1:4",
-    "result": "✓"
-  },
-  {
-    "sport": "basketball",
-    "league": "Premier league",
-    "match": "Tindastoll vs IR Reykjavik",
-    "tip": "Over 184.5",
-    "odds": "1.60",
-    "date": "2026-04-11T19:00:00+00:00",
-    "score": "125:87",
     "result": "✓"
   }
 ]
