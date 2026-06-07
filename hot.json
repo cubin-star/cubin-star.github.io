@@ -1,50 +1,50 @@
 [
   {
-    "league": "Tercera División RFEF - Group 3",
-    "match": "Laredo - Tropezón",
-    "kickoff": "2026-06-06T18:00:00+02:00",
+    "league": "Primera División RFEF - Play Offs",
+    "match": "Celta de Vigo II - Europa Fc",
+    "kickoff": "2026-06-07T16:15:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.24",
+    "odds": "2.15",
     "group": 1
   },
   {
-    "league": "Serie D",
-    "match": "Portuguesa - Portuguesa RJ",
-    "kickoff": "2026-06-06T20:00:00+02:00",
+    "league": "Tercera División RFEF - Group 5",
+    "match": "Badalona - Cornellà",
+    "kickoff": "2026-06-07T18:15:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.24",
+    "odds": "2.19",
     "group": 1
   },
   {
-    "league": "Tercera División RFEF - Group 4",
-    "match": "Leioa - Derio",
-    "kickoff": "2026-06-06T19:00:00+02:00",
+    "league": "Tercera División RFEF - Group 17",
+    "match": "Cuarte - Atlético Monzón",
+    "kickoff": "2026-06-07T20:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.13",
+    "odds": "2.35",
     "group": 2
   },
   {
-    "league": "Primera División - Apertura",
-    "match": "Central Espanol - Racing Montevideo",
-    "kickoff": "2026-06-06T15:00:00+02:00",
+    "league": "Tercera División RFEF - Group 7",
+    "match": "Trival Valderas - Las Rozas",
+    "kickoff": "2026-06-07T11:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.38",
+    "odds": "2.14",
     "group": 2
   },
   {
-    "league": "Liga Pro Serie B",
-    "match": "LDU Portoviejo - Gualaceo SC",
-    "kickoff": "2026-06-06T23:00:00+02:00",
+    "league": "Segunda División",
+    "match": "Las Palmas - Malaga",
+    "kickoff": "2026-06-07T21:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.24",
+    "odds": "2.16",
     "group": 3
   },
   {
-    "league": "Friendlies",
-    "match": "Armenia - Kazakhstan",
-    "kickoff": "2026-06-06T16:00:00+02:00",
+    "league": "Tercera División RFEF - Group 14",
+    "match": "Badajoz - Moralo",
+    "kickoff": "2026-06-07T19:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.24",
+    "odds": "2.15",
     "group": 3
   }
 ]
