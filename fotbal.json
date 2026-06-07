@@ -1,24 +1,24 @@
 [
   {
-    "League": "Ykkösliiga",
-    "Match": "EIF vs MP",
+    "League": "Ettan - Södra",
+    "Match": "Kristianstad vs Lund",
     "Tip": "Over 2.5",
-    "Odds": "1.76",
-    "Date": "2026-06-06T13:00:00+00:00"
+    "Odds": "1.75",
+    "Date": "2026-06-07T11:00:00+00:00"
   },
   {
     "League": "Friendlies",
-    "Match": "Bolivia vs Scotland",
+    "Match": "Ecuador vs Guatemala",
     "Tip": "Over 2.5",
-    "Odds": "1.79",
-    "Date": "2026-06-06T20:00:00+00:00"
+    "Odds": "1.78",
+    "Date": "2026-06-07T20:00:00+00:00"
   },
   {
-    "League": "2. Division",
-    "Match": "Brabrand vs Fremad Amager",
+    "League": "Copa De La Liga",
+    "Match": "Universidad de Chile vs A. Italiano",
     "Tip": "Over 2.5",
-    "Odds": "1.95",
-    "Date": "2026-06-06T12:00:00+00:00",
+    "Odds": "1.88",
+    "Date": "2026-06-07T16:30:00+00:00",
     "locked": true
   }
 ]
