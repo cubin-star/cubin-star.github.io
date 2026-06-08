@@ -1,24 +1,9 @@
 [
   {
-    "League": "Ettan - Södra",
-    "Match": "Kristianstad vs Lund",
+    "League": "Primera B",
+    "Match": "Union Espanola vs Union San Felipe",
     "Tip": "Over 2.5",
-    "Odds": "1.75",
-    "Date": "2026-06-07T11:00:00+00:00"
-  },
-  {
-    "League": "Friendlies",
-    "Match": "Ecuador vs Guatemala",
-    "Tip": "Over 2.5",
-    "Odds": "1.78",
-    "Date": "2026-06-07T20:00:00+00:00"
-  },
-  {
-    "League": "Copa De La Liga",
-    "Match": "Universidad de Chile vs A. Italiano",
-    "Tip": "Over 2.5",
-    "Odds": "1.88",
-    "Date": "2026-06-07T16:30:00+00:00",
-    "locked": true
+    "Odds": "1.84",
+    "Date": "2026-06-08T23:30:00+00:00"
   }
 ]
