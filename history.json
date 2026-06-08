@@ -1,5 +1,45 @@
 [
   {
+    "sport": "hockey",
+    "league": "AHL",
+    "match": "Colorado Eagles vs Chicago Wolves",
+    "tip": "Over 3.5",
+    "odds": "1.25",
+    "date": "2026-06-08T00:05:00+00:00",
+    "score": "2:3",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "Serie B",
+    "match": "CRB vs São Bernardo",
+    "tip": "Over 1.5",
+    "odds": "1.31",
+    "date": "2026-06-07T19:00:00+00:00",
+    "score": "2:3",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "K League 2",
+    "match": "Gimpo Citizen vs Jeonnam Dragons",
+    "tip": "Over 1.5",
+    "odds": "1.34",
+    "date": "2026-06-07T10:30:00+00:00",
+    "score": "2:2",
+    "result": "✓"
+  },
+  {
+    "sport": "basketball",
+    "league": "P. League+",
+    "match": "Taoyuan Pauian Pilots vs Fubon Braves",
+    "tip": "Over 179.5",
+    "odds": "1.50",
+    "date": "2026-06-07T09:00:00+00:00",
+    "score": "98:94",
+    "result": "✓"
+  },
+  {
     "sport": "basketball",
     "league": "Superliga",
     "match": "Kapfenberg Bulls vs Oberwart Gunners",
@@ -1958,45 +1998,5 @@
     "date": "2026-04-12T14:00:00+00:00",
     "score": "0:3",
     "result": "✗"
-  },
-  {
-    "sport": "basketball",
-    "league": "Korisliiga",
-    "match": "Helsinki Seagulls vs Kataja",
-    "tip": "Over 160.5",
-    "odds": "1.43",
-    "date": "2026-04-12T14:00:00+00:00",
-    "score": "86:76",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "2. Lig",
-    "match": "Şanlıurfaspor vs Kastamonuspor",
-    "tip": "Over 1.5",
-    "odds": "1.19",
-    "date": "2026-04-12T12:00:00+00:00",
-    "score": "5:2",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Regionalliga - SudWest",
-    "match": "Freiburg II vs Eintracht Trier",
-    "tip": "Over 1.5",
-    "odds": "1.20",
-    "date": "2026-04-12T12:00:00+00:00",
-    "score": "4:1",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "J1 League",
-    "match": "Kawasaki Frontale vs Kashima",
-    "tip": "Over 1.5",
-    "odds": "1.20",
-    "date": "2026-04-12T07:00:00+00:00",
-    "score": "0:2",
-    "result": "✓"
   }
 ]
