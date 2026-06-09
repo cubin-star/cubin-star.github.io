@@ -1,50 +1,50 @@
 [
   {
-    "league": "Botola Pro",
-    "match": "Renaissance Berkane - Ittihad Tanger",
-    "kickoff": "2026-06-08T20:00:00+02:00",
+    "league": "Premier League",
+    "match": "Ahrobiznes Volochysk - Kudrivka",
+    "kickoff": "2026-06-09T17:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.19",
+    "odds": "2.40",
     "group": 1
   },
   {
     "league": "Friendlies",
-    "match": "Niger - Mauritania",
-    "kickoff": "2026-06-08T21:00:00+02:00",
+    "match": "Tajikistan - India",
+    "kickoff": "2026-06-09T17:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.36",
+    "odds": "2.15",
     "group": 1
   },
   {
-    "league": "Primera B Metropolitana",
-    "match": "UAI Urquiza - Liniers",
-    "kickoff": "2026-06-08T20:30:00+02:00",
+    "league": "Botola Pro",
+    "match": "Yacoub El Mansour - CODM Meknès",
+    "kickoff": "2026-06-09T18:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.50",
+    "odds": "2.41",
     "group": 2
   },
   {
-    "league": "Copa Gaúcha",
-    "match": "Monsoon - Santa Cruz RS",
-    "kickoff": "2026-06-08T20:00:00+02:00",
+    "league": "Azadegan League",
+    "match": "Nassaji Mazandaran - Shenavarsazi Qeshm",
+    "kickoff": "2026-06-09T17:00:00+02:00",
     "tip": "Over 2.5",
     "odds": "2.13",
     "group": 2
   },
   {
-    "league": "Primera División - Apertura",
-    "match": "Liverpool Montevideo - Cerro Largo",
-    "kickoff": "2026-06-09T00:00:00+02:00",
+    "league": "World Cup - Women - Qualification Europe",
+    "match": "Wales W - Czech Republic W",
+    "kickoff": "2026-06-09T19:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.18",
+    "odds": "2.23",
     "group": 3
   },
   {
-    "league": "Serie B",
-    "match": "Vila Nova - Botafogo SP",
-    "kickoff": "2026-06-09T01:00:00+02:00",
+    "league": "Première Division",
+    "match": "Djoliba - Réal Bamako",
+    "kickoff": "2026-06-09T18:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.40",
+    "odds": "2.37",
     "group": 3
   }
 ]
