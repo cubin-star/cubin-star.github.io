@@ -1,9 +1,24 @@
 [
   {
-    "League": "Primera B",
-    "Match": "Union Espanola vs Union San Felipe",
+    "League": "Friendlies",
+    "Match": "Indonesia vs Mozambique",
     "Tip": "Over 2.5",
-    "Odds": "1.84",
-    "Date": "2026-06-08T23:30:00+00:00"
+    "Odds": "1.78",
+    "Date": "2026-06-09T13:00:00+00:00"
+  },
+  {
+    "League": "Superettan",
+    "Match": "IK brage vs Ljungskile SK",
+    "Tip": "Over 2.5",
+    "Odds": "1.75",
+    "Date": "2026-06-09T17:00:00+00:00"
+  },
+  {
+    "League": "Segunda División",
+    "Match": "Almeria vs Castellón",
+    "Tip": "Over 2.5",
+    "Odds": "1.77",
+    "Date": "2026-06-09T19:00:00+00:00",
+    "locked": true
   }
 ]
