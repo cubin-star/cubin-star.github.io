@@ -1,5 +1,25 @@
 [
   {
+    "sport": "basketball",
+    "league": "BBL",
+    "match": "Alba Berlin vs Bamberg",
+    "tip": "Over 151.5",
+    "odds": "1.29",
+    "date": "2026-06-09T18:30:00+00:00",
+    "score": "97:66",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "Superettan",
+    "match": "Sandviken vs Falkenbergs FF",
+    "tip": "Over 1.5",
+    "odds": "1.19",
+    "date": "2026-06-09T17:00:00+00:00",
+    "score": "4:2",
+    "result": "✓"
+  },
+  {
     "sport": "hockey",
     "league": "AHL",
     "match": "Colorado Eagles vs Chicago Wolves",
@@ -1978,25 +1998,5 @@
     "date": "2026-04-12T15:00:00+00:00",
     "score": "4:2",
     "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Super League",
-    "match": "FC Sion vs Lausanne",
-    "tip": "Over 1.5",
-    "odds": "1.18",
-    "date": "2026-04-12T14:30:00+00:00",
-    "score": "3:0",
-    "result": "✓"
-  },
-  {
-    "sport": "hockey",
-    "league": "Extraliga",
-    "match": "Slovan Bratislava vs Kosice",
-    "tip": "Over 3.5",
-    "odds": "1.31",
-    "date": "2026-04-12T14:00:00+00:00",
-    "score": "0:3",
-    "result": "✗"
   }
 ]
