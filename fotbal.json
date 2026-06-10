@@ -1,24 +1,24 @@
 [
   {
-    "League": "Friendlies",
-    "Match": "Indonesia vs Mozambique",
+    "League": "Suomen Cup",
+    "Match": "KuPS vs VPS",
     "Tip": "Over 2.5",
-    "Odds": "1.78",
-    "Date": "2026-06-09T13:00:00+00:00"
+    "Odds": "1.93",
+    "Date": "2026-06-10T14:00:00+00:00"
+  },
+  {
+    "League": "Friendlies",
+    "Match": "Bolivia vs Algeria",
+    "Tip": "Over 2.5",
+    "Odds": "1.79",
+    "Date": "2026-06-11T00:00:00+00:00"
   },
   {
     "League": "Superettan",
-    "Match": "IK brage vs Ljungskile SK",
+    "Match": "Varbergs BoIS FC vs Norrby IF",
     "Tip": "Over 2.5",
-    "Odds": "1.75",
-    "Date": "2026-06-09T17:00:00+00:00"
-  },
-  {
-    "League": "Segunda División",
-    "Match": "Almeria vs Castellón",
-    "Tip": "Over 2.5",
-    "Odds": "1.77",
-    "Date": "2026-06-09T19:00:00+00:00",
+    "Odds": "1.78",
+    "Date": "2026-06-10T17:00:00+00:00",
     "locked": true
   }
 ]
