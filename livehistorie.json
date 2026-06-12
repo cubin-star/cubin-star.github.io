@@ -1,5 +1,21 @@
 [
   {
+    "league": "Premier Division",
+    "homeTeam": "Shelbourne",
+    "awayTeam": "Shamrock Rovers",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "1:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-06-12T19:00:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper 1:0 comeback | HT 1:0 | xG: 1.27 | Shots: 12/2 | losingXG: 0.94 losingSOT: 1 | @HT | Pre O2.5: 2.05"
+  },
+  {
     "league": "J1 League",
     "homeTeam": "Mito Hollyhock",
     "awayTeam": "V-varen Nagasaki",
