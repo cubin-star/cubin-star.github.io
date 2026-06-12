@@ -2,6 +2,16 @@
   {
     "sport": "football",
     "league": "Superettan",
+    "match": "Helsingborg vs Landskrona BoIS",
+    "tip": "Over 1.5",
+    "odds": "1.22",
+    "date": "2026-06-11T17:00:00+00:00",
+    "score": "0:3",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "Superettan",
     "match": "Orebro SK vs GIF Sundsvall",
     "tip": "Over 1.5",
     "odds": "1.28",
@@ -1987,16 +1997,6 @@
     "odds": "1.16",
     "date": "2026-04-12T20:00:00+00:00",
     "score": "2:2",
-    "result": "✓"
-  },
-  {
-    "sport": "hockey",
-    "league": "AHL",
-    "match": "Manitoba Moose vs Texas Stars",
-    "tip": "Over 3.5",
-    "odds": "1.20",
-    "date": "2026-04-12T19:00:00+00:00",
-    "score": "4:3",
     "result": "✓"
   }
 ]
