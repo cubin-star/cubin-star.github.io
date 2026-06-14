@@ -1,24 +1,24 @@
 [
   {
-    "League": "Veikkausliiga",
-    "Match": "Lahti vs SJK",
+    "League": "A Lyga",
+    "Match": "Hegelmann Litauen vs Kauno Žalgiris",
     "Tip": "Over 2.5",
-    "Odds": "1.89",
-    "Date": "2026-06-13T16:00:00+00:00"
+    "Odds": "1.88",
+    "Date": "2026-06-14T11:15:00+00:00"
   },
   {
     "League": "Ettan - Södra",
-    "Match": "Tvååker vs Jonkopings Sodra",
+    "Match": "Rosengård vs Skövde AIK",
     "Tip": "Over 2.5",
-    "Odds": "1.95",
-    "Date": "2026-06-13T11:00:00+00:00"
+    "Odds": "1.80",
+    "Date": "2026-06-14T14:00:00+00:00"
   },
   {
-    "League": "Ykkösliiga",
-    "Match": "JIPPO vs KäPa",
+    "League": "Superettan",
+    "Match": "Falkenbergs FF vs Orebro SK",
     "Tip": "Over 2.5",
-    "Odds": "1.87",
-    "Date": "2026-06-13T13:00:00+00:00",
+    "Odds": "1.80",
+    "Date": "2026-06-14T13:00:00+00:00",
     "locked": true
   }
 ]
