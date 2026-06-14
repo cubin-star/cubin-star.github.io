@@ -1,21 +1,21 @@
 {
-  "updated_at": "13.06.2026 10:07",
+  "updated_at": "14.06.2026 10:23",
   "tips": [
-    {
-      "league": "WTA - Nottingham, Great Britain, Qualifying",
-      "match": "Udvardy, Panna vs Volynets, Katie",
-      "tip": "Over20.5",
-      "odds": "1.77",
-      "date": "13.06.2026",
-      "time": "14:20"
-    },
     {
       "league": "WTA - Berlin, Germany, Qualifying",
       "match": "Sun, Lulu vs Kalinina, Anhelina",
       "tip": "Over20.5",
       "odds": "1.81",
-      "date": "13.06.2026",
-      "time": "16:00"
+      "date": "14.06.2026",
+      "time": "11:00"
+    },
+    {
+      "league": "WTA - Berlin, Germany",
+      "match": "Svitolina, Elina vs Kalinskaya, Anna",
+      "tip": "Over21.5",
+      "odds": "1.93",
+      "date": "14.06.2026",
+      "time": "10:00"
     }
   ]
 }
