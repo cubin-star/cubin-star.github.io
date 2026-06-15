@@ -1,50 +1,50 @@
 [
   {
-    "league": "Tercera División RFEF - Promotion - Play-offs",
-    "match": "Badajoz - Cuarte",
-    "kickoff": "2026-06-14T19:30:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.28",
-    "group": 1
-  },
-  {
-    "league": "League One",
-    "match": "Nantong Zhiyun - Yanbian Longding",
-    "kickoff": "2026-06-14T13:30:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.26",
-    "group": 1
-  },
-  {
     "league": "Serie B",
-    "match": "Novorizontino - Nautico Recife",
-    "kickoff": "2026-06-15T00:00:00+02:00",
+    "match": "Criciuma - Ceara",
+    "kickoff": "2026-06-16T02:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.13",
+    "odds": "2.34",
+    "group": 1
+  },
+  {
+    "league": "World Cup",
+    "match": "Iran - New Zealand",
+    "kickoff": "2026-06-16T03:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.42",
+    "group": 1
+  },
+  {
+    "league": "Premier League",
+    "match": "Adama Kenema - Ethiopia Nigd Bank",
+    "kickoff": "2026-06-15T15:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.40",
     "group": 2
   },
   {
-    "league": "Torneo Federal A",
-    "match": "Costa Brava - Cipolletti",
-    "kickoff": "2026-06-14T22:00:00+02:00",
+    "league": "Azadegan League",
+    "match": "Mes Shahr-e Babak - Be'sat Kermanshah",
+    "kickoff": "2026-06-15T16:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.44",
+    "odds": "2.38",
     "group": 2
   },
   {
-    "league": "Segunda División",
-    "match": "Linares Unido - Lota Schwager",
-    "kickoff": "2026-06-14T22:00:00+02:00",
+    "league": "Serie C",
+    "match": "Ypiranga-RS - Botafogo PB",
+    "kickoff": "2026-06-16T01:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.17",
+    "odds": "2.14",
     "group": 3
   },
   {
-    "league": "Serie D",
-    "match": "Real Noroeste - Democrata GV",
-    "kickoff": "2026-06-14T22:00:00+02:00",
+    "league": "Primera C",
+    "match": "Sacachispas - Argentino Rosario",
+    "kickoff": "2026-06-15T20:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.34",
+    "odds": "2.44",
     "group": 3
   }
 ]
