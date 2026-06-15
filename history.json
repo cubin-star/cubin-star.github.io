@@ -4,6 +4,36 @@
     "league": "AHL",
     "match": "Chicago Wolves vs Toronto Marlies",
     "tip": "Over 3.5",
+    "odds": "1.21",
+    "date": "2026-06-14T20:00:00+00:00",
+    "score": "4:5",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "1. Division",
+    "match": "Lyn vs Bryne",
+    "tip": "Over 1.5",
+    "odds": "1.20",
+    "date": "2026-06-14T14:00:00+00:00",
+    "score": "0:3",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "Superettan",
+    "match": "Norrby IF vs Oddevold",
+    "tip": "Over 1.5",
+    "odds": "1.22",
+    "date": "2026-06-14T11:00:00+00:00",
+    "score": "0:2",
+    "result": "✓"
+  },
+  {
+    "sport": "hockey",
+    "league": "AHL",
+    "match": "Chicago Wolves vs Toronto Marlies",
+    "tip": "Over 3.5",
     "odds": "1.23",
     "date": "2026-06-13T00:00:00+00:00",
     "score": "2:4",
@@ -1967,36 +1997,6 @@
     "odds": "1.30",
     "date": "2026-04-13T16:45:00+00:00",
     "score": "3:2",
-    "result": "✓"
-  },
-  {
-    "sport": "hockey",
-    "league": "Liiga",
-    "match": "SaiPa vs Assat",
-    "tip": "Over 4.5",
-    "odds": "1.42",
-    "date": "2026-04-13T15:30:00+00:00",
-    "score": "4:2",
-    "result": "✓"
-  },
-  {
-    "sport": "basketball",
-    "league": "Korisliiga",
-    "match": "Salon Vilpas vs UU-Korihait Uusikaupunki",
-    "tip": "Over 161.5",
-    "odds": "1.43",
-    "date": "2026-04-13T15:30:00+00:00",
-    "score": "92:84",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Campionato Primavera - 1",
-    "match": "Torino U20 vs Cremonese U20",
-    "tip": "Over 1.5",
-    "odds": "1.19",
-    "date": "2026-04-13T13:00:00+00:00",
-    "score": "3:0",
     "result": "✓"
   }
 ]
