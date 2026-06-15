@@ -1,6 +1,22 @@
 [
   {
     "league": "World Cup",
+    "homeTeam": "Saudi Arabia",
+    "awayTeam": "Uruguay",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "1:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-06-15T22:00:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper 1:0 comeback | HT 1:0 | xG: 1.32 | Shots: 11/6 | losingXG: 0.39 losingSOT: 3 | @49' | Pre O2.5: 2"
+  },
+  {
+    "league": "World Cup",
     "homeTeam": "Ivory Coast",
     "awayTeam": "Ecuador",
     "tip": "Over 0.5",
