@@ -1,9 +1,24 @@
 [
   {
-    "League": "Superettan",
-    "Match": "IFK Norrkoping vs Varbergs BoIS FC",
+    "League": "World Cup",
+    "Match": "France vs Senegal",
     "Tip": "Over 2.5",
-    "Odds": "1.78",
-    "Date": "2026-06-15T17:05:00+00:00"
+    "Odds": "1.91",
+    "Date": "2026-06-16T19:00:00+00:00"
+  },
+  {
+    "League": "Virsliga",
+    "Match": "Grobiņa vs FK Liepaja",
+    "Tip": "Over 2.5",
+    "Odds": "1.91",
+    "Date": "2026-06-16T16:00:00+00:00"
+  },
+  {
+    "League": "Premier League",
+    "Match": "Kazma vs Al Arabi",
+    "Tip": "Over 2.5",
+    "Odds": "1.94",
+    "Date": "2026-06-16T17:45:00+00:00",
+    "locked": true
   }
 ]
