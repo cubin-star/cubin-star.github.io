@@ -1,6 +1,22 @@
 [
   {
     "league": "World Cup",
+    "homeTeam": "Iran",
+    "awayTeam": "New Zealand",
+    "tip": "Over 2.5",
+    "odds": "",
+    "halftimeScore": "1:1",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-06-16T01:00:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper 1:1 open | HT 1:1 | xG: 1.29 | Shots: 16/7 | losingXG: 0.00 losingSOT: 0 | @HT | Pre O2.5: 2.35"
+  },
+  {
+    "league": "World Cup",
     "homeTeam": "Saudi Arabia",
     "awayTeam": "Uruguay",
     "tip": "Over 1.5",
