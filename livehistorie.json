@@ -1,6 +1,22 @@
 [
   {
     "league": "World Cup",
+    "homeTeam": "Iraq",
+    "awayTeam": "Norway",
+    "tip": "Over 3.5",
+    "odds": "",
+    "halftimeScore": "1:2",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-06-16T22:00:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper 1:2 shootout | HT 1:2 | xG: 2.48 | Shots: 14/4 | losingXG: 0.58 losingSOT: 1 | @HT | Pre O2.5: 1.62"
+  },
+  {
+    "league": "World Cup",
     "homeTeam": "Iran",
     "awayTeam": "New Zealand",
     "tip": "Over 2.5",
