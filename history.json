@@ -1,5 +1,15 @@
 [
   {
+    "sport": "football",
+    "league": "Superettan",
+    "match": "IFK Norrkoping vs Varbergs BoIS FC",
+    "tip": "Over 1.5",
+    "odds": "1.20",
+    "date": "2026-06-15T17:05:00+00:00",
+    "score": "2:0",
+    "result": "✓"
+  },
+  {
     "sport": "hockey",
     "league": "AHL",
     "match": "Chicago Wolves vs Toronto Marlies",
@@ -1986,16 +1996,6 @@
     "tip": "Over 3.5",
     "odds": "1.30",
     "date": "2026-04-13T17:00:00+00:00",
-    "score": "3:2",
-    "result": "✓"
-  },
-  {
-    "sport": "hockey",
-    "league": "Extraliga",
-    "match": "Sparta Prague vs Pardubice",
-    "tip": "Over 3.5",
-    "odds": "1.30",
-    "date": "2026-04-13T16:45:00+00:00",
     "score": "3:2",
     "result": "✓"
   }
