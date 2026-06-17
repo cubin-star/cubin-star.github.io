@@ -1,6 +1,22 @@
 [
   {
     "league": "World Cup",
+    "homeTeam": "Austria",
+    "awayTeam": "Jordan",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "1:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-06-17T04:00:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper 1:0 comeback | HT 1:0 | xG: 0.65 | Shots: 13/4 | losingXG: 0.39 losingSOT: 3 | @HT | Pre O2.5: 1.8"
+  },
+  {
+    "league": "World Cup",
     "homeTeam": "Iraq",
     "awayTeam": "Norway",
     "tip": "Over 3.5",
