@@ -1,24 +1,24 @@
 [
   {
-    "League": "Veikkausliiga",
-    "Match": "SJK vs VPS",
+    "League": "World Cup",
+    "Match": "Canada vs Qatar",
     "Tip": "Over 2.5",
-    "Odds": "1.81",
-    "Date": "2026-06-17T18:00:00+00:00"
+    "Odds": "1.80",
+    "Date": "2026-06-18T22:00:00+00:00"
   },
   {
     "League": "Erovnuli Liga",
-    "Match": "Torpedo Kutaisi vs Dinamo Batumi",
+    "Match": "Dinamo Tbilisi vs Samgurali",
     "Tip": "Over 2.5",
-    "Odds": "1.80",
-    "Date": "2026-06-17T17:00:00+00:00"
+    "Odds": "1.91",
+    "Date": "2026-06-18T16:00:00+00:00"
   },
   {
-    "League": "World Cup",
-    "Match": "Portugal vs Congo DR",
+    "League": "Ettan - Södra",
+    "Match": "Skövde AIK vs Hässleholms IF",
     "Tip": "Over 2.5",
-    "Odds": "1.85",
-    "Date": "2026-06-17T17:00:00+00:00",
+    "Odds": "1.75",
+    "Date": "2026-06-18T17:00:00+00:00",
     "locked": true
   }
 ]
