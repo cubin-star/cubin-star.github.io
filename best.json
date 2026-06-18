@@ -1,23 +1,23 @@
 [
   {
+    "league": "World Cup",
+    "match": "Mexico - South Korea",
+    "kickoff": "2026-06-19T03:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.26"
+  },
+  {
+    "league": "Ligi kuu Bara",
+    "match": "JKT Tanzania - Tanzania Prisons",
+    "kickoff": "2026-06-18T15:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.21"
+  },
+  {
     "league": "Botola Pro",
-    "match": "UTS Rabat - CODM Meknès",
-    "kickoff": "2026-06-17T17:00:00+02:00",
+    "match": "Wydad AC - FUS Rabat",
+    "kickoff": "2026-06-18T16:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.46"
-  },
-  {
-    "league": "Copa Gaúcha",
-    "match": "Santa Cruz RS - Gramadense",
-    "kickoff": "2026-06-17T20:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.40"
-  },
-  {
-    "league": "Torneo Promocional Amateur",
-    "match": "Alumni Los Hornos - Ezeiza",
-    "kickoff": "2026-06-17T20:30:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.36"
+    "odds": "2.19"
   }
 ]
