@@ -1,24 +1,24 @@
 [
   {
-    "League": "First Division",
-    "Match": "Bray Wanderers vs Longford Town",
+    "League": "World Cup",
+    "Match": "Netherlands vs Sweden",
     "Tip": "Over 2.5",
-    "Odds": "1.86",
-    "Date": "2026-06-19T18:45:00+00:00"
+    "Odds": "1.84",
+    "Date": "2026-06-20T17:00:00+00:00"
   },
   {
-    "League": "1 Lyga",
-    "Match": "Babrungas vs Be1 NFA",
+    "League": "Friendlies Clubs",
+    "Match": "Stranraer vs Larne",
     "Tip": "Over 2.5",
     "Odds": "1.85",
-    "Date": "2026-06-19T15:00:00+00:00"
+    "Date": "2026-06-20T11:30:00+00:00"
   },
   {
-    "League": "Premier Division",
-    "Match": "Bohemians vs Dundalk",
+    "League": "Copa De La Liga",
+    "Match": "FC Cajamarca vs Deportivo Llacuabamba",
     "Tip": "Over 2.5",
-    "Odds": "1.78",
-    "Date": "2026-06-19T19:00:00+00:00",
+    "Odds": "1.85",
+    "Date": "2026-06-20T18:15:00+00:00",
     "locked": true
   }
 ]
