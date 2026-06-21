@@ -1,5 +1,15 @@
 [
   {
+    "sport": "football",
+    "league": "Segunda División",
+    "match": "Almeria vs Malaga",
+    "tip": "Over 1.5",
+    "odds": "1.28",
+    "date": "2026-06-20T19:00:00+00:00",
+    "score": "1:2",
+    "result": "✓"
+  },
+  {
     "sport": "basketball",
     "league": "NBA W",
     "match": "Golden State Valkyries W vs Minnesota Lynx W",
@@ -1988,15 +1998,5 @@
     "date": "2026-04-15T19:00:00+00:00",
     "score": "99:59",
     "result": "✓"
-  },
-  {
-    "sport": "basketball",
-    "league": "BBL",
-    "match": "Chemnitz vs Ulm",
-    "tip": "Over 155.5",
-    "odds": "1.35",
-    "date": "2026-04-15T18:00:00+00:00",
-    "score": "79:66",
-    "result": "✗"
   }
 ]
