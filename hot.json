@@ -1,50 +1,50 @@
 [
   {
     "league": "Tercera División RFEF - Promotion - Play-offs",
-    "match": "Cuarte - Badajoz",
-    "kickoff": "2026-06-20T20:00:00+02:00",
+    "match": "Albacete II - Leioa",
+    "kickoff": "2026-06-21T20:30:00+02:00",
     "tip": "Over 2.5",
     "odds": "2.34",
     "group": 1
   },
   {
     "league": "Serie D",
-    "match": "Sampaio Corrêa RJ - Portuguesa",
-    "kickoff": "2026-06-20T22:00:00+02:00",
+    "match": "Rio Branco ES - Uberlandia",
+    "kickoff": "2026-06-21T22:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.38",
+    "odds": "2.39",
     "group": 1
   },
   {
-    "league": "Primera División RFEF - Play Offs",
-    "match": "Celta de Vigo II - Ponferradina",
-    "kickoff": "2026-06-20T18:30:00+02:00",
+    "league": "Segunda División",
+    "match": "Lota Schwager - Santiago Morning",
+    "kickoff": "2026-06-21T22:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.41",
+    "odds": "2.40",
     "group": 2
   },
   {
-    "league": "Primera B Metropolitana",
-    "match": "Excursionistas - Deportivo Camioneros",
-    "kickoff": "2026-06-20T20:30:00+02:00",
+    "league": "Botola Pro",
+    "match": "Hassania Agadir - UTS Rabat",
+    "kickoff": "2026-06-21T16:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.31",
+    "odds": "2.22",
     "group": 2
   },
   {
-    "league": "USL League One",
-    "match": "Richmond Kickers - Fort Wayne",
-    "kickoff": "2026-06-21T01:00:00+02:00",
+    "league": "Primera Nacional",
+    "match": "Club Atlético Güemes - Gimnasia Jujuy",
+    "kickoff": "2026-06-21T22:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.10",
+    "odds": "2.46",
     "group": 3
   },
   {
-    "league": "Premier League",
-    "match": "Reyady Abaseya - Safa",
-    "kickoff": "2026-06-20T15:00:00+02:00",
+    "league": "World Cup",
+    "match": "New Zealand - Egypt",
+    "kickoff": "2026-06-22T03:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.50",
+    "odds": "2.11",
     "group": 3
   }
 ]
