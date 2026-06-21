@@ -1,6 +1,22 @@
 [
   {
     "league": "World Cup",
+    "homeTeam": "Ecuador",
+    "awayTeam": "Curaçao",
+    "tip": "Over 0.5",
+    "odds": "",
+    "halftimeScore": "0:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-06-21T00:00:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper 0:0 pressure | HT 0:0 | xG: 1.30 | Shots: 13/6 | losingXG: 0.00 losingSOT: 0 | @HT | Pre O2.5: 1.6"
+  },
+  {
+    "league": "World Cup",
     "homeTeam": "Netherlands",
     "awayTeam": "Sweden",
     "tip": "Over 2.5",
