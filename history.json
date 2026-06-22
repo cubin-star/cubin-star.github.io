@@ -1,5 +1,25 @@
 [
   {
+    "sport": "basketball",
+    "league": "LNB",
+    "match": "Monaco vs Paris",
+    "tip": "Over 168.5",
+    "odds": "1.30",
+    "date": "2026-06-21T16:00:00+00:00",
+    "score": "96:84",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "Superettan",
+    "match": "IK brage vs IFK Varnamo",
+    "tip": "Over 1.5",
+    "odds": "1.20",
+    "date": "2026-06-21T13:00:00+00:00",
+    "score": "5:1",
+    "result": "✓"
+  },
+  {
     "sport": "football",
     "league": "Segunda División",
     "match": "Almeria vs Malaga",
@@ -1977,26 +1997,6 @@
     "odds": "1.21",
     "date": "2026-04-17T15:00:00+00:00",
     "score": "2:1",
-    "result": "✓"
-  },
-  {
-    "sport": "basketball",
-    "league": "First League",
-    "match": "Cacak 94 vs Sloga",
-    "tip": "Over 163.5",
-    "odds": "1.60",
-    "date": "2026-04-17T15:00:00+00:00",
-    "score": "91:104",
-    "result": "✓"
-  },
-  {
-    "sport": "basketball",
-    "league": "Champions League",
-    "match": "Tenerife vs Galatasaray",
-    "tip": "Over 153.5",
-    "odds": "1.37",
-    "date": "2026-04-15T19:00:00+00:00",
-    "score": "99:59",
     "result": "✓"
   }
 ]
