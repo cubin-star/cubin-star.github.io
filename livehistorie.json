@@ -1,6 +1,22 @@
 [
   {
     "league": "World Cup",
+    "homeTeam": "New Zealand",
+    "awayTeam": "Egypt",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "1:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-06-22T01:00:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper 1:0 comeback | HT 1:0 | xG: 1.15 | Shots: 14/5 | losingXG: 0.83 losingSOT: 2 | @49' | Pre O2.5: 2"
+  },
+  {
+    "league": "World Cup",
     "homeTeam": "Belgium",
     "awayTeam": "Iran",
     "tip": "Over 0.5",
