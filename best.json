@@ -1,23 +1,23 @@
 [
   {
-    "league": "Serie C",
-    "match": "Confiança - Guarani Campinas",
-    "kickoff": "2026-06-23T00:30:00+02:00",
+    "league": "Torneo Promocional Amateur",
+    "match": "Buenos Aires City - Control Orientado",
+    "kickoff": "2026-06-23T18:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.47"
+    "odds": "2.50"
   },
   {
-    "league": "GFA League",
-    "match": "Fortune - Steve Biko",
-    "kickoff": "2026-06-22T18:30:00+02:00",
+    "league": "Serie B",
+    "match": "America Mineiro - Criciuma",
+    "kickoff": "2026-06-24T01:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.39"
+    "odds": "2.42"
   },
   {
-    "league": "Torneo Federal A",
-    "match": "9 de Julio Rafaela - El Linqueño",
-    "kickoff": "2026-06-23T01:15:00+02:00",
+    "league": "World Cup",
+    "match": "Colombia - Congo DR",
+    "kickoff": "2026-06-24T04:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.23"
+    "odds": "2.20"
   }
 ]
