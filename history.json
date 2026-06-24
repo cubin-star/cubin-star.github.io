@@ -1,5 +1,15 @@
 [
   {
+    "sport": "basketball",
+    "league": "LNB",
+    "match": "Paris vs Monaco",
+    "tip": "Over 164.5",
+    "odds": "1.18",
+    "date": "2026-06-23T19:10:00+00:00",
+    "score": "92:101",
+    "result": "✓"
+  },
+  {
     "sport": "football",
     "league": "Superettan",
     "match": "Varbergs BoIS FC vs Landskrona BoIS",
@@ -1987,16 +1997,6 @@
     "odds": "1.19",
     "date": "2026-04-17T17:00:00+00:00",
     "score": "6:0",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "2. Bundesliga",
-    "match": "Holstein Kiel vs 1. FC Kaiserslautern",
-    "tip": "Over 1.5",
-    "odds": "1.19",
-    "date": "2026-04-17T16:30:00+00:00",
-    "score": "3:0",
     "result": "✓"
   }
 ]
