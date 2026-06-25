@@ -1,24 +1,24 @@
 [
   {
-    "League": "Friendlies Clubs",
-    "Match": "CSKA Sofia vs Polessya",
-    "Tip": "Over 2.5",
-    "Odds": "1.90",
-    "Date": "2026-06-24T16:00:00+00:00"
-  },
-  {
     "League": "World Cup",
-    "Match": "Scotland vs Brazil",
+    "Match": "Japan vs Sweden",
     "Tip": "Over 2.5",
-    "Odds": "1.91",
-    "Date": "2026-06-24T22:00:00+00:00"
+    "Odds": "1.88",
+    "Date": "2026-06-25T23:00:00+00:00"
   },
   {
-    "League": "Copa Chile",
-    "Match": "Union La Calera vs Universidad de Chile",
+    "League": "Virsliga",
+    "Match": "Grobiņa vs Auda",
     "Tip": "Over 2.5",
-    "Odds": "1.85",
-    "Date": "2026-06-24T23:30:00+00:00",
+    "Odds": "1.83",
+    "Date": "2026-06-25T14:00:00+00:00"
+  },
+  {
+    "League": "Premier League",
+    "Match": "Al Salmiyah vs Al Arabi",
+    "Tip": "Over 2.5",
+    "Odds": "1.95",
+    "Date": "2026-06-25T18:45:00+00:00",
     "locked": true
   }
 ]
