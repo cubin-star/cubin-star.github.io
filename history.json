@@ -1,6 +1,26 @@
 [
   {
     "sport": "basketball",
+    "league": "NBA W",
+    "match": "Seattle Storm W vs New York Liberty W",
+    "tip": "Over 156.5",
+    "odds": "1.31",
+    "date": "2026-06-26T02:00:00+00:00",
+    "score": "99:88",
+    "result": "✓"
+  },
+  {
+    "sport": "basketball",
+    "league": "NBL",
+    "match": "Manawatu Jets vs Otago Nuggets",
+    "tip": "Over 171.5",
+    "odds": "1.29",
+    "date": "2026-06-25T07:00:00+00:00",
+    "score": "104:97",
+    "result": "✓"
+  },
+  {
+    "sport": "basketball",
     "league": "LNB",
     "match": "Paris vs Monaco",
     "tip": "Over 164.5",
@@ -1977,26 +1997,6 @@
     "odds": "1.19",
     "date": "2026-04-18T08:15:00+00:00",
     "score": "0:2",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "J1 League",
-    "match": "Sanfrecce Hiroshima vs V-varen Nagasaki",
-    "tip": "Over 1.5",
-    "odds": "1.20",
-    "date": "2026-04-18T05:00:00+00:00",
-    "score": "2:0",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Superliga",
-    "match": "Brondby vs Sonderjyske",
-    "tip": "Over 1.5",
-    "odds": "1.19",
-    "date": "2026-04-17T17:00:00+00:00",
-    "score": "6:0",
     "result": "✓"
   }
 ]
