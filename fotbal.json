@@ -1,24 +1,24 @@
 [
   {
-    "League": "World Cup",
-    "Match": "Japan vs Sweden",
+    "League": "Friendlies Clubs",
+    "Match": "Baltika vs Volga Ulyanovsk",
     "Tip": "Over 2.5",
-    "Odds": "1.88",
-    "Date": "2026-06-25T23:00:00+00:00"
+    "Odds": "1.84",
+    "Date": "2026-06-26T08:00:00+00:00"
   },
   {
-    "League": "Virsliga",
-    "Match": "Grobiņa vs Auda",
-    "Tip": "Over 2.5",
-    "Odds": "1.83",
-    "Date": "2026-06-25T14:00:00+00:00"
-  },
-  {
-    "League": "Premier League",
-    "Match": "Al Salmiyah vs Al Arabi",
+    "League": "First Division",
+    "Match": "Athlone Town vs Finn Harps",
     "Tip": "Over 2.5",
     "Odds": "1.95",
-    "Date": "2026-06-25T18:45:00+00:00",
+    "Date": "2026-06-26T18:45:00+00:00"
+  },
+  {
+    "League": "World Cup",
+    "Match": "Senegal vs Iraq",
+    "Tip": "Over 2.5",
+    "Odds": "1.87",
+    "Date": "2026-06-26T19:00:00+00:00",
     "locked": true
   }
 ]
