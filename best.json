@@ -1,23 +1,23 @@
 [
   {
-    "league": "K3 League",
-    "match": "Changwon City - Yeoju Sejong",
-    "kickoff": "2026-06-27T09:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.36"
-  },
-  {
     "league": "Premier League",
-    "match": "Arba Minch Kenema - Welwalo Adigrat Uni",
-    "kickoff": "2026-06-26T17:00:00+02:00",
+    "match": "Kaspiy - Atyrau",
+    "kickoff": "2026-06-27T17:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.30"
+    "odds": "2.40"
   },
   {
-    "league": "League Two",
-    "match": "Shanghai Second - Qingdao Red Lions",
-    "kickoff": "2026-06-27T10:00:00+02:00",
+    "league": "Primera C",
+    "match": "Central Cordoba - Deportivo Muñiz",
+    "kickoff": "2026-06-27T20:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.22"
+    "odds": "2.38"
+  },
+  {
+    "league": "Ligi kuu Bara",
+    "match": "Pamba Jiji - JKT Tanzania",
+    "kickoff": "2026-06-27T15:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.37"
   }
 ]
