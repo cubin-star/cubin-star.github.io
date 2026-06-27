@@ -1,5 +1,21 @@
 [
   {
+    "league": "Superettan",
+    "homeTeam": "Ljungskile SK",
+    "awayTeam": "Orebro SK",
+    "tip": "Over 3.5",
+    "odds": "",
+    "halftimeScore": "1:2",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-06-27T13:00:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper 1:2 shootout | HT 1:2 | xG: 0.60(est) | Shots: 10/5 | losingXG: 0.24 losingSOT: 2 | @HT | Pre O2.5: 1.75"
+  },
+  {
     "league": "World Cup",
     "homeTeam": "New Zealand",
     "awayTeam": "Egypt",
