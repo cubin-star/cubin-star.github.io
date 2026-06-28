@@ -1,24 +1,24 @@
 [
   {
-    "League": "Ettan - Södra",
-    "Match": "AFC Malmo vs Jonkopings Sodra",
+    "League": "1 Lyga",
+    "Match": "Kauno Žalgiris II vs BFA",
     "Tip": "Over 2.5",
-    "Odds": "1.77",
-    "Date": "2026-06-27T14:00:00+00:00"
+    "Odds": "1.87",
+    "Date": "2026-06-28T15:30:00+00:00"
   },
   {
-    "League": "Friendlies Clubs",
-    "Match": "Budapest Honved vs Kisvarda FC",
+    "League": "Ykkösliiga",
+    "Match": "KäPa vs JäPS",
     "Tip": "Over 2.5",
     "Odds": "1.81",
-    "Date": "2026-06-27T15:00:00+00:00"
+    "Date": "2026-06-28T13:00:00+00:00"
   },
   {
-    "League": "Veikkausliiga",
-    "Match": "AC Oulu vs Lahti",
+    "League": "A Lyga",
+    "Match": "Džiugas Telšiai vs FK Zalgiris Vilnius",
     "Tip": "Over 2.5",
-    "Odds": "1.89",
-    "Date": "2026-06-27T18:00:00+00:00",
+    "Odds": "1.84",
+    "Date": "2026-06-28T15:45:00+00:00",
     "locked": true
   }
 ]
