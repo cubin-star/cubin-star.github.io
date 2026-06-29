@@ -2,6 +2,36 @@
   {
     "sport": "basketball",
     "league": "NBA W",
+    "match": "Golden State Valkyries W vs New York Liberty W",
+    "tip": "Over 152.5",
+    "odds": "1.20",
+    "date": "2026-06-28T23:00:00+00:00",
+    "score": "76:67",
+    "result": "✗"
+  },
+  {
+    "sport": "football",
+    "league": "Serie B",
+    "match": "Atletico Goianiense vs Ponte Preta",
+    "tip": "Over 1.5",
+    "odds": "1.30",
+    "date": "2026-06-28T19:00:00+00:00",
+    "score": "2:0",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "Superettan",
+    "match": "Landskrona BoIS vs IFK Varnamo",
+    "tip": "Over 1.5",
+    "odds": "1.19",
+    "date": "2026-06-28T13:00:00+00:00",
+    "score": "1:0",
+    "result": "✗"
+  },
+  {
+    "sport": "basketball",
+    "league": "NBA W",
     "match": "Indiana Fever W vs Los Angeles Sparks W",
     "tip": "Over 165.5",
     "odds": "1.23",
@@ -1967,36 +1997,6 @@
     "odds": "1.16",
     "date": "2026-04-18T13:00:00+00:00",
     "score": "1:4",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Czech Liga",
-    "match": "Slovan Liberec vs Mlada Boleslav",
-    "tip": "Over 1.5",
-    "odds": "1.20",
-    "date": "2026-04-18T13:00:00+00:00",
-    "score": "0:0",
-    "result": "✗"
-  },
-  {
-    "sport": "football",
-    "league": "3. Division",
-    "match": "FA 2000 vs Hørsholm-Usserød",
-    "tip": "Over 1.5",
-    "odds": "1.19",
-    "date": "2026-04-18T12:00:00+00:00",
-    "score": "3:1",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Regionalliga - West",
-    "match": "Paderborn II vs Fortuna Düsseldorf II",
-    "tip": "Over 1.5",
-    "odds": "1.20",
-    "date": "2026-04-18T12:00:00+00:00",
-    "score": "1:2",
     "result": "✓"
   }
 ]
