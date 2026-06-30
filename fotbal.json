@@ -1,24 +1,16 @@
 [
   {
-    "League": "Friendlies Clubs",
-    "Match": "CSKA 1948 vs FK Partizan",
-    "Tip": "Over 2.5",
-    "Odds": "1.78",
-    "Date": "2026-06-29T12:00:00+00:00"
-  },
-  {
     "League": "World Cup",
-    "Match": "Germany vs Paraguay",
+    "Match": "Ivory Coast vs Norway",
     "Tip": "Over 2.5",
-    "Odds": "1.80",
-    "Date": "2026-06-29T20:30:00+00:00"
+    "Odds": "1.95",
+    "Date": "2026-06-30T17:00:00+00:00"
   },
   {
-    "League": "Premier League",
-    "Match": "Al Qadsia vs Al Kuwait",
+    "League": "Copa Chile",
+    "Match": "A. Italiano vs Palestino",
     "Tip": "Over 2.5",
-    "Odds": "1.90",
-    "Date": "2026-06-29T16:05:00+00:00",
-    "locked": true
+    "Odds": "1.85",
+    "Date": "2026-06-30T22:00:00+00:00"
   }
 ]
