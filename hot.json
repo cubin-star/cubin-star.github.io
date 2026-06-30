@@ -1,50 +1,50 @@
 [
   {
-    "league": "A Lyga",
-    "match": "Panevėžys - Suduva Marijampole",
-    "kickoff": "2026-06-29T17:45:00+02:00",
+    "league": "Suomen Cup",
+    "match": "VPS - Inter Turku",
+    "kickoff": "2026-06-30T17:00:00+02:00",
     "tip": "Over 2.5",
     "odds": "2.10",
     "group": 1
   },
   {
-    "league": "Premier League",
-    "match": "Al Hikma - Tadamon Sour",
-    "kickoff": "2026-06-29T14:30:00+02:00",
+    "league": "Primera C",
+    "match": "Claypole - Canuelas",
+    "kickoff": "2026-06-30T20:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.19",
+    "odds": "2.41",
     "group": 1
   },
   {
-    "league": "Serie D",
-    "match": "Democrata GV - Ivinhema",
-    "kickoff": "2026-06-30T00:00:00+02:00",
+    "league": "Serie C",
+    "match": "Botafogo PB - Brusque",
+    "kickoff": "2026-07-01T01:30:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.41",
+    "group": 2
+  },
+  {
+    "league": "Division Intermedia",
+    "match": "Resistencia - Encarnación",
+    "kickoff": "2026-06-30T20:30:00+02:00",
     "tip": "Over 2.5",
     "odds": "2.10",
     "group": 2
   },
   {
-    "league": "Premier League",
-    "match": "Kazma - Al Salmiyah",
-    "kickoff": "2026-06-29T21:15:00+02:00",
+    "league": "Serie B",
+    "match": "Botafogo SP - CRB",
+    "kickoff": "2026-07-01T01:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.24",
-    "group": 2
-  },
-  {
-    "league": "World Cup",
-    "match": "Brazil - Japan",
-    "kickoff": "2026-06-29T19:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.10",
+    "odds": "2.22",
     "group": 3
   },
   {
-    "league": "Torneo Promocional Amateur",
-    "match": "Juventud de Bernal - Deportivo Metalurgico",
-    "kickoff": "2026-06-29T20:00:00+02:00",
+    "league": "Ligi kuu Bara",
+    "match": "Namungo - Mtibwa Sugar",
+    "kickoff": "2026-06-30T15:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.20",
+    "odds": "2.22",
     "group": 3
   }
 ]
