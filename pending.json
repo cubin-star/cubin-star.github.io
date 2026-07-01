@@ -1,1 +1,10 @@
-[]
+[
+  {
+    "sport": "basketball",
+    "league": "NBL",
+    "match": "Southland Sharks vs Canterbury Rams",
+    "tip": "Over 175.5",
+    "odds": "1.30",
+    "date": "2026-07-01T07:00:00+00:00"
+  }
+]
