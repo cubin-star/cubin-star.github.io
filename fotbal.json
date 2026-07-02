@@ -1,24 +1,24 @@
 [
   {
-    "League": "World Cup",
-    "Match": "USA vs Bosnia & Herzegovina",
+    "League": "1 Lyga",
+    "Match": "BFA vs Ekranas",
     "Tip": "Over 2.5",
-    "Odds": "1.80",
-    "Date": "2026-07-02T00:00:00+00:00"
+    "Odds": "1.75",
+    "Date": "2026-07-02T15:00:00+00:00"
   },
   {
     "League": "Friendlies Clubs",
-    "Match": "GKS Katowice vs Piast Gliwice",
+    "Match": "Rodina Moskva vs Akron",
     "Tip": "Over 2.5",
-    "Odds": "1.91",
-    "Date": "2026-07-01T08:15:00+00:00"
+    "Odds": "1.92",
+    "Date": "2026-07-02T12:00:00+00:00"
   },
   {
-    "League": "Copa Chile",
-    "Match": "Universidad de Concepcion vs Nublense",
+    "League": "World Cup",
+    "Match": "Spain vs Austria",
     "Tip": "Over 2.5",
-    "Odds": "1.81",
-    "Date": "2026-07-01T19:00:00+00:00",
+    "Odds": "1.87",
+    "Date": "2026-07-02T19:00:00+00:00",
     "locked": true
   }
 ]
