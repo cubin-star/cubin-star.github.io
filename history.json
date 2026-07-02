@@ -1,5 +1,15 @@
 [
   {
+    "sport": "basketball",
+    "league": "NBL",
+    "match": "Southland Sharks vs Canterbury Rams",
+    "tip": "Over 175.5",
+    "odds": "1.30",
+    "date": "2026-07-01T07:00:00+00:00",
+    "score": "103:98",
+    "result": "✓"
+  },
+  {
     "sport": "football",
     "league": "Serie B",
     "match": "Botafogo SP vs CRB",
@@ -1987,16 +1997,6 @@
     "odds": "1.21",
     "date": "2026-04-18T14:00:00+00:00",
     "score": "1:1",
-    "result": "✓"
-  },
-  {
-    "sport": "basketball",
-    "league": "Korisliiga",
-    "match": "Helsinki Seagulls vs Kataja",
-    "tip": "Over 159.5",
-    "odds": "1.47",
-    "date": "2026-04-18T14:00:00+00:00",
-    "score": "72:92",
     "result": "✓"
   }
 ]
