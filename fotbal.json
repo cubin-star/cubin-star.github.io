@@ -1,24 +1,24 @@
 [
   {
-    "League": "1 Lyga",
-    "Match": "BFA vs Ekranas",
-    "Tip": "Over 2.5",
-    "Odds": "1.75",
-    "Date": "2026-07-02T15:00:00+00:00"
-  },
-  {
     "League": "Friendlies Clubs",
-    "Match": "Rodina Moskva vs Akron",
+    "Match": "Flamengo vs River Plate",
     "Tip": "Over 2.5",
-    "Odds": "1.92",
-    "Date": "2026-07-02T12:00:00+00:00"
+    "Odds": "1.85",
+    "Date": "2026-07-03T18:30:00+00:00"
   },
   {
-    "League": "World Cup",
-    "Match": "Spain vs Austria",
+    "League": "Premier Division",
+    "Match": "Sligo Rovers vs Shamrock Rovers",
     "Tip": "Over 2.5",
-    "Odds": "1.87",
-    "Date": "2026-07-02T19:00:00+00:00",
+    "Odds": "1.84",
+    "Date": "2026-07-03T18:45:00+00:00"
+  },
+  {
+    "League": "First Division",
+    "Match": "Cobh Ramblers vs Cork City",
+    "Tip": "Over 2.5",
+    "Odds": "1.81",
+    "Date": "2026-07-03T18:45:00+00:00",
     "locked": true
   }
 ]
