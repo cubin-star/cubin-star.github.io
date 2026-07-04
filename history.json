@@ -1,5 +1,25 @@
 [
   {
+    "sport": "football",
+    "league": "Allsvenskan",
+    "match": "Sirius vs Mjallby AIF",
+    "tip": "Over 1.5",
+    "odds": "1.19",
+    "date": "2026-07-03T17:00:00+00:00",
+    "score": "4:4",
+    "result": "✓"
+  },
+  {
+    "sport": "basketball",
+    "league": "World Cup",
+    "match": "Finland vs Hungary",
+    "tip": "Over 153.5",
+    "odds": "1.28",
+    "date": "2026-07-03T15:30:00+00:00",
+    "score": "85:77",
+    "result": "✓"
+  },
+  {
     "sport": "basketball",
     "league": "NBL",
     "match": "Southland Sharks vs Canterbury Rams",
@@ -1977,26 +1997,6 @@
     "odds": "1.54",
     "date": "2026-04-18T16:00:00+00:00",
     "score": "93:76",
-    "result": "✓"
-  },
-  {
-    "sport": "basketball",
-    "league": "NB I A",
-    "match": "Szolnoki Olaj vs Soproni KC",
-    "tip": "Over 154.5",
-    "odds": "1.53",
-    "date": "2026-04-18T16:00:00+00:00",
-    "score": "107:68",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "League One",
-    "match": "Peterhead vs Queen of the South",
-    "tip": "Over 1.5",
-    "odds": "1.21",
-    "date": "2026-04-18T14:00:00+00:00",
-    "score": "1:1",
     "result": "✓"
   }
 ]
