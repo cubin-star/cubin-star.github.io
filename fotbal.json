@@ -1,24 +1,24 @@
 [
   {
     "League": "Friendlies Clubs",
-    "Match": "Flamengo vs River Plate",
+    "Match": "Piast Gliwice vs Baník Ostrava",
     "Tip": "Over 2.5",
-    "Odds": "1.85",
-    "Date": "2026-07-03T18:30:00+00:00"
+    "Odds": "1.82",
+    "Date": "2026-07-04T15:00:00+00:00"
   },
   {
-    "League": "Premier Division",
-    "Match": "Sligo Rovers vs Shamrock Rovers",
+    "League": "Allsvenskan",
+    "Match": "Degerfors IF vs Malmo FF",
     "Tip": "Over 2.5",
-    "Odds": "1.84",
-    "Date": "2026-07-03T18:45:00+00:00"
+    "Odds": "1.87",
+    "Date": "2026-07-04T13:00:00+00:00"
   },
   {
     "League": "First Division",
-    "Match": "Cobh Ramblers vs Cork City",
+    "Match": "Longford Town vs UCD",
     "Tip": "Over 2.5",
-    "Odds": "1.81",
-    "Date": "2026-07-03T18:45:00+00:00",
+    "Odds": "1.86",
+    "Date": "2026-07-04T18:30:00+00:00",
     "locked": true
   }
 ]
