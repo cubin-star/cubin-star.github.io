@@ -1,6 +1,16 @@
 [
   {
     "sport": "football",
+    "league": "K League 1",
+    "match": "Gimcheon Sangmu FC vs Jeju United FC",
+    "tip": "Over 1.5",
+    "odds": "1.33",
+    "date": "2026-07-05T10:30:00+00:00",
+    "score": "1:1",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
     "league": "Allsvenskan",
     "match": "Degerfors IF vs Malmo FF",
     "tip": "Over 1.5",
@@ -1987,16 +1997,6 @@
     "odds": "1.22",
     "date": "2026-04-18T17:30:00+00:00",
     "score": "4:3",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Ligat Ha'al",
-    "match": "Maccabi Netanya vs Ashdod",
-    "tip": "Over 1.5",
-    "odds": "1.17",
-    "date": "2026-04-18T16:50:00+00:00",
-    "score": "2:1",
     "result": "✓"
   }
 ]
