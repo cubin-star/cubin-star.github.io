@@ -1,24 +1,24 @@
 [
   {
-    "League": "Ykkösliiga",
-    "Match": "MP vs Haka",
+    "League": "Allsvenskan",
+    "Match": "IF Brommapojkarna vs Gais",
     "Tip": "Over 2.5",
-    "Odds": "1.75",
-    "Date": "2026-07-05T15:30:00+00:00"
+    "Odds": "1.88",
+    "Date": "2026-07-06T17:00:00+00:00"
   },
   {
     "League": "World Cup",
-    "Match": "Brazil vs Norway",
+    "Match": "USA vs Belgium",
     "Tip": "Over 2.5",
-    "Odds": "1.78",
-    "Date": "2026-07-05T20:00:00+00:00"
+    "Odds": "1.77",
+    "Date": "2026-07-07T00:00:00+00:00"
   },
   {
-    "League": "Allsvenskan",
-    "Match": "IFK Goteborg vs AIK Stockholm",
+    "League": "Virsliga",
+    "Match": "Super Nova vs Ogre United",
     "Tip": "Over 2.5",
-    "Odds": "1.75",
-    "Date": "2026-07-05T12:00:00+00:00",
+    "Odds": "1.81",
+    "Date": "2026-07-06T16:00:00+00:00",
     "locked": true
   }
 ]
