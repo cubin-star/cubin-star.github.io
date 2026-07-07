@@ -1,6 +1,26 @@
 [
   {
     "sport": "football",
+    "league": "Allsvenskan",
+    "match": "IF Brommapojkarna vs Gais",
+    "tip": "Over 1.5",
+    "odds": "1.27",
+    "date": "2026-07-06T17:00:00+00:00",
+    "score": "1:1",
+    "result": "✓"
+  },
+  {
+    "sport": "basketball",
+    "league": "World Cup",
+    "match": "Czech Republic vs Estonia",
+    "tip": "Over 155.5",
+    "odds": "1.29",
+    "date": "2026-07-06T15:00:00+00:00",
+    "score": "75:73",
+    "result": "✗"
+  },
+  {
+    "sport": "football",
     "league": "K League 1",
     "match": "Gimcheon Sangmu FC vs Jeju United FC",
     "tip": "Over 1.5",
@@ -1978,25 +1998,5 @@
     "date": "2026-04-18T20:00:00+00:00",
     "score": "0:2",
     "result": "✗"
-  },
-  {
-    "sport": "football",
-    "league": "First Amateur Division",
-    "match": "Albert Quévy-Mons vs Excelsior Virton",
-    "tip": "Over 1.5",
-    "odds": "1.19",
-    "date": "2026-04-18T18:00:00+00:00",
-    "score": "0:2",
-    "result": "✓"
-  },
-  {
-    "sport": "hockey",
-    "league": "Alps Hockey League",
-    "match": "Gherdeina vs Merano",
-    "tip": "Over 4",
-    "odds": "1.22",
-    "date": "2026-04-18T17:30:00+00:00",
-    "score": "4:3",
-    "result": "✓"
   }
 ]
