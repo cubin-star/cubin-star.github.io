@@ -1,23 +1,23 @@
 [
   {
-    "league": "Serie D",
-    "match": "Ivinhema - ASA",
-    "kickoff": "2026-07-07T01:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.43"
-  },
-  {
-    "league": "Primera C",
-    "match": "Centro Español - Mercedes",
-    "kickoff": "2026-07-06T20:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.32"
-  },
-  {
     "league": "Serie B",
-    "match": "Vila Nova - São Bernardo",
-    "kickoff": "2026-07-07T00:00:00+02:00",
+    "match": "Athletic Club - Operario-PR",
+    "kickoff": "2026-07-08T01:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.21"
+    "odds": "2.42"
+  },
+  {
+    "league": "World Cup",
+    "match": "Switzerland - Colombia",
+    "kickoff": "2026-07-07T22:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.29"
+  },
+  {
+    "league": "UEFA Champions League",
+    "match": "Floriana - Shamrock Rovers",
+    "kickoff": "2026-07-07T19:30:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.10"
   }
 ]
