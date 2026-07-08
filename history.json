@@ -1,5 +1,25 @@
 [
   {
+    "sport": "basketball",
+    "league": "NBA W",
+    "match": "Phoenix Mercury W vs Chicago Sky W",
+    "tip": "Over 162.5",
+    "odds": "1.28",
+    "date": "2026-07-08T02:00:00+00:00",
+    "score": "66:77",
+    "result": "✗"
+  },
+  {
+    "sport": "football",
+    "league": "UEFA Champions League",
+    "match": "Floriana vs Shamrock Rovers",
+    "tip": "Over 1.5",
+    "odds": "1.33",
+    "date": "2026-07-07T17:30:00+00:00",
+    "score": "2:0",
+    "result": "✓"
+  },
+  {
     "sport": "football",
     "league": "Allsvenskan",
     "match": "IF Brommapojkarna vs Gais",
@@ -1978,25 +1998,5 @@
     "date": "2026-04-19T15:30:00+00:00",
     "score": "3:0",
     "result": "✓"
-  },
-  {
-    "sport": "basketball",
-    "league": "NBA",
-    "match": "New York Knicks vs Atlanta Hawks",
-    "tip": "Over 206.5",
-    "odds": "1.29",
-    "date": "2026-04-18T22:00:00+00:00",
-    "score": "113:102",
-    "result": "✓"
-  },
-  {
-    "sport": "hockey",
-    "league": "AHL",
-    "match": "Charlotte Checkers vs Lehigh Valley Phantoms",
-    "tip": "Over 4.25",
-    "odds": "1.31",
-    "date": "2026-04-18T20:00:00+00:00",
-    "score": "0:2",
-    "result": "✗"
   }
 ]
