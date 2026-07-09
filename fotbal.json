@@ -1,24 +1,16 @@
 [
   {
     "League": "UEFA Europa Conference League",
-    "Match": "GAP Connah S Quay FC vs Ballkani",
+    "Match": "FK Sarajevo vs Inter Turku",
     "Tip": "Over 2.5",
-    "Odds": "1.85",
-    "Date": "2026-07-08T17:30:00+00:00"
+    "Odds": "1.90",
+    "Date": "2026-07-09T19:00:00+00:00"
   },
   {
     "League": "Friendlies Clubs",
-    "Match": "Spartak Moscow vs Rubin",
+    "Match": "OFK Beograd vs Buducnost Podgorica",
     "Tip": "Over 2.5",
-    "Odds": "1.78",
-    "Date": "2026-07-08T17:30:00+00:00"
-  },
-  {
-    "League": "USL League One",
-    "Match": "Greenville Triumph vs Sarasota Paradise",
-    "Tip": "Over 2.5",
-    "Odds": "1.91",
-    "Date": "2026-07-08T23:00:00+00:00",
-    "locked": true
+    "Odds": "1.85",
+    "Date": "2026-07-09T14:00:00+00:00"
   }
 ]
