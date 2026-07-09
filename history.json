@@ -2,6 +2,36 @@
   {
     "sport": "basketball",
     "league": "NBA W",
+    "match": "Connecticut Sun W vs Minnesota Lynx W",
+    "tip": "Over 157.5",
+    "odds": "1.24",
+    "date": "2026-07-08T23:30:00+00:00",
+    "score": "80:86",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "UEFA Europa Conference League",
+    "match": "GAP Connah S Quay FC vs Ballkani",
+    "tip": "Over 1.5",
+    "odds": "1.24",
+    "date": "2026-07-08T17:30:00+00:00",
+    "score": "0:0",
+    "result": "✗"
+  },
+  {
+    "sport": "football",
+    "league": "UEFA Champions League",
+    "match": "Flora Tallinn vs Saburtalo",
+    "tip": "Over 1.5",
+    "odds": "1.22",
+    "date": "2026-07-08T16:00:00+00:00",
+    "score": "2:3",
+    "result": "✓"
+  },
+  {
+    "sport": "basketball",
+    "league": "NBA W",
     "match": "Phoenix Mercury W vs Chicago Sky W",
     "tip": "Over 162.5",
     "odds": "1.28",
@@ -1967,36 +1997,6 @@
     "odds": "1.14",
     "date": "2026-04-21T16:00:00+00:00",
     "score": "3:4",
-    "result": "✓"
-  },
-  {
-    "sport": "hockey",
-    "league": "Liiga",
-    "match": "KooKoo vs SaiPa",
-    "tip": "Over 3.5",
-    "odds": "1.15",
-    "date": "2026-04-21T15:30:00+00:00",
-    "score": "2:4",
-    "result": "✓"
-  },
-  {
-    "sport": "basketball",
-    "league": "NBA",
-    "match": "New York Knicks vs Atlanta Hawks",
-    "tip": "Over 206.5",
-    "odds": "1.28",
-    "date": "2026-04-21T00:00:00+00:00",
-    "score": "106:107",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Premier League",
-    "match": "Hamrun Spartans vs Naxxar Lions",
-    "tip": "Over 1.5",
-    "odds": "1.17",
-    "date": "2026-04-19T15:30:00+00:00",
-    "score": "3:0",
     "result": "✓"
   }
 ]
