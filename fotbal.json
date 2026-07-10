@@ -1,16 +1,24 @@
 [
   {
-    "League": "UEFA Europa Conference League",
-    "Match": "FK Sarajevo vs Inter Turku",
+    "League": "Friendlies Clubs",
+    "Match": "Austria Lustenau vs FC Aarau",
     "Tip": "Over 2.5",
-    "Odds": "1.90",
-    "Date": "2026-07-09T19:00:00+00:00"
+    "Odds": "1.82",
+    "Date": "2026-07-10T15:00:00+00:00"
   },
   {
-    "League": "Friendlies Clubs",
-    "Match": "OFK Beograd vs Buducnost Podgorica",
+    "League": "First Division",
+    "Match": "Finn Harps vs Treaty United",
     "Tip": "Over 2.5",
     "Odds": "1.85",
-    "Date": "2026-07-09T14:00:00+00:00"
+    "Date": "2026-07-10T18:45:00+00:00"
+  },
+  {
+    "League": "Premier Division",
+    "Match": "Waterford vs St Patrick's Athl.",
+    "Tip": "Over 2.5",
+    "Odds": "1.86",
+    "Date": "2026-07-10T19:00:00+00:00",
+    "locked": true
   }
 ]
