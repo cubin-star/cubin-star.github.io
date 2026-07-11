@@ -1,50 +1,50 @@
 [
   {
-    "league": "Primera B Metropolitana",
-    "match": "Talleres Remedios - Flandria",
-    "kickoff": "2026-07-10T20:00:00+02:00",
+    "league": "Ykkösliiga",
+    "match": "Klubi-04 - JIPPO",
+    "kickoff": "2026-07-11T18:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.32",
+    "odds": "2.11",
     "group": 1
   },
   {
-    "league": "Serie B",
-    "match": "Sport Recife - Botafogo SP",
-    "kickoff": "2026-07-11T01:00:00+02:00",
+    "league": "Torneo Federal A",
+    "match": "Juventud Unida Univ. - Cipolletti",
+    "kickoff": "2026-07-11T20:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.28",
+    "group": 1
+  },
+  {
+    "league": "K League 2",
+    "match": "Yongin City - Cheongju",
+    "kickoff": "2026-07-11T12:30:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.12",
+    "group": 2
+  },
+  {
+    "league": "League One",
+    "match": "Yanbian Longding - Suzhou Dongwu",
+    "kickoff": "2026-07-11T12:00:00+02:00",
     "tip": "Over 2.5",
     "odds": "2.17",
-    "group": 1
-  },
-  {
-    "league": "K3 League",
-    "match": "Ulsan Citizen - Yeoju Sejong",
-    "kickoff": "2026-07-10T12:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.24",
     "group": 2
   },
   {
-    "league": "NWSL Women",
-    "match": "Utah Royals W - NJ/NY Gotham FC W",
-    "kickoff": "2026-07-11T04:00:00+02:00",
+    "league": "K League 1",
+    "match": "Gimcheon Sangmu FC - Bucheon FC 1995",
+    "kickoff": "2026-07-11T12:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.19",
-    "group": 2
-  },
-  {
-    "league": "Torneo Promocional Amateur",
-    "match": "Nautico Hacoaj - Defensores Glew",
-    "kickoff": "2026-07-10T16:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.41",
+    "odds": "2.17",
     "group": 3
   },
   {
-    "league": "Division Intermedia",
-    "match": "Fernando De La Mora - Paraguari AC",
-    "kickoff": "2026-07-10T23:00:00+02:00",
+    "league": "Premier League",
+    "match": "Ulytau - Kaisar",
+    "kickoff": "2026-07-11T15:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.10",
+    "odds": "2.11",
     "group": 3
   }
 ]
