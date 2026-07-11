@@ -1,24 +1,24 @@
 [
   {
     "League": "Friendlies Clubs",
-    "Match": "Austria Lustenau vs FC Aarau",
-    "Tip": "Over 2.5",
-    "Odds": "1.82",
-    "Date": "2026-07-10T15:00:00+00:00"
-  },
-  {
-    "League": "First Division",
-    "Match": "Finn Harps vs Treaty United",
+    "Match": "Chesterfield vs Sheffield Utd",
     "Tip": "Over 2.5",
     "Odds": "1.85",
-    "Date": "2026-07-10T18:45:00+00:00"
+    "Date": "2026-07-11T14:00:00+00:00"
   },
   {
-    "League": "Premier Division",
-    "Match": "Waterford vs St Patrick's Athl.",
+    "League": "Eliteserien",
+    "Match": "Tromso vs Valerenga",
     "Tip": "Over 2.5",
-    "Odds": "1.86",
-    "Date": "2026-07-10T19:00:00+00:00",
+    "Odds": "1.78",
+    "Date": "2026-07-11T16:00:00+00:00"
+  },
+  {
+    "League": "Veikkausliiga",
+    "Match": "Turku PS vs AC Oulu",
+    "Tip": "Over 2.5",
+    "Odds": "1.91",
+    "Date": "2026-07-11T14:00:00+00:00",
     "locked": true
   }
 ]
