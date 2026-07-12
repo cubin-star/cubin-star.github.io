@@ -1,24 +1,24 @@
 [
   {
-    "League": "Friendlies Clubs",
-    "Match": "Chesterfield vs Sheffield Utd",
+    "League": "Allsvenskan",
+    "Match": "Gais vs IF Elfsborg",
     "Tip": "Over 2.5",
-    "Odds": "1.85",
-    "Date": "2026-07-11T14:00:00+00:00"
+    "Odds": "1.95",
+    "Date": "2026-07-12T14:30:00+00:00"
   },
   {
     "League": "Eliteserien",
-    "Match": "Tromso vs Valerenga",
+    "Match": "Sandefjord vs Ham-Kam",
     "Tip": "Over 2.5",
-    "Odds": "1.78",
-    "Date": "2026-07-11T16:00:00+00:00"
+    "Odds": "1.75",
+    "Date": "2026-07-12T15:00:00+00:00"
   },
   {
-    "League": "Veikkausliiga",
-    "Match": "Turku PS vs AC Oulu",
+    "League": "Super Liga",
+    "Match": "Milsami Orhei vs Dacia-Buiucani",
     "Tip": "Over 2.5",
-    "Odds": "1.91",
-    "Date": "2026-07-11T14:00:00+00:00",
+    "Odds": "1.75",
+    "Date": "2026-07-12T17:00:00+00:00",
     "locked": true
   }
 ]
