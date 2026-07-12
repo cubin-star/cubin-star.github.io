@@ -1,50 +1,50 @@
 [
   {
-    "league": "Ykkösliiga",
-    "match": "Klubi-04 - JIPPO",
-    "kickoff": "2026-07-11T18:00:00+02:00",
+    "league": "Supercupa",
+    "match": "Universitatea Craiova - Universitatea Cluj",
+    "kickoff": "2026-07-12T19:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.11",
+    "odds": "2.13",
     "group": 1
   },
   {
-    "league": "Torneo Federal A",
-    "match": "Juventud Unida Univ. - Cipolletti",
-    "kickoff": "2026-07-11T20:00:00+02:00",
+    "league": "Primera Nacional",
+    "match": "Gimnasia Jujuy - Chacarita Juniors",
+    "kickoff": "2026-07-12T20:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.28",
+    "odds": "2.30",
     "group": 1
-  },
-  {
-    "league": "K League 2",
-    "match": "Yongin City - Cheongju",
-    "kickoff": "2026-07-11T12:30:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.12",
-    "group": 2
-  },
-  {
-    "league": "League One",
-    "match": "Yanbian Longding - Suzhou Dongwu",
-    "kickoff": "2026-07-11T12:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.17",
-    "group": 2
-  },
-  {
-    "league": "K League 1",
-    "match": "Gimcheon Sangmu FC - Bucheon FC 1995",
-    "kickoff": "2026-07-11T12:30:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.17",
-    "group": 3
   },
   {
     "league": "Premier League",
-    "match": "Ulytau - Kaisar",
-    "kickoff": "2026-07-11T15:00:00+02:00",
+    "match": "FC Astana - Aktobe",
+    "kickoff": "2026-07-12T16:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.11",
+    "odds": "2.10",
+    "group": 2
+  },
+  {
+    "league": "Torneo Federal A",
+    "match": "Sarmiento de La Banda - San Martin Formosa",
+    "kickoff": "2026-07-12T21:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.50",
+    "group": 2
+  },
+  {
+    "league": "Primera División - Apertura",
+    "match": "Boston River - Central Espanol",
+    "kickoff": "2026-07-12T20:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.18",
+    "group": 3
+  },
+  {
+    "league": "K League 1",
+    "match": "Jeju United FC - Daejeon Citizen",
+    "kickoff": "2026-07-12T12:30:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.14",
     "group": 3
   }
 ]
