@@ -577,6 +577,34 @@ def select_best_tips(candidates):
         if rest:
             print(f"Fallback: doplneno na {len(selected)}")
 
+    # Hard fallback: pokud stale chybi tipy, doplnime nahodne ze surovych kandidatu.
+    # Tyto zapasy uz splnuji: kurz v rozmezi MIN_ODDS-MAX_ODDS a Over linku .5 (>=120).
+    # Statistiky tymu se nekontroluji - doplneni "just to have 2 tips".
+    if len(selected) < MAX_TIPS:
+        used_ids = set(s["match"] for s in selected)
+        used_lg = set(s["league"] for s in selected)
+
+        # Prvni pokus: jina liga nez uz vybrane
+        pool = [c for c in candidates
+                if c["match"] not in used_ids and c["league"] not in used_lg]
+        random.shuffle(pool)
+
+        # Druhy pokus: povolime i stejnou ligu, pokud prvni pokus nestacil
+        pool_same_lg = [c for c in candidates
+                        if c["match"] not in used_ids and c["league"] in used_lg]
+        random.shuffle(pool_same_lg)
+
+        added = 0
+        for c in pool + pool_same_lg:
+            if len(selected) >= MAX_TIPS:
+                break
+            c["fallback_random"] = True
+            selected.append(c)
+            used_ids.add(c["match"])
+            added += 1
+        if added:
+            print(f"Hard fallback (random): doplneno {added}, celkem: {len(selected)}")
+
     return selected
 
 
@@ -611,6 +639,8 @@ def main():
             entry["qualified13"] = True
         elif t.get("qualified10"):
             entry["qualified10"] = True
+        elif t.get("fallback_random"):
+            entry["fallback_random"] = True
         output.append(entry)
 
     with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
