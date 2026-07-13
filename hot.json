@@ -1,50 +1,50 @@
 [
   {
-    "league": "Supercupa",
-    "match": "Universitatea Craiova - Universitatea Cluj",
-    "kickoff": "2026-07-12T19:30:00+02:00",
+    "league": "Segunda División",
+    "match": "Paysandu - Fenix",
+    "kickoff": "2026-07-14T00:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.13",
+    "odds": "2.15",
     "group": 1
-  },
-  {
-    "league": "Primera Nacional",
-    "match": "Gimnasia Jujuy - Chacarita Juniors",
-    "kickoff": "2026-07-12T20:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.30",
-    "group": 1
-  },
-  {
-    "league": "Premier League",
-    "match": "FC Astana - Aktobe",
-    "kickoff": "2026-07-12T16:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.10",
-    "group": 2
-  },
-  {
-    "league": "Torneo Federal A",
-    "match": "Sarmiento de La Banda - San Martin Formosa",
-    "kickoff": "2026-07-12T21:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.50",
-    "group": 2
   },
   {
     "league": "Primera División - Apertura",
-    "match": "Boston River - Central Espanol",
-    "kickoff": "2026-07-12T20:00:00+02:00",
+    "match": "Cerro Largo - Defensor Sporting",
+    "kickoff": "2026-07-14T00:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.18",
+    "odds": "2.41",
+    "group": 1
+  },
+  {
+    "league": "Primera C",
+    "match": "Claypole - Leones de Rosario",
+    "kickoff": "2026-07-13T20:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.38",
+    "group": 2
+  },
+  {
+    "league": "Serie D",
+    "match": "CSA - Ipatinga",
+    "kickoff": "2026-07-14T01:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.17",
+    "group": 2
+  },
+  {
+    "league": "Serie B",
+    "match": "Ceara - Athletic Club",
+    "kickoff": "2026-07-14T01:30:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.31",
     "group": 3
   },
   {
-    "league": "K League 1",
-    "match": "Jeju United FC - Daejeon Citizen",
-    "kickoff": "2026-07-12T12:30:00+02:00",
+    "league": "Serie C",
+    "match": "Figueirense - Volta Redonda",
+    "kickoff": "2026-07-14T01:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.14",
+    "odds": "2.31",
     "group": 3
   }
 ]
