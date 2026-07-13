@@ -1,24 +1,24 @@
 [
   {
-    "League": "Allsvenskan",
-    "Match": "Gais vs IF Elfsborg",
+    "League": "Division Intermedia",
+    "Match": "Independiente F.b.c. vs Tacuary",
     "Tip": "Over 2.5",
     "Odds": "1.95",
-    "Date": "2026-07-12T14:30:00+00:00"
+    "Date": "2026-07-13T20:00:00+00:00"
   },
   {
-    "League": "Eliteserien",
-    "Match": "Sandefjord vs Ham-Kam",
+    "League": "Canadian Championship",
+    "Match": "Cavalry FC vs Vancouver Whitecaps",
     "Tip": "Over 2.5",
-    "Odds": "1.75",
-    "Date": "2026-07-12T15:00:00+00:00"
+    "Odds": "1.90",
+    "Date": "2026-07-14T01:30:00+00:00"
   },
   {
-    "League": "Super Liga",
-    "Match": "Milsami Orhei vs Dacia-Buiucani",
+    "League": "League One",
+    "Match": "Ningbo Professional vs Dongguan United",
     "Tip": "Over 2.5",
-    "Odds": "1.75",
-    "Date": "2026-07-12T17:00:00+00:00",
+    "Odds": "1.95",
+    "Date": "2026-07-13T11:00:00+00:00",
     "locked": true
   }
 ]
