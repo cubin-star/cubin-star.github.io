@@ -4,5 +4,12 @@
     "match": "Atlanta Dream W vs Los Angeles Sparks W",
     "tip": "Over 179.5",
     "odds": "1.79"
+  },
+  {
+    "league": "USA - NBA - Las Vegas Summer League",
+    "match": "New York Knicks vs Detroit Pistons",
+    "tip": "Over 166.5",
+    "odds": "1.75",
+    "fallback_random": true
   }
 ]
