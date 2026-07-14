@@ -1,24 +1,24 @@
 [
   {
-    "League": "Division Intermedia",
-    "Match": "Independiente F.b.c. vs Tacuary",
+    "League": "League Cup",
+    "Match": "East Fife vs Morton",
     "Tip": "Over 2.5",
-    "Odds": "1.95",
-    "Date": "2026-07-13T20:00:00+00:00"
+    "Odds": "1.80",
+    "Date": "2026-07-14T18:45:00+00:00"
   },
   {
-    "League": "Canadian Championship",
-    "Match": "Cavalry FC vs Vancouver Whitecaps",
+    "League": "Friendlies Clubs",
+    "Match": "Legia Warszawa vs Radomiak Radom",
     "Tip": "Over 2.5",
-    "Odds": "1.90",
-    "Date": "2026-07-14T01:30:00+00:00"
+    "Odds": "1.80",
+    "Date": "2026-07-14T10:00:00+00:00"
   },
   {
-    "League": "League One",
-    "Match": "Ningbo Professional vs Dongguan United",
+    "League": "UEFA Champions League",
+    "Match": "Riga vs Ararat-Armenia",
     "Tip": "Over 2.5",
-    "Odds": "1.95",
-    "Date": "2026-07-13T11:00:00+00:00",
+    "Odds": "1.85",
+    "Date": "2026-07-14T17:00:00+00:00",
     "locked": true
   }
 ]
