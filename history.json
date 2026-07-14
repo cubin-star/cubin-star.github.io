@@ -1,5 +1,15 @@
 [
   {
+    "sport": "football",
+    "league": "Serie B",
+    "match": "America Mineiro vs Londrina",
+    "tip": "Over 1.5",
+    "odds": "1.33",
+    "date": "2026-07-13T22:00:00+00:00",
+    "score": "1:1",
+    "result": "✓"
+  },
+  {
     "sport": "basketball",
     "league": "NBA W",
     "match": "Washington Mystics W vs Seattle Storm W",
@@ -1987,16 +1997,6 @@
     "odds": "1.33",
     "date": "2026-04-23T17:00:00+00:00",
     "score": "4:1",
-    "result": "✓"
-  },
-  {
-    "sport": "hockey",
-    "league": "Extraliga",
-    "match": "Trinec vs Pardubice",
-    "tip": "Over 2.5",
-    "odds": "1.11",
-    "date": "2026-04-23T15:00:00+00:00",
-    "score": "4:2",
     "result": "✓"
   }
 ]
