@@ -1,23 +1,23 @@
 [
   {
-    "league": "Primera División - Apertura",
-    "match": "Cerro Largo - Defensor Sporting",
-    "kickoff": "2026-07-14T00:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.41"
-  },
-  {
-    "league": "Primera C",
-    "match": "Claypole - Leones de Rosario",
-    "kickoff": "2026-07-13T20:00:00+02:00",
+    "league": "Primera B Metropolitana",
+    "match": "Deportivo Armenio - Talleres Remedios",
+    "kickoff": "2026-07-14T20:30:00+02:00",
     "tip": "Over 2.5",
     "odds": "2.38"
   },
   {
-    "league": "Serie B",
-    "match": "Ceara - Athletic Club",
-    "kickoff": "2026-07-14T01:30:00+02:00",
+    "league": "Reserve League",
+    "match": "Unión Santa Fe Res. - Gimnasia La Plata Res.",
+    "kickoff": "2026-07-14T18:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.31"
+    "odds": "2.19"
+  },
+  {
+    "league": "Liga Pro",
+    "match": "Macara - Mushuc Runa SC",
+    "kickoff": "2026-07-14T23:30:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.12"
   }
 ]
