@@ -1,0 +1,51 @@
+# Over 2.5 History Evaluator – runs every day at 6:00 AM UTC
+# Reads tips.json (2 zápasy pro daný den), dohledá výsledky přes API-Football
+# a připojí tiket do tipshistory.json. Dokud nejsou oba zápasy dohrané,
+# tiket zůstane v pending_tipshistory.json a bude znovu vyhodnocen příští běh.
+#
+# SETUP:
+# 1. Nakopíruj tento soubor do:
+#    cubin-star/cubin-star.github.io/.github/workflows/over-tipshistory.yml
+# 2. Nakopíruj generate_tipshistory.py do rootu toho repa
+# 3. V Settings → Secrets and variables → Actions musí být:
+#    API_FOOTBALL_KEY1 = tvůj klíč z https://www.api-football.com/
+# 4. V Settings → Actions → General → Workflow permissions:
+#    povolit "Read and write permissions"
+
+name: Over Tips History Evaluator
+
+on:
+  schedule:
+    # Každý den v 6:00 UTC
+    - cron: '0 6 * * *'
+  workflow_dispatch:
+    # Umožní ruční spuštění
+
+permissions:
+  contents: write
+
+jobs:
+  evaluate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Evaluate tips history
+        env:
+          API_FOOTBALL_KEY1: ${{ secrets.API_FOOTBALL_KEY1 }}
+        run: python generate_tipshistory.py
+
+      - name: Commit and push
+        run: |
+          git config user.name  "Over Bot"
+          git config user.email "bot@over.app"
+          git add tipshistory.json pending_tipshistory.json
+          git diff --staged --quiet || git commit -m "📊 Over history $(date -u +%Y-%m-%d)"
+          git pull --rebase --autostash
+          git push
