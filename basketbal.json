@@ -1,15 +1,14 @@
 [
   {
     "league": "USA - NBA W",
-    "match": "Atlanta Dream W vs Los Angeles Sparks W",
-    "tip": "Over 179.5",
-    "odds": "1.79"
+    "match": "Connecticut Sun W vs Portland Fire W",
+    "tip": "Over 167.5",
+    "odds": "1.83"
   },
   {
-    "league": "USA - NBA - Las Vegas Summer League",
-    "match": "New York Knicks vs Detroit Pistons",
-    "tip": "Over 166.5",
-    "odds": "1.75",
-    "fallback_random": true
+    "league": "USA - NBA W",
+    "match": "Toronto Tempo W vs Washington Mystics W",
+    "tip": "Over 171.5",
+    "odds": "1.79"
   }
 ]
