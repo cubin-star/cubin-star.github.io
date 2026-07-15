@@ -60,12 +60,26 @@ def api_get(endpoint, params):
         try:
             with urllib.request.urlopen(req, timeout=20) as resp:
                 request_count += 1
-                return json.loads(resp.read().decode("utf-8"))
+                data = json.loads(resp.read().decode("utf-8"))
+                # API-Football vrací chyby v "errors" a i popísaný stav
+                errors = data.get("errors")
+                if errors:
+                    print(f"  ! API errors for {endpoint}: {errors}")
+                results = data.get("results")
+                if results is not None:
+                    print(f"  API {endpoint} results={results}")
+                return data
         except urllib.error.HTTPError as e:
+            body = ""
+            try:
+                body = e.read().decode("utf-8", errors="ignore")[:200]
+            except Exception:
+                pass
             if e.code == 429:
+                print(f"  HTTP 429 (rate limit), sleeping {5*attempt}s")
                 time.sleep(5 * attempt)
             else:
-                print(f"  HTTP {e.code} for {endpoint}")
+                print(f"  HTTP {e.code} for {endpoint}: {body}")
                 return {}
         except Exception as ex:
             print(f"  ERR {ex}")
@@ -160,9 +174,12 @@ def fetch_finished_fixtures(date_str):
         return []
     time.sleep(DELAY)
     data = api_get("fixtures", {"date": date_str, "timezone": "UTC"})
+    all_response = data.get("response", []) or []
     finished = []
-    for f in data.get("response", []):
+    status_counter = {}
+    for f in all_response:
         status = f.get("fixture", {}).get("status", {}).get("short", "")
+        status_counter[status] = status_counter.get(status, 0) + 1
         if status not in ("FT", "AET", "PEN"):
             continue
         home = f.get("teams", {}).get("home", {}).get("name", "")
@@ -175,6 +192,7 @@ def fetch_finished_fixtures(date_str):
             "total": gh + ga,
             "score": f"{gh}:{ga}",
         })
+    print(f"    -> {date_str}: {len(all_response)} total, {len(finished)} finished, statuses={status_counter}")
     return finished
 
 
