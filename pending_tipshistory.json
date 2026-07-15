@@ -1,18 +1,18 @@
 [
   {
-    "date": "2026-07-14T06:00:00Z",
+    "date": "2026-07-15T06:00:00Z",
     "matches": [
       {
-        "league": "",
-        "match": "",
-        "tip": "",
-        "odds": ""
+        "league": "UEFA Champions League",
+        "match": "Atert Bissen vs KI Klaksvik",
+        "tip": "Over 2.5",
+        "odds": "1.63"
       },
       {
-        "league": "",
-        "match": "",
-        "tip": "",
-        "odds": ""
+        "league": "UEFA Europa Conference League",
+        "match": "Malisheva vs Vllaznia Shkodër",
+        "tip": "Over 2.5",
+        "odds": "1.79"
       }
     ]
   }
