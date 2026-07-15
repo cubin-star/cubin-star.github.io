@@ -332,9 +332,11 @@ def main():
         for m in ticket.get("matches", []):
             if m.get("result") in ("\u2713", "\u2717"):
                 continue
+            print(f"  ~ searching: '{m.get('match','')}' | tip='{m.get('tip','')}' | target date={target}")
             res = evaluate_match(m, fixtures_by_date, target)
             if res is None:
                 all_done = False
+                print(f"    NOT FOUND")
                 continue
             score, verdict = res
             m["score"] = score
