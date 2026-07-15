@@ -73,8 +73,33 @@ def api_get(endpoint, params):
     return {}
 
 
+import re
+import unicodedata
+
+# Slova, která u fotbalových klubů typicky přebývají a matou porovnání.
+_STOPWORDS = {
+    "fc", "cf", "sc", "sk", "ac", "afc", "cfc", "bk", "if", "ff",
+    "club", "clube", "cd", "cp", "cs", "de", "la", "el", "los",
+    "united", "utd", "city", "town",
+}
+
+
+def _strip_diacritics(s):
+    nfkd = unicodedata.normalize("NFKD", s)
+    return "".join(c for c in nfkd if not unicodedata.combining(c))
+
+
 def normalize(name):
-    return (name or "").strip().lower()
+    """Normalizace pro porovnání jmen týmů: lowercase, bez diakritiky,
+    pomlčky/podtržítka/tečky -> mezera, jen alfanumerické znaky."""
+    s = _strip_diacritics(name or "").lower()
+    s = re.sub(r"[\-_./]+", " ", s)
+    s = re.sub(r"[^a-z0-9 ]+", "", s)
+    return re.sub(r"\s+", " ", s).strip()
+
+
+def _tokens(name):
+    return [t for t in normalize(name).split() if t and t not in _STOPWORDS]
 
 
 def names_match(api_name, pred_name):
@@ -82,7 +107,17 @@ def names_match(api_name, pred_name):
     b = normalize(pred_name)
     if not a or not b:
         return False
-    return a == b or a in b or b in a
+    # 1) přesná / substringová shoda po normalizaci
+    if a == b or a in b or b in a:
+        return True
+    # 2) token-based: alespoň jeden významný token musí sedět
+    ta = set(_tokens(api_name))
+    tb = set(_tokens(pred_name))
+    if not ta or not tb:
+        return False
+    common = ta & tb
+    # Aspoň jedno slovo se musí shodovat a mít >= 3 znaky (aby "as" nedělalo bordel)
+    return any(len(w) >= 3 for w in common)
 
 
 def parse_over_line(tip):
@@ -159,6 +194,27 @@ def find_score(match_str, fixtures):
     return None
 
 
+def _debug_dump_similar(match_str, fixtures, limit=8):
+    """Když zápas nenajdeme, vypíše kandidáty, kde alespoň jeden tým částečně sedí."""
+    home, away = parse_match_teams(match_str)
+    if not home or not away or not fixtures:
+        return
+    candidates = []
+    for fx in fixtures:
+        if (names_match(fx["home"], home) or names_match(fx["away"], away)
+            or names_match(fx["home"], away) or names_match(fx["away"], home)):
+            candidates.append(fx)
+    if candidates:
+        print(f"    ? Similar fixtures for '{match_str}':")
+        for fx in candidates[:limit]:
+            print(f"        - {fx['home']} vs {fx['away']}  ({fx['score']})")
+    else:
+        # Ukaž prvních pár, ať víme, že vůbec něco přišlo z API
+        print(f"    ? No fixture matched '{match_str}'. First few from API this day:")
+        for fx in fixtures[:limit]:
+            print(f"        - {fx['home']} vs {fx['away']}  ({fx['score']})")
+
+
 def evaluate_match(item, fixtures_by_date, target_date_str):
     """Vrátí (score, verdict) nebo None pokud zápas není dohraný / nenalezen."""
     match_str = item.get("match", "")
@@ -180,6 +236,8 @@ def evaluate_match(item, fixtures_by_date, target_date_str):
                 return None
             verdict = "\u2713" if hit["total"] > line else "\u2717"
             return hit["score"], verdict
+    # Nic nenalezeno – vypiš kandidáty pro cílový den, ať víme, jak API pojmenovává týmy
+    _debug_dump_similar(match_str, fixtures_by_date.get(target_date_str, []))
     return None
 
 
