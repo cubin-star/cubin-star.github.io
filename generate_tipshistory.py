@@ -152,6 +152,18 @@ def parse_match_teams(match_str):
     return None, None
 
 
+def _get_ci(obj, *names):
+    """Vrátí první ne-prázdnou hodnotu z objektu podle názvů (case-insensitive)."""
+    if not isinstance(obj, dict):
+        return ""
+    lower = {k.lower(): v for k, v in obj.items()}
+    for n in names:
+        v = lower.get(n.lower())
+        if v not in (None, ""):
+            return v
+    return ""
+
+
 def load_json(path, default):
     try:
         with open(path, "r", encoding="utf-8") as f:
@@ -280,6 +292,12 @@ def main():
 
     # 1) Načíst pending tikety z minula
     pending = load_json(PENDING_FILE, [])
+    # Vyhodit rozbité tikety s prázdnými match stringy (z buggy předchozí verze)
+    original_pending = len(pending)
+    pending = [p for p in pending
+               if any((m.get("match") or "").strip() for m in p.get("matches", []))]
+    if len(pending) != original_pending:
+        print(f"  cleaned {original_pending - len(pending)} broken pending ticket(s) with empty matches")
     print(f"  Pending from previous run: {len(pending)}")
 
     # 2) Přidat dnešní tiket z tips.json (pokud tam ještě není)
@@ -293,14 +311,18 @@ def main():
         matches = []
         for t in tips:
             matches.append({
-                "league": t.get("league", ""),
-                "match":  t.get("match", ""),
-                "tip":    t.get("tip", ""),
-                "odds":   t.get("odds", ""),
+                "league": _get_ci(t, "league", "League", "division", "competition"),
+                "match":  _get_ci(t, "match", "Match", "fixture", "game"),
+                "tip":    _get_ci(t, "tip", "Tip", "pick", "prediction"),
+                "odds":   str(_get_ci(t, "odds", "Odds", "price", "kurs", "kurt")),
             })
+        # Odstranit prázdné položky (bez match string)
+        matches = [m for m in matches if m["match"]]
         new_ticket = {"date": today, "matches": matches}
         existing_keys = {ticket_key(p) for p in pending}
-        if ticket_key(new_ticket) not in existing_keys:
+        if not matches:
+            print(f"  ! tips.json parsed but no valid matches (check field names)")
+        elif ticket_key(new_ticket) not in existing_keys:
             pending.append(new_ticket)
             print(f"  + added today's ticket ({len(matches)} matches)")
         else:
