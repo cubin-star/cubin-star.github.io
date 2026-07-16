@@ -1,1 +1,23 @@
-[]
+[
+  {
+    "date": "2026-07-15T06:00:00Z",
+    "matches": [
+      {
+        "league": "UEFA Champions League",
+        "match": "Atert Bissen vs KI Klaksvik",
+        "tip": "Over 2.5",
+        "odds": "1.63",
+        "score": "1:2",
+        "result": "✓"
+      },
+      {
+        "league": "UEFA Europa Conference League",
+        "match": "Malisheva vs Vllaznia Shkodër",
+        "tip": "Over 2.5",
+        "odds": "1.79",
+        "score": "5:0",
+        "result": "✓"
+      }
+    ]
+  }
+]

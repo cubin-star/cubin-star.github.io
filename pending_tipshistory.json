@@ -1,18 +1,18 @@
 [
   {
-    "date": "2026-07-15T06:00:00Z",
+    "date": "2026-07-16T06:00:00Z",
     "matches": [
       {
-        "league": "UEFA Champions League",
-        "match": "Atert Bissen vs KI Klaksvik",
+        "league": "UEFA Europa Conference League",
+        "match": "Ilves vs FC Differdange 03",
         "tip": "Over 2.5",
-        "odds": "1.63"
+        "odds": "1.68"
       },
       {
-        "league": "UEFA Europa Conference League",
-        "match": "Malisheva vs Vllaznia Shkodër",
+        "league": "UEFA Europa League",
+        "match": "Universitatea Cluj vs Dynamo Kyiv",
         "tip": "Over 2.5",
-        "odds": "1.79"
+        "odds": "1.89"
       }
     ]
   }
