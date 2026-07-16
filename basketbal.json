@@ -1,14 +1,15 @@
 [
   {
     "league": "USA - NBA W",
-    "match": "Chicago Sky W vs Seattle Storm W",
-    "tip": "Over 169.5",
+    "match": "Washington Mystics W vs Portland Fire W",
+    "tip": "Over 160.5",
     "odds": "1.78"
   },
   {
-    "league": "USA - NBA W",
-    "match": "Minnesota Lynx W vs Los Angeles Sparks W",
-    "tip": "Over 182.5",
-    "odds": "1.90"
+    "league": "USA - NBA - Las Vegas Summer League",
+    "match": "Oklahoma City Thunder vs Dallas Mavericks",
+    "tip": "Over 179.5",
+    "odds": "1.78",
+    "fallback_random": true
   }
 ]
