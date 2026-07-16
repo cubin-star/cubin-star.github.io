@@ -1,23 +1,23 @@
 [
   {
-    "league": "World Cup",
-    "match": "England - Argentina",
-    "kickoff": "2026-07-15T21:00:00+02:00",
+    "league": "Copa Argentina",
+    "match": "Racing Club - Defensa Y Justicia",
+    "kickoff": "2026-07-16T23:45:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.37"
+    "odds": "2.27"
   },
   {
-    "league": "Catarinense - 2",
-    "match": "Fluminense-SC - Guarani de Palhoça",
-    "kickoff": "2026-07-15T20:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.30"
-  },
-  {
-    "league": "UEFA Champions League",
-    "match": "Egnatia Rrogozhinë - Petrocub",
-    "kickoff": "2026-07-15T21:00:00+02:00",
+    "league": "Liga Pro",
+    "match": "Orense SC - Emelec",
+    "kickoff": "2026-07-17T02:00:00+02:00",
     "tip": "Over 2.5",
     "odds": "2.21"
+  },
+  {
+    "league": "UEFA Europa League",
+    "match": "Aluminij - Sheriff Tiraspol",
+    "kickoff": "2026-07-16T20:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.20"
   }
 ]

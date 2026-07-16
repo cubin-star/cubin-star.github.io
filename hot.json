@@ -1,50 +1,50 @@
 [
   {
-    "league": "Liga Pro",
-    "match": "Leones del Norte - Deportivo Cuenca",
-    "kickoff": "2026-07-16T00:00:00+02:00",
+    "league": "UEFA Europa Conference League",
+    "match": "Yelimay Semey - Alashkert",
+    "kickoff": "2026-07-16T17:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.18",
+    "odds": "2.10",
     "group": 1
   },
   {
-    "league": "UEFA Champions League",
-    "match": "Egnatia Rrogozhinë - Petrocub",
-    "kickoff": "2026-07-15T21:00:00+02:00",
+    "league": "Copa Argentina",
+    "match": "Racing Club - Defensa Y Justicia",
+    "kickoff": "2026-07-16T23:45:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.27",
+    "group": 1
+  },
+  {
+    "league": "Liga Pro",
+    "match": "Orense SC - Emelec",
+    "kickoff": "2026-07-17T02:00:00+02:00",
     "tip": "Over 2.5",
     "odds": "2.21",
-    "group": 1
-  },
-  {
-    "league": "Catarinense - 2",
-    "match": "Fluminense-SC - Guarani de Palhoça",
-    "kickoff": "2026-07-15T20:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.30",
     "group": 2
   },
   {
-    "league": "NWSL Women",
-    "match": "NJ/NY Gotham FC W - Washington Spirit W",
-    "kickoff": "2026-07-16T02:00:00+02:00",
+    "league": "Serie A",
+    "match": "Vitoria - Vasco DA Gama",
+    "kickoff": "2026-07-17T00:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.16",
+    "odds": "2.10",
     "group": 2
   },
   {
-    "league": "World Cup",
-    "match": "England - Argentina",
-    "kickoff": "2026-07-15T21:00:00+02:00",
+    "league": "UEFA Europa League",
+    "match": "Aluminij - Sheriff Tiraspol",
+    "kickoff": "2026-07-16T20:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.37",
+    "odds": "2.20",
     "group": 3
   },
   {
-    "league": "Maranhense - 2",
-    "match": "Sao Luis - Pinheiro",
-    "kickoff": "2026-07-15T20:30:00+02:00",
+    "league": "Premier League",
+    "match": "Al Ahed - Al Nejmeh",
+    "kickoff": "2026-07-16T16:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.10",
+    "odds": "2.15",
     "group": 3
   }
 ]
