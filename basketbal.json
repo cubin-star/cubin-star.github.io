@@ -1,15 +1,14 @@
 [
   {
-    "league": "USA - NBA W",
-    "match": "Washington Mystics W vs Portland Fire W",
-    "tip": "Over 160.5",
-    "odds": "1.78"
+    "league": "Australia - NBL1 South",
+    "match": "Bendigo Braves vs Keilor Thunder",
+    "tip": "Over 173.5",
+    "odds": "1.75"
   },
   {
-    "league": "USA - NBA - Las Vegas Summer League",
-    "match": "Oklahoma City Thunder vs Dallas Mavericks",
-    "tip": "Over 179.5",
-    "odds": "1.78",
-    "fallback_random": true
+    "league": "Australia - NBL1 South",
+    "match": "Eltham vs Kilsyth",
+    "tip": "Over 173.5",
+    "odds": "1.79"
   }
 ]
