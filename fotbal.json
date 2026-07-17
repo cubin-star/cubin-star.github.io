@@ -1,24 +1,24 @@
 [
   {
-    "League": "UEFA Europa Conference League",
-    "Match": "FK Zalgiris Vilnius vs Petrovac",
+    "League": "Friendlies Clubs",
+    "Match": "Zbrojovka Brno vs Podbrezová",
     "Tip": "Over 2.5",
-    "Odds": "1.77",
-    "Date": "2026-07-16T17:00:00+00:00"
+    "Odds": "1.80",
+    "Date": "2026-07-17T15:00:00+00:00"
   },
   {
-    "League": "UEFA Europa League",
-    "Match": "Žilina vs HNK Hajduk Split",
+    "League": "Super Liga",
+    "Match": "Železničar Pančevo vs Radnicki NIS",
     "Tip": "Over 2.5",
-    "Odds": "1.90",
-    "Date": "2026-07-16T18:30:00+00:00"
+    "Odds": "1.95",
+    "Date": "2026-07-17T18:00:00+00:00"
   },
   {
-    "League": "Serie A",
-    "Match": "Botafogo vs Santos",
+    "League": "Liga MX",
+    "Match": "Leon vs Atlas",
     "Tip": "Over 2.5",
-    "Odds": "1.90",
-    "Date": "2026-07-16T22:30:00+00:00",
+    "Odds": "1.88",
+    "Date": "2026-07-18T01:00:00+00:00",
     "locked": true
   }
 ]
