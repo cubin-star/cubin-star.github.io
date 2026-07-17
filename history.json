@@ -2,6 +2,16 @@
   {
     "sport": "football",
     "league": "UEFA Europa Conference League",
+    "match": "Torpedo Kutaisi vs Zira",
+    "tip": "Over 1.5",
+    "odds": "1.28",
+    "date": "2026-07-16T16:00:00+00:00",
+    "score": "0:3",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "UEFA Europa Conference League",
     "match": "Malisheva vs Vllaznia Shkodër",
     "tip": "Over 1.5",
     "odds": "1.24",
@@ -1987,16 +1997,6 @@
     "odds": "1.20",
     "date": "2026-04-24T16:00:00+00:00",
     "score": "2:3",
-    "result": "✓"
-  },
-  {
-    "sport": "hockey",
-    "league": "2. Liga",
-    "match": "AZ Havirov vs Prostejov",
-    "tip": "Over 4.5",
-    "odds": "1.17",
-    "date": "2026-04-24T15:30:00+00:00",
-    "score": "3:4",
     "result": "✓"
   }
 ]
