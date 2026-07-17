@@ -1,18 +1,18 @@
 [
   {
-    "date": "2026-07-16T06:00:00Z",
+    "date": "2026-07-17T06:00:00Z",
     "matches": [
       {
-        "league": "UEFA Europa Conference League",
-        "match": "Ilves vs FC Differdange 03",
+        "league": "Liga MX",
+        "match": "Leon vs Atlas",
         "tip": "Over 2.5",
-        "odds": "1.68"
+        "odds": "1.82"
       },
       {
-        "league": "UEFA Europa League",
-        "match": "Universitatea Cluj vs Dynamo Kyiv",
+        "league": "Major League Soccer",
+        "match": "Nashville SC vs Atlanta United FC",
         "tip": "Over 2.5",
-        "odds": "1.89"
+        "odds": "1.70"
       }
     ]
   }
