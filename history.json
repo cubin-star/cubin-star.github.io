@@ -1,6 +1,16 @@
 [
   {
     "sport": "football",
+    "league": "Liga MX",
+    "match": "FC Juarez vs Puebla",
+    "tip": "Over 1.5",
+    "odds": "1.20",
+    "date": "2026-07-18T03:00:00+00:00",
+    "score": "0:1",
+    "result": "✗"
+  },
+  {
+    "sport": "football",
     "league": "UEFA Europa Conference League",
     "match": "Torpedo Kutaisi vs Zira",
     "tip": "Over 1.5",
@@ -1987,16 +1997,6 @@
     "odds": "1.12",
     "date": "2026-04-24T17:30:00+00:00",
     "score": "3:7",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "2. Liga",
-    "match": "Schwarz-Weiß Bregenz vs WSPG Wels",
-    "tip": "Over 1.5",
-    "odds": "1.20",
-    "date": "2026-04-24T16:00:00+00:00",
-    "score": "2:3",
     "result": "✓"
   }
 ]
