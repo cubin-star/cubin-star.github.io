@@ -1,24 +1,24 @@
 [
   {
+    "League": "League Cup",
+    "Match": "Hamilton Academical vs Raith Rovers",
+    "Tip": "Over 2.5",
+    "Odds": "1.75",
+    "Date": "2026-07-18T14:00:00+00:00"
+  },
+  {
     "League": "Friendlies Clubs",
-    "Match": "Zbrojovka Brno vs Podbrezová",
+    "Match": "Bologna vs Arminia Bielefeld",
     "Tip": "Over 2.5",
-    "Odds": "1.80",
-    "Date": "2026-07-17T15:00:00+00:00"
+    "Odds": "1.75",
+    "Date": "2026-07-18T10:00:00+00:00"
   },
   {
-    "League": "Super Liga",
-    "Match": "Železničar Pančevo vs Radnicki NIS",
+    "League": "Superettan",
+    "Match": "Oddevold vs Varbergs BoIS FC",
     "Tip": "Over 2.5",
-    "Odds": "1.95",
-    "Date": "2026-07-17T18:00:00+00:00"
-  },
-  {
-    "League": "Liga MX",
-    "Match": "Leon vs Atlas",
-    "Tip": "Over 2.5",
-    "Odds": "1.88",
-    "Date": "2026-07-18T01:00:00+00:00",
+    "Odds": "1.85",
+    "Date": "2026-07-18T11:00:00+00:00",
     "locked": true
   }
 ]
