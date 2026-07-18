@@ -1,50 +1,50 @@
 [
   {
-    "league": "Liga I",
-    "match": "FC Voluntari - FC Botosani",
-    "kickoff": "2026-07-17T17:30:00+02:00",
+    "league": "Eliteserien",
+    "match": "Ham-Kam - Tromso",
+    "kickoff": "2026-07-18T14:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.21",
+    "odds": "2.10",
     "group": 1
   },
   {
-    "league": "Liga MX U21",
-    "match": "Club Leon U21 - Atlas U21",
-    "kickoff": "2026-07-17T17:00:00+02:00",
+    "league": "First League",
+    "match": "Septemvri Sofia - Arda Kardzhali",
+    "kickoff": "2026-07-18T18:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.29",
+    "odds": "2.18",
     "group": 1
+  },
+  {
+    "league": "Liga I",
+    "match": "Oţelul - CFR 1907 Cluj",
+    "kickoff": "2026-07-18T17:30:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.13",
+    "group": 2
+  },
+  {
+    "league": "K League 2",
+    "match": "Seongnam FC - Busan I Park",
+    "kickoff": "2026-07-18T12:30:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.13",
+    "group": 2
   },
   {
     "league": "Division Intermedia",
-    "match": "12 de Junio VH - General Caballero",
-    "kickoff": "2026-07-18T00:30:00+02:00",
+    "match": "Benjamín Aceval - Resistencia",
+    "kickoff": "2026-07-18T20:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.10",
-    "group": 2
-  },
-  {
-    "league": "Super League",
-    "match": "Mash'al - Kokand-1912",
-    "kickoff": "2026-07-17T17:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.37",
-    "group": 2
-  },
-  {
-    "league": "Copa Paulista",
-    "match": "Marília - Grêmio Prudente",
-    "kickoff": "2026-07-18T00:30:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.33",
+    "odds": "2.15",
     "group": 3
   },
   {
-    "league": "Serie A",
-    "match": "Fluminense - RB Bragantino",
-    "kickoff": "2026-07-18T01:00:00+02:00",
+    "league": "Primera División",
+    "match": "ADT - Universitario",
+    "kickoff": "2026-07-18T20:15:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.11",
+    "odds": "2.10",
     "group": 3
   }
 ]
