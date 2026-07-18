@@ -1,22 +1,6 @@
 [
   {
     "league": "Serie A",
-    "homeTeam": "Fluminense",
-    "awayTeam": "RB Bragantino",
-    "tip": "Over 1.5",
-    "odds": "",
-    "halftimeScore": "0:1",
-    "liveOdds": "",
-    "finalScore": "",
-    "result": "",
-    "sport": "football",
-    "kickoff": "2026-07-17T23:00:00.000Z",
-    "resolvedAt": "",
-    "source": "whisper-football",
-    "scoutStats": "Whisper 0:1 comeback | HT 0:1 | xG: 2.13 | Shots: 29/6 | losingXG: 1.26 losingSOT: 4 | @46' | Pre O2.5: 2"
-  },
-  {
-    "league": "Serie A",
     "homeTeam": "Botafogo",
     "awayTeam": "Santos",
     "tip": "Over 1.5",
