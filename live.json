@@ -1,1 +1,23 @@
-[]
+[
+  {
+    "League": "Friendlies Clubs",
+    "Match": "Chrobry Głogów vs Ślęza Wrocław",
+    "Tip": "Over 1.5",
+    "Odds": "1.14",
+    "Date": "2026-07-18T08:30:00+00:00"
+  },
+  {
+    "League": "Friendlies Clubs",
+    "Match": "FC Zurich vs SpVgg Greuther Fürth",
+    "Tip": "Over 1.5",
+    "Odds": "1.12",
+    "Date": "2026-07-18T12:00:00+00:00"
+  },
+  {
+    "League": "1. Liga",
+    "Match": "JFK Ventspils vs JDFS Alberts",
+    "Tip": "Over 1.5",
+    "Odds": "1.16",
+    "Date": "2026-07-18T14:00:00+00:00"
+  }
+]
