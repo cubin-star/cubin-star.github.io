@@ -1,5 +1,26 @@
 [
   {
+    "date": "2026-07-17T06:00:00Z",
+    "matches": [
+      {
+        "league": "Liga MX",
+        "match": "Leon vs Atlas",
+        "tip": "Over 2.5",
+        "odds": "1.82",
+        "score": "1:0",
+        "result": "✗"
+      },
+      {
+        "league": "Major League Soccer",
+        "match": "Nashville SC vs Atlanta United FC",
+        "tip": "Over 2.5",
+        "odds": "1.70",
+        "score": "1:0",
+        "result": "✗"
+      }
+    ]
+  },
+  {
     "date": "2026-07-16T06:00:00Z",
     "matches": [
       {
