@@ -10,7 +10,7 @@ vyhodnotí Over/Under podle pole "tip" a připojí tiket do tipshistory.json.
 Formát tipshistory.json (co čte MAUI aplikace):
 [
   {
-    "date": "2025-01-15T06:00:00Z",
+    "date": "2025-01-15T05:30:00Z",
     "matches": [
       { "league":"…", "match":"A vs B", "tip":"Over 2.5",
         "odds":"1.95", "score":"2:1", "result":"✓" },
@@ -305,9 +305,9 @@ def main():
     if isinstance(tips, dict):
         tips = tips.get("tips", [])
     if tips:
-        # Datum tiketu = dnešní den v 06:00 UTC (kdy běh vyhodnocuje včerejší zápasy)
+        # Datum tiketu = dnešní den v 05:30 UTC (kdy běh vyhodnocuje včerejší zápasy)
         # Aplikace zobrazuje jen datum, čas není důležitý.
-        today = now.date().isoformat() + "T06:00:00Z"
+        today = now.date().isoformat() + "T05:30:00Z"
         matches = []
         for t in tips:
             matches.append({
