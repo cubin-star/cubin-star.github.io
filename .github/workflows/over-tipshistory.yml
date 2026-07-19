@@ -1,4 +1,4 @@
-# Over 2.5 History Evaluator – runs every day at 6:00 AM UTC
+# Over 2.5 History Evaluator – runs every day at 5:30 AM UTC
 # Reads tips.json (2 zápasy pro daný den), dohledá výsledky přes API-Football
 # a připojí tiket do tipshistory.json. Dokud nejsou oba zápasy dohrané,
 # tiket zůstane v pending_tipshistory.json a bude znovu vyhodnocen příští běh.
@@ -17,7 +17,7 @@ name: Over Tips History Evaluator
 on:
   schedule:
     # Každý den v 6:00 UTC
-    - cron: '0 6 * * *'
+    - cron: '30 5 * * *'
   workflow_dispatch:
     # Umožní ruční spuštění
 
