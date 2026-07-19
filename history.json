@@ -1,6 +1,16 @@
 [
   {
     "sport": "football",
+    "league": "Eliteserien",
+    "match": "Ham-Kam vs Tromso",
+    "tip": "Over 1.5",
+    "odds": "1.32",
+    "date": "2026-07-18T12:00:00+00:00",
+    "score": "1:4",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
     "league": "Liga MX",
     "match": "FC Juarez vs Puebla",
     "tip": "Over 1.5",
@@ -1987,16 +1997,6 @@
     "odds": "1.17",
     "date": "2026-04-24T18:00:00+00:00",
     "score": "1:2",
-    "result": "✓"
-  },
-  {
-    "sport": "hockey",
-    "league": "DEL",
-    "match": "Adler Mannheim vs Eisbaren Berlin",
-    "tip": "Over 3.5",
-    "odds": "1.12",
-    "date": "2026-04-24T17:30:00+00:00",
-    "score": "3:7",
     "result": "✓"
   }
 ]
