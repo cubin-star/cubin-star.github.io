@@ -1,5 +1,26 @@
 [
   {
+    "date": "2026-07-18T06:00:00Z",
+    "matches": [
+      {
+        "league": "Norway League",
+        "match": "Start vs Rosenborg",
+        "tip": "Over 2.5",
+        "odds": "1.7",
+        "score": "0:3",
+        "result": "✓"
+      },
+      {
+        "league": "Liga MX",
+        "match": "U.N.A.M. vs Pachuca",
+        "tip": "Over 2.5",
+        "odds": "1.93",
+        "score": "0:3",
+        "result": "✓"
+      }
+    ]
+  },
+  {
     "date": "2026-07-17T06:00:00Z",
     "matches": [
       {
@@ -58,6 +79,27 @@
         "tip": "Over 2.5",
         "odds": "1.79",
         "score": "5:0",
+        "result": "✓"
+      }
+    ]
+  },
+  {
+    "date": "2026-07-14T06:00:00Z",
+    "matches": [
+      {
+        "league": "UEFA Champions League",
+        "match": "Riga FC vs Ararat Armenia",
+        "tip": "Over 2.5",
+        "odds": "1.79",
+        "score": "3:2",
+        "result": "✓"
+      },
+      {
+        "league": "UEFA Champions League",
+        "match": "Shamrock Rovers vs Floriana",
+        "tip": "Over 2.5",
+        "odds": "1.62",
+        "score": "5:1",
         "result": "✓"
       }
     ]
