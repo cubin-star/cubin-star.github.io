@@ -1,24 +1,24 @@
 [
   {
-    "League": "League Cup",
-    "Match": "Hamilton Academical vs Raith Rovers",
+    "League": "Friendlies Clubs",
+    "Match": "Widzew Łódź vs Puszcza Niepołomice",
     "Tip": "Over 2.5",
     "Odds": "1.75",
-    "Date": "2026-07-18T14:00:00+00:00"
+    "Date": "2026-07-19T15:00:00+00:00"
   },
   {
-    "League": "Friendlies Clubs",
-    "Match": "Bologna vs Arminia Bielefeld",
+    "League": "1 Lyga",
+    "Match": "Kauno Žalgiris II vs Babrungas",
     "Tip": "Over 2.5",
-    "Odds": "1.75",
-    "Date": "2026-07-18T10:00:00+00:00"
+    "Odds": "1.91",
+    "Date": "2026-07-19T15:00:00+00:00"
   },
   {
     "League": "Superettan",
-    "Match": "Oddevold vs Varbergs BoIS FC",
+    "Match": "IFK Varnamo vs Ljungskile SK",
     "Tip": "Over 2.5",
-    "Odds": "1.85",
-    "Date": "2026-07-18T11:00:00+00:00",
+    "Odds": "1.75",
+    "Date": "2026-07-19T13:00:00+00:00",
     "locked": true
   }
 ]
