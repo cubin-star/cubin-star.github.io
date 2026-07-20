@@ -1,24 +1,24 @@
 [
   {
-    "League": "Friendlies Clubs",
-    "Match": "Widzew Łódź vs Puszcza Niepołomice",
+    "League": "First League",
+    "Match": "Slavia Sofia vs CSKA Sofia",
     "Tip": "Over 2.5",
-    "Odds": "1.75",
-    "Date": "2026-07-19T15:00:00+00:00"
-  },
-  {
-    "League": "1 Lyga",
-    "Match": "Kauno Žalgiris II vs Babrungas",
-    "Tip": "Over 2.5",
-    "Odds": "1.91",
-    "Date": "2026-07-19T15:00:00+00:00"
+    "Odds": "1.85",
+    "Date": "2026-07-20T16:15:00+00:00"
   },
   {
     "League": "Superettan",
-    "Match": "IFK Varnamo vs Ljungskile SK",
+    "Match": "Norrby IF vs GIF Sundsvall",
     "Tip": "Over 2.5",
-    "Odds": "1.75",
-    "Date": "2026-07-19T13:00:00+00:00",
+    "Odds": "1.92",
+    "Date": "2026-07-20T17:00:00+00:00"
+  },
+  {
+    "League": "FA Cup",
+    "Match": "Henan Jianye vs Dalian Zhixing",
+    "Tip": "Over 2.5",
+    "Odds": "1.87",
+    "Date": "2026-07-21T07:00:00+00:00",
     "locked": true
   }
 ]
