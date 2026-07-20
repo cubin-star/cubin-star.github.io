@@ -1,50 +1,50 @@
 [
   {
-    "league": "Super Liga",
-    "match": "Radnik Surdulica - Mladost Lucani",
-    "kickoff": "2026-07-19T19:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.14",
-    "group": 1
-  },
-  {
-    "league": "First League",
-    "match": "Botev Vratsa - Cherno More Varna",
-    "kickoff": "2026-07-19T18:30:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.45",
-    "group": 1
-  },
-  {
     "league": "Liga I",
-    "match": "Petrolul Ploiesti - Dinamo Bucuresti",
-    "kickoff": "2026-07-19T18:30:00+02:00",
+    "match": "Corvinul Hunedoara - Csikszereda",
+    "kickoff": "2026-07-20T17:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.23",
-    "group": 2
+    "odds": "2.12",
+    "group": 1
   },
   {
-    "league": "Super League",
-    "match": "Dedza Dynamos - Chitipa United",
-    "kickoff": "2026-07-19T14:30:00+02:00",
+    "league": "Primera C",
+    "match": "Berazategui - Central Cordoba",
+    "kickoff": "2026-07-20T20:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.27",
-    "group": 2
-  },
-  {
-    "league": "Serie D",
-    "match": "America-RN - Gama",
-    "kickoff": "2026-07-20T00:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.35",
-    "group": 3
+    "odds": "2.28",
+    "group": 1
   },
   {
     "league": "A Lyga",
-    "match": "Džiugas Telšiai - Banga",
-    "kickoff": "2026-07-19T17:45:00+02:00",
+    "match": "Suduva Marijampole - Hegelmann Litauen",
+    "kickoff": "2026-07-20T17:45:00+02:00",
     "tip": "Over 2.5",
     "odds": "2.14",
+    "group": 2
+  },
+  {
+    "league": "Division Intermedia",
+    "match": "Deportivo Santani - Fernando De La Mora",
+    "kickoff": "2026-07-21T00:30:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.22",
+    "group": 2
+  },
+  {
+    "league": "Primera División - Apertura",
+    "match": "Defensor Sporting - Liverpool Montevideo",
+    "kickoff": "2026-07-21T01:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.33",
+    "group": 3
+  },
+  {
+    "league": "Virsliga",
+    "match": "Super Nova - Grobiņa",
+    "kickoff": "2026-07-20T18:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.11",
     "group": 3
   }
 ]
