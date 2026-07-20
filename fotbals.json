@@ -1,9 +1,16 @@
 [
   {
-    "League": "K League 1",
-    "Match": "Bucheon FC 1995 vs FC Seoul",
+    "League": "Allsvenskan",
+    "Match": "Kalmar FF vs Malmo FF",
     "Tip": "Over 1.5",
-    "Odds": "1.35",
-    "Date": "2026-07-19T10:30:00+00:00"
+    "Odds": "1.19",
+    "Date": "2026-07-20T17:00:00+00:00"
+  },
+  {
+    "League": "Superettan",
+    "Match": "Norrby IF vs GIF Sundsvall",
+    "Tip": "Over 1.5",
+    "Odds": "1.26",
+    "Date": "2026-07-20T17:00:00+00:00"
   }
 ]
