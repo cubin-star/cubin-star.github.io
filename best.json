@@ -1,23 +1,23 @@
 [
   {
-    "league": "Primera División - Apertura",
-    "match": "Defensor Sporting - Liverpool Montevideo",
-    "kickoff": "2026-07-21T01:00:00+02:00",
+    "league": "Serie B",
+    "match": "Novorizontino - Criciuma",
+    "kickoff": "2026-07-22T00:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.33"
+    "odds": "2.43"
   },
   {
-    "league": "Primera C",
-    "match": "Berazategui - Central Cordoba",
-    "kickoff": "2026-07-20T20:00:00+02:00",
+    "league": "Super League",
+    "match": "Buxoro - Bunyodkor",
+    "kickoff": "2026-07-21T17:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.28"
+    "odds": "2.16"
   },
   {
-    "league": "Division Intermedia",
-    "match": "Deportivo Santani - Fernando De La Mora",
-    "kickoff": "2026-07-21T00:30:00+02:00",
+    "league": "CONMEBOL Sudamericana",
+    "match": "UCV - Santos",
+    "kickoff": "2026-07-22T02:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.22"
+    "odds": "2.13"
   }
 ]
