@@ -3,16 +3,16 @@
     "date": "2026-07-21T05:30:00Z",
     "matches": [
       {
-        "league": "Allsvenskan",
-        "match": "Kalmar FF vs Malmo FF",
+        "league": "UEFA Europa Conference League",
+        "match": "Atert Bissen vs Gyori ETO FC",
         "tip": "Over 2.5",
-        "odds": "1.63"
+        "odds": "1.68"
       },
       {
-        "league": "Superettan",
-        "match": "Norrby IF vs GIF Sundsvall",
+        "league": "UEFA Champions League",
+        "match": "FC Thun vs Dinamo Zagreb",
         "tip": "Over 2.5",
-        "odds": "1.87"
+        "odds": "1.63"
       }
     ]
   }

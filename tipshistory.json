@@ -1,5 +1,26 @@
 [
   {
+    "date": "2026-07-21T05:30:00Z",
+    "matches": [
+      {
+        "league": "Allsvenskan",
+        "match": "Kalmar FF vs Malmo FF",
+        "tip": "Over 2.5",
+        "odds": "1.63",
+        "score": "2:2",
+        "result": "✓"
+      },
+      {
+        "league": "Superettan",
+        "match": "Norrby IF vs GIF Sundsvall",
+        "tip": "Over 2.5",
+        "odds": "1.87",
+        "score": "3:1",
+        "result": "✓"
+      }
+    ]
+  },
+  {
     "date": "2026-07-19T06:00:00Z",
     "matches": [
       {
