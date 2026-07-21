@@ -1,24 +1,24 @@
 [
   {
-    "League": "First League",
-    "Match": "Slavia Sofia vs CSKA Sofia",
+    "League": "League Cup",
+    "Match": "Inverness CT vs ST Johnstone",
     "Tip": "Over 2.5",
-    "Odds": "1.85",
-    "Date": "2026-07-20T16:15:00+00:00"
+    "Odds": "1.90",
+    "Date": "2026-07-21T18:45:00+00:00"
   },
   {
-    "League": "Superettan",
-    "Match": "Norrby IF vs GIF Sundsvall",
+    "League": "Friendlies Clubs",
+    "Match": "Alfreton Town vs Rotherham",
     "Tip": "Over 2.5",
-    "Odds": "1.92",
-    "Date": "2026-07-20T17:00:00+00:00"
+    "Odds": "1.80",
+    "Date": "2026-07-21T18:30:00+00:00"
   },
   {
-    "League": "FA Cup",
-    "Match": "Henan Jianye vs Dalian Zhixing",
+    "League": "UEFA Champions League",
+    "Match": "Vikingur Reykjavik vs Hapoel Beer Sheva",
     "Tip": "Over 2.5",
-    "Odds": "1.87",
-    "Date": "2026-07-21T07:00:00+00:00",
+    "Odds": "1.80",
+    "Date": "2026-07-21T19:00:00+00:00",
     "locked": true
   }
 ]
