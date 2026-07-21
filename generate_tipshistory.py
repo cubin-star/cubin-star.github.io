@@ -345,8 +345,12 @@ def main():
             base_date = now
         target = base_date.date().isoformat()
 
-        # Nevyhodnocuj tikety, jejichž den ještě neuběhl + buffer
-        if base_date + MATCH_BUFFER > now:
+        # Nevyhodnocuj tikety, jejichž datum je teprve v budoucnu (jiný den).
+        # Pro dnešní tiket (base_date = dnes 05:30 UTC) chceme vyhodnotit hned,
+        # protože zápasy proběhly předchozí večer. Zápasy, které ještě nejsou
+        # dohrané, vyfiltruje fetch_finished_fixtures (status != FT/AET/PEN)
+        # a tiket správně zůstane v pending přes evaluate_match -> None.
+        if base_date.date() > now.date():
             still_pending.append(ticket)
             continue
 
