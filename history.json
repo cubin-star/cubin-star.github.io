@@ -1,6 +1,36 @@
 [
   {
     "sport": "basketball",
+    "league": "NBA W",
+    "match": "Toronto Tempo W vs Las Vegas Aces W",
+    "tip": "Over 171.5",
+    "odds": "1.24",
+    "date": "2026-07-21T00:00:00+00:00",
+    "score": "83:109",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "Allsvenskan",
+    "match": "Kalmar FF vs Malmo FF",
+    "tip": "Over 1.5",
+    "odds": "1.19",
+    "date": "2026-07-20T17:00:00+00:00",
+    "score": "2:2",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "Superettan",
+    "match": "Norrby IF vs GIF Sundsvall",
+    "tip": "Over 1.5",
+    "odds": "1.26",
+    "date": "2026-07-20T17:00:00+00:00",
+    "score": "3:1",
+    "result": "✓"
+  },
+  {
+    "sport": "basketball",
     "league": "Governors Cup",
     "match": "Barangay Ginebra San Miguel vs Phoenix Fuelmasters",
     "tip": "Over 191.5",
@@ -1967,36 +1997,6 @@
     "odds": "1.31",
     "date": "2026-04-25T13:15:00+00:00",
     "score": "5:1",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "I Liga",
-    "match": "ŁKS Łódź vs Stal Rzeszów",
-    "tip": "Over 1.5",
-    "odds": "1.16",
-    "date": "2026-04-25T12:30:00+00:00",
-    "score": "2:1",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "League Two",
-    "match": "Milton Keynes Dons vs Tranmere",
-    "tip": "Over 1.5",
-    "odds": "1.21",
-    "date": "2026-04-25T11:30:00+00:00",
-    "score": "3:0",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Thai League 2",
-    "match": "Mahasarakham United vs Khon Kaen United",
-    "tip": "Over 1.5",
-    "odds": "1.15",
-    "date": "2026-04-25T11:00:00+00:00",
-    "score": "2:2",
     "result": "✓"
   }
 ]
