@@ -1,50 +1,50 @@
 [
   {
-    "league": "Serie B",
-    "match": "Novorizontino - Criciuma",
-    "kickoff": "2026-07-22T00:30:00+02:00",
+    "league": "Reserve League",
+    "match": "Central Córdoba SdE Res. - Platense Res.",
+    "kickoff": "2026-07-22T22:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.43",
+    "odds": "2.22",
     "group": 1
   },
   {
-    "league": "FA Cup",
-    "match": "Chongqing Tongliang Long - Qingdao Youth Island",
-    "kickoff": "2026-07-21T13:35:00+02:00",
+    "league": "UEFA Europa Conference League",
+    "match": "Neftchi Baku - Dinamo Minsk",
+    "kickoff": "2026-07-22T18:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.10",
+    "odds": "2.21",
     "group": 1
   },
   {
     "league": "K League 1",
-    "match": "Ulsan Hyundai FC - Incheon United",
-    "kickoff": "2026-07-21T12:30:00+02:00",
+    "match": "Bucheon FC 1995 - FC Anyang",
+    "kickoff": "2026-07-22T12:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.12",
+    "odds": "2.35",
     "group": 2
   },
   {
-    "league": "CONMEBOL Sudamericana",
-    "match": "UCV - Santos",
-    "kickoff": "2026-07-22T02:30:00+02:00",
+    "league": "Serie B",
+    "match": "Ceara - CRB",
+    "kickoff": "2026-07-23T00:30:00+02:00",
     "tip": "Over 2.5",
     "odds": "2.13",
     "group": 2
   },
   {
-    "league": "Super League",
-    "match": "Buxoro - Bunyodkor",
-    "kickoff": "2026-07-21T17:00:00+02:00",
+    "league": "Serie A",
+    "match": "Sao Paulo - Atletico Paranaense",
+    "kickoff": "2026-07-23T02:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.16",
+    "odds": "2.20",
     "group": 3
   },
   {
-    "league": "Liga Pro",
-    "match": "Universidad Catolica - Barcelona SC",
-    "kickoff": "2026-07-22T02:00:00+02:00",
+    "league": "FA Cup",
+    "match": "Rizhao Yuqi - Shaanxi Union",
+    "kickoff": "2026-07-22T14:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.11",
+    "odds": "2.25",
     "group": 3
   }
 ]

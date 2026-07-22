@@ -1,23 +1,23 @@
 [
   {
-    "league": "Serie B",
-    "match": "Novorizontino - Criciuma",
-    "kickoff": "2026-07-22T00:30:00+02:00",
+    "league": "K League 1",
+    "match": "Bucheon FC 1995 - FC Anyang",
+    "kickoff": "2026-07-22T12:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.43"
+    "odds": "2.35"
   },
   {
-    "league": "Super League",
-    "match": "Buxoro - Bunyodkor",
-    "kickoff": "2026-07-21T17:00:00+02:00",
+    "league": "FA Cup",
+    "match": "Rizhao Yuqi - Shaanxi Union",
+    "kickoff": "2026-07-22T14:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.16"
+    "odds": "2.25"
   },
   {
-    "league": "CONMEBOL Sudamericana",
-    "match": "UCV - Santos",
-    "kickoff": "2026-07-22T02:30:00+02:00",
+    "league": "Reserve League",
+    "match": "Central Córdoba SdE Res. - Platense Res.",
+    "kickoff": "2026-07-22T22:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.13"
+    "odds": "2.22"
   }
 ]
