@@ -1,24 +1,24 @@
 [
   {
-    "League": "League Cup",
-    "Match": "Inverness CT vs ST Johnstone",
+    "League": "CONMEBOL Sudamericana",
+    "Match": "Lanus vs Cienciano",
     "Tip": "Over 2.5",
-    "Odds": "1.90",
-    "Date": "2026-07-21T18:45:00+00:00"
+    "Odds": "1.89",
+    "Date": "2026-07-23T00:30:00+00:00"
   },
   {
     "League": "Friendlies Clubs",
-    "Match": "Alfreton Town vs Rotherham",
+    "Match": "Dunkerque vs Samsunspor",
     "Tip": "Over 2.5",
-    "Odds": "1.80",
-    "Date": "2026-07-21T18:30:00+00:00"
+    "Odds": "1.95",
+    "Date": "2026-07-22T12:00:00+00:00"
   },
   {
-    "League": "UEFA Champions League",
-    "Match": "Vikingur Reykjavik vs Hapoel Beer Sheva",
+    "League": "Major League Soccer",
+    "Match": "New England Revolution vs Toronto FC",
     "Tip": "Over 2.5",
-    "Odds": "1.80",
-    "Date": "2026-07-21T19:00:00+00:00",
+    "Odds": "1.75",
+    "Date": "2026-07-22T23:30:00+00:00",
     "locked": true
   }
 ]
