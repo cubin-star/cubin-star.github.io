@@ -21,6 +21,27 @@
     ]
   },
   {
+    "date": "2026-07-21T05:30:00Z",
+    "matches": [
+      {
+        "league": "UEFA Europa Conference League",
+        "match": "Atert Bissen vs Gyori ETO FC",
+        "tip": "Over 2.5",
+        "odds": "1.68",
+        "score": "2:6",
+        "result": "✓"
+      },
+      {
+        "league": "UEFA Champions League",
+        "match": "FC Thun vs Dinamo Zagreb",
+        "tip": "Over 2.5",
+        "odds": "1.63",
+        "score": "1:1",
+        "result": "✗"
+      }
+    ]
+  },
+  {
     "date": "2026-07-19T06:00:00Z",
     "matches": [
       {
