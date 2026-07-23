@@ -1,21 +1,21 @@
 [
   {
-    "date": "2026-07-20T05:30:00Z",
+    "date": "2026-07-23T05:30:00Z",
     "matches": [
       {
-        "league": "Allsvenskan",
-        "match": "Kalmar FF vs Malmo FF",
+        "league": "Major League Soccer",
+        "match": "New England Revolution vs Toronto FC",
         "tip": "Over 2.5",
-        "odds": "1.63",
-        "score": "2:2",
-        "result": "✓"
+        "odds": "1.72",
+        "score": "0:0",
+        "result": "✗"
       },
       {
-        "league": "Superettan",
-        "match": "Norrby IF vs GIF Sundsvall",
+        "league": "Serie A",
+        "match": "Chapecoense-sc vs Flamengo",
         "tip": "Over 2.5",
-        "odds": "1.87",
-        "score": "3:1",
+        "odds": "1.86",
+        "score": "0:4",
         "result": "✓"
       }
     ]
@@ -38,6 +38,27 @@
         "odds": "1.63",
         "score": "1:1",
         "result": "✗"
+      }
+    ]
+  },
+  {
+    "date": "2026-07-20T05:30:00Z",
+    "matches": [
+      {
+        "league": "Allsvenskan",
+        "match": "Kalmar FF vs Malmo FF",
+        "tip": "Over 2.5",
+        "odds": "1.63",
+        "score": "2:2",
+        "result": "✓"
+      },
+      {
+        "league": "Superettan",
+        "match": "Norrby IF vs GIF Sundsvall",
+        "tip": "Over 2.5",
+        "odds": "1.87",
+        "score": "3:1",
+        "result": "✓"
       }
     ]
   },
