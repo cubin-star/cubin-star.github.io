@@ -1,11 +1,11 @@
 [
   {
     "league": "UEFA Europa Conference League",
-    "homeTeam": "Vojvodina",
-    "awayTeam": "Ajax",
+    "homeTeam": "Polessya",
+    "awayTeam": "FC Copenhagen",
     "tip": "Over 3.5",
     "odds": "",
-    "halftimeScore": "1:2",
+    "halftimeScore": "2:1",
     "liveOdds": "",
     "finalScore": "",
     "result": "",
@@ -13,7 +13,7 @@
     "kickoff": "2026-07-23T18:00:00.000Z",
     "resolvedAt": "",
     "source": "whisper-football",
-    "scoutStats": "Whisper 1:2 shootout | HT 1:2 | xG: 1.20(est) | Shots: 18/10 | losingXG: 0.24 losingSOT: 2 | @HT | Pre O2.5: 1.7"
+    "scoutStats": "Whisper 2:1 shootout | HT 2:1 | xG: 0.84(est) | Shots: 15/7 | losingXG: 0.24 losingSOT: 2 | @HT | Pre O2.5: 1.8"
   },
   {
     "league": "UEFA Champions League",
