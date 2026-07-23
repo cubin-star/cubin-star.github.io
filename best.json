@@ -1,23 +1,23 @@
 [
   {
-    "league": "K League 1",
-    "match": "Bucheon FC 1995 - FC Anyang",
-    "kickoff": "2026-07-22T12:30:00+02:00",
+    "league": "Serie B",
+    "match": "Cuiaba - Atletico Goianiense",
+    "kickoff": "2026-07-24T01:30:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.41"
+  },
+  {
+    "league": "UEFA Europa Conference League",
+    "match": "Hapoel Tel Aviv - Ludogorets",
+    "kickoff": "2026-07-23T20:30:00+02:00",
     "tip": "Over 2.5",
     "odds": "2.35"
   },
   {
-    "league": "FA Cup",
-    "match": "Rizhao Yuqi - Shaanxi Union",
-    "kickoff": "2026-07-22T14:00:00+02:00",
+    "league": "Liga Pro Serie B",
+    "match": "Ind. Juniors - Cuniburo",
+    "kickoff": "2026-07-23T22:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.25"
-  },
-  {
-    "league": "Reserve League",
-    "match": "Central Córdoba SdE Res. - Platense Res.",
-    "kickoff": "2026-07-22T22:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.22"
+    "odds": "2.30"
   }
 ]
