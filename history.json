@@ -1,6 +1,36 @@
 [
   {
     "sport": "football",
+    "league": "Major League Soccer",
+    "match": "Charlotte vs Atlanta United FC",
+    "tip": "Over 1.5",
+    "odds": "1.20",
+    "date": "2026-07-23T00:15:00+00:00",
+    "score": "2:2",
+    "result": "✓"
+  },
+  {
+    "sport": "basketball",
+    "league": "NBA W",
+    "match": "Washington Mystics W vs Las Vegas Aces W",
+    "tip": "Over 149.5",
+    "odds": "1.19",
+    "date": "2026-07-22T23:30:00+00:00",
+    "score": "100:99",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "UEFA Europa Conference League",
+    "match": "Bohemians vs Ballkani",
+    "tip": "Over 1.5",
+    "odds": "1.29",
+    "date": "2026-07-22T17:00:00+00:00",
+    "score": "2:1",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
     "league": "Liga MX",
     "match": "Cruz Azul vs Puebla",
     "tip": "Over 1.5",
@@ -1967,36 +1997,6 @@
     "odds": "1.20",
     "date": "2026-04-26T12:00:00+00:00",
     "score": "3:2",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Segunda División RFEF - Group 2",
-    "match": "Real Zaragoza II vs Real Unión",
-    "tip": "Over 1.5",
-    "odds": "1.18",
-    "date": "2026-04-26T10:00:00+00:00",
-    "score": "3:1",
-    "result": "✓"
-  },
-  {
-    "sport": "basketball",
-    "league": "NBA",
-    "match": "Atlanta Hawks vs New York Knicks",
-    "tip": "Over 199.5",
-    "odds": "1.22",
-    "date": "2026-04-25T22:00:00+00:00",
-    "score": "98:114",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Championship",
-    "match": "Sheffield Utd vs Preston",
-    "tip": "Over 1.5",
-    "odds": "1.20",
-    "date": "2026-04-25T14:00:00+00:00",
-    "score": "2:3",
     "result": "✓"
   }
 ]
