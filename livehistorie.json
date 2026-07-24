@@ -1,11 +1,11 @@
 [
   {
     "league": "Liga Profesional Argentina",
-    "homeTeam": "Racing Club",
-    "awayTeam": "Gimnasia L.P.",
-    "tip": "Over 2.5",
+    "homeTeam": "Velez Sarsfield",
+    "awayTeam": "Instituto Cordoba",
+    "tip": "Over 1.5",
     "odds": "",
-    "halftimeScore": "1:1",
+    "halftimeScore": "1:0",
     "liveOdds": "",
     "finalScore": "",
     "result": "",
@@ -13,7 +13,7 @@
     "kickoff": "2026-07-24T22:00:00.000Z",
     "resolvedAt": "",
     "source": "whisper-football",
-    "scoutStats": "Whisper 1:1 open | HT 1:1 | xG: 2.21 | Shots: 15/8 | losingXG: 0.00 losingSOT: 0 | @HT | Pre O2.5: 2.55"
+    "scoutStats": "Whisper 1:0 comeback | HT 1:0 | xG: 1.30 | Shots: 8/3 | losingXG: 1.19 losingSOT: 2 | @HT | Pre O2.5: 2.65"
   },
   {
     "league": "UEFA Europa Conference League",
