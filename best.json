@@ -1,23 +1,23 @@
 [
   {
-    "league": "Serie B",
-    "match": "Cuiaba - Atletico Goianiense",
-    "kickoff": "2026-07-24T01:30:00+02:00",
+    "league": "Liga I",
+    "match": "Arges Pitesti - Petrolul Ploiesti",
+    "kickoff": "2026-07-24T20:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.41"
+    "odds": "2.46"
   },
   {
-    "league": "UEFA Europa Conference League",
-    "match": "Hapoel Tel Aviv - Ludogorets",
-    "kickoff": "2026-07-23T20:30:00+02:00",
+    "league": "Primera B",
+    "match": "Tigres FC - Leones FC",
+    "kickoff": "2026-07-25T01:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.35"
+    "odds": "2.46"
   },
   {
-    "league": "Liga Pro Serie B",
-    "match": "Ind. Juniors - Cuniburo",
-    "kickoff": "2026-07-23T22:30:00+02:00",
+    "league": "Liga Panameña de Fútbol",
+    "match": "CD Arabe Unido - Plaza Amador",
+    "kickoff": "2026-07-25T03:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.30"
+    "odds": "2.25"
   }
 ]
