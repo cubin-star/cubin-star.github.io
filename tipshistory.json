@@ -1,5 +1,26 @@
 [
   {
+    "date": "2026-07-24T05:30:00Z",
+    "matches": [
+      {
+        "league": "UEFA Europa Conference League",
+        "match": "NK Varazdin vs FK Jablonec",
+        "tip": "Over 2.5",
+        "odds": "1.87",
+        "score": "3:2",
+        "result": "✓"
+      },
+      {
+        "league": "Serie A",
+        "match": "Botafogo vs Vitoria",
+        "tip": "Over 2.5",
+        "odds": "1.83",
+        "score": "0:0",
+        "result": "✗"
+      }
+    ]
+  },
+  {
     "date": "2026-07-23T05:30:00Z",
     "matches": [
       {
