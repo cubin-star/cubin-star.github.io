@@ -592,7 +592,8 @@ def compute_odds_for_fixtures(odds_data, fixture_ids):
 
 
 def pick_random_top_league_tips(all_fixtures, exclude_keys, exclude_leagues, need,
-                                  min_odds=None, max_odds=None, max_attempts=None):
+                                  min_odds=None, max_odds=None, max_attempts=None,
+                                  window_hours=24):
     """
     FALLBACK pro tips.json: úplně random Over 2.5 z TOP first-tier lig.
 
@@ -612,7 +613,7 @@ def pick_random_top_league_tips(all_fixtures, exclude_keys, exclude_leagues, nee
         max_attempts = TIPS_FB_MAX_ATTEMPTS
 
     now2 = datetime.now(timezone.utc)
-    cutoff = now2 + timedelta(hours=24)
+    cutoff = now2 + timedelta(hours=window_hours)
 
     # 1) Kandidáti: TOP + 2nd-tier ligy + 24h okno + nejsou už použiti.
     #    Rozlišujeme 'tier' (1 = first-tier, 2 = second-tier) kvůli prioritizaci.
@@ -652,7 +653,7 @@ def pick_random_top_league_tips(all_fixtures, exclude_keys, exclude_leagues, nee
     candidates = top_candidates + second_candidates  # 1. ligy mají prioritu
     print(f"  Tips fallback: trying random Over 2.5 from "
           f"{len(top_candidates)} TOP + {len(second_candidates)} 2nd-tier fixtures "
-          f"(odds {min_odds}-{max_odds}, need={need}, max_attempts={max_attempts})...")
+          f"(odds {min_odds}-{max_odds}, need={need}, max_attempts={max_attempts}, window={window_hours}h)...")
 
     picked = []
     used_leagues = set()
@@ -1127,27 +1128,34 @@ def main():
     #       1) 1.60–1.90 (preferované, hodnotové)
     #       2) 1.45–2.20 (širší)
     #       3) 1.30–2.80 (last resort, jakýkoli rozumný kurz)
+    #     Nejdřív projdeme VŠECHNY odds-passy s 14h oknem (bližší zápasy = kvalitnější
+    #     data) a teprve když ani jeden neuspěje, opakujeme totéž se širším 24h oknem.
     odds_passes = [
         (TIPS_FB_MIN_ODDS, TIPS_FB_MAX_ODDS, TIPS_FB_MAX_ATTEMPTS),
         (1.45, 2.20, TIPS_FB_MAX_ATTEMPTS),
         (1.30, 2.80, TIPS_FB_MAX_ATTEMPTS),
     ]
-    for pass_idx, (lo, hi, ma) in enumerate(odds_passes, 1):
+    window_passes = [14, 24]
+    for win_h in window_passes:
         if len(tips) >= MAX_TIPS:
             break
-        need = MAX_TIPS - len(tips)
-        exclude_keys = set(selected_keys)
-        for t in tips:
-            exclude_keys.add((t["Match"], t["Date"]))
-        exclude_leagues = {t["League"] for t in tips}
-        if pass_idx > 1:
-            print(f"  Tips fallback pass {pass_idx}: rozšiřuji pásmo na {lo}-{hi}")
-        random_picks = pick_random_top_league_tips(
-            all_fixtures, exclude_keys, exclude_leagues, need,
-            min_odds=lo, max_odds=hi, max_attempts=ma)
-        for p in random_picks:
-            tips.append(p)
-            selected_keys.add((p["Match"], p["Date"]))
+        for pass_idx, (lo, hi, ma) in enumerate(odds_passes, 1):
+            if len(tips) >= MAX_TIPS:
+                break
+            if pass_idx > 1 or win_h != window_passes[0]:
+                print(f"  Tips fallback: window={win_h}h, odds {lo}-{hi}")
+            need = MAX_TIPS - len(tips)
+            exclude_keys = set(selected_keys)
+            for t in tips:
+                exclude_keys.add((t["Match"], t["Date"]))
+            exclude_leagues = {t["League"] for t in tips}
+            random_picks = pick_random_top_league_tips(
+                all_fixtures, exclude_keys, exclude_leagues, need,
+                min_odds=lo, max_odds=hi, max_attempts=ma,
+                window_hours=win_h)
+            for p in random_picks:
+                tips.append(p)
+                selected_keys.add((p["Match"], p["Date"]))
 
     # 8c. Pokud i po všech průchodech chybí tipy (extrémně málo fixtures dne),
     #     doplň placeholder záznamy, aby tips.json měl VŽDY MAX_TIPS položek.
