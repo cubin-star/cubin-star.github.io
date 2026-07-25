@@ -1,6 +1,36 @@
 [
   {
     "sport": "football",
+    "league": "Liga MX",
+    "match": "Club Tijuana vs Leon",
+    "tip": "Over 1.5",
+    "odds": "1.19",
+    "date": "2026-07-25T03:00:00+00:00",
+    "score": "1:0",
+    "result": "✗"
+  },
+  {
+    "sport": "football",
+    "league": "Ekstraklasa",
+    "match": "Radomiak Radom vs Wieczysta Kraków",
+    "tip": "Over 1.5",
+    "odds": "1.21",
+    "date": "2026-07-24T16:00:00+00:00",
+    "score": "2:1",
+    "result": "✓"
+  },
+  {
+    "sport": "basketball",
+    "league": "NBL",
+    "match": "Manawatu Jets vs Franklin Bulls",
+    "tip": "Over 175.5",
+    "odds": "1.20",
+    "date": "2026-07-24T07:30:00+00:00",
+    "score": "122:76",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
     "league": "Serie A",
     "match": "Corinthians vs Remo",
     "tip": "Over 1.5",
@@ -1967,36 +1997,6 @@
     "odds": "1.15",
     "date": "2026-04-28T15:30:00+00:00",
     "score": "3:2",
-    "result": "✓"
-  },
-  {
-    "sport": "basketball",
-    "league": "NBA",
-    "match": "Denver Nuggets vs Minnesota Timberwolves",
-    "tip": "Over 207.5",
-    "odds": "1.23",
-    "date": "2026-04-28T02:30:00+00:00",
-    "score": "125:113",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Liga 1",
-    "match": "Bali United vs PSM Makassar",
-    "tip": "Over 1.5",
-    "odds": "1.21",
-    "date": "2026-04-27T08:30:00+00:00",
-    "score": "2:0",
-    "result": "✓"
-  },
-  {
-    "sport": "hockey",
-    "league": "D1",
-    "match": "Caen vs Cholet",
-    "tip": "Over 3.5",
-    "odds": "1.16",
-    "date": "2026-04-26T18:00:00+00:00",
-    "score": "2:3",
     "result": "✓"
   }
 ]
