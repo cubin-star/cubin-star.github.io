@@ -1,24 +1,24 @@
 [
   {
     "League": "Friendlies Clubs",
-    "Match": "Feignies-Aulnoye vs Francs Borains",
+    "Match": "Scarborough Athletic vs Barnsley",
     "Tip": "Over 2.5",
-    "Odds": "1.86",
-    "Date": "2026-07-24T16:00:00+00:00"
+    "Odds": "1.77",
+    "Date": "2026-07-25T12:00:00+00:00"
   },
   {
-    "League": "Premier Division",
-    "Match": "St Patrick's Athl. vs Dundalk",
+    "League": "1 Lyga",
+    "Match": "Jonava vs Garliava",
+    "Tip": "Over 2.5",
+    "Odds": "1.87",
+    "Date": "2026-07-25T16:00:00+00:00"
+  },
+  {
+    "League": "Eliteserien",
+    "Match": "Kristiansund BK vs Start",
     "Tip": "Over 2.5",
     "Odds": "1.75",
-    "Date": "2026-07-24T19:00:00+00:00"
-  },
-  {
-    "League": "I Liga",
-    "Match": "Odra Opole vs Arka Gdynia",
-    "Tip": "Over 2.5",
-    "Odds": "1.90",
-    "Date": "2026-07-24T19:00:00+00:00",
+    "Date": "2026-07-25T14:00:00+00:00",
     "locked": true
   }
 ]
