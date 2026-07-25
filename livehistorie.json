@@ -1,5 +1,21 @@
 [
   {
+    "league": "Premier Division",
+    "homeTeam": "Sligo Rovers",
+    "awayTeam": "Drogheda United",
+    "tip": "Over 3.5",
+    "odds": "",
+    "halftimeScore": "2:1",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-07-25T18:45:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper 2:1 shootout | HT 2:1 | xG: 2.18 | Shots: 15/3 | losingXG: 0.68 losingSOT: 1 | @HT | Pre O2.5: 1.85"
+  },
+  {
     "league": "Liga Profesional Argentina",
     "homeTeam": "Velez Sarsfield",
     "awayTeam": "Instituto Cordoba",
