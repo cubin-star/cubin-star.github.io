@@ -1,16 +1,23 @@
 [
   {
-    "League": "Ekstraklasa",
-    "Match": "Gornik Zabrze vs Slask Wroclaw",
+    "League": "Division Intermedia",
+    "Match": "Sportivo Carapeguá vs General Caballero",
     "Tip": "Over 1.5",
-    "Odds": "1.25",
-    "Date": "2026-07-25T15:30:00+00:00"
+    "Odds": "1.21",
+    "Date": "2026-07-26T13:00:00+00:00"
   },
   {
-    "League": "Allsvenskan",
-    "Match": "Kalmar FF vs Mjallby AIF",
+    "League": "Serie A",
+    "Match": "Palmeiras vs Atletico-MG",
+    "Tip": "Over 1.5",
+    "Odds": "1.31",
+    "Date": "2026-07-26T22:30:00+00:00"
+  },
+  {
+    "League": "Ekstraklasa",
+    "Match": "Widzew Łódź vs Motor Lublin",
     "Tip": "Over 1.5",
     "Odds": "1.26",
-    "Date": "2026-07-25T15:30:00+00:00"
+    "Date": "2026-07-26T15:30:00+00:00"
   }
 ]
