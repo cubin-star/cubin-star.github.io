@@ -1,6 +1,26 @@
 [
   {
     "sport": "football",
+    "league": "Ekstraklasa",
+    "match": "Gornik Zabrze vs Slask Wroclaw",
+    "tip": "Over 1.5",
+    "odds": "1.25",
+    "date": "2026-07-25T15:30:00+00:00",
+    "score": "2:1",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "Allsvenskan",
+    "match": "Kalmar FF vs Mjallby AIF",
+    "tip": "Over 1.5",
+    "odds": "1.26",
+    "date": "2026-07-25T15:30:00+00:00",
+    "score": "2:1",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
     "league": "Liga MX",
     "match": "Club Tijuana vs Leon",
     "tip": "Over 1.5",
@@ -1977,26 +1997,6 @@
     "odds": "1.18",
     "date": "2026-04-28T16:30:00+00:00",
     "score": "1:1",
-    "result": "✓"
-  },
-  {
-    "sport": "basketball",
-    "league": "NBL",
-    "match": "Brno vs Decin",
-    "tip": "Over 151.5",
-    "odds": "1.16",
-    "date": "2026-04-28T16:00:00+00:00",
-    "score": "89:98",
-    "result": "✓"
-  },
-  {
-    "sport": "hockey",
-    "league": "2. Liga",
-    "match": "AZ Havirov vs Prostejov",
-    "tip": "Over 4.5",
-    "odds": "1.15",
-    "date": "2026-04-28T15:30:00+00:00",
-    "score": "3:2",
     "result": "✓"
   }
 ]
