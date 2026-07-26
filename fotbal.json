@@ -1,24 +1,24 @@
 [
   {
-    "League": "Friendlies Clubs",
-    "Match": "Scarborough Athletic vs Barnsley",
-    "Tip": "Over 2.5",
-    "Odds": "1.77",
-    "Date": "2026-07-25T12:00:00+00:00"
-  },
-  {
-    "League": "1 Lyga",
-    "Match": "Jonava vs Garliava",
+    "League": "1. Division",
+    "Match": "Hobro vs Aarhus Fremad",
     "Tip": "Over 2.5",
     "Odds": "1.87",
-    "Date": "2026-07-25T16:00:00+00:00"
+    "Date": "2026-07-26T12:00:00+00:00"
   },
   {
-    "League": "Eliteserien",
-    "Match": "Kristiansund BK vs Start",
+    "League": "Ekstraklasa",
+    "Match": "Widzew Łódź vs Motor Lublin",
     "Tip": "Over 2.5",
-    "Odds": "1.75",
-    "Date": "2026-07-25T14:00:00+00:00",
+    "Odds": "1.88",
+    "Date": "2026-07-26T15:30:00+00:00"
+  },
+  {
+    "League": "Super Liga",
+    "Match": "Sheriff Tiraspol vs Milsami Orhei",
+    "Tip": "Over 2.5",
+    "Odds": "1.85",
+    "Date": "2026-07-26T17:00:00+00:00",
     "locked": true
   }
 ]
