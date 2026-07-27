@@ -1,24 +1,24 @@
 [
   {
-    "League": "1. Division",
-    "Match": "Hobro vs Aarhus Fremad",
+    "League": "Liga I",
+    "Match": "CFR 1907 Cluj vs FC Voluntari",
     "Tip": "Over 2.5",
-    "Odds": "1.87",
-    "Date": "2026-07-26T12:00:00+00:00"
+    "Odds": "1.95",
+    "Date": "2026-07-27T15:30:00+00:00"
   },
   {
-    "League": "Ekstraklasa",
-    "Match": "Widzew Łódź vs Motor Lublin",
+    "League": "NB I",
+    "Match": "MTK Budapest vs Zalaegerszegi TE",
     "Tip": "Over 2.5",
-    "Odds": "1.88",
-    "Date": "2026-07-26T15:30:00+00:00"
+    "Odds": "1.76",
+    "Date": "2026-07-27T17:30:00+00:00"
   },
   {
-    "League": "Super Liga",
-    "Match": "Sheriff Tiraspol vs Milsami Orhei",
+    "League": "Superettan",
+    "Match": "Orebro SK vs Oddevold",
     "Tip": "Over 2.5",
-    "Odds": "1.85",
-    "Date": "2026-07-26T17:00:00+00:00",
+    "Odds": "1.75",
+    "Date": "2026-07-27T17:00:00+00:00",
     "locked": true
   }
 ]
