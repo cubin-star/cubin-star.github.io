@@ -1,6 +1,36 @@
 [
   {
     "sport": "football",
+    "league": "Serie A",
+    "match": "Palmeiras vs Atletico-MG",
+    "tip": "Over 1.5",
+    "odds": "1.31",
+    "date": "2026-07-26T22:30:00+00:00",
+    "score": "1:2",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "Ekstraklasa",
+    "match": "Widzew Łódź vs Motor Lublin",
+    "tip": "Over 1.5",
+    "odds": "1.26",
+    "date": "2026-07-26T15:30:00+00:00",
+    "score": "2:2",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "Division Intermedia",
+    "match": "Sportivo Carapeguá vs General Caballero",
+    "tip": "Over 1.5",
+    "odds": "1.21",
+    "date": "2026-07-26T13:00:00+00:00",
+    "score": "1:2",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
     "league": "Ekstraklasa",
     "match": "Gornik Zabrze vs Slask Wroclaw",
     "tip": "Over 1.5",
@@ -1967,36 +1997,6 @@
     "odds": "1.22",
     "date": "2026-04-29T23:30:00+00:00",
     "score": "125:120",
-    "result": "✓"
-  },
-  {
-    "sport": "basketball",
-    "league": "NBA",
-    "match": "New York Knicks vs Atlanta Hawks",
-    "tip": "Over 201.5",
-    "odds": "1.22",
-    "date": "2026-04-29T00:00:00+00:00",
-    "score": "126:97",
-    "result": "✓"
-  },
-  {
-    "sport": "hockey",
-    "league": "DEL",
-    "match": "Adler Mannheim vs Eisbaren Berlin",
-    "tip": "Over 3.5",
-    "odds": "1.12",
-    "date": "2026-04-28T17:30:00+00:00",
-    "score": "1:5",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Liga Revelação U23",
-    "match": "Torreense U23 vs Sporting Braga U23",
-    "tip": "Over 1.5",
-    "odds": "1.18",
-    "date": "2026-04-28T16:30:00+00:00",
-    "score": "1:1",
     "result": "✓"
   }
 ]
