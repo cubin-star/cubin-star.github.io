@@ -1,5 +1,26 @@
 [
   {
+    "date": "2026-07-28T05:30:00Z",
+    "matches": [
+      {
+        "league": "Czech Liga",
+        "match": "Artis vs Mlada Boleslav",
+        "tip": "Over 2.5",
+        "odds": "1.79",
+        "score": "2:4",
+        "result": "✓"
+      },
+      {
+        "league": "Eliteserien",
+        "match": "Rosenborg vs Fredrikstad",
+        "tip": "Over 2.5",
+        "odds": "1.74",
+        "score": "4:0",
+        "result": "✓"
+      }
+    ]
+  },
+  {
     "date": "2026-07-27T05:30:00Z",
     "matches": [
       {
