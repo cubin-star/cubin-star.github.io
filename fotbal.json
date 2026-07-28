@@ -1,24 +1,24 @@
 [
   {
-    "League": "Liga I",
-    "Match": "CFR 1907 Cluj vs FC Voluntari",
+    "League": "Friendlies Clubs",
+    "Match": "Sparta Rotterdam vs Asteras Tripolis",
+    "Tip": "Over 2.5",
+    "Odds": "1.90",
+    "Date": "2026-07-28T17:00:00+00:00"
+  },
+  {
+    "League": "UEFA Champions League",
+    "Match": "Shamrock Rovers vs Ararat-Armenia",
+    "Tip": "Over 2.5",
+    "Odds": "1.80",
+    "Date": "2026-07-28T19:00:00+00:00"
+  },
+  {
+    "League": "Second League",
+    "Match": "Rilski Sportist vs Ludogorets II",
     "Tip": "Over 2.5",
     "Odds": "1.95",
-    "Date": "2026-07-27T15:30:00+00:00"
-  },
-  {
-    "League": "NB I",
-    "Match": "MTK Budapest vs Zalaegerszegi TE",
-    "Tip": "Over 2.5",
-    "Odds": "1.76",
-    "Date": "2026-07-27T17:30:00+00:00"
-  },
-  {
-    "League": "Superettan",
-    "Match": "Orebro SK vs Oddevold",
-    "Tip": "Over 2.5",
-    "Odds": "1.75",
-    "Date": "2026-07-27T17:00:00+00:00",
+    "Date": "2026-07-28T15:30:00+00:00",
     "locked": true
   }
 ]
