@@ -1,23 +1,23 @@
 [
   {
-    "league": "Serie B",
-    "match": "Sport Recife - Cuiaba",
-    "kickoff": "2026-07-28T00:30:00+02:00",
+    "league": "Liga Profesional Argentina",
+    "match": "Argentinos JRS - Estudiantes de Rio Cuarto",
+    "kickoff": "2026-07-29T02:15:00+02:00",
     "tip": "Over 2.5",
     "odds": "2.42"
   },
   {
-    "league": "Primera C",
-    "match": "Sacachispas - Leandro N. Alem",
-    "kickoff": "2026-07-27T20:00:00+02:00",
+    "league": "Serie B",
+    "match": "Ponte Preta - Athletic Club",
+    "kickoff": "2026-07-29T00:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.40"
+    "odds": "2.31"
   },
   {
-    "league": "Primera B",
-    "match": "Envigado - Real Soacha",
-    "kickoff": "2026-07-27T22:30:00+02:00",
+    "league": "Copa Colombia",
+    "match": "Quindio - Deportes Tolima",
+    "kickoff": "2026-07-29T01:15:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.32"
+    "odds": "2.25"
   }
 ]
