@@ -1,12 +1,13 @@
 # Denní aktualizace hot.json – výběr 6 fotbalových zápasů (Over, kurz 2.2-3.0)
-# Spouští se každý den v 7:00 UTC (= 9:00 CEST / 8:00 CET)
-# Bot před výběrem přečte fotbal.json a live2.json a vyhne se duplicitám.
+# Hlavní čas: 7:17 UTC (9:17 CEST). Záložní čas: 9:17 UTC (11:17 CEST)
+# – záloha se sama ukončí, pokud dnes už hot.json byl aktualizován.
 
 name: Daily Picks Bot
 
 on:
   schedule:
-    - cron: '0 7 * * *' # 7:00 UTC = 9:00 CEST
+    - cron: '17 7 * * *' # 7:17 UTC = 9:17 CEST – hlavní čas
+    - cron: '17 9 * * *' # 9:17 UTC = 11:17 CEST – záloha, kdyby GitHub první slot vynechal
   workflow_dispatch: # Ruční spuštění
 
 permissions:
@@ -19,22 +20,50 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # potřebujeme historii, abychom zjistili poslední commit hot.json
+
+      - name: Skip if hot.json already updated today
+        id: guard
+        run: |
+          TODAY=$(date -u +%Y-%m-%d)
+          LAST=$(git log -1 --format=%cs -- hot.json || echo "")
+          echo "Dnes (UTC): $TODAY, poslední commit hot.json: $LAST"
+          if [ "$LAST" = "$TODAY" ]; then
+            echo "hot.json už byl dnes aktualizován, končím."
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          fi
 
       - name: Setup Node.js
+        if: steps.guard.outputs.skip != 'true'
         uses: actions/setup-node@v4
         with:
           node-version: '22'
 
       - name: Run bot
+        if: steps.guard.outputs.skip != 'true'
         env:
           API_FOOTBALL_KEY1: ${{ secrets.API_FOOTBALL_KEY1 }}
         run: node fetch-matches.mjs
 
       - name: Commit & push
+        if: steps.guard.outputs.skip != 'true'
         run: |
           git config user.name "Kombík Bot"
           git config user.email "bot@kombik.cz"
           git add hot.json live1.json best.json
-          git diff --cached --quiet || git commit -m "🤖 Denní tipy $(date +%Y-%m-%d)"
-          git pull --rebase
-          git push
+          if git diff --cached --quiet; then
+            echo "Žádné změny k commitu, končím."
+            exit 0
+          fi
+          git commit -m "🤖 Denní tipy $(date +%Y-%m-%d)"
+          for i in 1 2 3; do
+            git pull --rebase origin "${GITHUB_REF_NAME}" && \
+            git push origin "HEAD:${GITHUB_REF_NAME}" && exit 0
+            echo "Push selhal (pokus $i/3), čekám 5s..."
+            sleep 5
+          done
+          echo "Push se nezdařil ani po 3 pokusech."
+          exit 1
