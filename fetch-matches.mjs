@@ -21,6 +21,12 @@ let fixtureFetchErrors = 0;
 let fixtureFetchAttempts = 0;
 
 const TIER1 = [
+    // Evropske klubove pohary (UEFA) - v API-Football maji country = 'World'
+    ['UEFA Champions League','World'],
+    ['UEFA Europa League','World'],
+    ['UEFA Europa Conference League','World'],
+    ['UEFA Conference League','World'],
+
     ['Premier League','England'],['La Liga','Spain'],['Serie A','Italy'],
     ['Bundesliga','Germany'],['Ligue 1','France'],['Eredivisie','Netherlands'],
     ['Primeira Liga','Portugal'],['Liga Portugal','Portugal'],
@@ -41,12 +47,33 @@ const TIER2 = [
     ['National League','England'],['League One','England'],['League Two','England'],
     ['Challenger Pro League','Belgium'],['Liga de Honra','Portugal'],
     ['2. Liga','Austria'],['1. Division','Denmark'],
+
+    // Domaci pohary
+    ['FA Cup','England'],['League Cup','England'],
+    ['Copa del Rey','Spain'],
+    ['Coppa Italia','Italy'],
+    ['DFB Pokal','Germany'],
+    ['Coupe de France','France'],
+    ['KNVB Beker','Netherlands'],
+    ['Taça de Portugal','Portugal'],
+    ['Croky Cup','Belgium'],
+    ['Scottish Cup','Scotland'],
+    ['Puchar Polski','Poland'],
+    ['Czech Cup','Czech-Republic'],
+    ['Slovak Cup','Slovakia'],
+    ['Greek Cup','Greece'],
+    ['Türkiye Kupası','Turkey'],
+    ['OFB Cup','Austria'],
+    ['DBU Pokalen','Denmark'],
+    ['Svenska Cupen','Sweden'],
+    ['NM Cupen','Norway'],
 ];
 
 const TIER1_SET = new Set(TIER1.map(([n,c]) => n+'|'+c));
 const TIER2_SET = new Set(TIER2.map(([n,c]) => n+'|'+c));
 
 const EUROPE_COUNTRIES = new Set([
+    'World', // UEFA klubove pohary
     'England','Spain','Germany','Italy','France','Netherlands','Portugal','Belgium',
     'Greece','Turkey','Poland','Czech-Republic','Slovakia','Scotland','Switzerland',
     'Austria','Sweden','Norway','Denmark','Finland','Serbia','Croatia','Ukraine',
