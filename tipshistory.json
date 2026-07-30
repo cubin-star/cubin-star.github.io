@@ -1,5 +1,26 @@
 [
   {
+    "date": "2026-07-30T05:30:00Z",
+    "matches": [
+      {
+        "league": "UEFA Europa Conference League",
+        "match": "Dukagjini vs FC Lugano",
+        "tip": "Over 2.5",
+        "odds": "1.81",
+        "score": "1:5",
+        "result": "✓"
+      },
+      {
+        "league": "UEFA Champions League",
+        "match": "Hapoel Beer Sheva vs Vikingur Reykjavik",
+        "tip": "Over 2.5",
+        "odds": "1.63",
+        "score": "2:0",
+        "result": "✗"
+      }
+    ]
+  },
+  {
     "date": "2026-07-29T05:30:00Z",
     "matches": [
       {
