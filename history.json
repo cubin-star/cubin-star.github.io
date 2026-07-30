@@ -2,6 +2,26 @@
   {
     "sport": "basketball",
     "league": "NBA W",
+    "match": "Phoenix Mercury W vs Golden State Valkyries W",
+    "tip": "Over 145.5",
+    "odds": "1.31",
+    "date": "2026-07-30T02:00:00+00:00",
+    "score": "91:89",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "UEFA Europa Conference League",
+    "match": "Dukagjini vs FC Lugano",
+    "tip": "Over 1.5",
+    "odds": "1.25",
+    "date": "2026-07-29T14:30:00+00:00",
+    "score": "1:5",
+    "result": "✓"
+  },
+  {
+    "sport": "basketball",
+    "league": "NBA W",
     "match": "Washington Mystics W vs Connecticut Sun W",
     "tip": "Over 146.5",
     "odds": "1.28",
@@ -1977,26 +1997,6 @@
     "odds": "1.16",
     "date": "2026-04-30T19:15:00+00:00",
     "score": "93:67",
-    "result": "✓"
-  },
-  {
-    "sport": "basketball",
-    "league": "Euroleague",
-    "match": "Fenerbahce vs Zalgiris Kaunas",
-    "tip": "Over 151.5",
-    "odds": "1.29",
-    "date": "2026-04-30T17:45:00+00:00",
-    "score": "86:74",
-    "result": "✓"
-  },
-  {
-    "sport": "hockey",
-    "league": "DEL",
-    "match": "Eisbaren Berlin vs Adler Mannheim",
-    "tip": "Over 3.5",
-    "odds": "1.12",
-    "date": "2026-04-30T17:30:00+00:00",
-    "score": "3:4",
     "result": "✓"
   }
 ]
