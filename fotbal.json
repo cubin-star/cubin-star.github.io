@@ -1,24 +1,24 @@
 [
   {
-    "League": "Friendlies Clubs",
-    "Match": "Marino de Luanco vs Real Avilés",
-    "Tip": "Over 2.5",
-    "Odds": "1.90",
-    "Date": "2026-07-29T18:00:00+00:00"
-  },
-  {
-    "League": "UEFA Champions League",
-    "Match": "Hapoel Beer Sheva vs Vikingur Reykjavik",
-    "Tip": "Over 2.5",
-    "Odds": "1.75",
-    "Date": "2026-07-29T17:30:00+00:00"
-  },
-  {
     "League": "UEFA Europa Conference League",
-    "Match": "Dukagjini vs FC Lugano",
+    "Match": "Gent vs LNZ Cherkasy",
     "Tip": "Over 2.5",
-    "Odds": "1.91",
-    "Date": "2026-07-29T14:30:00+00:00",
+    "Odds": "1.88",
+    "Date": "2026-07-30T18:30:00+00:00"
+  },
+  {
+    "League": "UEFA Europa League",
+    "Match": "Anderlecht vs Hammarby FF",
+    "Tip": "Over 2.5",
+    "Odds": "1.82",
+    "Date": "2026-07-30T18:30:00+00:00"
+  },
+  {
+    "League": "Ykkösliiga",
+    "Match": "JIPPO vs JäPS",
+    "Tip": "Over 2.5",
+    "Odds": "1.88",
+    "Date": "2026-07-30T15:30:00+00:00",
     "locked": true
   }
 ]
