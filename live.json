@@ -1,1 +1,23 @@
-[]
+[
+  {
+    "League": "Division 2 - Norra Götaland",
+    "Match": "IF Karlstad II vs Grebbestad",
+    "Tip": "Over 1.5",
+    "Odds": "1.14",
+    "Date": "2026-07-31T17:30:00+00:00"
+  },
+  {
+    "League": "New South Wales NPL",
+    "Match": "Western Sydney Wanderers U23 vs UNSW",
+    "Tip": "Over 1.5",
+    "Odds": "1.15",
+    "Date": "2026-08-01T05:00:00+00:00"
+  },
+  {
+    "League": "New South Wales NPL 2",
+    "Match": "Canterbury Bankstown vs Dulwich Hill",
+    "Tip": "Over 1.5",
+    "Odds": "1.13",
+    "Date": "2026-08-01T07:00:00+00:00"
+  }
+]
