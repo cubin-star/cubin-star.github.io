@@ -1,23 +1,23 @@
 [
   {
-    "league": "Liga Profesional Argentina",
-    "match": "Talleres Cordoba - Velez Sarsfield",
-    "kickoff": "2026-07-31T00:00:00+02:00",
+    "league": "CECAFA Club Cup",
+    "match": "Singida Black Stars - Simba",
+    "kickoff": "2026-07-31T19:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.50"
+    "odds": "2.34"
   },
   {
-    "league": "CONMEBOL Sudamericana",
-    "match": "Caracas FC - Santa Fe",
-    "kickoff": "2026-07-31T02:30:00+02:00",
+    "league": "Ekstraklasa",
+    "match": "Wisla Plock - Widzew Łódź",
+    "kickoff": "2026-07-31T18:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.30"
+    "odds": "2.25"
   },
   {
-    "league": "CONCACAF Central American Cup",
-    "match": "Municipal - CS Cartagines",
-    "kickoff": "2026-07-31T05:00:00+02:00",
+    "league": "Liga I",
+    "match": "Arges Pitesti - Csikszereda",
+    "kickoff": "2026-07-31T17:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.15"
+    "odds": "2.22"
   }
 ]

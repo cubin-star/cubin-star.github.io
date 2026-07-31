@@ -1,23 +1,30 @@
 [
   {
-    "league": "UEFA Europa Conference League",
-    "match": "Pyunik Yerevan - Debreceni VSC",
-    "kickoff": "2026-07-30T18:00:00+02:00",
+    "league": "Liga I",
+    "match": "Arges Pitesti - Csikszereda",
+    "kickoff": "2026-07-31T17:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.13"
+    "odds": "2.22"
   },
   {
-    "league": "UEFA Europa Conference League",
-    "match": "Beitar Jerusalem - AEK Larnaca",
-    "kickoff": "2026-07-30T19:30:00+02:00",
+    "league": "Liga I",
+    "match": "Oţelul - Dinamo Bucuresti",
+    "kickoff": "2026-07-31T20:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.10"
+    "odds": "2.19"
   },
   {
-    "league": "UEFA Europa League",
-    "match": "CSKA Sofia - Qarabag",
-    "kickoff": "2026-07-30T20:00:00+02:00",
+    "league": "Ekstraklasa",
+    "match": "Wisla Plock - Widzew Łódź",
+    "kickoff": "2026-07-31T18:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.13"
+    "odds": "2.25"
+  },
+  {
+    "league": "2. Liga",
+    "match": "Floridsdorfer AC - SKN ST. Polten",
+    "kickoff": "2026-07-31T20:30:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.11"
   }
 ]

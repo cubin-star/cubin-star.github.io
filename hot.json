@@ -1,50 +1,50 @@
 [
   {
-    "league": "UEFA Europa Conference League",
-    "match": "Pyunik Yerevan - Debreceni VSC",
-    "kickoff": "2026-07-30T18:00:00+02:00",
+    "league": "Liga I",
+    "match": "Arges Pitesti - Csikszereda",
+    "kickoff": "2026-07-31T17:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.13",
+    "odds": "2.22",
     "group": 1
   },
   {
-    "league": "CONMEBOL Sudamericana",
-    "match": "Caracas FC - Santa Fe",
-    "kickoff": "2026-07-31T02:30:00+02:00",
+    "league": "First League",
+    "match": "CSKA 1948 - Arda Kardzhali",
+    "kickoff": "2026-07-31T20:15:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.30",
+    "odds": "2.22",
     "group": 1
   },
   {
-    "league": "UEFA Europa League",
-    "match": "CSKA Sofia - Qarabag",
-    "kickoff": "2026-07-30T20:00:00+02:00",
+    "league": "Ekstraklasa",
+    "match": "Wisla Plock - Widzew Łódź",
+    "kickoff": "2026-07-31T18:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.13",
+    "odds": "2.25",
     "group": 2
   },
   {
-    "league": "CONCACAF Central American Cup",
-    "match": "Municipal - CS Cartagines",
-    "kickoff": "2026-07-31T05:00:00+02:00",
+    "league": "Prva Liga",
+    "match": "Loznica - Naftagas",
+    "kickoff": "2026-07-31T20:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.15",
+    "odds": "2.21",
     "group": 2
   },
   {
-    "league": "Copa Ecuador",
-    "match": "LDU de Quito - Leones del Norte",
-    "kickoff": "2026-07-30T22:00:00+02:00",
+    "league": "2. Liga",
+    "match": "Floridsdorfer AC - SKN ST. Polten",
+    "kickoff": "2026-07-31T20:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.10",
+    "odds": "2.11",
     "group": 3
   },
   {
-    "league": "Liga Profesional Argentina",
-    "match": "Talleres Cordoba - Velez Sarsfield",
-    "kickoff": "2026-07-31T00:00:00+02:00",
+    "league": "CECAFA Club Cup",
+    "match": "Singida Black Stars - Simba",
+    "kickoff": "2026-07-31T19:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.50",
+    "odds": "2.34",
     "group": 3
   }
 ]
