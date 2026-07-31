@@ -1,24 +1,24 @@
 [
   {
-    "League": "UEFA Europa Conference League",
-    "Match": "Gent vs LNZ Cherkasy",
+    "League": "Super Cup",
+    "Match": "Club Brugge KV vs Union St. Gilloise",
     "Tip": "Over 2.5",
-    "Odds": "1.88",
-    "Date": "2026-07-30T18:30:00+00:00"
+    "Odds": "1.89",
+    "Date": "2026-07-31T18:30:00+00:00"
   },
   {
-    "League": "UEFA Europa League",
-    "Match": "Anderlecht vs Hammarby FF",
+    "League": "Premier League",
+    "Match": "Barry Town vs Cambrian & Clydach",
     "Tip": "Over 2.5",
-    "Odds": "1.82",
-    "Date": "2026-07-30T18:30:00+00:00"
+    "Odds": "1.75",
+    "Date": "2026-07-31T18:45:00+00:00"
   },
   {
-    "League": "Ykkösliiga",
-    "Match": "JIPPO vs JäPS",
+    "League": "CONCACAF Caribbean Club Shield",
+    "Match": "Metropolitan vs Delfines Del Este",
     "Tip": "Over 2.5",
-    "Odds": "1.88",
-    "Date": "2026-07-30T15:30:00+00:00",
+    "Odds": "1.85",
+    "Date": "2026-07-31T20:00:00+00:00",
     "locked": true
   }
 ]
