@@ -1,5 +1,21 @@
 [
   {
+    "league": "Liga Profesional Argentina",
+    "homeTeam": "Gimnasia M.",
+    "awayTeam": "Union Santa Fe",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "1:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-08-01T18:30:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper 1:0 comeback | HT 1:0 | xG: 1.60 | Shots: 17/7 | losingXG: 1.01 losingSOT: 3 | @HT | Pre O2.5: 2.35"
+  },
+  {
     "league": "HNL",
     "homeTeam": "Istra 1961",
     "awayTeam": "NK Lokomotiva Zagreb",
