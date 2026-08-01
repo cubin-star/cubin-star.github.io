@@ -1,5 +1,21 @@
 [
   {
+    "league": "HNL",
+    "homeTeam": "Istra 1961",
+    "awayTeam": "NK Lokomotiva Zagreb",
+    "tip": "Over 3.5",
+    "odds": "",
+    "halftimeScore": "1:2",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-08-01T16:30:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper 1:2 shootout | HT 1:2 | xG: 1.07 | Shots: 14/6 | losingXG: 0.62 losingSOT: 2 | @HT | Pre O2.5: 1.83"
+  },
+  {
     "league": "Ekstraklasa",
     "homeTeam": "Piast Gliwice",
     "awayTeam": "Wisla Krakow",
