@@ -1,5 +1,21 @@
 [
   {
+    "league": "Primera A",
+    "homeTeam": "Deportivo Pasto",
+    "awayTeam": "Águilas Doradas",
+    "tip": "Over 2.5",
+    "odds": "",
+    "halftimeScore": "1:1",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-08-01T19:00:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper 1:1 open | HT 1:1 | xG: 1.21 | Shots: 16/9 | losingXG: 0.00 losingSOT: 0 | @HT | Pre O2.5: 2.15"
+  },
+  {
     "league": "Liga Profesional Argentina",
     "homeTeam": "Gimnasia M.",
     "awayTeam": "Union Santa Fe",
