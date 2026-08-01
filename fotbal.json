@@ -1,24 +1,24 @@
 [
   {
-    "League": "Super Cup",
-    "Match": "Club Brugge KV vs Union St. Gilloise",
+    "League": "Premiership",
+    "Match": "Aberdeen vs Heart Of Midlothian",
     "Tip": "Over 2.5",
-    "Odds": "1.89",
-    "Date": "2026-07-31T18:30:00+00:00"
+    "Odds": "1.78",
+    "Date": "2026-08-01T16:30:00+00:00"
   },
   {
-    "League": "Premier League",
-    "Match": "Barry Town vs Cambrian & Clydach",
+    "League": "Friendlies Clubs",
+    "Match": "Levante vs Albacete",
     "Tip": "Over 2.5",
-    "Odds": "1.75",
-    "Date": "2026-07-31T18:45:00+00:00"
+    "Odds": "1.90",
+    "Date": "2026-08-01T08:00:00+00:00"
   },
   {
-    "League": "CONCACAF Caribbean Club Shield",
-    "Match": "Metropolitan vs Delfines Del Este",
+    "League": "1. Division",
+    "Match": "Kolding IF vs Hvidovre",
     "Tip": "Over 2.5",
-    "Odds": "1.85",
-    "Date": "2026-07-31T20:00:00+00:00",
+    "Odds": "1.90",
+    "Date": "2026-08-01T14:00:00+00:00",
     "locked": true
   }
 ]
