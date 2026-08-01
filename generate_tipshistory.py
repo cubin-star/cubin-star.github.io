@@ -305,9 +305,9 @@ def main():
     if isinstance(tips, dict):
         tips = tips.get("tips", [])
     if tips:
-        # Datum tiketu = dnešní den v 05:30 UTC (kdy běh vyhodnocuje včerejší zápasy)
+        # Datum tiketu = včerejší den (zápasy se hrály včera, bot je vyhodnocuje dnes ráno).
         # Aplikace zobrazuje jen datum, čas není důležitý.
-        today = now.date().isoformat() + "T05:30:00Z"
+        yesterday = (now.date() - timedelta(days=1)).isoformat() + "T05:30:00Z"
         matches = []
         for t in tips:
             matches.append({
@@ -318,7 +318,7 @@ def main():
             })
         # Odstranit prázdné položky (bez match string)
         matches = [m for m in matches if m["match"]]
-        new_ticket = {"date": today, "matches": matches}
+        new_ticket = {"date": yesterday, "matches": matches}
         existing_keys = {ticket_key(p) for p in pending}
         if not matches:
             print(f"  ! tips.json parsed but no valid matches (check field names)")
