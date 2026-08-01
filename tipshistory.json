@@ -21,6 +21,27 @@
     ]
   },
   {
+    "date": "2026-07-31T05:30:00Z",
+    "matches": [
+      {
+        "league": "Bundesliga",
+        "match": "Lask Linz vs Grazer AK",
+        "tip": "Over 2.5",
+        "odds": "1.74",
+        "score": "3:0",
+        "result": "✓"
+      },
+      {
+        "league": "Ekstraklasa",
+        "match": "Motor Lublin vs Jagiellonia",
+        "tip": "Over 2.5",
+        "odds": "1.69",
+        "score": "1:2",
+        "result": "✓"
+      }
+    ]
+  },
+  {
     "date": "2026-07-30T05:30:00Z",
     "matches": [
       {
