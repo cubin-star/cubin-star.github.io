@@ -1,23 +1,58 @@
 [
   {
-    "League": "Division 2 - Norra Götaland",
-    "Match": "IF Karlstad II vs Grebbestad",
-    "Tip": "Over 1.5",
-    "Odds": "1.14",
-    "Date": "2026-07-31T17:30:00+00:00"
-  },
-  {
-    "League": "New South Wales NPL",
-    "Match": "Western Sydney Wanderers U23 vs UNSW",
-    "Tip": "Over 1.5",
-    "Odds": "1.15",
-    "Date": "2026-08-01T05:00:00+00:00"
-  },
-  {
     "League": "New South Wales NPL 2",
     "Match": "Canterbury Bankstown vs Dulwich Hill",
     "Tip": "Over 1.5",
     "Odds": "1.13",
     "Date": "2026-08-01T07:00:00+00:00"
+  },
+  {
+    "League": "Super League",
+    "Match": "Tianjin Teda vs Yunnan Yukun",
+    "Tip": "Over 1.5",
+    "Odds": "1.18",
+    "Date": "2026-08-01T11:00:00+00:00"
+  },
+  {
+    "League": "1. Liga",
+    "Match": "Skanste vs Mārupe",
+    "Tip": "Over 1.5",
+    "Odds": "1.12",
+    "Date": "2026-08-01T12:00:00+00:00"
+  },
+  {
+    "League": "Damallsvenskan",
+    "Match": "Kristianstad W vs AIK W",
+    "Tip": "Over 1.5",
+    "Odds": "1.16",
+    "Date": "2026-08-01T13:00:00+00:00"
+  },
+  {
+    "League": "Ettan - Norra",
+    "Match": "FBK Karlstad vs Assyriska FF",
+    "Tip": "Over 1.5",
+    "Odds": "1.14",
+    "Date": "2026-08-01T14:00:00+00:00"
+  },
+  {
+    "League": "Ettan - Norra",
+    "Match": "Järfälla vs Stockholm Internazionale",
+    "Tip": "Over 1.5",
+    "Odds": "1.15",
+    "Date": "2026-08-01T14:00:00+00:00"
+  },
+  {
+    "League": "Division 2 - Västra Götaland",
+    "Match": "Hestrafor vs Åstorp",
+    "Tip": "Over 1.5",
+    "Odds": "1.12",
+    "Date": "2026-08-01T14:00:00+00:00"
+  },
+  {
+    "League": "Major League Soccer",
+    "Match": "Los Angeles Galaxy vs FC Dallas",
+    "Tip": "Over 1.5",
+    "Odds": "1.14",
+    "Date": "2026-08-02T02:30:00+00:00"
   }
 ]
