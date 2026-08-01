@@ -1,5 +1,21 @@
 [
   {
+    "league": "Ekstraklasa",
+    "homeTeam": "Piast Gliwice",
+    "awayTeam": "Wisla Krakow",
+    "tip": "Over 3.5",
+    "odds": "",
+    "halftimeScore": "2:1",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-08-01T12:45:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper 2:1 shootout | HT 2:1 | xG: 1.51 | Shots: 20/9 | losingXG: 0.82 losingSOT: 5 | @HT | Pre O2.5: 1.9"
+  },
+  {
     "league": "Premier Division",
     "homeTeam": "Sligo Rovers",
     "awayTeam": "Drogheda United",
