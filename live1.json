@@ -1,23 +1,16 @@
 [
   {
-    "league": "Liga I",
-    "match": "FC Voluntari - Uta Arad",
-    "kickoff": "2026-08-01T17:30:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.28"
-  },
-  {
     "league": "Super Liga",
-    "match": "Cukaricki - Radnicki 1923",
-    "kickoff": "2026-08-01T20:30:00+02:00",
+    "match": "Zemun - Radnicki NIS",
+    "kickoff": "2026-08-02T20:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.14"
+    "odds": "2.13"
   },
   {
     "league": "Liga I",
-    "match": "Universitatea Craiova - Petrolul Ploiesti",
-    "kickoff": "2026-08-01T20:30:00+02:00",
+    "match": "Corvinul Hunedoara - Sepsi OSK Sfantu Gheorghe",
+    "kickoff": "2026-08-02T17:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.14"
+    "odds": "2.29"
   }
 ]
