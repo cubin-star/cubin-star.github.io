@@ -2,6 +2,26 @@
   {
     "sport": "football",
     "league": "Liga MX",
+    "match": "Club Queretaro vs Tigres UANL",
+    "tip": "Over 1.5",
+    "odds": "1.26",
+    "date": "2026-08-01T23:00:00+00:00",
+    "score": "3:2",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "Eliteserien",
+    "match": "Fredrikstad vs Sandefjord",
+    "tip": "Over 1.5",
+    "odds": "1.22",
+    "date": "2026-08-01T14:00:00+00:00",
+    "score": "1:0",
+    "result": "✗"
+  },
+  {
+    "sport": "football",
+    "league": "Liga MX",
     "match": "Atletico San Luis vs Club Tijuana",
     "tip": "Over 1.5",
     "odds": "1.20",
@@ -1977,26 +1997,6 @@
     "odds": "1.28",
     "date": "2026-05-02T23:30:00+00:00",
     "score": "100:109",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Jupiler Pro League",
-    "match": "Charleroi vs Genk",
-    "tip": "Over 1.5",
-    "odds": "1.21",
-    "date": "2026-05-02T16:15:00+00:00",
-    "score": "2:0",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Campionato Primavera - 1",
-    "match": "Genoa U20 vs Cesena U20",
-    "tip": "Over 1.5",
-    "odds": "1.21",
-    "date": "2026-05-02T13:00:00+00:00",
-    "score": "3:5",
     "result": "✓"
   }
 ]
