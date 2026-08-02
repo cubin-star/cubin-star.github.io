@@ -1,24 +1,24 @@
 [
   {
     "League": "Premiership",
-    "Match": "Aberdeen vs Heart Of Midlothian",
+    "Match": "ST Johnstone vs Kilmarnock",
     "Tip": "Over 2.5",
-    "Odds": "1.78",
-    "Date": "2026-08-01T16:30:00+00:00"
+    "Odds": "1.94",
+    "Date": "2026-08-02T13:00:00+00:00"
   },
   {
-    "League": "Friendlies Clubs",
-    "Match": "Levante vs Albacete",
+    "League": "Premier League",
+    "Match": "GAP Connah S Quay FC vs Caernarfon Town",
     "Tip": "Over 2.5",
-    "Odds": "1.90",
-    "Date": "2026-08-01T08:00:00+00:00"
+    "Odds": "1.82",
+    "Date": "2026-08-02T13:30:00+00:00"
   },
   {
-    "League": "1. Division",
-    "Match": "Kolding IF vs Hvidovre",
+    "League": "First League",
+    "Match": "CSKA Sofia vs Dunav Ruse",
     "Tip": "Over 2.5",
-    "Odds": "1.90",
-    "Date": "2026-08-01T14:00:00+00:00",
+    "Odds": "1.85",
+    "Date": "2026-08-02T18:15:00+00:00",
     "locked": true
   }
 ]
