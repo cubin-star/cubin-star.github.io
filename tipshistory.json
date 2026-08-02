@@ -42,6 +42,48 @@
     ]
   },
   {
+    "date": "2026-07-29T05:30:00Z",
+    "matches": [
+      {
+        "league": "UEFA Europa Conference League",
+        "match": "Dukagjini vs FC Lugano",
+        "tip": "Over 2.5",
+        "odds": "1.81",
+        "score": "1:5",
+        "result": "✓"
+      },
+      {
+        "league": "UEFA Champions League",
+        "match": "Hapoel Beer Sheva vs Vikingur Reykjavik",
+        "tip": "Over 2.5",
+        "odds": "1.63",
+        "score": "2:0",
+        "result": "✗"
+      }
+    ]
+  },
+  {
+    "date": "2026-07-28T05:30:00Z",
+    "matches": [
+      {
+        "league": "UEFA Champions League",
+        "match": "Celje vs Egnatia Rrogozhinë",
+        "tip": "Over 2.5",
+        "odds": "1.61",
+        "score": "1:1",
+        "result": "✗"
+      },
+      {
+        "league": "UEFA Europa Conference League",
+        "match": "Apollon Limassol vs Dila",
+        "tip": "Over 2.5",
+        "odds": "1.67",
+        "score": "3:0",
+        "result": "✓"
+      }
+    ]
+  },
+  {
     "date": "2026-07-27T05:30:00Z",
     "matches": [
       {
