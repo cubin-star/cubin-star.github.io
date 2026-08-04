@@ -1,23 +1,23 @@
 [
   {
-    "league": "Premier League",
-    "match": "Bukovyna - LNZ Cherkasy",
-    "kickoff": "2026-08-03T14:30:00+02:00",
+    "league": "CECAFA Club Cup",
+    "match": "GOR Mahia - Al Hilal Omdurman",
+    "kickoff": "2026-08-04T15:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.23"
+    "odds": "2.29"
   },
   {
-    "league": "Ekstraklasa",
-    "match": "Cracovia Krakow - Pogon Szczecin",
-    "kickoff": "2026-08-03T19:00:00+02:00",
+    "league": "Friendlies Clubs",
+    "match": "Cadiz - Granada CF",
+    "kickoff": "2026-08-05T10:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.17"
+    "odds": "2.29"
   },
   {
-    "league": "I Liga",
-    "match": "Chrobry Głogów - Odra Opole",
-    "kickoff": "2026-08-03T19:00:00+02:00",
+    "league": "UEFA Champions League",
+    "match": "Levski Sofia - Kairat Almaty",
+    "kickoff": "2026-08-04T19:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.14"
+    "odds": "2.15"
   }
 ]
