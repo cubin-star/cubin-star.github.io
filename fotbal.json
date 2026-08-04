@@ -1,24 +1,24 @@
 [
   {
-    "League": "League Cup",
-    "Match": "York vs Crawley Town",
+    "League": "Friendlies Clubs",
+    "Match": "Ipswich vs Le Havre",
     "Tip": "Over 2.5",
     "Odds": "1.80",
-    "Date": "2026-08-03T18:30:00+00:00"
+    "Date": "2026-08-04T18:45:00+00:00"
   },
   {
-    "League": "Liga I",
-    "Match": "FCSB vs Farul Constanta",
+    "League": "UEFA Champions League",
+    "Match": "Sparta Praha vs Lyon",
     "Tip": "Over 2.5",
-    "Odds": "1.83",
-    "Date": "2026-08-03T18:30:00+00:00"
+    "Odds": "1.78",
+    "Date": "2026-08-04T18:00:00+00:00"
   },
   {
-    "League": "Premier League",
-    "Match": "Alashkert vs Ararat",
+    "League": "National Division",
+    "Match": "UNA Strassen vs Victoria Rosport",
     "Tip": "Over 2.5",
     "Odds": "1.75",
-    "Date": "2026-08-03T16:00:00+00:00",
+    "Date": "2026-08-04T18:00:00+00:00",
     "locked": true
   }
 ]
