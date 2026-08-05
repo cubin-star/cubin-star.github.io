@@ -1,5 +1,26 @@
 [
   {
+    "date": "2026-08-04T05:30:00Z",
+    "matches": [
+      {
+        "league": "UEFA Champions League",
+        "match": "Olympiakos Piraeus vs NEC Nijmegen",
+        "tip": "Over 2.5",
+        "odds": "1.68",
+        "score": "0:0",
+        "result": "✗"
+      },
+      {
+        "league": "UEFA Champions League",
+        "match": "Mjallby AIF vs Slovan Bratislava",
+        "tip": "Over 2.5",
+        "odds": "1.82",
+        "score": "1:2",
+        "result": "✓"
+      }
+    ]
+  },
+  {
     "date": "2026-08-03T05:30:00Z",
     "matches": [
       {
