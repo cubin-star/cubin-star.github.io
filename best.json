@@ -1,23 +1,23 @@
 [
   {
+    "league": "Liga Profesional Argentina",
+    "match": "Union Santa Fe - Lanus",
+    "kickoff": "2026-08-07T00:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.44"
+  },
+  {
     "league": "Reserve League",
-    "match": "Ferro 2 - Deportivo Riestra Res.",
-    "kickoff": "2026-08-05T20:00:00+02:00",
+    "match": "Rosario Central Res. - Instituto Res.",
+    "kickoff": "2026-08-06T20:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.25"
+    "odds": "2.22"
   },
   {
-    "league": "League Two",
-    "match": "Hubei Chufeng Heli - Jiangxi Liansheng",
-    "kickoff": "2026-08-05T13:30:00+02:00",
+    "league": "UEFA Europa Conference League",
+    "match": "FK Jablonec - Rīgas FS",
+    "kickoff": "2026-08-06T18:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.24"
-  },
-  {
-    "league": "Copa Rio",
-    "match": "Portuguesa RJ - Madureira",
-    "kickoff": "2026-08-06T00:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.23"
+    "odds": "2.12"
   }
 ]
