@@ -1,5 +1,21 @@
 [
   {
+    "league": "Ekstraklasa",
+    "homeTeam": "Wisla Krakow",
+    "awayTeam": "Wisla Plock",
+    "tip": "Over 3.5",
+    "odds": "",
+    "halftimeScore": "2:1",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-08-07T18:30:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper 2:1 shootout | HT 2:1 | xG: 1.18 | Shots: 14/6 | losingXG: 0.65 losingSOT: 4 | @HT | Pre O2.5: 1.8"
+  },
+  {
     "league": "Liga MX",
     "homeTeam": "Club Queretaro",
     "awayTeam": "Tigres UANL",
