@@ -1,24 +1,24 @@
 [
   {
-    "League": "UEFA Europa Conference League",
-    "Match": "Raków Częstochowa vs Hammarby FF",
+    "League": "League Cup",
+    "Match": "Middlesbrough vs Wrexham",
     "Tip": "Over 2.5",
-    "Odds": "1.90",
-    "Date": "2026-08-06T17:00:00+00:00"
+    "Odds": "1.82",
+    "Date": "2026-08-07T19:00:00+00:00"
   },
   {
-    "League": "UEFA Europa League",
-    "Match": "Red Bull Salzburg vs Pafos",
+    "League": "Premier League",
+    "Match": "Ammanford AFC vs Colwyn Bay",
     "Tip": "Over 2.5",
-    "Odds": "1.80",
-    "Date": "2026-08-06T17:00:00+00:00"
+    "Odds": "1.85",
+    "Date": "2026-08-07T18:45:00+00:00"
   },
   {
-    "League": "Friendlies Clubs",
-    "Match": "Monaco vs Getafe",
+    "League": "Ekstraklasa",
+    "Match": "Wisla Krakow vs Wisla Plock",
     "Tip": "Over 2.5",
-    "Odds": "1.90",
-    "Date": "2026-08-06T18:00:00+00:00",
+    "Odds": "1.94",
+    "Date": "2026-08-07T18:30:00+00:00",
     "locked": true
   }
 ]
