@@ -1,5 +1,25 @@
 [
   {
+    "sport": "football",
+    "league": "UEFA Europa Conference League",
+    "match": "Inter Club d'Escaldes vs Flora Tallinn",
+    "tip": "Over 1.5",
+    "odds": "1.29",
+    "date": "2026-08-06T17:00:00+00:00",
+    "score": "2:0",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "UEFA Europa League",
+    "match": "Jagiellonia vs Rangers",
+    "tip": "Over 1.5",
+    "odds": "1.29",
+    "date": "2026-08-06T16:00:00+00:00",
+    "score": "2:1",
+    "result": "✓"
+  },
+  {
     "sport": "basketball",
     "league": "NBA W",
     "match": "New York Liberty W vs Seattle Storm W",
@@ -1977,26 +1997,6 @@
     "odds": "1.27",
     "date": "2026-05-09T23:00:00+00:00",
     "score": "0:2",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Bundesliga",
-    "match": "WSG Wattens vs FC BW Linz",
-    "tip": "Over 1.5",
-    "odds": "1.30",
-    "date": "2026-05-09T15:00:00+00:00",
-    "score": "1:1",
-    "result": "✓"
-  },
-  {
-    "sport": "basketball",
-    "league": "NBA",
-    "match": "Minnesota Timberwolves vs San Antonio Spurs",
-    "tip": "Over 205.5",
-    "odds": "1.31",
-    "date": "2026-05-09T01:30:00+00:00",
-    "score": "108:115",
     "result": "✓"
   }
 ]
