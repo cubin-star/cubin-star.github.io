@@ -1,8 +1,57 @@
 [
   {
-    "league": "Liga I",
-    "match": "Uta Arad - Rapid",
-    "kickoff": "2026-08-07T20:00:00+02:00",
+    "league": "Ekstraklasa",
+    "match": "Korona Kielce - Legia Warszawa",
+    "kickoff": "2026-08-08T20:15:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.13"
+  },
+  {
+    "league": "Primeira Liga",
+    "match": "Maritimo - Casa Pia",
+    "kickoff": "2026-08-08T16:30:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.16"
+  },
+  {
+    "league": "I Liga",
+    "match": "Puszcza Niepołomice - Odra Opole",
+    "kickoff": "2026-08-08T15:30:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.10"
+  },
+  {
+    "league": "Ligue 2",
+    "match": "Clermont Foot - Reims",
+    "kickoff": "2026-08-08T20:45:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.12"
+  },
+  {
+    "league": "Ligue 2",
+    "match": "Nantes - RED Star FC 93",
+    "kickoff": "2026-08-08T20:45:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.10"
+  },
+  {
+    "league": "Ligue 2",
+    "match": "Montpellier - Dijon",
+    "kickoff": "2026-08-08T20:45:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.14"
+  },
+  {
+    "league": "Ligue 2",
+    "match": "Boulogne - Nancy",
+    "kickoff": "2026-08-08T20:45:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.14"
+  },
+  {
+    "league": "Coppa Italia",
+    "match": "Vicenza Virtus - Catania",
+    "kickoff": "2026-08-08T20:00:00+02:00",
     "tip": "Over 2.5",
     "odds": "2.11"
   }
