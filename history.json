@@ -1,6 +1,16 @@
 [
   {
     "sport": "football",
+    "league": "Eliteserien",
+    "match": "Sandefjord vs KFUM Oslo",
+    "tip": "Over 1.5",
+    "odds": "1.20",
+    "date": "2026-08-07T17:00:00+00:00",
+    "score": "0:1",
+    "result": "✗"
+  },
+  {
+    "sport": "football",
     "league": "UEFA Europa Conference League",
     "match": "Inter Club d'Escaldes vs Flora Tallinn",
     "tip": "Over 1.5",
@@ -1987,16 +1997,6 @@
     "odds": "1.31",
     "date": "2026-05-10T00:00:00+00:00",
     "score": "1:2",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "USL Championship",
-    "match": "Louisville City vs Pittsburgh Riverhounds",
-    "tip": "Over 1.5",
-    "odds": "1.27",
-    "date": "2026-05-09T23:00:00+00:00",
-    "score": "0:2",
     "result": "✓"
   }
 ]
