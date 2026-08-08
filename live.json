@@ -1,16 +1,44 @@
 [
   {
-    "League": "Damallsvenskan",
-    "Match": "AIK W vs Brommapojkarna W",
+    "League": "New South Wales NPL",
+    "Match": "SD Raiders vs Western Sydney Wanderers U23",
     "Tip": "Over 1.5",
-    "Odds": "1.16",
-    "Date": "2026-08-07T17:00:00+00:00"
+    "Odds": "1.12",
+    "Date": "2026-08-08T07:00:00+00:00"
+  },
+  {
+    "League": "New South Wales NPL 2",
+    "Match": "Hills Brumbies vs Canterbury Bankstown",
+    "Tip": "Over 1.5",
+    "Odds": "1.13",
+    "Date": "2026-08-08T07:00:00+00:00"
+  },
+  {
+    "League": "New South Wales NPL 2",
+    "Match": "Bankstown City Lions vs Hurstville FC",
+    "Tip": "Over 1.5",
+    "Odds": "1.12",
+    "Date": "2026-08-08T07:00:00+00:00"
   },
   {
     "League": "1. Deild",
-    "Match": "Leiknir R. vs Fylkir",
+    "Match": "Njardvik vs Vestri",
     "Tip": "Over 1.5",
     "Odds": "1.12",
-    "Date": "2026-08-07T19:15:00+00:00"
+    "Date": "2026-08-08T14:00:00+00:00"
+  },
+  {
+    "League": "1. Liga",
+    "Match": "JDFS Alberts vs Riga FC II",
+    "Tip": "Over 1.5",
+    "Odds": "1.12",
+    "Date": "2026-08-08T15:30:00+00:00"
+  },
+  {
+    "League": "USL League One",
+    "Match": "Charlotte Independence vs Greenville Triumph",
+    "Tip": "Over 1.5",
+    "Odds": "1.12",
+    "Date": "2026-08-08T23:00:00+00:00"
   }
 ]
