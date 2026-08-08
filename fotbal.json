@@ -1,24 +1,24 @@
 [
   {
-    "League": "League Cup",
-    "Match": "Middlesbrough vs Wrexham",
+    "League": "National League",
+    "Match": "Scunthorpe vs Yeovil Town",
     "Tip": "Over 2.5",
-    "Odds": "1.82",
-    "Date": "2026-08-07T19:00:00+00:00"
+    "Odds": "1.80",
+    "Date": "2026-08-08T14:00:00+00:00"
   },
   {
-    "League": "Premier League",
-    "Match": "Ammanford AFC vs Colwyn Bay",
+    "League": "1. Lig",
+    "Match": "Sivasspor vs Esenler Erokspor",
     "Tip": "Over 2.5",
-    "Odds": "1.85",
-    "Date": "2026-08-07T18:45:00+00:00"
+    "Odds": "1.88",
+    "Date": "2026-08-08T16:00:00+00:00"
   },
   {
-    "League": "Ekstraklasa",
-    "Match": "Wisla Krakow vs Wisla Plock",
+    "League": "Regionalliga - West",
+    "Match": "SV Rodinghausen vs Bonner SC",
     "Tip": "Over 2.5",
-    "Odds": "1.94",
-    "Date": "2026-08-07T18:30:00+00:00",
+    "Odds": "1.83",
+    "Date": "2026-08-08T12:00:00+00:00",
     "locked": true
   }
 ]
