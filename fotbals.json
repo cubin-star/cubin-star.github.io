@@ -1,9 +1,16 @@
 [
   {
-    "League": "J1 League",
-    "Match": "Kashiwa Reysol vs Mito Hollyhock",
+    "League": "Czech Liga",
+    "Match": "Artis vs Sigma Olomouc",
     "Tip": "Over 1.5",
-    "Odds": "1.29",
-    "Date": "2026-08-08T10:00:00+00:00"
+    "Odds": "1.27",
+    "Date": "2026-08-09T18:00:00+00:00"
+  },
+  {
+    "League": "Jupiler Pro League",
+    "Match": "Gent vs KV Mechelen",
+    "Tip": "Over 1.5",
+    "Odds": "1.26",
+    "Date": "2026-08-09T11:30:00+00:00"
   }
 ]
