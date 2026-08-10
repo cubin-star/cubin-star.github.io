@@ -1,24 +1,24 @@
 [
   {
     "League": "1. Lig",
-    "Match": "Sarıyer vs Muğlaspor",
-    "Tip": "Over 2.5",
-    "Odds": "1.95",
-    "Date": "2026-08-09T16:00:00+00:00"
-  },
-  {
-    "League": "Jupiler Pro League",
-    "Match": "Zulte Waregem vs Genk",
-    "Tip": "Over 2.5",
-    "Odds": "1.81",
-    "Date": "2026-08-09T14:00:00+00:00"
-  },
-  {
-    "League": "League Cup",
-    "Match": "Mansfield Town vs Sheffield Utd",
+    "Match": "Pendikspor vs Batman Petrolspor",
     "Tip": "Over 2.5",
     "Odds": "1.85",
-    "Date": "2026-08-09T15:00:00+00:00",
+    "Date": "2026-08-10T18:30:00+00:00"
+  },
+  {
+    "League": "1. SNL",
+    "Match": "Mura vs Radomlje",
+    "Tip": "Over 2.5",
+    "Odds": "1.80",
+    "Date": "2026-08-10T16:00:00+00:00"
+  },
+  {
+    "League": "First League",
+    "Match": "Botev Plovdiv vs Spartak Varna",
+    "Tip": "Over 2.5",
+    "Odds": "1.87",
+    "Date": "2026-08-10T18:15:00+00:00",
     "locked": true
   }
 ]
