@@ -1,51 +1,16 @@
 [
   {
-    "league": "Jupiler Pro League",
-    "match": "Antwerp - SK Beveren",
-    "kickoff": "2026-08-09T19:15:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.12"
-  },
-  {
-    "league": "Jupiler Pro League",
-    "match": "Charleroi - OH Leuven",
-    "kickoff": "2026-08-09T16:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.11"
-  },
-  {
-    "league": "Super Liga",
-    "match": "Mladost Lucani - Cukaricki",
-    "kickoff": "2026-08-09T21:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.16"
-  },
-  {
     "league": "Liga I",
-    "match": "Petrolul Ploiesti - Oţelul",
-    "kickoff": "2026-08-09T17:30:00+02:00",
+    "match": "CFR 1907 Cluj - Universitatea Cluj",
+    "kickoff": "2026-08-10T20:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.27"
+    "odds": "2.15"
   },
   {
-    "league": "Super Liga",
-    "match": "Macva - IMT Novi Beograd",
-    "kickoff": "2026-08-09T20:00:00+02:00",
+    "league": "Primeira Liga",
+    "match": "Santa Clara - Nacional",
+    "kickoff": "2026-08-10T21:15:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.14"
-  },
-  {
-    "league": "Liga I",
-    "match": "Universitatea Craiova - Arges Pitesti",
-    "kickoff": "2026-08-09T20:30:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.13"
-  },
-  {
-    "league": "Coppa Italia",
-    "match": "Benevento - Ravenna",
-    "kickoff": "2026-08-09T21:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.10"
+    "odds": "2.18"
   }
 ]
