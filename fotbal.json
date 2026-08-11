@@ -1,24 +1,24 @@
 [
   {
-    "League": "1. Lig",
-    "Match": "Pendikspor vs Batman Petrolspor",
+    "League": "Challenge Cup",
+    "Match": "Alloa Athletic vs Stranraer",
     "Tip": "Over 2.5",
-    "Odds": "1.85",
-    "Date": "2026-08-10T18:30:00+00:00"
+    "Odds": "1.78",
+    "Date": "2026-08-11T18:45:00+00:00"
   },
   {
-    "League": "1. SNL",
-    "Match": "Mura vs Radomlje",
+    "League": "UEFA Europa Conference League",
+    "Match": "Apollon Limassol vs Brann",
     "Tip": "Over 2.5",
-    "Odds": "1.80",
-    "Date": "2026-08-10T16:00:00+00:00"
+    "Odds": "1.86",
+    "Date": "2026-08-11T17:00:00+00:00"
   },
   {
-    "League": "First League",
-    "Match": "Botev Plovdiv vs Spartak Varna",
+    "League": "AFC Challenge League",
+    "Match": "Fortis vs Muras United",
     "Tip": "Over 2.5",
-    "Odds": "1.87",
-    "Date": "2026-08-10T18:15:00+00:00",
+    "Odds": "1.76",
+    "Date": "2026-08-11T09:00:00+00:00",
     "locked": true
   }
 ]
