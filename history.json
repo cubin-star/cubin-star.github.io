@@ -1,5 +1,15 @@
 [
   {
+    "sport": "basketball",
+    "league": "NBA W",
+    "match": "Seattle Storm W vs Chicago Sky W",
+    "tip": "Over 169.5",
+    "odds": "1.31",
+    "date": "2026-08-11T02:00:00+00:00",
+    "score": "97:88",
+    "result": "✓"
+  },
+  {
     "sport": "football",
     "league": "Czech Liga",
     "match": "Artis vs Sigma Olomouc",
@@ -1987,16 +1997,6 @@
     "odds": "1.25",
     "date": "2026-05-10T14:00:00+00:00",
     "score": "1:4",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Serie D - Girone G",
-    "match": "Trastevere vs Albalonga",
-    "tip": "Over 1.5",
-    "odds": "1.30",
-    "date": "2026-05-10T14:00:00+00:00",
-    "score": "2:0",
     "result": "✓"
   }
 ]
