@@ -1,1 +1,19 @@
-[]
+[
+  {
+    "date": "2026-08-10T05:30:00Z",
+    "matches": [
+      {
+        "league": "Superettan",
+        "match": "Norrby IF vs Orebro SK",
+        "tip": "Over 2.5",
+        "odds": "1.83"
+      },
+      {
+        "league": "1. Lig",
+        "match": "Pendikspor vs Batman Petrolspor",
+        "tip": "Over 2.5",
+        "odds": "1.81"
+      }
+    ]
+  }
+]
