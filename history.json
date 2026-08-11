@@ -11,6 +11,16 @@
   },
   {
     "sport": "football",
+    "league": "Liga Profesional Argentina",
+    "match": "Union Santa Fe vs Central Cordoba de Santiago",
+    "tip": "Over 1.5",
+    "odds": "1.33",
+    "date": "2026-08-11T00:15:00+00:00",
+    "score": "1:2",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
     "league": "Czech Liga",
     "match": "Artis vs Sigma Olomouc",
     "tip": "Over 1.5",
@@ -1987,16 +1997,6 @@
     "odds": "1.30",
     "date": "2026-05-10T19:00:00+00:00",
     "score": "1:1",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "First League",
-    "match": "Makedonija GjP vs Tikveš",
-    "tip": "Over 1.5",
-    "odds": "1.25",
-    "date": "2026-05-10T14:00:00+00:00",
-    "score": "1:4",
     "result": "✓"
   }
 ]
