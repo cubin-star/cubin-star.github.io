@@ -1,24 +1,24 @@
 [
   {
-    "League": "Challenge Cup",
-    "Match": "Alloa Athletic vs Stranraer",
-    "Tip": "Over 2.5",
-    "Odds": "1.78",
-    "Date": "2026-08-11T18:45:00+00:00"
-  },
-  {
-    "League": "UEFA Europa Conference League",
-    "Match": "Apollon Limassol vs Brann",
-    "Tip": "Over 2.5",
-    "Odds": "1.86",
-    "Date": "2026-08-11T17:00:00+00:00"
-  },
-  {
-    "League": "AFC Challenge League",
-    "Match": "Fortis vs Muras United",
+    "League": "Friendlies Clubs",
+    "Match": "Newcastle vs Everton",
     "Tip": "Over 2.5",
     "Odds": "1.76",
-    "Date": "2026-08-11T09:00:00+00:00",
+    "Date": "2026-08-12T16:15:00+00:00"
+  },
+  {
+    "League": "Super Cup",
+    "Match": "AEK Athens FC vs OFI",
+    "Tip": "Over 2.5",
+    "Odds": "1.93",
+    "Date": "2026-08-12T17:00:00+00:00"
+  },
+  {
+    "League": "UEFA Super Cup",
+    "Match": "Paris Saint Germain vs Aston Villa",
+    "Tip": "Over 2.5",
+    "Odds": "1.88",
+    "Date": "2026-08-12T19:00:00+00:00",
     "locked": true
   }
 ]
