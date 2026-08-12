@@ -1,50 +1,50 @@
 [
   {
-    "league": "UEFA Champions League",
-    "match": "Kairat Almaty - Levski Sofia",
-    "kickoff": "2026-08-11T17:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.37",
-    "group": 1
-  },
-  {
-    "league": "UEFA Europa League",
-    "match": "Saburtalo - Larne",
-    "kickoff": "2026-08-11T18:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.10",
-    "group": 1
-  },
-  {
-    "league": "Second League",
-    "match": "Yantra 2019 - Montana",
-    "kickoff": "2026-08-11T19:00:00+02:00",
+    "league": "UEFA Europa Conference League",
+    "match": "GKS Katowice - Hapoel Tel Aviv",
+    "kickoff": "2026-08-12T18:00:00+02:00",
     "tip": "Over 2.5",
     "odds": "2.12",
-    "group": 2
+    "group": 1
   },
   {
-    "league": "AFC Champions League Elite",
-    "match": "Pakhtakor - Al Hussein",
-    "kickoff": "2026-08-11T17:00:00+02:00",
+    "league": "Torneo Federal A",
+    "match": "San Martin Formosa - Sportivo Belgrano",
+    "kickoff": "2026-08-12T21:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.10",
-    "group": 2
+    "odds": "2.47",
+    "group": 1
   },
   {
-    "league": "CONCACAF Central American Cup",
-    "match": "Plaza Amador - Xelajú",
-    "kickoff": "2026-08-12T02:00:00+02:00",
+    "league": "CONMEBOL Sudamericana",
+    "match": "RB Bragantino - Atletico-MG",
+    "kickoff": "2026-08-13T00:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.10",
-    "group": 3
+    "odds": "2.20",
+    "group": 2
   },
   {
     "league": "CONMEBOL Libertadores",
-    "match": "Deportes Tolima - Independiente del Valle",
-    "kickoff": "2026-08-12T02:30:00+02:00",
+    "match": "Cruzeiro - Flamengo",
+    "kickoff": "2026-08-13T02:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.22",
+    "odds": "2.21",
+    "group": 2
+  },
+  {
+    "league": "Friendlies Clubs",
+    "match": "Alcorcon - Rayo Majadahonda",
+    "kickoff": "2026-08-12T10:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.15",
+    "group": 3
+  },
+  {
+    "league": "Copa Argentina",
+    "match": "Atletico Tucuman - Independiente",
+    "kickoff": "2026-08-13T00:15:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.43",
     "group": 3
   }
 ]
