@@ -1,5 +1,25 @@
 [
   {
+    "sport": "football",
+    "league": "UEFA Champions League",
+    "match": "Slovan Bratislava vs Mjallby AIF",
+    "tip": "Over 1.5",
+    "odds": "1.27",
+    "date": "2026-08-11T18:15:00+00:00",
+    "score": "2:0",
+    "result": "✓"
+  },
+  {
+    "sport": "basketball",
+    "league": "Governors Cup",
+    "match": "Converge FiberXers vs Terrafirma Dyip",
+    "tip": "Over 204.5",
+    "odds": "1.20",
+    "date": "2026-08-11T09:15:00+00:00",
+    "score": "120:103",
+    "result": "✓"
+  },
+  {
     "sport": "basketball",
     "league": "NBA W",
     "match": "Seattle Storm W vs Chicago Sky W",
@@ -1976,26 +1996,6 @@
     "tip": "Over 1.5",
     "odds": "1.22",
     "date": "2026-05-14T18:00:00+00:00",
-    "score": "1:1",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Super League",
-    "match": "FC Sion vs FC Lugano",
-    "tip": "Over 1.5",
-    "odds": "1.21",
-    "date": "2026-05-14T14:30:00+00:00",
-    "score": "2:2",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Serie A",
-    "match": "Atletico-MG vs Botafogo",
-    "tip": "Over 1.5",
-    "odds": "1.30",
-    "date": "2026-05-10T19:00:00+00:00",
     "score": "1:1",
     "result": "✓"
   }
