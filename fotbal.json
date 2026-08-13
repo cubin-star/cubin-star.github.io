@@ -1,24 +1,24 @@
 [
   {
-    "League": "Friendlies Clubs",
-    "Match": "Newcastle vs Everton",
+    "League": "CONMEBOL Sudamericana",
+    "Match": "Santos vs Macara",
+    "Tip": "Over 2.5",
+    "Odds": "1.87",
+    "Date": "2026-08-13T22:00:00+00:00"
+  },
+  {
+    "League": "UEFA Europa Conference League",
+    "Match": "Flora Tallinn vs Inter Club d'Escaldes",
+    "Tip": "Over 2.5",
+    "Odds": "1.95",
+    "Date": "2026-08-13T16:00:00+00:00"
+  },
+  {
+    "League": "UEFA Europa League",
+    "Match": "Rangers vs Jagiellonia",
     "Tip": "Over 2.5",
     "Odds": "1.76",
-    "Date": "2026-08-12T16:15:00+00:00"
-  },
-  {
-    "League": "Super Cup",
-    "Match": "AEK Athens FC vs OFI",
-    "Tip": "Over 2.5",
-    "Odds": "1.93",
-    "Date": "2026-08-12T17:00:00+00:00"
-  },
-  {
-    "League": "UEFA Super Cup",
-    "Match": "Paris Saint Germain vs Aston Villa",
-    "Tip": "Over 2.5",
-    "Odds": "1.88",
-    "Date": "2026-08-12T19:00:00+00:00",
+    "Date": "2026-08-13T18:30:00+00:00",
     "locked": true
   }
 ]
