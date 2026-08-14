@@ -1,9 +1,16 @@
 [
   {
-    "League": "UEFA Europa Conference League",
-    "Match": "FK Tobol Kostanay vs FK Partizan",
+    "League": "Paulista - U20",
+    "Match": "Juventus U20 vs Ponte Preta U20",
     "Tip": "Over 1.5",
-    "Odds": "1.23",
-    "Date": "2026-08-13T15:00:00+00:00"
+    "Odds": "1.25",
+    "Date": "2026-08-14T18:00:00+00:00"
+  },
+  {
+    "League": "Jupiler Pro League",
+    "Match": "Cercle Brugge vs St. Truiden",
+    "Tip": "Over 1.5",
+    "Odds": "1.21",
+    "Date": "2026-08-14T18:45:00+00:00"
   }
 ]
