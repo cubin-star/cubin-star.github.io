@@ -1,24 +1,24 @@
 [
   {
-    "League": "CONMEBOL Sudamericana",
-    "Match": "Santos vs Macara",
+    "League": "National League - South",
+    "Match": "Dagenham & Redbridge vs Farnham Town",
     "Tip": "Over 2.5",
-    "Odds": "1.87",
-    "Date": "2026-08-13T22:00:00+00:00"
+    "Odds": "1.80",
+    "Date": "2026-08-14T19:00:00+00:00"
   },
   {
-    "League": "UEFA Europa Conference League",
-    "Match": "Flora Tallinn vs Inter Club d'Escaldes",
+    "League": "League Cup",
+    "Match": "Kilmarnock vs Ayr Utd",
     "Tip": "Over 2.5",
-    "Odds": "1.95",
-    "Date": "2026-08-13T16:00:00+00:00"
+    "Odds": "1.83",
+    "Date": "2026-08-14T18:45:00+00:00"
   },
   {
-    "League": "UEFA Europa League",
-    "Match": "Rangers vs Jagiellonia",
+    "League": "Jupiler Pro League",
+    "Match": "Cercle Brugge vs St. Truiden",
     "Tip": "Over 2.5",
-    "Odds": "1.76",
-    "Date": "2026-08-13T18:30:00+00:00",
+    "Odds": "1.75",
+    "Date": "2026-08-14T18:45:00+00:00",
     "locked": true
   }
 ]
