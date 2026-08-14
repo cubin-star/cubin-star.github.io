@@ -2,6 +2,16 @@
   {
     "sport": "football",
     "league": "UEFA Europa Conference League",
+    "match": "FK Tobol Kostanay vs FK Partizan",
+    "tip": "Over 1.5",
+    "odds": "1.23",
+    "date": "2026-08-13T15:00:00+00:00",
+    "score": "1:2",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "UEFA Europa Conference League",
     "match": "GKS Katowice vs Hapoel Tel Aviv",
     "tip": "Over 1.5",
     "odds": "1.34",
@@ -1987,16 +1997,6 @@
     "odds": "1.26",
     "date": "2026-05-15T18:45:00+00:00",
     "score": "3:0",
-    "result": "✓"
-  },
-  {
-    "sport": "hockey",
-    "league": "World Championship",
-    "match": "USA vs Switzerland",
-    "tip": "Over 3.5",
-    "odds": "1.24",
-    "date": "2026-05-15T18:20:00+00:00",
-    "score": "1:3",
     "result": "✓"
   }
 ]
