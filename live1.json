@@ -1,23 +1,44 @@
 [
   {
-    "league": "UEFA Europa Conference League",
-    "match": "Rīgas FS - FK Jablonec",
-    "kickoff": "2026-08-13T18:30:00+02:00",
+    "league": "Liga I",
+    "match": "FC Voluntari - Petrolul Ploiesti",
+    "kickoff": "2026-08-14T17:30:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.16"
+  },
+  {
+    "league": "Liga I",
+    "match": "Arges Pitesti - Farul Constanta",
+    "kickoff": "2026-08-14T20:30:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.16"
+  },
+  {
+    "league": "Ligue 2",
+    "match": "Laval - Nantes",
+    "kickoff": "2026-08-14T20:45:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.14"
+  },
+  {
+    "league": "Ligue 2",
+    "match": "Dijon - PAU",
+    "kickoff": "2026-08-14T20:45:00+02:00",
     "tip": "Over 2.5",
     "odds": "2.13"
   },
   {
-    "league": "UEFA Europa Conference League",
-    "match": "Ilves - HNK Rijeka",
-    "kickoff": "2026-08-13T18:00:00+02:00",
+    "league": "Ligue 2",
+    "match": "RED Star FC 93 - Sochaux",
+    "kickoff": "2026-08-14T20:45:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.10"
+    "odds": "2.11"
   },
   {
-    "league": "UEFA Europa League",
-    "match": "CSKA Sofia - Maccabi Tel Aviv",
-    "kickoff": "2026-08-13T20:00:00+02:00",
+    "league": "Ligue 2",
+    "match": "Guingamp - Boulogne",
+    "kickoff": "2026-08-14T20:45:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.10"
+    "odds": "2.12"
   }
 ]
