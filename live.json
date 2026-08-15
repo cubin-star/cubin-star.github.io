@@ -1,9 +1,30 @@
 [
   {
-    "League": "Paulista - U20",
-    "Match": "Juventus U20 vs Ponte Preta U20",
+    "League": "New South Wales NPL 2",
+    "Match": "Canterbury Bankstown vs Hakoah Sydney City",
     "Tip": "Over 1.5",
-    "Odds": "1.25",
-    "Date": "2026-08-14T18:00:00+00:00"
+    "Odds": "1.12",
+    "Date": "2026-08-15T07:00:00+00:00"
+  },
+  {
+    "League": "New South Wales NPL 2",
+    "Match": "Inter Lions vs Bankstown City Lions",
+    "Tip": "Over 1.5",
+    "Odds": "1.13",
+    "Date": "2026-08-15T07:00:00+00:00"
+  },
+  {
+    "League": "Super Liga",
+    "Match": "Dacia-Buiucani vs Petrocub",
+    "Tip": "Over 1.5",
+    "Odds": "1.24",
+    "Date": "2026-08-15T17:00:00+00:00"
+  },
+  {
+    "League": "Segunda División",
+    "Match": "Fundación Lara Deportiva vs Club Atletico Barinas",
+    "Tip": "Over 1.5",
+    "Odds": "1.17",
+    "Date": "2026-08-15T20:30:00+00:00"
   }
 ]
