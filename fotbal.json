@@ -1,24 +1,24 @@
 [
   {
-    "League": "National League - South",
-    "Match": "Dagenham & Redbridge vs Farnham Town",
-    "Tip": "Over 2.5",
-    "Odds": "1.80",
-    "Date": "2026-08-14T19:00:00+00:00"
-  },
-  {
-    "League": "League Cup",
-    "Match": "Kilmarnock vs Ayr Utd",
-    "Tip": "Over 2.5",
-    "Odds": "1.83",
-    "Date": "2026-08-14T18:45:00+00:00"
-  },
-  {
-    "League": "Jupiler Pro League",
-    "Match": "Cercle Brugge vs St. Truiden",
+    "League": "Süper Lig",
+    "Match": "Gençlerbirliği S.K. vs Fenerbahçe",
     "Tip": "Over 2.5",
     "Odds": "1.75",
-    "Date": "2026-08-14T18:45:00+00:00",
+    "Date": "2026-08-15T18:30:00+00:00"
+  },
+  {
+    "League": "Coppa Italia",
+    "Match": "Venezia vs Modena",
+    "Tip": "Over 2.5",
+    "Odds": "1.80",
+    "Date": "2026-08-15T18:45:00+00:00"
+  },
+  {
+    "League": "National League - South",
+    "Match": "Braintree vs Chesham United",
+    "Tip": "Over 2.5",
+    "Odds": "1.95",
+    "Date": "2026-08-15T14:00:00+00:00",
     "locked": true
   }
 ]
