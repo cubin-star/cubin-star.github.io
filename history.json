@@ -1,6 +1,26 @@
 [
   {
     "sport": "football",
+    "league": "Jupiler Pro League",
+    "match": "Cercle Brugge vs St. Truiden",
+    "tip": "Over 1.5",
+    "odds": "1.21",
+    "date": "2026-08-14T18:45:00+00:00",
+    "score": "3:3",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "Paulista - U20",
+    "match": "Juventus U20 vs Ponte Preta U20",
+    "tip": "Over 1.5",
+    "odds": "1.25",
+    "date": "2026-08-14T18:00:00+00:00",
+    "score": "5:0",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
     "league": "UEFA Europa Conference League",
     "match": "FK Tobol Kostanay vs FK Partizan",
     "tip": "Over 1.5",
@@ -1977,26 +1997,6 @@
     "odds": "1.26",
     "date": "2026-05-15T23:00:00+00:00",
     "score": "94:115",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Premier League",
-    "match": "Aston Villa vs Liverpool",
-    "tip": "Over 1.5",
-    "odds": "1.20",
-    "date": "2026-05-15T19:00:00+00:00",
-    "score": "4:2",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Jupiler Pro League",
-    "match": "OH Leuven vs Antwerp",
-    "tip": "Over 1.5",
-    "odds": "1.26",
-    "date": "2026-05-15T18:45:00+00:00",
-    "score": "3:0",
     "result": "✓"
   }
 ]
