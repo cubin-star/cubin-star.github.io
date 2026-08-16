@@ -1,24 +1,24 @@
 [
   {
-    "League": "Süper Lig",
-    "Match": "Gençlerbirliği S.K. vs Fenerbahçe",
+    "League": "La Liga",
+    "Match": "Racing Santander vs Villarreal",
+    "Tip": "Over 2.5",
+    "Odds": "1.83",
+    "Date": "2026-08-16T15:00:00+00:00"
+  },
+  {
+    "League": "League Cup",
+    "Match": "Hibernian vs Partick",
     "Tip": "Over 2.5",
     "Odds": "1.75",
-    "Date": "2026-08-15T18:30:00+00:00"
+    "Date": "2026-08-16T13:00:00+00:00"
   },
   {
-    "League": "Coppa Italia",
-    "Match": "Venezia vs Modena",
-    "Tip": "Over 2.5",
-    "Odds": "1.80",
-    "Date": "2026-08-15T18:45:00+00:00"
-  },
-  {
-    "League": "National League - South",
-    "Match": "Braintree vs Chesham United",
+    "League": "Campeonato de Portugal Prio - Group A",
+    "Match": "SC Braga B vs Maia Lidador",
     "Tip": "Over 2.5",
     "Odds": "1.95",
-    "Date": "2026-08-15T14:00:00+00:00",
+    "Date": "2026-08-16T10:00:00+00:00",
     "locked": true
   }
 ]
