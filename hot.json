@@ -1,50 +1,50 @@
 [
   {
     "league": "Primeira Liga",
-    "match": "Alverca - Estrela",
-    "kickoff": "2026-08-15T16:30:00+02:00",
+    "match": "Arouca - Moreirense",
+    "kickoff": "2026-08-16T19:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.15",
+    "odds": "2.16",
     "group": 1
   },
   {
     "league": "La Liga",
-    "match": "Sevilla - Rayo Vallecano",
-    "kickoff": "2026-08-15T21:30:00+02:00",
+    "match": "Espanyol - Levante",
+    "kickoff": "2026-08-16T19:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.27",
+    "odds": "2.19",
     "group": 1
   },
   {
-    "league": "Ekstraklasa",
-    "match": "Zaglebie Lubin - Slask Wroclaw",
-    "kickoff": "2026-08-15T14:45:00+02:00",
+    "league": "Super Liga",
+    "match": "IMT Novi Beograd - Radnicki NIS",
+    "kickoff": "2026-08-16T19:00:00+02:00",
     "tip": "Over 2.5",
     "odds": "2.19",
     "group": 2
   },
   {
-    "league": "Jupiler Pro League",
-    "match": "Kortrijk - Antwerp",
-    "kickoff": "2026-08-15T18:15:00+02:00",
+    "league": "Ekstraklasa",
+    "match": "Cracovia Krakow - Raków Częstochowa",
+    "kickoff": "2026-08-16T17:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.16",
+    "odds": "2.12",
     "group": 2
   },
   {
-    "league": "Liga I",
-    "match": "Csikszereda - Sepsi OSK Sfantu Gheorghe",
-    "kickoff": "2026-08-15T17:30:00+02:00",
+    "league": "Veikkausliiga",
+    "match": "AC Oulu - Inter Turku",
+    "kickoff": "2026-08-16T16:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.29",
+    "odds": "2.12",
     "group": 3
   },
   {
-    "league": "League Two",
-    "match": "Accrington ST - Colchester",
-    "kickoff": "2026-08-15T16:00:00+02:00",
+    "league": "Liga 3",
+    "match": "Varzim - AD Marco 09",
+    "kickoff": "2026-08-16T21:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.11",
+    "odds": "2.23",
     "group": 3
   }
 ]
