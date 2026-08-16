@@ -1,5 +1,35 @@
 [
   {
+    "sport": "basketball",
+    "league": "LNBP",
+    "match": "Mineros vs Astros",
+    "tip": "Over 157.5",
+    "odds": "1.29",
+    "date": "2026-08-16T01:05:00+00:00",
+    "score": "94:88",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "Süper Lig",
+    "match": "Gaziantep FK vs Alanyaspor",
+    "tip": "Over 1.5",
+    "odds": "1.26",
+    "date": "2026-08-15T18:30:00+00:00",
+    "score": "1:1",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "Jupiler Pro League",
+    "match": "Union St. Gilloise vs Zulte Waregem",
+    "tip": "Over 1.5",
+    "odds": "1.19",
+    "date": "2026-08-15T14:00:00+00:00",
+    "score": "0:0",
+    "result": "✗"
+  },
+  {
     "sport": "football",
     "league": "Jupiler Pro League",
     "match": "Cercle Brugge vs St. Truiden",
@@ -1967,36 +1997,6 @@
     "odds": "1.28",
     "date": "2026-05-16T21:30:00+00:00",
     "score": "0:3",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "1st League - FBiH",
-    "match": "Radnik Hadžići vs Igman Konjic",
-    "tip": "Over 1.5",
-    "odds": "1.28",
-    "date": "2026-05-16T15:00:00+00:00",
-    "score": "0:1",
-    "result": "✗"
-  },
-  {
-    "sport": "hockey",
-    "league": "ECHL",
-    "match": "Toledo Walleye vs Fort Wayne Komets",
-    "tip": "Over 3.5",
-    "odds": "1.22",
-    "date": "2026-05-15T23:15:00+00:00",
-    "score": "3:2",
-    "result": "✓"
-  },
-  {
-    "sport": "basketball",
-    "league": "NBA",
-    "match": "Cleveland Cavaliers vs Detroit Pistons",
-    "tip": "Over 197.5",
-    "odds": "1.26",
-    "date": "2026-05-15T23:00:00+00:00",
-    "score": "94:115",
     "result": "✓"
   }
 ]
