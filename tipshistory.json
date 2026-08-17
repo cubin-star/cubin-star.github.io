@@ -24,20 +24,20 @@
     "date": "2026-08-15T05:30:00Z",
     "matches": [
       {
-        "league": "Jupiler Pro League",
-        "match": "Union St. Gilloise vs Zulte Waregem",
+        "league": "Czech League",
+        "match": "Viktoria Plzen vs Zlin",
         "tip": "Over 2.5",
-        "odds": "1.62",
-        "score": "0:0",
-        "result": "✗"
+        "odds": "1.65",
+        "score": "3:2",
+        "result": "✓"
       },
       {
-        "league": "Eliteserien",
-        "match": "KFUM Oslo vs Lillestrom",
+        "league": "Eredivisie",
+        "match": "Utrecht vs Alkmaar",
         "tip": "Over 2.5",
-        "odds": "1.64",
-        "score": "1:1",
-        "result": "✗"
+        "odds": "1.75",
+        "score": "1:4",
+        "result": "✓"
       }
     ]
   },
@@ -180,11 +180,11 @@
       },
       {
         "league": "J1 League",
-        "match": "Nagoya Grampus vs Shimizu S-pulse",
+        "match": "Kashiwa vs Mito",
         "tip": "Over 2.5",
-        "odds": "1.88",
-        "score": "0:1",
-        "result": "✗"
+        "odds": "1.9",
+        "score": "2:1",
+        "result": "✓"
       }
     ]
   },
@@ -214,19 +214,19 @@
     "matches": [
       {
         "league": "UEFA Europa Conference League",
-        "match": "Raków Częstochowa vs Hammarby FF",
+        "match": "Tre Fiori vs Drita",
         "tip": "Over 2.5",
-        "odds": "1.85",
-        "score": "0:0",
-        "result": "✗"
+        "odds": "1.82",
+        "score": "1:4",
+        "result": "✓"
       },
       {
         "league": "UEFA Europa League",
-        "match": "KuPS vs Universitatea Craiova",
+        "match": "Jagiellonia vs Rangers",
         "tip": "Over 2.5",
-        "odds": "1.90",
-        "score": "1:1",
-        "result": "✗"
+        "odds": "1.93",
+        "score": "2:1",
+        "result": "✓"
       }
     ]
   },
