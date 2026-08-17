@@ -1,24 +1,24 @@
 [
   {
-    "League": "La Liga",
-    "Match": "Racing Santander vs Villarreal",
+    "League": "1. Lig",
+    "Match": "Batman Petrolspor vs Boluspor",
     "Tip": "Over 2.5",
-    "Odds": "1.83",
-    "Date": "2026-08-16T15:00:00+00:00"
+    "Odds": "1.77",
+    "Date": "2026-08-17T18:30:00+00:00"
   },
   {
-    "League": "League Cup",
-    "Match": "Hibernian vs Partick",
+    "League": "Challenger Pro League",
+    "Match": "Liège vs Francs Borains",
     "Tip": "Over 2.5",
     "Odds": "1.75",
-    "Date": "2026-08-16T13:00:00+00:00"
+    "Date": "2026-08-17T18:00:00+00:00"
   },
   {
-    "League": "Campeonato de Portugal Prio - Group A",
-    "Match": "SC Braga B vs Maia Lidador",
+    "League": "Super Liga",
+    "Match": "Novi Pazar vs Vojvodina",
     "Tip": "Over 2.5",
-    "Odds": "1.95",
-    "Date": "2026-08-16T10:00:00+00:00",
+    "Odds": "1.75",
+    "Date": "2026-08-17T18:00:00+00:00",
     "locked": true
   }
 ]
