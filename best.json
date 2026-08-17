@@ -1,23 +1,23 @@
 [
   {
-    "league": "Liga 3",
-    "match": "Varzim - AD Marco 09",
-    "kickoff": "2026-08-16T21:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.23"
-  },
-  {
     "league": "La Liga",
-    "match": "Espanyol - Levante",
-    "kickoff": "2026-08-16T19:00:00+02:00",
+    "match": "Deportivo La Coruna - Elche",
+    "kickoff": "2026-08-17T21:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.19"
+    "odds": "2.31"
   },
   {
-    "league": "Super Liga",
-    "match": "IMT Novi Beograd - Radnicki NIS",
-    "kickoff": "2026-08-16T19:00:00+02:00",
+    "league": "Segunda División",
+    "match": "Sporting Gijon - Sabadell",
+    "kickoff": "2026-08-17T19:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.19"
+    "odds": "2.20"
+  },
+  {
+    "league": "Cup",
+    "match": "Iraklis 1908 - Volos NFC",
+    "kickoff": "2026-08-17T20:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.13"
   }
 ]
