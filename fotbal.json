@@ -1,24 +1,24 @@
 [
   {
-    "League": "1. Lig",
-    "Match": "Batman Petrolspor vs Boluspor",
+    "League": "National League - South",
+    "Match": "Maidstone Utd vs Folkestone Invicta",
     "Tip": "Over 2.5",
-    "Odds": "1.77",
-    "Date": "2026-08-17T18:30:00+00:00"
+    "Odds": "1.80",
+    "Date": "2026-08-18T18:45:00+00:00"
   },
   {
-    "League": "Challenger Pro League",
-    "Match": "Liège vs Francs Borains",
+    "League": "National League - North",
+    "Match": "Darlington 1883 vs Chester",
     "Tip": "Over 2.5",
-    "Odds": "1.75",
-    "Date": "2026-08-17T18:00:00+00:00"
+    "Odds": "1.82",
+    "Date": "2026-08-18T18:45:00+00:00"
   },
   {
-    "League": "Super Liga",
-    "Match": "Novi Pazar vs Vojvodina",
+    "League": "DBU Pokalen",
+    "Match": "Nykobing FC vs Naestved",
     "Tip": "Over 2.5",
-    "Odds": "1.75",
-    "Date": "2026-08-17T18:00:00+00:00",
+    "Odds": "1.95",
+    "Date": "2026-08-18T17:00:00+00:00",
     "locked": true
   }
 ]
