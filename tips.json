@@ -1,16 +1,16 @@
 [
   {
     "League": "UEFA Champions League",
-    "Match": "Dinamo Zagreb vs Viking",
-    "Tip": "Over 2.5",
-    "Odds": "1.60",
-    "Date": "2026-08-18T19:00:00+00:00"
-  },
-  {
-    "League": "UEFA Champions League",
-    "Match": "Fenerbahçe vs Lyon",
+    "Match": "Slovan Bratislava vs Celje",
     "Tip": "Over 2.5",
     "Odds": "1.72",
-    "Date": "2026-08-18T19:00:00+00:00"
+    "Date": "2026-08-19T19:00:00+00:00"
+  },
+  {
+    "League": "La Liga",
+    "Match": "Atletico Madrid vs Malaga",
+    "Tip": "Over 2.5",
+    "Odds": "1.69",
+    "Date": "2026-08-19T19:00:00+00:00"
   }
 ]
