@@ -2,6 +2,26 @@
   {
     "sport": "basketball",
     "league": "NBA W",
+    "match": "Chicago Sky W vs New York Liberty W",
+    "tip": "Over 172.5",
+    "odds": "1.30",
+    "date": "2026-08-19T01:00:00+00:00",
+    "score": "86:93",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "UEFA Champions League",
+    "match": "Fenerbahçe vs Lyon",
+    "tip": "Over 1.5",
+    "odds": "1.22",
+    "date": "2026-08-18T19:00:00+00:00",
+    "score": "1:1",
+    "result": "✓"
+  },
+  {
+    "sport": "basketball",
+    "league": "NBA W",
     "match": "Golden State Valkyries W vs Dallas Wings W",
     "tip": "Over 151.5",
     "odds": "1.25",
@@ -1978,25 +1998,5 @@
     "date": "2026-05-17T18:45:00+00:00",
     "score": "0:1",
     "result": "✗"
-  },
-  {
-    "sport": "hockey",
-    "league": "World Championship",
-    "match": "Norway vs Slovenia",
-    "tip": "Over 3.5",
-    "odds": "1.24",
-    "date": "2026-05-17T18:20:00+00:00",
-    "score": "4:0",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Premier League",
-    "match": "Brentford vs Crystal Palace",
-    "tip": "Over 1.5",
-    "odds": "1.20",
-    "date": "2026-05-17T14:00:00+00:00",
-    "score": "2:2",
-    "result": "✓"
   }
 ]
