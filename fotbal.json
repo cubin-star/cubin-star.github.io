@@ -1,24 +1,24 @@
 [
   {
-    "League": "National League - South",
-    "Match": "Maidstone Utd vs Folkestone Invicta",
+    "League": "La Liga",
+    "Match": "Atletico Madrid vs Malaga",
+    "Tip": "Over 2.5",
+    "Odds": "1.84",
+    "Date": "2026-08-19T19:00:00+00:00"
+  },
+  {
+    "League": "CONCACAF Central American Cup",
+    "Match": "Mixco vs UMECIT",
     "Tip": "Over 2.5",
     "Odds": "1.80",
-    "Date": "2026-08-18T18:45:00+00:00"
+    "Date": "2026-08-20T01:00:00+00:00"
   },
   {
-    "League": "National League - North",
-    "Match": "Darlington 1883 vs Chester",
+    "League": "Cupa României",
+    "Match": "USV Iaşi vs Sporting Lieşti",
     "Tip": "Over 2.5",
-    "Odds": "1.82",
-    "Date": "2026-08-18T18:45:00+00:00"
-  },
-  {
-    "League": "DBU Pokalen",
-    "Match": "Nykobing FC vs Naestved",
-    "Tip": "Over 2.5",
-    "Odds": "1.95",
-    "Date": "2026-08-18T17:00:00+00:00",
+    "Odds": "1.78",
+    "Date": "2026-08-19T14:30:00+00:00",
     "locked": true
   }
 ]
