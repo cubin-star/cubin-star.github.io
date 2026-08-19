@@ -1,5 +1,26 @@
 [
   {
+    "date": "2026-08-18T05:30:00Z",
+    "matches": [
+      {
+        "league": "UEFA Champions League",
+        "match": "Dinamo Zagreb vs Viking",
+        "tip": "Over 2.5",
+        "odds": "1.60",
+        "score": "2:2",
+        "result": "✓"
+      },
+      {
+        "league": "UEFA Champions League",
+        "match": "Fenerbahçe vs Lyon",
+        "tip": "Over 2.5",
+        "odds": "1.72",
+        "score": "1:1",
+        "result": "✗"
+      }
+    ]
+  },
+  {
     "date": "2026-08-17T05:30:00Z",
     "matches": [
       {
