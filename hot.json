@@ -1,50 +1,50 @@
 [
   {
-    "league": "UEFA Champions League",
-    "match": "Levski Sofia - AEK Athens FC",
-    "kickoff": "2026-08-18T21:00:00+02:00",
+    "league": "CONMEBOL Sudamericana",
+    "match": "Atletico-MG - RB Bragantino",
+    "kickoff": "2026-08-20T00:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.27",
+    "odds": "2.25",
+    "group": 1
+  },
+  {
+    "league": "Prva Liga",
+    "match": "OFK Bor 1919 - FK Vozdovac",
+    "kickoff": "2026-08-19T19:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.22",
     "group": 1
   },
   {
     "league": "Cupa României",
-    "match": "CSM Ramnicu Valcea - Chindia Targoviste",
-    "kickoff": "2026-08-18T16:30:00+02:00",
+    "match": "Slatina - Sepsi OSK Sfantu Gheorghe",
+    "kickoff": "2026-08-19T16:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.15",
-    "group": 1
+    "odds": "2.10",
+    "group": 2
   },
   {
     "league": "CONMEBOL Libertadores",
-    "match": "U. Catolica - Estudiantes L.P.",
-    "kickoff": "2026-08-19T02:30:00+02:00",
+    "match": "Cerro Porteno - Palmeiras",
+    "kickoff": "2026-08-20T00:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.45",
+    "odds": "2.41",
     "group": 2
   },
   {
-    "league": "CONCACAF Caribbean Club Championship",
-    "match": "Mount Pleasant Academy - Cibao",
-    "kickoff": "2026-08-19T00:00:00+02:00",
+    "league": "CONCACAF Central American Cup",
+    "match": "FAS - Municipal",
+    "kickoff": "2026-08-20T05:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.10",
-    "group": 2
-  },
-  {
-    "league": "Non League Premier - Northern",
-    "match": "Gainsborough Trinity - Stockton Town",
-    "kickoff": "2026-08-18T20:45:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.10",
+    "odds": "2.23",
     "group": 3
   },
   {
     "league": "Cup",
-    "match": "Levadiakos - Asteras Tripolis",
-    "kickoff": "2026-08-18T20:00:00+02:00",
+    "match": "Kalamata - Panetolikos",
+    "kickoff": "2026-08-19T16:15:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.37",
+    "odds": "2.24",
     "group": 3
   }
 ]
