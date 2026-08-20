@@ -1,5 +1,26 @@
 [
   {
+    "date": "2026-08-19T05:30:00Z",
+    "matches": [
+      {
+        "league": "UEFA Champions League",
+        "match": "Slovan Bratislava vs Celje",
+        "tip": "Over 2.5",
+        "odds": "1.72",
+        "score": "1:1",
+        "result": "✗"
+      },
+      {
+        "league": "La Liga",
+        "match": "Atletico Madrid vs Malaga",
+        "tip": "Over 2.5",
+        "odds": "1.69",
+        "score": "2:0",
+        "result": "✗"
+      }
+    ]
+  },
+  {
     "date": "2026-08-18T05:30:00Z",
     "matches": [
       {
