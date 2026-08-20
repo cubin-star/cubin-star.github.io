@@ -1,5 +1,15 @@
 [
   {
+    "sport": "football",
+    "league": "UEFA Champions League",
+    "match": "Slovan Bratislava vs Celje",
+    "tip": "Over 1.5",
+    "odds": "1.21",
+    "date": "2026-08-19T19:00:00+00:00",
+    "score": "1:1",
+    "result": "✓"
+  },
+  {
     "sport": "basketball",
     "league": "NBA W",
     "match": "Chicago Sky W vs New York Liberty W",
@@ -1988,15 +1998,5 @@
     "date": "2026-05-18T00:00:00+00:00",
     "score": "94:125",
     "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Serie A",
-    "match": "Udinese vs Cremonese",
-    "tip": "Over 1.5",
-    "odds": "1.34",
-    "date": "2026-05-17T18:45:00+00:00",
-    "score": "0:1",
-    "result": "✗"
   }
 ]
