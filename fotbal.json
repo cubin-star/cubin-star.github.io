@@ -1,24 +1,24 @@
 [
   {
-    "League": "La Liga",
-    "Match": "Atletico Madrid vs Malaga",
+    "League": "UEFA Europa League",
+    "Match": "Universitatea Craiova vs Ararat-Armenia",
     "Tip": "Over 2.5",
-    "Odds": "1.84",
-    "Date": "2026-08-19T19:00:00+00:00"
+    "Odds": "1.77",
+    "Date": "2026-08-20T17:00:00+00:00"
   },
   {
-    "League": "CONCACAF Central American Cup",
-    "Match": "Mixco vs UMECIT",
+    "League": "UEFA Europa Conference League",
+    "Match": "FC Lugano vs Maccabi Tel Aviv",
     "Tip": "Over 2.5",
-    "Odds": "1.80",
-    "Date": "2026-08-20T01:00:00+00:00"
+    "Odds": "1.95",
+    "Date": "2026-08-20T18:30:00+00:00"
   },
   {
-    "League": "Cupa României",
-    "Match": "USV Iaşi vs Sporting Lieşti",
+    "League": "Svenska Cupen",
+    "Match": "Hässleholms IF vs Landskrona BoIS",
     "Tip": "Over 2.5",
-    "Odds": "1.78",
-    "Date": "2026-08-19T14:30:00+00:00",
+    "Odds": "1.75",
+    "Date": "2026-08-20T16:30:00+00:00",
     "locked": true
   }
 ]
