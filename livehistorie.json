@@ -1,5 +1,21 @@
 [
   {
+    "league": "La Liga",
+    "homeTeam": "Rayo Vallecano",
+    "awayTeam": "Alaves",
+    "tip": "Over 0.5",
+    "odds": "",
+    "halftimeScore": "0:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-08-20T19:00:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 0:0 | xG: 0.93 | Shots: 7/1 | losingXG: 0.00 losingSOT: 0 | @HT | Pre O2.5: 2.45"
+  },
+  {
     "league": "Superliga",
     "homeTeam": "Randers FC",
     "awayTeam": "Lyngby",
