@@ -1,5 +1,35 @@
 [
   {
+    "sport": "basketball",
+    "league": "LNBP",
+    "match": "Diablos Rojos vs Lobos Plateados",
+    "tip": "Over 154.5",
+    "odds": "1.29",
+    "date": "2026-08-21T02:15:00+00:00",
+    "score": "88:89",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "UEFA Europa Conference League",
+    "match": "Gent vs Hibernian",
+    "tip": "Over 1.5",
+    "odds": "1.30",
+    "date": "2026-08-20T18:30:00+00:00",
+    "score": "0:0",
+    "result": "✗"
+  },
+  {
+    "sport": "football",
+    "league": "UEFA Europa League",
+    "match": "Universitatea Craiova vs Ararat-Armenia",
+    "tip": "Over 1.5",
+    "odds": "1.21",
+    "date": "2026-08-20T17:00:00+00:00",
+    "score": "1:1",
+    "result": "✓"
+  },
+  {
     "sport": "football",
     "league": "UEFA Champions League",
     "match": "Slovan Bratislava vs Celje",
@@ -1967,36 +1997,6 @@
     "odds": "1.22",
     "date": "2026-05-18T18:20:00+00:00",
     "score": "3:4",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Ettan - Södra",
-    "match": "Angelholms FF vs Kristianstad",
-    "tip": "Over 1.5",
-    "odds": "1.21",
-    "date": "2026-05-18T17:00:00+00:00",
-    "score": "0:1",
-    "result": "✗"
-  },
-  {
-    "sport": "football",
-    "league": "Ekstraklasa",
-    "match": "Arka Gdynia vs Nieciecza",
-    "tip": "Over 1.5",
-    "odds": "1.21",
-    "date": "2026-05-18T17:00:00+00:00",
-    "score": "2:3",
-    "result": "✓"
-  },
-  {
-    "sport": "basketball",
-    "league": "NBA",
-    "match": "Detroit Pistons vs Cleveland Cavaliers",
-    "tip": "Over 194.5",
-    "odds": "1.26",
-    "date": "2026-05-18T00:00:00+00:00",
-    "score": "94:125",
     "result": "✓"
   }
 ]
