@@ -1,24 +1,24 @@
 [
   {
-    "League": "UEFA Europa League",
-    "Match": "Universitatea Craiova vs Ararat-Armenia",
+    "League": "Challenger Pro League",
+    "Match": "RSC Anderlecht II vs Excelsior Virton",
     "Tip": "Over 2.5",
-    "Odds": "1.77",
-    "Date": "2026-08-20T17:00:00+00:00"
+    "Odds": "1.76",
+    "Date": "2026-08-21T18:00:00+00:00"
   },
   {
-    "League": "UEFA Europa Conference League",
-    "Match": "FC Lugano vs Maccabi Tel Aviv",
+    "League": "Süper Lig",
+    "Match": "Erzurumspor FK vs Galatasaray",
     "Tip": "Over 2.5",
-    "Odds": "1.95",
-    "Date": "2026-08-20T18:30:00+00:00"
+    "Odds": "1.78",
+    "Date": "2026-08-21T18:30:00+00:00"
   },
   {
-    "League": "Svenska Cupen",
-    "Match": "Hässleholms IF vs Landskrona BoIS",
+    "League": "1. Lig",
+    "Match": "Fatih Karagümrük vs Bursaspor",
     "Tip": "Over 2.5",
-    "Odds": "1.75",
-    "Date": "2026-08-20T16:30:00+00:00",
+    "Odds": "1.93",
+    "Date": "2026-08-21T18:30:00+00:00",
     "locked": true
   }
 ]
