@@ -1,5 +1,26 @@
 [
   {
+    "date": "2026-08-20T05:30:00Z",
+    "matches": [
+      {
+        "league": "UEFA Europa Conference League",
+        "match": "FC Midtjylland vs HNK Rijeka",
+        "tip": "Over 2.5",
+        "odds": "1.81",
+        "score": "2:0",
+        "result": "✗"
+      },
+      {
+        "league": "UEFA Europa League",
+        "match": "Universitatea Craiova vs Ararat-Armenia",
+        "tip": "Over 2.5",
+        "odds": "1.71",
+        "score": "1:1",
+        "result": "✗"
+      }
+    ]
+  },
+  {
     "date": "2026-08-19T05:30:00Z",
     "matches": [
       {
