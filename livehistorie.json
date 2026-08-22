@@ -1,5 +1,21 @@
 [
   {
+    "league": "Super League",
+    "homeTeam": "FC Zurich",
+    "awayTeam": "FC Basel 1893",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "1:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-08-22T18:30:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 1:0 | xG: 1.27 | Shots: 12/4 | losingXG: 0.37 losingSOT: 2 | @HT | Pre O2.5: 5"
+  },
+  {
     "league": "Bundesliga",
     "homeTeam": "Sturm Graz",
     "awayTeam": "Austria Lustenau",
