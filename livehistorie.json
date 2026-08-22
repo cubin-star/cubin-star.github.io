@@ -1,5 +1,21 @@
 [
   {
+    "league": "Bundesliga",
+    "homeTeam": "Sturm Graz",
+    "awayTeam": "Austria Lustenau",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "0:1",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-08-22T17:30:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 0:1 | xG: 0.93 | Shots: 13/3 | losingXG: 0.55 losingSOT: 1 | @HT | Pre O2.5: 4.8"
+  },
+  {
     "league": "Eredivisie",
     "homeTeam": "Sparta Rotterdam",
     "awayTeam": "Utrecht",
