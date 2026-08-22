@@ -1,5 +1,21 @@
 [
   {
+    "league": "Premier League",
+    "homeTeam": "Hull City",
+    "awayTeam": "Manchester United",
+    "tip": "Over 2.5",
+    "odds": "",
+    "halftimeScore": "2:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-08-22T11:30:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 2:0 | xG: 1.01 | Shots: 7/5 | losingXG: 0.16 losingSOT: 2 | @HT | Pre O2.5: 5"
+  },
+  {
     "league": "Jupiler Pro League",
     "homeTeam": "Standard Liege",
     "awayTeam": "RAAL La Louvière",
