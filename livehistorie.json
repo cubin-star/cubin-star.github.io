@@ -1,11 +1,11 @@
 [
   {
     "league": "Ligue 1",
-    "homeTeam": "Le Mans",
-    "awayTeam": "Stade Brestois 29",
-    "tip": "Over 2.5",
+    "homeTeam": "Nice",
+    "awayTeam": "Lorient",
+    "tip": "Over 0.5",
     "odds": "",
-    "halftimeScore": "1:1",
+    "halftimeScore": "0:0",
     "liveOdds": "",
     "finalScore": "",
     "result": "",
@@ -13,7 +13,7 @@
     "kickoff": "2026-08-22T18:45:00.000Z",
     "resolvedAt": "",
     "source": "whisper-football",
-    "scoutStats": "Whisper xG-rate surge | HT 1:1 | xG: 1.13 | Shots: 14/5 | losingXG: 0.00 losingSOT: 0 | @HT | Pre O2.5: 7.5"
+    "scoutStats": "Whisper xG-rate surge | HT 0:0 | xG: 1.15 | Shots: 10/2 | losingXG: 0.00 losingSOT: 0 | @HT | Pre O2.5: 8"
   },
   {
     "league": "Super League",
