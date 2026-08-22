@@ -1,11 +1,11 @@
 [
   {
-    "league": "Premier League",
-    "homeTeam": "Everton",
-    "awayTeam": "Crystal Palace",
-    "tip": "Over 1.5",
+    "league": "Championship",
+    "homeTeam": "Derby",
+    "awayTeam": "Cardiff",
+    "tip": "Over 3.5",
     "odds": "",
-    "halftimeScore": "1:0",
+    "halftimeScore": "1:2",
     "liveOdds": "",
     "finalScore": "",
     "result": "",
@@ -13,7 +13,7 @@
     "kickoff": "2026-08-22T14:00:00.000Z",
     "resolvedAt": "",
     "source": "whisper-football",
-    "scoutStats": "Whisper xG-rate surge | HT 1:0 | xG: 1.25 | Shots: 7/3 | losingXG: 1.11 losingSOT: 2 | @HT | Pre O2.5: 7"
+    "scoutStats": "Whisper xG-rate surge | HT 1:2 | xG: 1.07 | Shots: 10/6 | losingXG: 0.63 losingSOT: 3 | @HT | Pre O2.5: 6.5"
   },
   {
     "league": "Championship",
