@@ -1,11 +1,11 @@
 [
   {
-    "league": "Championship",
-    "homeTeam": "Blackburn",
-    "awayTeam": "Middlesbrough",
+    "league": "Premier League",
+    "homeTeam": "Everton",
+    "awayTeam": "Crystal Palace",
     "tip": "Over 1.5",
     "odds": "",
-    "halftimeScore": "0:1",
+    "halftimeScore": "1:0",
     "liveOdds": "",
     "finalScore": "",
     "result": "",
@@ -13,7 +13,7 @@
     "kickoff": "2026-08-22T14:00:00.000Z",
     "resolvedAt": "",
     "source": "whisper-football",
-    "scoutStats": "Whisper xG-rate surge | HT 0:1 | xG: 0.77 | Shots: 6/2 | losingXG: 0.38 losingSOT: 1 | @HT | Pre O2.5: 7"
+    "scoutStats": "Whisper xG-rate surge | HT 1:0 | xG: 1.25 | Shots: 7/3 | losingXG: 1.11 losingSOT: 2 | @HT | Pre O2.5: 7"
   },
   {
     "league": "Championship",
