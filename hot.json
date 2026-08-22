@@ -1,50 +1,50 @@
 [
   {
     "league": "Liga I",
-    "match": "Petrolul Ploiesti - Rapid",
-    "kickoff": "2026-08-21T19:30:00+02:00",
+    "match": "Uta Arad - Corvinul Hunedoara",
+    "kickoff": "2026-08-22T17:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.16",
+    "odds": "2.12",
     "group": 1
   },
   {
-    "league": "Jupiler Pro League",
-    "match": "Standard Liege - RAAL La Louvière",
-    "kickoff": "2026-08-21T20:45:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.11",
-    "group": 1
-  },
-  {
-    "league": "Ligue 2",
-    "match": "Sochaux - Guingamp",
-    "kickoff": "2026-08-21T20:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.11",
-    "group": 2
-  },
-  {
-    "league": "Serie B",
-    "match": "Vicenza Virtus - Catanzaro",
-    "kickoff": "2026-08-21T20:30:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.14",
-    "group": 2
-  },
-  {
-    "league": "Serie C - Girone A",
-    "match": "Alcione - Renate",
-    "kickoff": "2026-08-21T21:00:00+02:00",
+    "league": "Serie A",
+    "match": "Parma - Cagliari",
+    "kickoff": "2026-08-22T20:45:00+02:00",
     "tip": "Over 2.5",
     "odds": "2.43",
+    "group": 1
+  },
+  {
+    "league": "Primeira Liga",
+    "match": "Maritimo - Academico Viseu",
+    "kickoff": "2026-08-22T16:30:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.22",
+    "group": 2
+  },
+  {
+    "league": "Super Liga",
+    "match": "Macva - Radnicki NIS",
+    "kickoff": "2026-08-22T18:30:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.15",
+    "group": 2
+  },
+  {
+    "league": "Premier League",
+    "match": "Ipswich - Sunderland",
+    "kickoff": "2026-08-22T16:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.13",
     "group": 3
   },
   {
-    "league": "Serie C - Girone C",
-    "match": "Giugliano - Scafatese",
-    "kickoff": "2026-08-21T21:00:00+02:00",
+    "league": "La Liga",
+    "match": "Valencia - Celta Vigo",
+    "kickoff": "2026-08-22T19:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.10",
+    "odds": "2.23",
     "group": 3
   }
 ]
