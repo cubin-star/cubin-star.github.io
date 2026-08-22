@@ -1,5 +1,21 @@
 [
   {
+    "league": "Eredivisie",
+    "homeTeam": "Sparta Rotterdam",
+    "awayTeam": "Utrecht",
+    "tip": "Over 2.5",
+    "odds": "",
+    "halftimeScore": "1:1",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-08-22T16:45:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 1:1 | xG: 0.80 | Shots: 12/2 | losingXG: 0.00 losingSOT: 0 | @HT | Pre O2.5: 5.8"
+  },
+  {
     "league": "Bundesliga",
     "homeTeam": "SCR Altach",
     "awayTeam": "TSV Hartberg",
