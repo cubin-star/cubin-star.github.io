@@ -1,5 +1,15 @@
 [
   {
+    "sport": "football",
+    "league": "Süper Lig",
+    "match": "Erzurumspor FK vs Galatasaray",
+    "tip": "Over 1.5",
+    "odds": "1.19",
+    "date": "2026-08-21T18:30:00+00:00",
+    "score": "0:4",
+    "result": "✓"
+  },
+  {
     "sport": "basketball",
     "league": "LNBP",
     "match": "Diablos Rojos vs Lobos Plateados",
@@ -1987,16 +1997,6 @@
     "odds": "1.21",
     "date": "2026-05-18T23:30:00+00:00",
     "score": "2:3",
-    "result": "✓"
-  },
-  {
-    "sport": "hockey",
-    "league": "World Championship",
-    "match": "Sweden vs Czech Republic",
-    "tip": "Over 3.5",
-    "odds": "1.22",
-    "date": "2026-05-18T18:20:00+00:00",
-    "score": "3:4",
     "result": "✓"
   }
 ]
