@@ -1,5 +1,21 @@
 [
   {
+    "league": "Bundesliga",
+    "homeTeam": "SCR Altach",
+    "awayTeam": "TSV Hartberg",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "0:1",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-08-22T15:00:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 0:1 | xG: 0.73 | Shots: 2/1 | losingXG: 0.04 losingSOT: 0 | @HT | Pre O2.5: 7"
+  },
+  {
     "league": "Primeira Liga",
     "homeTeam": "Maritimo",
     "awayTeam": "Academico Viseu",
