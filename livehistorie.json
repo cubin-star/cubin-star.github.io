@@ -1,11 +1,11 @@
 [
   {
-    "league": "Premier League",
-    "homeTeam": "Hull City",
-    "awayTeam": "Manchester United",
-    "tip": "Over 2.5",
+    "league": "Championship",
+    "homeTeam": "Lincoln",
+    "awayTeam": "Portsmouth",
+    "tip": "Over 3.5",
     "odds": "",
-    "halftimeScore": "2:0",
+    "halftimeScore": "1:2",
     "liveOdds": "",
     "finalScore": "",
     "result": "",
@@ -13,7 +13,7 @@
     "kickoff": "2026-08-22T11:30:00.000Z",
     "resolvedAt": "",
     "source": "whisper-football",
-    "scoutStats": "Whisper xG-rate surge | HT 2:0 | xG: 1.01 | Shots: 7/5 | losingXG: 0.16 losingSOT: 2 | @HT | Pre O2.5: 5"
+    "scoutStats": "Whisper xG-rate surge | HT 1:2 | xG: 1.06 | Shots: 10/6 | losingXG: 0.67 losingSOT: 3 | @HT | Pre O2.5: 1.95"
   },
   {
     "league": "Jupiler Pro League",
