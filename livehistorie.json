@@ -1,5 +1,21 @@
 [
   {
+    "league": "Ligue 1",
+    "homeTeam": "Le Havre",
+    "awayTeam": "Monaco",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "0:1",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-08-23T15:15:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 0:1 | xG: 0.95 | Shots: 13/5 | losingXG: 0.01 losingSOT: 1 | @HT | Pre O2.5: 6"
+  },
+  {
     "league": "Primeira Liga",
     "homeTeam": "Vitória SC",
     "awayTeam": "Nacional",
