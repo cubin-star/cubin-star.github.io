@@ -1,5 +1,21 @@
 [
   {
+    "league": "Liga Profesional Argentina",
+    "homeTeam": "Barracas Central",
+    "awayTeam": "Platense",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "1:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-08-23T17:45:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 1:0 | xG: 1.35 | Shots: 9/4 | losingXG: 0.30 losingSOT: 1 | @HT | Pre O2.5: 3.5"
+  },
+  {
     "league": "Primeira Liga",
     "homeTeam": "Santa Clara",
     "awayTeam": "Famalicao",
@@ -39,11 +55,11 @@
     "odds": "",
     "halftimeScore": "0:1",
     "liveOdds": "",
-    "finalScore": "0:1",
-    "result": "❌ Lost",
+    "finalScore": "",
+    "result": "",
     "sport": "football",
     "kickoff": "2026-08-23T16:30:00.000Z",
-    "resolvedAt": "2026-08-23T18:34:04.688Z",
+    "resolvedAt": "",
     "source": "whisper-football",
     "scoutStats": "Whisper xG-rate surge | HT 0:1 | xG: 1.63 | Shots: 15/5 | losingXG: 0.22 losingSOT: 1 | @HT | Pre O2.5: 5"
   },
