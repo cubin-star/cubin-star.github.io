@@ -1,5 +1,21 @@
 [
   {
+    "league": "Primeira Liga",
+    "homeTeam": "Vitória SC",
+    "awayTeam": "Nacional",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "1:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-08-23T14:30:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 1:0 | xG: 0.79 | Shots: 8/2 | losingXG: 0.10 losingSOT: 0 | @HT | Pre O2.5: 6.5"
+  },
+  {
     "league": "Premier League",
     "homeTeam": "Manchester City",
     "awayTeam": "Bournemouth",
