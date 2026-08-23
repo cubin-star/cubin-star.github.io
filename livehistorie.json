@@ -1,21 +1,5 @@
 [
   {
-    "league": "La Liga",
-    "homeTeam": "Atletico Madrid",
-    "awayTeam": "Villarreal",
-    "tip": "Over 0.5",
-    "odds": "",
-    "halftimeScore": "0:0",
-    "liveOdds": "",
-    "finalScore": "",
-    "result": "",
-    "sport": "football",
-    "kickoff": "2026-08-23T15:00:00.000Z",
-    "resolvedAt": "",
-    "source": "whisper-football",
-    "scoutStats": "Whisper xG-rate surge | HT 0:0 | xG: 1.26 | Shots: 13/3 | losingXG: 0.00 losingSOT: 0 | @HT | Pre O2.5: 6"
-  },
-  {
     "league": "Primeira Liga",
     "homeTeam": "Vitória SC",
     "awayTeam": "Nacional",
