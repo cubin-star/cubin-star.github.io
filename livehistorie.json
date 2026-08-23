@@ -1,11 +1,11 @@
 [
   {
-    "league": "Ligue 1",
-    "homeTeam": "Angers",
-    "awayTeam": "Lille",
-    "tip": "Over 2.5",
+    "league": "Premier League",
+    "homeTeam": "Manchester City",
+    "awayTeam": "Bournemouth",
+    "tip": "Over 1.5",
     "odds": "",
-    "halftimeScore": "0:2",
+    "halftimeScore": "0:1",
     "liveOdds": "",
     "finalScore": "",
     "result": "",
@@ -13,7 +13,7 @@
     "kickoff": "2026-08-23T13:00:00.000Z",
     "resolvedAt": "",
     "source": "whisper-football",
-    "scoutStats": "Whisper xG-rate surge | HT 0:2 | xG: 1.10 | Shots: 10/5 | losingXG: 0.16 losingSOT: 0 | @HT | Pre O2.5: 7.5"
+    "scoutStats": "Whisper xG-rate surge | HT 0:1 | xG: 0.75 | Shots: 7/4 | losingXG: 0.37 losingSOT: 2 | @HT | Pre O2.5: 4.2"
   },
   {
     "league": "Superliga",
