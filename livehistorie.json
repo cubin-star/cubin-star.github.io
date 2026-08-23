@@ -1,5 +1,21 @@
 [
   {
+    "league": "HNL",
+    "homeTeam": "HNK Rijeka",
+    "awayTeam": "Istra 1961",
+    "tip": "Over 2.5",
+    "odds": "",
+    "halftimeScore": "2:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-08-23T16:30:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 2:0 | xG: 1.12 | Shots: 9/5 | losingXG: 0.07 losingSOT: 1 | @HT | Pre O2.5: 6"
+  },
+  {
     "league": "Süper Lig",
     "homeTeam": "Trabzonspor",
     "awayTeam": "Başakşehir",
