@@ -1,23 +1,23 @@
 [
   {
-    "league": "Serie A",
-    "match": "Parma - Cagliari",
-    "kickoff": "2026-08-22T20:45:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.43"
-  },
-  {
     "league": "La Liga",
-    "match": "Valencia - Celta Vigo",
-    "kickoff": "2026-08-22T19:30:00+02:00",
+    "match": "Getafe - Racing Santander",
+    "kickoff": "2026-08-23T19:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.23"
+    "odds": "2.45"
   },
   {
     "league": "Primeira Liga",
-    "match": "Maritimo - Academico Viseu",
-    "kickoff": "2026-08-22T16:30:00+02:00",
+    "match": "Santa Clara - Famalicao",
+    "kickoff": "2026-08-23T19:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.22"
+    "odds": "2.44"
+  },
+  {
+    "league": "Super League 1",
+    "match": "Panetolikos - Asteras Tripolis",
+    "kickoff": "2026-08-23T20:30:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.39"
   }
 ]
