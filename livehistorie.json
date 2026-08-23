@@ -1,5 +1,21 @@
 [
   {
+    "league": "Superliga",
+    "homeTeam": "Aarhus",
+    "awayTeam": "Odense",
+    "tip": "Over 3.5",
+    "odds": "",
+    "halftimeScore": "1:2",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-08-23T12:00:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 1:2 | xG: 0.88 | Shots: 14/3 | losingXG: 0.63 losingSOT: 2 | @HT | Pre O2.5: 5.5"
+  },
+  {
     "league": "La Liga",
     "homeTeam": "Espanyol",
     "awayTeam": "Real Madrid",
