@@ -1,11 +1,11 @@
 [
   {
-    "league": "HNL",
-    "homeTeam": "HNK Rijeka",
-    "awayTeam": "Istra 1961",
-    "tip": "Over 2.5",
+    "league": "Serie A",
+    "homeTeam": "Frosinone",
+    "awayTeam": "Juventus",
+    "tip": "Over 1.5",
     "odds": "",
-    "halftimeScore": "2:0",
+    "halftimeScore": "0:1",
     "liveOdds": "",
     "finalScore": "",
     "result": "",
@@ -13,7 +13,7 @@
     "kickoff": "2026-08-23T16:30:00.000Z",
     "resolvedAt": "",
     "source": "whisper-football",
-    "scoutStats": "Whisper xG-rate surge | HT 2:0 | xG: 1.12 | Shots: 9/5 | losingXG: 0.07 losingSOT: 1 | @HT | Pre O2.5: 6"
+    "scoutStats": "Whisper xG-rate surge | HT 0:1 | xG: 1.63 | Shots: 15/5 | losingXG: 0.22 losingSOT: 1 | @HT | Pre O2.5: 5"
   },
   {
     "league": "Süper Lig",
