@@ -1,11 +1,11 @@
 [
   {
-    "league": "Premier League",
-    "homeTeam": "El Gouna FC",
-    "awayTeam": "Future FC",
-    "tip": "Over 0.5",
+    "league": "Jupiler Pro League",
+    "homeTeam": "Lommel United",
+    "awayTeam": "KVC Westerlo",
+    "tip": "Over 2.5",
     "odds": "",
-    "halftimeScore": "0:0",
+    "halftimeScore": "2:0",
     "liveOdds": "",
     "finalScore": "",
     "result": "",
@@ -13,7 +13,7 @@
     "kickoff": "2026-08-23T14:00:00.000Z",
     "resolvedAt": "",
     "source": "whisper-football",
-    "scoutStats": "Whisper xG-rate surge | HT 0:0 | xG: 0.83 | Shots: 11/3 | losingXG: 0.00 losingSOT: 0 | @HT | Pre O2.5: 15"
+    "scoutStats": "Whisper xG-rate surge | HT 2:0 | xG: 0.77 | Shots: 11/6 | losingXG: 0.29 losingSOT: 3 | @HT | Pre O2.5: 5"
   },
   {
     "league": "Premier League",
