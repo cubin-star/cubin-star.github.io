@@ -1,5 +1,25 @@
 [
   {
+    "sport": "basketball",
+    "league": "NBA W",
+    "match": "Los Angeles Sparks W vs Connecticut Sun W",
+    "tip": "Over 157.5",
+    "odds": "1.23",
+    "date": "2026-08-23T01:00:00+00:00",
+    "score": "77:68",
+    "result": "✗"
+  },
+  {
+    "sport": "football",
+    "league": "Jupiler Pro League",
+    "match": "Charleroi vs KV Mechelen",
+    "tip": "Over 1.5",
+    "odds": "1.22",
+    "date": "2026-08-22T16:15:00+00:00",
+    "score": "2:0",
+    "result": "✓"
+  },
+  {
     "sport": "football",
     "league": "Süper Lig",
     "match": "Erzurumspor FK vs Galatasaray",
@@ -1977,26 +1997,6 @@
     "odds": "1.25",
     "date": "2026-05-19T18:20:00+00:00",
     "score": "5:0",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Bundesliga",
-    "match": "Ried vs Wolfsberger AC",
-    "tip": "Over 1.5",
-    "odds": "1.28",
-    "date": "2026-05-19T16:30:00+00:00",
-    "score": "2:1",
-    "result": "✓"
-  },
-  {
-    "sport": "hockey",
-    "league": "NHL",
-    "match": "Buffalo Sabres vs Montreal Canadiens",
-    "tip": "Over 3.5",
-    "odds": "1.21",
-    "date": "2026-05-18T23:30:00+00:00",
-    "score": "2:3",
     "result": "✓"
   }
 ]
