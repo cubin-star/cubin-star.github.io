@@ -1,11 +1,11 @@
 [
   {
     "league": "Superliga",
-    "homeTeam": "Aarhus",
-    "awayTeam": "Odense",
-    "tip": "Over 3.5",
+    "homeTeam": "FC Midtjylland",
+    "awayTeam": "Randers FC",
+    "tip": "Over 1.5",
     "odds": "",
-    "halftimeScore": "1:2",
+    "halftimeScore": "1:0",
     "liveOdds": "",
     "finalScore": "",
     "result": "",
@@ -13,7 +13,7 @@
     "kickoff": "2026-08-23T12:00:00.000Z",
     "resolvedAt": "",
     "source": "whisper-football",
-    "scoutStats": "Whisper xG-rate surge | HT 1:2 | xG: 0.88 | Shots: 14/3 | losingXG: 0.63 losingSOT: 2 | @HT | Pre O2.5: 5.5"
+    "scoutStats": "Whisper xG-rate surge | HT 1:0 | xG: 0.81 | Shots: 10/4 | losingXG: 0.27 losingSOT: 1 | @HT | Pre O2.5: 4.8"
   },
   {
     "league": "La Liga",
