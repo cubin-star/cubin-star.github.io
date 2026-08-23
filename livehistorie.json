@@ -1,5 +1,21 @@
 [
   {
+    "league": "Serie A",
+    "homeTeam": "RB Bragantino",
+    "awayTeam": "Gremio",
+    "tip": "Over 0.5",
+    "odds": "",
+    "halftimeScore": "0:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-08-23T19:00:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 0:0 | xG: 1.57 | Shots: 17/3 | losingXG: 0.00 losingSOT: 0 | @HT | Pre O2.5: 1.85"
+  },
+  {
     "league": "Super Liga",
     "homeTeam": "Mladost Lucani",
     "awayTeam": "FK Partizan",
