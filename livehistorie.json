@@ -1,5 +1,21 @@
 [
   {
+    "league": "Super Liga",
+    "homeTeam": "Mladost Lucani",
+    "awayTeam": "FK Partizan",
+    "tip": "Over 2.5",
+    "odds": "",
+    "halftimeScore": "2:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-08-23T19:00:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper 2:0 comeback | HT 2:0 | xG: 0.60(est) | Shots: 7/5 | losingXG: 0.48 losingSOT: 4 | @HT | Pre O2.5: 1.8"
+  },
+  {
     "league": "Liga Profesional Argentina",
     "homeTeam": "Barracas Central",
     "awayTeam": "Platense",
@@ -7,11 +23,11 @@
     "odds": "",
     "halftimeScore": "1:0",
     "liveOdds": "",
-    "finalScore": "1:2",
-    "result": "✅ Won",
+    "finalScore": "",
+    "result": "",
     "sport": "football",
     "kickoff": "2026-08-23T17:45:00.000Z",
-    "resolvedAt": "2026-08-23T19:43:05.530Z",
+    "resolvedAt": "",
     "source": "whisper-football",
     "scoutStats": "Whisper xG-rate surge | HT 1:0 | xG: 1.35 | Shots: 9/4 | losingXG: 0.30 losingSOT: 1 | @HT | Pre O2.5: 3.5"
   },
