@@ -85,7 +85,8 @@ function maskKey(k){if(!k)return'(none)';if(k.length<=8)return'***';return k.sli
 function sleep(ms){return new Promise(r=>setTimeout(r,ms));}
 function shuffle(arr){for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]];}return arr;}
 function fmtDate(d){return d.toISOString().split('T')[0];}
-
+// Stredni (medianovy) kurz - pro sudy pocet prumer dvou prostrednich hodnot
+function median(arr){if(!arr||arr.length===0)return NaN;const s=[...arr].sort((a,b)=>a-b);const mid=Math.floor(s.length/2);return s.length%2!==0?s[mid]:(s[mid-1]+s[mid])/2;}
 // --- Deduplikace proti existujicim json souborum jinych botu -----------------
 function normTeam(s){return String(s||'').toLowerCase().replace(/\s+/g,' ').trim();}
 function normDate(s){return String(s||'').slice(0,10);}
@@ -198,7 +199,7 @@ async function main(){
     console.log('   '+leagueMap.size+' leagues\n');
     const candidateMap=new Map();
     for(const[,lg]of leagueMap){for(const d of lg.dates){const oddsData=await getLeagueOdds(lg.id,lg.season,d);for(const entry of oddsData){const fix=fixtureMap.get(entry.fixture?.id);if(!fix)continue;const mKey=fix.fixture.id;for(const bm of entry.bookmakers||[]){for(const bet of bm.bets||[]){for(const v of bet.values||[]){if(v.value!=='Over 2.5')continue;const odd=parseFloat(v.odd);if(isNaN(odd)||odd<MIN_ODDS||odd>MAX_ODDS)continue;if(!candidateMap.has(mKey))candidateMap.set(mKey,{fixtureId:mKey,league:lg.name,country:lg.country,match:fix.teams.home.name+' - '+fix.teams.away.name,kickoff:fix.fixture.date,tip:'Over 2.5',tier:leagueTier(lg.name,lg.country),allOdds:[]});candidateMap.get(mKey).allOdds.push(odd);}}}};await sleep(450);}}
-    let pool=[...candidateMap.values()].map(m=>({...m,odds:(m.allOdds.reduce((a,b)=>a+b,0)/m.allOdds.length).toFixed(2)}));
+    let pool=[...candidateMap.values()].map(m=>({...m,odds:median(m.allOdds).toFixed(2)}));
     console.log('Candidates: '+pool.length+' (Over 2.5, odds '+MIN_ODDS+'-'+MAX_ODDS+')');
 
     // 2) Odfiltruj zapasy, ktere uz vybral fotbal.json / live2.json
