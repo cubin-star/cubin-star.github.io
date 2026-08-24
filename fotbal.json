@@ -1,24 +1,24 @@
 [
   {
-    "League": "Süper Lig",
-    "Match": "Eyüpspor vs Gaziantep FK",
-    "Tip": "Over 2.5",
-    "Odds": "1.94",
-    "Date": "2026-08-23T16:00:00+00:00"
-  },
-  {
     "League": "1. Lig",
-    "Match": "Boluspor vs Mardin 1969",
+    "Match": "Sivasspor vs Manisa F.K.",
     "Tip": "Over 2.5",
-    "Odds": "1.85",
-    "Date": "2026-08-23T16:00:00+00:00"
+    "Odds": "1.86",
+    "Date": "2026-08-24T18:30:00+00:00"
   },
   {
-    "League": "Serie A",
-    "Match": "Frosinone vs Juventus",
+    "League": "Liga I",
+    "Match": "FC Botosani vs Csikszereda",
     "Tip": "Over 2.5",
     "Odds": "1.80",
-    "Date": "2026-08-23T16:30:00+00:00",
+    "Date": "2026-08-24T15:30:00+00:00"
+  },
+  {
+    "League": "Superettan",
+    "Match": "Ostersunds FK vs Ljungskile SK",
+    "Tip": "Over 2.5",
+    "Odds": "1.85",
+    "Date": "2026-08-24T17:00:00+00:00",
     "locked": true
   }
 ]
