@@ -26,19 +26,21 @@ jobs:
       - name: Skip if hot.json already updated today
         id: guard
         run: |
-          # Ruční spuštění (workflow_dispatch) vždy projde a přegeneruje se.
-          if [ "${{ github.event_name }}" != "schedule" ]; then
-            echo "Ruční spuštění (${{ github.event_name }}) – guard se přeskakuje, generuji vždy."
+          # Guard se uplatní JEN u záložního naplánovaného slotu (17 9 UTC).
+          # Hlavní slot, ruční spuštění i re-run běží vždy.
+          if [ "${{ github.event_name }}" != "schedule" ] || [ "${{ github.event.schedule }}" != "17 9 * * *" ]; then
+            echo "Není to záložní naplánovaný běh (event=${{ github.event_name }}, schedule=${{ github.event.schedule }}) – generuji vždy."
             echo "skip=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
           TODAY=$(date -u +%Y-%m-%d)
           LAST=$(git log -1 --format=%cs -- hot.json || echo "")
-          echo "Dnes (UTC): $TODAY, poslední commit hot.json: $LAST"
+          echo "Záložní běh. Dnes (UTC): $TODAY, poslední commit hot.json: $LAST"
           if [ "$LAST" = "$TODAY" ]; then
-            echo "hot.json už byl dnes aktualizován, končím (naplánovaný běh)."
+            echo "hot.json už byl dnes aktualizován, záložní běh se přeskakuje."
             echo "skip=true" >> "$GITHUB_OUTPUT"
           else
+            echo "hot.json dnes ještě nebyl aktualizován – záložní běh generuje."
             echo "skip=false" >> "$GITHUB_OUTPUT"
           fi
 
