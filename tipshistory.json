@@ -1,5 +1,26 @@
 [
   {
+    "date": "2026-08-23T05:30:00Z",
+    "matches": [
+      {
+        "league": "Ekstraklasa",
+        "match": "GKS Katowice vs Wisla Plock",
+        "tip": "Over 2.5",
+        "odds": "1.66",
+        "score": "5:0",
+        "result": "✓"
+      },
+      {
+        "league": "Czech Liga",
+        "match": "Teplice vs Zbrojovka Brno",
+        "tip": "Over 2.5",
+        "odds": "1.79",
+        "score": "0:2",
+        "result": "✗"
+      }
+    ]
+  },
+  {
     "date": "2026-08-22T05:30:00Z",
     "matches": [
       {
