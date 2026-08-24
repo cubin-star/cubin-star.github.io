@@ -4,28 +4,14 @@
     "match": "GIL Vicente - Casa Pia",
     "kickoff": "2026-08-24T21:15:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.29"
+    "odds": "2.30"
   },
   {
-    "league": "La Liga",
-    "match": "Osasuna - Levante",
-    "kickoff": "2026-08-24T19:30:00+02:00",
+    "league": "Premier League",
+    "match": "Fulham - Chelsea",
+    "kickoff": "2026-08-24T21:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.11"
-  },
-  {
-    "league": "La Liga",
-    "match": "Malaga - Deportivo La Coruna",
-    "kickoff": "2026-08-24T21:30:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.44"
-  },
-  {
-    "league": "Serie A",
-    "match": "Bologna - Lazio",
-    "kickoff": "2026-08-24T18:30:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.23"
+    "odds": "2.38"
   },
   {
     "league": "Liga I",
@@ -33,5 +19,26 @@
     "kickoff": "2026-08-24T20:30:00+02:00",
     "tip": "Over 2.5",
     "odds": "2.33"
+  },
+  {
+    "league": "La Liga",
+    "match": "Osasuna - Levante",
+    "kickoff": "2026-08-24T19:30:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.12"
+  },
+  {
+    "league": "La Liga",
+    "match": "Malaga - Deportivo La Coruna",
+    "kickoff": "2026-08-24T21:30:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.45"
+  },
+  {
+    "league": "Serie A",
+    "match": "Bologna - Lazio",
+    "kickoff": "2026-08-24T18:30:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.23"
   }
 ]
