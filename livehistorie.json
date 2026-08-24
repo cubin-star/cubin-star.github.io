@@ -1,5 +1,21 @@
 [
   {
+    "league": "Liga Profesional Argentina",
+    "homeTeam": "Racing Club",
+    "awayTeam": "Boca Juniors",
+    "tip": "Over 2.5",
+    "odds": "",
+    "halftimeScore": "1:1",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-08-24T00:30:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 1:1 | xG: 1.24 | Shots: 15/3 | losingXG: 0.00 losingSOT: 0 | @HT | Pre O2.5: 2.6"
+  },
+  {
     "league": "Serie A",
     "homeTeam": "Vitoria",
     "awayTeam": "Bahia",
