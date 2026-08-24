@@ -212,8 +212,10 @@ async function main(){
 
     const tier1=shuffle(pool.filter(m=>m.tier===1)),tier2=shuffle(pool.filter(m=>m.tier===2)),tier3=shuffle(pool.filter(m=>m.tier===3)),tier4=shuffle(pool.filter(m=>m.tier===4));
     console.log('Tier 1: '+tier1.length+', Tier 2: '+tier2.length+', Tier 3: '+tier3.length+', Tier 4: '+tier4.length+'\n');
+    // Vsechny tiery dohromady a nahodne zamichane -> z nich vybirame 6 (max 1 zapas na ligu)
+    const shuffledPool=shuffle([...pool]);
     const selected=[],usedLeagues=new Set();
-    for(const m of[...tier1,...tier2,...tier3,...tier4]){if(selected.length>=PICK_COUNT)break;const lk=m.league+'|'+m.country;if(usedLeagues.has(lk))continue;usedLeagues.add(lk);selected.push(m);console.log('   [T'+m.tier+'] '+m.match+' | '+m.league+' ('+m.country+') | Over 2.5 @ '+m.odds);}
+    for(const m of shuffledPool){if(selected.length>=PICK_COUNT)break;const lk=m.league+'|'+m.country;if(usedLeagues.has(lk))continue;usedLeagues.add(lk);selected.push(m);console.log('   [T'+m.tier+'] '+m.match+' | '+m.league+' ('+m.country+') | Over 2.5 @ '+m.odds);}
     console.log('\nVybrano: '+selected.length+'/'+PICK_COUNT);
     if(selected.length<PICK_COUNT)console.log('WARNING: Mene nez '+PICK_COUNT+' zapasu.');
     const live1=[...tier1,...tier2].map(m=>({league:m.league,match:m.match,kickoff:m.kickoff,tip:m.tip,odds:m.odds}));
