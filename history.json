@@ -2,6 +2,36 @@
   {
     "sport": "basketball",
     "league": "NBA W",
+    "match": "Chicago Sky W vs Indiana Fever W",
+    "tip": "Over 175.5",
+    "odds": "1.24",
+    "date": "2026-08-23T23:00:00+00:00",
+    "score": "90:113",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "Serie A",
+    "match": "RB Bragantino vs Gremio",
+    "tip": "Over 1.5",
+    "odds": "1.27",
+    "date": "2026-08-23T19:00:00+00:00",
+    "score": "1:0",
+    "result": "✗"
+  },
+  {
+    "sport": "football",
+    "league": "Premier League",
+    "match": "Brighton vs Aston Villa",
+    "tip": "Over 1.5",
+    "odds": "1.24",
+    "date": "2026-08-23T13:00:00+00:00",
+    "score": "4:0",
+    "result": "✓"
+  },
+  {
+    "sport": "basketball",
+    "league": "NBA W",
     "match": "Los Angeles Sparks W vs Connecticut Sun W",
     "tip": "Over 157.5",
     "odds": "1.23",
@@ -1967,36 +1997,6 @@
     "odds": "1.25",
     "date": "2026-05-20T00:00:00+00:00",
     "score": "115:104",
-    "result": "✓"
-  },
-  {
-    "sport": "hockey",
-    "league": "AHL",
-    "match": "Springfield Thunderbirds vs Wilkes-Barre/Scranton",
-    "tip": "Over 3.5",
-    "odds": "1.25",
-    "date": "2026-05-19T23:05:00+00:00",
-    "score": "1:2",
-    "result": "✗"
-  },
-  {
-    "sport": "football",
-    "league": "Jupiler Pro League",
-    "match": "KVC Westerlo vs Standard Liege",
-    "tip": "Over 1.5",
-    "odds": "1.20",
-    "date": "2026-05-19T18:30:00+00:00",
-    "score": "1:2",
-    "result": "✓"
-  },
-  {
-    "sport": "hockey",
-    "league": "World Championship",
-    "match": "Hungary vs Great Britain",
-    "tip": "Over 3.5",
-    "odds": "1.25",
-    "date": "2026-05-19T18:20:00+00:00",
-    "score": "5:0",
     "result": "✓"
   }
 ]
