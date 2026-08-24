@@ -80,22 +80,6 @@
     "scoutStats": "Whisper xG-rate surge | HT 0:1 | xG: 0.75 | Shots: 7/4 | losingXG: 0.37 losingSOT: 2 | @HT | Pre O2.5: 4.2"
   },
   {
-    "league": "Superliga",
-    "homeTeam": "FC Midtjylland",
-    "awayTeam": "Randers FC",
-    "tip": "Over 1.5",
-    "odds": "",
-    "halftimeScore": "1:0",
-    "liveOdds": "",
-    "finalScore": "",
-    "result": "",
-    "sport": "football",
-    "kickoff": "2026-08-23T12:00:00.000Z",
-    "resolvedAt": "",
-    "source": "whisper-football",
-    "scoutStats": "Whisper xG-rate surge | HT 1:0 | xG: 0.81 | Shots: 10/4 | losingXG: 0.27 losingSOT: 1 | @HT | Pre O2.5: 4.8"
-  },
-  {
     "league": "La Liga",
     "homeTeam": "Espanyol",
     "awayTeam": "Real Madrid",
