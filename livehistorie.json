@@ -48,22 +48,6 @@
     "scoutStats": "Whisper xG-rate surge | HT 1:0 | xG: 1.35 | Shots: 9/4 | losingXG: 0.30 losingSOT: 1 | @HT | Pre O2.5: 3.5"
   },
   {
-    "league": "Super League 1",
-    "homeTeam": "OFI",
-    "awayTeam": "Volos NFC",
-    "tip": "Over 2.5",
-    "odds": "",
-    "halftimeScore": "2:0",
-    "liveOdds": "",
-    "finalScore": "",
-    "result": "",
-    "sport": "football",
-    "kickoff": "2026-08-23T16:30:00.000Z",
-    "resolvedAt": "",
-    "source": "whisper-football",
-    "scoutStats": "Whisper xG-rate surge | HT 2:0 | xG: 0.82 | Shots: 3/1 | losingXG: 0.02 losingSOT: 0 | @HT | Pre O2.5: 6.5"
-  },
-  {
     "league": "Süper Lig",
     "homeTeam": "Trabzonspor",
     "awayTeam": "Başakşehir",
