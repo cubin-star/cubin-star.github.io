@@ -1,16 +1,16 @@
 [
   {
-    "League": "Süper Lig",
-    "Match": "Kocaelispor vs Amed",
-    "Tip": "Over 1.5",
-    "Odds": "1.34",
-    "Date": "2026-08-24T18:30:00+00:00"
-  },
-  {
     "League": "La Liga",
-    "Match": "Osasuna vs Levante",
+    "Match": "Valencia vs Real Betis",
     "Tip": "Over 1.5",
     "Odds": "1.32",
-    "Date": "2026-08-24T17:30:00+00:00"
+    "Date": "2026-08-25T19:00:00+00:00"
+  },
+  {
+    "League": "K League 1",
+    "Match": "Gimcheon Sangmu FC vs Jeonbuk Motors",
+    "Tip": "Over 1.5",
+    "Odds": "1.29",
+    "Date": "2026-08-25T10:30:00+00:00"
   }
 ]
