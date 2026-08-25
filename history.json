@@ -2,6 +2,36 @@
   {
     "sport": "basketball",
     "league": "NBA W",
+    "match": "Minnesota Lynx W vs Golden State Valkyries W",
+    "tip": "Over 148.5",
+    "odds": "1.20",
+    "date": "2026-08-25T00:00:00+00:00",
+    "score": "66:80",
+    "result": "✗"
+  },
+  {
+    "sport": "football",
+    "league": "Süper Lig",
+    "match": "Kocaelispor vs Amed",
+    "tip": "Over 1.5",
+    "odds": "1.34",
+    "date": "2026-08-24T18:30:00+00:00",
+    "score": "2:0",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "La Liga",
+    "match": "Osasuna vs Levante",
+    "tip": "Over 1.5",
+    "odds": "1.32",
+    "date": "2026-08-24T17:30:00+00:00",
+    "score": "0:0",
+    "result": "✗"
+  },
+  {
+    "sport": "basketball",
+    "league": "NBA W",
     "match": "Chicago Sky W vs Indiana Fever W",
     "tip": "Over 175.5",
     "odds": "1.24",
@@ -1967,36 +1997,6 @@
     "odds": "1.27",
     "date": "2026-05-21T00:30:00+00:00",
     "score": "122:113",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "UEFA Europa League",
-    "match": "SC Freiburg vs Aston Villa",
-    "tip": "Over 1.5",
-    "odds": "1.31",
-    "date": "2026-05-20T19:00:00+00:00",
-    "score": "0:3",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Allsvenskan",
-    "match": "Gais vs Hammarby FF",
-    "tip": "Over 1.5",
-    "odds": "1.28",
-    "date": "2026-05-20T17:00:00+00:00",
-    "score": "2:0",
-    "result": "✓"
-  },
-  {
-    "sport": "basketball",
-    "league": "NBA",
-    "match": "New York Knicks vs Cleveland Cavaliers",
-    "tip": "Over 204.5",
-    "odds": "1.25",
-    "date": "2026-05-20T00:00:00+00:00",
-    "score": "115:104",
     "result": "✓"
   }
 ]
