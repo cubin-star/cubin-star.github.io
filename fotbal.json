@@ -1,24 +1,24 @@
 [
   {
-    "League": "1. Lig",
-    "Match": "Sivasspor vs Manisa F.K.",
+    "League": "Regionalliga - Nordost",
+    "Match": "Lokomotive Leipzig vs Chemnitzer FC",
     "Tip": "Over 2.5",
-    "Odds": "1.86",
-    "Date": "2026-08-24T18:30:00+00:00"
-  },
-  {
-    "League": "Liga I",
-    "Match": "FC Botosani vs Csikszereda",
-    "Tip": "Over 2.5",
-    "Odds": "1.80",
-    "Date": "2026-08-24T15:30:00+00:00"
+    "Odds": "1.75",
+    "Date": "2026-08-25T17:00:00+00:00"
   },
   {
     "League": "Superettan",
-    "Match": "Ostersunds FK vs Ljungskile SK",
+    "Match": "Orebro SK vs Varbergs BoIS FC",
     "Tip": "Over 2.5",
     "Odds": "1.85",
-    "Date": "2026-08-24T17:00:00+00:00",
+    "Date": "2026-08-25T17:00:00+00:00"
+  },
+  {
+    "League": "Second League",
+    "Match": "CSKA Sofia II vs Ludogorets II",
+    "Tip": "Over 2.5",
+    "Odds": "1.80",
+    "Date": "2026-08-25T15:00:00+00:00",
     "locked": true
   }
 ]
