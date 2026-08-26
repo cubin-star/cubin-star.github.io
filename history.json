@@ -2,6 +2,36 @@
   {
     "sport": "basketball",
     "league": "NBA W",
+    "match": "Dallas Wings W vs Portland Fire W",
+    "tip": "Over 165.5",
+    "odds": "1.25",
+    "date": "2026-08-26T00:00:00+00:00",
+    "score": "96:78",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "La Liga",
+    "match": "Valencia vs Real Betis",
+    "tip": "Over 1.5",
+    "odds": "1.32",
+    "date": "2026-08-25T19:00:00+00:00",
+    "score": "0:1",
+    "result": "✗"
+  },
+  {
+    "sport": "football",
+    "league": "K League 1",
+    "match": "Gimcheon Sangmu FC vs Jeonbuk Motors",
+    "tip": "Over 1.5",
+    "odds": "1.29",
+    "date": "2026-08-25T10:30:00+00:00",
+    "score": "0:0",
+    "result": "✗"
+  },
+  {
+    "sport": "basketball",
+    "league": "NBA W",
     "match": "Minnesota Lynx W vs Golden State Valkyries W",
     "tip": "Over 148.5",
     "odds": "1.20",
@@ -1967,36 +1997,6 @@
     "odds": "1.27",
     "date": "2026-05-21T18:20:00+00:00",
     "score": "1:5",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Superliga",
-    "match": "Brondby vs FC Copenhagen",
-    "tip": "Over 1.5",
-    "odds": "1.25",
-    "date": "2026-05-21T16:30:00+00:00",
-    "score": "1:3",
-    "result": "✓"
-  },
-  {
-    "sport": "hockey",
-    "league": "AHL",
-    "match": "Colorado Eagles vs Coachella Valley Firebirds",
-    "tip": "Over 3.5",
-    "odds": "1.23",
-    "date": "2026-05-21T01:05:00+00:00",
-    "score": "3:2",
-    "result": "✓"
-  },
-  {
-    "sport": "basketball",
-    "league": "NBA",
-    "match": "Oklahoma City Thunder vs San Antonio Spurs",
-    "tip": "Over 203.5",
-    "odds": "1.27",
-    "date": "2026-05-21T00:30:00+00:00",
-    "score": "122:113",
     "result": "✓"
   }
 ]
