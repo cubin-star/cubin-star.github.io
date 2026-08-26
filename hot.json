@@ -1,50 +1,50 @@
 [
   {
-    "league": "Iraqi League",
-    "match": "Al Zawra'a - Naft Maysan",
-    "kickoff": "2026-08-25T20:00:00+02:00",
+    "league": "Primera División",
+    "match": "Coquimbo Unido - U. Catolica",
+    "kickoff": "2026-08-27T00:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.15",
+    "odds": "2.11",
     "group": 1
   },
   {
-    "league": "Primera B Metropolitana",
-    "match": "Arsenal Sarandi - Ituzaingó",
-    "kickoff": "2026-08-25T20:00:00+02:00",
+    "league": "Copa Uruguay",
+    "match": "Plaza Colonia - Cerro Largo",
+    "kickoff": "2026-08-26T22:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.22",
+    "odds": "2.34",
     "group": 1
   },
   {
-    "league": "Premier Soccer League",
-    "match": "Kruger United - Durban City",
-    "kickoff": "2026-08-25T19:30:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.45",
-    "group": 2
-  },
-  {
-    "league": "League Cup",
-    "match": "Fleetwood Town - Shrewsbury",
-    "kickoff": "2026-08-25T20:45:00+02:00",
+    "league": "Reserve League",
+    "match": "San Lorenzo Res. - Godoy Cruz Res.",
+    "kickoff": "2026-08-26T20:00:00+02:00",
     "tip": "Over 2.5",
     "odds": "2.10",
     "group": 2
   },
   {
-    "league": "La Liga",
-    "match": "Valencia - Real Betis",
-    "kickoff": "2026-08-25T21:00:00+02:00",
+    "league": "Iraqi League",
+    "match": "Naft - Duhok",
+    "kickoff": "2026-08-26T17:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.13",
+    "odds": "2.38",
+    "group": 2
+  },
+  {
+    "league": "Premier League",
+    "match": "National Bank of Egypt - Zamalek SC",
+    "kickoff": "2026-08-26T19:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.25",
     "group": 3
   },
   {
-    "league": "Liga Femenina",
-    "match": "Santa Fe W - Orsomarso W",
-    "kickoff": "2026-08-26T01:00:00+02:00",
+    "league": "Copa Venezuela",
+    "match": "Petare FC - Anzoátegui FC",
+    "kickoff": "2026-08-27T01:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.22",
+    "odds": "2.13",
     "group": 3
   }
 ]
