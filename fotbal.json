@@ -1,24 +1,24 @@
 [
   {
-    "League": "Regionalliga - Nordost",
-    "Match": "Lokomotive Leipzig vs Chemnitzer FC",
+    "League": "CONCACAF Central American Cup",
+    "Match": "Xelajú vs Firpo",
     "Tip": "Over 2.5",
-    "Odds": "1.75",
-    "Date": "2026-08-25T17:00:00+00:00"
+    "Odds": "1.83",
+    "Date": "2026-08-27T02:30:00+00:00"
   },
   {
-    "League": "Superettan",
-    "Match": "Orebro SK vs Varbergs BoIS FC",
-    "Tip": "Over 2.5",
-    "Odds": "1.85",
-    "Date": "2026-08-25T17:00:00+00:00"
-  },
-  {
-    "League": "Second League",
-    "Match": "CSKA Sofia II vs Ludogorets II",
+    "League": "David Kipiani Cup",
+    "Match": "Torpedo Kutaisi vs Dinamo Batumi",
     "Tip": "Over 2.5",
     "Odds": "1.80",
-    "Date": "2026-08-25T15:00:00+00:00",
+    "Date": "2026-08-26T17:00:00+00:00"
+  },
+  {
+    "League": "Leagues Cup",
+    "Match": "Club America vs Columbus Crew",
+    "Tip": "Over 2.5",
+    "Odds": "1.80",
+    "Date": "2026-08-27T02:45:00+00:00",
     "locked": true
   }
 ]
