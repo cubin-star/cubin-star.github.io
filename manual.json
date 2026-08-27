@@ -1,15 +1,3 @@
 [
-  {
-    "homeTeam": "CSKA Sofia",
-    "awayTeam": "OFI Kreta",
-    "league": "UEFA Europa League",
-    "kickOff": "2024-01-25T18:45:00Z"
-  },
-   {
-    "homeTeam": "Rijeka",
-    "awayTeam": "Mydtjylland",
-  },
-  [
-  { "homeTeam": "Hibernians", "awayTeam": "Gent" }
-]
-]
+  { "homeTeam": "Rijeka", "awayTeam": "Midtjylland", "league": "UEFA Conference League" }
+   ]
