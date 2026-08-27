@@ -1,5 +1,21 @@
 [
   {
+    "league": "Primera A",
+    "homeTeam": "America de Cali",
+    "awayTeam": "Junior",
+    "tip": "Over 2.5",
+    "odds": "",
+    "halftimeScore": "1:1",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-08-26T23:20:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 1:1 | xG: 1.32 | Shots: 14/6 | losingXG: 0.00 losingSOT: 0 | @HT | Pre O2.5: 1.85"
+  },
+  {
     "league": "Serie A",
     "homeTeam": "Botafogo",
     "awayTeam": "Atletico Paranaense",
