@@ -1,24 +1,24 @@
 [
   {
     "League": "CONCACAF Central American Cup",
-    "Match": "Xelajú vs Firpo",
+    "Match": "CD Olimpia vs Deportivo Saprissa",
     "Tip": "Over 2.5",
-    "Odds": "1.83",
-    "Date": "2026-08-27T02:30:00+00:00"
+    "Odds": "1.93",
+    "Date": "2026-08-28T02:30:00+00:00"
   },
   {
-    "League": "David Kipiani Cup",
-    "Match": "Torpedo Kutaisi vs Dinamo Batumi",
+    "League": "UEFA Europa Conference League",
+    "Match": "Qarabag vs Twente",
     "Tip": "Over 2.5",
     "Odds": "1.80",
-    "Date": "2026-08-26T17:00:00+00:00"
+    "Date": "2026-08-27T16:00:00+00:00"
   },
   {
-    "League": "Leagues Cup",
-    "Match": "Club America vs Columbus Crew",
+    "League": "UEFA Europa League",
+    "Match": "Kauno Žalgiris vs Beşiktaş",
     "Tip": "Over 2.5",
-    "Odds": "1.80",
-    "Date": "2026-08-27T02:45:00+00:00",
+    "Odds": "1.89",
+    "Date": "2026-08-27T17:00:00+00:00",
     "locked": true
   }
 ]
