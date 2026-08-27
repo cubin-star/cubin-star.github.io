@@ -1,5 +1,19 @@
 [
   {
+    "league": "UEFA Conference League",
+    "homeTeam": "Rijeka",
+    "awayTeam": "Midtjylland",
+    "tip": "Over 2.5",
+    "odds": "",
+    "halftimeScore": "1:1",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-08-27T18:45:00.000Z",
+    "resolvedAt": ""
+  },
+  {
     "league": "UEFA Europa League",
     "homeTeam": "CSKA Sofia",
     "awayTeam": "OFI Kreta",
