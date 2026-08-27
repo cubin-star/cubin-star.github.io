@@ -1,5 +1,19 @@
 [
   {
+    "league": "UEFA Europa League",
+    "homeTeam": "CSKA Sofia",
+    "awayTeam": "OFI Kreta",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "0:1",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2024-01-25T18:45:00.000Z",
+    "resolvedAt": ""
+  },
+  {
     "league": "Primera A",
     "homeTeam": "America de Cali",
     "awayTeam": "Junior",
