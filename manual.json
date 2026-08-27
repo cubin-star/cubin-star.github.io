@@ -8,7 +8,8 @@
    {
     "homeTeam": "Rijeka",
     "awayTeam": "Mydtjylland",
-    "league": "UEFA Conference League",
-    "kickOff": "2024-01-25T20:45:00Z"
-  }
+  },
+  [
+  { "homeTeam": "Hibernians", "awayTeam": "Gent" }
+]
 ]
