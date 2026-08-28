@@ -487,11 +487,11 @@
     "matches": [
       {
         "league": "Superliga",
-        "match": "Odense vs Sonderjyske",
+        "match": "SJK vs HJK",
         "tip": "Over 2.5",
         "odds": "1.63",
-        "score": "1:0",
-        "result": "✗"
+        "score": "3:0",
+        "result": "✓"
       },
       {
         "league": "Superettan",
@@ -508,11 +508,11 @@
     "matches": [
       {
         "league": "Czech Liga",
-        "match": "Bohemians 1905 vs Hradec Králové",
+        "match": "Sigma Olomouc vs Mlada Boleslav",
         "tip": "Over 2.5",
         "odds": "1.84",
-        "score": "0:0",
-        "result": "✗"
+        "score": "2:2",
+        "result": "✓"
       },
       {
         "league": "K League 1",
