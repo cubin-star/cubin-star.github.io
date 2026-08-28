@@ -1,6 +1,36 @@
 [
   {
     "sport": "basketball",
+    "league": "World Cup",
+    "match": "Croatia vs Latvia",
+    "tip": "Over 160.5",
+    "odds": "1.23",
+    "date": "2026-08-27T18:00:00+00:00",
+    "score": "115:80",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "UEFA Europa League",
+    "match": "Lillestrom vs Egnatia Rrogozhinë",
+    "tip": "Over 1.5",
+    "odds": "1.24",
+    "date": "2026-08-27T17:00:00+00:00",
+    "score": "2:1",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "UEFA Europa Conference League",
+    "match": "Qarabag vs Twente",
+    "tip": "Over 1.5",
+    "odds": "1.21",
+    "date": "2026-08-27T16:00:00+00:00",
+    "score": "1:4",
+    "result": "✓"
+  },
+  {
+    "sport": "basketball",
     "league": "NBA W",
     "match": "Seattle Storm W vs Toronto Tempo W",
     "tip": "Over 164.5",
@@ -1968,35 +1998,5 @@
     "date": "2026-05-23T00:30:00+00:00",
     "score": "108:123",
     "result": "✓"
-  },
-  {
-    "sport": "hockey",
-    "league": "AHL",
-    "match": "Toronto Marlies vs Cleveland Monsters",
-    "tip": "Over 3.5",
-    "odds": "1.23",
-    "date": "2026-05-22T23:00:00+00:00",
-    "score": "5:2",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Bundesliga",
-    "match": "Ried vs Rapid Vienna",
-    "tip": "Over 1.5",
-    "odds": "1.27",
-    "date": "2026-05-22T17:30:00+00:00",
-    "score": "2:1",
-    "result": "✓"
-  },
-  {
-    "sport": "basketball",
-    "league": "Euroleague",
-    "match": "Olympiacos vs Fenerbahce",
-    "tip": "Over 151.5",
-    "odds": "1.28",
-    "date": "2026-05-22T15:00:00+00:00",
-    "score": "79:61",
-    "result": "✗"
   }
 ]
