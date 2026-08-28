@@ -1,5 +1,26 @@
 [
   {
+    "date": "2026-08-27T05:30:00Z",
+    "matches": [
+      {
+        "league": "UEFA Europa League",
+        "match": "CSKA Sofia vs OFI",
+        "tip": "Over 2.5",
+        "odds": "1.73",
+        "score": "0:2",
+        "result": "✗"
+      },
+      {
+        "league": "UEFA Europa Conference League",
+        "match": "Maccabi Tel Aviv vs FC Lugano",
+        "tip": "Over 2.5",
+        "odds": "1.76",
+        "score": "1:1",
+        "result": "✗"
+      }
+    ]
+  },
+  {
     "date": "2026-08-26T05:30:00Z",
     "matches": [
       {
