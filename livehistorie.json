@@ -1,5 +1,21 @@
 [
   {
+    "league": "Premier League",
+    "homeTeam": "Enppi",
+    "awayTeam": "Wadi Degla",
+    "tip": "Over 2.5",
+    "odds": "",
+    "halftimeScore": "1:1",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-08-28T14:00:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 1:1 | xG: 2.22 | Shots: 15/4 | losingXG: 0.00 losingSOT: 0 | @HT | Pre O2.5: 2.59"
+  },
+  {
     "league": "UEFA Conference League",
     "homeTeam": "Hibernian",
     "awayTeam": "Gent",
