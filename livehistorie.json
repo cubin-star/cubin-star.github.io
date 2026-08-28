@@ -7,11 +7,11 @@
     "odds": "",
     "halftimeScore": "1:0",
     "liveOdds": "",
-    "finalScore": "2:2",
-    "result": "✅ Won",
+    "finalScore": "",
+    "result": "",
     "sport": "football",
     "kickoff": "2026-08-28T18:45:00.000Z",
-    "resolvedAt": "2026-08-28T20:55:04.874Z"
+    "resolvedAt": ""
   },
   {
     "league": "Championship",
@@ -21,11 +21,11 @@
     "odds": "",
     "halftimeScore": "0:1",
     "liveOdds": "",
-    "finalScore": "",
-    "result": "",
+    "finalScore": "1:2",
+    "result": "✅ Won",
     "sport": "football",
     "kickoff": "2026-08-28T19:00:00.000Z",
-    "resolvedAt": "",
+    "resolvedAt": "2026-08-28T20:58:05.076Z",
     "source": "whisper-football",
     "scoutStats": "Whisper xG-rate surge | HT 0:1 | xG: 1.43 | Shots: 10/4 | losingXG: 0.23 losingSOT: 2 | @HT | Pre O2.5: 2.17"
   },
