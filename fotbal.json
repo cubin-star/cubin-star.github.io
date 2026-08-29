@@ -1,24 +1,24 @@
 [
   {
-    "League": "National League",
-    "Match": "AFC Hornchurch vs Woking",
-    "Tip": "Over 2.5",
-    "Odds": "1.87",
-    "Date": "2026-08-28T18:45:00+00:00"
-  },
-  {
     "League": "National League - North",
-    "Match": "Hednesford Town vs Harborough Town",
+    "Match": "Scarborough Athletic vs Southport",
     "Tip": "Over 2.5",
-    "Odds": "1.79",
-    "Date": "2026-08-28T18:45:00+00:00"
+    "Odds": "1.77",
+    "Date": "2026-08-29T14:00:00+00:00"
   },
   {
-    "League": "Süper Lig",
-    "Match": "Gençlerbirliği S.K. vs Erzurumspor FK",
+    "League": "Serie A",
+    "Match": "Juventus vs Parma",
     "Tip": "Over 2.5",
-    "Odds": "1.88",
-    "Date": "2026-08-28T18:30:00+00:00",
+    "Odds": "1.75",
+    "Date": "2026-08-29T18:45:00+00:00"
+  },
+  {
+    "League": "Challenger Pro League",
+    "Match": "Patro Eisden vs Club Brugge II",
+    "Tip": "Over 2.5",
+    "Odds": "1.92",
+    "Date": "2026-08-29T18:00:00+00:00",
     "locked": true
   }
 ]
