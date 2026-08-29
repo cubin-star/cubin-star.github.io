@@ -1,20 +1,6 @@
 [
   {
     "league": "",
-    "homeTeam": "Alaves",
-    "awayTeam": "Villarreal",
-    "tip": "Over 1.5",
-    "odds": "",
-    "halftimeScore": "1:0",
-    "liveOdds": "",
-    "finalScore": "1:0",
-    "result": "❌ Lost",
-    "sport": "football",
-    "kickoff": "2026-08-28T19:30:00.000Z",
-    "resolvedAt": "2026-08-28T21:40:05.944Z"
-  },
-  {
-    "league": "",
     "homeTeam": "Lille",
     "awayTeam": "Paris SG",
     "tip": "Over 1.5",
