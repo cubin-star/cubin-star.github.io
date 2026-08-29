@@ -1,9 +1,23 @@
 [
   {
-    "League": "Primera División",
-    "Match": "Cobresal vs Palestino",
+    "League": "Division Profesional - Clausura",
+    "Match": "Deportivo Recoleta vs Olimpia",
     "Tip": "Over 1.5",
-    "Odds": "1.21",
-    "Date": "2026-08-28T22:30:00+00:00"
+    "Odds": "1.23",
+    "Date": "2026-08-29T21:30:00+00:00"
+  },
+  {
+    "League": "Major League Soccer",
+    "Match": "Atlanta United FC vs Charlotte",
+    "Tip": "Over 1.5",
+    "Odds": "1.17",
+    "Date": "2026-08-29T23:30:00+00:00"
+  },
+  {
+    "League": "Major League Soccer",
+    "Match": "Nashville SC vs FC Cincinnati",
+    "Tip": "Over 1.5",
+    "Odds": "1.14",
+    "Date": "2026-08-30T00:30:00+00:00"
   }
 ]
