@@ -1,5 +1,15 @@
 [
   {
+    "sport": "football",
+    "league": "Ligue 1",
+    "match": "Lille vs Paris Saint Germain",
+    "tip": "Over 1.5",
+    "odds": "1.22",
+    "date": "2026-08-28T18:45:00+00:00",
+    "score": "2:2",
+    "result": "✓"
+  },
+  {
     "sport": "basketball",
     "league": "World Cup",
     "match": "Croatia vs Latvia",
@@ -1987,16 +1997,6 @@
     "odds": "1.26",
     "date": "2026-05-23T07:30:00+00:00",
     "score": "3:2",
-    "result": "✓"
-  },
-  {
-    "sport": "basketball",
-    "league": "NBA",
-    "match": "San Antonio Spurs vs Oklahoma City Thunder",
-    "tip": "Over 204.5",
-    "odds": "1.27",
-    "date": "2026-05-23T00:30:00+00:00",
-    "score": "108:123",
     "result": "✓"
   }
 ]
