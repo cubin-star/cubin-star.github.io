@@ -1,17 +1,31 @@
 [
   {
     "league": "",
+    "homeTeam": "FCSB",
+    "awayTeam": "UTA Arad",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "0:1",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-08-30T18:00:00.000Z",
+    "resolvedAt": ""
+  },
+  {
+    "league": "",
     "homeTeam": "Cadiz",
     "awayTeam": "Valladolid",
     "tip": "Over 2.5",
     "odds": "",
     "halftimeScore": "1:1",
     "liveOdds": "",
-    "finalScore": "1:1",
-    "result": "❌ Lost",
+    "finalScore": "",
+    "result": "",
     "sport": "football",
     "kickoff": "2026-08-30T17:00:00.000Z",
-    "resolvedAt": "2026-08-30T19:10:14.912Z"
+    "resolvedAt": ""
   },
   {
     "league": "",
