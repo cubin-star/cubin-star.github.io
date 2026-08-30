@@ -1,24 +1,24 @@
 [
   {
-    "League": "National League - North",
-    "Match": "Scarborough Athletic vs Southport",
+    "League": "Taça de Portugal",
+    "Match": "Florgrade vs São João Ver",
     "Tip": "Over 2.5",
-    "Odds": "1.77",
-    "Date": "2026-08-29T14:00:00+00:00"
+    "Odds": "1.95",
+    "Date": "2026-08-30T16:00:00+00:00"
   },
   {
-    "League": "Serie A",
-    "Match": "Juventus vs Parma",
+    "League": "Jupiler Pro League",
+    "Match": "Antwerp vs St. Truiden",
     "Tip": "Over 2.5",
-    "Odds": "1.75",
-    "Date": "2026-08-29T18:45:00+00:00"
+    "Odds": "1.80",
+    "Date": "2026-08-30T14:00:00+00:00"
   },
   {
-    "League": "Challenger Pro League",
-    "Match": "Patro Eisden vs Club Brugge II",
+    "League": "Süper Lig",
+    "Match": "Başakşehir vs Kasımpaşa",
     "Tip": "Over 2.5",
-    "Odds": "1.92",
-    "Date": "2026-08-29T18:00:00+00:00",
+    "Odds": "1.80",
+    "Date": "2026-08-30T18:30:00+00:00",
     "locked": true
   }
 ]
