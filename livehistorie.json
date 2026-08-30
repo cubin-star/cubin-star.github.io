@@ -1,20 +1,6 @@
 [
   {
     "league": "",
-    "homeTeam": "Hartberg",
-    "awayTeam": "Ried",
-    "tip": "Over 3.5",
-    "odds": "",
-    "halftimeScore": "2:1",
-    "liveOdds": "",
-    "finalScore": "",
-    "result": "",
-    "sport": "football",
-    "kickoff": "2026-08-30T15:00:00.000Z",
-    "resolvedAt": ""
-  },
-  {
-    "league": "",
     "homeTeam": "Kisvarda",
     "awayTeam": "Gyor",
     "tip": "Over 2.5",
@@ -35,11 +21,11 @@
     "odds": "",
     "halftimeScore": "0:1",
     "liveOdds": "",
-    "finalScore": "",
-    "result": "",
+    "finalScore": "1:4",
+    "result": "✅ Won",
     "sport": "football",
     "kickoff": "2026-08-30T14:00:00.000Z",
-    "resolvedAt": ""
+    "resolvedAt": "2026-08-30T16:10:06.312Z"
   },
   {
     "league": "",
