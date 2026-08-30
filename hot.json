@@ -1,50 +1,50 @@
 [
   {
-    "league": "Primera C",
-    "match": "El Porvenir - Claypole",
-    "kickoff": "2026-08-29T20:00:00+02:00",
+    "league": "Division Intermedia",
+    "match": "Guairena FC - SOL DE America",
+    "kickoff": "2026-08-30T15:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.46",
+    "odds": "2.15",
     "group": 1
   },
   {
-    "league": "Ligue 1",
-    "match": "Auxerre - Angers",
-    "kickoff": "2026-08-29T20:45:00+02:00",
+    "league": "Liga Pro",
+    "match": "Orense SC - Macara",
+    "kickoff": "2026-08-30T22:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.10",
+    "odds": "2.35",
     "group": 1
   },
   {
-    "league": "Premier League",
-    "match": "A'Ali - Manama",
-    "kickoff": "2026-08-29T18:00:00+02:00",
+    "league": "Segunda División",
+    "match": "Santiago Morning - Provincial Ovalle",
+    "kickoff": "2026-08-30T21:00:00+02:00",
     "tip": "Over 2.5",
     "odds": "2.13",
     "group": 2
   },
   {
-    "league": "Segunda División",
-    "match": "Albacete - Oviedo",
-    "kickoff": "2026-08-29T19:00:00+02:00",
+    "league": "Primera Nacional",
+    "match": "Quilmes - Temperley",
+    "kickoff": "2026-08-31T00:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.38",
+    "odds": "2.50",
     "group": 2
   },
   {
-    "league": "Liga II",
-    "match": "Dumbrăviţa - CSM Ramnicu Valcea",
-    "kickoff": "2026-08-29T10:00:00+02:00",
+    "league": "Serie A",
+    "match": "Corinthians - Santos",
+    "kickoff": "2026-08-30T21:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.16",
+    "odds": "2.18",
     "group": 3
   },
   {
     "league": "Serie B",
-    "match": "Ascoli - Carrarese",
-    "kickoff": "2026-08-29T21:00:00+02:00",
+    "match": "Vila Nova - Ceara",
+    "kickoff": "2026-08-30T23:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.36",
+    "odds": "2.29",
     "group": 3
   }
 ]
