@@ -1,5 +1,21 @@
 [
   {
+    "league": "Serie A",
+    "homeTeam": "Napoli",
+    "awayTeam": "Como",
+    "tip": "Over 3.5",
+    "odds": "",
+    "halftimeScore": "1:2",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-08-30T16:30:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 1:2 | xG: 1.47 | Shots: 16/4 | losingXG: 0.91 losingSOT: 1 | @HT | Pre O2.5: 2.25"
+  },
+  {
     "league": "",
     "homeTeam": "Deportivo Moquegua",
     "awayTeam": "Alianza Atletico Sullana",
