@@ -1,5 +1,21 @@
 [
   {
+    "league": "Liga Profesional Argentina",
+    "homeTeam": "Argentinos JRS",
+    "awayTeam": "Aldosivi",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "0:1",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-08-30T20:00:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 0:1 | xG: 1.39 | Shots: 17/4 | losingXG: 0.77 losingSOT: 2 | @HT | Pre O2.5: 2.2"
+  },
+  {
     "league": "",
     "homeTeam": "Cagliari",
     "awayTeam": "Inter",
