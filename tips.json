@@ -1,16 +1,16 @@
 [
   {
-    "League": "Ekstraklasa",
-    "Match": "Zaglebie Lubin vs Pogon Szczecin",
-    "Tip": "Over 2.5",
-    "Odds": "1.88",
-    "Date": "2026-08-29T18:15:00+00:00"
-  },
-  {
-    "League": "Bundesliga",
-    "Match": "FSV Mainz 05 vs SC Paderborn 07",
+    "League": "Eliteserien",
+    "Match": "Start vs KFUM Oslo",
     "Tip": "Over 2.5",
     "Odds": "1.66",
-    "Date": "2026-08-29T13:30:00+00:00"
+    "Date": "2026-08-30T15:00:00+00:00"
+  },
+  {
+    "League": "Süper Lig",
+    "Match": "Samsunspor vs Fenerbahçe",
+    "Tip": "Over 2.5",
+    "Odds": "1.61",
+    "Date": "2026-08-30T18:30:00+00:00"
   }
 ]

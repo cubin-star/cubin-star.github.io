@@ -1,23 +1,30 @@
 [
   {
-    "League": "Division Profesional - Clausura",
-    "Match": "Deportivo Recoleta vs Olimpia",
+    "League": "1. Division",
+    "Match": "Hillerød vs Hobro",
     "Tip": "Over 1.5",
-    "Odds": "1.23",
-    "Date": "2026-08-29T21:30:00+00:00"
+    "Odds": "1.22",
+    "Date": "2026-08-30T11:00:00+00:00"
   },
   {
-    "League": "Major League Soccer",
-    "Match": "Atlanta United FC vs Charlotte",
+    "League": "I Liga",
+    "Match": "Arka Gdynia vs Polonia Bytom",
     "Tip": "Over 1.5",
-    "Odds": "1.17",
-    "Date": "2026-08-29T23:30:00+00:00"
+    "Odds": "1.19",
+    "Date": "2026-08-30T12:30:00+00:00"
   },
   {
-    "League": "Major League Soccer",
-    "Match": "Nashville SC vs FC Cincinnati",
+    "League": "Super Liga",
+    "Match": "Spartak Trnava vs Žilina",
     "Tip": "Over 1.5",
-    "Odds": "1.14",
-    "Date": "2026-08-30T00:30:00+00:00"
+    "Odds": "1.18",
+    "Date": "2026-08-30T17:00:00+00:00"
+  },
+  {
+    "League": "Primera División",
+    "Match": "Coquimbo Unido vs Huachipato",
+    "Tip": "Over 1.5",
+    "Odds": "1.21",
+    "Date": "2026-08-31T00:00:00+00:00"
   }
 ]
