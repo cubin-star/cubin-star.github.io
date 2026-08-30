@@ -23,11 +23,11 @@
     "odds": "",
     "halftimeScore": "0:1",
     "liveOdds": "",
-    "finalScore": "",
-    "result": "",
+    "finalScore": "0:1",
+    "result": "❌ Lost",
     "sport": "football",
     "kickoff": "2026-08-30T18:45:00.000Z",
-    "resolvedAt": ""
+    "resolvedAt": "2026-08-30T20:55:20.214Z"
   },
   {
     "league": "",
