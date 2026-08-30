@@ -1,6 +1,20 @@
 [
   {
     "league": "",
+    "homeTeam": "Cagliari",
+    "awayTeam": "Inter",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "0:1",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-08-30T18:45:00.000Z",
+    "resolvedAt": ""
+  },
+  {
+    "league": "",
     "homeTeam": "Widzew Lodz",
     "awayTeam": "Lech",
     "tip": "Over 3.5",
