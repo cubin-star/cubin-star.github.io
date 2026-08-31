@@ -1,5 +1,19 @@
 [
   {
+    "league": "",
+    "homeTeam": "Rapid",
+    "awayTeam": "Universitatea Craiova",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "0:1",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-08-31T17:30:00.000Z",
+    "resolvedAt": ""
+  },
+  {
     "league": "Premier League",
     "homeTeam": "Zamalek SC",
     "awayTeam": "Petrojet",
