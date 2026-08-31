@@ -1,6 +1,20 @@
 [
   {
     "league": "",
+    "homeTeam": "Wil",
+    "awayTeam": "Aarau",
+    "tip": "Over 2.5",
+    "odds": "",
+    "halftimeScore": "0:2",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-08-31T18:15:00.000Z",
+    "resolvedAt": ""
+  },
+  {
+    "league": "",
     "homeTeam": "Al Taee",
     "awayTeam": "Al Jandal",
     "tip": "Over 1.5",
