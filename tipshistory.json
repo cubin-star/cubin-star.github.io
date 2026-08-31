@@ -1,5 +1,26 @@
 [
   {
+    "date": "2026-08-30T05:30:00Z",
+    "matches": [
+      {
+        "league": "Eliteserien",
+        "match": "Start vs KFUM Oslo",
+        "tip": "Over 2.5",
+        "odds": "1.66",
+        "score": "4:1",
+        "result": "✓"
+      },
+      {
+        "league": "Süper Lig",
+        "match": "Samsunspor vs Fenerbahçe",
+        "tip": "Over 2.5",
+        "odds": "1.61",
+        "score": "3:1",
+        "result": "✓"
+      }
+    ]
+  },
+  {
     "date": "2026-08-29T05:30:00Z",
     "matches": [
       {
