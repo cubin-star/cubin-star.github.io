@@ -7,6 +7,9 @@ const FOOTBALL_API = 'https://v3.football.api-sports.io';
 const MIN_ODDS = 2.1;
 const MAX_ODDS = 2.5;
 const PICK_COUNT = 6;
+// Vahy pro vazeny nahodny vyber - vyssi tier ma vyrazne vetsi sanci, ale nizsi nejsou vyloucene.
+// T1 = top evropske ligy + UEFA pohary, T2 = druhe ligy/domaci pohary, T3 = ostatni Evropa, T4 = zbytek sveta.
+const TIER_WEIGHTS = { 1: 12, 2: 6, 3: 3, 4: 1 };
 const EXCLUDED_COUNTRIES = new Set(['Russia', 'Belarus']);
 const TZ = 'Europe/Prague';
 const USER_AGENT = 'kombik-bot/1.0 (+github-actions)';
@@ -213,10 +216,20 @@ async function main(){
 
     const tier1=shuffle(pool.filter(m=>m.tier===1)),tier2=shuffle(pool.filter(m=>m.tier===2)),tier3=shuffle(pool.filter(m=>m.tier===3)),tier4=shuffle(pool.filter(m=>m.tier===4));
     console.log('Tier 1: '+tier1.length+', Tier 2: '+tier2.length+', Tier 3: '+tier3.length+', Tier 4: '+tier4.length+'\n');
-    // Vsechny tiery dohromady a nahodne zamichane -> z nich vybirame 6 (max 1 zapas na ligu)
-    const shuffledPool=shuffle([...pool]);
+    // Vazeny nahodny vyber: vyssi tier (Evropa/top ligy) ma vetsi sanci, ale i nizsi tiery mohou projit.
+    // Zaroven max 1 zapas na ligu. Vahy: T1 nejvyssi ... T4 nejnizsi.
+    const remaining=[...pool];
     const selected=[],usedLeagues=new Set();
-    for(const m of shuffledPool){if(selected.length>=PICK_COUNT)break;const lk=m.league+'|'+m.country;if(usedLeagues.has(lk))continue;usedLeagues.add(lk);selected.push(m);console.log('   [T'+m.tier+'] '+m.match+' | '+m.league+' ('+m.country+') | Over 2.5 @ '+m.odds);}
+    while(selected.length<PICK_COUNT&&remaining.length>0){
+        const totalW=remaining.reduce((a,m)=>a+(TIER_WEIGHTS[m.tier]||1),0);
+        let r=Math.random()*totalW,idx=0;
+        for(let i=0;i<remaining.length;i++){r-=(TIER_WEIGHTS[remaining[i].tier]||1);if(r<=0){idx=i;break;}}
+        const m=remaining.splice(idx,1)[0];
+        const lk=m.league+'|'+m.country;
+        if(usedLeagues.has(lk))continue;
+        usedLeagues.add(lk);selected.push(m);
+        console.log('   [T'+m.tier+'] '+m.match+' | '+m.league+' ('+m.country+') | Over 2.5 @ '+m.odds);
+    }
     console.log('\nVybrano: '+selected.length+'/'+PICK_COUNT);
     if(selected.length<PICK_COUNT)console.log('WARNING: Mene nez '+PICK_COUNT+' zapasu.');
     const live1=[...tier1,...tier2].map(m=>({league:m.league,match:m.match,kickoff:m.kickoff,tip:m.tip,odds:m.odds}));
