@@ -1,6 +1,20 @@
 [
   {
     "league": "",
+    "homeTeam": "Parma",
+    "awayTeam": "Cremonese",
+    "tip": "Over 2.5",
+    "odds": "",
+    "halftimeScore": "0:2",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-09-01T16:00:00.000Z",
+    "resolvedAt": ""
+  },
+  {
+    "league": "",
     "homeTeam": "Volos",
     "awayTeam": "Kalamata",
     "tip": "Over 2.5",
