@@ -1,17 +1,31 @@
 [
   {
     "league": "",
+    "homeTeam": "Volos",
+    "awayTeam": "Kalamata",
+    "tip": "Over 2.5",
+    "odds": "",
+    "halftimeScore": "0:2",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-09-01T15:00:00.000Z",
+    "resolvedAt": ""
+  },
+  {
+    "league": "",
     "homeTeam": "Umraniyespor",
     "awayTeam": "Muglaspor",
     "tip": "Over 1.5",
     "odds": "",
     "halftimeScore": "0:1",
     "liveOdds": "",
-    "finalScore": "0:1",
-    "result": "❌ Lost",
+    "finalScore": "",
+    "result": "",
     "sport": "football",
     "kickoff": "2026-09-01T14:00:00.000Z",
-    "resolvedAt": "2026-09-01T16:10:05.653Z"
+    "resolvedAt": ""
   },
   {
     "league": "",
