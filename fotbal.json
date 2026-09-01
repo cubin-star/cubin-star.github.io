@@ -1,24 +1,24 @@
 [
   {
-    "League": "National League - North",
-    "Match": "Worksop Town vs Oxford City",
+    "League": "National League",
+    "Match": "FC Halifax Town vs Hartlepool",
     "Tip": "Over 2.5",
-    "Odds": "1.80",
-    "Date": "2026-08-31T14:00:00+00:00"
+    "Odds": "1.82",
+    "Date": "2026-09-01T18:45:00+00:00"
   },
   {
-    "League": "Süper Lig",
-    "Match": "Amed vs Trabzonspor",
+    "League": "Cup",
+    "Match": "Podhale Nowy Targ vs Pogoń Grod. Mazowiecki",
     "Tip": "Over 2.5",
     "Odds": "1.75",
-    "Date": "2026-08-31T18:30:00+00:00"
+    "Date": "2026-09-01T13:30:00+00:00"
   },
   {
-    "League": "National League - South",
-    "Match": "Folkestone Invicta vs Hemel Hempstead Town",
+    "League": "Cupa României",
+    "Match": "Corona Braşov vs Bihor Oradea",
     "Tip": "Over 2.5",
-    "Odds": "1.81",
-    "Date": "2026-08-31T14:00:00+00:00",
+    "Odds": "1.92",
+    "Date": "2026-09-01T15:00:00+00:00",
     "locked": true
   }
 ]
