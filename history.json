@@ -1,6 +1,36 @@
 [
   {
     "sport": "football",
+    "league": "Primera División",
+    "match": "U. Catolica vs O'Higgins",
+    "tip": "Over 1.5",
+    "odds": "1.23",
+    "date": "2026-09-01T00:45:00+00:00",
+    "score": "3:2",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "Serie A",
+    "match": "Atalanta vs Bologna",
+    "tip": "Over 1.5",
+    "odds": "1.29",
+    "date": "2026-08-31T18:45:00+00:00",
+    "score": "1:0",
+    "result": "✗"
+  },
+  {
+    "sport": "basketball",
+    "league": "World Cup",
+    "match": "Montenegro vs Ukraine",
+    "tip": "Over 146.5",
+    "odds": "1.28",
+    "date": "2026-08-31T18:30:00+00:00",
+    "score": "89:98",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
     "league": "Superliga",
     "match": "Randers FC vs Aarhus",
     "tip": "Over 1.5",
@@ -1967,36 +1997,6 @@
     "odds": "1.21",
     "date": "2026-05-24T16:30:00+00:00",
     "score": "5:1",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Premier League",
-    "match": "Tottenham vs Everton",
-    "tip": "Over 1.5",
-    "odds": "1.24",
-    "date": "2026-05-24T15:00:00+00:00",
-    "score": "1:0",
-    "result": "✗"
-  },
-  {
-    "sport": "hockey",
-    "league": "World Championship",
-    "match": "Denmark vs Italy",
-    "tip": "Over 3.5",
-    "odds": "1.29",
-    "date": "2026-05-24T14:20:00+00:00",
-    "score": "3:2",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "J1 League",
-    "match": "Shimizu S-pulse vs Gamba Osaka",
-    "tip": "Over 1.5",
-    "odds": "1.29",
-    "date": "2026-05-24T08:00:00+00:00",
-    "score": "1:2",
     "result": "✓"
   }
 ]
