@@ -1,13 +1,6 @@
 [
   {
     "league": "First NL",
-    "match": "HNK Cibalia - Orijent 1919",
-    "kickoff": "2026-09-02T19:30:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.10"
-  },
-  {
-    "league": "First NL",
     "match": "Croatia Zmijavci - Bsk Bijelo Brdo",
     "kickoff": "2026-09-02T17:00:00+02:00",
     "tip": "Over 2.5",
@@ -15,8 +8,8 @@
   },
   {
     "league": "First NL",
-    "match": "Mladost Ždralovi - Sesvete",
-    "kickoff": "2026-09-02T17:00:00+02:00",
+    "match": "HNK Cibalia - Orijent 1919",
+    "kickoff": "2026-09-02T19:30:00+02:00",
     "tip": "Over 2.5",
     "odds": "2.10"
   },
@@ -28,25 +21,11 @@
     "odds": "2.10"
   },
   {
-    "league": "Cup",
-    "match": "Panserraikos - Atromitos",
-    "kickoff": "2026-09-02T19:00:00+02:00",
+    "league": "First NL",
+    "match": "Mladost Ždralovi - Sesvete",
+    "kickoff": "2026-09-02T17:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.13"
-  },
-  {
-    "league": "Cupa României",
-    "match": "Arges Pitesti - FCSB",
-    "kickoff": "2026-09-02T20:30:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.12"
-  },
-  {
-    "league": "Coppa Italia Serie C",
-    "match": "Guidonia Montecelio 1937 - Latina",
-    "kickoff": "2026-09-02T18:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.13"
+    "odds": "2.10"
   },
   {
     "league": "Cupa României",
@@ -56,23 +35,23 @@
     "odds": "2.11"
   },
   {
-    "league": "Coppa Italia Serie C",
-    "match": "Athletic Carpi - PRO Vercelli",
-    "kickoff": "2026-09-02T18:30:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.10"
-  },
-  {
-    "league": "Coppa Italia Serie C",
-    "match": "Arzignano Valchiampo - Dolomiti Bellunesi",
-    "kickoff": "2026-09-02T18:30:00+02:00",
+    "league": "Cup",
+    "match": "Panserraikos - Atromitos",
+    "kickoff": "2026-09-02T19:00:00+02:00",
     "tip": "Over 2.5",
     "odds": "2.13"
   },
   {
-    "league": "Championship",
-    "match": "West Brom - Charlton",
-    "kickoff": "2026-09-02T20:45:00+02:00",
+    "league": "Coppa Italia Serie C",
+    "match": "Guidonia Montecelio 1937 - Latina",
+    "kickoff": "2026-09-02T18:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.13"
+  },
+  {
+    "league": "Coppa Italia Serie C",
+    "match": "Athletic Carpi - PRO Vercelli",
+    "kickoff": "2026-09-02T18:30:00+02:00",
     "tip": "Over 2.5",
     "odds": "2.10"
   },
@@ -84,6 +63,20 @@
     "odds": "2.30"
   },
   {
+    "league": "Championship",
+    "match": "West Brom - Charlton",
+    "kickoff": "2026-09-02T20:45:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.10"
+  },
+  {
+    "league": "Coppa Italia Serie C",
+    "match": "Arzignano Valchiampo - Dolomiti Bellunesi",
+    "kickoff": "2026-09-02T18:30:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.13"
+  },
+  {
     "league": "1. Lig",
     "match": "Sivasspor - Mardin 1969",
     "kickoff": "2026-09-02T19:00:00+02:00",
@@ -91,17 +84,24 @@
     "odds": "2.10"
   },
   {
-    "league": "Coppa Italia Serie C",
-    "match": "Team Altamura - Sambenedettese",
-    "kickoff": "2026-09-02T21:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.25"
-  },
-  {
     "league": "Cupa României",
     "match": "FC Botosani - Corvinul Hunedoara",
     "kickoff": "2026-09-02T15:45:00+02:00",
     "tip": "Over 2.5",
     "odds": "2.20"
+  },
+  {
+    "league": "Cupa României",
+    "match": "Arges Pitesti - FCSB",
+    "kickoff": "2026-09-02T20:30:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.12"
+  },
+  {
+    "league": "Coppa Italia Serie C",
+    "match": "Team Altamura - Sambenedettese",
+    "kickoff": "2026-09-02T21:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.25"
   }
 ]
