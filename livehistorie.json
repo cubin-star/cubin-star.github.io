@@ -1,6 +1,20 @@
 [
   {
     "league": "",
+    "homeTeam": "Atletico MG",
+    "awayTeam": "Cruzeiro",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "0:1",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-09-02T00:00:00.000Z",
+    "resolvedAt": ""
+  },
+  {
+    "league": "",
     "homeTeam": "Supra du Quebec",
     "awayTeam": "Forge",
     "tip": "Over 1.5",
