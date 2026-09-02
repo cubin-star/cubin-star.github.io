@@ -1,1 +1,1673 @@
-[]
+[{
+    "schemaVersion":  1,
+    "description":  "Databaze dohranych zapasu pro analyzu: padne ve 2. polocase gol? Statistiky jsou HT (za 1. polocas). Pole ve \u0027stats\u0027 jsou null - doplnit rucne ze screenshotu.",
+    "source":  "livehistorie.json (cubin-star.github.io), zapasy od 2026-08-28",
+    "updatedAt":  "2026-09-02T11:09:50+02:00",
+    "fields":  {
+                   "id":  "poradove cislo zaznamu (stabilni)",
+                   "date":  "YYYY-MM-DD (datum vykopu)",
+                   "sport":  "football / hockey / basketball",
+                   "league":  "nazev souteze",
+                   "home":  "domaci tym",
+                   "away":  "hostujici tym",
+                   "tip":  "tip vygenerovany aplikaci",
+                   "ht":  "polocasovy vysledek {home, away}",
+                   "ft":  "konecny vysledek {home, away}",
+                   "stats":  "HT statistiky pro home/away: xg, shots, shotsOnTarget, bigChances (null = doplnit rucne)",
+                   "secondHalfGoals":  "(ft.home+ft.away) - (ht.home+ht.away)",
+                   "ok":  "true = ve 2. polocase padl alespon 1 gol (OK), false = KO"
+               },
+  "matches": [
+    {
+      "id": 21,
+      "date": "2026-08-30",
+      "sport": "football",
+      "league": "Liga Profesional Argentina",
+      "home": "Argentinos JRS",
+      "away": "Aldosivi",
+      "tip": "Over 1.5",
+      "ht": {
+        "home": 0,
+        "away": 1
+      },
+      "ft": {
+        "home": 2,
+        "away": 1
+      },
+      "stats": {
+        "home": {
+          "xg": 0.7,
+          "shots": 14,
+          "shotsOnTarget": 2,
+          "bigChances": 0
+        },
+        "away": {
+          "xg": 0.62,
+          "shots": 3,
+          "shotsOnTarget": 2,
+          "bigChances": 1
+        }
+      },
+      "secondHalfGoals": 2,
+      "ok": true
+    },
+    {
+      "id": 22,
+      "date": "2026-08-31",
+      "sport": "football",
+      "league": "",
+      "home": "FK Liepaja",
+      "away": "Riga FC",
+      "tip": "Over 3.5",
+      "ht": {
+        "home": 2,
+        "away": 1
+      },
+      "ft": {
+        "home": 3,
+        "away": 2
+      },
+      "stats": {
+        "home": {
+          "xg": 1.07,
+          "shots": 4,
+          "shotsOnTarget": 2,
+          "bigChances": 2
+        },
+        "away": {
+          "xg": 0.81,
+          "shots": 8,
+          "shotsOnTarget": 4,
+          "bigChances": 3
+        }
+      },
+      "secondHalfGoals": 2,
+      "ok": true
+    },
+    {
+      "id": 23,
+      "date": "2026-08-31",
+      "sport": "football",
+      "league": "Premier League",
+      "home": "Zamalek SC",
+      "away": "Petrojet",
+      "tip": "Over 1.5",
+      "ht": {
+        "home": 1,
+        "away": 0
+      },
+      "ft": {
+        "home": 2,
+        "away": 1
+      },
+      "stats": {
+        "home": {
+          "xg": 0.5,
+          "shots": 9,
+          "shotsOnTarget": 3,
+          "bigChances": 1
+        },
+        "away": {
+          "xg": 1.15,
+          "shots": 14,
+          "shotsOnTarget": 4,
+          "bigChances": 0
+        }
+      },
+      "secondHalfGoals": 2,
+      "ok": true
+    },
+    {
+      "id": 20,
+      "date": "2026-08-30",
+      "sport": "football",
+      "league": "",
+      "home": "Widzew Lodz",
+      "away": "Lech",
+      "tip": "Over 3.5",
+      "ht": {
+        "home": 1,
+        "away": 2
+      },
+      "ft": {
+        "home": 2,
+        "away": 3
+      },
+      "stats": {
+        "home": {
+          "xg": 0.73,
+          "shots": 11,
+          "shotsOnTarget": 5,
+          "bigChances": 1
+        },
+        "away": {
+          "xg": 0.67,
+          "shots": 6,
+          "shotsOnTarget": 4,
+          "bigChances": 1
+        }
+      },
+      "secondHalfGoals": 2,
+      "ok": true
+    },
+    {
+      "id": 17,
+      "date": "2026-08-30",
+      "sport": "football",
+      "league": "",
+      "home": "Deportivo Moquegua",
+      "away": "Alianza Atletico Sullana",
+      "tip": "Over 2.5",
+      "ht": {
+        "home": 1,
+        "away": 1
+      },
+      "ft": {
+        "home": 1,
+        "away": 4
+      },
+      "stats": {
+        "home": {
+          "xg": 1.37,
+          "shots": 4,
+          "shotsOnTarget": 3,
+          "bigChances": 1
+        },
+        "away": {
+          "xg": 0.84,
+          "shots": 10,
+          "shotsOnTarget": 3,
+          "bigChances": 1
+        }
+      },
+      "secondHalfGoals": 3,
+      "ok": true
+    },
+    {
+      "id": 18,
+      "date": "2026-08-30",
+      "sport": "football",
+      "league": "",
+      "home": "Royale Union SG",
+      "away": "Anderlecht",
+      "tip": "Over 2.5",
+      "ht": {
+        "home": 2,
+        "away": 0
+      },
+      "ft": {
+        "home": 3,
+        "away": 0
+      },
+      "stats": {
+        "home": {
+          "xg": 0.86,
+          "shots": 8,
+          "shotsOnTarget": 5,
+          "bigChances": 1
+        },
+        "away": {
+          "xg": 0.57,
+          "shots": 4,
+          "shotsOnTarget": 1,
+          "bigChances": 1
+        }
+      },
+      "secondHalfGoals": 1,
+      "ok": true
+    },
+    {
+      "id": 19,
+      "date": "2026-08-30",
+      "sport": "football",
+      "league": "",
+      "home": "Cadiz",
+      "away": "Valladolid",
+      "tip": "Over 2.5",
+      "ht": {
+        "home": 1,
+        "away": 1
+      },
+      "ft": {
+        "home": 1,
+        "away": 1
+      },
+      "stats": {
+        "home": {
+          "xg": 1.36,
+          "shots": 10,
+          "shotsOnTarget": 2,
+          "bigChances": 1
+        },
+        "away": {
+          "xg": 1.15,
+          "shots": 13,
+          "shotsOnTarget": 6,
+          "bigChances": 1
+        }
+      },
+      "secondHalfGoals": 0,
+      "ok": false
+    },
+    {
+      "id": 24,
+      "date": "2026-08-31",
+      "sport": "football",
+      "league": "",
+      "home": "Rapid",
+      "away": "Universitatea Craiova",
+      "tip": "Over 1.5",
+      "ht": {
+        "home": 0,
+        "away": 1
+      },
+      "ft": {
+        "home": 1,
+        "away": 1
+      },
+      "stats": {
+        "home": {
+          "xg": 0.52,
+          "shots": 6,
+          "shotsOnTarget": 2,
+          "bigChances": 1
+        },
+        "away": {
+          "xg": 0.83,
+          "shots": 10,
+          "shotsOnTarget": 4,
+          "bigChances": 1
+        }
+      },
+      "secondHalfGoals": 1,
+      "ok": true
+    },
+    {
+      "id": 29,
+      "date": "2026-09-01",
+      "sport": "football",
+      "league": "",
+      "home": "Swansea",
+      "away": "Watford",
+      "tip": "Over 2.5",
+      "ht": {
+        "home": 2,
+        "away": 0
+      },
+      "ft": {
+        "home": 2,
+        "away": 0
+      },
+      "stats": {
+        "home": {
+          "xg": 2.45,
+          "shots": 11,
+          "shotsOnTarget": 5,
+          "bigChances": 5
+        },
+        "away": {
+          "xg": 0.52,
+          "shots": 4,
+          "shotsOnTarget": 2,
+          "bigChances": 2
+        }
+      },
+      "secondHalfGoals": 0,
+      "ok": false
+    },
+    {
+      "id": 30,
+      "date": "2026-09-02",
+      "sport": "football",
+      "league": "",
+      "home": "Supra du Quebec",
+      "away": "Forge",
+      "tip": "Over 1.5",
+      "ht": {
+        "home": 1,
+        "away": 0
+      },
+      "ft": {
+        "home": 1,
+        "away": 1
+      },
+      "stats": {
+        "home": {
+          "xg": 0.69,
+          "shots": 3,
+          "shotsOnTarget": 1,
+          "bigChances": 1
+        },
+        "away": {
+          "xg": 0.65,
+          "shots": 8,
+          "shotsOnTarget": 4,
+          "bigChances": 2
+        }
+      },
+      "secondHalfGoals": 1,
+      "ok": true
+    },
+    {
+      "id": 31,
+      "date": "2026-09-02",
+      "sport": "football",
+      "league": "",
+      "home": "Atletico MG",
+      "away": "Cruzeiro",
+      "tip": "Over 1.5",
+      "ht": {
+        "home": 0,
+        "away": 1
+      },
+      "ft": {
+        "home": 2,
+        "away": 1
+      },
+      "stats": {
+        "home": {
+          "xg": 1.37,
+          "shots": 14,
+          "shotsOnTarget": 3,
+          "bigChances": 1
+        },
+        "away": {
+          "xg": 0.97,
+          "shots": 6,
+          "shotsOnTarget": 3,
+          "bigChances": 1
+        }
+      },
+      "secondHalfGoals": 2,
+      "ok": true
+    },
+    {
+      "id": 28,
+      "date": "2026-09-01",
+      "sport": "football",
+      "league": "",
+      "home": "Volos",
+      "away": "Kalamata",
+      "tip": "Over 2.5",
+      "ht": {
+        "home": 0,
+        "away": 2
+      },
+      "ft": {
+        "home": 2,
+        "away": 2
+      },
+      "stats": {
+        "home": {
+          "xg": 1.36,
+          "shots": 11,
+          "shotsOnTarget": 2,
+          "bigChances": 3
+        },
+        "away": {
+          "xg": 1.21,
+          "shots": 4,
+          "shotsOnTarget": 3,
+          "bigChances": 1
+        }
+      },
+      "secondHalfGoals": 2,
+      "ok": true
+    },
+    {
+      "id": 25,
+      "date": "2026-08-31",
+      "sport": "football",
+      "league": "",
+      "home": "Al Taee",
+      "away": "Al Jandal",
+      "tip": "Over 1.5",
+      "ht": {
+        "home": 1,
+        "away": 0
+      },
+      "ft": {
+        "home": 2,
+        "away": 1
+      },
+      "stats": {
+        "home": {
+          "xg": 0.64,
+          "shots": 4,
+          "shotsOnTarget": 1,
+          "bigChances": 0
+        },
+        "away": {
+          "xg": 0.9,
+          "shots": 12,
+          "shotsOnTarget": 3,
+          "bigChances": 1
+        }
+      },
+      "secondHalfGoals": 2,
+      "ok": true
+    },
+    {
+      "id": 26,
+      "date": "2026-08-31",
+      "sport": "football",
+      "league": "",
+      "home": "Wil",
+      "away": "Aarau",
+      "tip": "Over 2.5",
+      "ht": {
+        "home": 0,
+        "away": 2
+      },
+      "ft": {
+        "home": 2,
+        "away": 2
+      },
+      "stats": {
+        "home": {
+          "xg": 0.59,
+          "shots": 9,
+          "shotsOnTarget": 2,
+          "bigChances": 1
+        },
+        "away": {
+          "xg": 1.09,
+          "shots": 8,
+          "shotsOnTarget": 2,
+          "bigChances": 1
+        }
+      },
+      "secondHalfGoals": 2,
+      "ok": true
+    },
+    {
+      "id": 27,
+      "date": "2026-09-01",
+      "sport": "football",
+      "league": "",
+      "home": "Umraniyespor",
+      "away": "Muglaspor",
+      "tip": "Over 1.5",
+      "ht": {
+        "home": 0,
+        "away": 1
+      },
+      "ft": {
+        "home": 0,
+        "away": 1
+      },
+      "stats": {
+        "home": {
+          "xg": 0.5,
+          "shots": 10,
+          "shotsOnTarget": 3,
+          "bigChances": 0
+        },
+        "away": {
+          "xg": 0.82,
+          "shots": 3,
+          "shotsOnTarget": 2,
+          "bigChances": 2
+        }
+      },
+      "secondHalfGoals": 0,
+      "ok": false
+    },
+    {
+      "id": 16,
+      "date": "2026-08-30",
+      "sport": "football",
+      "league": "",
+      "home": "Antverpy",
+      "away": "St.Truiden",
+      "tip": "Over 1.5",
+      "ht": {
+        "home": 0,
+        "away": 1
+      },
+      "ft": {
+        "home": 1,
+        "away": 4
+      },
+      "stats": {
+        "home": {
+          "xg": 0.45,
+          "shots": 9,
+          "shotsOnTarget": 3,
+          "bigChances": 0
+        },
+        "away": {
+          "xg": 1.08,
+          "shots": 8,
+          "shotsOnTarget": 3,
+          "bigChances": 3
+        }
+      },
+      "secondHalfGoals": 4,
+      "ok": true
+    },
+    {
+      "id": 5,
+      "date": "2026-08-29",
+      "sport": "football",
+      "league": "",
+      "home": "Csikszereda",
+      "away": "CFR 1907 Cluj",
+      "tip": "Over 3.5",
+      "ht": {
+        "home": 1,
+        "away": 2
+      },
+      "ft": {
+        "home": 2,
+        "away": 3
+      },
+      "stats": {
+        "home": {
+          "xg": 0.62,
+          "shots": 4,
+          "shotsOnTarget": 1,
+          "bigChances": 2
+        },
+        "away": {
+          "xg": 1.13,
+          "shots": 7,
+          "shotsOnTarget": 3,
+          "bigChances": 3
+        }
+      },
+      "secondHalfGoals": 2,
+      "ok": true
+    },
+    {
+      "id": 6,
+      "date": "2026-08-29",
+      "sport": "football",
+      "league": "",
+      "home": "Walsall",
+      "away": "Accrington",
+      "tip": "Over 3.5",
+      "ht": {
+        "home": 2,
+        "away": 1
+      },
+      "ft": {
+        "home": 3,
+        "away": 2
+      },
+      "stats": {
+        "home": {
+          "xg": 1.67,
+          "shots": 12,
+          "shotsOnTarget": 4,
+          "bigChances": 4
+        },
+        "away": {
+          "xg": 0.99,
+          "shots": 9,
+          "shotsOnTarget": 2,
+          "bigChances": 1
+        }
+      },
+      "secondHalfGoals": 2,
+      "ok": true
+    },
+    {
+      "id": 7,
+      "date": "2026-08-29",
+      "sport": "football",
+      "league": "",
+      "home": "Istanbulspor",
+      "away": "Karagumruk",
+      "tip": "Over 2.5",
+      "ht": {
+        "home": 1,
+        "away": 1
+      },
+      "ft": {
+        "home": 1,
+        "away": 1
+      },
+      "stats": {
+        "home": {
+          "xg": 0.34,
+          "shots": 4,
+          "shotsOnTarget": 1,
+          "bigChances": 0
+        },
+        "away": {
+          "xg": 0.9,
+          "shots": 6,
+          "shotsOnTarget": 3,
+          "bigChances": 2
+        }
+      },
+      "secondHalfGoals": 0,
+      "ok": false
+    },
+    {
+      "id": 4,
+      "date": "2026-08-28",
+      "sport": "football",
+      "league": "Championship",
+      "home": "Wrexham",
+      "away": "Birmingham",
+      "tip": "Over 1.5",
+      "ht": {
+        "home": 0,
+        "away": 1
+      },
+      "ft": {
+        "home": 1,
+        "away": 2
+      },
+      "stats": {
+        "home": {
+          "xg": 0.19,
+          "shots": 5,
+          "shotsOnTarget": 2,
+          "bigChances": 0
+        },
+        "away": {
+          "xg": 1.16,
+          "shots": 5,
+          "shotsOnTarget": 2,
+          "bigChances": 3
+        }
+      },
+      "secondHalfGoals": 2,
+      "ok": true
+    },
+    {
+      "id": 1,
+      "date": "2026-08-28",
+      "sport": "football",
+      "league": "Premier League",
+      "home": "Enppi",
+      "away": "Wadi Degla",
+      "tip": "Over 2.5",
+      "ht": {
+        "home": 1,
+        "away": 1
+      },
+      "ft": {
+        "home": 1,
+        "away": 3
+      },
+      "stats": {
+        "home": {
+          "xg": 1.1,
+          "shots": 7,
+          "shotsOnTarget": 1,
+          "bigChances": 2
+        },
+        "away": {
+          "xg": 1.2,
+          "shots": 9,
+          "shotsOnTarget": 3,
+          "bigChances": 0
+        }
+      },
+      "secondHalfGoals": 2,
+      "ok": true
+    },
+    {
+      "id": 2,
+      "date": "2026-08-28",
+      "sport": "football",
+      "league": "",
+      "home": "Universitatea Cluj",
+      "away": "Petrolul",
+      "tip": "Over 3.5",
+      "ht": {
+        "home": 1,
+        "away": 2
+      },
+      "ft": {
+        "home": 2,
+        "away": 3
+      },
+      "stats": {
+        "home": {
+          "xg": 0.94,
+          "shots": 9,
+          "shotsOnTarget": 3,
+          "bigChances": 2
+        },
+        "away": {
+          "xg": 0.36,
+          "shots": 3,
+          "shotsOnTarget": 3,
+          "bigChances": 1
+        }
+      },
+      "secondHalfGoals": 2,
+      "ok": true
+    },
+    {
+      "id": 3,
+      "date": "2026-08-28",
+      "sport": "football",
+      "league": "",
+      "home": "Lille",
+      "away": "Paris SG",
+      "tip": "Over 1.5",
+      "ht": {
+        "home": 1,
+        "away": 0
+      },
+      "ft": {
+        "home": 2,
+        "away": 2
+      },
+      "stats": {
+        "home": {
+          "xg": 0.99,
+          "shots": 7,
+          "shotsOnTarget": 3,
+          "bigChances": 1
+        },
+        "away": {
+          "xg": 0.93,
+          "shots": 8,
+          "shotsOnTarget": 1,
+          "bigChances": 2
+        }
+      },
+      "secondHalfGoals": 3,
+      "ok": true
+    },
+    {
+      "id": 8,
+      "date": "2026-08-29",
+      "sport": "football",
+      "league": "",
+      "home": "Sassuolo",
+      "away": "Torino",
+      "tip": "Over 2.5",
+      "ht": {
+        "home": 1,
+        "away": 1
+      },
+      "ft": {
+        "home": 2,
+        "away": 1
+      },
+      "stats": {
+        "home": {
+          "xg": 1.1,
+          "shots": 9,
+          "shotsOnTarget": 4,
+          "bigChances": 1
+        },
+        "away": {
+          "xg": 1.03,
+          "shots": 6,
+          "shotsOnTarget": 4,
+          "bigChances": 4
+        }
+      },
+      "secondHalfGoals": 1,
+      "ok": true
+    },
+    {
+      "id": 13,
+      "date": "2026-08-30",
+      "sport": "football",
+      "league": "Liga Profesional Argentina",
+      "home": "Talleres Cordoba",
+      "away": "Central Cordoba de Santiago",
+      "tip": "Over 0.5",
+      "ht": {
+        "home": 0,
+        "away": 0
+      },
+      "ft": {
+        "home": 0,
+        "away": 0
+      },
+      "stats": {
+        "home": {
+          "xg": 0.68,
+          "shots": 17,
+          "shotsOnTarget": 4,
+          "bigChances": 0
+        },
+        "away": {
+          "xg": 0.68,
+          "shots": 7,
+          "shotsOnTarget": 2,
+          "bigChances": 1
+        }
+      },
+      "secondHalfGoals": 0,
+      "ok": false
+    },
+    {
+      "id": 14,
+      "date": "2026-08-30",
+      "sport": "football",
+      "league": "",
+      "home": "Gent",
+      "away": "Club Brugge",
+      "tip": "Over 2.5",
+      "ht": {
+        "home": 1,
+        "away": 1
+      },
+      "ft": {
+        "home": 2,
+        "away": 1
+      },
+      "stats": {
+        "home": {
+          "xg": 0.95,
+          "shots": 7,
+          "shotsOnTarget": 4,
+          "bigChances": 2
+        },
+        "away": {
+          "xg": 0.63,
+          "shots": 6,
+          "shotsOnTarget": 3,
+          "bigChances": 1
+        }
+      },
+      "secondHalfGoals": 1,
+      "ok": true
+    },
+    {
+      "id": 15,
+      "date": "2026-08-30",
+      "sport": "football",
+      "league": "",
+      "home": "Rakow",
+      "away": "Jagiellonia",
+      "tip": "Over 3.5",
+      "ht": {
+        "home": 1,
+        "away": 2
+      },
+      "ft": {
+        "home": 2,
+        "away": 5
+      },
+      "stats": {
+        "home": {
+          "xg": 0.87,
+          "shots": 6,
+          "shotsOnTarget": 2,
+          "bigChances": 1
+        },
+        "away": {
+          "xg": 2.72,
+          "shots": 11,
+          "shotsOnTarget": 6,
+          "bigChances": 5
+        }
+      },
+      "secondHalfGoals": 4,
+      "ok": true
+    },
+    {
+      "id": 12,
+      "date": "2026-08-29",
+      "sport": "football",
+      "league": "Primera A",
+      "home": "Jaguares",
+      "away": "America de Cali",
+      "tip": "Over 3.5",
+      "ht": {
+        "home": 2,
+        "away": 1
+      },
+      "ft": {
+        "home": 2,
+        "away": 2
+      },
+      "stats": {
+        "home": {
+          "xg": 0.75,
+          "shots": 6,
+          "shotsOnTarget": 3,
+          "bigChances": 2
+        },
+        "away": {
+          "xg": 1.03,
+          "shots": 10,
+          "shotsOnTarget": 6,
+          "bigChances": 1
+        }
+      },
+      "secondHalfGoals": 1,
+      "ok": true
+    },
+    {
+      "id": 9,
+      "date": "2026-08-29",
+      "sport": "football",
+      "league": "",
+      "home": "Panetolikos",
+      "away": "Kalamata",
+      "tip": "Over 1.5",
+      "ht": {
+        "home": 1,
+        "away": 0
+      },
+      "ft": {
+        "home": 2,
+        "away": 0
+      },
+      "stats": {
+        "home": {
+          "xg": 1.29,
+          "shots": 8,
+          "shotsOnTarget": 2,
+          "bigChances": 1
+        },
+        "away": {
+          "xg": 1.09,
+          "shots": 6,
+          "shotsOnTarget": 2,
+          "bigChances": 2
+        }
+      },
+      "secondHalfGoals": 1,
+      "ok": true
+    },
+    {
+      "id": 105,
+      "date": "2026-08-29",
+      "sport": "football",
+      "league": "",
+      "home": "RAAL La Louviere",
+      "away": "KV Mechelen",
+      "tip": "Over 3.5",
+      "ht": {
+        "home": 2,
+        "away": 1
+      },
+      "ft": {
+        "home": 2,
+        "away": 2
+      },
+      "stats": {
+        "home": {
+          "xg": 1.96,
+          "shots": 8,
+          "shotsOnTarget": 5,
+          "bigChances": 4
+        },
+        "away": {
+          "xg": 0.77,
+          "shots": 6,
+          "shotsOnTarget": 2,
+          "bigChances": 0
+        }
+      },
+      "secondHalfGoals": 1,
+      "ok": true
+    },
+    {
+      "id": 106,
+      "date": "2026-08-29",
+      "sport": "football",
+      "league": "",
+      "home": "Gaziantep",
+      "away": "Rizespor",
+      "tip": "Over 2.5",
+      "ht": {
+        "home": 0,
+        "away": 2
+      },
+      "ft": {
+        "home": 1,
+        "away": 2
+      },
+      "stats": {
+        "home": {
+          "xg": 0.45,
+          "shots": 9,
+          "shotsOnTarget": 2,
+          "bigChances": 0
+        },
+        "away": {
+          "xg": 0.92,
+          "shots": 8,
+          "shotsOnTarget": 3,
+          "bigChances": 2
+        }
+      },
+      "secondHalfGoals": 1,
+      "ok": true
+    },
+    {
+      "id": 107,
+      "date": "2026-08-29",
+      "sport": "football",
+      "league": "",
+      "home": "Auxerre",
+      "away": "Angers",
+      "tip": "Over 2.5",
+      "ht": {
+        "home": 1,
+        "away": 1
+      },
+      "ft": {
+        "home": 1,
+        "away": 3
+      },
+      "stats": {
+        "home": {
+          "xg": 1.12,
+          "shots": 9,
+          "shotsOnTarget": 4,
+          "bigChances": 3
+        },
+        "away": {
+          "xg": 0.35,
+          "shots": 5,
+          "shotsOnTarget": 2,
+          "bigChances": 0
+        }
+      },
+      "secondHalfGoals": 2,
+      "ok": true
+    },
+    {
+      "id": 110,
+      "date": "2026-08-30",
+      "sport": "football",
+      "league": "",
+      "home": "Augsburg",
+      "away": "Schalke",
+      "tip": "Over 1.5",
+      "ht": {
+        "home": 1,
+        "away": 0
+      },
+      "ft": {
+        "home": 3,
+        "away": 0
+      },
+      "stats": {
+        "home": {
+          "xg": 1.7,
+          "shots": 5,
+          "shotsOnTarget": 4,
+          "bigChances": 4
+        },
+        "away": {
+          "xg": 1.83,
+          "shots": 9,
+          "shotsOnTarget": 5,
+          "bigChances": 4
+        }
+      },
+      "secondHalfGoals": 2,
+      "ok": true
+    },
+    {
+      "id": 109,
+      "date": "2026-08-30",
+      "sport": "football",
+      "league": "",
+      "home": "Hartberg",
+      "away": "Ried",
+      "tip": "Over 3.5",
+      "ht": {
+        "home": 2,
+        "away": 1
+      },
+      "ft": {
+        "home": 3,
+        "away": 2
+      },
+      "stats": {
+        "home": {
+          "xg": 2.24,
+          "shots": 10,
+          "shotsOnTarget": 4,
+          "bigChances": 2
+        },
+        "away": {
+          "xg": 0.4,
+          "shots": 6,
+          "shotsOnTarget": 2,
+          "bigChances": 2
+        }
+      },
+      "secondHalfGoals": 2,
+      "ok": true
+    },
+    {
+      "id": 111,
+      "date": "2026-08-30",
+      "sport": "football",
+      "league": "",
+      "home": "Aris",
+      "away": "OFI Creta",
+      "tip": "Over 1.5",
+      "ht": {
+        "home": 1,
+        "away": 0
+      },
+      "ft": {
+        "home": 2,
+        "away": 1
+      },
+      "stats": {
+        "home": {
+          "xg": 0.61,
+          "shots": 9,
+          "shotsOnTarget": 4,
+          "bigChances": 1
+        },
+        "away": {
+          "xg": 0.99,
+          "shots": 7,
+          "shotsOnTarget": 1,
+          "bigChances": 3
+        }
+      },
+      "secondHalfGoals": 2,
+      "ok": true
+    },
+    {
+      "id": 112,
+      "date": "2026-08-30",
+      "sport": "football",
+      "league": "",
+      "home": "FCSB",
+      "away": "UTA Arad",
+      "tip": "Over 1.5",
+      "ht": {
+        "home": 0,
+        "away": 1
+      },
+      "ft": {
+        "home": 1,
+        "away": 3
+      },
+      "stats": {
+        "home": {
+          "xg": 0.51,
+          "shots": 7,
+          "shotsOnTarget": 3,
+          "bigChances": 2
+        },
+        "away": {
+          "xg": 0.63,
+          "shots": 5,
+          "shotsOnTarget": 2,
+          "bigChances": 1
+        }
+      },
+      "secondHalfGoals": 3,
+      "ok": true
+    },
+    {
+      "id": 113,
+      "date": "2026-08-30",
+      "sport": "football",
+      "league": "",
+      "home": "Farul Constanta",
+      "away": "Botosani",
+      "tip": "Over 0.5",
+      "ht": {
+        "home": 0,
+        "away": 0
+      },
+      "ft": {
+        "home": 0,
+        "away": 0
+      },
+      "stats": {
+        "home": {
+          "xg": 1.83,
+          "shots": 12,
+          "shotsOnTarget": 5,
+          "bigChances": 2
+        },
+        "away": {
+          "xg": 2.07,
+          "shots": 7,
+          "shotsOnTarget": 0,
+          "bigChances": 3
+        }
+      },
+      "secondHalfGoals": 0,
+      "ok": false
+    },
+    {
+      "id": 114,
+      "date": "2026-08-30",
+      "sport": "football",
+      "league": "",
+      "home": "U. De Concepcion",
+      "away": "U. De Chile",
+      "tip": "Over 2.5",
+      "ht": {
+        "home": 2,
+        "away": 0
+      },
+      "ft": {
+        "home": 2,
+        "away": 1
+      },
+      "stats": {
+        "home": {
+          "xg": 1.38,
+          "shots": 3,
+          "shotsOnTarget": 3,
+          "bigChances": 2
+        },
+        "away": {
+          "xg": 0.11,
+          "shots": 3,
+          "shotsOnTarget": 1,
+          "bigChances": 0
+        }
+      },
+      "secondHalfGoals": 1,
+      "ok": true
+    },
+    {
+      "id": 115,
+      "date": "2026-08-29",
+      "sport": "football",
+      "league": "",
+      "home": "Mito",
+      "away": "Machida",
+      "tip": "Over 2.5",
+      "ht": {
+        "home": 1,
+        "away": 1
+      },
+      "ft": {
+        "home": 1,
+        "away": 1
+      },
+      "stats": {
+        "home": {
+          "xg": 0.84,
+          "shots": 6,
+          "shotsOnTarget": 4,
+          "bigChances": 2
+        },
+        "away": {
+          "xg": 0.45,
+          "shots": 6,
+          "shotsOnTarget": 2,
+          "bigChances": 1
+        }
+      },
+      "secondHalfGoals": 0,
+      "ok": false
+    },
+    {
+      "id": 116,
+      "date": "2026-08-30",
+      "sport": "football",
+      "league": "",
+      "home": "Kisvarda",
+      "away": "Gyor",
+      "tip": "Over 2.5",
+      "ht": {
+        "home": 1,
+        "away": 1
+      },
+      "ft": {
+        "home": 1,
+        "away": 1
+      },
+      "stats": {
+        "home": {
+          "xg": 1.36,
+          "shots": 6,
+          "shotsOnTarget": 3,
+          "bigChances": 1
+        },
+        "away": {
+          "xg": 1.09,
+          "shots": 6,
+          "shotsOnTarget": 2,
+          "bigChances": 1
+        }
+      },
+      "secondHalfGoals": 0,
+      "ok": false
+    },
+    {
+      "id": 117,
+      "date": "2026-08-30",
+      "sport": "football",
+      "league": "",
+      "home": "Neapol",
+      "away": "Como",
+      "tip": "Over 3.5",
+      "ht": {
+        "home": 1,
+        "away": 2
+      },
+      "ft": {
+        "home": 1,
+        "away": 2
+      },
+      "stats": {
+        "home": {
+          "xg": 0.93,
+          "shots": 5,
+          "shotsOnTarget": 1,
+          "bigChances": 1
+        },
+        "away": {
+          "xg": 0.69,
+          "shots": 13,
+          "shotsOnTarget": 4,
+          "bigChances": 0
+        }
+      },
+      "secondHalfGoals": 0,
+      "ok": false
+    },
+    {
+      "id": 118,
+      "date": "2026-08-30",
+      "sport": "football",
+      "league": "",
+      "home": "Cagliari",
+      "away": "Inter",
+      "tip": "Over 1.5",
+      "ht": {
+        "home": 0,
+        "away": 1
+      },
+      "ft": {
+        "home": 0,
+        "away": 1
+      },
+      "stats": {
+        "home": {
+          "xg": 0.00,
+          "shots": 0,
+          "shotsOnTarget": 0,
+          "bigChances": 0
+        },
+        "away": {
+          "xg": 1.54,
+          "shots": 16,
+          "shotsOnTarget": 5,
+          "bigChances": 3
+        }
+      },
+      "secondHalfGoals": 0,
+      "ok": false
+    },
+    {
+      "id": 108,
+      "date": "2026-08-30",
+      "sport": "football",
+      "league": "",
+      "home": "Samsunspor",
+      "away": "Fenerbahce",
+      "tip": "Over 1.5",
+      "ht": {
+        "home": 0,
+        "away": 1
+      },
+      "ft": {
+        "home": 0,
+        "away": 2
+      },
+      "stats": {
+        "home": {
+          "xg": 0.17,
+          "shots": 3,
+          "shotsOnTarget": 0,
+          "bigChances": 1
+        },
+        "away": {
+          "xg": 1.25,
+          "shots": 9,
+          "shotsOnTarget": 5,
+          "bigChances": 3
+        }
+      },
+      "secondHalfGoals": 1,
+      "ok": true
+    },
+    {
+      "id": 10,
+      "date": "2026-08-29",
+      "sport": "football",
+      "league": "",
+      "home": "Lorient",
+      "away": "Troyes",
+      "tip": "Over 2.5",
+      "ht": {
+        "home": 0,
+        "away": 2
+      },
+      "ft": {
+        "home": 1,
+        "away": 2
+      },
+      "stats": {
+        "home": {
+          "xg": 0.51,
+          "shots": 5,
+          "shotsOnTarget": 2,
+          "bigChances": 1
+        },
+        "away": {
+          "xg": 1.44,
+          "shots": 7,
+          "shotsOnTarget": 2,
+          "bigChances": 2
+        }
+      },
+      "secondHalfGoals": 1,
+      "ok": true
+    },
+    {
+      "id": 101,
+      "date": "2026-08-29",
+      "sport": "football",
+      "league": "",
+      "home": "Ascoli",
+      "away": "Carrarese",
+      "tip": "Over 0.5",
+      "ht": {
+        "home": 0,
+        "away": 0
+      },
+      "ft": {
+        "home": 1,
+        "away": 1
+      },
+      "stats": {
+        "home": {
+          "xg": 0.62,
+          "shots": 8,
+          "shotsOnTarget": 3,
+          "bigChances": 2
+        },
+        "away": {
+          "xg": 1.28,
+          "shots": 10,
+          "shotsOnTarget": 1,
+          "bigChances": 2
+        }
+      },
+      "secondHalfGoals": 2,
+      "ok": true
+    },
+    {
+      "id": 102,
+      "date": "2026-08-29",
+      "sport": "football",
+      "league": "",
+      "home": "Arezzo",
+      "away": "Palermo",
+      "tip": "Over 1.5",
+      "ht": {
+        "home": 0,
+        "away": 1
+      },
+      "ft": {
+        "home": 2,
+        "away": 3
+      },
+      "stats": {
+        "home": {
+          "xg": 0.39,
+          "shots": 7,
+          "shotsOnTarget": 2,
+          "bigChances": 0
+        },
+        "away": {
+          "xg": 1.14,
+          "shots": 6,
+          "shotsOnTarget": 2,
+          "bigChances": 2
+        }
+      },
+      "secondHalfGoals": 4,
+      "ok": true
+    },
+    {
+      "id": 103,
+      "date": "2026-08-29",
+      "sport": "football",
+      "league": "",
+      "home": "Pisa",
+      "away": "Catanzaro",
+      "tip": "Over 3.5",
+      "ht": {
+        "home": 2,
+        "away": 1
+      },
+      "ft": {
+        "home": 2,
+        "away": 1
+      },
+      "stats": {
+        "home": {
+          "xg": 1.48,
+          "shots": 13,
+          "shotsOnTarget": 6,
+          "bigChances": 4
+        },
+        "away": {
+          "xg": 0.35,
+          "shots": 6,
+          "shotsOnTarget": 3,
+          "bigChances": 0
+        }
+      },
+      "secondHalfGoals": 0,
+      "ok": false
+    },
+    {
+      "id": 100,
+      "date": "2026-08-29",
+      "sport": "football",
+      "league": "",
+      "home": "Avellino",
+      "away": "L.R. Vicenza",
+      "tip": "Over 2.5",
+      "ht": {
+        "home": 2,
+        "away": 0
+      },
+      "ft": {
+        "home": 3,
+        "away": 0
+      },
+      "stats": {
+        "home": {
+          "xg": 1.38,
+          "shots": 6,
+          "shotsOnTarget": 4,
+          "bigChances": 2
+        },
+        "away": {
+          "xg": 0.6,
+          "shots": 8,
+          "shotsOnTarget": 2,
+          "bigChances": 0
+        }
+      },
+      "secondHalfGoals": 1,
+      "ok": true
+    },
+    {
+      "id": 104,
+      "date": "2026-09-01",
+      "sport": "football",
+      "league": "",
+      "home": "Preston",
+      "away": "Bristol City",
+      "tip": "Over 1.5",
+      "ht": {
+        "home": 0,
+        "away": 1
+      },
+      "ft": {
+        "home": 1,
+        "away": 3
+      },
+      "stats": {
+        "home": {
+          "xg": 1.32,
+          "shots": 11,
+          "shotsOnTarget": 2,
+          "bigChances": 2
+        },
+        "away": {
+          "xg": 0.62,
+          "shots": 6,
+          "shotsOnTarget": 3,
+          "bigChances": 1
+        }
+      },
+      "secondHalfGoals": 3,
+      "ok": true
+    },
+    {
+      "id": 11,
+      "date": "2026-08-29",
+      "sport": "football",
+      "league": "",
+      "home": "Padova",
+      "away": "Verona",
+      "tip": "Over 1.5",
+      "ht": {
+        "home": 1,
+        "away": 0
+      },
+      "ft": {
+        "home": 1,
+        "away": 1
+      },
+      "stats": {
+        "home": {
+          "xg": 0.83,
+          "shots": 5,
+          "shotsOnTarget": 2,
+          "bigChances": 1
+        },
+        "away": {
+          "xg": 0.48,
+          "shots": 9,
+          "shotsOnTarget": 2,
+          "bigChances": 0
+        }
+      },
+      "secondHalfGoals": 1,
+      "ok": true
+    }
+  ]
+}
+]
