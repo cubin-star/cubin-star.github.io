@@ -9,9 +9,19 @@ const MAX_ODDS = 2.5;
 const PICK_COUNT = 6;
 // Max pocet vybranych zapasu z jedne zeme - brani zaplaveni tiketu jednou destinaci.
 const MAX_PER_COUNTRY = 2;
-// Vahy pro vazeny nahodny vyber - vyssi tier ma vyrazne vetsi sanci, ale nizsi nejsou vyloucene.
+// Vahy pro vazeny nahodny vyber TIERU (ne jednotlivych zapasu) - vyssi tier ma
+// vyrazne vetsi sanci, ale nizsi nejsou vyloucene.
 // T1 = top evropske ligy + UEFA pohary, T2 = druhe ligy/domaci pohary, T3 = ostatni Evropa, T4 = zbytek sveta.
-const TIER_WEIGHTS = { 1: 12, 2: 6, 3: 3, 4: 1 };
+// Sance pri dostupnych vsech tierech: T1 ~66 %, T2 ~23 %, T3 ~9 %, T4 ~1,6 %.
+const TIER_WEIGHTS = { 1: 40, 2: 14, 3: 5, 4: 1 };
+// Tvrdy strop na pocet vybranych zapasu z daneho tieru. Resi to, ze T4 ma vzdy
+// nejvic kandidatu - i kdyby jich bylo 200, projde max 1. Stropy se uvolni az
+// v druhe fazi, kdyby se jinak nepodarilo naplnit PICK_COUNT.
+const MAX_PER_TIER = { 1: 6, 2: 4, 3: 2, 4: 1 };
+// Z tieru se nikdy nevybere vic nez tento podil jeho kandidatu (min. 1 zapas).
+// Bez toho by pri 4 kandidatech v T1 a stropu 6 byl vyber deterministicky -
+// vzali by se proste vsichni ctyri. Takhle se ze 4 kandidatu vyberou max 2.
+const MAX_TIER_SHARE = 0.5;
 const EXCLUDED_COUNTRIES = new Set(['Russia', 'Belarus']);
 const TZ = 'Europe/Prague';
 const USER_AGENT = 'kombik-bot/1.0 (+github-actions)';
@@ -49,6 +59,7 @@ function norm(s){
 const EXCLUDE_RE = [
     /\bu ?\d{2}\b/, /\byouth\b/, /\bjunior/, /\bjuvenil/, /\bprimavera\b/,
     /\breserve/, /\bacademy\b/, /\bdevelopment\b/, /\bii\b$/,
+    /\bamateur/, /\bamatoer/, /\bveterans\b/,
     /\bwomen\b/, /\bfeminin/, /\bfemenin/, /\bfrauen\b/, /\bdamallsvenskan\b/, /\bkvinde/,
     /\bfriendl/, /\bfutsal\b/, /\bbeach\b/, /\besoccer\b/, /\bindoor\b/,
 ];
@@ -77,6 +88,8 @@ function countryGroup(c){
 
 // Rozpoznani poharu bez nutnosti znat nazev (fallback, kdyz chybi league.type z API).
 const CUP_RE = /\bcup\b|\bcupen\b|\bpokal\b|\bpokalen\b|\bcopa\b|\bcoupe\b|\bcoppa\b|\bbeker\b|\btaca\b|\bkupa\b|\bkupasi\b|\bkubok\b|\bpuchar\b|\bpohar\b|\bkypello\b|\btrophy\b|\bsupercup\b|\bsuper cup\b/;
+// Pohary nizsich/mladeznickych urovni - nepatri mezi hlavni domaci pohary (T2).
+const LOW_CUP_RE = /\bfa trophy\b|\bfa vase\b|\bleague trophy\b|\befl trophy\b|\bpremier league cup\b|\bregional/;
 
 // Zeme, kde nazev neprozradi uroven ligy (Championship, 1. Division...) -> rucni mapa.
 // Klic = normalizovana zeme, hodnota = [uroven, [normalizovane podretezce nazvu]].
@@ -139,7 +152,10 @@ function leagueTier(name,country,type){
     const grp=countryGroup(c);
     if(grp==='D')return 4;
     const isCup=(type&&norm(type)==='cup')||CUP_RE.test(n);
-    if(isCup)return grp==='C'?3:2;
+    if(isCup){
+        if(LOW_CUP_RE.test(n))return 4;
+        return grp==='C'?3:2;
+    }
     const lvl=leagueLevel(n,c);
     return TIER_TABLE[grp][lvl]||4;
 }
@@ -297,22 +313,43 @@ async function main(){
     console.log('Tier 1: '+tier1.length+', Tier 2: '+tier2.length+', Tier 3: '+tier3.length+', Tier 4: '+tier4.length+'\n');
     // Vazeny nahodny vyber: nejdriv se podle vah vylosuje TIER, teprve pak zapas z nej.
     // Diky tomu pocet zapasu v tieru neovlivnuje jeho sanci (drive 200x T4 prevazilo 5x T1).
-    // Zaroven max 1 zapas na ligu a max MAX_PER_COUNTRY zapasu na zemi.
+    // Faze 1 drzi stropy: pevny MAX_PER_TIER a zaroven podil MAX_TIER_SHARE z poctu
+    // kandidatu tieru, aby vyber zustal nahodny i u malych tieru.
+    // Faze 2 stropy uvolni, jen kdyby se jinak nepodarilo naplnit PICK_COUNT.
     const buckets={1:[...tier1],2:[...tier2],3:[...tier3],4:[...tier4]};
-    const selected=[],usedLeagues=new Set(),countryCount=new Map();
-    while(selected.length<PICK_COUNT){
-        const avail=[1,2,3,4].filter(t=>buckets[t].length>0);
-        if(avail.length===0)break;
-        const totalW=avail.reduce((a,t)=>a+(TIER_WEIGHTS[t]||1),0);
-        let r=Math.random()*totalW,tier=avail[avail.length-1];
-        for(const t of avail){r-=(TIER_WEIGHTS[t]||1);if(r<=0){tier=t;break;}}
-        const m=buckets[tier].pop();
-        const lk=m.league+'|'+m.country;
-        if(usedLeagues.has(lk))continue;
-        if((countryCount.get(m.country)||0)>=MAX_PER_COUNTRY)continue;
-        usedLeagues.add(lk);countryCount.set(m.country,(countryCount.get(m.country)||0)+1);selected.push(m);
-        console.log('   [T'+m.tier+'] '+m.match+' | '+m.league+' ('+m.country+') | Over 2.5 @ '+m.odds);
+    const tierCaps={};
+    for(const t of [1,2,3,4]){
+        const n=buckets[t].length;
+        tierCaps[t]=n===0?0:Math.max(1,Math.min(MAX_PER_TIER[t]??PICK_COUNT,Math.floor(n*MAX_TIER_SHARE)));
     }
+    console.log('Stropy tieru (faze 1): T1='+tierCaps[1]+', T2='+tierCaps[2]+', T3='+tierCaps[3]+', T4='+tierCaps[4]);
+    const selected=[],usedLeagues=new Set(),countryCount=new Map(),tierCount={1:0,2:0,3:0,4:0};
+
+    function tryPick(useTierCaps){
+        while(selected.length<PICK_COUNT){
+            const avail=[1,2,3,4].filter(t=>buckets[t].length>0&&(!useTierCaps||tierCount[t]<tierCaps[t]));
+            if(avail.length===0)return;
+            const totalW=avail.reduce((a,t)=>a+(TIER_WEIGHTS[t]||1),0);
+            let r=Math.random()*totalW,tier=avail[avail.length-1];
+            for(const t of avail){r-=(TIER_WEIGHTS[t]||1);if(r<=0){tier=t;break;}}
+            const m=buckets[tier].pop();
+            const lk=m.league+'|'+m.country;
+            if(usedLeagues.has(lk))continue;
+            if((countryCount.get(m.country)||0)>=MAX_PER_COUNTRY)continue;
+            usedLeagues.add(lk);
+            countryCount.set(m.country,(countryCount.get(m.country)||0)+1);
+            tierCount[tier]++;
+            selected.push(m);
+            console.log('   [T'+m.tier+'] '+m.match+' | '+m.league+' ('+m.country+') | Over 2.5 @ '+m.odds);
+        }
+    }
+
+    tryPick(true);
+    if(selected.length<PICK_COUNT){
+        console.log('   (nedostatek zapasu pri stropech tieru - uvolnuji stropy)');
+        tryPick(false);
+    }
+    console.log('   Rozlozeni tieru: T1='+tierCount[1]+', T2='+tierCount[2]+', T3='+tierCount[3]+', T4='+tierCount[4]);
     console.log('\nVybrano: '+selected.length+'/'+PICK_COUNT);
     if(selected.length<PICK_COUNT)console.log('WARNING: Mene nez '+PICK_COUNT+' zapasu.');
     const live1=[...tier1,...tier2].map(m=>({league:m.league,match:m.match,kickoff:m.kickoff,tip:m.tip,odds:m.odds}));
