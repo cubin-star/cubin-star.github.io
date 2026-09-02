@@ -7,6 +7,8 @@ const FOOTBALL_API = 'https://v3.football.api-sports.io';
 const MIN_ODDS = 2.1;
 const MAX_ODDS = 2.5;
 const PICK_COUNT = 6;
+// Max pocet vybranych zapasu z jedne zeme - brani zaplaveni tiketu jednou destinaci.
+const MAX_PER_COUNTRY = 2;
 // Vahy pro vazeny nahodny vyber - vyssi tier ma vyrazne vetsi sanci, ale nizsi nejsou vyloucene.
 // T1 = top evropske ligy + UEFA pohary, T2 = druhe ligy/domaci pohary, T3 = ostatni Evropa, T4 = zbytek sveta.
 const TIER_WEIGHTS = { 1: 12, 2: 6, 3: 3, 4: 1 };
@@ -23,67 +25,124 @@ let reqCount = 0;
 let fixtureFetchErrors = 0;
 let fixtureFetchAttempts = 0;
 
-const TIER1 = [
-    // Evropske klubove pohary (UEFA) - v API-Football maji country = 'World'
-    ['UEFA Champions League','World'],
-    ['UEFA Europa League','World'],
-    ['UEFA Europa Conference League','World'],
-    ['UEFA Conference League','World'],
+// === Klasifikace soutezi ====================================================
+// Misto krehkeho porovnavani presnych nazvu 'Nazev|Zeme' se soutez rozklada na
+// (skupina zeme) x (uroven souteze), coz je odolne vuci diakritice, sponzorskym
+// nazvum a drobnym odchylkam v API.
 
-    ['Premier League','England'],['La Liga','Spain'],['Serie A','Italy'],
-    ['Bundesliga','Germany'],['Ligue 1','France'],['Eredivisie','Netherlands'],
-    ['Primeira Liga','Portugal'],['Liga Portugal','Portugal'],
-    ['Pro League','Belgium'],['Jupiler Pro League','Belgium'],
-    ['Scottish Premiership','Scotland'],['Premiership','Scotland'],
-    ['Ekstraklasa','Poland'],['Czech Liga','Czech-Republic'],['Fortuna Liga','Czech-Republic'],
-    ['Super League 1','Greece'],['Super Liga','Serbia'],
-    ['Austrian Football Bundesliga','Austria'],['Austrian Bundesliga','Austria'],
-    ['Eliteserien','Norway'],['Allsvenskan','Sweden'],['Superliga','Denmark'],
-    ['Veikkausliiga','Finland'],['Super League','Switzerland'],['Liga I','Romania'],
+// Normalizace: odstrani diakritiku, prevede na mala pismena, interpunkci na mezery
+// a oddeli cislice od pismen ('LaLiga2' -> 'laliga 2', '2. Bundesliga' -> '2 bundesliga').
+function norm(s){
+    return String(s||'')
+        .replace(/ı/g,'i').replace(/İ/g,'i').replace(/ø/g,'o').replace(/Ø/g,'o')
+        .replace(/đ/g,'d').replace(/Đ/g,'d').replace(/ß/g,'ss')
+        .replace(/ł/g,'l').replace(/Ł/g,'l').replace(/æ/g,'ae').replace(/Æ/g,'ae')
+        .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g,' ')
+        .replace(/([a-z])(\d)/g,'$1 $2')
+        .replace(/\s+/g,' ')
+        .trim();
+}
+
+// Souteze, ktere nikdy nechceme (mladez, zeny, rezervy, pratelaky, futsal...).
+const EXCLUDE_RE = [
+    /\bu ?\d{2}\b/, /\byouth\b/, /\bjunior/, /\bjuvenil/, /\bprimavera\b/,
+    /\breserve/, /\bacademy\b/, /\bdevelopment\b/, /\bii\b$/,
+    /\bwomen\b/, /\bfeminin/, /\bfemenin/, /\bfrauen\b/, /\bdamallsvenskan\b/, /\bkvinde/,
+    /\bfriendl/, /\bfutsal\b/, /\bbeach\b/, /\besoccer\b/, /\bindoor\b/,
 ];
 
-const TIER2 = [
-    ['Championship','England'],['2. Bundesliga','Germany'],['Serie B','Italy'],
-    ['LaLiga2','Spain'],['Ligue 2','France'],['Eerste Divisie','Netherlands'],
-    ['Scottish Championship','Scotland'],['TFF First League','Turkey'],
-    ['1. Liga','Czech-Republic'],['Fortuna 1. Liga','Slovakia'],['I Liga','Poland'],
-    ['National League','England'],['League One','England'],['League Two','England'],
-    ['Challenger Pro League','Belgium'],['Liga de Honra','Portugal'],
-    ['2. Liga','Austria'],['1. Division','Denmark'],
-
-    // Domaci pohary
-    ['FA Cup','England'],['League Cup','England'],
-    ['Copa del Rey','Spain'],
-    ['Coppa Italia','Italy'],
-    ['DFB Pokal','Germany'],
-    ['Coupe de France','France'],
-    ['KNVB Beker','Netherlands'],
-    ['Taça de Portugal','Portugal'],
-    ['Croky Cup','Belgium'],
-    ['Scottish Cup','Scotland'],
-    ['Puchar Polski','Poland'],
-    ['Czech Cup','Czech-Republic'],
-    ['Slovak Cup','Slovakia'],
-    ['Greek Cup','Greece'],
-    ['Türkiye Kupası','Turkey'],
-    ['OFB Cup','Austria'],
-    ['DBU Pokalen','Denmark'],
-    ['Svenska Cupen','Sweden'],
-    ['NM Cupen','Norway'],
-];
-
-const TIER1_SET = new Set(TIER1.map(([n,c]) => n+'|'+c));
-const TIER2_SET = new Set(TIER2.map(([n,c]) => n+'|'+c));
-
-const EUROPE_COUNTRIES = new Set([
-    'World', // UEFA klubove pohary
-    'England','Spain','Germany','Italy','France','Netherlands','Portugal','Belgium',
-    'Greece','Turkey','Poland','Czech-Republic','Slovakia','Scotland','Switzerland',
-    'Austria','Sweden','Norway','Denmark','Finland','Serbia','Croatia','Ukraine',
-    'Romania','Hungary','Bulgaria','Slovenia','Bosnia And Herzegovina',
+// Skupiny zemi. A = top5, B = silne evropske ligy, C = zbytek Evropy, D = zbytek sveta.
+const COUNTRY_A = new Set(['england','spain','italy','germany','france']);
+const COUNTRY_B = new Set([
+    'netherlands','portugal','belgium','turkey','scotland','austria','switzerland',
+    'greece','denmark','norway','sweden','poland','czech republic','czechia',
+    'ukraine','serbia','croatia','romania',
 ]);
+const COUNTRY_C = new Set([
+    'slovakia','hungary','bulgaria','slovenia','bosnia and herzegovina','finland',
+    'ireland','republic of ireland','northern ireland','wales','iceland','albania',
+    'azerbaijan','kazakhstan','georgia','armenia','moldova','montenegro',
+    'north macedonia','macedonia','latvia','lithuania','estonia','luxembourg',
+    'malta','faroe islands','andorra','kosovo','gibraltar','san marino',
+    'israel','cyprus','belarus','russia',
+]);
+function countryGroup(c){
+    if(COUNTRY_A.has(c))return 'A';
+    if(COUNTRY_B.has(c))return 'B';
+    if(COUNTRY_C.has(c))return 'C';
+    return 'D';
+}
 
-function leagueTier(n,c){const k=n+'|'+c;if(TIER1_SET.has(k))return 1;if(TIER2_SET.has(k))return 2;if(EUROPE_COUNTRIES.has(c))return 3;return 4;}
+// Rozpoznani poharu bez nutnosti znat nazev (fallback, kdyz chybi league.type z API).
+const CUP_RE = /\bcup\b|\bcupen\b|\bpokal\b|\bpokalen\b|\bcopa\b|\bcoupe\b|\bcoppa\b|\bbeker\b|\btaca\b|\bkupa\b|\bkupasi\b|\bkubok\b|\bpuchar\b|\bpohar\b|\bkypello\b|\btrophy\b|\bsupercup\b|\bsuper cup\b/;
+
+// Zeme, kde nazev neprozradi uroven ligy (Championship, 1. Division...) -> rucni mapa.
+// Klic = normalizovana zeme, hodnota = [uroven, [normalizovane podretezce nazvu]].
+const LEVEL_OVERRIDES = {
+    'england':   [[1,['premier league']],[2,['championship']],[3,['league one']],[4,['league two']],[5,['national league']]],
+    'scotland':  [[1,['premiership']],[2,['championship']],[3,['league one']],[4,['league two']],[5,['highland league','lowland league']]],
+    'netherlands':[[2,['eerste divisie']],[3,['tweede divisie']]],
+    'belgium':   [[2,['challenger pro league','first division b']]],
+    'portugal':  [[2,['liga de honra','segunda liga','liga portugal 2']],[3,['campeonato de portugal']]],
+    'spain':     [[2,['segunda division','laliga 2','la liga 2']],[3,['primera federacion','primera division rfef']],[4,['segunda federacion']],[5,['tercera']]],
+    'italy':     [[3,['serie c']],[4,['serie d']]],
+    'germany':   [[4,['regionalliga']],[5,['oberliga']]],
+    'france':    [[3,['national 1','championnat national']],[4,['national 2']],[5,['national 3']]],
+    'turkey':    [[1,['super lig']],[2,['1 lig','first league']],[3,['2 lig']],[4,['3 lig']]],
+    'denmark':   [[1,['superliga','superligaen']],[2,['1 division','1 divisionen']],[3,['2 division']]],
+    'sweden':    [[1,['allsvenskan']],[2,['superettan']],[3,['ettan']]],
+    'norway':    [[1,['eliteserien']],[2,['obos ligaen','1 divisjon']],[3,['2 divisjon']]],
+    'czech republic':[[1,['czech liga','fortuna liga','first league']],[2,['fnl','narodni liga','national football league']]],
+    'slovakia':  [[1,['super liga','nike liga','fortuna liga','fortuna 1 liga']],[2,['2 liga']]],
+    'poland':    [[1,['ekstraklasa']],[2,['i liga','1 liga']],[3,['ii liga','2 liga']]],
+    'austria':   [[1,['bundesliga']],[2,['2 liga']],[3,['regionalliga']]],
+    'switzerland':[[1,['super league']],[2,['challenge league']]],
+    'greece':    [[1,['super league 1']],[2,['super league 2']]],
+    'ireland':   [[1,['premier division']],[2,['first division']]],
+    'republic of ireland':[[1,['premier division']],[2,['first division']]],
+};
+
+// Genericka detekce urovne z cisla/slova v nazvu. Poradi od nejnizsi urovne.
+const GENERIC_LEVELS = [
+    [5,[/\b(5|v)\b/,/quinta/,/oberliga/]],
+    [4,[/\b(4|iv)\b/,/cuarta/,/quarta/,/quatrieme/,/regionalliga/,/\bd\b/]],
+    [3,[/\b(3|iii)\b/,/tercera/,/terza/,/troisieme/,/dritte/,/third/,/treca/,/\bc\b/]],
+    [2,[/\b(2|ii)\b/,/segunda/,/seconda/,/second/,/zweite/,/deuxieme/,/druga/,/druha/,/masodik/,/\bb\b/]],
+];
+
+// Vrati uroven ligy (1 = nejvyssi soutez zeme). Default 1 - nizsi souteze maji
+// prakticky vzdy cislo nebo poradove slovo v nazvu.
+function leagueLevel(n,c){
+    const ov=LEVEL_OVERRIDES[c];
+    if(ov){for(const [lvl,pats] of ov){for(const p of pats){if(n.includes(p))return lvl;}}}
+    for(const [lvl,res] of GENERIC_LEVELS){for(const re of res){if(re.test(n))return lvl;}}
+    return 1;
+}
+
+// Tier podle skupiny zeme a urovne souteze. 0 = soutez vyradit z vyberu.
+const TIER_TABLE = {
+    A:{1:1,2:2,3:3,4:4,5:4},
+    B:{1:1,2:2,3:3,4:4,5:4},
+    C:{1:2,2:3,3:4,4:4,5:4},
+};
+
+function leagueTier(name,country,type){
+    const n=norm(name),c=norm(country);
+    if(EXCLUDE_RE.some(re=>re.test(n)))return 0;
+    if(c==='world'){
+        if(/uefa champions league|uefa europa league|uefa (europa )?conference league/.test(n))return 1;
+        if(/uefa super cup/.test(n))return 2;
+        return 4;
+    }
+    const grp=countryGroup(c);
+    if(grp==='D')return 4;
+    const isCup=(type&&norm(type)==='cup')||CUP_RE.test(n);
+    if(isCup)return grp==='C'?3:2;
+    const lvl=leagueLevel(n,c);
+    return TIER_TABLE[grp][lvl]||4;
+}
 function maskKey(k){if(!k)return'(none)';if(k.length<=8)return'***';return k.slice(0,4)+'...'+k.slice(-4)+' (len='+k.length+')';}
 function sleep(ms){return new Promise(r=>setTimeout(r,ms));}
 function shuffle(arr){for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]];}return arr;}
@@ -164,6 +223,15 @@ async function apiFetch(path){
 
 async function getFixtures(date){fixtureFetchAttempts++;const data=await apiFetch('/fixtures?date='+date+'&timezone='+TZ+'&status=NS');if(data.__error)fixtureFetchErrors++;return data.response||[];}
 
+// Metadata vsech soutezi (hlavne league.type = 'League' / 'Cup'), ktere /fixtures nevraci.
+async function getLeagueTypes(){
+    const data=await apiFetch('/leagues');
+    const map=new Map();
+    for(const it of data.response||[]){if(it?.league?.id!=null)map.set(it.league.id,it.league.type);}
+    console.log('Metadata soutezi: '+map.size+' lig nacteno');
+    return map;
+}
+
 async function getLeagueOdds(leagueId,season,date){
     let all=[],page=1,totalPages=1;
     do{const data=await apiFetch('/odds?league='+leagueId+'&season='+season+'&date='+date+'&bet=5&page='+page);all.push(...(data.response||[]));totalPages=data.paging?.total||0;page++;if(page<=totalPages)await sleep(450);}while(page<=totalPages);
@@ -187,6 +255,9 @@ async function main(){
     const dedupSet=await loadDedupKeysFromUrls(DEDUP_URLS);
     console.log('Dedup klicu celkem: '+dedupSet.size+'\n');
 
+    const leagueTypes=await getLeagueTypes();
+    await sleep(450);
+
     const now=new Date(),max24h=new Date(now.getTime()+24*60*60*1000);
     console.log('Window: '+now.toUTCString()+' -> '+max24h.toUTCString()+' (24h)\n');
     const dates=new Set();
@@ -198,10 +269,18 @@ async function main(){
     fixtures=fixtures.filter(f=>{const t=new Date(f.fixture.date);return t>=now&&t<=max24h&&!EXCLUDED_COUNTRIES.has(f.league.country);});
     console.log('   '+fixtures.length+' in 24h window (excl. RU/BY)');
     const fixtureMap=new Map(),leagueMap=new Map();
-    for(const f of fixtures){fixtureMap.set(f.fixture.id,f);const key=f.league.id+'_'+f.league.season;if(!leagueMap.has(key))leagueMap.set(key,{id:f.league.id,season:f.league.season,name:f.league.name,country:f.league.country,dates:new Set()});leagueMap.get(key).dates.add(fmtDate(new Date(f.fixture.date)));}
-    console.log('   '+leagueMap.size+' leagues\n');
+    for(const f of fixtures){fixtureMap.set(f.fixture.id,f);const key=f.league.id+'_'+f.league.season;if(!leagueMap.has(key))leagueMap.set(key,{id:f.league.id,season:f.league.season,name:f.league.name,country:f.league.country,type:leagueTypes.get(f.league.id),tier:leagueTier(f.league.name,f.league.country,leagueTypes.get(f.league.id)),dates:new Set()});leagueMap.get(key).dates.add(fmtDate(new Date(f.fixture.date)));}
+    console.log('   '+leagueMap.size+' leagues');
+    // Diagnostika: prehled zarazeni soutezi do tieru (pro ladeni klasifikace)
+    for(let t=0;t<=4;t++){
+        const names=[...leagueMap.values()].filter(l=>l.tier===t).map(l=>l.name+' ('+l.country+')');
+        if(names.length)console.log('   T'+t+(t===0?' [VYRAZENO]':'')+': '+names.join(', '));
+    }
+    // Vyrad mladez/zeny/rezervy/pratelaky uplne - nema smysl na ne platit /odds dotazy.
+    for(const [k,lg] of leagueMap){if(lg.tier===0)leagueMap.delete(k);}
+    console.log('   '+leagueMap.size+' leagues po vyrazeni\n');
     const candidateMap=new Map();
-    for(const[,lg]of leagueMap){for(const d of lg.dates){const oddsData=await getLeagueOdds(lg.id,lg.season,d);for(const entry of oddsData){const fix=fixtureMap.get(entry.fixture?.id);if(!fix)continue;const mKey=fix.fixture.id;for(const bm of entry.bookmakers||[]){for(const bet of bm.bets||[]){for(const v of bet.values||[]){if(v.value!=='Over 2.5')continue;const odd=parseFloat(v.odd);if(isNaN(odd)||odd<MIN_ODDS||odd>MAX_ODDS)continue;if(!candidateMap.has(mKey))candidateMap.set(mKey,{fixtureId:mKey,league:lg.name,country:lg.country,match:fix.teams.home.name+' - '+fix.teams.away.name,kickoff:fix.fixture.date,tip:'Over 2.5',tier:leagueTier(lg.name,lg.country),allOdds:[]});candidateMap.get(mKey).allOdds.push(odd);}}}};await sleep(450);}}
+    for(const[,lg]of leagueMap){for(const d of lg.dates){const oddsData=await getLeagueOdds(lg.id,lg.season,d);for(const entry of oddsData){const fix=fixtureMap.get(entry.fixture?.id);if(!fix)continue;const mKey=fix.fixture.id;for(const bm of entry.bookmakers||[]){for(const bet of bm.bets||[]){for(const v of bet.values||[]){if(v.value!=='Over 2.5')continue;const odd=parseFloat(v.odd);if(isNaN(odd)||odd<MIN_ODDS||odd>MAX_ODDS)continue;if(!candidateMap.has(mKey))candidateMap.set(mKey,{fixtureId:mKey,league:lg.name,country:lg.country,match:fix.teams.home.name+' - '+fix.teams.away.name,kickoff:fix.fixture.date,tip:'Over 2.5',tier:lg.tier,allOdds:[]});candidateMap.get(mKey).allOdds.push(odd);}}}};await sleep(450);}}
     let pool=[...candidateMap.values()].map(m=>({...m,odds:median(m.allOdds).toFixed(2)}));
     console.log('Candidates: '+pool.length+' (Over 2.5, odds '+MIN_ODDS+'-'+MAX_ODDS+')');
 
@@ -216,18 +295,22 @@ async function main(){
 
     const tier1=shuffle(pool.filter(m=>m.tier===1)),tier2=shuffle(pool.filter(m=>m.tier===2)),tier3=shuffle(pool.filter(m=>m.tier===3)),tier4=shuffle(pool.filter(m=>m.tier===4));
     console.log('Tier 1: '+tier1.length+', Tier 2: '+tier2.length+', Tier 3: '+tier3.length+', Tier 4: '+tier4.length+'\n');
-    // Vazeny nahodny vyber: vyssi tier (Evropa/top ligy) ma vetsi sanci, ale i nizsi tiery mohou projit.
-    // Zaroven max 1 zapas na ligu. Vahy: T1 nejvyssi ... T4 nejnizsi.
-    const remaining=[...pool];
-    const selected=[],usedLeagues=new Set();
-    while(selected.length<PICK_COUNT&&remaining.length>0){
-        const totalW=remaining.reduce((a,m)=>a+(TIER_WEIGHTS[m.tier]||1),0);
-        let r=Math.random()*totalW,idx=0;
-        for(let i=0;i<remaining.length;i++){r-=(TIER_WEIGHTS[remaining[i].tier]||1);if(r<=0){idx=i;break;}}
-        const m=remaining.splice(idx,1)[0];
+    // Vazeny nahodny vyber: nejdriv se podle vah vylosuje TIER, teprve pak zapas z nej.
+    // Diky tomu pocet zapasu v tieru neovlivnuje jeho sanci (drive 200x T4 prevazilo 5x T1).
+    // Zaroven max 1 zapas na ligu a max MAX_PER_COUNTRY zapasu na zemi.
+    const buckets={1:[...tier1],2:[...tier2],3:[...tier3],4:[...tier4]};
+    const selected=[],usedLeagues=new Set(),countryCount=new Map();
+    while(selected.length<PICK_COUNT){
+        const avail=[1,2,3,4].filter(t=>buckets[t].length>0);
+        if(avail.length===0)break;
+        const totalW=avail.reduce((a,t)=>a+(TIER_WEIGHTS[t]||1),0);
+        let r=Math.random()*totalW,tier=avail[avail.length-1];
+        for(const t of avail){r-=(TIER_WEIGHTS[t]||1);if(r<=0){tier=t;break;}}
+        const m=buckets[tier].pop();
         const lk=m.league+'|'+m.country;
         if(usedLeagues.has(lk))continue;
-        usedLeagues.add(lk);selected.push(m);
+        if((countryCount.get(m.country)||0)>=MAX_PER_COUNTRY)continue;
+        usedLeagues.add(lk);countryCount.set(m.country,(countryCount.get(m.country)||0)+1);selected.push(m);
         console.log('   [T'+m.tier+'] '+m.match+' | '+m.league+' ('+m.country+') | Over 2.5 @ '+m.odds);
     }
     console.log('\nVybrano: '+selected.length+'/'+PICK_COUNT);
