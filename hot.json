@@ -1,50 +1,50 @@
 [
   {
-    "league": "Championship",
-    "match": "West Brom - Charlton",
-    "kickoff": "2026-09-02T20:45:00+02:00",
+    "league": "First NL",
+    "match": "Dugopolje - Karlovac 1919",
+    "kickoff": "2026-09-02T17:00:00+02:00",
     "tip": "Over 2.5",
     "odds": "2.10",
     "group": 1
   },
   {
-    "league": "Persian Gulf Pro League",
-    "match": "Esteghlal FC - Persepolis FC",
-    "kickoff": "2026-09-02T18:00:00+02:00",
+    "league": "Coppa Italia Serie C",
+    "match": "Team Altamura - Sambenedettese",
+    "kickoff": "2026-09-02T21:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.48",
+    "odds": "2.25",
     "group": 1
   },
   {
-    "league": "Coppa Italia Serie C",
-    "match": "Arzignano Valchiampo - Dolomiti Bellunesi",
-    "kickoff": "2026-09-02T18:30:00+02:00",
+    "league": "Second League",
+    "match": "Rilski Sportist - Sportist Svoge",
+    "kickoff": "2026-09-02T16:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.13",
+    "odds": "2.17",
     "group": 2
   },
   {
     "league": "Cupa României",
-    "match": "Arges Pitesti - FCSB",
-    "kickoff": "2026-09-02T20:30:00+02:00",
+    "match": "FC Botosani - Corvinul Hunedoara",
+    "kickoff": "2026-09-02T15:45:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.12",
+    "odds": "2.20",
     "group": 2
   },
   {
-    "league": "First NL",
-    "match": "Croatia Zmijavci - Bsk Bijelo Brdo",
-    "kickoff": "2026-09-02T17:00:00+02:00",
+    "league": "1st Division",
+    "match": "Cape Town City - Leicesterfield",
+    "kickoff": "2026-09-02T15:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.29",
+    "odds": "2.25",
     "group": 3
   },
   {
-    "league": "Reserve League",
-    "match": "Atlético Tucumán Res. - San Lorenzo Res.",
-    "kickoff": "2026-09-02T20:00:00+02:00",
+    "league": "Liga Pro",
+    "match": "Barcelona SC - Independiente del Valle",
+    "kickoff": "2026-09-03T02:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.12",
+    "odds": "2.10",
     "group": 3
   }
 ]
