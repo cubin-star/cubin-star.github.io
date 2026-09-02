@@ -1,6 +1,16 @@
 [
   {
     "sport": "football",
+    "league": "Superettan",
+    "match": "Helsingborg vs Orebro SK",
+    "tip": "Over 1.5",
+    "odds": "1.19",
+    "date": "2026-09-01T17:00:00+00:00",
+    "score": "1:1",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
     "league": "Primera División",
     "match": "U. Catolica vs O'Higgins",
     "tip": "Over 1.5",
@@ -1988,15 +1998,5 @@
     "date": "2026-05-25T00:00:00+00:00",
     "score": "103:82",
     "result": "✗"
-  },
-  {
-    "sport": "football",
-    "league": "Jupiler Pro League",
-    "match": "Union St. Gilloise vs Anderlecht",
-    "tip": "Over 1.5",
-    "odds": "1.21",
-    "date": "2026-05-24T16:30:00+00:00",
-    "score": "5:1",
-    "result": "✓"
   }
 ]
