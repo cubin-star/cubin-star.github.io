@@ -61,7 +61,7 @@ jobs:
         run: |
           git config user.name "Kombík Bot"
           git config user.email "bot@kombik.cz"
-          git add hot.json live1.json best.json
+          git add hot.json live1.json best.json tips.json
           if git diff --cached --quiet; then
             echo "Žádné změny k commitu, končím."
             exit 0
