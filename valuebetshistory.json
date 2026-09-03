@@ -1,5 +1,15 @@
 [
   {
+    "League": "USL League One",
+    "Match": "Westchester SC vs Chattanooga Red Wolves",
+    "Tip": "Over 2.5",
+    "Odds": "1.50",
+    "Date": "2026-09-02T23:00:00+00:00",
+    "FixtureId": 1493976,
+    "Result": "KO",
+    "Score": "0:1"
+  },
+  {
     "League": "Allsvenskan",
     "Match": "IF Brommapojkarna vs Malmo FF",
     "Tip": "Over 2.5",
