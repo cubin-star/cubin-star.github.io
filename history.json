@@ -1,6 +1,16 @@
 [
   {
     "sport": "football",
+    "league": "Czech Liga",
+    "match": "Zbrojovka Brno vs Hradec Králové",
+    "tip": "Over 1.5",
+    "odds": "1.28",
+    "date": "2026-09-02T16:00:00+00:00",
+    "score": "1:0",
+    "result": "✗"
+  },
+  {
+    "sport": "football",
     "league": "Superettan",
     "match": "Helsingborg vs Orebro SK",
     "tip": "Over 1.5",
@@ -1988,15 +1998,5 @@
     "date": "2026-05-25T14:20:00+00:00",
     "score": "1:4",
     "result": "✓"
-  },
-  {
-    "sport": "basketball",
-    "league": "NBA",
-    "match": "San Antonio Spurs vs Oklahoma City Thunder",
-    "tip": "Over 206.5",
-    "odds": "1.27",
-    "date": "2026-05-25T00:00:00+00:00",
-    "score": "103:82",
-    "result": "✗"
   }
 ]
