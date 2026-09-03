@@ -1,6 +1,20 @@
 [
   {
     "league": "",
+    "homeTeam": "Rayo Zuliano",
+    "awayTeam": "Carabobo",
+    "tip": "Over 3.5",
+    "odds": "",
+    "halftimeScore": "2:1",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-09-03T19:30:00.000Z",
+    "resolvedAt": ""
+  },
+  {
+    "league": "",
     "homeTeam": "Basel",
     "awayTeam": "Sion",
     "tip": "Over 1.5",
