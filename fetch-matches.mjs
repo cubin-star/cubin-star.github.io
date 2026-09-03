@@ -7,6 +7,11 @@ const FOOTBALL_API = 'https://v3.football.api-sports.io';
 const MIN_ODDS = 2.1;
 const MAX_ODDS = 2.5;
 const PICK_COUNT = 6;
+// Samostatny denni vyber do tips.json - nizsi kurzovy pas, primarne tier 1+2,
+// pri nedostatku se dobira z tieru 3 a 4. Max jeden zapas z ligy.
+const TIPS_MIN_ODDS = 1.75;
+const TIPS_MAX_ODDS = 1.9;
+const TIPS_PICK_COUNT = 2;
 // Max pocet vybranych zapasu z jedne zeme - brani zaplaveni tiketu jednou destinaci.
 const MAX_PER_COUNTRY = 2;
 // Vahy pro vazeny nahodny vyber TIERU (ne jednotlivych zapasu) - vyssi tier ma
@@ -296,8 +301,15 @@ async function main(){
     for(const [k,lg] of leagueMap){if(lg.tier===0)leagueMap.delete(k);}
     console.log('   '+leagueMap.size+' leagues po vyrazeni\n');
     const candidateMap=new Map();
-    for(const[,lg]of leagueMap){for(const d of lg.dates){const oddsData=await getLeagueOdds(lg.id,lg.season,d);for(const entry of oddsData){const fix=fixtureMap.get(entry.fixture?.id);if(!fix)continue;const mKey=fix.fixture.id;for(const bm of entry.bookmakers||[]){for(const bet of bm.bets||[]){for(const v of bet.values||[]){if(v.value!=='Over 2.5')continue;const odd=parseFloat(v.odd);if(isNaN(odd)||odd<MIN_ODDS||odd>MAX_ODDS)continue;if(!candidateMap.has(mKey))candidateMap.set(mKey,{fixtureId:mKey,league:lg.name,country:lg.country,match:fix.teams.home.name+' - '+fix.teams.away.name,kickoff:fix.fixture.date,tip:'Over 2.5',tier:lg.tier,allOdds:[]});candidateMap.get(mKey).allOdds.push(odd);}}}};await sleep(450);}}
+    const tipsCandidateMap=new Map();
+    function addCandidate(map,mKey,lg,fix,odd){
+        if(!map.has(mKey))map.set(mKey,{fixtureId:mKey,league:lg.name,country:lg.country,match:fix.teams.home.name+' - '+fix.teams.away.name,kickoff:fix.fixture.date,tip:'Over 2.5',tier:lg.tier,allOdds:[]});
+        map.get(mKey).allOdds.push(odd);
+    }
+    for(const[,lg]of leagueMap){for(const d of lg.dates){const oddsData=await getLeagueOdds(lg.id,lg.season,d);for(const entry of oddsData){const fix=fixtureMap.get(entry.fixture?.id);if(!fix)continue;const mKey=fix.fixture.id;for(const bm of entry.bookmakers||[]){for(const bet of bm.bets||[]){for(const v of bet.values||[]){if(v.value!=='Over 2.5')continue;const odd=parseFloat(v.odd);if(isNaN(odd))continue;if(odd>=MIN_ODDS&&odd<=MAX_ODDS)addCandidate(candidateMap,mKey,lg,fix,odd);if(odd>=TIPS_MIN_ODDS&&odd<=TIPS_MAX_ODDS)addCandidate(tipsCandidateMap,mKey,lg,fix,odd);}}}};await sleep(450);}}
     let pool=[...candidateMap.values()].map(m=>({...m,odds:median(m.allOdds).toFixed(2)}));
+    let tipsPool=[...tipsCandidateMap.values()].map(m=>({...m,odds:median(m.allOdds).toFixed(2)})).filter(m=>parseFloat(m.odds)>=TIPS_MIN_ODDS&&parseFloat(m.odds)<=TIPS_MAX_ODDS);
+    console.log('Tips candidates: '+tipsPool.length+' (Over 2.5, odds '+TIPS_MIN_ODDS+'-'+TIPS_MAX_ODDS+')');
     console.log('Candidates: '+pool.length+' (Over 2.5, odds '+MIN_ODDS+'-'+MAX_ODDS+')');
 
     // 2) Odfiltruj zapasy, ktere uz vybral fotbal.json / live2.json
@@ -307,6 +319,9 @@ async function main(){
         pool=pool.filter(m=>{if(isDuplicate(m,dedupSet)){removed.push(m);return false;}return true;});
         console.log('Dedup: odstraneno '+(before-pool.length)+' duplicit (vs fotbal.json/live2.json)');
         for(const m of removed)console.log('   - DUP: '+m.match+' | '+m.league);
+        const tipsBefore=tipsPool.length;
+        tipsPool=tipsPool.filter(m=>!isDuplicate(m,dedupSet));
+        console.log('Dedup (tips): odstraneno '+(tipsBefore-tipsPool.length)+' duplicit');
     }
 
     const tier1=shuffle(pool.filter(m=>m.tier===1)),tier2=shuffle(pool.filter(m=>m.tier===2)),tier3=shuffle(pool.filter(m=>m.tier===3)),tier4=shuffle(pool.filter(m=>m.tier===4));
@@ -352,6 +367,28 @@ async function main(){
     console.log('   Rozlozeni tieru: T1='+tierCount[1]+', T2='+tierCount[2]+', T3='+tierCount[3]+', T4='+tierCount[4]);
     console.log('\nVybrano: '+selected.length+'/'+PICK_COUNT);
     if(selected.length<PICK_COUNT)console.log('WARNING: Mene nez '+PICK_COUNT+' zapasu.');
+    // === tips.json: 2 nahodne zapasy 1.75-1.9, primarne T1+T2, jinak T3/T4 ====
+    const selectedIds=new Set(selected.map(m=>m.fixtureId));
+    const tipsSelected=[],tipsUsedLeagues=new Set();
+    function tipsPickFrom(tiers){
+        const bucket=shuffle(tipsPool.filter(m=>tiers.includes(m.tier)&&!selectedIds.has(m.fixtureId)));
+        for(const m of bucket){
+            if(tipsSelected.length>=TIPS_PICK_COUNT)return;
+            const lk=m.league+'|'+m.country;
+            if(tipsUsedLeagues.has(lk))continue;
+            tipsUsedLeagues.add(lk);
+            selectedIds.add(m.fixtureId);
+            tipsSelected.push(m);
+        }
+    }
+    tipsPickFrom([1,2]);
+    if(tipsSelected.length<TIPS_PICK_COUNT)tipsPickFrom([3,4]);
+    const tips=tipsSelected.map(m=>({league:m.league,match:m.match,kickoff:m.kickoff,tip:m.tip,odds:m.odds}));
+    writeFileSync('tips.json',JSON.stringify(tips,null,2),'utf-8');
+    console.log('tips.json: '+tips.length+'/'+TIPS_PICK_COUNT+' zapasu ('+TIPS_MIN_ODDS+'-'+TIPS_MAX_ODDS+')');
+    for(const m of tipsSelected)console.log('   [T'+m.tier+'] '+m.match+' | '+m.league+' ('+m.country+') | Over 2.5 @ '+m.odds);
+    if(tips.length<TIPS_PICK_COUNT)console.log('WARNING: tips.json ma mene nez '+TIPS_PICK_COUNT+' zapasu.');
+
     const live1=[...tier1,...tier2].map(m=>({league:m.league,match:m.match,kickoff:m.kickoff,tip:m.tip,odds:m.odds}));
     writeFileSync('live1.json',JSON.stringify(live1,null,2),'utf-8');
     console.log('live1.json: '+live1.length+' matches (tier 1+2)');
