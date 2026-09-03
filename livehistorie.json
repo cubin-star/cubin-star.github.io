@@ -1,6 +1,20 @@
 [
   {
     "league": "",
+    "homeTeam": "Basel",
+    "awayTeam": "Sion",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "1:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-09-03T18:30:00.000Z",
+    "resolvedAt": ""
+  },
+  {
+    "league": "",
     "homeTeam": "Wigan",
     "awayTeam": "Milton Keynes",
     "tip": "Over 1.5",
