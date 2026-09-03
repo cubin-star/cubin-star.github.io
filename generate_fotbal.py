@@ -854,8 +854,6 @@ def main():
             json.dump([], f)
         with open(OUTPUT_LIVE2, "w", encoding="utf-8") as f:
             json.dump([], f)
-        with open(OUTPUT_TIPS, "w", encoding="utf-8") as f:
-            json.dump([], f)
         return
 
     # 2. Filter fixtures by 24h window + country
@@ -1091,98 +1089,12 @@ def main():
     with open(OUTPUT, "w", encoding="utf-8") as f:
         json.dump(fotbals_out, f, indent=2, ensure_ascii=False)
 
-    # 8. Write tips.json – max MAX_TIPS tipů, primárně z varianty A.
-    #    Logika:
-    #      a) Vyber zápasy s _variant == "A" (nejsilnější profil – oba útočí + obrany inkasují)
-    #         Pro každý dopočti odhadovaný kurz Over 2.5 z Over 1.5 přes Poisson
-    #         (nemusíme ho hledat v API – inverzí z o15)
-    #      b) Pokud A pool < MAX_TIPS, doplň úplně random Over 2.5 z TOP first-tier lig
-    #         (skutečný kurz z API)
-    tips = []
-    selected_keys = set()
-    MIN_TIPS_O25 = 1.6  # zápas se do tips.json zapíše jen když dopočtený O2.5 ≥ 1.6
-
-    a_pool = [r for r in deduped if r.get("_variant") == "A"]
-    random.shuffle(a_pool)
-    for r in a_pool:
-        if len(tips) >= MAX_TIPS:
-            break
-        o25_est = estimate_o25_from_o15(r.get("_o15"))
-        if o25_est is None:
-            continue
-        if o25_est < MIN_TIPS_O25:
-            print(f"  ⚠ tips skip {r['Match'][:50]}: O2.5={o25_est:.2f} < {MIN_TIPS_O25}")
-            continue
-        tips.append({
-            "League": r["League"],
-            "Match": r["Match"],
-            "Tip": "Over 2.5",
-            "Odds": f"{o25_est:.2f}",
-            "Date": r["Date"],
-        })
-        selected_keys.add((r["Match"], r["Date"]))
-
-    # 8b. FALLBACK: pokud A pool nedodal MAX_TIPS, doplň úplně random
-    #     Over 2.5 z TOP first-tier lig s reálným kurzem.
-    #     Postupně rozšiřujeme pásmo kurzů, abychom GARANTOVANĚ dosáhli MAX_TIPS:
-    #       1) 1.60–1.90 (preferované, hodnotové)
-    #       2) 1.45–2.20 (širší)
-    #       3) 1.30–2.80 (last resort, jakýkoli rozumný kurz)
-    #     Nejdřív projdeme VŠECHNY odds-passy s 14h oknem (bližší zápasy = kvalitnější
-    #     data) a teprve když ani jeden neuspěje, opakujeme totéž se širším 24h oknem.
-    odds_passes = [
-        (TIPS_FB_MIN_ODDS, TIPS_FB_MAX_ODDS, TIPS_FB_MAX_ATTEMPTS),
-        (1.45, 2.20, TIPS_FB_MAX_ATTEMPTS),
-        (1.30, 2.80, TIPS_FB_MAX_ATTEMPTS),
-    ]
-    window_passes = [14, 24]
-    for win_h in window_passes:
-        if len(tips) >= MAX_TIPS:
-            break
-        for pass_idx, (lo, hi, ma) in enumerate(odds_passes, 1):
-            if len(tips) >= MAX_TIPS:
-                break
-            if pass_idx > 1 or win_h != window_passes[0]:
-                print(f"  Tips fallback: window={win_h}h, odds {lo}-{hi}")
-            need = MAX_TIPS - len(tips)
-            exclude_keys = set(selected_keys)
-            for t in tips:
-                exclude_keys.add((t["Match"], t["Date"]))
-            exclude_leagues = {t["League"] for t in tips}
-            random_picks = pick_random_top_league_tips(
-                all_fixtures, exclude_keys, exclude_leagues, need,
-                min_odds=lo, max_odds=hi, max_attempts=ma,
-                window_hours=win_h)
-            for p in random_picks:
-                tips.append(p)
-                selected_keys.add((p["Match"], p["Date"]))
-
-    # 8c. Pokud i po všech průchodech chybí tipy (extrémně málo fixtures dne),
-    #     doplň placeholder záznamy, aby tips.json měl VŽDY MAX_TIPS položek.
-    while len(tips) < MAX_TIPS:
-        print(f"  ⚠ Tips: nepodařilo se najít {MAX_TIPS} reálných zápasů, "
-              f"doplňuji placeholder ({len(tips)+1}/{MAX_TIPS})")
-        tips.append({
-            "League": "-",
-            "Match": "No tip available.",
-            "Tip": "-",
-            "Odds": "-",
-            "Date": now.isoformat(),
-        })
-
-    if tips and tips[0]["Match"] != "No tip available.":
-        print(f"  Tips: {len(tips)} match(es) → {OUTPUT_TIPS}")
-    else:
-        print(f"  Tips: only placeholders → {OUTPUT_TIPS}")
-
-    with open(OUTPUT_TIPS, "w", encoding="utf-8") as f:
-        json.dump(tips, f, indent=2, ensure_ascii=False)
+    # 8. tips.json se záměrně negeneruje (výstup zrušen).
 
     print(f"\n{'='*50}")
     print(f"  Results: {len(fotbals_out)} match(es) → {OUTPUT}")
     print(f"  Live:    {len(live_out)} match(es) → {OUTPUT_LIVE}")
     print(f"  Live2:   {len(live2_out)} match(es) → {OUTPUT_LIVE2}")
-    print(f"  Tips:    {len(tips)} match(es) → {OUTPUT_TIPS}")
     print(f"  API requests: {request_count} / 7500 ({request_count * 100 // 7500}%)")
 
 
