@@ -1,24 +1,24 @@
 [
   {
-    "League": "Coppa Italia",
-    "Match": "Sassuolo vs Frosinone",
-    "Tip": "Over 2.5",
-    "Odds": "1.87",
-    "Date": "2026-09-02T13:00:00+00:00"
-  },
-  {
-    "League": "Premiership",
-    "Match": "Dundee vs ST Johnstone",
-    "Tip": "Over 2.5",
-    "Odds": "1.90",
-    "Date": "2026-09-02T18:45:00+00:00"
-  },
-  {
     "League": "1. Lig",
-    "Match": "Vanspor FK vs Batman Petrolspor",
+    "Match": "Iğdır FK vs Manisa F.K.",
     "Tip": "Over 2.5",
     "Odds": "1.85",
-    "Date": "2026-09-02T14:00:00+00:00",
+    "Date": "2026-09-03T14:00:00+00:00"
+  },
+  {
+    "League": "Jupiler Pro League",
+    "Match": "Gent vs OH Leuven",
+    "Tip": "Over 2.5",
+    "Odds": "1.79",
+    "Date": "2026-09-03T18:30:00+00:00"
+  },
+  {
+    "League": "Coppa Italia",
+    "Match": "Palermo vs Mantova",
+    "Tip": "Over 2.5",
+    "Odds": "1.80",
+    "Date": "2026-09-03T16:00:00+00:00",
     "locked": true
   }
 ]
