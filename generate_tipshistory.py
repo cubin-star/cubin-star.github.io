@@ -145,10 +145,24 @@ def parse_over_line(tip):
     return None
 
 
+# Oddělovače týmů, které se mohou objevit v tips.json (podle zdroje dat).
+# Pořadí je důležité – delší varianty musí být před kratšími.
+_SEPARATORS = (" vs. ", " vs ", " v. ", " v ", " - ", " – ", " — ", " x ", " @ ")
+
+
 def parse_match_teams(match_str):
-    parts = (match_str or "").split(" vs ")
-    if len(parts) == 2:
-        return parts[0].strip(), parts[1].strip()
+    """Rozdělí 'A vs B', 'A - B', 'A – B' … na (home, away)."""
+    s = (match_str or "").strip()
+    if not s:
+        return None, None
+    low = s.lower()
+    for sep in _SEPARATORS:
+        idx = low.find(sep)
+        if idx > 0:
+            home = s[:idx].strip()
+            away = s[idx + len(sep):].strip()
+            if home and away:
+                return home, away
     return None, None
 
 
@@ -211,6 +225,7 @@ def fetch_finished_fixtures(date_str):
 def find_score(match_str, fixtures):
     home, away = parse_match_teams(match_str)
     if not home or not away:
+        print(f"    ! nelze rozparsovat n\u00E1zev z\u00E1pasu: '{match_str}'")
         return None
     for fx in fixtures:
         if names_match(fx["home"], home) and names_match(fx["away"], away):
