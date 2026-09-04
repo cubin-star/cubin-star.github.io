@@ -1,24 +1,24 @@
 [
   {
-    "League": "1. Lig",
-    "Match": "Iğdır FK vs Manisa F.K.",
+    "League": "National League",
+    "Match": "Altrincham vs Eastleigh",
     "Tip": "Over 2.5",
-    "Odds": "1.85",
-    "Date": "2026-09-03T14:00:00+00:00"
+    "Odds": "1.78",
+    "Date": "2026-09-04T18:45:00+00:00"
   },
   {
-    "League": "Jupiler Pro League",
-    "Match": "Gent vs OH Leuven",
+    "League": "Challenger Pro League",
+    "Match": "Beerschot VA vs Patro Eisden",
     "Tip": "Over 2.5",
-    "Odds": "1.79",
-    "Date": "2026-09-03T18:30:00+00:00"
+    "Odds": "1.95",
+    "Date": "2026-09-04T18:00:00+00:00"
   },
   {
-    "League": "Coppa Italia",
-    "Match": "Palermo vs Mantova",
+    "League": "Premier League",
+    "Match": "Syunik vs Pyunik Yerevan",
     "Tip": "Over 2.5",
-    "Odds": "1.80",
-    "Date": "2026-09-03T16:00:00+00:00",
+    "Odds": "1.75",
+    "Date": "2026-09-04T12:00:00+00:00",
     "locked": true
   }
 ]
