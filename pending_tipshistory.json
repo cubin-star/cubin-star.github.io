@@ -3,16 +3,16 @@
     "date": "2026-09-03T05:30:00Z",
     "matches": [
       {
-        "league": "Coppa Italia",
-        "match": "Palermo - Mantova",
+        "league": "Premier League",
+        "match": "Syunik - Pyunik Yerevan",
         "tip": "Over 2.5",
-        "odds": "1.76"
+        "odds": "1.75"
       },
       {
-        "league": "Liga Alef",
-        "match": "Shimshon Tel Aviv - Ironi Beit Shemesh",
+        "league": "Campionato",
+        "match": "Tre Penne - Cosmos",
         "tip": "Over 2.5",
-        "odds": "1.84"
+        "odds": "1.75"
       }
     ]
   }
