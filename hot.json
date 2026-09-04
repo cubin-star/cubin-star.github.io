@@ -1,50 +1,50 @@
 [
   {
-    "league": "Birinci Dasta",
-    "match": "Baku Sportinq - Karvan",
-    "kickoff": "2026-09-03T15:00:00+02:00",
+    "league": "FAI Cup",
+    "match": "Drogheda United - Galway United",
+    "kickoff": "2026-09-04T20:45:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.21",
+    "odds": "2.26",
     "group": 1
   },
   {
-    "league": "Coppa Italia",
-    "match": "Cagliari - Hellas Verona",
-    "kickoff": "2026-09-03T21:00:00+02:00",
+    "league": "Ligue 2",
+    "match": "PAU - Sochaux",
+    "kickoff": "2026-09-04T20:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.10",
+    "odds": "2.11",
     "group": 1
   },
   {
-    "league": "Primera B",
-    "match": "Internacional Palmira - Real Cundinamarca",
-    "kickoff": "2026-09-04T01:00:00+02:00",
+    "league": "Premier League",
+    "match": "Chornomorets - Livyi Bereh",
+    "kickoff": "2026-09-04T12:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.15",
+    "odds": "2.44",
     "group": 2
   },
   {
-    "league": "1. Lig",
-    "match": "Bodrum FK - Esenler Erokspor",
-    "kickoff": "2026-09-03T19:00:00+02:00",
+    "league": "Premiership",
+    "match": "Larne - Glentoran",
+    "kickoff": "2026-09-04T20:45:00+02:00",
     "tip": "Over 2.5",
     "odds": "2.10",
     "group": 2
   },
   {
-    "league": "Second League",
-    "match": "Beroe - Montana",
-    "kickoff": "2026-09-03T19:00:00+02:00",
+    "league": "Liga 3",
+    "match": "União Santarém - Caldas",
+    "kickoff": "2026-09-04T21:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.10",
+    "odds": "2.16",
     "group": 3
   },
   {
-    "league": "Coppa Italia Serie C",
-    "match": "Novara - Livorno",
-    "kickoff": "2026-09-03T20:00:00+02:00",
+    "league": "First League",
+    "match": "Arda Kardzhali - Botev Plovdiv",
+    "kickoff": "2026-09-04T20:15:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.13",
+    "odds": "2.11",
     "group": 3
   }
 ]
