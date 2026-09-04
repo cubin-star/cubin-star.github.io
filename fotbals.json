@@ -1,9 +1,16 @@
 [
   {
-    "League": "Jupiler Pro League",
-    "Match": "Gent vs OH Leuven",
+    "League": "Major League Soccer",
+    "Match": "New York City FC vs Nashville SC",
     "Tip": "Over 1.5",
-    "Odds": "1.24",
-    "Date": "2026-09-03T18:30:00+00:00"
+    "Odds": "1.23",
+    "Date": "2026-09-04T23:30:00+00:00"
+  },
+  {
+    "League": "Liga MX",
+    "Match": "FC Juarez vs CF Pachuca",
+    "Tip": "Over 1.5",
+    "Odds": "1.27",
+    "Date": "2026-09-05T03:00:00+00:00"
   }
 ]
