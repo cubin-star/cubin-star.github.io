@@ -1,1 +1,16 @@
-[]
+[
+  {
+    "league": "Liiga",
+    "match": "KalPa vs Jukurit",
+    "tip": "Over 3.5",
+    "odds": "1.25",
+    "date": "2026-09-04T15:30:00+00:00"
+  },
+  {
+    "league": "Club Friendly",
+    "match": "Malmo vs Linkoping",
+    "tip": "Over 3.5",
+    "odds": "1.25",
+    "date": "2026-09-04T16:00:00+00:00"
+  }
+]
