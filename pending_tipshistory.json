@@ -1,1 +1,19 @@
-[]
+[
+  {
+    "date": "2026-09-03T05:30:00Z",
+    "matches": [
+      {
+        "league": "Coppa Italia",
+        "match": "Palermo - Mantova",
+        "tip": "Over 2.5",
+        "odds": "1.76"
+      },
+      {
+        "league": "Liga Alef",
+        "match": "Shimshon Tel Aviv - Ironi Beit Shemesh",
+        "tip": "Over 2.5",
+        "odds": "1.84"
+      }
+    ]
+  }
+]
