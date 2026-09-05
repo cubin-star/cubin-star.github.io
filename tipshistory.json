@@ -21,6 +21,27 @@
     ]
   },
   {
+    "date": "2026-09-03T05:30:00Z",
+    "matches": [
+      {
+        "league": "Premier League",
+        "match": "Syunik - Pyunik Yerevan",
+        "tip": "Over 2.5",
+        "odds": "1.75",
+        "score": "0:0",
+        "result": "✗"
+      },
+      {
+        "league": "Campionato",
+        "match": "Tre Penne - Cosmos",
+        "tip": "Over 2.5",
+        "odds": "1.75",
+        "score": "2:0",
+        "result": "✗"
+      }
+    ]
+  },
+  {
     "date": "2026-09-02T05:30:00Z",
     "matches": [
       {
