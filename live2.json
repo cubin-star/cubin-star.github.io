@@ -1,1 +1,30 @@
-[]
+[
+  {
+    "League": "Liga II",
+    "Match": "Concordia vs CS Afumati",
+    "Tip": "Over 2.5",
+    "Odds": "1.54",
+    "Date": "2026-09-05T08:00:00+00:00"
+  },
+  {
+    "League": "League Two",
+    "Match": "Stirling Albion vs Spartans",
+    "Tip": "Over 2.5",
+    "Odds": "1.51",
+    "Date": "2026-09-05T14:00:00+00:00"
+  },
+  {
+    "League": "National League",
+    "Match": "Scunthorpe vs Harrogate Town",
+    "Tip": "Over 2.5",
+    "Odds": "1.54",
+    "Date": "2026-09-05T14:00:00+00:00"
+  },
+  {
+    "League": "USL League One",
+    "Match": "Chattanooga Red Wolves vs Greenville Triumph",
+    "Tip": "Over 2.5",
+    "Odds": "1.51",
+    "Date": "2026-09-05T23:00:00+00:00"
+  }
+]
