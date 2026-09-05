@@ -1,6 +1,46 @@
 [
   {
     "sport": "football",
+    "league": "Liga MX",
+    "match": "FC Juarez vs CF Pachuca",
+    "tip": "Over 1.5",
+    "odds": "1.27",
+    "date": "2026-09-05T03:00:00+00:00",
+    "score": "0:2",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "Major League Soccer",
+    "match": "New York City FC vs Nashville SC",
+    "tip": "Over 1.5",
+    "odds": "1.23",
+    "date": "2026-09-04T23:30:00+00:00",
+    "score": "0:0",
+    "result": "✗"
+  },
+  {
+    "sport": "hockey",
+    "league": "Club Friendly",
+    "match": "Malmo vs Linkoping",
+    "tip": "Over 3.5",
+    "odds": "1.25",
+    "date": "2026-09-04T16:00:00+00:00",
+    "score": "3:4",
+    "result": "✓"
+  },
+  {
+    "sport": "hockey",
+    "league": "Liiga",
+    "match": "KalPa vs Jukurit",
+    "tip": "Over 3.5",
+    "odds": "1.25",
+    "date": "2026-09-04T15:30:00+00:00",
+    "score": "4:0",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
     "league": "Jupiler Pro League",
     "match": "Gent vs OH Leuven",
     "tip": "Over 1.5",
@@ -1957,46 +1997,6 @@
     "odds": "1.28",
     "date": "2026-05-26T10:20:00+00:00",
     "score": "4:3",
-    "result": "✓"
-  },
-  {
-    "sport": "basketball",
-    "league": "B League",
-    "match": "Nagasaki vs Ryukyu",
-    "tip": "Over 141.5",
-    "odds": "1.57",
-    "date": "2026-05-26T10:05:00+00:00",
-    "score": "72:64",
-    "result": "✗"
-  },
-  {
-    "sport": "football",
-    "league": "Division Intermedia",
-    "match": "General Caballero vs Guairena FC",
-    "tip": "Over 1.5",
-    "odds": "1.30",
-    "date": "2026-05-25T22:30:00+00:00",
-    "score": "0:0",
-    "result": "✗"
-  },
-  {
-    "sport": "football",
-    "league": "Allsvenskan",
-    "match": "IFK Goteborg vs Mjallby AIF",
-    "tip": "Over 1.5",
-    "odds": "1.30",
-    "date": "2026-05-25T17:00:00+00:00",
-    "score": "1:1",
-    "result": "✓"
-  },
-  {
-    "sport": "basketball",
-    "league": "Superliga",
-    "match": "Oberwart Gunners vs Kapfenberg Bulls",
-    "tip": "Over 149.5",
-    "odds": "1.28",
-    "date": "2026-05-25T16:00:00+00:00",
-    "score": "79:76",
     "result": "✓"
   }
 ]
