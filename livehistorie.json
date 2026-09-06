@@ -1,17 +1,31 @@
 [
   {
     "league": "",
+    "homeTeam": "Alaves",
+    "awayTeam": "Osasuna",
+    "tip": "Over 2.5",
+    "odds": "",
+    "halftimeScore": "2:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-09-06T16:30:00.000Z",
+    "resolvedAt": ""
+  },
+  {
+    "league": "",
     "homeTeam": "Angers",
     "awayTeam": "Rennes",
     "tip": "Over 3.5",
     "odds": "",
     "halftimeScore": "1:2",
     "liveOdds": "",
-    "finalScore": "1:2",
-    "result": "❌ Lost",
+    "finalScore": "",
+    "result": "",
     "sport": "football",
     "kickoff": "2026-09-06T15:15:00.000Z",
-    "resolvedAt": "2026-09-06T17:26:07.848Z"
+    "resolvedAt": ""
   },
   {
     "league": "",
