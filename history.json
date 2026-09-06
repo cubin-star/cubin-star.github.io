@@ -2,6 +2,26 @@
   {
     "sport": "football",
     "league": "Liga MX",
+    "match": "Tigres UANL vs Necaxa",
+    "tip": "Over 1.5",
+    "odds": "1.18",
+    "date": "2026-09-06T01:00:00+00:00",
+    "score": "1:1",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "Serie A",
+    "match": "AS Roma vs Atalanta",
+    "tip": "Over 1.5",
+    "odds": "1.24",
+    "date": "2026-09-05T18:45:00+00:00",
+    "score": "2:1",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "Liga MX",
     "match": "FC Juarez vs CF Pachuca",
     "tip": "Over 1.5",
     "odds": "1.27",
@@ -1977,26 +1997,6 @@
     "odds": "1.20",
     "date": "2026-05-26T18:30:00+00:00",
     "score": "2:0",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Virsliga",
-    "match": "BFC Daugavpils vs Auda",
-    "tip": "Over 1.5",
-    "odds": "1.20",
-    "date": "2026-05-26T16:00:00+00:00",
-    "score": "0:1",
-    "result": "✗"
-  },
-  {
-    "sport": "hockey",
-    "league": "World Championship",
-    "match": "Norway vs Denmark",
-    "tip": "Over 3.5",
-    "odds": "1.28",
-    "date": "2026-05-26T10:20:00+00:00",
-    "score": "4:3",
     "result": "✓"
   }
 ]
