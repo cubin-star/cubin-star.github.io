@@ -1,24 +1,24 @@
 [
   {
-    "League": "Premier League",
-    "Match": "Brighton vs Leeds",
+    "League": "Ligue 1",
+    "Match": "Estac Troyes vs Strasbourg",
     "Tip": "Over 2.5",
-    "Odds": "1.95",
-    "Date": "2026-09-05T14:00:00+00:00"
+    "Odds": "1.91",
+    "Date": "2026-09-06T13:00:00+00:00"
   },
   {
-    "League": "National League",
-    "Match": "Hartlepool vs Woking",
+    "League": "1. Lig",
+    "Match": "Antalyaspor vs Sivasspor",
     "Tip": "Over 2.5",
-    "Odds": "1.93",
-    "Date": "2026-09-05T14:00:00+00:00"
+    "Odds": "1.85",
+    "Date": "2026-09-06T17:00:00+00:00"
   },
   {
-    "League": "National League - South",
-    "Match": "Truro City vs Chesham United",
+    "League": "Süper Lig",
+    "Match": "Trabzonspor vs Gençlerbirliği S.K.",
     "Tip": "Over 2.5",
-    "Odds": "1.81",
-    "Date": "2026-09-05T14:00:00+00:00",
+    "Odds": "1.78",
+    "Date": "2026-09-06T17:00:00+00:00",
     "locked": true
   }
 ]
