@@ -1,21 +1,5 @@
 [
   {
-    "league": "Primera A",
-    "homeTeam": "Chico",
-    "awayTeam": "Once Caldas",
-    "tip": "Over 2.5",
-    "odds": "",
-    "halftimeScore": "2:0",
-    "liveOdds": "",
-    "finalScore": "2:0",
-    "result": "❌ Lost",
-    "sport": "football",
-    "kickoff": "2026-09-05T21:00:00.000Z",
-    "resolvedAt": "2026-09-05T22:59:04.882Z",
-    "source": "whisper-football",
-    "scoutStats": "Whisper 2:0 comeback | HT 2:0 | xG: 0.84(est) | Shots: 9/7 | losingXG: 0.60 losingSOT: 5 | @HT | Pre O2.5: 2.08"
-  },
-  {
     "league": "",
     "homeTeam": "Gimnasia Mendoza",
     "awayTeam": "Boca Juniors",
