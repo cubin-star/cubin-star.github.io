@@ -1,6 +1,20 @@
 [
   {
     "league": "",
+    "homeTeam": "Mlada Boleslav",
+    "awayTeam": "Banik Ostrava",
+    "tip": "Over 2.5",
+    "odds": "",
+    "halftimeScore": "2:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-09-06T11:00:00.000Z",
+    "resolvedAt": ""
+  },
+  {
+    "league": "",
     "homeTeam": "Deportivo Fabril",
     "awayTeam": "Cacereno",
     "tip": "Over 1.5",
