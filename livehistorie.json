@@ -1,6 +1,20 @@
 [
   {
     "league": "",
+    "homeTeam": "National Bank Egypt",
+    "awayTeam": "Ghazl El Mahallah",
+    "tip": "Over 3.5",
+    "odds": "",
+    "halftimeScore": "2:1",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-09-07T17:00:00.000Z",
+    "resolvedAt": ""
+  },
+  {
+    "league": "",
     "homeTeam": "Istanbulspor",
     "awayTeam": "Igdir FK",
     "tip": "Over 1.5",
