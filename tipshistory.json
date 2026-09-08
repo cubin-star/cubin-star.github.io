@@ -1,5 +1,26 @@
 [
   {
+    "date": "2026-09-07T05:30:00Z",
+    "matches": [
+      {
+        "league": "Liga Leumit",
+        "match": "Maccabi Kiryat Gat - Maccabi Herzliya",
+        "tip": "Over 2.5",
+        "odds": "1.86",
+        "score": "1:1",
+        "result": "✗"
+      },
+      {
+        "league": "1. Lig",
+        "match": "İstanbulspor - Iğdır FK",
+        "tip": "Over 2.5",
+        "odds": "1.80",
+        "score": "1:2",
+        "result": "✓"
+      }
+    ]
+  },
+  {
     "date": "2026-09-06T05:30:00Z",
     "matches": [
       {
