@@ -1,23 +1,23 @@
 [
   {
-    "league": "Liga I",
-    "match": "FC Voluntari - Arges Pitesti",
-    "kickoff": "2026-09-07T16:30:00+02:00",
+    "league": "Primera C",
+    "match": "Claypole - Central Ballester",
+    "kickoff": "2026-09-08T20:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.47"
+    "odds": "2.38"
   },
   {
-    "league": "Serie A",
-    "match": "Udinese - Lazio",
-    "kickoff": "2026-09-07T20:45:00+02:00",
+    "league": "First League",
+    "match": "Sutjeska - Mornar",
+    "kickoff": "2026-09-08T20:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.35"
+    "odds": "2.25"
   },
   {
-    "league": "Super League 1",
-    "match": "Asteras Tripolis - Iraklis 1908",
-    "kickoff": "2026-09-07T17:00:00+02:00",
+    "league": "Iraqi League",
+    "match": "Duhok - Ghaz Al Shamal",
+    "kickoff": "2026-09-08T17:45:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.19"
+    "odds": "2.21"
   }
 ]

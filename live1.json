@@ -1,79 +1,9 @@
 [
   {
-    "league": "Serie A",
-    "match": "Cagliari - Lecce",
-    "kickoff": "2026-09-07T18:30:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.38"
-  },
-  {
-    "league": "Super Liga",
-    "match": "OFK Beograd - IMT Novi Beograd",
-    "kickoff": "2026-09-07T20:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.21"
-  },
-  {
-    "league": "Prva Liga",
-    "match": "FK Vozdovac - TSC Backa Topola",
-    "kickoff": "2026-09-07T18:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.18"
-  },
-  {
-    "league": "Serie A",
-    "match": "Udinese - Lazio",
-    "kickoff": "2026-09-07T20:45:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.35"
-  },
-  {
-    "league": "Super League 1",
-    "match": "Asteras Tripolis - Iraklis 1908",
-    "kickoff": "2026-09-07T17:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.19"
-  },
-  {
-    "league": "Liga I",
-    "match": "FC Voluntari - Arges Pitesti",
-    "kickoff": "2026-09-07T16:30:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.47"
-  },
-  {
-    "league": "Liga Leumit",
-    "match": "Kafr Qasim - Ironi Modi'in",
-    "kickoff": "2026-09-07T18:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.19"
-  },
-  {
-    "league": "Super League 2",
-    "match": "Marko - Panserraikos",
-    "kickoff": "2026-09-07T15:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.11"
-  },
-  {
     "league": "First League",
-    "match": "Dunav Ruse - Slavia Sofia",
-    "kickoff": "2026-09-07T19:30:00+02:00",
+    "match": "Sutjeska - Mornar",
+    "kickoff": "2026-09-08T20:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.38"
-  },
-  {
-    "league": "Super League 2",
-    "match": "Ellas Syros - Apollon Pontou",
-    "kickoff": "2026-09-07T16:30:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.17"
-  },
-  {
-    "league": "Segunda Liga",
-    "match": "Lusitânia Lourosa - AVS",
-    "kickoff": "2026-09-07T19:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.15"
+    "odds": "2.25"
   }
 ]

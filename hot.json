@@ -1,50 +1,50 @@
 [
   {
-    "league": "Segunda Liga",
-    "match": "Lusitânia Lourosa - AVS",
-    "kickoff": "2026-09-07T19:00:00+02:00",
+    "league": "First League",
+    "match": "Sutjeska - Mornar",
+    "kickoff": "2026-09-08T20:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.15",
+    "odds": "2.25",
     "group": 1
   },
   {
-    "league": "Serie A",
-    "match": "Udinese - Lazio",
-    "kickoff": "2026-09-07T20:45:00+02:00",
+    "league": "Division 1",
+    "match": "Damac - Al Ula",
+    "kickoff": "2026-09-08T17:50:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.35",
+    "odds": "2.12",
     "group": 1
   },
   {
-    "league": "Liga I",
-    "match": "FC Voluntari - Arges Pitesti",
-    "kickoff": "2026-09-07T16:30:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.47",
-    "group": 2
-  },
-  {
-    "league": "Erovnuli Liga 2",
-    "match": "Telavi - Samtredia",
-    "kickoff": "2026-09-07T18:00:00+02:00",
+    "league": "Second League",
+    "match": "Montana - Vihren",
+    "kickoff": "2026-09-08T18:00:00+02:00",
     "tip": "Over 2.5",
     "odds": "2.10",
     "group": 2
   },
   {
-    "league": "Super League 1",
-    "match": "Asteras Tripolis - Iraklis 1908",
-    "kickoff": "2026-09-07T17:00:00+02:00",
+    "league": "Primera C",
+    "match": "Claypole - Central Ballester",
+    "kickoff": "2026-09-08T20:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.19",
+    "odds": "2.38",
+    "group": 2
+  },
+  {
+    "league": "CONCACAF Caribbean Club Championship",
+    "match": "Club Sando - Delfines Del Este",
+    "kickoff": "2026-09-09T01:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.20",
     "group": 3
   },
   {
-    "league": "Super League 2",
-    "match": "Ellas Syros - Apollon Pontou",
-    "kickoff": "2026-09-07T16:30:00+02:00",
+    "league": "Iraqi League",
+    "match": "Duhok - Ghaz Al Shamal",
+    "kickoff": "2026-09-08T17:45:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.17",
+    "odds": "2.21",
     "group": 3
   }
 ]
