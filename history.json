@@ -1,6 +1,26 @@
 [
   {
     "sport": "football",
+    "league": "Primeira Liga",
+    "match": "Estoril vs Arouca",
+    "tip": "Over 1.5",
+    "odds": "1.24",
+    "date": "2026-09-07T19:15:00+00:00",
+    "score": "0:0",
+    "result": "✗"
+  },
+  {
+    "sport": "football",
+    "league": "Ekstraklasa",
+    "match": "Pogon Szczecin vs Wisla Plock",
+    "tip": "Over 1.5",
+    "odds": "1.21",
+    "date": "2026-09-07T18:30:00+00:00",
+    "score": "1:1",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
     "league": "J1 League",
     "match": "Cerezo Osaka vs Tokyo Verdy",
     "tip": "Over 1.5",
@@ -1978,25 +1998,5 @@
     "date": "2026-05-27T16:00:00+00:00",
     "score": "1:4",
     "result": "✓"
-  },
-  {
-    "sport": "basketball",
-    "league": "NBA",
-    "match": "Oklahoma City Thunder vs San Antonio Spurs",
-    "tip": "Over 203.5",
-    "odds": "1.25",
-    "date": "2026-05-27T00:30:00+00:00",
-    "score": "127:114",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Ligue 1",
-    "match": "Saint Etienne vs Nice",
-    "tip": "Over 1.5",
-    "odds": "1.24",
-    "date": "2026-05-26T18:45:00+00:00",
-    "score": "0:0",
-    "result": "✗"
   }
 ]
