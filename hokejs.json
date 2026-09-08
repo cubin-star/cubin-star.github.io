@@ -1,1 +1,16 @@
-[]
+[
+  {
+    "league": "Liiga",
+    "match": "Hameenlinna vs Ilves",
+    "tip": "Over 3.5",
+    "odds": "1.29",
+    "date": "2026-09-08T15:30:00+00:00"
+  },
+  {
+    "league": "Club Friendly",
+    "match": "Timrå vs Luleå",
+    "tip": "Over 3.5",
+    "odds": "1.23",
+    "date": "2026-09-08T16:00:00+00:00"
+  }
+]
