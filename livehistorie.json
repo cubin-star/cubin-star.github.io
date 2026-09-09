@@ -1,6 +1,20 @@
 [
   {
     "league": "",
+    "homeTeam": "France U20 W",
+    "awayTeam": "Ecuador U20 W",
+    "tip": "Over 3.5",
+    "odds": "",
+    "halftimeScore": "1:2",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-09-09T16:00:00.000Z",
+    "resolvedAt": ""
+  },
+  {
+    "league": "",
     "homeTeam": "Jablonec",
     "awayTeam": "Banik Ostrava",
     "tip": "Over 1.5",
