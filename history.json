@@ -1,6 +1,36 @@
 [
   {
     "sport": "football",
+    "league": "UEFA Champions League",
+    "match": "Lille vs Real Betis",
+    "tip": "Over 1.5",
+    "odds": "1.24",
+    "date": "2026-09-08T19:00:00+00:00",
+    "score": "0:0",
+    "result": "✗"
+  },
+  {
+    "sport": "hockey",
+    "league": "Club Friendly",
+    "match": "Timrå vs Luleå",
+    "tip": "Over 3.5",
+    "odds": "1.23",
+    "date": "2026-09-08T16:00:00+00:00",
+    "score": "4:3",
+    "result": "✓"
+  },
+  {
+    "sport": "hockey",
+    "league": "Liiga",
+    "match": "Hameenlinna vs Ilves",
+    "tip": "Over 3.5",
+    "odds": "1.29",
+    "date": "2026-09-08T15:30:00+00:00",
+    "score": "0:4",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
     "league": "Primeira Liga",
     "match": "Estoril vs Arouca",
     "tip": "Over 1.5",
@@ -1967,36 +1997,6 @@
     "odds": "1.32",
     "date": "2026-05-28T14:20:00+00:00",
     "score": "4:1",
-    "result": "✓"
-  },
-  {
-    "sport": "hockey",
-    "league": "NHL",
-    "match": "Montreal Canadiens vs Carolina Hurricanes",
-    "tip": "Over 3.5",
-    "odds": "1.19",
-    "date": "2026-05-28T00:00:00+00:00",
-    "score": "0:4",
-    "result": "✓"
-  },
-  {
-    "sport": "hockey",
-    "league": "AHL",
-    "match": "Wilkes-Barre/Scranton vs Toronto Marlies",
-    "tip": "Over 3.5",
-    "odds": "1.24",
-    "date": "2026-05-27T23:05:00+00:00",
-    "score": "2:4",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Czech Liga",
-    "match": "Artis vs Slovácko",
-    "tip": "Over 1.5",
-    "odds": "1.27",
-    "date": "2026-05-27T16:00:00+00:00",
-    "score": "1:4",
     "result": "✓"
   }
 ]
