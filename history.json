@@ -1,6 +1,26 @@
 [
   {
     "sport": "football",
+    "league": "Major League Soccer",
+    "match": "DC United vs Columbus Crew",
+    "tip": "Over 1.5",
+    "odds": "1.21",
+    "date": "2026-09-09T23:30:00+00:00",
+    "score": "2:1",
+    "result": "✓"
+  },
+  {
+    "sport": "hockey",
+    "league": "Club Friendly",
+    "match": "Zilina vs Poprad",
+    "tip": "Over 3.5",
+    "odds": "1.19",
+    "date": "2026-09-09T15:30:00+00:00",
+    "score": "1:3",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
     "league": "UEFA Champions League",
     "match": "Lille vs Real Betis",
     "tip": "Over 1.5",
@@ -1977,26 +1997,6 @@
     "odds": "1.26",
     "date": "2026-05-29T00:30:00+00:00",
     "score": "118:91",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "I Liga",
-    "match": "Chrobry Głogów vs ŁKS Łódź",
-    "tip": "Over 1.5",
-    "odds": "1.27",
-    "date": "2026-05-28T15:30:00+00:00",
-    "score": "1:1",
-    "result": "✓"
-  },
-  {
-    "sport": "hockey",
-    "league": "World Championship",
-    "match": "Finland vs Czech Republic",
-    "tip": "Over 3.5",
-    "odds": "1.32",
-    "date": "2026-05-28T14:20:00+00:00",
-    "score": "4:1",
     "result": "✓"
   }
 ]
