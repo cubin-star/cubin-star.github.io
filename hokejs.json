@@ -1,9 +1,16 @@
 [
   {
-    "league": "Club Friendly",
-    "match": "Zilina vs Poprad",
+    "league": "Champions League",
+    "match": "SaiPa vs Pardubice",
     "tip": "Over 3.5",
-    "odds": "1.19",
-    "date": "2026-09-09T15:30:00+00:00"
+    "odds": "1.22",
+    "date": "2026-09-10T15:30:00+00:00"
+  },
+  {
+    "league": "Club Friendly",
+    "match": "Brynas vs Luleå",
+    "tip": "Over 3.5",
+    "odds": "1.24",
+    "date": "2026-09-10T16:00:00+00:00"
   }
 ]
