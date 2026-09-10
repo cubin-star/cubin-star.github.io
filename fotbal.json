@@ -1,24 +1,24 @@
 [
   {
-    "League": "Copa Federacion",
-    "Match": "Compostela vs Derio",
+    "League": "Prva Liga",
+    "Match": "Teleoptik vs Naftagas",
+    "Tip": "Over 2.5",
+    "Odds": "1.87",
+    "Date": "2026-09-10T15:00:00+00:00"
+  },
+  {
+    "League": "Virsliga",
+    "Match": "Super Nova vs Tukums",
     "Tip": "Over 2.5",
     "Odds": "1.80",
-    "Date": "2026-09-09T17:00:00+00:00"
+    "Date": "2026-09-10T16:00:00+00:00"
   },
   {
-    "League": "FA Cup",
-    "Match": "Exmouth vs Banbury United",
+    "League": "Superettan",
+    "Match": "GIF Sundsvall vs Orebro SK",
     "Tip": "Over 2.5",
-    "Odds": "1.75",
-    "Date": "2026-09-09T18:45:00+00:00"
-  },
-  {
-    "League": "Erovnuli Liga",
-    "Match": "Samgurali vs Dila",
-    "Tip": "Over 2.5",
-    "Odds": "1.88",
-    "Date": "2026-09-09T15:00:00+00:00",
+    "Odds": "1.85",
+    "Date": "2026-09-10T17:00:00+00:00",
     "locked": true
   }
 ]
