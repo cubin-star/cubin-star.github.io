@@ -1,6 +1,46 @@
 [
   {
     "sport": "football",
+    "league": "Super League 1",
+    "match": "Panathinaikos vs Kifisia",
+    "tip": "Over 1.5",
+    "odds": "1.20",
+    "date": "2026-09-10T18:15:00+00:00",
+    "score": "3:1",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "UEFA Champions League",
+    "match": "Fenerbahçe vs AS Roma",
+    "tip": "Over 1.5",
+    "odds": "1.20",
+    "date": "2026-09-10T16:45:00+00:00",
+    "score": "1:1",
+    "result": "✓"
+  },
+  {
+    "sport": "hockey",
+    "league": "Club Friendly",
+    "match": "Brynas vs Luleå",
+    "tip": "Over 3.5",
+    "odds": "1.24",
+    "date": "2026-09-10T16:00:00+00:00",
+    "score": "3:4",
+    "result": "✓"
+  },
+  {
+    "sport": "hockey",
+    "league": "Champions League",
+    "match": "SaiPa vs Pardubice",
+    "tip": "Over 3.5",
+    "odds": "1.22",
+    "date": "2026-09-10T15:30:00+00:00",
+    "score": "3:2",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
     "league": "Major League Soccer",
     "match": "DC United vs Columbus Crew",
     "tip": "Over 1.5",
@@ -1957,46 +1997,6 @@
     "odds": "1.22",
     "date": "2026-05-30T07:30:00+00:00",
     "score": "1:1",
-    "result": "✓"
-  },
-  {
-    "sport": "hockey",
-    "league": "AHL",
-    "match": "Wilkes-Barre/Scranton vs Toronto Marlies",
-    "tip": "Over 3.5",
-    "odds": "1.25",
-    "date": "2026-05-29T23:05:00+00:00",
-    "score": "1:2",
-    "result": "✗"
-  },
-  {
-    "sport": "football",
-    "league": "Allsvenskan",
-    "match": "Orgryte IS vs IF Elfsborg",
-    "tip": "Over 1.5",
-    "odds": "1.23",
-    "date": "2026-05-29T17:00:00+00:00",
-    "score": "2:2",
-    "result": "✓"
-  },
-  {
-    "sport": "basketball",
-    "league": "ACB",
-    "match": "Manresa vs Real Madrid",
-    "tip": "Over 165.5",
-    "odds": "1.18",
-    "date": "2026-05-29T16:00:00+00:00",
-    "score": "94:87",
-    "result": "✓"
-  },
-  {
-    "sport": "basketball",
-    "league": "NBA",
-    "match": "San Antonio Spurs vs Oklahoma City Thunder",
-    "tip": "Over 206.5",
-    "odds": "1.26",
-    "date": "2026-05-29T00:30:00+00:00",
-    "score": "118:91",
     "result": "✓"
   }
 ]
