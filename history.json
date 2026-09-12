@@ -1,6 +1,46 @@
 [
   {
     "sport": "football",
+    "league": "Liga MX",
+    "match": "Necaxa vs Puebla",
+    "tip": "Over 1.5",
+    "odds": "1.21",
+    "date": "2026-09-12T01:00:00+00:00",
+    "score": "0:1",
+    "result": "✗"
+  },
+  {
+    "sport": "football",
+    "league": "Liga Profesional Argentina",
+    "match": "Boca Juniors vs Central Cordoba de Santiago",
+    "tip": "Over 1.5",
+    "odds": "1.33",
+    "date": "2026-09-12T00:30:00+00:00",
+    "score": "3:1",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "Ligue 2",
+    "match": "Rodez vs Grenoble",
+    "tip": "Over 1.5",
+    "odds": "1.22",
+    "date": "2026-09-11T18:00:00+00:00",
+    "score": "0:1",
+    "result": "✗"
+  },
+  {
+    "sport": "hockey",
+    "league": "Club Friendly",
+    "match": "Mountfield HK vs Straubing Tigers",
+    "tip": "Over 3.5",
+    "odds": "1.19",
+    "date": "2026-09-11T15:00:00+00:00",
+    "score": "3:1",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
     "league": "Super League 1",
     "match": "Panathinaikos vs Kifisia",
     "tip": "Over 1.5",
@@ -1957,46 +1997,6 @@
     "odds": "1.25",
     "date": "2026-05-31T12:00:00+00:00",
     "score": "4:5",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Serie A",
-    "match": "Bahia vs Botafogo",
-    "tip": "Over 1.5",
-    "odds": "1.21",
-    "date": "2026-05-30T20:30:00+00:00",
-    "score": "2:1",
-    "result": "✓"
-  },
-  {
-    "sport": "hockey",
-    "league": "World Championship",
-    "match": "Canada vs Finland",
-    "tip": "Over 3.5",
-    "odds": "1.26",
-    "date": "2026-05-30T18:00:00+00:00",
-    "score": "2:4",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Czech Liga",
-    "match": "Táborsko vs Baník Ostrava",
-    "tip": "Over 1.5",
-    "odds": "1.25",
-    "date": "2026-05-30T11:00:00+00:00",
-    "score": "0:5",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "K League 2",
-    "match": "Yongin City vs Daegu FC",
-    "tip": "Over 1.5",
-    "odds": "1.22",
-    "date": "2026-05-30T07:30:00+00:00",
-    "score": "1:1",
     "result": "✓"
   }
 ]
