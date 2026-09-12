@@ -1,23 +1,16 @@
 [
   {
-    "League": "Ligue 2",
-    "Match": "Rodez vs Grenoble",
+    "League": "Championship",
+    "Match": "Blackburn vs Millwall",
     "Tip": "Over 1.5",
-    "Odds": "1.22",
-    "Date": "2026-09-11T18:00:00+00:00"
+    "Odds": "1.28",
+    "Date": "2026-09-12T14:00:00+00:00"
   },
   {
-    "League": "Liga MX",
-    "Match": "Necaxa vs Puebla",
+    "League": "Premier League",
+    "Match": "Aston Villa vs Nottingham Forest",
     "Tip": "Over 1.5",
-    "Odds": "1.21",
-    "Date": "2026-09-12T01:00:00+00:00"
-  },
-  {
-    "League": "Liga Profesional Argentina",
-    "Match": "Boca Juniors vs Central Cordoba de Santiago",
-    "Tip": "Over 1.5",
-    "Odds": "1.33",
-    "Date": "2026-09-12T00:30:00+00:00"
+    "Odds": "1.29",
+    "Date": "2026-09-12T14:00:00+00:00"
   }
 ]
