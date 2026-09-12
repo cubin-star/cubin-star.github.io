@@ -1,79 +1,261 @@
 [
   {
-    "league": "La Liga",
-    "match": "Sevilla - Valencia",
-    "kickoff": "2026-09-11T21:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.31"
-  },
-  {
     "league": "Prva Liga",
-    "match": "Metalac GM - Dubočica",
-    "kickoff": "2026-09-11T18:00:00+02:00",
+    "match": "OFK Vršac - Grafičar",
+    "kickoff": "2026-09-12T16:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.13"
+    "odds": "2.15"
   },
   {
-    "league": "First NL",
-    "match": "Opatija - Bsk Bijelo Brdo",
-    "kickoff": "2026-09-11T15:30:00+02:00",
+    "league": "Primeira Liga",
+    "match": "Academico Viseu - Vitória SC",
+    "kickoff": "2026-09-12T21:30:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.11"
+  },
+  {
+    "league": "Persha Liga",
+    "match": "Lokomotiv Kyiv - SK Poltava",
+    "kickoff": "2026-09-12T12:30:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.29"
+  },
+  {
+    "league": "Premier League",
+    "match": "LNZ Cherkasy - Obolon'-Brovar",
+    "kickoff": "2026-09-12T12:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.29"
+  },
+  {
+    "league": "Premier League",
+    "match": "Veres Rivne - Kudrivka",
+    "kickoff": "2026-09-12T17:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.19"
+  },
+  {
+    "league": "Liga I",
+    "match": "Sepsi OSK Sfantu Gheorghe - CFR 1907 Cluj",
+    "kickoff": "2026-09-12T17:30:00+02:00",
     "tip": "Over 2.5",
     "odds": "2.25"
   },
   {
-    "league": "Prva Liga",
-    "match": "FK Spartak Zdrepceva KRV - Napredak",
-    "kickoff": "2026-09-11T20:00:00+02:00",
+    "league": "La Liga",
+    "match": "Osasuna - Espanyol",
+    "kickoff": "2026-09-12T16:15:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.26"
+  },
+  {
+    "league": "Ligue 1",
+    "match": "Le Havre - Angers",
+    "kickoff": "2026-09-12T20:45:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.10"
+  },
+  {
+    "league": "Super League 1",
+    "match": "Iraklis 1908 - Atromitos",
+    "kickoff": "2026-09-12T20:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.20"
+  },
+  {
+    "league": "Serie A",
+    "match": "Lazio - AC Milan",
+    "kickoff": "2026-09-12T18:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.29"
+  },
+  {
+    "league": "Premier League",
+    "match": "Sunderland - Arsenal",
+    "kickoff": "2026-09-12T21:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.14"
+  },
+  {
+    "league": "Segunda Liga",
+    "match": "Portimonense - Tondela",
+    "kickoff": "2026-09-12T12:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.15"
+  },
+  {
+    "league": "Premier League",
+    "match": "Birkirkara - Hibernians",
+    "kickoff": "2026-09-12T18:00:00+02:00",
     "tip": "Over 2.5",
     "odds": "2.10"
   },
   {
     "league": "Serie B",
-    "match": "Benevento - Hellas Verona",
-    "kickoff": "2026-09-11T21:00:00+02:00",
+    "match": "Vicenza Virtus - Juve Stabia",
+    "kickoff": "2026-09-12T15:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.11"
+    "odds": "2.15"
   },
   {
-    "league": "Serie B",
-    "match": "Empoli - Arezzo",
-    "kickoff": "2026-09-11T19:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.12"
-  },
-  {
-    "league": "1. Lig",
-    "match": "Sarıyer - Bandırmaspor",
-    "kickoff": "2026-09-11T19:00:00+02:00",
+    "league": "Veikkausliiga",
+    "match": "AC Oulu - Gnistan",
+    "kickoff": "2026-09-12T18:00:00+02:00",
     "tip": "Over 2.5",
     "odds": "2.13"
   },
   {
-    "league": "Ligue 2",
-    "match": "Clermont Foot - Boulogne",
-    "kickoff": "2026-09-11T20:00:00+02:00",
+    "league": "Premier League",
+    "match": "Colwyn Bay - GAP Connah S Quay FC",
+    "kickoff": "2026-09-12T18:30:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.10"
+  },
+  {
+    "league": "Segunda División",
+    "match": "Granada CF - Albacete",
+    "kickoff": "2026-09-12T18:30:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.13"
+  },
+  {
+    "league": "Championship",
+    "match": "Charlton - Portsmouth",
+    "kickoff": "2026-09-12T16:00:00+02:00",
     "tip": "Over 2.5",
     "odds": "2.20"
   },
   {
-    "league": "1. Division",
-    "match": "AEL - Nea Salamis",
-    "kickoff": "2026-09-11T19:00:00+02:00",
+    "league": "Premyer Liqa",
+    "match": "Kapaz - Qabala",
+    "kickoff": "2026-09-12T15:30:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.18"
+  },
+  {
+    "league": "1st Division",
+    "match": "Oriku - Bylis",
+    "kickoff": "2026-09-12T16:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.10"
+  },
+  {
+    "league": "First League",
+    "match": "CSKA Sofia - Arda Kardzhali",
+    "kickoff": "2026-09-12T20:15:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.10"
+  },
+  {
+    "league": "Segunda División",
+    "match": "Cadiz - Las Palmas",
+    "kickoff": "2026-09-12T16:15:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.10"
+  },
+  {
+    "league": "Premier League",
+    "match": "Floriana - Marsaxlokk",
+    "kickoff": "2026-09-12T20:30:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.10"
+  },
+  {
+    "league": "Premier League",
+    "match": "Zhenys - Kyzyl-Zhar",
+    "kickoff": "2026-09-12T16:00:00+02:00",
     "tip": "Over 2.5",
     "odds": "2.14"
   },
   {
     "league": "Serie B",
-    "match": "Pisa - Virtus Entella",
-    "kickoff": "2026-09-11T21:00:00+02:00",
+    "match": "Padova - Ascoli",
+    "kickoff": "2026-09-12T15:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.13"
+    "odds": "2.10"
+  },
+  {
+    "league": "Premyer Liqa",
+    "match": "Sumqayıt - Şamaxı FK",
+    "kickoff": "2026-09-12T17:45:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.20"
+  },
+  {
+    "league": "Segunda División RFEF - Group 2",
+    "match": "Ebro - Reddis",
+    "kickoff": "2026-09-12T17:30:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.34"
   },
   {
     "league": "Superliga",
-    "match": "Skenderbeu Korce - Tirana",
-    "kickoff": "2026-09-11T18:30:00+02:00",
+    "match": "Partizani - Dinamo Tirana",
+    "kickoff": "2026-09-12T16:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.12"
+    "odds": "2.43"
+  },
+  {
+    "league": "Championship",
+    "match": "Derby - Birmingham",
+    "kickoff": "2026-09-12T13:30:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.10"
+  },
+  {
+    "league": "Premier League",
+    "match": "Kaisar - Atyrau",
+    "kickoff": "2026-09-12T17:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.14"
+  },
+  {
+    "league": "1st Division",
+    "match": "Iliria Fushë-Krujë - FK Kukesi",
+    "kickoff": "2026-09-12T16:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.10"
+  },
+  {
+    "league": "Segunda División RFEF - Group 2",
+    "match": "Manresa - Peña Sport",
+    "kickoff": "2026-09-12T19:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.14"
+  },
+  {
+    "league": "1. Lig",
+    "match": "Bodrum FK - Batman Petrolspor",
+    "kickoff": "2026-09-12T19:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.10"
+  },
+  {
+    "league": "Segunda Liga",
+    "match": "Felgueiras 1932 - Penafiel",
+    "kickoff": "2026-09-12T15:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.35"
+  },
+  {
+    "league": "Serie B",
+    "match": "Sudtirol - Modena",
+    "kickoff": "2026-09-12T15:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.21"
+  },
+  {
+    "league": "Superliga",
+    "match": "Teuta Durrës - Vora",
+    "kickoff": "2026-09-12T18:30:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.10"
+  },
+  {
+    "league": "Serie B",
+    "match": "Catanzaro - Carrarese",
+    "kickoff": "2026-09-12T17:15:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.19"
   }
 ]
