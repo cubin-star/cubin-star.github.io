@@ -1,24 +1,24 @@
 [
   {
-    "League": "Regionalliga - Nordost",
-    "Match": "BSG Chemie Leipzig vs FSV Zwickau",
+    "League": "Primeira Liga",
+    "Match": "Famalicao vs Sporting CP",
     "Tip": "Over 2.5",
-    "Odds": "1.90",
-    "Date": "2026-09-12T12:30:00+00:00"
+    "Odds": "1.88",
+    "Date": "2026-09-13T19:30:00+00:00"
   },
   {
-    "League": "National League - North",
-    "Match": "Hebburn Town vs Hednesford Town",
+    "League": "1. Lig",
+    "Match": "Iğdır FK vs Mardin 1969",
     "Tip": "Over 2.5",
-    "Odds": "1.81",
-    "Date": "2026-09-12T14:00:00+00:00"
+    "Odds": "1.95",
+    "Date": "2026-09-13T14:00:00+00:00"
   },
   {
-    "League": "La Liga",
-    "Match": "Racing Santander vs Alaves",
+    "League": "Süper Lig",
+    "Match": "Amed vs Başakşehir",
     "Tip": "Over 2.5",
-    "Odds": "1.79",
-    "Date": "2026-09-12T12:00:00+00:00",
+    "Odds": "1.84",
+    "Date": "2026-09-13T17:00:00+00:00",
     "locked": true
   }
 ]
