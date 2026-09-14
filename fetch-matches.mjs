@@ -69,28 +69,6 @@ const EXCLUDE_RE = [
     /\bfriendl/, /\bfutsal\b/, /\bbeach\b/, /\besoccer\b/, /\bindoor\b/,
 ];
 
-// Skupiny zemi. A = top5, B = silne evropske ligy, C = zbytek Evropy, D = zbytek sveta.
-const COUNTRY_A = new Set(['england','spain','italy','germany','france']);
-const COUNTRY_B = new Set([
-    'netherlands','portugal','belgium','turkey','scotland','austria','switzerland',
-    'greece','denmark','norway','sweden','poland','czech republic','czechia',
-    'ukraine','serbia','croatia','romania',
-]);
-const COUNTRY_C = new Set([
-    'slovakia','hungary','bulgaria','slovenia','bosnia and herzegovina','finland',
-    'ireland','republic of ireland','northern ireland','wales','iceland','albania',
-    'azerbaijan','kazakhstan','georgia','armenia','moldova','montenegro',
-    'north macedonia','macedonia','latvia','lithuania','estonia','luxembourg',
-    'malta','faroe islands','andorra','kosovo','gibraltar','san marino',
-    'israel','cyprus','belarus','russia',
-]);
-function countryGroup(c){
-    if(COUNTRY_A.has(c))return 'A';
-    if(COUNTRY_B.has(c))return 'B';
-    if(COUNTRY_C.has(c))return 'C';
-    return 'D';
-}
-
 // Rozpoznani poharu bez nutnosti znat nazev (fallback, kdyz chybi league.type z API).
 const CUP_RE = /\bcup\b|\bcupen\b|\bpokal\b|\bpokalen\b|\bcopa\b|\bcoupe\b|\bcoppa\b|\bbeker\b|\btaca\b|\bkupa\b|\bkupasi\b|\bkubok\b|\bpuchar\b|\bpohar\b|\bkypello\b|\btrophy\b|\bsupercup\b|\bsuper cup\b/;
 // Pohary nizsich/mladeznickych urovni - nepatri mezi hlavni domaci pohary (T2).
@@ -120,6 +98,12 @@ const LEVEL_OVERRIDES = {
     'greece':    [[1,['super league 1']],[2,['super league 2']]],
     'ireland':   [[1,['premier division']],[2,['first division']]],
     'republic of ireland':[[1,['premier division']],[2,['first division']]],
+    'usa':       [[2,['usl championship','nwsl']],[3,['usl league one','mls next pro']],[4,['usl league two','nisa']]],
+    'brazil':    [[2,['serie b']],[3,['serie c']],[4,['serie d']]],
+    'japan':     [[2,['j 2 league']],[3,['j 3 league']]],
+    'south korea':[[2,['k league 2']]],
+    'croatia':   [[2,['prva nl','first nl','druga']]],
+    'israel':    [[2,['liga leumit']]],
 };
 
 // Genericka detekce urovne z cisla/slova v nazvu. Poradi od nejnizsi urovne.
@@ -139,12 +123,80 @@ function leagueLevel(n,c){
     return 1;
 }
 
-// Tier podle skupiny zeme a urovne souteze. 0 = soutez vyradit z vyberu.
-const TIER_TABLE = {
-    A:{1:1,2:2,3:3,4:4,5:4},
-    B:{1:1,2:2,3:3,4:4,5:4},
-    C:{1:2,2:3,3:4,4:4,5:4},
+// Explicitni seznam soutezi pro tier 1 a tier 2.
+// Klic = normalizovana zeme (viz norm()), hodnota = normalizovane podretezce nazvu.
+// U kazde ligy jsou uvedeny i alternativni nazvy, ktere API-Football pouziva
+// nebo pouzivalo (sponzorske nazvy se meni kazdou sezonu).
+// POZOR: T2 se vyhodnocuje PRED T1, aby 'Liga Portugal 2' nespadla pod 'Liga Portugal'.
+const TIER1_LEAGUES = {
+    'england':      ['premier league'],
+    'czech republic':['chance liga','czech liga','fortuna liga','1 liga','first league'],
+    'france':       ['ligue 1'],
+    'italy':        ['serie a'],
+    'germany':      ['bundesliga'],
+    'spain':        ['la liga','laliga','primera division'],
+    'belgium':      ['jupiler pro league','pro league','first division a'],
+    'denmark':      ['superliga','superligaen'],
+    'finland':      ['veikkausliiga'],
+    'croatia':      ['hnl','prva liga'],
+    'ireland':      ['premier division'],
+    'republic of ireland':['premier division'],
+    'israel':       ['ligat ha al','ligat haal','premier league'],
+    'japan':        ['j 1 league','j1 league'],
+    'south korea':  ['k league 1','k league'],
+    'netherlands':  ['eredivisie'],
+    'norway':       ['eliteserien'],
+    'poland':       ['ekstraklasa'],
+    'portugal':     ['liga portugal','primeira liga'],
+    'austria':      ['bundesliga'],
+    'romania':      ['superliga','liga i'],
+    'greece':       ['super league 1','super league'],
+    'scotland':     ['premiership'],
+    'slovakia':     ['nike liga','super liga','fortuna liga'],
+    'slovenia':     ['prva liga','1 snl','snl'],
+    'serbia':       ['super liga','superliga'],
+    'sweden':       ['allsvenskan'],
+    'switzerland':  ['super league'],
+    'turkey':       ['super lig','superliga'],
+    'ukraine':      ['premier league'],
+    'usa':          ['major league soccer','mls'],
 };
+
+const TIER2_LEAGUES = {
+    'england':      ['championship','league one'],
+    'brazil':       ['serie a'],
+    'denmark':      ['1 division','1 divisionen'],
+    'france':       ['ligue 2'],
+    'indonesia':    ['liga 1','super league'],
+    'italy':        ['serie b'],
+    'cyprus':       ['1 division','1 divizion','first division'],
+    'lithuania':    ['a lyga','toplyga'],
+    'latvia':       ['virsliga','virsliga'],
+    'hungary':      ['nb i','nb 1','otp bank liga'],
+    'malta':        ['premier league'],
+    'germany':      ['2 bundesliga'],
+    'netherlands':  ['eerste divisie'],
+    'norway':       ['obos ligaen','obos','1 divisjon'],
+    'paraguay':     ['division profesional','copa de primera','primera division'],
+    'peru':         ['liga 1','primera division'],
+    'poland':       ['i liga','1 liga'],
+    'portugal':     ['liga portugal 2','segunda liga','liga de honra'],
+    'austria':      ['2 liga'],
+    'romania':      ['liga ii','liga 2'],
+    'scotland':     ['championship'],
+    'spain':        ['segunda division','laliga 2','la liga 2'],
+    'sweden':       ['superettan'],
+    'switzerland':  ['promotion league'],
+    'thailand':     ['thai league 1','thai league'],
+    'turkey':       ['1 lig','first league'],
+};
+
+function matchesList(list,c,n){
+    const pats=list[c];
+    if(!pats)return false;
+    for(const p of pats){if(n.includes(p))return true;}
+    return false;
+}
 
 function leagueTier(name,country,type){
     const n=norm(name),c=norm(country);
@@ -154,15 +206,18 @@ function leagueTier(name,country,type){
         if(/uefa super cup/.test(n))return 2;
         return 4;
     }
-    const grp=countryGroup(c);
-    if(grp==='D')return 4;
+    // T2 se testuje jako prvni - jeho nazvy jsou casto nadmnozinou tech z T1
+    // ('liga portugal 2' obsahuje 'liga portugal', '2 bundesliga' obsahuje 'bundesliga').
+    if(matchesList(TIER2_LEAGUES,c,n))return 2;
+    if(matchesList(TIER1_LEAGUES,c,n))return 1;
     const isCup=(type&&norm(type)==='cup')||CUP_RE.test(n);
     if(isCup){
         if(LOW_CUP_RE.test(n))return 4;
-        return grp==='C'?3:2;
+        // Hlavni domaci pohary zemi, ktere maji ligu v T1 -> T3, ostatni T4.
+        return TIER1_LEAGUES[c]?3:4;
     }
-    const lvl=leagueLevel(n,c);
-    return TIER_TABLE[grp][lvl]||4;
+    // Zbytek: nejvyssi soutez zeme -> T3, jakakoli nizsi soutez -> T4.
+    return leagueLevel(n,c)===1?3:4;
 }
 function maskKey(k){if(!k)return'(none)';if(k.length<=8)return'***';return k.slice(0,4)+'...'+k.slice(-4)+' (len='+k.length+')';}
 function sleep(ms){return new Promise(r=>setTimeout(r,ms));}
