@@ -1,50 +1,50 @@
 [
   {
-    "league": "Segunda División RFEF - Group 3",
-    "match": "Orihuela - Lorca Deportiva",
-    "kickoff": "2026-09-13T19:00:00+02:00",
+    "league": "Primeira Liga",
+    "match": "Moreirense - Maritimo",
+    "kickoff": "2026-09-14T21:15:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.15",
+    "odds": "2.26",
     "group": 1
   },
   {
-    "league": "Serie A",
-    "match": "Napoli - Bologna",
-    "kickoff": "2026-09-13T18:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.13",
-    "group": 1
-  },
-  {
-    "league": "First NL",
-    "match": "Croatia Zmijavci - Vukovar",
-    "kickoff": "2026-09-13T14:45:00+02:00",
+    "league": "First League",
+    "match": "Mornar - Otrant-Olympic",
+    "kickoff": "2026-09-14T19:00:00+02:00",
     "tip": "Over 2.5",
     "odds": "2.19",
-    "group": 2
+    "group": 1
   },
   {
-    "league": "Liga I",
-    "match": "Arges Pitesti - FC Botosani",
-    "kickoff": "2026-09-13T14:00:00+02:00",
+    "league": "Super Liga",
+    "match": "Zemun - Radnik Surdulica",
+    "kickoff": "2026-09-14T19:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.13",
+    "odds": "2.14",
     "group": 2
   },
   {
-    "league": "Persha Liga",
-    "match": "Nyva Ternopil - Prykarpattia",
-    "kickoff": "2026-09-13T14:00:00+02:00",
+    "league": "Premier League",
+    "match": "Ceramica Cleopatra - National Bank of Egypt",
+    "kickoff": "2026-09-14T19:00:00+02:00",
     "tip": "Over 2.5",
     "odds": "2.38",
+    "group": 2
+  },
+  {
+    "league": "Veikkausliiga",
+    "match": "Inter Turku - VPS",
+    "kickoff": "2026-09-14T17:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.17",
     "group": 3
   },
   {
-    "league": "Segunda División",
-    "match": "Sporting Gijon - Eldense",
-    "kickoff": "2026-09-13T14:00:00+02:00",
+    "league": "Serie B",
+    "match": "Avai - Vila Nova",
+    "kickoff": "2026-09-15T02:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.13",
+    "odds": "2.30",
     "group": 3
   }
 ]
