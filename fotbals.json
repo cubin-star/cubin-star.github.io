@@ -1,9 +1,16 @@
 [
   {
     "League": "Primeira Liga",
-    "Match": "Famalicao vs Sporting CP",
+    "Match": "SC Braga vs Estoril",
     "Tip": "Over 1.5",
-    "Odds": "1.24",
-    "Date": "2026-09-13T19:30:00+00:00"
+    "Odds": "1.20",
+    "Date": "2026-09-14T19:45:00+00:00"
+  },
+  {
+    "League": "Süper Lig",
+    "Match": "Gaziantep FK vs Fenerbahçe",
+    "Tip": "Over 1.5",
+    "Odds": "1.21",
+    "Date": "2026-09-14T17:00:00+00:00"
   }
 ]
