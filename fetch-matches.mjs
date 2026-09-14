@@ -65,7 +65,11 @@ const EXCLUDE_RE = [
     /\bu ?\d{2}\b/, /\byouth\b/, /\bjunior/, /\bjuvenil/, /\bprimavera\b/,
     /\breserve/, /\bacademy\b/, /\bdevelopment\b/, /\bii\b$/,
     /\bamateur/, /\bamatoer/, /\bveterans\b/,
-    /\bwomen\b/, /\bfeminin/, /\bfemenin/, /\bfrauen\b/, /\bdamallsvenskan\b/, /\bkvinde/,
+    // Rezervni / farmarske souteze schovane pod nazvem hlavni ligy
+    /\bpremier league 2\b/, /\bnext pro\b/, /\belite league\b/,
+    // Zenske souteze - 'wk league' (J. Korea), 'femenil' (Mexiko), 'kvinde' (Dansko)...
+    /\bwk league\b/, /\bwomen\b/, /\bfemen/, /\bfeminin/, /\bfrauen\b/,
+    /\bdamallsvenskan\b/, /\bkvinde/, /\btoppserien\b/, /\bnwsl\b/,
     /\bfriendl/, /\bfutsal\b/, /\bbeach\b/, /\besoccer\b/, /\bindoor\b/,
 ];
 
@@ -77,7 +81,7 @@ const LOW_CUP_RE = /\bfa trophy\b|\bfa vase\b|\bleague trophy\b|\befl trophy\b|\
 // Zeme, kde nazev neprozradi uroven ligy (Championship, 1. Division...) -> rucni mapa.
 // Klic = normalizovana zeme, hodnota = [uroven, [normalizovane podretezce nazvu]].
 const LEVEL_OVERRIDES = {
-    'england':   [[1,['premier league']],[2,['championship']],[3,['league one']],[4,['league two']],[5,['national league']]],
+    'england':   [[1,['premier league']],[2,['championship']],[3,['league one']],[4,['league two']],[5,['national league','non league','isthmian','northern premier','southern league']]],
     'scotland':  [[1,['premiership']],[2,['championship']],[3,['league one']],[4,['league two']],[5,['highland league','lowland league']]],
     'netherlands':[[2,['eerste divisie']],[3,['tweede divisie']]],
     'belgium':   [[2,['challenger pro league','first division b']]],
@@ -104,6 +108,17 @@ const LEVEL_OVERRIDES = {
     'south korea':[[2,['k league 2']]],
     'croatia':   [[2,['prva nl','first nl','druga']]],
     'israel':    [[2,['liga leumit']]],
+    'ukraine':   [[2,['persha liga','first league']],[3,['druha liga']]],
+    'estonia':   [[1,['meistriliiga']],[2,['esiliiga a','esiliiga']],[3,['esiliiga b']]],
+    'lithuania': [[1,['a lyga']],[2,['1 lyga','pirma lyga']]],
+    'latvia':    [[1,['virsliga']],[2,['1 liga','first league']]],
+    'argentina': [[2,['primera nacional']],[3,['primera b metropolitana']],[4,['primera c','primera d','torneo federal']]],
+    'paraguay':  [[2,['division intermedia']]],
+    'costa rica':[[2,['liga de ascenso','segunda division']]],
+    'colombia':  [[2,['primera b','torneo']]],
+    'chile':     [[2,['primera b']]],
+    'bolivia':   [[2,['nacional b']]],
+    'saudi arabia':[[2,['division 1','first division']]],
 };
 
 // Genericka detekce urovne z cisla/slova v nazvu. Poradi od nejnizsi urovne.
@@ -150,7 +165,7 @@ const TIER1_LEAGUES = {
     'portugal':     ['liga portugal','primeira liga'],
     'austria':      ['bundesliga'],
     'romania':      ['superliga','liga i'],
-    'greece':       ['super league 1','super league'],
+    'greece':       ['super league 1'],
     'scotland':     ['premiership'],
     'slovakia':     ['nike liga','super liga','fortuna liga'],
     'slovenia':     ['prva liga','1 snl','snl'],
