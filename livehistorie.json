@@ -7,11 +7,11 @@
     "odds": "",
     "halftimeScore": "2:0",
     "liveOdds": "",
-    "finalScore": "",
-    "result": "",
+    "finalScore": "2:0",
+    "result": "❌ Lost",
     "sport": "football",
     "kickoff": "2026-09-14T17:00:00.000Z",
-    "resolvedAt": ""
+    "resolvedAt": "2026-09-14T19:15:26.133Z"
   },
   {
     "league": "",
@@ -21,11 +21,11 @@
     "odds": "",
     "halftimeScore": "0:1",
     "liveOdds": "",
-    "finalScore": "0:2",
-    "result": "✅ Won",
+    "finalScore": "",
+    "result": "",
     "sport": "football",
     "kickoff": "2026-09-14T17:00:00.000Z",
-    "resolvedAt": "2026-09-14T19:12:14.984Z"
+    "resolvedAt": ""
   },
   {
     "league": "",
