@@ -2,6 +2,36 @@
   {
     "sport": "football",
     "league": "Primeira Liga",
+    "match": "SC Braga vs Estoril",
+    "tip": "Over 1.5",
+    "odds": "1.20",
+    "date": "2026-09-14T19:45:00+00:00",
+    "score": "1:0",
+    "result": "✗"
+  },
+  {
+    "sport": "football",
+    "league": "Süper Lig",
+    "match": "Gaziantep FK vs Fenerbahçe",
+    "tip": "Over 1.5",
+    "odds": "1.21",
+    "date": "2026-09-14T17:00:00+00:00",
+    "score": "0:0",
+    "result": "✗"
+  },
+  {
+    "sport": "basketball",
+    "league": "Champions League",
+    "match": "Breogan vs Rilski Sportist",
+    "tip": "Over 163.5",
+    "odds": "1.30",
+    "date": "2026-09-14T15:45:00+00:00",
+    "score": "126:80",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "Primeira Liga",
     "match": "Famalicao vs Sporting CP",
     "tip": "Over 1.5",
     "odds": "1.24",
@@ -1967,36 +1997,6 @@
     "odds": "1.25",
     "date": "2026-06-03T23:00:00+00:00",
     "score": "3:4",
-    "result": "✓"
-  },
-  {
-    "sport": "basketball",
-    "league": "ACB",
-    "match": "Baskonia vs Joventut Badalona",
-    "tip": "Over 159.5",
-    "odds": "1.20",
-    "date": "2026-06-03T19:00:00+00:00",
-    "score": "85:71",
-    "result": "✗"
-  },
-  {
-    "sport": "hockey",
-    "league": "NHL",
-    "match": "Carolina Hurricanes vs Vegas Golden Knights",
-    "tip": "Over 3.5",
-    "odds": "1.19",
-    "date": "2026-06-03T00:00:00+00:00",
-    "score": "4:5",
-    "result": "✓"
-  },
-  {
-    "sport": "hockey",
-    "league": "AHL",
-    "match": "Chicago Wolves vs Colorado Eagles",
-    "tip": "Over 3.5",
-    "odds": "1.25",
-    "date": "2026-06-03T00:00:00+00:00",
-    "score": "2:3",
     "result": "✓"
   }
 ]
