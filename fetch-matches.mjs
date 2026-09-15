@@ -1,7 +1,6 @@
 import { writeFileSync, existsSync, readFileSync } from 'fs';
 
 const API_KEY = process.env.API_FOOTBALL_KEY1;
-if (!API_KEY) { console.error('Chybi API_FOOTBALL_KEY1 env promenna.'); process.exit(1); }
 
 const FOOTBALL_API = 'https://v3.football.api-sports.io';
 const MIN_ODDS = 2.1;
@@ -63,10 +62,10 @@ function norm(s){
 // Souteze, ktere nikdy nechceme (mladez, zeny, rezervy, pratelaky, futsal...).
 const EXCLUDE_RE = [
     /\bu ?\d{2}\b/, /\byouth\b/, /\bjunior/, /\bjuvenil/, /\bprimavera\b/,
-    /\breserve/, /\bacademy\b/, /\bdevelopment\b/, /\bii\b$/,
+    /\breserve/, /\bacademy\b/, /\bdevelopment\b/,
     /\bamateur/, /\bamatoer/, /\bveterans\b/,
-    // Rezervni / farmarske souteze schovane pod nazvem hlavni ligy
-    /\bpremier league 2\b/, /\bnext pro\b/, /\belite league\b/,
+    // Rezervni / farmarske / mladeznicke souteze schovane pod nazvem hlavni ligy
+    /\bpremier league 2\b/, /\bpremier league cup\b/, /\bnext pro\b/, /\belite league\b/,
     // Zenske souteze - 'wk league' (J. Korea), 'femenil' (Mexiko), 'kvinde' (Dansko)...
     /\bwk league\b/, /\bwomen\b/, /\bfemen/, /\bfeminin/, /\bfrauen\b/,
     /\bdamallsvenskan\b/, /\bkvinde/, /\btoppserien\b/, /\bnwsl\b/,
@@ -76,7 +75,7 @@ const EXCLUDE_RE = [
 // Rozpoznani poharu bez nutnosti znat nazev (fallback, kdyz chybi league.type z API).
 const CUP_RE = /\bcup\b|\bcupen\b|\bpokal\b|\bpokalen\b|\bcopa\b|\bcoupe\b|\bcoppa\b|\bbeker\b|\btaca\b|\bkupa\b|\bkupasi\b|\bkubok\b|\bpuchar\b|\bpohar\b|\bkypello\b|\btrophy\b|\bsupercup\b|\bsuper cup\b/;
 // Pohary nizsich/mladeznickych urovni - nepatri mezi hlavni domaci pohary (T2).
-const LOW_CUP_RE = /\bfa trophy\b|\bfa vase\b|\bleague trophy\b|\befl trophy\b|\bpremier league cup\b|\bregional/;
+const LOW_CUP_RE = /\bfa trophy\b|\bfa vase\b|\bleague trophy\b|\befl trophy\b|\bpremier league cup\b|\bchallenge cup\b|\bregional/;
 
 // Zeme, kde nazev neprozradi uroven ligy (Championship, 1. Division...) -> rucni mapa.
 // Klic = normalizovana zeme, hodnota = [uroven, [normalizovane podretezce nazvu]].
@@ -119,6 +118,10 @@ const LEVEL_OVERRIDES = {
     'chile':     [[2,['primera b']]],
     'bolivia':   [[2,['nacional b']]],
     'saudi arabia':[[2,['division 1','first division']]],
+    'wales':     [[1,['cymru premier']],[2,['faw championship','cymru north','cymru south']]],
+    'iran':      [[1,['persian gulf pro league']],[2,['azadegan league']]],
+    'india':     [[1,['indian super league']],[2,['i league']],[3,['calcutta','premier division','state league']]],
+    'northern ireland':[[1,['premiership']],[2,['championship']]],
 };
 
 // Genericka detekce urovne z cisla/slova v nazvu. Poradi od nejnizsi urovne.
@@ -202,7 +205,7 @@ const TIER2_LEAGUES = {
     'spain':        ['segunda division','laliga 2','la liga 2'],
     'sweden':       ['superettan'],
     'switzerland':  ['promotion league'],
-    'thailand':     ['thai league 1','thai league'],
+    'thailand':     ['thai league 1'],
     'turkey':       ['1 lig','first league'],
 };
 
@@ -216,6 +219,9 @@ function matchesList(list,c,n){
 function leagueTier(name,country,type){
     const n=norm(name),c=norm(country);
     if(EXCLUDE_RE.some(re=>re.test(n)))return 0;
+    // Pohary nizsich urovni odchytit drive, nez se nazev chytne na seznam T1/T2
+    // ('Premier League Cup' obsahuje 'premier league').
+    if(LOW_CUP_RE.test(n))return 4;
     if(c==='world'){
         if(/uefa champions league|uefa europa league|uefa (europa )?conference league/.test(n))return 1;
         if(/uefa super cup/.test(n))return 2;
@@ -227,13 +233,14 @@ function leagueTier(name,country,type){
     if(matchesList(TIER1_LEAGUES,c,n))return 1;
     const isCup=(type&&norm(type)==='cup')||CUP_RE.test(n);
     if(isCup){
-        if(LOW_CUP_RE.test(n))return 4;
         // Hlavni domaci pohary zemi, ktere maji ligu v T1 -> T3, ostatni T4.
         return TIER1_LEAGUES[c]?3:4;
     }
     // Zbytek: nejvyssi soutez zeme -> T3, jakakoli nizsi soutez -> T4.
     return leagueLevel(n,c)===1?3:4;
 }
+
+export { leagueTier, norm, leagueLevel };
 function maskKey(k){if(!k)return'(none)';if(k.length<=8)return'***';return k.slice(0,4)+'...'+k.slice(-4)+' (len='+k.length+')';}
 function sleep(ms){return new Promise(r=>setTimeout(r,ms));}
 function shuffle(arr){for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]];}return arr;}
@@ -473,4 +480,8 @@ async function main(){
     for(let g=1;g<=gc;g++){const gm=output.filter(m=>m.group===g);const go=gm.reduce((a,m)=>a*parseFloat(m.odds),1);console.log('  Gr.'+g+' ('+go.toFixed(2)+'):');gm.forEach(m=>console.log('     ['+m.league+'] '+m.match+' | '+m.tip+' @ '+m.odds+' | '+m.kickoff));}
 }
 
-main().catch(err=>{console.error('Chyba:',err);process.exit(1);});
+// Spustit jen pri primem volani skriptu - pri importu (testy klasifikace) ne.
+if(process.argv[1]&&process.argv[1].endsWith('fetch-matches.mjs')){
+    if(!API_KEY){console.error('Chybi API_FOOTBALL_KEY1 env promenna.');process.exit(1);}
+    main().catch(err=>{console.error('Chyba:',err);process.exit(1);});
+}
