@@ -1,9 +1,37 @@
 [
   {
-    "League": "I Liga",
-    "Match": "Stal Mielec vs Nieciecza",
+    "League": "Superettan",
+    "Match": "IK brage vs Sandviken",
     "Tip": "Over 1.5",
-    "Odds": "1.19",
-    "Date": "2026-09-14T17:00:00+00:00"
+    "Odds": "1.17",
+    "Date": "2026-09-15T17:00:00+00:00"
+  },
+  {
+    "League": "La Liga",
+    "Match": "Rayo Vallecano vs Espanyol",
+    "Tip": "Over 1.5",
+    "Odds": "1.28",
+    "Date": "2026-09-15T17:00:00+00:00"
+  },
+  {
+    "League": "3. Liga",
+    "Match": "Würzburger Kickers vs Alemannia Aachen",
+    "Tip": "Over 1.5",
+    "Odds": "1.15",
+    "Date": "2026-09-15T17:00:00+00:00"
+  },
+  {
+    "League": "National League",
+    "Match": "Southend vs Tamworth",
+    "Tip": "Over 1.5",
+    "Odds": "1.12",
+    "Date": "2026-09-15T18:45:00+00:00"
+  },
+  {
+    "League": "National League - South",
+    "Match": "Billericay Town vs Braintree",
+    "Tip": "Over 1.5",
+    "Odds": "1.18",
+    "Date": "2026-09-15T18:45:00+00:00"
   }
 ]
