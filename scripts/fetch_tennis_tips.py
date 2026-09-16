@@ -10,11 +10,14 @@ Logika vyberu (inspirovana fotbalovym kombik botem):
   Kazdy tip z jineho turnaje.
 """
 
+import gzip
+import io
 import json
 import os
 import random
 import sys
 import time
+import zlib
 from datetime import datetime, timedelta, timezone
 from urllib.request import Request, urlopen
 from urllib.error import URLError, HTTPError
@@ -53,6 +56,22 @@ BLOCKED_LEAGUE_KEYWORDS = ("ITF", "UTR")
 
 # ===================== API VRSTVA =====================
 
+def read_json_response(resp):
+    """Precte HTTP odpoved a rozbali ji, pokud je gzip/deflate komprimovana."""
+    raw = resp.read()
+    encoding = (resp.headers.get("Content-Encoding") or "").lower()
+
+    if encoding == "gzip" or raw[:2] == b"\x1f\x8b":
+        raw = gzip.GzipFile(fileobj=io.BytesIO(raw)).read()
+    elif encoding == "deflate":
+        try:
+            raw = zlib.decompress(raw)
+        except zlib.error:
+            raw = zlib.decompress(raw, -zlib.MAX_WBITS)
+
+    return json.loads(raw.decode("utf-8", errors="replace"))
+
+
 def api_get(endpoint, retries=3, delay=5):
     """GET pozadavek na odds-api.io s retry logikou."""
     url = f"{BASE_URL}/{endpoint}"
@@ -63,9 +82,9 @@ def api_get(endpoint, retries=3, delay=5):
 
     for attempt in range(1, retries + 1):
         try:
-            req = Request(url, headers={"Accept": "application/json"})
+            req = Request(url, headers={"Accept": "application/json", "Accept-Encoding": "gzip, deflate"})
             with urlopen(req, timeout=30) as resp:
-                return json.loads(resp.read().decode())
+                return read_json_response(resp)
         except HTTPError as e:
             print(f"  HTTP {e.code} pro {endpoint} (pokus {attempt}/{retries})")
             if attempt < retries and e.code >= 500:
@@ -93,9 +112,9 @@ def fallback_get_tips():
     print("Pouzivam fallback: The Odds API...")
     url = f"{FALLBACK_BASE_URL}/sports/?apiKey={FALLBACK_API_KEY}&all=true"
     try:
-        req = Request(url, headers={"Accept": "application/json"})
+        req = Request(url, headers={"Accept": "application/json", "Accept-Encoding": "gzip, deflate"})
         with urlopen(req, timeout=30) as resp:
-            sports = json.loads(resp.read().decode())
+            sports = read_json_response(resp)
             tennis = [
                 s for s in sports
                 if "tennis" in s.get("key", "").lower() and s.get("active", False)
@@ -117,9 +136,9 @@ def fallback_get_tips():
             f"&regions=eu&markets=totals&oddsFormat=decimal"
         )
         try:
-            req = Request(odds_url, headers={"Accept": "application/json"})
+            req = Request(odds_url, headers={"Accept": "application/json", "Accept-Encoding": "gzip, deflate"})
             with urlopen(req, timeout=30) as resp:
-                events = json.loads(resp.read().decode())
+                events = read_json_response(resp)
         except (URLError, HTTPError):
             continue
 
