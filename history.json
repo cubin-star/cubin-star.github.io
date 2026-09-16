@@ -1,6 +1,36 @@
 [
   {
     "sport": "football",
+    "league": "Ekstraklasa",
+    "match": "Korona Kielce vs Gornik Zabrze",
+    "tip": "Over 1.5",
+    "odds": "1.26",
+    "date": "2026-09-15T18:30:00+00:00",
+    "score": "0:2",
+    "result": "✓"
+  },
+  {
+    "sport": "hockey",
+    "league": "National League",
+    "match": "Lausanne vs Zug",
+    "tip": "Over 3.5",
+    "odds": "1.34",
+    "date": "2026-09-15T17:45:00+00:00",
+    "score": "0:5",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "La Liga",
+    "match": "Rayo Vallecano vs Espanyol",
+    "tip": "Over 1.5",
+    "odds": "1.28",
+    "date": "2026-09-15T17:00:00+00:00",
+    "score": "2:1",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
     "league": "Primeira Liga",
     "match": "SC Braga vs Estoril",
     "tip": "Over 1.5",
@@ -1967,36 +1997,6 @@
     "odds": "1.25",
     "date": "2026-06-06T00:00:00+00:00",
     "score": "3:7",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "K League 2",
-    "match": "Daegu FC vs Paju Citizen",
-    "tip": "Over 1.5",
-    "odds": "1.22",
-    "date": "2026-06-05T10:30:00+00:00",
-    "score": "1:0",
-    "result": "✗"
-  },
-  {
-    "sport": "basketball",
-    "league": "Superliga",
-    "match": "Oberwart Gunners vs Kapfenberg Bulls",
-    "tip": "Over 146.5",
-    "odds": "1.28",
-    "date": "2026-06-04T16:00:00+00:00",
-    "score": "80:88",
-    "result": "✓"
-  },
-  {
-    "sport": "hockey",
-    "league": "AHL",
-    "match": "Toronto Marlies vs Wilkes-Barre/Scranton",
-    "tip": "Over 3.5",
-    "odds": "1.25",
-    "date": "2026-06-03T23:00:00+00:00",
-    "score": "3:4",
     "result": "✓"
   }
 ]
