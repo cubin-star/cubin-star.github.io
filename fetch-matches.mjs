@@ -75,7 +75,7 @@ const EXCLUDE_RE = [
 // Rozpoznani poharu bez nutnosti znat nazev (fallback, kdyz chybi league.type z API).
 const CUP_RE = /\bcup\b|\bcupen\b|\bpokal\b|\bpokalen\b|\bcopa\b|\bcoupe\b|\bcoppa\b|\bbeker\b|\btaca\b|\bkupa\b|\bkupasi\b|\bkubok\b|\bpuchar\b|\bpohar\b|\bkypello\b|\btrophy\b|\bsupercup\b|\bsuper cup\b/;
 // Pohary nizsich/mladeznickych urovni - nepatri mezi hlavni domaci pohary (T2).
-const LOW_CUP_RE = /\bfa trophy\b|\bfa vase\b|\bleague trophy\b|\befl trophy\b|\bpremier league cup\b|\bchallenge cup\b|\bregional/;
+const LOW_CUP_RE = /\bfa trophy\b|\bfa vase\b|\bleague trophy\b|\befl trophy\b|\bpremier league cup\b|\bchallenge cup\b|\bcopa federacion\b|\bregional/;
 
 // Zeme, kde nazev neprozradi uroven ligy (Championship, 1. Division...) -> rucni mapa.
 // Klic = normalizovana zeme, hodnota = [uroven, [normalizovane podretezce nazvu]].
@@ -97,7 +97,7 @@ const LEVEL_OVERRIDES = {
     'slovakia':  [[1,['super liga','nike liga','fortuna liga','fortuna 1 liga']],[2,['2 liga']]],
     'poland':    [[1,['ekstraklasa']],[2,['i liga','1 liga']],[3,['ii liga','2 liga']]],
     'austria':   [[1,['bundesliga']],[2,['2 liga']],[3,['regionalliga']]],
-    'switzerland':[[1,['super league']],[2,['challenge league']]],
+    'switzerland':[[1,['super league']],[2,['challenge league']],[3,['promotion league']],[4,['1 liga classic','1 liga']]],
     'greece':    [[1,['super league 1']],[2,['super league 2']]],
     'ireland':   [[1,['premier division']],[2,['first division']]],
     'republic of ireland':[[1,['premier division']],[2,['first division']]],
@@ -122,6 +122,12 @@ const LEVEL_OVERRIDES = {
     'iran':      [[1,['persian gulf pro league']],[2,['azadegan league']]],
     'india':     [[1,['indian super league']],[2,['i league']],[3,['calcutta','premier division','state league']]],
     'northern ireland':[[1,['premiership']],[2,['championship']]],
+    'serbia':    [[1,['super liga','superliga']],[2,['prva liga']],[3,['srpska liga']]],
+    'slovenia':  [[1,['prva liga','1 snl']],[2,['2 snl']],[3,['3 snl']]],
+    'azerbaijan':[[1,['premyer liqa']],[2,['birinci dasta','first division']]],
+    'albania':   [[1,['kategoria superiore','superiore']],[2,['1st division','kategoria e pare','first division']]],
+    'bosnia':    [[1,['premijer liga']],[2,['1st league','first league','prva liga']]],
+    'bosnia and herzegovina':[[1,['premijer liga']],[2,['1st league','first league','prva liga']]],
 };
 
 // Genericka detekce urovne z cisla/slova v nazvu. Poradi od nejnizsi urovne.
@@ -171,7 +177,7 @@ const TIER1_LEAGUES = {
     'greece':       ['super league 1'],
     'scotland':     ['premiership'],
     'slovakia':     ['nike liga','super liga','fortuna liga'],
-    'slovenia':     ['prva liga','1 snl','snl'],
+    'slovenia':     ['prva liga','1 snl'],
     'serbia':       ['super liga','superliga'],
     'sweden':       ['allsvenskan'],
     'switzerland':  ['super league'],
