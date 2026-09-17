@@ -1,24 +1,24 @@
 [
   {
-    "League": "La Liga",
-    "Match": "Levante vs Athletic Club",
+    "League": "CONCACAF Central American Cup",
+    "Match": "LD Alajuelense vs CD Marathon",
     "Tip": "Over 2.5",
-    "Odds": "1.88",
-    "Date": "2026-09-16T19:30:00+00:00"
+    "Odds": "1.95",
+    "Date": "2026-09-18T00:30:00+00:00"
   },
   {
-    "League": "Copa Federacion",
-    "Match": "Terrassa vs Binéfar",
+    "League": "Birinci Dasta",
+    "Match": "Şimal vs Şahdağ",
     "Tip": "Over 2.5",
-    "Odds": "1.77",
-    "Date": "2026-09-16T17:30:00+00:00"
+    "Odds": "1.83",
+    "Date": "2026-09-17T12:30:00+00:00"
   },
   {
-    "League": "National League",
-    "Match": "Altrincham vs Hartlepool",
+    "League": "CONMEBOL Sudamericana",
+    "Match": "Atletico Torque vs Cienciano",
     "Tip": "Over 2.5",
-    "Odds": "1.92",
-    "Date": "2026-09-16T18:45:00+00:00",
+    "Odds": "1.76",
+    "Date": "2026-09-18T00:30:00+00:00",
     "locked": true
   }
 ]
