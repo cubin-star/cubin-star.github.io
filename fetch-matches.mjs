@@ -68,7 +68,7 @@ const EXCLUDE_RE = [
     /\bpremier league 2\b/, /\bpremier league cup\b/, /\bnext pro\b/, /\belite league\b/,
     // Zenske souteze - 'wk league' (J. Korea), 'femenil' (Mexiko), 'kvinde' (Dansko)...
     /\bwk league\b/, /\bwomen\b/, /\bfemen/, /\bfeminin/, /\bfrauen\b/,
-    /\bdamallsvenskan\b/, /\bkvinde/, /\btoppserien\b/, /\bnwsl\b/,
+    /\bdamallsvenskan\b/, /\bkvinde/, /\btoppserien\b/, /\bnwsl\b/, /\bkansallinen liiga\b/,
     /\bfriendl/, /\bfutsal\b/, /\bbeach\b/, /\besoccer\b/, /\bindoor\b/,
 ];
 
@@ -106,7 +106,7 @@ const LEVEL_OVERRIDES = {
     'japan':     [[2,['j 2 league']],[3,['j 3 league']]],
     'south korea':[[2,['k league 2']]],
     'croatia':   [[2,['prva nl','first nl','druga']]],
-    'israel':    [[2,['liga leumit']]],
+    'israel':    [[2,['liga leumit']],[3,['liga alef']],[4,['liga bet','liga gimel']]],
     'ukraine':   [[2,['persha liga','first league']],[3,['druha liga']]],
     'estonia':   [[1,['meistriliiga']],[2,['esiliiga a','esiliiga']],[3,['esiliiga b']]],
     'lithuania': [[1,['a lyga']],[2,['1 lyga','pirma lyga']]],
@@ -128,6 +128,9 @@ const LEVEL_OVERRIDES = {
     'albania':   [[1,['kategoria superiore','superiore']],[2,['1st division','kategoria e pare','first division']]],
     'bosnia':    [[1,['premijer liga']],[2,['1st league','first league','prva liga']]],
     'bosnia and herzegovina':[[1,['premijer liga']],[2,['1st league','first league','prva liga']]],
+    'uzbekistan':[[1,['super league','superliga']],[2,['pro league']]],
+    'kazakhstan':[[1,['premier league']],[2,['1 division','first division']]],
+    'mexico':    [[1,['liga mx']],[2,['liga de expansion','expansion mx','ascenso mx']]],
 };
 
 // Genericka detekce urovne z cisla/slova v nazvu. Poradi od nejnizsi urovne.
