@@ -1,6 +1,26 @@
 [
   {
     "sport": "football",
+    "league": "UEFA Europa League",
+    "match": "Ararat-Armenia vs Sparta Praha",
+    "tip": "Over 1.5",
+    "odds": "1.20",
+    "date": "2026-09-16T16:45:00+00:00",
+    "score": "1:4",
+    "result": "✓"
+  },
+  {
+    "sport": "hockey",
+    "league": "Liiga",
+    "match": "IFK Helsinki vs Jukurit",
+    "tip": "Over 3.5",
+    "odds": "1.27",
+    "date": "2026-09-16T15:30:00+00:00",
+    "score": "4:7",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
     "league": "Ekstraklasa",
     "match": "Korona Kielce vs Gornik Zabrze",
     "tip": "Over 1.5",
@@ -1977,26 +1997,6 @@
     "odds": "1.22",
     "date": "2026-06-06T05:00:00+00:00",
     "score": "1:3",
-    "result": "✓"
-  },
-  {
-    "sport": "basketball",
-    "league": "NBA",
-    "match": "San Antonio Spurs vs New York Knicks",
-    "tip": "Over 201.5",
-    "odds": "1.25",
-    "date": "2026-06-06T00:30:00+00:00",
-    "score": "104:105",
-    "result": "✓"
-  },
-  {
-    "sport": "hockey",
-    "league": "AHL",
-    "match": "Chicago Wolves vs Colorado Eagles",
-    "tip": "Over 3.5",
-    "odds": "1.25",
-    "date": "2026-06-06T00:00:00+00:00",
-    "score": "3:7",
     "result": "✓"
   }
 ]
