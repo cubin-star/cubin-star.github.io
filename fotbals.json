@@ -1,9 +1,16 @@
 [
   {
-    "League": "UEFA Europa League",
-    "Match": "Real Sociedad vs Bournemouth",
+    "League": "La Liga",
+    "Match": "Espanyol vs Elche",
     "Tip": "Over 1.5",
-    "Odds": "1.21",
-    "Date": "2026-09-17T19:00:00+00:00"
+    "Odds": "1.25",
+    "Date": "2026-09-18T19:00:00+00:00"
+  },
+  {
+    "League": "Liga MX",
+    "Match": "FC Juarez vs Tigres UANL",
+    "Tip": "Over 1.5",
+    "Odds": "1.23",
+    "Date": "2026-09-19T03:00:00+00:00"
   }
 ]
