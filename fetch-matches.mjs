@@ -67,8 +67,9 @@ const EXCLUDE_RE = [
     // Rezervni / farmarske / mladeznicke souteze schovane pod nazvem hlavni ligy
     /\bpremier league 2\b/, /\bpremier league cup\b/, /\bnext pro\b/, /\belite league\b/,
     // Zenske souteze - 'wk league' (J. Korea), 'femenil' (Mexiko), 'kvinde' (Dansko)...
-    /\bwk league\b/, /\bwomen\b/, /\bfemen/, /\bfeminin/, /\bfrauen\b/,
-    /\bdamallsvenskan\b/, /\bkvinde/, /\btoppserien\b/, /\bnwsl\b/, /\bkansallinen liiga\b/,
+    /\bwk league\b/, /\bwomen\b/, /\bfemen/, /\bfeminin/, /\bfrauen/,
+    /\bdamallsvenskan\b/, /\belitettan\b/, /\bkvinde/, /\btoppserien\b/, /\bnwsl\b/, /\bkansallinen liiga\b/,
+    /\bwsl\b/, /\busl super league\b/, /\bfa wsl\b/,
     /\bfriendl/, /\bfutsal\b/, /\bbeach\b/, /\besoccer\b/, /\bindoor\b/,
 ];
 
@@ -130,7 +131,15 @@ const LEVEL_OVERRIDES = {
     'bosnia and herzegovina':[[1,['premijer liga']],[2,['1st league','first league','prva liga']]],
     'uzbekistan':[[1,['super league','superliga']],[2,['pro league']]],
     'kazakhstan':[[1,['premier league']],[2,['1 division','first division']]],
-    'mexico':    [[1,['liga mx']],[2,['liga de expansion','expansion mx','ascenso mx']]],
+    'mexico':    [[1,['liga mx']],[2,['liga de expansion','expansion mx','ascenso mx']],[3,['liga premier','primera premier','serie a']],[4,['serie b','liga tdp']]],
+    'china':     [[1,['super league']],[2,['league one']],[3,['league two']]],
+    'moldova':   [[1,['super liga','divizia nationala','national division']],[2,['liga 1']]],
+    'south africa':[[1,['premier soccer league','premiership','psl']],[2,['1st division','first division','motsepe']]],
+    'united arab emirates':[[1,['pro league','uae league','adnoc']],[2,['division 1','first division']]],
+    'finland':   [[1,['veikkausliiga']],[2,['ykkosliiga','ykkonen']],[3,['kakkonen']]],
+    'malta':     [[1,['premier league']],[2,['challenge league','first division']]],
+    'faroe islands':[[1,['betrideildin','meistaradeildin','premier league']],[2,['1 deild']],[3,['2 deild']]],
+    'australia': [[1,['a league']],[2,['npl','state league','premier league']]],
 };
 
 // Genericka detekce urovne z cisla/slova v nazvu. Poradi od nejnizsi urovne.
@@ -141,11 +150,20 @@ const GENERIC_LEVELS = [
     [2,[/\b(2|ii)\b/,/segunda/,/seconda/,/second/,/zweite/,/deuxieme/,/druga/,/druha/,/masodik/,/\bb\b/]],
 ];
 
+// Shoda podretezce na hranicich slov. Prosty includes() nestaci - 'III Liga'
+// obsahuje 'I Liga' a 'Liga III' obsahuje 'Liga II', takze 3. ligy padaly do T2.
+const wordReCache = new Map();
+function hasWord(n,p){
+    let re=wordReCache.get(p);
+    if(!re){re=new RegExp('\\b'+p.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'\\b');wordReCache.set(p,re);}
+    return re.test(n);
+}
+
 // Vrati uroven ligy (1 = nejvyssi soutez zeme). Default 1 - nizsi souteze maji
 // prakticky vzdy cislo nebo poradove slovo v nazvu.
 function leagueLevel(n,c){
     const ov=LEVEL_OVERRIDES[c];
-    if(ov){for(const [lvl,pats] of ov){for(const p of pats){if(n.includes(p))return lvl;}}}
+    if(ov){for(const [lvl,pats] of ov){for(const p of pats){if(hasWord(n,p))return lvl;}}}
     for(const [lvl,res] of GENERIC_LEVELS){for(const re of res){if(re.test(n))return lvl;}}
     return 1;
 }
@@ -161,8 +179,8 @@ const TIER1_LEAGUES = {
     'france':       ['ligue 1'],
     'italy':        ['serie a'],
     'germany':      ['bundesliga'],
-    'spain':        ['la liga','laliga','primera division'],
-    'belgium':      ['jupiler pro league','pro league','first division a'],
+    'spain':        ['la liga','laliga'],
+    'belgium':      ['jupiler pro league','first division a'],
     'denmark':      ['superliga','superligaen'],
     'finland':      ['veikkausliiga'],
     'croatia':      ['hnl','prva liga'],
@@ -170,7 +188,7 @@ const TIER1_LEAGUES = {
     'republic of ireland':['premier division'],
     'israel':       ['ligat ha al','ligat haal','premier league'],
     'japan':        ['j 1 league','j1 league'],
-    'south korea':  ['k league 1','k league'],
+    'south korea':  ['k league 1'],
     'netherlands':  ['eredivisie'],
     'norway':       ['eliteserien'],
     'poland':       ['ekstraklasa'],
@@ -221,7 +239,7 @@ const TIER2_LEAGUES = {
 function matchesList(list,c,n){
     const pats=list[c];
     if(!pats)return false;
-    for(const p of pats){if(n.includes(p))return true;}
+    for(const p of pats){if(hasWord(n,p))return true;}
     return false;
 }
 
