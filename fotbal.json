@@ -1,24 +1,24 @@
 [
   {
-    "League": "CONCACAF Central American Cup",
-    "Match": "LD Alajuelense vs CD Marathon",
+    "League": "Serie A",
+    "Match": "Monza vs Sassuolo",
     "Tip": "Over 2.5",
-    "Odds": "1.95",
-    "Date": "2026-09-18T00:30:00+00:00"
+    "Odds": "1.81",
+    "Date": "2026-09-18T18:45:00+00:00"
   },
   {
-    "League": "Birinci Dasta",
-    "Match": "Şimal vs Şahdağ",
+    "League": "La Liga",
+    "Match": "Espanyol vs Elche",
     "Tip": "Over 2.5",
-    "Odds": "1.83",
-    "Date": "2026-09-17T12:30:00+00:00"
+    "Odds": "1.89",
+    "Date": "2026-09-18T19:00:00+00:00"
   },
   {
-    "League": "CONMEBOL Sudamericana",
-    "Match": "Atletico Torque vs Cienciano",
+    "League": "Superettan",
+    "Match": "Falkenbergs FF vs Ostersunds FK",
     "Tip": "Over 2.5",
-    "Odds": "1.76",
-    "Date": "2026-09-18T00:30:00+00:00",
+    "Odds": "1.91",
+    "Date": "2026-09-18T17:00:00+00:00",
     "locked": true
   }
 ]
