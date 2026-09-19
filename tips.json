@@ -1,16 +1,16 @@
 [
   {
-    "league": "Ligue 2",
-    "match": "Annecy - Dijon",
-    "kickoff": "2026-09-18T20:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "1.83"
-  },
-  {
-    "league": "La Liga",
-    "match": "Espanyol - Elche",
-    "kickoff": "2026-09-18T21:00:00+02:00",
+    "league": "Liga I",
+    "match": "CFR 1907 Cluj - FC Botosani",
+    "kickoff": "2026-09-19T16:30:00+02:00",
     "tip": "Over 2.5",
     "odds": "1.81"
+  },
+  {
+    "league": "Serie B",
+    "match": "Cremonese - Virtus Entella",
+    "kickoff": "2026-09-19T15:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "1.90"
   }
 ]
