@@ -1,11 +1,11 @@
 [
   {
     "league": "Championship",
-    "homeTeam": "Birmingham",
-    "awayTeam": "Middlesbrough",
+    "homeTeam": "Wrexham",
+    "awayTeam": "Southampton",
     "tip": "Over 1.5",
     "odds": "",
-    "halftimeScore": "0:1",
+    "halftimeScore": "1:0",
     "liveOdds": "",
     "finalScore": "",
     "result": "",
@@ -13,7 +13,7 @@
     "kickoff": "2026-09-19T14:00:00.000Z",
     "resolvedAt": "",
     "source": "whisper-football",
-    "scoutStats": "Whisper xG-rate surge | HT 0:1 | xG: 1.60 | Shots: 19/5 | losingXG: 0.55 losingSOT: 3 | @HT | Pre O2.5: 1.65"
+    "scoutStats": "Whisper xG-rate surge | HT 1:0 | xG: 1.32 | Shots: 15/7 | losingXG: 0.88 losingSOT: 4 | @HT | Pre O2.5: 1.7"
   },
   {
     "league": "Veikkausliiga",
