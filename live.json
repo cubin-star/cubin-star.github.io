@@ -1,16 +1,65 @@
 [
   {
-    "League": "J3 League",
-    "Match": "Osaka vs Fukushima United",
+    "League": "3. Division",
+    "Match": "Hørsholm-Usserød vs Vanløse",
     "Tip": "Over 1.5",
-    "Odds": "1.16",
-    "Date": "2026-09-18T10:00:00+00:00"
+    "Odds": "1.13",
+    "Date": "2026-09-19T12:00:00+00:00"
   },
   {
-    "League": "2. Liga",
-    "Match": "Floridsdorfer AC vs FC Liefering",
+    "League": "Superettan",
+    "Match": "Varbergs BoIS FC vs IK brage",
+    "Tip": "Over 1.5",
+    "Odds": "1.19",
+    "Date": "2026-09-19T13:00:00+00:00"
+  },
+  {
+    "League": "League Two",
+    "Match": "Kelty Hearts vs Edinburgh City",
+    "Tip": "Over 1.5",
+    "Odds": "1.21",
+    "Date": "2026-09-19T14:00:00+00:00"
+  },
+  {
+    "League": "League Two",
+    "Match": "Colchester vs Cheltenham",
+    "Tip": "Over 1.5",
+    "Odds": "1.22",
+    "Date": "2026-09-19T14:00:00+00:00"
+  },
+  {
+    "League": "Liga Revelação U23",
+    "Match": "Leixões U23 vs Famalicão U23",
+    "Tip": "Over 1.5",
+    "Odds": "1.15",
+    "Date": "2026-09-19T14:00:00+00:00"
+  },
+  {
+    "League": "First NL",
+    "Match": "Vukovar vs Jadran LP",
+    "Tip": "Over 1.5",
+    "Odds": "1.32",
+    "Date": "2026-09-19T14:30:00+00:00"
+  },
+  {
+    "League": "Primera División",
+    "Match": "FC Cajamarca vs Cusco",
     "Tip": "Over 1.5",
     "Odds": "1.18",
-    "Date": "2026-09-18T16:30:00+00:00"
+    "Date": "2026-09-19T18:00:00+00:00"
+  },
+  {
+    "League": "Major League Soccer",
+    "Match": "FC Dallas vs Austin",
+    "Tip": "Over 1.5",
+    "Odds": "1.16",
+    "Date": "2026-09-20T00:30:00+00:00"
+  },
+  {
+    "League": "Liga de Expansión MX",
+    "Match": "CDS Tampico Madero vs Dorados",
+    "Tip": "Over 1.5",
+    "Odds": "1.18",
+    "Date": "2026-09-20T01:00:00+00:00"
   }
 ]
