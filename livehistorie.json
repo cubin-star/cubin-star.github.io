@@ -1,5 +1,21 @@
 [
   {
+    "league": "Primera A",
+    "homeTeam": "Bucaramanga",
+    "awayTeam": "Internacional de Bogota",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "1:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-09-20T21:05:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 1:0 | xG: 1.16 | Shots: 15/5 | losingXG: 0.61 losingSOT: 3 | @HT | Pre O2.5: 2.03"
+  },
+  {
     "league": "Liga MX",
     "homeTeam": "Monterrey",
     "awayTeam": "Cruz Azul",
