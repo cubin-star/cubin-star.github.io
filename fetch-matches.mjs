@@ -86,7 +86,7 @@ const LEVEL_OVERRIDES = {
     'netherlands':[[2,['eerste divisie']],[3,['tweede divisie']]],
     'belgium':   [[2,['challenger pro league','first division b']]],
     'portugal':  [[2,['liga de honra','segunda liga','liga portugal 2']],[3,['campeonato de portugal']]],
-    'spain':     [[2,['segunda division','laliga 2','la liga 2']],[3,['primera federacion','primera division rfef']],[4,['segunda federacion']],[5,['tercera']]],
+    'spain':     [[3,['primera federacion','primera division rfef']],[4,['segunda federacion','segunda division rfef']],[5,['tercera']],[2,['segunda division','laliga 2','la liga 2']]],
     'italy':     [[3,['serie c']],[4,['serie d']]],
     'germany':   [[4,['regionalliga']],[5,['oberliga']]],
     'france':    [[3,['national 1','championnat national']],[4,['national 2']],[5,['national 3']]],
@@ -249,6 +249,9 @@ function leagueTier(name,country,type){
     // Pohary nizsich urovni odchytit drive, nez se nazev chytne na seznam T1/T2
     // ('Premier League Cup' obsahuje 'premier league').
     if(LOW_CUP_RE.test(n))return 4;
+    // Spanelske RFEF souteze jsou az 3.-5. uroven, ale nazev obsahuje
+    // 'segunda division' / 'primera division' ze seznamu T1/T2 -> odchytit driv.
+    if(c==='spain'&&/\brfef\b|\bfederacion\b/.test(n))return 4;
     if(c==='world'){
         if(/uefa champions league|uefa europa league|uefa (europa )?conference league/.test(n))return 1;
         if(/uefa super cup/.test(n))return 2;
