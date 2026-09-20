@@ -1,65 +1,51 @@
 [
   {
-    "League": "3. Division",
-    "Match": "Hørsholm-Usserød vs Vanløse",
+    "League": "Division 2 - Södra Götaland",
+    "Match": "Växjö Norra vs Nosaby",
     "Tip": "Over 1.5",
     "Odds": "1.13",
-    "Date": "2026-09-19T12:00:00+00:00"
+    "Date": "2026-09-20T11:00:00+00:00"
   },
   {
-    "League": "Superettan",
-    "Match": "Varbergs BoIS FC vs IK brage",
-    "Tip": "Over 1.5",
-    "Odds": "1.19",
-    "Date": "2026-09-19T13:00:00+00:00"
-  },
-  {
-    "League": "League Two",
-    "Match": "Kelty Hearts vs Edinburgh City",
-    "Tip": "Over 1.5",
-    "Odds": "1.21",
-    "Date": "2026-09-19T14:00:00+00:00"
-  },
-  {
-    "League": "League Two",
-    "Match": "Colchester vs Cheltenham",
-    "Tip": "Over 1.5",
-    "Odds": "1.22",
-    "Date": "2026-09-19T14:00:00+00:00"
-  },
-  {
-    "League": "Liga Revelação U23",
-    "Match": "Leixões U23 vs Famalicão U23",
+    "League": "2. Bundesliga",
+    "Match": "Arminia Bielefeld vs 1. FC Heidenheim",
     "Tip": "Over 1.5",
     "Odds": "1.15",
-    "Date": "2026-09-19T14:00:00+00:00"
+    "Date": "2026-09-20T11:30:00+00:00"
   },
   {
-    "League": "First NL",
-    "Match": "Vukovar vs Jadran LP",
+    "League": "3. Liga",
+    "Match": "Rot-Weiß Essen vs Hansa Rostock",
     "Tip": "Over 1.5",
-    "Odds": "1.32",
-    "Date": "2026-09-19T14:30:00+00:00"
+    "Odds": "1.13",
+    "Date": "2026-09-20T11:30:00+00:00"
   },
   {
-    "League": "Primera División",
-    "Match": "FC Cajamarca vs Cusco",
+    "League": "Regionalliga - Nordost",
+    "Match": "FC Carl Zeiss Jena vs Lokomotive Leipzig",
     "Tip": "Over 1.5",
-    "Odds": "1.18",
-    "Date": "2026-09-19T18:00:00+00:00"
+    "Odds": "1.20",
+    "Date": "2026-09-20T12:00:00+00:00"
   },
   {
-    "League": "Major League Soccer",
-    "Match": "FC Dallas vs Austin",
+    "League": "Division 2 - Västra Götaland",
+    "Match": "Galtabacks vs Västra Frölunda",
     "Tip": "Over 1.5",
-    "Odds": "1.16",
-    "Date": "2026-09-20T00:30:00+00:00"
+    "Odds": "1.12",
+    "Date": "2026-09-20T13:00:00+00:00"
   },
   {
-    "League": "Liga de Expansión MX",
-    "Match": "CDS Tampico Madero vs Dorados",
+    "League": "Super League",
+    "Match": "Sogdiana vs Olmaliq",
     "Tip": "Over 1.5",
-    "Odds": "1.18",
-    "Date": "2026-09-20T01:00:00+00:00"
+    "Odds": "1.19",
+    "Date": "2026-09-20T14:00:00+00:00"
+  },
+  {
+    "League": "Primeira Liga",
+    "Match": "Estrela vs Academico Viseu",
+    "Tip": "Over 1.5",
+    "Odds": "1.30",
+    "Date": "2026-09-20T14:30:00+00:00"
   }
 ]
