@@ -140,6 +140,11 @@ const LEVEL_OVERRIDES = {
     'malta':     [[1,['premier league']],[2,['challenge league','first division']]],
     'faroe islands':[[1,['betrideildin','meistaradeildin','premier league']],[2,['1 deild']],[3,['2 deild']]],
     'australia': [[1,['a league']],[2,['npl','state league','premier league']]],
+    'armenia':   [[1,['premier league']],[2,['first league']]],
+    'macedonia': [[1,['first league','prva liga']],[2,['second league','vtora liga']]],
+    'north macedonia':[[1,['first league','prva liga']],[2,['second league','vtora liga']]],
+    'ghana':     [[1,['premier league']],[2,['division one league','division one']]],
+    'kosovo':    [[1,['superliga','super league']],[2,['liga e pare','first league']]],
 };
 
 // Genericka detekce urovne z cisla/slova v nazvu. Poradi od nejnizsi urovne.
