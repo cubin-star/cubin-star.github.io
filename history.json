@@ -1,6 +1,46 @@
 [
   {
     "sport": "basketball",
+    "league": "NBL",
+    "match": "Usti n. Labem vs Srsni Pisek",
+    "tip": "Over 163.5",
+    "odds": "1.30",
+    "date": "2026-09-20T16:00:00+00:00",
+    "score": "78:80",
+    "result": "✗"
+  },
+  {
+    "sport": "hockey",
+    "league": "Extraliga",
+    "match": "Vitkovice vs Litvinov",
+    "tip": "Over 3.5",
+    "odds": "1.26",
+    "date": "2026-09-20T15:00:00+00:00",
+    "score": "2:3",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "Primeira Liga",
+    "match": "Estrela vs Academico Viseu",
+    "tip": "Over 1.5",
+    "odds": "1.30",
+    "date": "2026-09-20T14:30:00+00:00",
+    "score": "0:2",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "Bundesliga",
+    "match": "Ried vs Wolfsberger AC",
+    "tip": "Over 1.5",
+    "odds": "1.20",
+    "date": "2026-09-20T12:30:00+00:00",
+    "score": "4:1",
+    "result": "✓"
+  },
+  {
+    "sport": "basketball",
     "league": "NBA W",
     "match": "Golden State Valkyries W vs Seattle Storm W",
     "tip": "Over 141.5",
@@ -1958,45 +1998,5 @@
     "date": "2026-06-14T11:00:00+00:00",
     "score": "0:2",
     "result": "✓"
-  },
-  {
-    "sport": "hockey",
-    "league": "AHL",
-    "match": "Chicago Wolves vs Toronto Marlies",
-    "tip": "Over 3.5",
-    "odds": "1.23",
-    "date": "2026-06-13T00:00:00+00:00",
-    "score": "2:4",
-    "result": "✓"
-  },
-  {
-    "sport": "basketball",
-    "league": "P. League+",
-    "match": "Fubon Braves vs Taoyuan Pauian Pilots",
-    "tip": "Over 184.5",
-    "odds": "1.66",
-    "date": "2026-06-12T11:00:00+00:00",
-    "score": "77:84",
-    "result": "✗"
-  },
-  {
-    "sport": "football",
-    "league": "Superettan",
-    "match": "Helsingborg vs Landskrona BoIS",
-    "tip": "Over 1.5",
-    "odds": "1.22",
-    "date": "2026-06-11T17:00:00+00:00",
-    "score": "0:3",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Superettan",
-    "match": "Orebro SK vs GIF Sundsvall",
-    "tip": "Over 1.5",
-    "odds": "1.28",
-    "date": "2026-06-10T17:00:00+00:00",
-    "score": "0:1",
-    "result": "✗"
   }
 ]
