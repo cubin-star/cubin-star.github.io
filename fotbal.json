@@ -1,24 +1,24 @@
 [
   {
-    "League": "Taça de Portugal",
-    "Match": "Sintrense vs AVS",
+    "League": "Prva Liga",
+    "Match": "FK Spartak Zdrepceva KRV vs FK Vozdovac",
     "Tip": "Over 2.5",
-    "Odds": "1.76",
-    "Date": "2026-09-20T14:00:00+00:00"
+    "Odds": "1.85",
+    "Date": "2026-09-21T18:00:00+00:00"
   },
   {
-    "League": "Primeira Liga",
-    "Match": "FC Porto vs Benfica",
+    "League": "1. Division",
+    "Match": "HB Koge vs Hobro",
     "Tip": "Over 2.5",
-    "Odds": "1.90",
-    "Date": "2026-09-20T19:30:00+00:00"
+    "Odds": "1.75",
+    "Date": "2026-09-21T17:00:00+00:00"
   },
   {
-    "League": "Ligue 1",
-    "Match": "Auxerre vs Stade Brestois 29",
+    "League": "Erovnuli Liga",
+    "Match": "Spaeri vs Dila",
     "Tip": "Over 2.5",
-    "Odds": "1.83",
-    "Date": "2026-09-20T13:00:00+00:00",
+    "Odds": "1.85",
+    "Date": "2026-09-21T17:00:00+00:00",
     "locked": true
   }
 ]
