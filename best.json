@@ -1,23 +1,23 @@
 [
   {
-    "league": "Segunda División",
-    "match": "Sabadell - Oviedo",
-    "kickoff": "2026-09-20T14:00:00+02:00",
+    "league": "Super League",
+    "match": "Xorazm - Qizilqum",
+    "kickoff": "2026-09-21T17:15:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.50"
+    "odds": "2.25"
   },
   {
-    "league": "First League",
-    "match": "Bokelj - Mladost DG",
-    "kickoff": "2026-09-20T19:00:00+02:00",
+    "league": "Prva Liga",
+    "match": "Napredak - Semendrija 1924",
+    "kickoff": "2026-09-21T18:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.29"
+    "odds": "2.25"
   },
   {
-    "league": "Super League 1",
-    "match": "OFI - Asteras Tripolis",
-    "kickoff": "2026-09-20T18:00:00+02:00",
+    "league": "Liga Pro",
+    "match": "Manta FC - Orense SC",
+    "kickoff": "2026-09-21T21:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.27"
+    "odds": "2.17"
   }
 ]
