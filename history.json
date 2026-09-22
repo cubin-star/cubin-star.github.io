@@ -1,5 +1,25 @@
 [
   {
+    "sport": "football",
+    "league": "1. Division",
+    "match": "HB Koge vs Hobro",
+    "tip": "Over 1.5",
+    "odds": "1.24",
+    "date": "2026-09-21T17:00:00+00:00",
+    "score": "5:2",
+    "result": "✓"
+  },
+  {
+    "sport": "basketball",
+    "league": "NBL",
+    "match": "Tasmania JackJumpers vs South East Melbourne",
+    "tip": "Over 169.5",
+    "odds": "1.18",
+    "date": "2026-09-21T09:30:00+00:00",
+    "score": "96:91",
+    "result": "✓"
+  },
+  {
     "sport": "basketball",
     "league": "NBL",
     "match": "Usti n. Labem vs Srsni Pisek",
@@ -1977,26 +1997,6 @@
     "odds": "1.21",
     "date": "2026-06-14T20:00:00+00:00",
     "score": "4:5",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "1. Division",
-    "match": "Lyn vs Bryne",
-    "tip": "Over 1.5",
-    "odds": "1.20",
-    "date": "2026-06-14T14:00:00+00:00",
-    "score": "0:3",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Superettan",
-    "match": "Norrby IF vs Oddevold",
-    "tip": "Over 1.5",
-    "odds": "1.22",
-    "date": "2026-06-14T11:00:00+00:00",
-    "score": "0:2",
     "result": "✓"
   }
 ]
