@@ -1,8 +1,14 @@
 [
   {
-    "league": "Hockey Allsvenskan",
-    "match": "AIK vs Kalmar",
+    "league": "Extraliga",
+    "match": "Pardubice vs Liberec",
     "tip": "Over 5.5",
-    "odds": "1.91"
+    "odds": "2.05"
+  },
+  {
+    "league": "Extraliga",
+    "match": "Sparta Prague vs Mlada Boleslav",
+    "tip": "Over 5.5",
+    "odds": "2.12"
   }
 ]
