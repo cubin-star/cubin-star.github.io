@@ -1,16 +1,16 @@
 [
   {
-    "league": "Liga I",
-    "match": "Petrolul Ploiesti - Csikszereda",
-    "kickoff": "2026-09-21T20:00:00+02:00",
+    "league": "Liga II",
+    "match": "Dumbrăviţa - CSM Reşiţa",
+    "kickoff": "2026-09-22T16:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "1.85"
+    "odds": "1.75"
   },
   {
-    "league": "1. Division",
-    "match": "HB Koge - Hobro",
-    "kickoff": "2026-09-21T19:00:00+02:00",
+    "league": "Non League Premier - Northern",
+    "match": "Cleethorpes Town - Redcar Athletic",
+    "kickoff": "2026-09-22T20:45:00+02:00",
     "tip": "Over 2.5",
-    "odds": "1.81"
+    "odds": "1.84"
   }
 ]
