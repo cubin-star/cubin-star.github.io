@@ -65,7 +65,7 @@ const EXCLUDE_RE = [
     /\breserve/, /\bacademy\b/, /\bdevelopment\b/,
     /\bamateur/, /\bamatoer/, /\bveterans\b/,
     // Rezervni / farmarske / mladeznicke souteze schovane pod nazvem hlavni ligy
-    /\bpremier league 2\b/, /\bpremier league cup\b/, /\bnext pro\b/, /\belite league\b/,
+    /\bpremier league 2\b/, /\bpremier league cup\b/, /\bpremier league international cup\b/, /\bnext pro\b/, /\belite league\b/,
     // Zenske souteze - 'wk league' (J. Korea), 'femenil' (Mexiko), 'kvinde' (Dansko)...
     /\bwk league\b/, /\bwomen\b/, /\bfemen/, /\bfeminin/, /\bfrauen/,
     /\bdamallsvenskan\b/, /\belitettan\b/, /\bkvinde/, /\btoppserien\b/, /\bnwsl\b/, /\bkansallinen liiga\b/,
@@ -76,7 +76,7 @@ const EXCLUDE_RE = [
 // Rozpoznani poharu bez nutnosti znat nazev (fallback, kdyz chybi league.type z API).
 const CUP_RE = /\bcup\b|\bcupen\b|\bpokal\b|\bpokalen\b|\bcopa\b|\bcoupe\b|\bcoppa\b|\bbeker\b|\btaca\b|\bkupa\b|\bkupasi\b|\bkubok\b|\bpuchar\b|\bpohar\b|\bkypello\b|\btrophy\b|\bsupercup\b|\bsuper cup\b/;
 // Pohary nizsich/mladeznickych urovni - nepatri mezi hlavni domaci pohary (T2).
-const LOW_CUP_RE = /\bfa trophy\b|\bfa vase\b|\bleague trophy\b|\befl trophy\b|\bpremier league cup\b|\bchallenge cup\b|\bcopa federacion\b|\bregional/;
+const LOW_CUP_RE = /\bfa trophy\b|\bfa vase\b|\bleague trophy\b|\befl trophy\b|\bpremier league cup\b|\bnational league cup\b|\bchallenge cup\b|\bcopa federacion\b|\bregional/;
 
 // Zeme, kde nazev neprozradi uroven ligy (Championship, 1. Division...) -> rucni mapa.
 // Klic = normalizovana zeme, hodnota = [uroven, [normalizovane podretezce nazvu]].
