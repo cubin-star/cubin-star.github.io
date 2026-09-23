@@ -1,5 +1,25 @@
 [
   {
+    "sport": "hockey",
+    "league": "SHL",
+    "match": "Timrå vs Orebro",
+    "tip": "Over 3.5",
+    "odds": "1.25",
+    "date": "2026-09-22T17:00:00+00:00",
+    "score": "1:5",
+    "result": "✓"
+  },
+  {
+    "sport": "basketball",
+    "league": "Intercontinental Cup",
+    "match": "Beijing Royal Fighters vs Boca Juniors",
+    "tip": "Over 153.5",
+    "odds": "1.29",
+    "date": "2026-09-22T11:30:00+00:00",
+    "score": "78:88",
+    "result": "✓"
+  },
+  {
     "sport": "football",
     "league": "1. Division",
     "match": "HB Koge vs Hobro",
@@ -1978,25 +1998,5 @@
     "date": "2026-06-16T11:00:00+00:00",
     "score": "69:72",
     "result": "✗"
-  },
-  {
-    "sport": "football",
-    "league": "Superettan",
-    "match": "IFK Norrkoping vs Varbergs BoIS FC",
-    "tip": "Over 1.5",
-    "odds": "1.20",
-    "date": "2026-06-15T17:05:00+00:00",
-    "score": "2:0",
-    "result": "✓"
-  },
-  {
-    "sport": "hockey",
-    "league": "AHL",
-    "match": "Chicago Wolves vs Toronto Marlies",
-    "tip": "Over 3.5",
-    "odds": "1.21",
-    "date": "2026-06-14T20:00:00+00:00",
-    "score": "4:5",
-    "result": "✓"
   }
 ]
