@@ -241,6 +241,12 @@ const TIER2_LEAGUES = {
     'turkey':       ['1 lig','first league'],
 };
 
+// Reprezentacni souteze (country = 'World'). Evropske a svetove -> T1,
+// ostatni svetadily -> T2. Duvod: pri reprezentacni prestavce nehraji klubove
+// souteze z T1/T2 a bez tohoto by zbyly jen zapasy z T3/T4.
+const NAT_T1_RE = /\buefa nations league\b|\beuro championship\b|\beuropean championship\b|\bworld cup\b|\bfinalissima\b/;
+const NAT_T2_RE = /\bafrica cup of nations\b|\bafcon\b|\basian cup\b|\bcopa america\b|\bgold cup\b|\bconcacaf nations league\b|\bconcacaf championship\b|\bcaf\b|\bafc asian\b|\bafc championship\b|\boceania nations cup\b|\bofc nations cup\b/;
+
 function matchesList(list,c,n){
     const pats=list[c];
     if(!pats)return false;
@@ -259,6 +265,11 @@ function leagueTier(name,country,type){
     if(c==='spain'&&/\brfef\b|\bfederacion\b/.test(n))return 4;
     if(c==='world'){
         if(/uefa champions league|uefa europa league|uefa (europa )?conference league/.test(n))return 1;
+        // Evropske reprezentacni souteze + svetove kvalifikace -> T1. Bez toho by
+        // pri reprezentacni prestavce byly T1 i T2 prazdne a bral by se jen T4.
+        if(NAT_T1_RE.test(n))return 1;
+        // Reprezentacni souteze ostatnich svetadilu -> T2.
+        if(NAT_T2_RE.test(n))return 2;
         if(/uefa super cup/.test(n))return 2;
         return 4;
     }
