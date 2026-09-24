@@ -1,5 +1,26 @@
 [
   {
+    "date": "2026-09-23T05:30:00Z",
+    "matches": [
+      {
+        "league": "Primera División",
+        "match": "ADT - Cienciano",
+        "tip": "Over 2.5",
+        "odds": "1.75",
+        "score": "2:1",
+        "result": "✓"
+      },
+      {
+        "league": "Liga Alef",
+        "match": "Hapoel Marmorek - Shimshon Tel Aviv",
+        "tip": "Over 2.5",
+        "odds": "1.81",
+        "score": "1:2",
+        "result": "✓"
+      }
+    ]
+  },
+  {
     "date": "2026-09-22T05:30:00Z",
     "matches": [
       {
