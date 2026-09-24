@@ -1,24 +1,24 @@
 [
   {
-    "League": "Friendlies",
-    "Match": "Gibraltar vs Sao Tome and Principe",
+    "League": "Cup",
+    "Match": "Elva vs Tallinna Kalev",
     "Tip": "Over 2.5",
-    "Odds": "1.75",
-    "Date": "2026-09-23T16:00:00+00:00"
+    "Odds": "1.91",
+    "Date": "2026-09-24T14:00:00+00:00"
+  },
+  {
+    "League": "CONCACAF Nations League",
+    "Match": "Cayman Islands vs Dominica",
+    "Tip": "Over 2.5",
+    "Odds": "1.85",
+    "Date": "2026-09-25T00:10:00+00:00"
   },
   {
     "League": "Gulf Cup of Nations",
-    "Match": "Saudi Arabia vs Kuwait",
+    "Match": "United Arab Emirates vs Yemen",
     "Tip": "Over 2.5",
-    "Odds": "1.76",
-    "Date": "2026-09-23T18:00:00+00:00"
-  },
-  {
-    "League": "Copa Chile",
-    "Match": "Union La Calera vs U. Catolica",
-    "Tip": "Over 2.5",
-    "Odds": "1.95",
-    "Date": "2026-09-23T23:30:00+00:00",
+    "Odds": "1.80",
+    "Date": "2026-09-24T15:00:00+00:00",
     "locked": true
   }
 ]
