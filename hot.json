@@ -1,48 +1,48 @@
 [
   {
-    "league": "Liga Mayor",
-    "match": "Moca - Delfines Del Este",
-    "kickoff": "2026-09-24T00:00:00+02:00",
+    "league": "Africa Cup of Nations - Qualification",
+    "match": "Cameroon - Comoros",
+    "kickoff": "2026-09-24T21:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.29",
+    "odds": "2.11",
     "group": 1
   },
   {
-    "league": "Primera División RFEF - Group 2",
-    "match": "Sant Andreu - Real Madrid II",
-    "kickoff": "2026-09-23T21:00:00+02:00",
+    "league": "Copa Uruguay",
+    "match": "Danubio - Penarol",
+    "kickoff": "2026-09-24T20:30:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.32",
+    "group": 1
+  },
+  {
+    "league": "FA Cup",
+    "match": "Sohar - Al Seeb",
+    "kickoff": "2026-09-24T16:40:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.20",
+    "group": 2
+  },
+  {
+    "league": "UEFA Nations League",
+    "match": "Serbia - Greece",
+    "kickoff": "2026-09-24T20:45:00+02:00",
     "tip": "Over 2.5",
     "odds": "2.15",
-    "group": 1
+    "group": 2
   },
   {
-    "league": "NPFL",
-    "match": "Enyimba - Sporting Lagos",
-    "kickoff": "2026-09-23T17:00:00+02:00",
+    "league": "Second League",
+    "match": "Masar - Proxy",
+    "kickoff": "2026-09-24T15:30:00+02:00",
     "tip": "Over 2.5",
     "odds": "2.38",
-    "group": 2
-  },
-  {
-    "league": "Copa Federacion",
-    "match": "Saguntino - Navalcarnero",
-    "kickoff": "2026-09-23T20:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.15",
-    "group": 2
-  },
-  {
-    "league": "Goiano - 2",
-    "match": "Goiânia - Morrinhos",
-    "kickoff": "2026-09-24T00:30:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.49",
     "group": 3
   },
   {
-    "league": "Primera Division",
-    "match": "Alianza - Fuerte San Francisco",
-    "kickoff": "2026-09-24T03:00:00+02:00",
+    "league": "Second League",
+    "match": "Detonit Plachkovica - Ohrid",
+    "kickoff": "2026-09-24T15:30:00+02:00",
     "tip": "Over 2.5",
     "odds": "2.10",
     "group": 3
