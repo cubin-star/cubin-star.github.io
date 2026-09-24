@@ -70,7 +70,7 @@ const EXCLUDE_RE = [
     /\bwk league\b/, /\bwomen\b/, /\bfemen/, /\bfeminin/, /\bfrauen/,
     /\bdamallsvenskan\b/, /\belitettan\b/, /\bkvinde/, /\btoppserien\b/, /\bnwsl\b/, /\bkansallinen liiga\b/,
     /\bwsl\b/, /\busl super league\b/, /\bfa wsl\b/,
-    /\bfriendl/, /\bfutsal\b/, /\bbeach\b/, /\besoccer\b/, /\bindoor\b/,
+    /\bfriendlies clubs\b/, /\bclub friendl/, /\bfutsal\b/, /\bbeach\b/, /\besoccer\b/, /\bindoor\b/,
 ];
 
 // Rozpoznani poharu bez nutnosti znat nazev (fallback, kdyz chybi league.type z API).
@@ -271,8 +271,12 @@ function leagueTier(name,country,type){
         // Reprezentacni souteze ostatnich svetadilu -> T2.
         if(NAT_T2_RE.test(n))return 2;
         if(/uefa super cup/.test(n))return 2;
+        // Mezinarodni pratelaky reprezentaci - povolene, ale az v T3.
+        if(/\bfriendl/.test(n))return 3;
         return 4;
     }
+    // Pratelske zapasy mimo reprezentacni uroven (country != World) nechceme.
+    if(/\bfriendl/.test(n))return 0;
     // T2 se testuje jako prvni - jeho nazvy jsou casto nadmnozinou tech z T1
     // ('liga portugal 2' obsahuje 'liga portugal', '2 bundesliga' obsahuje 'bundesliga').
     if(matchesList(TIER2_LEAGUES,c,n))return 2;
