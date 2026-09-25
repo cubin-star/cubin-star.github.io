@@ -1,5 +1,21 @@
 [
   {
+    "league": "Africa Cup of Nations - Qualification",
+    "homeTeam": "Togo",
+    "awayTeam": "Burundi",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "1:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-09-25T16:00:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 1:0 | xG: 1.16 | Shots: 15/6 | losingXG: 0.74 losingSOT: 4 | @HT | Pre O2.5: 2.27"
+  },
+  {
     "league": "EFL Trophy",
     "homeTeam": "Cheltenham",
     "awayTeam": "Exeter City",
