@@ -1,9 +1,16 @@
 [
   {
-    "League": "Paulista - U20",
-    "Match": "Portuguesa U20 vs Ponte Preta U20",
+    "League": "FAW Championship",
+    "Match": "Afan Lido vs Newport City",
     "Tip": "Over 1.5",
-    "Odds": "1.15",
-    "Date": "2026-09-24T18:00:00+00:00"
+    "Odds": "1.13",
+    "Date": "2026-09-25T18:30:00+00:00"
+  },
+  {
+    "League": "Liga de Expansión MX",
+    "Match": "Correcaminos Uat vs CDS Tampico Madero",
+    "Tip": "Over 1.5",
+    "Odds": "1.19",
+    "Date": "2026-09-26T01:00:00+00:00"
   }
 ]
