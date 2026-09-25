@@ -1,5 +1,21 @@
 [
   {
+    "league": "Segunda División",
+    "homeTeam": "Girona",
+    "awayTeam": "Albacete",
+    "tip": "Over 2.5",
+    "odds": "",
+    "halftimeScore": "2:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-09-25T18:30:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 2:0 | xG: 1.24 | Shots: 15/5 | losingXG: 0.72 losingSOT: 3 | @HT | Pre O2.5: 1.64"
+  },
+  {
     "league": "Africa Cup of Nations - Qualification",
     "homeTeam": "Togo",
     "awayTeam": "Burundi",
