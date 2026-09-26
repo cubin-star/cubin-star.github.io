@@ -1,16 +1,51 @@
 [
   {
-    "League": "FAW Championship",
-    "Match": "Afan Lido vs Newport City",
+    "League": "J2 League",
+    "Match": "Iwaki vs Vegalta Sendai",
     "Tip": "Over 1.5",
-    "Odds": "1.13",
-    "Date": "2026-09-25T18:30:00+00:00"
+    "Odds": "1.24",
+    "Date": "2026-09-26T08:00:00+00:00"
+  },
+  {
+    "League": "Division 2 - Norrland",
+    "Match": "IFK Östersund vs Boden",
+    "Tip": "Over 1.5",
+    "Odds": "1.15",
+    "Date": "2026-09-26T11:00:00+00:00"
+  },
+  {
+    "League": "Division 2 - Norrland",
+    "Match": "Skellefteå vs Gottne",
+    "Tip": "Over 1.5",
+    "Odds": "1.14",
+    "Date": "2026-09-26T12:00:00+00:00"
+  },
+  {
+    "League": "Tweede Divisie",
+    "Match": "Kozakken Boys vs Koninklijke HFC",
+    "Tip": "Over 1.5",
+    "Odds": "1.12",
+    "Date": "2026-09-26T13:00:00+00:00"
+  },
+  {
+    "League": "Premier League",
+    "Match": "Cambrian & Clydach vs Llandudno",
+    "Tip": "Over 1.5",
+    "Odds": "1.14",
+    "Date": "2026-09-26T13:30:00+00:00"
+  },
+  {
+    "League": "Ettan - Södra",
+    "Match": "Laholm vs Atvidabergs FF",
+    "Tip": "Over 1.5",
+    "Odds": "1.18",
+    "Date": "2026-09-26T14:00:00+00:00"
   },
   {
     "League": "Liga de Expansión MX",
-    "Match": "Correcaminos Uat vs CDS Tampico Madero",
+    "Match": "Tlaxcala vs Cancún",
     "Tip": "Over 1.5",
-    "Odds": "1.19",
-    "Date": "2026-09-26T01:00:00+00:00"
+    "Odds": "1.25",
+    "Date": "2026-09-26T22:00:00+00:00"
   }
 ]
