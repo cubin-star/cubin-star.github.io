@@ -1,6 +1,26 @@
 [
   {
     "sport": "football",
+    "league": "Liga MX",
+    "match": "Atlante FC vs Monterrey",
+    "tip": "Over 1.5",
+    "odds": "1.20",
+    "date": "2026-09-26T01:00:00+00:00",
+    "score": "4:2",
+    "result": "✓"
+  },
+  {
+    "sport": "hockey",
+    "league": "Hockey Allsvenskan",
+    "match": "Oskarshamn vs Ostersund",
+    "tip": "Over 3.5",
+    "odds": "1.23",
+    "date": "2026-09-25T17:00:00+00:00",
+    "score": "4:1",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
     "league": "Liga de Expansión MX",
     "match": "Mineros de Zacatecas vs Piratas",
     "tip": "Over 1.5",
@@ -1977,26 +1997,6 @@
     "odds": "1.30",
     "date": "2026-06-21T16:00:00+00:00",
     "score": "96:84",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Superettan",
-    "match": "IK brage vs IFK Varnamo",
-    "tip": "Over 1.5",
-    "odds": "1.20",
-    "date": "2026-06-21T13:00:00+00:00",
-    "score": "5:1",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Segunda División",
-    "match": "Almeria vs Malaga",
-    "tip": "Over 1.5",
-    "odds": "1.28",
-    "date": "2026-06-20T19:00:00+00:00",
-    "score": "1:2",
     "result": "✓"
   }
 ]
