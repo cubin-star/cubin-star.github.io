@@ -175,20 +175,6 @@
   },
   {
     "league": "",
-    "homeTeam": "Casarano",
-    "awayTeam": "Audace Cerignola",
-    "tip": "Over 1.5",
-    "odds": "",
-    "halftimeScore": "1:0",
-    "liveOdds": "",
-    "finalScore": "1:0",
-    "result": "❌ Lost",
-    "sport": "football",
-    "kickoff": "2026-09-15T19:00:00.000Z",
-    "resolvedAt": "2026-09-15T21:10:21.907Z"
-  },
-  {
-    "league": "",
     "homeTeam": "Giugliano",
     "awayTeam": "Cosenza",
     "tip": "Over 3.5",
@@ -242,20 +228,6 @@
     "sport": "football",
     "kickoff": "2026-09-13T19:00:00.000Z",
     "resolvedAt": "2026-09-13T21:11:05.009Z"
-  },
-  {
-    "league": "",
-    "homeTeam": "PAOK",
-    "awayTeam": "Aris",
-    "tip": "Over 2.5",
-    "odds": "",
-    "halftimeScore": "2:0",
-    "liveOdds": "",
-    "finalScore": "2:0",
-    "result": "❌ Lost",
-    "sport": "football",
-    "kickoff": "2026-09-13T18:00:00.000Z",
-    "resolvedAt": "2026-09-13T20:11:05.119Z"
   },
   {
     "league": "",
