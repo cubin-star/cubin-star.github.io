@@ -1,8 +1,14 @@
 [
   {
-    "league": "SHL",
-    "match": "Brynas vs Luleå",
+    "league": "Swiss League",
+    "match": "Arosa vs Sierre",
     "tip": "Over 5.5",
-    "odds": "1.95"
+    "odds": "1.92"
+  },
+  {
+    "league": "Liiga",
+    "match": "Ilves vs TPS Turku",
+    "tip": "Over 5.5",
+    "odds": "2.21"
   }
 ]
