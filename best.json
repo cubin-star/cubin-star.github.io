@@ -1,23 +1,23 @@
 [
   {
-    "league": "Primera B Metropolitana",
-    "match": "Argentino Quilmes - Comunicaciones",
-    "kickoff": "2026-09-27T20:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.50"
-  },
-  {
-    "league": "UEFA Nations League",
-    "match": "Lithuania - Azerbaijan",
-    "kickoff": "2026-09-27T15:00:00+02:00",
+    "league": "Africa Cup of Nations - Qualification",
+    "match": "Zimbabwe - Congo DR",
+    "kickoff": "2026-09-28T18:00:00+02:00",
     "tip": "Over 2.5",
     "odds": "2.46"
   },
   {
-    "league": "Segunda División",
-    "match": "Oviedo - Sporting Gijon",
-    "kickoff": "2026-09-27T21:00:00+02:00",
+    "league": "Primera B Metropolitana",
+    "match": "Flandria - Dock Sud",
+    "kickoff": "2026-09-28T20:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.42"
+    "odds": "2.46"
+  },
+  {
+    "league": "UEFA Nations League",
+    "match": "Latvia - Cyprus",
+    "kickoff": "2026-09-28T18:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.40"
   }
 ]

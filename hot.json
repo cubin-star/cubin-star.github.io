@@ -1,50 +1,50 @@
 [
   {
-    "league": "Segunda División",
-    "match": "Oviedo - Sporting Gijon",
-    "kickoff": "2026-09-27T21:00:00+02:00",
+    "league": "Africa Cup of Nations - Qualification",
+    "match": "Zimbabwe - Congo DR",
+    "kickoff": "2026-09-28T18:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.42",
+    "odds": "2.46",
     "group": 1
   },
   {
-    "league": "NPFL",
-    "match": "Nasarawa United - Niger Tornadoes",
-    "kickoff": "2026-09-27T17:00:00+02:00",
+    "league": "Primera División",
+    "match": "Wanderers - Albion FC",
+    "kickoff": "2026-09-29T01:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.23",
+    "odds": "2.10",
     "group": 1
   },
   {
     "league": "UEFA Nations League",
-    "match": "Lithuania - Azerbaijan",
-    "kickoff": "2026-09-27T15:00:00+02:00",
+    "match": "Latvia - Cyprus",
+    "kickoff": "2026-09-28T18:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.46",
+    "odds": "2.40",
     "group": 2
   },
   {
-    "league": "Primera A",
-    "match": "Deportivo Cali - Águilas Doradas",
-    "kickoff": "2026-09-28T03:10:00+02:00",
+    "league": "Serie B",
+    "match": "America Mineiro - Juventude",
+    "kickoff": "2026-09-29T00:30:00+02:00",
     "tip": "Over 2.5",
     "odds": "2.20",
     "group": 2
   },
   {
-    "league": "Primera B Metropolitana",
-    "match": "Argentino Quilmes - Comunicaciones",
-    "kickoff": "2026-09-27T20:00:00+02:00",
+    "league": "Prva Liga",
+    "match": "OFK Bor 1919 - Metalac GM",
+    "kickoff": "2026-09-28T18:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.50",
+    "odds": "2.10",
     "group": 3
   },
   {
-    "league": "Friendlies",
-    "match": "Jordan - Syria",
-    "kickoff": "2026-09-27T19:00:00+02:00",
+    "league": "Primera B Metropolitana",
+    "match": "Flandria - Dock Sud",
+    "kickoff": "2026-09-28T20:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.10",
+    "odds": "2.46",
     "group": 3
   }
 ]
