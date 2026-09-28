@@ -2,6 +2,46 @@
   {
     "sport": "football",
     "league": "Liga MX",
+    "match": "Necaxa vs Club America",
+    "tip": "Over 1.5",
+    "odds": "1.20",
+    "date": "2026-09-28T03:10:00+00:00",
+    "score": "2:4",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "Segunda División",
+    "match": "Mallorca vs Almeria",
+    "tip": "Over 1.5",
+    "odds": "1.28",
+    "date": "2026-09-27T14:15:00+00:00",
+    "score": "0:1",
+    "result": "✗"
+  },
+  {
+    "sport": "hockey",
+    "league": "Swiss League",
+    "match": "Basel vs Olten",
+    "tip": "Over 3.5",
+    "odds": "1.18",
+    "date": "2026-09-27T14:00:00+00:00",
+    "score": "4:2",
+    "result": "✓"
+  },
+  {
+    "sport": "basketball",
+    "league": "NBL",
+    "match": "Sydney vs Illawarra Hawks",
+    "tip": "Over 173.5",
+    "odds": "1.18",
+    "date": "2026-09-27T08:00:00+00:00",
+    "score": "121:100",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "Liga MX",
     "match": "Tigres UANL vs Puebla",
     "tip": "Over 1.5",
     "odds": "1.20",
@@ -1957,46 +1997,6 @@
     "odds": "1.30",
     "date": "2026-06-28T19:00:00+00:00",
     "score": "2:0",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Superettan",
-    "match": "Landskrona BoIS vs IFK Varnamo",
-    "tip": "Over 1.5",
-    "odds": "1.19",
-    "date": "2026-06-28T13:00:00+00:00",
-    "score": "1:0",
-    "result": "✗"
-  },
-  {
-    "sport": "basketball",
-    "league": "NBA W",
-    "match": "Indiana Fever W vs Los Angeles Sparks W",
-    "tip": "Over 165.5",
-    "odds": "1.23",
-    "date": "2026-06-28T00:00:00+00:00",
-    "score": "111:87",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Superettan",
-    "match": "United Nordic vs Oddevold",
-    "tip": "Over 1.5",
-    "odds": "1.24",
-    "date": "2026-06-27T15:00:00+00:00",
-    "score": "3:3",
-    "result": "✓"
-  },
-  {
-    "sport": "basketball",
-    "league": "NBA W",
-    "match": "Seattle Storm W vs New York Liberty W",
-    "tip": "Over 156.5",
-    "odds": "1.31",
-    "date": "2026-06-26T02:00:00+00:00",
-    "score": "99:88",
     "result": "✓"
   }
 ]
