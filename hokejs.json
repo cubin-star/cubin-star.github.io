@@ -1,9 +1,16 @@
 [
   {
-    "league": "Swiss League",
-    "match": "Basel vs Olten",
+    "league": "Extraliga",
+    "match": "Sparta Prague vs Karlovy Vary",
     "tip": "Over 3.5",
-    "odds": "1.18",
-    "date": "2026-09-27T14:00:00+00:00"
+    "odds": "1.25",
+    "date": "2026-09-28T14:00:00+00:00"
+  },
+  {
+    "league": "Hockey Allsvenskan",
+    "match": "Nybro vs MODO",
+    "tip": "Over 3.5",
+    "odds": "1.23",
+    "date": "2026-09-28T17:00:00+00:00"
   }
 ]
