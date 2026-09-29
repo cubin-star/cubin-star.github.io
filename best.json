@@ -1,23 +1,23 @@
 [
   {
-    "league": "Africa Cup of Nations - Qualification",
-    "match": "Zimbabwe - Congo DR",
-    "kickoff": "2026-09-28T18:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.46"
-  },
-  {
-    "league": "Primera B Metropolitana",
-    "match": "Flandria - Dock Sud",
-    "kickoff": "2026-09-28T20:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.46"
-  },
-  {
     "league": "UEFA Nations League",
-    "match": "Latvia - Cyprus",
-    "kickoff": "2026-09-28T18:00:00+02:00",
+    "match": "Moldova - Faroe Islands",
+    "kickoff": "2026-09-29T18:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.40"
+    "odds": "2.44"
+  },
+  {
+    "league": "Africa Cup of Nations - Qualification",
+    "match": "Liberia - Mali",
+    "kickoff": "2026-09-29T21:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.21"
+  },
+  {
+    "league": "Primera Division",
+    "match": "Atletico Balboa - Cacahuatique",
+    "kickoff": "2026-09-29T23:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.13"
   }
 ]

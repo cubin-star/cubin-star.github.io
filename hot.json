@@ -1,50 +1,50 @@
 [
   {
-    "league": "Africa Cup of Nations - Qualification",
-    "match": "Zimbabwe - Congo DR",
-    "kickoff": "2026-09-28T18:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.46",
-    "group": 1
-  },
-  {
-    "league": "Primera División",
-    "match": "Wanderers - Albion FC",
-    "kickoff": "2026-09-29T01:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.10",
-    "group": 1
-  },
-  {
     "league": "UEFA Nations League",
-    "match": "Latvia - Cyprus",
-    "kickoff": "2026-09-28T18:00:00+02:00",
+    "match": "Moldova - Faroe Islands",
+    "kickoff": "2026-09-29T18:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.40",
-    "group": 2
+    "odds": "2.44",
+    "group": 1
   },
   {
-    "league": "Serie B",
-    "match": "America Mineiro - Juventude",
-    "kickoff": "2026-09-29T00:30:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.20",
-    "group": 2
-  },
-  {
-    "league": "Prva Liga",
-    "match": "OFK Bor 1919 - Metalac GM",
-    "kickoff": "2026-09-28T18:00:00+02:00",
+    "league": "Primera B",
+    "match": "Union Magdalena - Real Cartagena",
+    "kickoff": "2026-09-30T01:00:00+02:00",
     "tip": "Over 2.5",
     "odds": "2.10",
+    "group": 1
+  },
+  {
+    "league": "Primera A",
+    "match": "Deportivo Pereira - Santa Fe",
+    "kickoff": "2026-09-29T22:30:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.12",
+    "group": 2
+  },
+  {
+    "league": "Primera Division",
+    "match": "Atletico Balboa - Cacahuatique",
+    "kickoff": "2026-09-29T23:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.13",
+    "group": 2
+  },
+  {
+    "league": "Africa Cup of Nations - Qualification",
+    "match": "Liberia - Mali",
+    "kickoff": "2026-09-29T21:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.21",
     "group": 3
   },
   {
-    "league": "Primera B Metropolitana",
-    "match": "Flandria - Dock Sud",
-    "kickoff": "2026-09-28T20:00:00+02:00",
+    "league": "J-League Cup",
+    "match": "Sagan Tosu - Tokyo Verdy",
+    "kickoff": "2026-09-29T12:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.46",
+    "odds": "2.10",
     "group": 3
   }
 ]
