@@ -1,50 +1,50 @@
 [
   {
-    "league": "UEFA Nations League",
-    "match": "Moldova - Faroe Islands",
-    "kickoff": "2026-09-29T18:00:00+02:00",
+    "league": "Friendlies",
+    "match": "Lithuania - Andorra",
+    "kickoff": "2026-09-30T18:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.44",
+    "odds": "2.50",
     "group": 1
   },
   {
-    "league": "Primera B",
-    "match": "Union Magdalena - Real Cartagena",
-    "kickoff": "2026-09-30T01:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.10",
-    "group": 1
-  },
-  {
-    "league": "Primera A",
-    "match": "Deportivo Pereira - Santa Fe",
-    "kickoff": "2026-09-29T22:30:00+02:00",
+    "league": "Gulf Cup of Nations",
+    "match": "Bahrain - Yemen",
+    "kickoff": "2026-09-30T19:30:00+02:00",
     "tip": "Over 2.5",
     "odds": "2.12",
+    "group": 1
+  },
+  {
+    "league": "NPFL",
+    "match": "Sporting Lagos - Ikorodu City",
+    "kickoff": "2026-09-30T17:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.33",
     "group": 2
   },
   {
-    "league": "Primera Division",
-    "match": "Atletico Balboa - Cacahuatique",
-    "kickoff": "2026-09-29T23:00:00+02:00",
+    "league": "Liga Alef",
+    "match": "Maccabi Kiryat Malachi - Hapoel Herzliya",
+    "kickoff": "2026-09-30T15:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.13",
+    "odds": "2.16",
     "group": 2
   },
   {
-    "league": "Africa Cup of Nations - Qualification",
-    "match": "Liberia - Mali",
-    "kickoff": "2026-09-29T21:00:00+02:00",
+    "league": "Liga Mayor",
+    "match": "Salcedo - Delfines Del Este",
+    "kickoff": "2026-09-30T22:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.21",
+    "odds": "2.20",
     "group": 3
   },
   {
-    "league": "J-League Cup",
-    "match": "Sagan Tosu - Tokyo Verdy",
-    "kickoff": "2026-09-29T12:00:00+02:00",
+    "league": "Primera Division",
+    "match": "Águila - Inter",
+    "kickoff": "2026-09-30T23:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.10",
+    "odds": "2.20",
     "group": 3
   }
 ]
