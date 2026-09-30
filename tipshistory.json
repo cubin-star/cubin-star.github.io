@@ -1,5 +1,26 @@
 [
   {
+    "date": "2026-09-29T05:30:00Z",
+    "matches": [
+      {
+        "league": "UEFA Nations League",
+        "match": "Slovakia - Kazakhstan",
+        "tip": "Over 2.5",
+        "odds": "1.81",
+        "score": "2:1",
+        "result": "✓"
+      },
+      {
+        "league": "Africa Cup of Nations - Qualification",
+        "match": "Burundi - Algeria",
+        "tip": "Over 2.5",
+        "odds": "1.82",
+        "score": "2:2",
+        "result": "✓"
+      }
+    ]
+  },
+  {
     "date": "2026-09-28T05:30:00Z",
     "matches": [
       {
