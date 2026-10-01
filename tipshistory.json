@@ -1,5 +1,26 @@
 [
   {
+    "date": "2026-09-30T05:30:00Z",
+    "matches": [
+      {
+        "league": "Liga Alef",
+        "match": "Maccabi Ashdod - Holon Yermiyahu",
+        "tip": "Over 2.5",
+        "odds": "1.76",
+        "score": "2:0",
+        "result": "✗"
+      },
+      {
+        "league": "Copa Paraguay",
+        "match": "Independiente F.b.c. - Nacional Asuncion",
+        "tip": "Over 2.5",
+        "odds": "1.77",
+        "score": "2:2",
+        "result": "✓"
+      }
+    ]
+  },
+  {
     "date": "2026-09-29T05:30:00Z",
     "matches": [
       {
