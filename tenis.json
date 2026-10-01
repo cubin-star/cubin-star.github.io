@@ -1,21 +1,21 @@
 {
-  "updated_at": "30.09.2026 09:09",
+  "updated_at": "01.10.2026 09:09",
   "tips": [
     {
-      "league": "WTA 125K - Adana, Turkiye",
-      "match": "Andreeva, Erika vs Waltert, Simona",
-      "tip": "Over21.5",
-      "odds": "1.81",
-      "date": "30.09.2026",
-      "time": "11:00"
+      "league": "WTA 125K - Jingshan, China",
+      "match": "Shubladze, Alexandra vs Wei, Sijia",
+      "tip": "Over19.5",
+      "odds": "1.78",
+      "date": "01.10.2026",
+      "time": "05:00"
     },
     {
-      "league": "WTA 125K - Jingshan, China",
-      "match": "Wei, Sijia vs Ferro, Fiona",
+      "league": "WTA - Beijing, China",
+      "match": "Yastremska, Dayana vs Chwalinska, Maja",
       "tip": "Over20.5",
-      "odds": "1.91",
-      "date": "30.09.2026",
-      "time": "10:10"
+      "odds": "1.75",
+      "date": "01.10.2026",
+      "time": "05:00"
     }
   ]
 }
