@@ -1,24 +1,24 @@
 [
   {
-    "League": "CONCACAF Nations League",
-    "Match": "Nicaragua vs Costa Rica",
+    "League": "1 Lyga",
+    "Match": "Garliava vs Dainava",
     "Tip": "Over 2.5",
-    "Odds": "1.93",
-    "Date": "2026-10-02T02:00:00+00:00"
+    "Odds": "1.75",
+    "Date": "2026-10-02T16:30:00+00:00"
   },
   {
-    "League": "UEFA Nations League",
-    "Match": "Denmark vs Portugal",
+    "League": "Friendlies Clubs",
+    "Match": "Rapid vs Genoa",
     "Tip": "Over 2.5",
-    "Odds": "1.78",
-    "Date": "2026-10-01T18:45:00+00:00"
+    "Odds": "1.91",
+    "Date": "2026-10-02T16:00:00+00:00"
   },
   {
-    "League": "Liga Leumit",
-    "Match": "Hapoel Ra'anana vs Kafr Qasim",
+    "League": "FIFA Asean Cup",
+    "Match": "Thailand vs Philippines",
     "Tip": "Over 2.5",
-    "Odds": "1.87",
-    "Date": "2026-10-01T16:00:00+00:00",
+    "Odds": "1.77",
+    "Date": "2026-10-02T09:00:00+00:00",
     "locked": true
   }
 ]
