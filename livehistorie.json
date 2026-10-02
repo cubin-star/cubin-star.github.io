@@ -1,6 +1,22 @@
 [
   {
     "league": "UEFA Nations League",
+    "homeTeam": "Hungary",
+    "awayTeam": "Georgia",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "1:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-10-02T18:45:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 1:0 | xG: 1.60 | Shots: 19/5 | winXG: 1.13 | losingXG: 0.47 losingSOT: 2 | @HT | Pre O2.5: 2.2199999999999998"
+  },
+  {
+    "league": "UEFA Nations League",
     "homeTeam": "Kazakhstan",
     "awayTeam": "Moldova",
     "tip": "Over 1.5",
