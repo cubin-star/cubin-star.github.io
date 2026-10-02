@@ -1,8 +1,14 @@
 [
   {
-    "league": "Extraliga",
-    "match": "Sparta Prague vs Ceske Budejovice",
+    "league": "Hockey Allsvenskan",
+    "match": "Kalmar vs Mora",
     "tip": "Over 5.5",
-    "odds": "2.02"
+    "odds": "1.78"
+  },
+  {
+    "league": "Hockey Allsvenskan",
+    "match": "Vimmerby vs Almtuna",
+    "tip": "Over 5.5",
+    "odds": "2.05"
   }
 ]
