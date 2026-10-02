@@ -1,5 +1,26 @@
 [
   {
+    "date": "2026-10-01T05:30:00Z",
+    "matches": [
+      {
+        "league": "UEFA Nations League",
+        "match": "Israel - Kosovo",
+        "tip": "Over 2.5",
+        "odds": "1.90",
+        "score": "0:0",
+        "result": "✗"
+      },
+      {
+        "league": "CONCACAF Nations League",
+        "match": "Nicaragua - Costa Rica",
+        "tip": "Over 2.5",
+        "odds": "1.77",
+        "score": "0:3",
+        "result": "✓"
+      }
+    ]
+  },
+  {
     "date": "2026-09-30T05:30:00Z",
     "matches": [
       {
