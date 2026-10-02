@@ -71,7 +71,29 @@ const EXCLUDE_RE = [
     /\bdamallsvenskan\b/, /\belitettan\b/, /\bkvinde/, /\btoppserien\b/, /\bnwsl\b/, /\bkansallinen liiga\b/,
     /\bwsl\b/, /\busl super league\b/, /\bfa wsl\b/,
     /\bfriendlies clubs\b/, /\bclub friendl/, /\bfutsal\b/, /\bbeach\b/, /\besoccer\b/, /\bindoor\b/,
+    // Vyberove/olympijske turnaje jsou de facto U23 (muzi) - stejna nepredvidatelnost jako mladez.
+    /\basian games\b/, /\bolympic/, /\bpan american\b/,
 ];
+
+// Evropske zeme - jejich nejvyssi soutez a pohar patri do T3 (resp. T2 u T1-zemi).
+// Bez tohoto delitka koncila "Premier League (Mongolia)" ve stejnem tieru jako
+// "Premier Division (Ireland)".
+const EUROPEAN_COUNTRIES = new Set([
+    'albania','andorra','armenia','austria','azerbaijan','belarus','belgium','bosnia','bosnia and herzegovina',
+    'bulgaria','croatia','cyprus','czech republic','denmark','england','estonia','faroe islands','finland',
+    'france','georgia','germany','gibraltar','greece','hungary','iceland','ireland','israel','italy','kosovo',
+    'latvia','liechtenstein','lithuania','luxembourg','macedonia','north macedonia','malta','moldova','monaco',
+    'montenegro','netherlands','northern ireland','norway','poland','portugal','republic of ireland','romania',
+    'russia','san marino','scotland','serbia','slovakia','slovenia','spain','sweden','switzerland','turkey',
+    'ukraine','wales',
+]);
+
+// Mimoevropske zeme se silnou a sledovanou nejvyssi soutezi - rovnez T3.
+// Zbytek sveta (Mongolsko, Bhutan, Banglades, Eswatini...) spadne do T4.
+const STRONG_NON_EU_COUNTRIES = new Set([
+    'argentina','brazil','chile','colombia','uruguay','mexico','usa','canada','japan','south korea','china',
+    'australia','saudi arabia','united arab emirates','qatar','iran','egypt','morocco','south africa','tunisia','algeria',
+]);
 
 // Rozpoznani poharu bez nutnosti znat nazev (fallback, kdyz chybi league.type z API).
 const CUP_RE = /\bcup\b|\bcupen\b|\bpokal\b|\bpokalen\b|\bcopa\b|\bcoupe\b|\bcoppa\b|\bbeker\b|\btaca\b|\bkupa\b|\bkupasi\b|\bkubok\b|\bpuchar\b|\bpohar\b|\bkypello\b|\btrophy\b|\bsupercup\b|\bsuper cup\b/;
@@ -209,7 +231,6 @@ const TIER1_LEAGUES = {
     'switzerland':  ['super league'],
     'turkey':       ['super lig','superliga'],
     'ukraine':      ['premier league'],
-    'usa':          ['major league soccer','mls'],
 };
 
 const TIER2_LEAGUES = {
@@ -220,11 +241,10 @@ const TIER2_LEAGUES = {
     'indonesia':    ['liga 1','super league'],
     'italy':        ['serie b'],
     'cyprus':       ['1 division','1 divizion','first division'],
-    'lithuania':    ['a lyga','toplyga'],
-    'latvia':       ['virsliga','virsliga'],
     'hungary':      ['nb i','nb 1','otp bank liga'],
-    'malta':        ['premier league'],
     'germany':      ['2 bundesliga'],
+    'usa':          ['major league soccer','mls'],
+    'mexico':       ['liga mx'],
     'netherlands':  ['eerste divisie'],
     'norway':       ['obos ligaen','obos','1 divisjon'],
     'paraguay':     ['division profesional','copa de primera','primera division'],
@@ -271,8 +291,9 @@ function leagueTier(name,country,type){
         // Reprezentacni souteze ostatnich svetadilu -> T2.
         if(NAT_T2_RE.test(n))return 2;
         if(/uefa super cup/.test(n))return 2;
-        // Mezinarodni pratelaky reprezentaci - povolene, ale az v T3.
-        if(/\bfriendl/.test(n))return 3;
+        // Mezinarodni pratelaky reprezentaci - rotujici sestavy, nejhorsi
+        // predvidatelnost ze vsech. Povolene, ale az v T4.
+        if(/\bfriendl/.test(n))return 4;
         return 4;
     }
     // Pratelske zapasy mimo reprezentacni uroven (country != World) nechceme.
@@ -281,13 +302,17 @@ function leagueTier(name,country,type){
     // ('liga portugal 2' obsahuje 'liga portugal', '2 bundesliga' obsahuje 'bundesliga').
     if(matchesList(TIER2_LEAGUES,c,n))return 2;
     if(matchesList(TIER1_LEAGUES,c,n))return 1;
+    const isStrong=EUROPEAN_COUNTRIES.has(c)||STRONG_NON_EU_COUNTRIES.has(c);
     const isCup=(type&&norm(type)==='cup')||CUP_RE.test(n);
     if(isCup){
-        // Hlavni domaci pohary zemi, ktere maji ligu v T1 -> T3, ostatni T4.
-        return TIER1_LEAGUES[c]?3:4;
+        // Hlavni domaci pohar zeme s ligou v T1 -> T2 (viz popis tieru v hlavicce),
+        // ostatni evropske/silne pohary -> T3, zbytek sveta -> T4.
+        if(TIER1_LEAGUES[c])return 2;
+        return isStrong?3:4;
     }
-    // Zbytek: nejvyssi soutez zeme -> T3, jakakoli nizsi soutez -> T4.
-    return leagueLevel(n,c)===1?3:4;
+    // Zbytek: nejvyssi soutez evropske/silne zeme -> T3, jinak T4.
+    if(leagueLevel(n,c)!==1)return 4;
+    return isStrong?3:4;
 }
 
 export { leagueTier, norm, leagueLevel };
