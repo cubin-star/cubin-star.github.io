@@ -1,16 +1,65 @@
 [
   {
     "league": "UEFA Nations League",
-    "match": "Rep. Of Ireland - Austria",
-    "kickoff": "2026-10-01T20:45:00+02:00",
+    "match": "Hungary - Georgia",
+    "kickoff": "2026-10-02T20:45:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.25"
+  },
+  {
+    "league": "UEFA Nations League",
+    "match": "Ukraine - Northern Ireland",
+    "kickoff": "2026-10-02T20:45:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.46"
+  },
+  {
+    "league": "UEFA Nations League",
+    "match": "Latvia - Montenegro",
+    "kickoff": "2026-10-02T18:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.27"
+  },
+  {
+    "league": "UEFA Nations League",
+    "match": "Cyprus - Armenia",
+    "kickoff": "2026-10-02T18:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.12"
+  },
+  {
+    "league": "UEFA Nations League",
+    "match": "Kazakhstan - Moldova",
+    "kickoff": "2026-10-02T16:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.24"
+  },
+  {
+    "league": "UEFA Nations League",
+    "match": "Faroe Islands - Slovakia",
+    "kickoff": "2026-10-02T20:45:00+02:00",
     "tip": "Over 2.5",
     "odds": "2.23"
   },
   {
-    "league": "UEFA Nations League",
-    "match": "Malta - Gibraltar",
-    "kickoff": "2026-10-01T20:45:00+02:00",
+    "league": "CONCACAF Nations League",
+    "match": "El Salvador - Jamaica",
+    "kickoff": "2026-10-03T04:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.13"
+    "odds": "2.12"
+  },
+  {
+    "league": "Serie A",
+    "match": "Sao Paulo - Santos",
+    "kickoff": "2026-10-03T01:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.15"
+  },
+  {
+    "league": "Segunda División",
+    "match": "Eldense - Oviedo",
+    "kickoff": "2026-10-02T20:30:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.38"
   }
 ]

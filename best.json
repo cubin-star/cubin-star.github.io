@@ -1,23 +1,23 @@
 [
   {
-    "league": "Liga Pro Serie B",
-    "match": "Cumbayá - Santo Domingo",
-    "kickoff": "2026-10-01T22:30:00+02:00",
+    "league": "Friendlies",
+    "match": "Congo DR - Uganda",
+    "kickoff": "2026-10-02T15:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.42"
+    "odds": "2.45"
   },
   {
-    "league": "Second League",
-    "match": "El Mansura - Masar",
-    "kickoff": "2026-10-01T14:30:00+02:00",
+    "league": "Segunda División",
+    "match": "Eldense - Oviedo",
+    "kickoff": "2026-10-02T20:30:00+02:00",
     "tip": "Over 2.5",
     "odds": "2.38"
   },
   {
-    "league": "Primera B",
-    "match": "Envigado - Orsomarso",
-    "kickoff": "2026-10-01T22:30:00+02:00",
+    "league": "UEFA Nations League",
+    "match": "Faroe Islands - Slovakia",
+    "kickoff": "2026-10-02T20:45:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.22"
+    "odds": "2.23"
   }
 ]
