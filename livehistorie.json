@@ -1,5 +1,21 @@
 [
   {
+    "league": "Liga Profesional Argentina",
+    "homeTeam": "Independ. Rivadavia",
+    "awayTeam": "Gimnasia L.P.",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "1:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-10-03T00:30:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 1:0 | xG: 1.98 | Shots: 21/5 | winXG: 1.16 | losingXG: 0.83 losingSOT: 2 | @HT | Pre O2.5: 2.215"
+  },
+  {
     "league": "Serie B",
     "homeTeam": "Juventude",
     "awayTeam": "Operario-PR",
