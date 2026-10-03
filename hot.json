@@ -1,50 +1,50 @@
 [
   {
-    "league": "UEFA Nations League",
-    "match": "Faroe Islands - Slovakia",
-    "kickoff": "2026-10-02T20:45:00+02:00",
+    "league": "Premier League",
+    "match": "Veres Rivne - Kudrivka",
+    "kickoff": "2026-10-03T12:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.23",
+    "odds": "2.11",
     "group": 1
   },
   {
     "league": "Ligue 2",
-    "match": "MO Constantine - CR Béni Thour",
-    "kickoff": "2026-10-02T16:00:00+02:00",
+    "match": "Koléa - El Bayadh",
+    "kickoff": "2026-10-03T16:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.17",
+    "odds": "2.38",
     "group": 1
   },
   {
+    "league": "UEFA Nations League",
+    "match": "FYR Macedonia - Scotland",
+    "kickoff": "2026-10-03T20:45:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.29",
+    "group": 2
+  },
+  {
     "league": "Segunda División",
-    "match": "Eldense - Oviedo",
-    "kickoff": "2026-10-02T20:30:00+02:00",
+    "match": "Cadiz - Leganes",
+    "kickoff": "2026-10-03T18:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.38",
+    "odds": "2.30",
     "group": 2
   },
   {
-    "league": "Serie A",
-    "match": "Sao Paulo - Santos",
-    "kickoff": "2026-10-03T01:00:00+02:00",
+    "league": "Primera División",
+    "match": "Albion FC - Defensor Sporting",
+    "kickoff": "2026-10-03T20:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.15",
-    "group": 2
-  },
-  {
-    "league": "Liga Nacional",
-    "match": "Marquense - Antigua GFC",
-    "kickoff": "2026-10-03T04:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.13",
+    "odds": "2.10",
     "group": 3
   },
   {
-    "league": "Friendlies",
-    "match": "Congo DR - Uganda",
-    "kickoff": "2026-10-02T15:00:00+02:00",
+    "league": "Botola Pro",
+    "match": "CODM Meknès - Kawkab Marrakech",
+    "kickoff": "2026-10-03T20:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.45",
+    "odds": "2.44",
     "group": 3
   }
 ]
