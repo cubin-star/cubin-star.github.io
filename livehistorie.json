@@ -1,5 +1,21 @@
 [
   {
+    "league": "Serie B",
+    "homeTeam": "Juventude",
+    "awayTeam": "Operario-PR",
+    "tip": "Over 2.5",
+    "odds": "",
+    "halftimeScore": "2:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-10-02T23:45:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 2:0 | xG: 1.93 | Shots: 25/5 | winXG: 1.43 | losingXG: 0.50 losingSOT: 2 | @HT | Pre O2.5: 2.2"
+  },
+  {
     "league": "CONCACAF Nations League",
     "homeTeam": "St. Kitts and Nevis",
     "awayTeam": "Cuba",
