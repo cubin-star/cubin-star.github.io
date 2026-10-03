@@ -69,7 +69,7 @@ const EXCLUDE_RE = [
     // Zenske souteze - 'wk league' (J. Korea), 'femenil' (Mexiko), 'kvinde' (Dansko)...
     /\bwk league\b/, /\bwomen\b/, /\bfemen/, /\bfeminin/, /\bfrauen/,
     /\bdamallsvenskan\b/, /\belitettan\b/, /\bkvinde/, /\btoppserien\b/, /\bnwsl\b/, /\bkansallinen liiga\b/,
-    /\bwsl\b/, /\busl super league\b/, /\bfa wsl\b/,
+    /\bwsl\b/, /\busl super league\b/, /\bfa wsl\b/, /\bnorthern super league\b/,
     /\bfriendlies clubs\b/, /\bclub friendl/, /\bfutsal\b/, /\bbeach\b/, /\besoccer\b/, /\bindoor\b/,
     // Vyberove/olympijske turnaje jsou de facto U23 (muzi) - stejna nepredvidatelnost jako mladez.
     /\basian games\b/, /\bolympic/, /\bpan american\b/,
@@ -98,7 +98,7 @@ const STRONG_NON_EU_COUNTRIES = new Set([
 // Rozpoznani poharu bez nutnosti znat nazev (fallback, kdyz chybi league.type z API).
 const CUP_RE = /\bcup\b|\bcupen\b|\bpokal\b|\bpokalen\b|\bcopa\b|\bcoupe\b|\bcoppa\b|\bbeker\b|\btaca\b|\bkupa\b|\bkupasi\b|\bkubok\b|\bpuchar\b|\bpohar\b|\bkypello\b|\btrophy\b|\bsupercup\b|\bsuper cup\b/;
 // Pohary nizsich/mladeznickych urovni - nepatri mezi hlavni domaci pohary (T2).
-const LOW_CUP_RE = /\bfa trophy\b|\bfa vase\b|\bleague trophy\b|\befl trophy\b|\bpremier league cup\b|\bnational league cup\b|\bchallenge cup\b|\bcopa federacion\b|\bregional/;
+const LOW_CUP_RE = /\bfa trophy\b|\bfa vase\b|\bleague trophy\b|\befl trophy\b|\bpremier league cup\b|\bnational league cup\b|\bchallenge cup\b|\bcopa federacion\b|\bregional|\bcopa paulista\b|\bcopa rio\b|\bcopa santa catarina\b|\bcopa gaucha\b|\bsuper copa international\b/;
 
 // Zeme, kde nazev neprozradi uroven ligy (Championship, 1. Division...) -> rucni mapa.
 // Klic = normalizovana zeme, hodnota = [uroven, [normalizovane podretezce nazvu]].
@@ -115,7 +115,7 @@ const LEVEL_OVERRIDES = {
     'turkey':    [[1,['super lig']],[2,['1 lig','first league']],[3,['2 lig']],[4,['3 lig']]],
     'denmark':   [[1,['superliga','superligaen']],[2,['1 division','1 divisionen']],[3,['2 division']]],
     'sweden':    [[1,['allsvenskan']],[2,['superettan']],[3,['ettan']]],
-    'norway':    [[1,['eliteserien']],[2,['obos ligaen','1 divisjon']],[3,['2 divisjon']]],
+    'norway':    [[1,['eliteserien']],[2,['obos ligaen','1 divisjon','1 division']],[3,['2 divisjon']]],
     'czech republic':[[1,['czech liga','fortuna liga','first league']],[2,['fnl','narodni liga','national football league']]],
     'slovakia':  [[1,['super liga','nike liga','fortuna liga','fortuna 1 liga']],[2,['2 liga']]],
     'poland':    [[1,['ekstraklasa']],[2,['i liga','1 liga']],[3,['ii liga','2 liga']]],
@@ -214,7 +214,7 @@ const TIER1_LEAGUES = {
     'ireland':      ['premier division'],
     'republic of ireland':['premier division'],
     'israel':       ['ligat ha al','ligat haal','premier league'],
-    'japan':        ['j 1 league','j1 league'],
+    'japan':        ['j 1 league','j1 league','j league'],
     'south korea':  ['k league 1'],
     'netherlands':  ['eredivisie'],
     'norway':       ['eliteserien'],
@@ -230,11 +230,10 @@ const TIER1_LEAGUES = {
     'sweden':       ['allsvenskan'],
     'switzerland':  ['super league'],
     'turkey':       ['super lig','superliga'],
-    'ukraine':      ['premier league'],
 };
 
 const TIER2_LEAGUES = {
-    'england':      ['championship','league one'],
+    'england':      ['championship'],
     'brazil':       ['serie a'],
     'denmark':      ['1 division','1 divisionen'],
     'france':       ['ligue 2'],
@@ -246,7 +245,7 @@ const TIER2_LEAGUES = {
     'usa':          ['major league soccer','mls'],
     'mexico':       ['liga mx'],
     'netherlands':  ['eerste divisie'],
-    'norway':       ['obos ligaen','obos','1 divisjon'],
+    'norway':       ['obos ligaen','obos','1 divisjon','1 division'],
     'paraguay':     ['division profesional','copa de primera','primera division'],
     'peru':         ['liga 1','primera division'],
     'poland':       ['i liga','1 liga'],
@@ -259,13 +258,28 @@ const TIER2_LEAGUES = {
     'switzerland':  ['promotion league'],
     'thailand':     ['thai league 1'],
     'turkey':       ['1 lig','first league'],
+    'ukraine':      ['premier league'],
 };
+
+// Treti urovne, ktere jsou presto dobre obsazene a sledovane. Bez tohoto seznamu
+// by spadly do T4 spolecne s pullige z Lesotha (leagueLevel je zaradi jako uroven 3).
+const TIER3_LEAGUES = {
+    'england':      ['league one'],
+    'germany':      ['3 liga','3 bundesliga'],
+    'france':       ['national 1','championnat national'],
+    'italy':        ['serie c'],
+    'spain':        ['primera federacion'],
+};
+
+// Klubove kontinentalni pohary mimo UEFA - nejsou to reprezentacni souteze,
+// takze nepatri do T2 vedle Africkeho poharu naroduu.
+const CONT_CLUB_RE = /\bcaf champions league\b|\bcaf confederation cup\b|\bafc champions league\b|\bafc cup\b|\bconcacaf champions\b|\bcopa libertadores\b|\bcopa sudamericana\b|\bleagues cup\b/;
 
 // Reprezentacni souteze (country = 'World'). Evropske a svetove -> T1,
 // ostatni svetadily -> T2. Duvod: pri reprezentacni prestavce nehraji klubove
 // souteze z T1/T2 a bez tohoto by zbyly jen zapasy z T3/T4.
 const NAT_T1_RE = /\buefa nations league\b|\beuro championship\b|\beuropean championship\b|\bworld cup\b|\bfinalissima\b/;
-const NAT_T2_RE = /\bafrica cup of nations\b|\bafcon\b|\basian cup\b|\bcopa america\b|\bgold cup\b|\bconcacaf nations league\b|\bconcacaf championship\b|\bcaf\b|\bafc asian\b|\bafc championship\b|\boceania nations cup\b|\bofc nations cup\b/;
+const NAT_T2_RE = /\bafrica cup of nations\b|\bafcon\b|\basian cup\b|\bcopa america\b|\bgold cup\b|\bconcacaf nations league\b|\bconcacaf championship\b|\bcaf cup of nations\b|\bafc asian\b|\bafc championship\b|\boceania nations cup\b|\bofc nations cup\b/;
 
 function matchesList(list,c,n){
     const pats=list[c];
@@ -285,6 +299,8 @@ function leagueTier(name,country,type){
     if(c==='spain'&&/\brfef\b|\bfederacion\b/.test(n))return 4;
     if(c==='world'){
         if(/uefa champions league|uefa europa league|uefa (europa )?conference league/.test(n))return 1;
+        // Klubove kontinentalni pohary mimo UEFA -> T3 (musi byt pred NAT_T2_RE).
+        if(CONT_CLUB_RE.test(n))return 3;
         // Evropske reprezentacni souteze + svetove kvalifikace -> T1. Bez toho by
         // pri reprezentacni prestavce byly T1 i T2 prazdne a bral by se jen T4.
         if(NAT_T1_RE.test(n))return 1;
@@ -298,18 +314,23 @@ function leagueTier(name,country,type){
     }
     // Pratelske zapasy mimo reprezentacni uroven (country != World) nechceme.
     if(/\bfriendl/.test(n))return 0;
-    // T2 se testuje jako prvni - jeho nazvy jsou casto nadmnozinou tech z T1
-    // ('liga portugal 2' obsahuje 'liga portugal', '2 bundesliga' obsahuje 'bundesliga').
-    if(matchesList(TIER2_LEAGUES,c,n))return 2;
-    if(matchesList(TIER1_LEAGUES,c,n))return 1;
     const isStrong=EUROPEAN_COUNTRIES.has(c)||STRONG_NON_EU_COUNTRIES.has(c);
-    const isCup=(type&&norm(type)==='cup')||CUP_RE.test(n);
+    // Typ z API je spolehlivejsi nez nazev - nektere ligy maji v nazvu 'copa'
+    // ('Copa de Primera' v Paraguayi je liga, ne pohar).
+    const isCup=type?norm(type)==='cup':CUP_RE.test(n);
+    // Pohary se vyhodnocuji PRED seznamy T1/T2 a nikdy nejdou vys nez T2 -
+    // T1 je vyhrazeny pro top prvni ligy ('J-League Cup' by jinak sel do T1).
     if(isCup){
         // Hlavni domaci pohar zeme s ligou v T1 -> T2 (viz popis tieru v hlavicce),
         // ostatni evropske/silne pohary -> T3, zbytek sveta -> T4.
         if(TIER1_LEAGUES[c])return 2;
         return isStrong?3:4;
     }
+    // T2 se testuje jako prvni - jeho nazvy jsou casto nadmnozinou tech z T1
+    // ('liga portugal 2' obsahuje 'liga portugal', '2 bundesliga' obsahuje 'bundesliga').
+    if(matchesList(TIER2_LEAGUES,c,n))return 2;
+    if(matchesList(TIER1_LEAGUES,c,n))return 1;
+    if(matchesList(TIER3_LEAGUES,c,n))return 3;
     // Zbytek: nejvyssi soutez evropske/silne zeme -> T3, jinak T4.
     if(leagueLevel(n,c)!==1)return 4;
     return isStrong?3:4;
