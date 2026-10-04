@@ -1,16 +1,16 @@
 [
   {
-    "league": "Segunda División",
-    "match": "Albacete - Eibar",
-    "kickoff": "2026-10-03T14:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "1.79"
-  },
-  {
-    "league": "Championship",
-    "match": "Livingston - Ayr Utd",
-    "kickoff": "2026-10-03T16:00:00+02:00",
+    "league": "CONCACAF Nations League",
+    "match": "Costa Rica - Haiti",
+    "kickoff": "2026-10-05T02:00:00+02:00",
     "tip": "Over 2.5",
     "odds": "1.75"
+  },
+  {
+    "league": "UEFA Nations League",
+    "match": "Kosovo - Austria",
+    "kickoff": "2026-10-04T18:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "1.87"
   }
 ]

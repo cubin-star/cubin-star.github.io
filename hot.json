@@ -1,50 +1,50 @@
 [
   {
-    "league": "Premier League",
-    "match": "Veres Rivne - Kudrivka",
-    "kickoff": "2026-10-03T12:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.11",
-    "group": 1
-  },
-  {
-    "league": "Ligue 2",
-    "match": "Koléa - El Bayadh",
-    "kickoff": "2026-10-03T16:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.38",
-    "group": 1
-  },
-  {
     "league": "UEFA Nations League",
-    "match": "FYR Macedonia - Scotland",
-    "kickoff": "2026-10-03T20:45:00+02:00",
+    "match": "Malta - Andorra",
+    "kickoff": "2026-10-04T18:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.29",
-    "group": 2
+    "odds": "2.50",
+    "group": 1
   },
   {
-    "league": "Segunda División",
-    "match": "Cadiz - Leganes",
-    "kickoff": "2026-10-03T18:30:00+02:00",
+    "league": "Serie C - Girone C",
+    "match": "Cosenza - Foggia",
+    "kickoff": "2026-10-04T14:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.30",
-    "group": 2
+    "odds": "2.12",
+    "group": 1
   },
   {
     "league": "Primera División",
-    "match": "Albion FC - Defensor Sporting",
-    "kickoff": "2026-10-03T20:00:00+02:00",
+    "match": "Racing Montevideo - Penarol",
+    "kickoff": "2026-10-05T00:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.10",
+    "odds": "2.40",
+    "group": 2
+  },
+  {
+    "league": "Serie C - Girone A",
+    "match": "Lecco - Union Brescia",
+    "kickoff": "2026-10-04T12:30:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.20",
+    "group": 2
+  },
+  {
+    "league": "Segunda División RFEF - Group 1",
+    "match": "Compostela - Real Oviedo II",
+    "kickoff": "2026-10-04T17:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.19",
     "group": 3
   },
   {
-    "league": "Botola Pro",
-    "match": "CODM Meknès - Kawkab Marrakech",
-    "kickoff": "2026-10-03T20:00:00+02:00",
+    "league": "Liga Profesional Argentina",
+    "match": "Talleres Cordoba - Belgrano Cordoba",
+    "kickoff": "2026-10-04T22:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.44",
+    "odds": "2.45",
     "group": 3
   }
 ]
