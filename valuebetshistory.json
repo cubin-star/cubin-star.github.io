@@ -1,5 +1,35 @@
 [
   {
+    "League": "Friendlies Clubs",
+    "Match": "Stade Brestois 29 vs Monza",
+    "Tip": "Over 2.5",
+    "Odds": "1.52",
+    "Date": "2026-10-03T16:00:00+00:00",
+    "FixtureId": 1642959,
+    "Result": "OK",
+    "Score": "2:2"
+  },
+  {
+    "League": "League Two",
+    "Match": "Accrington ST vs Cheltenham",
+    "Tip": "Over 2.5",
+    "Odds": "1.65",
+    "Date": "2026-10-03T14:00:00+00:00",
+    "FixtureId": 1563779,
+    "Result": "KO",
+    "Score": "2:0"
+  },
+  {
+    "League": "National League",
+    "Match": "Harrogate Town vs AFC Hornchurch",
+    "Tip": "Over 2.5",
+    "Odds": "1.55",
+    "Date": "2026-10-03T14:00:00+00:00",
+    "FixtureId": 1585274,
+    "Result": "OK",
+    "Score": "3:0"
+  },
+  {
     "League": "USL League One",
     "Match": "Westchester SC vs Chattanooga Red Wolves",
     "Tip": "Over 2.5",
