@@ -1,9 +1,16 @@
 [
   {
-    "League": "Serie A",
-    "Match": "Atletico-MG vs RB Bragantino",
+    "League": "2. SNL",
+    "Match": "Bistrica vs Rudar",
     "Tip": "Over 1.5",
-    "Odds": "1.25",
-    "Date": "2026-10-03T21:30:00+00:00"
+    "Odds": "1.21",
+    "Date": "2026-10-04T13:00:00+00:00"
+  },
+  {
+    "League": "Segunda Liga",
+    "Match": "Farense vs Chaves",
+    "Tip": "Over 1.5",
+    "Odds": "1.29",
+    "Date": "2026-10-04T10:00:00+00:00"
   }
 ]
