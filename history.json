@@ -1,6 +1,36 @@
 [
   {
     "sport": "football",
+    "league": "Serie A",
+    "match": "Atletico-MG vs RB Bragantino",
+    "tip": "Over 1.5",
+    "odds": "1.25",
+    "date": "2026-10-03T21:30:00+00:00",
+    "score": "1:0",
+    "result": "✗"
+  },
+  {
+    "sport": "basketball",
+    "league": "LNB",
+    "match": "Pau-Orthez vs Dijon",
+    "tip": "Over 150.5",
+    "odds": "1.29",
+    "date": "2026-10-03T16:30:00+00:00",
+    "score": "56:95",
+    "result": "✓"
+  },
+  {
+    "sport": "hockey",
+    "league": "Liiga",
+    "match": "TPS Turku vs JYP",
+    "tip": "Over 3.5",
+    "odds": "1.24",
+    "date": "2026-10-03T14:00:00+00:00",
+    "score": "4:1",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
     "league": "Liga Profesional Argentina",
     "match": "Independ. Rivadavia vs Gimnasia L.P.",
     "tip": "Over 1.5",
@@ -1968,35 +1998,5 @@
     "date": "2026-07-08T23:30:00+00:00",
     "score": "80:86",
     "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "UEFA Europa Conference League",
-    "match": "GAP Connah S Quay FC vs Ballkani",
-    "tip": "Over 1.5",
-    "odds": "1.24",
-    "date": "2026-07-08T17:30:00+00:00",
-    "score": "0:0",
-    "result": "✗"
-  },
-  {
-    "sport": "football",
-    "league": "UEFA Champions League",
-    "match": "Flora Tallinn vs Saburtalo",
-    "tip": "Over 1.5",
-    "odds": "1.22",
-    "date": "2026-07-08T16:00:00+00:00",
-    "score": "2:3",
-    "result": "✓"
-  },
-  {
-    "sport": "basketball",
-    "league": "NBA W",
-    "match": "Phoenix Mercury W vs Chicago Sky W",
-    "tip": "Over 162.5",
-    "odds": "1.28",
-    "date": "2026-07-08T02:00:00+00:00",
-    "score": "66:77",
-    "result": "✗"
   }
 ]
