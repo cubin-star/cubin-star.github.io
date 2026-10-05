@@ -1,50 +1,50 @@
 [
   {
-    "league": "UEFA Nations League",
-    "match": "Malta - Andorra",
-    "kickoff": "2026-10-04T18:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.50",
-    "group": 1
-  },
-  {
-    "league": "Serie C - Girone C",
-    "match": "Cosenza - Foggia",
-    "kickoff": "2026-10-04T14:30:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.12",
-    "group": 1
-  },
-  {
-    "league": "Primera División",
-    "match": "Racing Montevideo - Penarol",
-    "kickoff": "2026-10-05T00:30:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.40",
-    "group": 2
-  },
-  {
-    "league": "Serie C - Girone A",
-    "match": "Lecco - Union Brescia",
-    "kickoff": "2026-10-04T12:30:00+02:00",
+    "league": "CONCACAF Nations League",
+    "match": "Honduras - Jamaica",
+    "kickoff": "2026-10-06T04:00:00+02:00",
     "tip": "Over 2.5",
     "odds": "2.20",
+    "group": 1
+  },
+  {
+    "league": "Liga Panameña de Fútbol",
+    "match": "Sporting San Miguelito - Union Cocle",
+    "kickoff": "2026-10-06T03:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.20",
+    "group": 1
+  },
+  {
+    "league": "UEFA Nations League",
+    "match": "Northern Ireland - Georgia",
+    "kickoff": "2026-10-05T20:45:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.47",
     "group": 2
   },
   {
-    "league": "Segunda División RFEF - Group 1",
-    "match": "Compostela - Real Oviedo II",
-    "kickoff": "2026-10-04T17:00:00+02:00",
+    "league": "Division Intermedia",
+    "match": "12 de Junio VH - SOL DE America",
+    "kickoff": "2026-10-05T22:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.19",
-    "group": 3
+    "odds": "2.10",
+    "group": 2
   },
   {
     "league": "Liga Profesional Argentina",
-    "match": "Talleres Cordoba - Belgrano Cordoba",
-    "kickoff": "2026-10-04T22:00:00+02:00",
+    "match": "Deportivo Riestra - Central Cordoba de Santiago",
+    "kickoff": "2026-10-05T21:45:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.45",
+    "odds": "2.49",
+    "group": 3
+  },
+  {
+    "league": "Division Profesional - Clausura",
+    "match": "Cerro Porteno - 2 de Mayo",
+    "kickoff": "2026-10-06T00:15:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.10",
     "group": 3
   }
 ]
