@@ -1,14 +1,14 @@
 [
   {
-    "league": "DEL",
-    "match": "Bremerhaven vs Frankfurt Lowen",
+    "league": "NHL",
+    "match": "Boston Bruins vs Ottawa Senators",
     "tip": "Over 5.5",
     "odds": "1.75"
   },
   {
-    "league": "National League",
-    "match": "Servette vs Zug",
+    "league": "Extraliga",
+    "match": "Ceske Budejovice vs Kometa Brno",
     "tip": "Over 5.5",
-    "odds": "1.85"
+    "odds": "1.95"
   }
 ]
