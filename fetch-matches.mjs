@@ -91,7 +91,7 @@ const EUROPEAN_COUNTRIES = new Set([
 // Mimoevropske zeme se silnou a sledovanou nejvyssi soutezi - rovnez T3.
 // Zbytek sveta (Mongolsko, Bhutan, Banglades, Eswatini...) spadne do T4.
 const STRONG_NON_EU_COUNTRIES = new Set([
-    'argentina','brazil','chile','colombia','uruguay','mexico','usa','canada','japan','south korea','china',
+    'argentina','brazil','chile','colombia','uruguay','mexico','usa','japan','south korea','china',
     'australia','saudi arabia','united arab emirates','qatar','iran','egypt','morocco','south africa','tunisia','algeria',
 ]);
 
@@ -267,7 +267,6 @@ const TIER3_LEAGUES = {
     'england':      ['league one'],
     'germany':      ['3 liga','3 bundesliga'],
     'france':       ['national 1','championnat national'],
-    'italy':        ['serie c'],
     'spain':        ['primera federacion'],
 };
 
@@ -321,10 +320,11 @@ function leagueTier(name,country,type){
     // Pohary se vyhodnocuji PRED seznamy T1/T2 a nikdy nejdou vys nez T2 -
     // T1 je vyhrazeny pro top prvni ligy ('J-League Cup' by jinak sel do T1).
     if(isCup){
-        // Hlavni domaci pohar zeme s ligou v T1 -> T2 (viz popis tieru v hlavicce),
-        // ostatni evropske/silne pohary -> T3, zbytek sveta -> T4.
+        // Hlavni domaci pohar zeme s ligou v T1 -> T2 (viz popis tieru v hlavicce).
+        // Ostatni evropske pohary -> T3, mimoevropske -> T4; pohar je ze vsech
+        // soutezi nejmene predvidatelny, takze u slabsich zemi nema co delat vys.
         if(TIER1_LEAGUES[c])return 2;
-        return isStrong?3:4;
+        return EUROPEAN_COUNTRIES.has(c)?3:4;
     }
     // T2 se testuje jako prvni - jeho nazvy jsou casto nadmnozinou tech z T1
     // ('liga portugal 2' obsahuje 'liga portugal', '2 bundesliga' obsahuje 'bundesliga').
