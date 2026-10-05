@@ -1,24 +1,24 @@
 [
   {
-    "League": "Primera División RFEF - Group 1",
-    "Match": "Zamora vs CD Coria",
+    "League": "UEFA Nations League",
+    "Match": "Montenegro vs Armenia",
     "Tip": "Over 2.5",
-    "Odds": "1.85",
-    "Date": "2026-10-04T14:30:00+00:00"
+    "Odds": "1.77",
+    "Date": "2026-10-05T18:45:00+00:00"
   },
   {
-    "League": "Gamma Ethniki - Group 8",
-    "Match": "Ethnikos Piraeus vs Amfiali",
+    "League": "CONCACAF Nations League",
+    "Match": "Guatemala vs Suriname",
     "Tip": "Over 2.5",
-    "Odds": "1.86",
-    "Date": "2026-10-04T13:00:00+00:00"
+    "Odds": "1.95",
+    "Date": "2026-10-06T00:00:00+00:00"
   },
   {
-    "League": "Prva Liga",
-    "Match": "Javor vs Borac Cacak",
+    "League": "Friendlies",
+    "Match": "Mauritius vs Sri Lanka",
     "Tip": "Over 2.5",
-    "Odds": "1.86",
-    "Date": "2026-10-04T14:00:00+00:00",
+    "Odds": "1.91",
+    "Date": "2026-10-05T15:00:00+00:00",
     "locked": true
   }
 ]
