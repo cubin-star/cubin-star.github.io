@@ -1,5 +1,45 @@
 [
   {
+    "sport": "basketball",
+    "league": "Lega A",
+    "match": "Virtus Bologna vs Maxima Roma",
+    "tip": "Over 154.5",
+    "odds": "1.23",
+    "date": "2026-10-04T16:15:00+00:00",
+    "score": "98:89",
+    "result": "✓"
+  },
+  {
+    "sport": "hockey",
+    "league": "Extraliga",
+    "match": "Spisska Nova Ves vs Slovan Bratislava",
+    "tip": "Over 3.5",
+    "odds": "1.22",
+    "date": "2026-10-04T14:00:00+00:00",
+    "score": "6:1",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "2. SNL",
+    "match": "Bistrica vs Rudar",
+    "tip": "Over 1.5",
+    "odds": "1.21",
+    "date": "2026-10-04T13:00:00+00:00",
+    "score": "3:1",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "Segunda Liga",
+    "match": "Farense vs Chaves",
+    "tip": "Over 1.5",
+    "odds": "1.29",
+    "date": "2026-10-04T10:00:00+00:00",
+    "score": "4:0",
+    "result": "✓"
+  },
+  {
     "sport": "football",
     "league": "Serie A",
     "match": "Atletico-MG vs RB Bragantino",
@@ -1957,46 +1997,6 @@
     "odds": "1.23",
     "date": "2026-07-11T13:00:00+00:00",
     "score": "1:2",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "K League 2",
-    "match": "Cheonan City vs Gimhae City",
-    "tip": "Over 1.5",
-    "odds": "1.30",
-    "date": "2026-07-10T10:30:00+00:00",
-    "score": "0:1",
-    "result": "✗"
-  },
-  {
-    "sport": "football",
-    "league": "UEFA Europa Conference League",
-    "match": "Vllaznia Shkodër vs Malisheva",
-    "tip": "Over 1.5",
-    "odds": "1.28",
-    "date": "2026-07-09T18:00:00+00:00",
-    "score": "2:1",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "UEFA Europa League",
-    "match": "Vojvodina vs Ferencvarosi TC",
-    "tip": "Over 1.5",
-    "odds": "1.20",
-    "date": "2026-07-09T18:00:00+00:00",
-    "score": "1:2",
-    "result": "✓"
-  },
-  {
-    "sport": "basketball",
-    "league": "NBA W",
-    "match": "Connecticut Sun W vs Minnesota Lynx W",
-    "tip": "Over 157.5",
-    "odds": "1.24",
-    "date": "2026-07-08T23:30:00+00:00",
-    "score": "80:86",
     "result": "✓"
   }
 ]
