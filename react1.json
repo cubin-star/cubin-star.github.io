@@ -1,1 +1,23 @@
-[]
+[
+  {
+    "league": "UEFA Nations League",
+    "match": "Estonia - Iceland",
+    "kickoff": "2026-10-06T20:45:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "1.85"
+  },
+  {
+    "league": "FA Cup",
+    "match": "Wingate & Finchley - Bedford Town",
+    "kickoff": "2026-10-06T20:45:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "1.76"
+  },
+  {
+    "league": "League One",
+    "match": "Nantong Zhiyun - Ningbo Professional",
+    "kickoff": "2026-10-06T13:30:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "1.90"
+  }
+]
