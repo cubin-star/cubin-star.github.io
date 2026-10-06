@@ -1,5 +1,21 @@
 [
   {
+    "league": "EFL Trophy",
+    "homeTeam": "Cambridge United",
+    "awayTeam": "Northampton",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "1:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-10-06T18:00:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 1:0 | xG: 1.21 | Shots: 14/5 | winXG: 0.77 | losingXG: 0.44 losingSOT: 2 | @HT | Pre O2.5: 1.66"
+  },
+  {
     "league": "Liga Profesional Argentina",
     "homeTeam": "Independ. Rivadavia",
     "awayTeam": "Gimnasia L.P.",
