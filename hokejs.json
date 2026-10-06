@@ -1,1 +1,16 @@
-[]
+[
+  {
+    "league": "Championship",
+    "match": "Beibarys Atyrau vs Almaty",
+    "tip": "Over 3.5",
+    "odds": "1.19",
+    "date": "2026-10-06T14:00:00+00:00"
+  },
+  {
+    "league": "Champions League",
+    "match": "Klagenfurt vs KooKoo",
+    "tip": "Over 3.5",
+    "odds": "1.19",
+    "date": "2026-10-06T17:15:00+00:00"
+  }
+]
