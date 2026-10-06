@@ -11,6 +11,9 @@ const PICK_COUNT = 6;
 const TIPS_MIN_ODDS = 1.75;
 const TIPS_MAX_ODDS = 1.9;
 const TIPS_PICK_COUNT = 2;
+// Samostatny denni vyber do react1.json - stejny kurzovy pas jako tips.json,
+// prednostne tier 1, pak tier 2, pri nedostatku tier 3/4. Max jeden zapas z ligy.
+const REACT1_PICK_COUNT = 3;
 // Max pocet vybranych zapasu z jedne zeme - brani zaplaveni tiketu jednou destinaci.
 const MAX_PER_COUNTRY = 2;
 // Vahy pro vazeny nahodny vyber TIERU (ne jednotlivych zapasu) - vyssi tier ma
@@ -91,7 +94,7 @@ const EUROPEAN_COUNTRIES = new Set([
 // Mimoevropske zeme se silnou a sledovanou nejvyssi soutezi - rovnez T3.
 // Zbytek sveta (Mongolsko, Bhutan, Banglades, Eswatini...) spadne do T4.
 const STRONG_NON_EU_COUNTRIES = new Set([
-    'argentina','brazil','chile','colombia','uruguay','mexico','usa','japan','south korea','china',
+    'argentina','brazil','chile','colombia','uruguay','peru','paraguay','mexico','usa','japan','south korea','china',
     'australia','saudi arabia','united arab emirates','qatar','iran','egypt','morocco','south africa','tunisia','algeria',
 ]);
 
@@ -237,7 +240,6 @@ const TIER2_LEAGUES = {
     'brazil':       ['serie a'],
     'denmark':      ['1 division','1 divisionen'],
     'france':       ['ligue 2'],
-    'indonesia':    ['liga 1','super league'],
     'italy':        ['serie b'],
     'cyprus':       ['1 division','1 divizion','first division'],
     'hungary':      ['nb i','nb 1','otp bank liga'],
@@ -246,8 +248,6 @@ const TIER2_LEAGUES = {
     'mexico':       ['liga mx'],
     'netherlands':  ['eerste divisie'],
     'norway':       ['obos ligaen','obos','1 divisjon','1 division'],
-    'paraguay':     ['division profesional','copa de primera','primera division'],
-    'peru':         ['liga 1','primera division'],
     'poland':       ['i liga','1 liga'],
     'portugal':     ['liga portugal 2','segunda liga','liga de honra'],
     'austria':      ['2 liga'],
@@ -256,7 +256,6 @@ const TIER2_LEAGUES = {
     'spain':        ['segunda division','laliga 2','la liga 2'],
     'sweden':       ['superettan'],
     'switzerland':  ['promotion league'],
-    'thailand':     ['thai league 1'],
     'turkey':       ['1 lig','first league'],
     'ukraine':      ['premier league'],
 };
@@ -561,6 +560,28 @@ async function main(){
     console.log('tips.json: '+tips.length+'/'+TIPS_PICK_COUNT+' zapasu ('+TIPS_MIN_ODDS+'-'+TIPS_MAX_ODDS+')');
     for(const m of tipsSelected)console.log('   [T'+m.tier+'] '+m.match+' | '+m.league+' ('+m.country+') | Over 2.5 @ '+m.odds);
     if(tips.length<TIPS_PICK_COUNT)console.log('WARNING: tips.json ma mene nez '+TIPS_PICK_COUNT+' zapasu.');
+
+    // === react1.json: 3 nahodne zapasy 1.75-1.9, prednostne T1, pak T2, jinak T3/T4 ====
+    const react1Selected=[],react1UsedLeagues=new Set();
+    function react1PickFrom(tiers){
+        const bucket=shuffle(tipsPool.filter(m=>tiers.includes(m.tier)&&!selectedIds.has(m.fixtureId)));
+        for(const m of bucket){
+            if(react1Selected.length>=REACT1_PICK_COUNT)return;
+            const lk=m.league+'|'+m.country;
+            if(react1UsedLeagues.has(lk))continue;
+            react1UsedLeagues.add(lk);
+            selectedIds.add(m.fixtureId);
+            react1Selected.push(m);
+        }
+    }
+    react1PickFrom([1]);
+    if(react1Selected.length<REACT1_PICK_COUNT)react1PickFrom([2]);
+    if(react1Selected.length<REACT1_PICK_COUNT)react1PickFrom([3,4]);
+    const react1=react1Selected.map(m=>({league:m.league,match:m.match,kickoff:m.kickoff,tip:m.tip,odds:m.odds}));
+    writeFileSync('react1.json',JSON.stringify(react1,null,2),'utf-8');
+    console.log('react1.json: '+react1.length+'/'+REACT1_PICK_COUNT+' zapasu ('+TIPS_MIN_ODDS+'-'+TIPS_MAX_ODDS+')');
+    for(const m of react1Selected)console.log('   [T'+m.tier+'] '+m.match+' | '+m.league+' ('+m.country+') | Over 2.5 @ '+m.odds);
+    if(react1.length<REACT1_PICK_COUNT)console.log('WARNING: react1.json ma mene nez '+REACT1_PICK_COUNT+' zapasu.');
 
     const live1=[...tier1,...tier2].map(m=>({league:m.league,match:m.match,kickoff:m.kickoff,tip:m.tip,odds:m.odds}));
     writeFileSync('live1.json',JSON.stringify(live1,null,2),'utf-8');
