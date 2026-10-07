@@ -1,6 +1,46 @@
 [
   {
     "sport": "football",
+    "league": "Serie B",
+    "match": "Ponte Preta vs Juventude",
+    "tip": "Over 1.5",
+    "odds": "1.25",
+    "date": "2026-10-07T00:35:00+00:00",
+    "score": "0:2",
+    "result": "✓"
+  },
+  {
+    "sport": "basketball",
+    "league": "Eurocup",
+    "match": "JL Bourg vs Tofas",
+    "tip": "Over 160.5",
+    "odds": "1.29",
+    "date": "2026-10-06T17:30:00+00:00",
+    "score": "82:89",
+    "result": "✓"
+  },
+  {
+    "sport": "hockey",
+    "league": "Champions League",
+    "match": "Klagenfurt vs KooKoo",
+    "tip": "Over 3.5",
+    "odds": "1.19",
+    "date": "2026-10-06T17:15:00+00:00",
+    "score": "3:5",
+    "result": "✓"
+  },
+  {
+    "sport": "hockey",
+    "league": "Championship",
+    "match": "Beibarys Atyrau vs Almaty",
+    "tip": "Over 3.5",
+    "odds": "1.19",
+    "date": "2026-10-06T14:00:00+00:00",
+    "score": "1:4",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
     "league": "Segunda División",
     "match": "Cordoba vs Tenerife",
     "tip": "Over 1.5",
@@ -1958,45 +1998,5 @@
     "date": "2026-07-15T14:30:00+00:00",
     "score": "5:0",
     "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "UEFA Champions League",
-    "match": "Shamrock Rovers vs Floriana",
-    "tip": "Over 1.5",
-    "odds": "1.20",
-    "date": "2026-07-14T19:00:00+00:00",
-    "score": "5:1",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Serie B",
-    "match": "America Mineiro vs Londrina",
-    "tip": "Over 1.5",
-    "odds": "1.33",
-    "date": "2026-07-13T22:00:00+00:00",
-    "score": "1:1",
-    "result": "✓"
-  },
-  {
-    "sport": "basketball",
-    "league": "NBA W",
-    "match": "Washington Mystics W vs Seattle Storm W",
-    "tip": "Over 148.5",
-    "odds": "1.25",
-    "date": "2026-07-12T19:00:00+00:00",
-    "score": "84:79",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "K League 1",
-    "match": "Jeju United FC vs Daejeon Citizen",
-    "tip": "Over 1.5",
-    "odds": "1.34",
-    "date": "2026-07-12T10:30:00+00:00",
-    "score": "0:0",
-    "result": "✗"
   }
 ]
