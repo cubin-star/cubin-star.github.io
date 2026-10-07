@@ -1,9 +1,16 @@
 [
   {
-    "League": "Serie B",
-    "Match": "Ponte Preta vs Juventude",
+    "League": "Serie A",
+    "Match": "Botafogo vs Vasco DA Gama",
     "Tip": "Over 1.5",
-    "Odds": "1.25",
-    "Date": "2026-10-07T00:35:00+00:00"
+    "Odds": "1.21",
+    "Date": "2026-10-07T23:30:00+00:00"
+  },
+  {
+    "League": "Serie B",
+    "Match": "CRB vs Atletico Goianiense",
+    "Tip": "Over 1.5",
+    "Odds": "1.28",
+    "Date": "2026-10-07T23:30:00+00:00"
   }
 ]
