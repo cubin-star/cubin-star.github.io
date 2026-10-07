@@ -1,23 +1,23 @@
 [
   {
-    "league": "UEFA Nations League",
-    "match": "Estonia - Iceland",
-    "kickoff": "2026-10-06T20:45:00+02:00",
+    "league": "Veikkausliiga",
+    "match": "Gnistan - Inter Turku",
+    "kickoff": "2026-10-07T18:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "1.85"
+    "odds": "1.75"
   },
   {
-    "league": "FA Cup",
-    "match": "Wingate & Finchley - Bedford Town",
-    "kickoff": "2026-10-06T20:45:00+02:00",
+    "league": "Türkiye Kupası",
+    "match": "Osmaniyespor - Yeni Mersin Idmanyurdu",
+    "kickoff": "2026-10-07T13:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "1.80"
+  },
+  {
+    "league": "Serie A",
+    "match": "Botafogo - Vasco DA Gama",
+    "kickoff": "2026-10-08T01:30:00+02:00",
     "tip": "Over 2.5",
     "odds": "1.76"
-  },
-  {
-    "league": "League One",
-    "match": "Nantong Zhiyun - Ningbo Professional",
-    "kickoff": "2026-10-06T13:30:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "1.90"
   }
 ]
