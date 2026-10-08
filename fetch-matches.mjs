@@ -101,7 +101,7 @@ const STRONG_NON_EU_COUNTRIES = new Set([
 // Rozpoznani poharu bez nutnosti znat nazev (fallback, kdyz chybi league.type z API).
 const CUP_RE = /\bcup\b|\bcupen\b|\bpokal\b|\bpokalen\b|\bcopa\b|\bcoupe\b|\bcoppa\b|\bbeker\b|\btaca\b|\bkupa\b|\bkupasi\b|\bkubok\b|\bpuchar\b|\bpohar\b|\bkypello\b|\btrophy\b|\bsupercup\b|\bsuper cup\b/;
 // Pohary nizsich/mladeznickych urovni - nepatri mezi hlavni domaci pohary (T2).
-const LOW_CUP_RE = /\bfa trophy\b|\bfa vase\b|\bleague trophy\b|\befl trophy\b|\bpremier league cup\b|\bnational league cup\b|\bchallenge cup\b|\bcopa federacion\b|\bregional|\bcopa paulista\b|\bcopa rio\b|\bcopa santa catarina\b|\bcopa gaucha\b|\bsuper copa international\b/;
+const LOW_CUP_RE = /\bfa trophy\b|\bfa vase\b|\bleague trophy\b|\befl trophy\b|\bpremier league cup\b|\bnational league cup\b|\bchallenge cup\b|\bcopa federacion\b|\bregional|\bcopa paulista\b|\bcopa rio\b|\bcopa santa catarina\b|\bcopa gaucha\b|\bsuper copa international\b|\bcoppa italia serie [cd]\b/;
 
 // Zeme, kde nazev neprozradi uroven ligy (Championship, 1. Division...) -> rucni mapa.
 // Klic = normalizovana zeme, hodnota = [uroven, [normalizovane podretezce nazvu]].
@@ -212,11 +212,7 @@ const TIER1_LEAGUES = {
     'spain':        ['la liga','laliga'],
     'belgium':      ['jupiler pro league','first division a'],
     'denmark':      ['superliga','superligaen'],
-    'finland':      ['veikkausliiga'],
     'croatia':      ['hnl','prva liga'],
-    'ireland':      ['premier division'],
-    'republic of ireland':['premier division'],
-    'israel':       ['ligat ha al','ligat haal','premier league'],
     'japan':        ['j 1 league','j1 league','j league'],
     'south korea':  ['k league 1'],
     'netherlands':  ['eredivisie'],
@@ -227,8 +223,6 @@ const TIER1_LEAGUES = {
     'romania':      ['superliga','liga i'],
     'greece':       ['super league 1'],
     'scotland':     ['premiership'],
-    'slovakia':     ['nike liga','super liga','fortuna liga'],
-    'slovenia':     ['prva liga','1 snl'],
     'serbia':       ['super liga','superliga'],
     'sweden':       ['allsvenskan'],
     'switzerland':  ['super league'],
@@ -238,6 +232,12 @@ const TIER1_LEAGUES = {
 const TIER2_LEAGUES = {
     'england':      ['championship'],
     'brazil':       ['serie a'],
+    'finland':      ['veikkausliiga'],
+    'ireland':      ['premier division'],
+    'republic of ireland':['premier division'],
+    'israel':       ['ligat ha al','ligat haal','premier league'],
+    'slovakia':     ['nike liga','super liga','fortuna liga'],
+    'slovenia':     ['prva liga','1 snl'],
     'denmark':      ['1 division','1 divisionen'],
     'france':       ['ligue 2'],
     'italy':        ['serie b'],
@@ -597,7 +597,8 @@ async function main(){
     for(const m of react1Selected)console.log('   [T'+m.tier+'] '+m.match+' | '+m.league+' ('+m.country+') | '+m.tip+' @ '+m.odds);
     if(react1.length<REACT1_PICK_COUNT)console.log('WARNING: react1.json ma mene nez '+REACT1_PICK_COUNT+' zapasu.');
 
-    const live1=
+    // === live1.json: vsechny zapasy z tieru 1 a 2 (bez omezeni poctu) ====
+    const live1=pool.filter(m=>m.tier===1||m.tier===2).map(m=>({league:m.league,match:m.match,kickoff:m.kickoff,tip:m.tip,odds:m.odds}));
     writeFileSync('live1.json',JSON.stringify(live1,null,2),'utf-8');
     console.log('live1.json: '+live1.length+' matches (tier 1+2)');
     if(selected.length===0){writeFileSync('hot.json',JSON.stringify([],null,2),'utf-8');writeFileSync('best.json',JSON.stringify([],null,2),'utf-8');console.log('Zadne zapasy. ('+reqCount+' API req)');process.exit(0);}
