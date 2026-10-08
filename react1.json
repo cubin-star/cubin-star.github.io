@@ -1,23 +1,23 @@
 [
   {
-    "league": "Veikkausliiga",
-    "match": "Gnistan - Inter Turku",
-    "kickoff": "2026-10-07T18:00:00+02:00",
+    "league": "Liga I",
+    "match": "CFR 1907 Cluj - Universitatea Cluj",
+    "kickoff": "2026-10-08T19:30:00+02:00",
     "tip": "Over 2.5",
+    "odds": "1.79"
+  },
+  {
+    "league": "K League 1",
+    "match": "Gangwon FC - Bucheon FC 1995",
+    "kickoff": "2026-10-09T09:30:00+02:00",
+    "tip": "Home win",
     "odds": "1.75"
   },
   {
-    "league": "Türkiye Kupası",
-    "match": "Osmaniyespor - Yeni Mersin Idmanyurdu",
-    "kickoff": "2026-10-07T13:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "1.80"
-  },
-  {
     "league": "Serie A",
-    "match": "Botafogo - Vasco DA Gama",
-    "kickoff": "2026-10-08T01:30:00+02:00",
+    "match": "Santos - Flamengo",
+    "kickoff": "2026-10-09T00:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "1.76"
+    "odds": "1.77"
   }
 ]
