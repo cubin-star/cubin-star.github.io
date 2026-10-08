@@ -1,24 +1,24 @@
 [
   {
-    "League": "Türkiye Kupası",
-    "Match": "Osmaniyespor vs Yeni Mersin Idmanyurdu",
+    "League": "Liga I",
+    "Match": "CFR 1907 Cluj vs Universitatea Cluj",
     "Tip": "Over 2.5",
-    "Odds": "1.80",
-    "Date": "2026-10-07T11:00:00+00:00"
+    "Odds": "1.82",
+    "Date": "2026-10-08T17:30:00+00:00"
   },
   {
-    "League": "Birinci Dasta",
-    "Match": "Şahdağ vs Zaqatala",
-    "Tip": "Over 2.5",
-    "Odds": "1.85",
-    "Date": "2026-10-07T11:30:00+00:00"
-  },
-  {
-    "League": "Veikkausliiga",
-    "Match": "Gnistan vs Inter Turku",
+    "League": "ASEAN Club Championship",
+    "Match": "Home United vs Công An Nhân Dân",
     "Tip": "Over 2.5",
     "Odds": "1.80",
-    "Date": "2026-10-07T16:00:00+00:00",
+    "Date": "2026-10-08T11:30:00+00:00"
+  },
+  {
+    "League": "Liga Alef",
+    "Match": "Tira vs Ironi Nesher",
+    "Tip": "Over 2.5",
+    "Odds": "1.80",
+    "Date": "2026-10-08T17:00:00+00:00",
     "locked": true
   }
 ]
