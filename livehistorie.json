@@ -1,5 +1,21 @@
 [
   {
+    "league": "Primera A",
+    "homeTeam": "Alianza Valledupar",
+    "awayTeam": "Águilas Doradas",
+    "tip": "Over 2.5",
+    "odds": "",
+    "halftimeScore": "0:2",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-10-09T23:00:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 0:2 | xG: 1.43 | Shots: 15/7 | winXG: 1.02 | losingXG: 0.41 losingSOT: 3 | @HT | Pre O2.5: 2.125"
+  },
+  {
     "league": "Liga I",
     "homeTeam": "Sepsi OSK Sfantu Gheorghe",
     "awayTeam": "Dinamo Bucuresti",
