@@ -1,23 +1,23 @@
 [
   {
-    "league": "Liga I",
-    "match": "CFR 1907 Cluj - Universitatea Cluj",
-    "kickoff": "2026-10-08T19:30:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "1.79"
-  },
-  {
     "league": "K League 1",
-    "match": "Gangwon FC - Bucheon FC 1995",
-    "kickoff": "2026-10-09T09:30:00+02:00",
-    "tip": "Home win",
+    "match": "FC Seoul - Jeju United FC",
+    "kickoff": "2026-10-10T07:00:00+02:00",
+    "tip": "Over 2.5",
     "odds": "1.75"
   },
   {
-    "league": "Serie A",
-    "match": "Santos - Flamengo",
-    "kickoff": "2026-10-09T00:30:00+02:00",
+    "league": "Liga I",
+    "match": "Corvinul Hunedoara - FC Voluntari",
+    "kickoff": "2026-10-09T17:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "1.77"
+    "odds": "1.78"
+  },
+  {
+    "league": "Jupiler Pro League",
+    "match": "SK Beveren - Lommel United",
+    "kickoff": "2026-10-09T20:45:00+02:00",
+    "tip": "Home win",
+    "odds": "1.80"
   }
 ]

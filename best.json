@@ -1,23 +1,23 @@
 [
   {
-    "league": "Botola Pro",
-    "match": "CR Khemis Zemamra - Hassania Agadir",
-    "kickoff": "2026-10-08T20:00:00+02:00",
+    "league": "Primeira Liga",
+    "match": "Moreirense - GIL Vicente",
+    "kickoff": "2026-10-09T19:45:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.46"
+    "odds": "2.25"
   },
   {
-    "league": "Ligue 1",
-    "match": "JS Saoura - Olympique Akbou",
-    "kickoff": "2026-10-08T19:00:00+02:00",
+    "league": "Ligue 2",
+    "match": "Sochaux - Boulogne",
+    "kickoff": "2026-10-09T20:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.46"
+    "odds": "2.24"
   },
   {
-    "league": "K League 1",
-    "match": "Incheon United - Pohang Steelers",
-    "kickoff": "2026-10-09T09:30:00+02:00",
+    "league": "Primera A",
+    "match": "Alianza Valledupar - Águilas Doradas",
+    "kickoff": "2026-10-10T01:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.41"
+    "odds": "2.17"
   }
 ]
