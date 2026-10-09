@@ -1,24 +1,24 @@
 [
   {
-    "League": "Liga I",
-    "Match": "CFR 1907 Cluj vs Universitatea Cluj",
+    "League": "1. Lig",
+    "Match": "Bodrum FK vs Keçiörengücü",
     "Tip": "Over 2.5",
-    "Odds": "1.82",
-    "Date": "2026-10-08T17:30:00+00:00"
+    "Odds": "1.90",
+    "Date": "2026-10-09T14:00:00+00:00"
   },
   {
-    "League": "ASEAN Club Championship",
-    "Match": "Home United vs Công An Nhân Dân",
+    "League": "Ykkösliiga",
+    "Match": "Haka vs PK-35",
     "Tip": "Over 2.5",
-    "Odds": "1.80",
-    "Date": "2026-10-08T11:30:00+00:00"
+    "Odds": "1.81",
+    "Date": "2026-10-09T16:00:00+00:00"
   },
   {
-    "League": "Liga Alef",
-    "Match": "Tira vs Ironi Nesher",
+    "League": "First Division",
+    "Match": "Cobh Ramblers vs Kerry",
     "Tip": "Over 2.5",
-    "Odds": "1.80",
-    "Date": "2026-10-08T17:00:00+00:00",
+    "Odds": "1.79",
+    "Date": "2026-10-09T18:45:00+00:00",
     "locked": true
   }
 ]
