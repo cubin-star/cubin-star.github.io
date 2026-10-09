@@ -1,5 +1,21 @@
 [
   {
+    "league": "Veikkausliiga",
+    "homeTeam": "SJK",
+    "awayTeam": "Lahti",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "1:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-10-09T15:00:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 1:0 | xG: 1.72 | Shots: 12/6 | winXG: 1.55 | losingXG: 0.17 losingSOT: 3 | @HT | Pre O2.5: 1.72"
+  },
+  {
     "league": "1. Lig",
     "homeTeam": "Bodrum FK",
     "awayTeam": "Keçiörengücü",
