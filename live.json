@@ -1,1 +1,37 @@
-[]
+[
+  {
+    "League": "Liga Leumit",
+    "Match": "Ironi Modi'in vs Hapoel Afula",
+    "Tip": "Over 1.5",
+    "Odds": "1.21",
+    "Date": "2026-10-09T13:00:00+00:00"
+  },
+  {
+    "League": "Premier League",
+    "Match": "Asia Talas vs Toktogul",
+    "Tip": "Over 1.5",
+    "Odds": "1.18",
+    "Date": "2026-10-09T13:00:00+00:00"
+  },
+  {
+    "League": "Copa Santa Catarina",
+    "Match": "Nação vs Marcílio Dias",
+    "Tip": "Over 1.5",
+    "Odds": "1.19",
+    "Date": "2026-10-09T18:00:00+00:00"
+  },
+  {
+    "League": "J3 League",
+    "Match": "Nara Club vs Kitakyushu",
+    "Tip": "Over 1.5",
+    "Odds": "1.18",
+    "Date": "2026-10-10T05:00:00+00:00"
+  },
+  {
+    "League": "J1 League",
+    "Match": "FC Tokyo vs Urawa",
+    "Tip": "Over 1.5",
+    "Odds": "1.18",
+    "Date": "2026-10-10T06:00:00+00:00"
+  }
+]
