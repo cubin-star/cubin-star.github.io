@@ -1,5 +1,21 @@
 [
   {
+    "league": "1. Lig",
+    "homeTeam": "Bodrum FK",
+    "awayTeam": "Keçiörengücü",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "0:1",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-10-09T14:00:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 0:1 | xG: 1.14 | Shots: 18/6 | winXG: 0.76 | losingXG: 0.38 losingSOT: 2 | @HT | Pre O2.5: 1.7"
+  },
+  {
     "league": "UEFA Nations League",
     "homeTeam": "Moldova",
     "awayTeam": "Slovakia",
