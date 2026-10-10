@@ -1,5 +1,45 @@
 [
   {
+    "sport": "hockey",
+    "league": "Metal Ligaen",
+    "match": "Odense Bulldogs vs Rodovre Mighty Bulls",
+    "tip": "Over 3.5",
+    "odds": "1.18",
+    "date": "2026-10-09T17:00:00+00:00",
+    "score": "3:0",
+    "result": "✗"
+  },
+  {
+    "sport": "football",
+    "league": "Liga Leumit",
+    "match": "Ironi Modi'in vs Hapoel Afula",
+    "tip": "Over 1.5",
+    "odds": "1.21",
+    "date": "2026-10-09T13:00:00+00:00",
+    "score": "1:2",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "J1 League",
+    "match": "Kashiwa Reysol vs Vissel Kobe",
+    "tip": "Over 1.5",
+    "odds": "1.25",
+    "date": "2026-10-09T10:00:00+00:00",
+    "score": "4:2",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "K League 1",
+    "match": "Daejeon Citizen vs Jeonbuk Motors",
+    "tip": "Over 1.5",
+    "odds": "1.22",
+    "date": "2026-10-09T05:00:00+00:00",
+    "score": "2:1",
+    "result": "✓"
+  },
+  {
     "sport": "football",
     "league": "Serie A",
     "match": "Atletico Paranaense vs Atletico-MG",
@@ -1957,46 +1997,6 @@
     "odds": "1.19",
     "date": "2026-07-22T01:00:00+00:00",
     "score": "2:1",
-    "result": "✓"
-  },
-  {
-    "sport": "basketball",
-    "league": "Governors Cup",
-    "match": "Meralco Bolts vs Blackwater Bossing",
-    "tip": "Over 197.5",
-    "odds": "1.20",
-    "date": "2026-07-21T09:15:00+00:00",
-    "score": "116:114",
-    "result": "✓"
-  },
-  {
-    "sport": "basketball",
-    "league": "NBA W",
-    "match": "Toronto Tempo W vs Las Vegas Aces W",
-    "tip": "Over 171.5",
-    "odds": "1.24",
-    "date": "2026-07-21T00:00:00+00:00",
-    "score": "83:109",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Allsvenskan",
-    "match": "Kalmar FF vs Malmo FF",
-    "tip": "Over 1.5",
-    "odds": "1.19",
-    "date": "2026-07-20T17:00:00+00:00",
-    "score": "2:2",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Superettan",
-    "match": "Norrby IF vs GIF Sundsvall",
-    "tip": "Over 1.5",
-    "odds": "1.26",
-    "date": "2026-07-20T17:00:00+00:00",
-    "score": "3:1",
     "result": "✓"
   }
 ]
