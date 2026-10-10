@@ -1,5 +1,21 @@
 [
   {
+    "league": "Liga MX",
+    "homeTeam": "Tigres UANL",
+    "awayTeam": "Toluca",
+    "tip": "Over 3.5",
+    "odds": "",
+    "halftimeScore": "2:1",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-10-10T03:00:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 2:1 | xG: 2.08 | Shots: 18/13 | winXG: 1.58 | losingXG: 0.50 losingSOT: 3 | @HT | Pre O2.5: 1.68"
+  },
+  {
     "league": "Primera División",
     "homeTeam": "Deportivo Garcilaso",
     "awayTeam": "Sport Huancayo",
