@@ -109,6 +109,10 @@ const CUP_RE = /\bcup\b|\bcupen\b|\bpokal\b|\bpokalen\b|\bcopa\b|\bcoupe\b|\bcop
 // Pohary nizsich/mladeznickych urovni - nepatri mezi hlavni domaci pohary (T2).
 const LOW_CUP_RE = /\bfa trophy\b|\bfa vase\b|\bleague trophy\b|\befl trophy\b|\bpremier league cup\b|\bnational league cup\b|\bchallenge cup\b|\bcopa federacion\b|\bregional|\bcopa paulista\b|\bcopa rio\b|\bcopa santa catarina\b|\bcopa gaucha\b|\bsuper copa international\b|\bcoppa italia serie [cd]\b/;
 
+// Brazilske statni ligy (Campeonato Carioca, Gaucho, Mineiro, Paulista...) -
+// druhe a nizsi divize techto regionalnich soutezi jsou poloamaterske.
+const STATE_LEAGUE_RE = /\bcarioca\b|\bgaucho\b|\bmineiro\b|\bpaulista\b|\bpaulistao\b|\bcatarinense\b|\bparanaense\b|\bparaibano\b|\bcearense\b|\bbaiano\b|\bpernambucano\b|\bgoiano\b|\bbrasiliense\b|\bmatogrossense\b|\bsergipano\b|\balagoano\b|\bpotiguar\b|\bcapixaba\b|\bamazonense\b|\bmaranhense\b|\bpiauiense\b|\bacreano\b|\brondoniense\b|\btocantinense\b|\bsul matogrossense\b/;
+
 // Zeme, kde nazev neprozradi uroven ligy (Championship, 1. Division...) -> rucni mapa.
 // Klic = normalizovana zeme, hodnota = [uroven, [normalizovane podretezce nazvu]].
 const LEVEL_OVERRIDES = {
@@ -308,6 +312,15 @@ function leagueTier(name,country,type){
     // Spanelske RFEF souteze jsou az 3.-5. uroven, ale nazev obsahuje
     // 'segunda division' / 'primera division' ze seznamu T1/T2 -> odchytit driv.
     if(c==='spain'&&/\brfef\b|\bfederacion\b/.test(n))return 4;
+    // Brazilske/argentinske statni a regionalni ligy nizsich urovni (Carioca B2,
+    // Gaucho - 3, Paraibano 2, Catarinense - 3, Mineiro - 3...) jsou poloamaterske
+    // a v log zaplavuji T4. Nazev je 'statni liga' + cislo urovne -> vyradit.
+    if(STATE_LEAGUE_RE.test(n)){
+        if(/\b([2-9]|b\d?|a[2-9])\b/.test(n))return 0;
+        // Nejvyssi statni divize (Paulista A1, Carioca, Mineiro) jsou sice kvalitni,
+        // ale je to regionalni soutez - nepatri do T3 vedle nejvyssich ligy zemi.
+        return 4;
+    }
     if(c==='world'){
         if(/uefa champions league|uefa europa league|uefa (europa )?conference league/.test(n))return 1;
         // Klubove kontinentalni pohary mimo UEFA -> T3 (musi byt pred NAT_T2_RE).
