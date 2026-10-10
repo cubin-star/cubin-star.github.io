@@ -1,5 +1,21 @@
 [
   {
+    "league": "Liga MX",
+    "homeTeam": "Puebla",
+    "awayTeam": "Leon",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "0:1",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-10-10T01:00:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 0:1 | xG: 1.30 | Shots: 14/7 | winXG: 0.84 | losingXG: 0.46 losingSOT: 4 | @HT | Pre O2.5: 1.86"
+  },
+  {
     "league": "Liga Profesional Argentina",
     "homeTeam": "Union Santa Fe",
     "awayTeam": "Defensa Y Justicia",
