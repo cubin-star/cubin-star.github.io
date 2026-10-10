@@ -1,5 +1,20 @@
 [
-  
+  {
+    "league": "Thai League 1",
+    "homeTeam": "Uthai Thani",
+    "awayTeam": "Rasi Salai United",
+    "tip": "Over 3.5",
+    "odds": "",
+    "halftimeScore": "2:1",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-10-10T12:00:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 2:1 | xG: 1.52 | Shots: 25/13 | winXG: 0.83 | losingXG: 0.69 losingSOT: 8 | @HT | Pre O2.5: 1.69"
+  },
   {
     "league": "UEFA Nations League",
     "homeTeam": "Moldova",
