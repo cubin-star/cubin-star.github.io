@@ -1,5 +1,21 @@
 [
   {
+    "league": "Premiership",
+    "homeTeam": "Dundee Utd",
+    "awayTeam": "Hibernian",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "1:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-10-10T14:00:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 1:0 | xG: 1.40 | Shots: 16/7 | winXG: 1.03 | losingXG: 0.37 losingSOT: 3 | @HT | Pre O2.5: 1.62"
+  },
+  {
     "league": "Thai League 1",
     "homeTeam": "Uthai Thani",
     "awayTeam": "Rasi Salai United",
