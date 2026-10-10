@@ -1,23 +1,23 @@
 [
   {
     "league": "Primeira Liga",
-    "match": "Moreirense - GIL Vicente",
-    "kickoff": "2026-10-09T19:45:00+02:00",
+    "match": "Casa Pia - Santa Clara",
+    "kickoff": "2026-10-10T16:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.25"
+    "odds": "2.35"
   },
   {
-    "league": "Ligue 2",
-    "match": "Sochaux - Boulogne",
-    "kickoff": "2026-10-09T20:00:00+02:00",
+    "league": "Serie C",
+    "match": "Ferroviária - Inter De Limeira",
+    "kickoff": "2026-10-10T22:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.24"
+    "odds": "2.21"
   },
   {
-    "league": "Primera A",
-    "match": "Alianza Valledupar - Águilas Doradas",
-    "kickoff": "2026-10-10T01:00:00+02:00",
+    "league": "Serie B",
+    "match": "Virtus Entella - Juve Stabia",
+    "kickoff": "2026-10-10T15:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.17"
+    "odds": "2.13"
   }
 ]

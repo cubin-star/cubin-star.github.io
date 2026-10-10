@@ -1,50 +1,50 @@
 [
   {
-    "league": "1. Lig",
-    "match": "Ümraniyespor - Sarıyer",
-    "kickoff": "2026-10-09T19:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.12",
+    "league": "Premier League",
+    "match": "Obolon'-Brovar - Kryvbas KR",
+    "kickoff": "2026-10-10T12:00:00+02:00",
+    "tip": "Away win",
+    "odds": "2.27",
     "group": 1
   },
   {
-    "league": "Ligue 2",
-    "match": "Sochaux - Boulogne",
-    "kickoff": "2026-10-09T20:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.24",
+    "league": "Championship",
+    "match": "Derby - Wrexham",
+    "kickoff": "2026-10-10T16:00:00+02:00",
+    "tip": "Away win",
+    "odds": "2.38",
     "group": 1
   },
   {
-    "league": "Primeira Liga",
-    "match": "Moreirense - GIL Vicente",
-    "kickoff": "2026-10-09T19:45:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.25",
+    "league": "Premier League",
+    "match": "Aston Villa - Brentford",
+    "kickoff": "2026-10-10T16:00:00+02:00",
+    "tip": "Away win",
+    "odds": "2.45",
     "group": 2
   },
   {
-    "league": "J3 League",
-    "match": "Kochi United - Parceiro Nagano",
-    "kickoff": "2026-10-10T07:00:00+02:00",
-    "tip": "Over 2.5",
+    "league": "Major League Soccer",
+    "match": "Minnesota United FC - Houston Dynamo",
+    "kickoff": "2026-10-11T02:30:00+02:00",
+    "tip": "Home win",
     "odds": "2.10",
     "group": 2
   },
   {
-    "league": "Ligue 1",
-    "match": "JS Kabylie - ASO Chlef",
-    "kickoff": "2026-10-09T18:45:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.15",
+    "league": "Süper Lig",
+    "match": "Gençlerbirliği S.K. - Amed",
+    "kickoff": "2026-10-10T12:30:00+02:00",
+    "tip": "Away win",
+    "odds": "2.12",
     "group": 3
   },
   {
-    "league": "Primera A",
-    "match": "Alianza Valledupar - Águilas Doradas",
-    "kickoff": "2026-10-10T01:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.17",
+    "league": "Bundesliga",
+    "match": "Union Berlin - SV Elversberg",
+    "kickoff": "2026-10-10T15:30:00+02:00",
+    "tip": "Home win",
+    "odds": "2.40",
     "group": 3
   }
 ]

@@ -1,23 +1,23 @@
 [
   {
-    "league": "K League 1",
-    "match": "FC Seoul - Jeju United FC",
-    "kickoff": "2026-10-10T07:00:00+02:00",
+    "league": "Ekstraklasa",
+    "match": "Cracovia Krakow - Zaglebie Lubin",
+    "kickoff": "2026-10-10T14:45:00+02:00",
+    "tip": "Home win",
+    "odds": "1.85"
+  },
+  {
+    "league": "Czech Liga",
+    "match": "Bohemians 1905 - Baník Ostrava",
+    "kickoff": "2026-10-10T18:00:00+02:00",
     "tip": "Over 2.5",
     "odds": "1.75"
   },
   {
-    "league": "Liga I",
-    "match": "Corvinul Hunedoara - FC Voluntari",
-    "kickoff": "2026-10-09T17:00:00+02:00",
+    "league": "Ligue 1",
+    "match": "Lorient - Paris FC",
+    "kickoff": "2026-10-10T20:45:00+02:00",
     "tip": "Over 2.5",
-    "odds": "1.78"
-  },
-  {
-    "league": "Jupiler Pro League",
-    "match": "SK Beveren - Lommel United",
-    "kickoff": "2026-10-09T20:45:00+02:00",
-    "tip": "Home win",
-    "odds": "1.80"
+    "odds": "1.89"
   }
 ]
