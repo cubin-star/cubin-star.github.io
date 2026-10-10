@@ -1,8 +1,8 @@
 [
   {
-    "league": "Liga MX",
-    "homeTeam": "Puebla",
-    "awayTeam": "Leon",
+    "league": "Primera División",
+    "homeTeam": "Deportivo Garcilaso",
+    "awayTeam": "Sport Huancayo",
     "tip": "Over 1.5",
     "odds": "",
     "halftimeScore": "0:1",
@@ -13,7 +13,7 @@
     "kickoff": "2026-10-10T01:00:00.000Z",
     "resolvedAt": "",
     "source": "whisper-football",
-    "scoutStats": "Whisper xG-rate surge | HT 0:1 | xG: 1.30 | Shots: 14/7 | winXG: 0.84 | losingXG: 0.46 losingSOT: 4 | @HT | Pre O2.5: 1.86"
+    "scoutStats": "Whisper xG-rate surge | HT 0:1 | xG: 1.68 | Shots: 19/6 | winXG: 1.08 | losingXG: 0.60 losingSOT: 2 | @HT | Pre O2.5: 1.895"
   },
   {
     "league": "Liga Profesional Argentina",
