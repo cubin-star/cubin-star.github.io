@@ -33,7 +33,12 @@ const MAX_PER_TIER = { 1: 6, 2: 4, 3: 2, 4: 1 };
 // Bez toho by pri 4 kandidatech v T1 a stropu 6 byl vyber deterministicky -
 // vzali by se proste vsichni ctyri. Takhle se ze 4 kandidatu vyberou max 2.
 const MAX_TIER_SHARE = 0.5;
-const EXCLUDED_COUNTRIES = new Set(['Russia', 'Belarus']);
+// Ukrajina je vyrazena kvuli valce - zapasy se casto prerusuji poplachy,
+// nedostanou se do tempa a vysledky jsou tim nepredvidatelne.
+const EXCLUDED_COUNTRIES = new Set(['Russia', 'Belarus', 'Ukraine']);
+// Normalizovana podoba vyrazenych zemi pro leagueTier() - zajisti, ze se
+// zadna jejich soutez (vcetne poharu) nedostane do zadneho tieru.
+const WAR_COUNTRIES = new Set(['russia', 'belarus', 'ukraine']);
 const TZ = 'Europe/Prague';
 const USER_AGENT = 'kombik-bot/1.0 (+github-actions)';
 // Zdroje (URL), jejichz zapasy NESMI byt vybrany (jine boty vybiraji podobne) -> dedup
@@ -111,7 +116,7 @@ const LOW_CUP_RE = /\bfa trophy\b|\bfa vase\b|\bleague trophy\b|\befl trophy\b|\
 
 // Brazilske statni ligy (Campeonato Carioca, Gaucho, Mineiro, Paulista...) -
 // druhe a nizsi divize techto regionalnich soutezi jsou poloamaterske.
-const STATE_LEAGUE_RE = /\bcarioca\b|\bgaucho\b|\bmineiro\b|\bpaulista\b|\bpaulistao\b|\bcatarinense\b|\bparanaense\b|\bparaibano\b|\bcearense\b|\bbaiano\b|\bpernambucano\b|\bgoiano\b|\bbrasiliense\b|\bmatogrossense\b|\bsergipano\b|\balagoano\b|\bpotiguar\b|\bcapixaba\b|\bamazonense\b|\bmaranhense\b|\bpiauiense\b|\bacreano\b|\brondoniense\b|\btocantinense\b|\bsul matogrossense\b/;
+const STATE_LEAGUE_RE = /\bcarioca\b|\bgaucho\b|\bmineiro\b|\bpaulista\b|\bpaulistao\b|\bcatarinense\b|\bparanaense\b|\bparaense\b|\bparaibano\b|\bcearense\b|\bbaiano\b|\bpernambucano\b|\bgoiano\b|\bbrasiliense\b|\bmatogrossense\b|\bsergipano\b|\balagoano\b|\bpotiguar\b|\bcapixaba\b|\bamazonense\b|\bmaranhense\b|\bpiauiense\b|\bacreano\b|\brondoniense\b|\broraimense\b|\btocantinense\b|\bsul matogrossense\b/;
 
 // Zeme, kde nazev neprozradi uroven ligy (Championship, 1. Division...) -> rucni mapa.
 // Klic = normalizovana zeme, hodnota = [uroven, [normalizovane podretezce nazvu]].
@@ -242,6 +247,7 @@ const TIER1_LEAGUES = {
 const TIER2_LEAGUES = {
     'england':      ['championship'],
     'brazil':       ['serie a'],
+    'argentina':    ['liga profesional','primera division','torneo betano'],
     'finland':      ['veikkausliiga'],
     'ireland':      ['premier division'],
     'republic of ireland':['premier division'],
@@ -306,6 +312,9 @@ function matchesList(list,c,n){
 function leagueTier(name,country,type){
     const n=norm(name),c=norm(country);
     if(EXCLUDE_RE.some(re=>re.test(n)))return 0;
+    // Valkou zasazene zeme - zapasy se prerusuji leteckymi poplachy, vysledky
+    // jsou proto nepredvidatelne. Vyradit vcetne poharu a nizsich soutezi.
+    if(WAR_COUNTRIES.has(c))return 0;
     // Pohary nizsich urovni odchytit drive, nez se nazev chytne na seznam T1/T2
     // ('Premier League Cup' obsahuje 'premier league').
     if(LOW_CUP_RE.test(n))return 4;
