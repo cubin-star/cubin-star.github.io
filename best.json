@@ -1,23 +1,23 @@
 [
   {
-    "league": "Primeira Liga",
-    "match": "Casa Pia - Santa Clara",
-    "kickoff": "2026-10-10T16:30:00+02:00",
+    "league": "NPFL",
+    "match": "Abia Warriors - Rivers United",
+    "kickoff": "2026-10-11T17:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.46"
+  },
+  {
+    "league": "Super League 1",
+    "match": "Iraklis 1908 - Levadiakos",
+    "kickoff": "2026-10-11T16:00:00+02:00",
     "tip": "Over 2.5",
     "odds": "2.35"
   },
   {
-    "league": "Serie C",
-    "match": "Ferroviária - Inter De Limeira",
-    "kickoff": "2026-10-10T22:00:00+02:00",
+    "league": "Liga Profesional Argentina",
+    "match": "Talleres Cordoba - Independiente",
+    "kickoff": "2026-10-12T02:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.21"
-  },
-  {
-    "league": "Serie B",
-    "match": "Virtus Entella - Juve Stabia",
-    "kickoff": "2026-10-10T15:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.13"
+    "odds": "2.30"
   }
 ]

@@ -1,16 +1,16 @@
 [
   {
-    "league": "La Liga",
-    "match": "Alaves - Atletico Madrid",
-    "kickoff": "2026-10-10T16:15:00+02:00",
+    "league": "Eliteserien",
+    "match": "Fredrikstad - Tromso",
+    "kickoff": "2026-10-11T14:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "1.84"
+    "odds": "1.86"
   },
   {
-    "league": "Liga MX",
-    "match": "FC Juarez - Club Tijuana",
-    "kickoff": "2026-10-11T01:00:00+02:00",
+    "league": "Segunda División",
+    "match": "Almeria - Leganes",
+    "kickoff": "2026-10-11T16:15:00+02:00",
     "tip": "Over 2.5",
-    "odds": "1.85"
+    "odds": "1.75"
   }
 ]

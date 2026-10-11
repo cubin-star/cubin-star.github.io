@@ -1,23 +1,23 @@
 [
   {
-    "league": "Ekstraklasa",
-    "match": "Cracovia Krakow - Zaglebie Lubin",
-    "kickoff": "2026-10-10T14:45:00+02:00",
-    "tip": "Home win",
-    "odds": "1.85"
-  },
-  {
     "league": "Czech Liga",
-    "match": "Bohemians 1905 - Baník Ostrava",
-    "kickoff": "2026-10-10T18:00:00+02:00",
+    "match": "Teplice - Sigma Olomouc",
+    "kickoff": "2026-10-11T15:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "1.75"
+    "odds": "1.83"
   },
   {
-    "league": "Ligue 1",
-    "match": "Lorient - Paris FC",
-    "kickoff": "2026-10-10T20:45:00+02:00",
+    "league": "La Liga",
+    "match": "Elche - Celta Vigo",
+    "kickoff": "2026-10-11T14:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "1.89"
+    "odds": "1.90"
+  },
+  {
+    "league": "Primeira Liga",
+    "match": "Arouca - Estrela",
+    "kickoff": "2026-10-11T21:30:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "1.86"
   }
 ]
