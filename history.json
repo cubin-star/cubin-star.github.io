@@ -1,5 +1,35 @@
 [
   {
+    "sport": "football",
+    "league": "Ligue 1",
+    "match": "Lorient vs Paris FC",
+    "tip": "Over 1.5",
+    "odds": "1.29",
+    "date": "2026-10-10T18:45:00+00:00",
+    "score": "1:0",
+    "result": "✗"
+  },
+  {
+    "sport": "hockey",
+    "league": "HockeyEttan Sodra",
+    "match": "Hanvikens vs Tingsryd",
+    "tip": "Over 3.5",
+    "odds": "1.19",
+    "date": "2026-10-10T14:00:00+00:00",
+    "score": "2:4",
+    "result": "✓"
+  },
+  {
+    "sport": "hockey",
+    "league": "Asia League",
+    "match": "Nikko Ice Bucks vs Tohoku Free Blades",
+    "tip": "Over 3.5",
+    "odds": "1.18",
+    "date": "2026-10-10T05:00:00+00:00",
+    "score": "5:2",
+    "result": "✓"
+  },
+  {
     "sport": "hockey",
     "league": "Metal Ligaen",
     "match": "Odense Bulldogs vs Rodovre Mighty Bulls",
@@ -1967,36 +1997,6 @@
     "odds": "1.20",
     "date": "2026-07-23T00:15:00+00:00",
     "score": "2:2",
-    "result": "✓"
-  },
-  {
-    "sport": "basketball",
-    "league": "NBA W",
-    "match": "Washington Mystics W vs Las Vegas Aces W",
-    "tip": "Over 149.5",
-    "odds": "1.19",
-    "date": "2026-07-22T23:30:00+00:00",
-    "score": "100:99",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "UEFA Europa Conference League",
-    "match": "Bohemians vs Ballkani",
-    "tip": "Over 1.5",
-    "odds": "1.29",
-    "date": "2026-07-22T17:00:00+00:00",
-    "score": "2:1",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Liga MX",
-    "match": "Cruz Azul vs Puebla",
-    "tip": "Over 1.5",
-    "odds": "1.19",
-    "date": "2026-07-22T01:00:00+00:00",
-    "score": "2:1",
     "result": "✓"
   }
 ]
