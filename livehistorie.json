@@ -1,5 +1,21 @@
 [
   {
+    "league": "Major League Soccer",
+    "homeTeam": "Austin",
+    "awayTeam": "Nashville SC",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "0:1",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-10-11T00:30:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 0:1 | xG: 2.05 | Shots: 16/4 | winXG: 1.60 | losingXG: 0.45 losingSOT: 2 | @HT | Pre O2.5: 1.7"
+  },
+  {
     "league": "Liga MX",
     "homeTeam": "Club Queretaro",
     "awayTeam": "Atlante FC",
