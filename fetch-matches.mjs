@@ -33,6 +33,16 @@ const MAX_PER_TIER = { 1: 6, 2: 4, 3: 2, 4: 1 };
 // Bez toho by pri 4 kandidatech v T1 a stropu 6 byl vyber deterministicky -
 // vzali by se proste vsichni ctyri. Takhle se ze 4 kandidatu vyberou max 2.
 const MAX_TIER_SHARE = 0.5;
+// === Golovy filtr (merkky blacklist) =======================================
+// Namereno skriptem measure-goals.mjs do league-goals.json. Pouziva se POUZE
+// na tipy Over 2.5 - v ligach, kde historicky padaji 3+ goly pod touto hranici,
+// je i kurz 2,3 past (Argentina ~38 %, Libertadores ~33 %, Ghana ~23 %).
+// Home win / Away win se netyka, tam golovost nic nevypovida.
+const GOALS_FILE = 'league-goals.json';
+// Pod touto uspesnosti Over 2.5 (v %) se soutez povazuje za golove chudou.
+const MIN_OVER25_RATE = 40;
+// Statistika z mensiho poctu zapasu je nahodny sum - takovou ligu nefiltrujeme.
+const GOALS_MIN_SAMPLE = 60;
 // Ukrajina je vyrazena kvuli valce - zapasy se casto prerusuji poplachy,
 // nedostanou se do tempa a vysledky jsou tim nepredvidatelne.
 const EXCLUDED_COUNTRIES = new Set(['Russia', 'Belarus', 'Ukraine']);
@@ -468,6 +478,53 @@ async function getLeagueOdds(leagueId,season,date,bet=5){
 
 function generatePairings(indices){const results=[];function recurse(rem,cur){if(rem.length===0){results.push([...cur]);return;}if(rem.length===1){results.push([...cur,[rem[0]]]);return;}const first=rem[0],rest=rem.slice(1);for(let i=0;i<rest.length;i++){cur.push([first,rest[i]]);recurse(rest.filter((_,j)=>j!==i),cur);cur.pop();}}recurse(indices,[]);return results;}
 
+// Nacte namerenou golovost soutezi (league-goals.json). Kdyz soubor chybi nebo
+// je rozbity, vrati prazdnou mapu - filtr se pak proste neuplatni a bot bezi
+// presne jako driv.
+function loadGoalStats(){
+    const map=new Map();
+    try{
+        if(!existsSync(GOALS_FILE)){console.log('Golove statistiky: '+GOALS_FILE+' nenalezen, filtr se neuplatni');return map;}
+        const data=JSON.parse(readFileSync(GOALS_FILE,'utf-8'));
+        for(const r of data||[]){
+            if(r?.name==null||r?.country==null)continue;
+            if(typeof r.over25Rate!=='number'||typeof r.played!=='number')continue;
+            map.set(norm(r.name)+'|'+norm(r.country),{over25Rate:r.over25Rate,played:r.played});
+        }
+        console.log('Golove statistiky: '+map.size+' soutezi nacteno');
+    }catch(e){console.warn('Golove statistiky: chyba cteni ('+e.message+'), filtr se neuplatni');}
+    return map;
+}
+
+// true = soutez je golove chuda a tip Over 2.5 v ni nedava smysl.
+// Rozhoduje jen pri dostatecnem vzorku; neznama soutez projde.
+function isLowScoring(goalStats,leagueName,country){
+    const st=goalStats.get(norm(leagueName)+'|'+norm(country));
+    if(!st||st.played<GOALS_MIN_SAMPLE)return false;
+    return st.over25Rate<MIN_OVER25_RATE;
+}
+
+// Merkky filtr: golove chude souteze z poolu odstrani jen tehdy, kdyz po
+// odstraneni zbyde dost kandidatu na naplneni tiketu. Ve slaby den (ctvrtek,
+// pauza na reprezentaci) se filtr sam vypne, aby aplikace nezustaly prazdne.
+function applyGoalFilter(pool,goalStats,needed,label){
+    if(goalStats.size===0)return pool;
+    const kept=[],dropped=[];
+    for(const m of pool){
+        // Filtrujeme vyhradne Over 2.5 - u Home/Away win golovost nevypovida nic.
+        if(m.tip==='Over 2.5'&&isLowScoring(goalStats,m.league,m.country))dropped.push(m);
+        else kept.push(m);
+    }
+    if(dropped.length===0)return pool;
+    if(kept.length<needed){
+        console.log('Golovy filtr ('+label+'): PRESKOCEN - po filtru by zbylo jen '+kept.length+' z '+needed+' potrebnych (slaby den)');
+        return pool;
+    }
+    console.log('Golovy filtr ('+label+'): odstraneno '+dropped.length+' tipu z golove chudych soutezi (zbyva '+kept.length+')');
+    for(const m of dropped)console.log('   - LOW: '+m.match+' | '+m.league+' ('+m.country+')');
+    return kept;
+}
+
 function balanceGroups(picks){
     const indices=picks.map((_,i)=>i);const allP=generatePairings(indices);
     let bestP=null,bestD=Infinity;
@@ -549,6 +606,15 @@ async function main(){
         react2Pool=react2Pool.filter(m=>!isDuplicate(m,dedupSet));
         console.log('Dedup (react2): odstraneno '+(react2Before-react2Pool.length)+' duplicit');
     }
+
+    // 3) Golovy filtr - vyradi Over 2.5 v soutezich, kde historicky skoro nepada
+    // 3+ golu. Pri nedostatku kandidatu se sam vypne, aby slaby den neznamenal
+    // prazdny vyber.
+    const goalStats=loadGoalStats();
+    pool=applyGoalFilter(pool,goalStats,PICK_COUNT,'hot');
+    tipsPool=applyGoalFilter(tipsPool,goalStats,TIPS_PICK_COUNT,'tips');
+    react1Pool=applyGoalFilter(react1Pool,goalStats,REACT1_PICK_COUNT,'react1');
+    react2Pool=applyGoalFilter(react2Pool,goalStats,REACT2_PICK_COUNT,'react2');
 
     const tier1=shuffle(pool.filter(m=>m.tier===1)),tier2=shuffle(pool.filter(m=>m.tier===2)),tier3=shuffle(pool.filter(m=>m.tier===3)),tier4=shuffle(pool.filter(m=>m.tier===4));
     console.log('Tier 1: '+tier1.length+', Tier 2: '+tier2.length+', Tier 3: '+tier3.length+', Tier 4: '+tier4.length+'\n');
