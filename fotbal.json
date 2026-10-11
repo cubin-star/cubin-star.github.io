@@ -1,24 +1,24 @@
 [
   {
-    "League": "National League - South",
-    "Match": "Weston-super-Mare vs Folkestone Invicta",
+    "League": "La Liga",
+    "Match": "Real Betis vs Osasuna",
     "Tip": "Over 2.5",
-    "Odds": "1.92",
-    "Date": "2026-10-10T14:00:00+00:00"
+    "Odds": "1.81",
+    "Date": "2026-10-11T16:30:00+00:00"
   },
   {
-    "League": "National League - North",
-    "Match": "Worksop Town vs Morecambe",
+    "League": "Primeira Liga",
+    "Match": "Arouca vs Estrela",
     "Tip": "Over 2.5",
-    "Odds": "1.75",
-    "Date": "2026-10-10T14:00:00+00:00"
+    "Odds": "1.93",
+    "Date": "2026-10-11T19:30:00+00:00"
   },
   {
-    "League": "1. Lig",
-    "Match": "Iğdır FK vs Batman Petrolspor",
+    "League": "Jupiler Pro League",
+    "Match": "Standard Liege vs Charleroi",
     "Tip": "Over 2.5",
-    "Odds": "1.80",
-    "Date": "2026-10-10T13:00:00+00:00",
+    "Odds": "1.85",
+    "Date": "2026-10-11T11:30:00+00:00",
     "locked": true
   }
 ]
