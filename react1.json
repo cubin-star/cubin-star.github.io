@@ -1,23 +1,23 @@
 [
   {
-    "league": "Czech Liga",
-    "match": "Teplice - Sigma Olomouc",
-    "kickoff": "2026-10-11T15:00:00+02:00",
+    "league": "Allsvenskan",
+    "match": "Malmo FF - Kalmar FF",
+    "kickoff": "2026-10-12T19:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "1.83"
+    "odds": "1.75"
   },
   {
-    "league": "La Liga",
-    "match": "Elche - Celta Vigo",
-    "kickoff": "2026-10-11T14:00:00+02:00",
+    "league": "Liga I",
+    "match": "Universitatea Cluj - Rapid",
+    "kickoff": "2026-10-12T20:00:00+02:00",
     "tip": "Over 2.5",
     "odds": "1.90"
   },
   {
-    "league": "Primeira Liga",
-    "match": "Arouca - Estrela",
-    "kickoff": "2026-10-11T21:30:00+02:00",
+    "league": "Super Liga",
+    "match": "Mladost Lucani - OFK Beograd",
+    "kickoff": "2026-10-12T20:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "1.86"
+    "odds": "1.82"
   }
 ]
