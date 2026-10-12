@@ -1,5 +1,21 @@
 [
   {
+    "league": "Segunda División",
+    "homeTeam": "Oviedo",
+    "awayTeam": "Eibar",
+    "tip": "Over 2.5",
+    "odds": "",
+    "halftimeScore": "2:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-10-12T16:30:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 2:0 | xG: 2.37 | Shots: 21/9 | winXG: 1.37 | losingXG: 1.00 losingSOT: 4 | @HT | Pre O2.5: 2.21"
+  },
+  {
     "league": "Ekstraklasa",
     "homeTeam": "Radomiak Radom",
     "awayTeam": "Motor Lublin",
