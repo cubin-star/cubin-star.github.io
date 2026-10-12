@@ -1,24 +1,24 @@
 [
   {
-    "League": "La Liga",
-    "Match": "Real Betis vs Osasuna",
+    "League": "Süper Lig",
+    "Match": "Eyüpspor vs Göztepe",
     "Tip": "Over 2.5",
-    "Odds": "1.81",
-    "Date": "2026-10-11T16:30:00+00:00"
+    "Odds": "1.78",
+    "Date": "2026-10-12T17:00:00+00:00"
   },
   {
-    "League": "Primeira Liga",
-    "Match": "Arouca vs Estrela",
+    "League": "Premier League",
+    "Match": "Coventry vs Newcastle",
     "Tip": "Over 2.5",
-    "Odds": "1.93",
-    "Date": "2026-10-11T19:30:00+00:00"
+    "Odds": "1.75",
+    "Date": "2026-10-12T19:00:00+00:00"
   },
   {
-    "League": "Jupiler Pro League",
-    "Match": "Standard Liege vs Charleroi",
+    "League": "Primera División RFEF - Group 1",
+    "Match": "Cultural Leonesa vs Arenas Getxo",
     "Tip": "Over 2.5",
-    "Odds": "1.85",
-    "Date": "2026-10-11T11:30:00+00:00",
+    "Odds": "1.80",
+    "Date": "2026-10-12T14:00:00+00:00",
     "locked": true
   }
 ]
