@@ -1,5 +1,35 @@
 [
   {
+    "sport": "basketball",
+    "league": "SLB",
+    "match": "Sheffield Sharks vs Leicester Riders",
+    "tip": "Over 158.5",
+    "odds": "1.30",
+    "date": "2026-10-11T15:00:00+00:00",
+    "score": "85:75",
+    "result": "✓"
+  },
+  {
+    "sport": "hockey",
+    "league": "ICE Hockey League",
+    "match": "Fehervar AV19 vs Graz99ers",
+    "tip": "Over 3.5",
+    "odds": "1.22",
+    "date": "2026-10-11T14:00:00+00:00",
+    "score": "2:3",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "Serie A",
+    "match": "Lazio vs Monza",
+    "tip": "Over 1.5",
+    "odds": "1.24",
+    "date": "2026-10-11T13:00:00+00:00",
+    "score": "3:1",
+    "result": "✓"
+  },
+  {
     "sport": "football",
     "league": "Ligue 1",
     "match": "Lorient vs Paris FC",
@@ -1967,36 +1997,6 @@
     "odds": "1.20",
     "date": "2026-07-24T07:30:00+00:00",
     "score": "122:76",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Serie A",
-    "match": "Corinthians vs Remo",
-    "tip": "Over 1.5",
-    "odds": "1.30",
-    "date": "2026-07-23T22:30:00+00:00",
-    "score": "3:0",
-    "result": "✓"
-  },
-  {
-    "sport": "basketball",
-    "league": "NBL",
-    "match": "Bay Hawks vs Wellington Saints",
-    "tip": "Over 174.5",
-    "odds": "1.18",
-    "date": "2026-07-23T07:00:00+00:00",
-    "score": "82:107",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Major League Soccer",
-    "match": "Charlotte vs Atlanta United FC",
-    "tip": "Over 1.5",
-    "odds": "1.20",
-    "date": "2026-07-23T00:15:00+00:00",
-    "score": "2:2",
     "result": "✓"
   }
 ]
