@@ -1,58 +1,16 @@
 [
   {
     "League": "I Liga",
-    "Match": "Stal Mielec vs Warta Poznań",
+    "Match": "Stal Rzeszów vs Lechia Gdansk",
     "Tip": "Over 1.5",
-    "Odds": "1.16",
-    "Date": "2026-10-11T10:00:00+00:00"
+    "Odds": "1.14",
+    "Date": "2026-10-12T16:00:00+00:00"
   },
   {
-    "League": "Super League",
-    "Match": "Sogdiana vs Lokomotiv",
-    "Tip": "Over 1.5",
-    "Odds": "1.15",
-    "Date": "2026-10-11T11:00:00+00:00"
-  },
-  {
-    "League": "Serie A",
-    "Match": "Lazio vs Monza",
-    "Tip": "Over 1.5",
-    "Odds": "1.24",
-    "Date": "2026-10-11T13:00:00+00:00"
-  },
-  {
-    "League": "Regionalliga - Nordost",
-    "Match": "SV Babelsberg 03 vs Lokomotive Leipzig",
+    "League": "Ekstraklasa",
+    "Match": "GKS Katowice vs Wieczysta Kraków",
     "Tip": "Over 1.5",
     "Odds": "1.12",
-    "Date": "2026-10-11T14:00:00+00:00"
-  },
-  {
-    "League": "National Division",
-    "Match": "Wiltz vs UNA Strassen",
-    "Tip": "Over 1.5",
-    "Odds": "1.12",
-    "Date": "2026-10-11T14:00:00+00:00"
-  },
-  {
-    "League": "NB I",
-    "Match": "Budapest Honved vs Ujpest",
-    "Tip": "Over 1.5",
-    "Odds": "1.15",
-    "Date": "2026-10-11T14:45:00+00:00"
-  },
-  {
-    "League": "Segunda División RFEF - Group 4",
-    "Match": "Mijas Las Lagunas vs Sevilla Atletico",
-    "Tip": "Over 1.5",
-    "Odds": "1.31",
-    "Date": "2026-10-11T16:00:00+00:00"
-  },
-  {
-    "League": "Primeira Liga",
-    "Match": "Arouca vs Estrela",
-    "Tip": "Over 1.5",
-    "Odds": "1.25",
-    "Date": "2026-10-11T19:30:00+00:00"
+    "Date": "2026-10-12T18:30:00+00:00"
   }
 ]
