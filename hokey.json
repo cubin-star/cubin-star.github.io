@@ -1,8 +1,14 @@
 [
   {
-    "league": "Hockey Allsvenskan",
-    "match": "Almtuna vs Nybro",
+    "league": "Ligue Magnus",
+    "match": "Rouen vs Angers",
     "tip": "Over 5.5",
-    "odds": "1.94"
+    "odds": "1.75"
+  },
+  {
+    "league": "Hockey Allsvenskan",
+    "match": "AIK vs Ostersund",
+    "tip": "Over 5.5",
+    "odds": "1.82"
   }
 ]
