@@ -1,16 +1,16 @@
 [
   {
-    "league": "Süper Lig",
-    "match": "Eyüpspor - Göztepe",
-    "kickoff": "2026-10-12T19:00:00+02:00",
+    "league": "Championship",
+    "match": "Millwall - Swansea",
+    "kickoff": "2026-10-13T20:45:00+02:00",
     "tip": "Over 2.5",
-    "odds": "1.78"
+    "odds": "1.83"
   },
   {
-    "league": "Veikkausliiga",
-    "match": "VPS - Gnistan",
-    "kickoff": "2026-10-12T17:00:00+02:00",
+    "league": "1. Lig",
+    "match": "Bandırmaspor - Sivasspor",
+    "kickoff": "2026-10-13T13:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "1.77"
+    "odds": "1.87"
   }
 ]

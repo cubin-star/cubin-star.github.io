@@ -1,23 +1,23 @@
 [
   {
-    "league": "Allsvenskan",
-    "match": "Malmo FF - Kalmar FF",
-    "kickoff": "2026-10-12T19:00:00+02:00",
-    "tip": "Over 2.5",
+    "league": "Championship",
+    "match": "Queen's Park - Inverness CT",
+    "kickoff": "2026-10-13T20:45:00+02:00",
+    "tip": "Away win",
     "odds": "1.75"
   },
   {
-    "league": "Liga I",
-    "match": "Universitatea Cluj - Rapid",
-    "kickoff": "2026-10-12T20:00:00+02:00",
+    "league": "Championship",
+    "match": "Burnley - Charlton",
+    "kickoff": "2026-10-13T20:45:00+02:00",
     "tip": "Over 2.5",
-    "odds": "1.90"
+    "odds": "1.80"
   },
   {
-    "league": "Super Liga",
-    "match": "Mladost Lucani - OFK Beograd",
-    "kickoff": "2026-10-12T20:00:00+02:00",
+    "league": "1. Lig",
+    "match": "Pendikspor - Vanspor FK",
+    "kickoff": "2026-10-13T19:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "1.82"
+    "odds": "1.79"
   }
 ]
