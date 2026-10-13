@@ -768,7 +768,10 @@ async function main(){
         console.log('   react2: dobiram '+missing+' zapasu z druheho trhu (nedostatek kandidatu)');
         react2PickMarket(gotOver<REACT2_OVER_COUNT?isWinner:isOver,missing,'dobrani');
     }
-    const react2=balanceGroups(react2Selected).map(m=>({league:m.league,match:m.match,kickoff:m.kickoff,tip:m.tip,odds:m.odds,group:m.group}));
+    // Promichej, aby v tiketu nesly 3 Over za sebou a pak 3 vitezove - skupiny
+    // by jinak vzdy vysly jako "cisty Over" vs "cisty vitez".
+    const react2Mixed=shuffle(react2Selected);
+    const react2=balanceGroups(react2Mixed).map(m=>({league:m.league,match:m.match,kickoff:m.kickoff,tip:m.tip,odds:m.odds,group:m.group}));
     writeFileSync('react2.json',JSON.stringify(react2,null,2),'utf-8');
     console.log('\nreact2.json: '+react2.length+'/'+REACT2_PICK_COUNT+' zapasu ('+MIN_ODDS+'-'+MAX_ODDS+')');
     console.log('   Slozeni trhu: Over 2.5='+react2Selected.filter(isOver).length+', Home/Away win='+react2Selected.filter(isWinner).length);
