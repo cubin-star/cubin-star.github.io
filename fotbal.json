@@ -1,24 +1,24 @@
 [
   {
-    "League": "Süper Lig",
-    "Match": "Eyüpspor vs Göztepe",
+    "League": "1. Lig",
+    "Match": "Pendikspor vs Vanspor FK",
     "Tip": "Over 2.5",
-    "Odds": "1.78",
-    "Date": "2026-10-12T17:00:00+00:00"
+    "Odds": "1.88",
+    "Date": "2026-10-13T17:00:00+00:00"
   },
   {
-    "League": "Premier League",
-    "Match": "Coventry vs Newcastle",
+    "League": "Regionalliga - Bayern",
+    "Match": "Greuther Fürth II vs Memmingen",
     "Tip": "Over 2.5",
-    "Odds": "1.75",
-    "Date": "2026-10-12T19:00:00+00:00"
+    "Odds": "1.87",
+    "Date": "2026-10-13T17:00:00+00:00"
   },
   {
-    "League": "Primera División RFEF - Group 1",
-    "Match": "Cultural Leonesa vs Arenas Getxo",
+    "League": "AFC Champions League Elite",
+    "Match": "Buriram United vs Beijing Guoan",
     "Tip": "Over 2.5",
-    "Odds": "1.80",
-    "Date": "2026-10-12T14:00:00+00:00",
+    "Odds": "1.76",
+    "Date": "2026-10-13T12:15:00+00:00",
     "locked": true
   }
 ]
