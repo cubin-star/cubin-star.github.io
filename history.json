@@ -1,5 +1,35 @@
 [
   {
+    "sport": "football",
+    "league": "La Liga",
+    "match": "Levante vs Sevilla",
+    "tip": "Over 1.5",
+    "odds": "1.33",
+    "date": "2026-10-12T19:00:00+00:00",
+    "score": "3:3",
+    "result": "✓"
+  },
+  {
+    "sport": "hockey",
+    "league": "Metal Ligaen",
+    "match": "Herlev vs Aalborg",
+    "tip": "Over 3.5",
+    "odds": "1.22",
+    "date": "2026-10-12T17:00:00+00:00",
+    "score": "3:1",
+    "result": "✓"
+  },
+  {
+    "sport": "basketball",
+    "league": "Energa Basket Liga",
+    "match": "Ostrow Wielkopolski vs Gornik Walbrzych",
+    "tip": "Over 158.5",
+    "odds": "1.31",
+    "date": "2026-10-12T17:00:00+00:00",
+    "score": "65:81",
+    "result": "✗"
+  },
+  {
     "sport": "basketball",
     "league": "SLB",
     "match": "Sheffield Sharks vs Leicester Riders",
@@ -1967,36 +1997,6 @@
     "odds": "1.26",
     "date": "2026-07-25T15:30:00+00:00",
     "score": "2:1",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Liga MX",
-    "match": "Club Tijuana vs Leon",
-    "tip": "Over 1.5",
-    "odds": "1.19",
-    "date": "2026-07-25T03:00:00+00:00",
-    "score": "1:0",
-    "result": "✗"
-  },
-  {
-    "sport": "football",
-    "league": "Ekstraklasa",
-    "match": "Radomiak Radom vs Wieczysta Kraków",
-    "tip": "Over 1.5",
-    "odds": "1.21",
-    "date": "2026-07-24T16:00:00+00:00",
-    "score": "2:1",
-    "result": "✓"
-  },
-  {
-    "sport": "basketball",
-    "league": "NBL",
-    "match": "Manawatu Jets vs Franklin Bulls",
-    "tip": "Over 175.5",
-    "odds": "1.20",
-    "date": "2026-07-24T07:30:00+00:00",
-    "score": "122:76",
     "result": "✓"
   }
 ]
