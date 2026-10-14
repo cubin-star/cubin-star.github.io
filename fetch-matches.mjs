@@ -820,7 +820,15 @@ async function main(){
     // Oba trhy se vybiraji samostatne (vlastni tierove kose i stropy), ale sdileji
     // omezeni na ligu, zemi a zapas, aby se nic neopakovalo napric tiketem.
     const react2Selected=[],react2UsedLeagues=new Set(),react2Countries=new Map(),react2TierCount={1:0,2:0,3:0,4:0};
-    const react2SeenFixtures=new Set(react1UsedFixtures);
+    // Blokuj zapasy, ktere uz vybral hot.json, tips.json i react1.json - jinak by
+    // se tytez zapasy objevily ve dvou aplikacich zaroven. selectedIds uz obsahuje
+    // hot i tips, react1UsedFixtures pak react1.
+    const react2SeenFixtures=new Set([...selectedIds,...react1UsedFixtures]);
+    {
+        const free=react2Pool.filter(m=>!react2SeenFixtures.has(m.fixtureId));
+        const uniq=new Set(free.map(m=>m.fixtureId)).size;
+        console.log('react2 pool: '+uniq+' volnych zapasu (Over 2.5: '+new Set(free.filter(m=>m.tip==='Over 2.5').map(m=>m.fixtureId)).size+', z jadra: '+new Set(free.filter(isCore).map(m=>m.fixtureId)).size+')');
+    }
     function react2PickMarket(matchesMarket,want,label,coreWant=0){
         const buckets={1:[],2:[],3:[],4:[]};
         const seenHere=new Set();
