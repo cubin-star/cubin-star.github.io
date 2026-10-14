@@ -1,50 +1,50 @@
 [
   {
-    "league": "Ligue 1",
-    "match": "US Biskra - MC Oran",
-    "kickoff": "2026-10-13T16:00:00+02:00",
+    "league": "J-League Cup",
+    "match": "Sagan Tosu - Avispa Fukuoka",
+    "kickoff": "2026-10-14T12:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.50",
-    "group": 1
-  },
-  {
-    "league": "Superliga",
-    "match": "Ballkani - Drita",
-    "kickoff": "2026-10-13T14:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.10",
+    "odds": "2.06",
     "group": 1
   },
   {
     "league": "Botola Pro",
-    "match": "FUS Rabat - Raja Casablanca",
-    "kickoff": "2026-10-13T22:00:00+02:00",
+    "match": "Ittihad Tanger - Maghreb Fès",
+    "kickoff": "2026-10-14T22:00:00+02:00",
     "tip": "Over 2.5",
     "odds": "2.45",
-    "group": 2
+    "group": 1
   },
   {
-    "league": "Division 1",
-    "match": "Al Bukayriyah - Al Zulfi",
-    "kickoff": "2026-10-13T17:15:00+02:00",
+    "league": "Super League 2",
+    "match": "Olympiakos Piraeus II - Kallithea",
+    "kickoff": "2026-10-14T13:45:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.18",
+    "odds": "2.08",
     "group": 2
   },
   {
-    "league": "Ligue 2",
-    "match": "US Chaouia - Paradou AC",
-    "kickoff": "2026-10-13T16:00:00+02:00",
+    "league": "Cup",
+    "match": "Bokelj - Buducnost Podgorica",
+    "kickoff": "2026-10-14T15:00:00+02:00",
     "tip": "Over 2.5",
     "odds": "2.41",
+    "group": 2
+  },
+  {
+    "league": "3. liga - CFL B",
+    "match": "Baník Souš - Benátky nad Jizerou",
+    "kickoff": "2026-10-14T15:30:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "1.96",
     "group": 3
   },
   {
-    "league": "Premier League",
-    "match": "National Bank of Egypt - El Geish",
-    "kickoff": "2026-10-13T16:00:00+02:00",
+    "league": "Ligue 1",
+    "match": "ES Setif - JS Kabylie",
+    "kickoff": "2026-10-14T19:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.40",
+    "odds": "2.52",
     "group": 3
   }
 ]

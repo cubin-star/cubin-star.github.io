@@ -1,23 +1,23 @@
 [
   {
-    "league": "Championship",
-    "match": "Queen's Park - Inverness CT",
-    "kickoff": "2026-10-13T20:45:00+02:00",
-    "tip": "Away win",
+    "league": "Major League Soccer",
+    "match": "FC Cincinnati - New England Revolution",
+    "kickoff": "2026-10-15T01:30:00+02:00",
+    "tip": "Home win",
     "odds": "1.75"
   },
   {
-    "league": "Championship",
-    "match": "Burnley - Charlton",
-    "kickoff": "2026-10-13T20:45:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "1.80"
+    "league": "UEFA Champions League",
+    "match": "Feyenoord - Como",
+    "kickoff": "2026-10-14T18:45:00+02:00",
+    "tip": "Away win",
+    "odds": "1.93"
   },
   {
-    "league": "1. Lig",
-    "match": "Pendikspor - Vanspor FK",
-    "kickoff": "2026-10-13T19:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "1.79"
+    "league": "1. Division",
+    "match": "Stromsgodset - Kongsvinger",
+    "kickoff": "2026-10-14T19:00:00+02:00",
+    "tip": "Home win",
+    "odds": "1.78"
   }
 ]

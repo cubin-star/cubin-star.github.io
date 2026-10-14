@@ -1,50 +1,50 @@
 [
   {
-    "league": "Botola Pro",
-    "match": "Renaissance Berkane - CR Khemis Zemamra",
-    "kickoff": "2026-10-13T20:00:00+02:00",
+    "league": "Cup",
+    "match": "Bokelj - Buducnost Podgorica",
+    "kickoff": "2026-10-14T15:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.12",
+    "odds": "2.41",
     "group": 1
   },
   {
-    "league": "Ligue 2",
-    "match": "CA Batna - Khroub",
-    "kickoff": "2026-10-13T16:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.33",
+    "league": "1. Division",
+    "match": "Sogndal - ODD Ballklubb",
+    "kickoff": "2026-10-14T19:00:00+02:00",
+    "tip": "Away win",
+    "odds": "1.96",
     "group": 1
   },
   {
-    "league": "Premier League",
-    "match": "Petrojet - Wadi Degla",
-    "kickoff": "2026-10-13T19:00:00+02:00",
+    "league": "Major League Soccer",
+    "match": "Colorado Rapids - Minnesota United FC",
+    "kickoff": "2026-10-15T03:30:00+02:00",
+    "tip": "Home win",
+    "odds": "2.16",
+    "group": 2
+  },
+  {
+    "league": "Super League 2",
+    "match": "Olympiakos Piraeus II - Kallithea",
+    "kickoff": "2026-10-14T13:45:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.19",
+    "odds": "2.08",
     "group": 2
   },
   {
     "league": "1. Lig",
-    "match": "Bandırmaspor - Sivasspor",
-    "kickoff": "2026-10-13T13:30:00+02:00",
-    "tip": "Home win",
-    "odds": "2.15",
-    "group": 2
-  },
-  {
-    "league": "AFC Champions League Two",
-    "match": "Al Seeb - Al Hussein",
-    "kickoff": "2026-10-13T18:00:00+02:00",
+    "match": "Antalyaspor - Kayserispor",
+    "kickoff": "2026-10-14T19:00:00+02:00",
     "tip": "Away win",
-    "odds": "2.44",
+    "odds": "2.32",
     "group": 3
   },
   {
-    "league": "UEFA Champions League",
-    "match": "Sabah FA - Slavia Praha",
-    "kickoff": "2026-10-13T18:45:00+02:00",
-    "tip": "Away win",
-    "odds": "2.10",
+    "league": "J-League Cup",
+    "match": "Sagan Tosu - Avispa Fukuoka",
+    "kickoff": "2026-10-14T12:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.06",
     "group": 3
   }
 ]
