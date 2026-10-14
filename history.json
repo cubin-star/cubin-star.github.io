@@ -1,6 +1,46 @@
 [
   {
     "sport": "football",
+    "league": "Non League Premier - Southern Central",
+    "match": "Peterborough Sports vs Banbury United",
+    "tip": "Over 1.5",
+    "odds": "1.21",
+    "date": "2026-10-13T18:45:00+00:00",
+    "score": "4:2",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "Championship",
+    "match": "Burnley vs Charlton",
+    "tip": "Over 1.5",
+    "odds": "1.26",
+    "date": "2026-10-13T18:45:00+00:00",
+    "score": "2:2",
+    "result": "✓"
+  },
+  {
+    "sport": "hockey",
+    "league": "Swiss League",
+    "match": "Visp vs Chur",
+    "tip": "Over 3.5",
+    "odds": "1.24",
+    "date": "2026-10-13T17:30:00+00:00",
+    "score": "3:2",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "1. Lig",
+    "match": "Sarıyer vs Bodrum FK",
+    "tip": "Over 1.5",
+    "odds": "1.32",
+    "date": "2026-10-13T14:00:00+00:00",
+    "score": "1:4",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
     "league": "La Liga",
     "match": "Levante vs Sevilla",
     "tip": "Over 1.5",
@@ -1957,46 +1997,6 @@
     "odds": "1.31",
     "date": "2026-07-26T22:30:00+00:00",
     "score": "1:2",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Ekstraklasa",
-    "match": "Widzew Łódź vs Motor Lublin",
-    "tip": "Over 1.5",
-    "odds": "1.26",
-    "date": "2026-07-26T15:30:00+00:00",
-    "score": "2:2",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Division Intermedia",
-    "match": "Sportivo Carapeguá vs General Caballero",
-    "tip": "Over 1.5",
-    "odds": "1.21",
-    "date": "2026-07-26T13:00:00+00:00",
-    "score": "1:2",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Ekstraklasa",
-    "match": "Gornik Zabrze vs Slask Wroclaw",
-    "tip": "Over 1.5",
-    "odds": "1.25",
-    "date": "2026-07-25T15:30:00+00:00",
-    "score": "2:1",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Allsvenskan",
-    "match": "Kalmar FF vs Mjallby AIF",
-    "tip": "Over 1.5",
-    "odds": "1.26",
-    "date": "2026-07-25T15:30:00+00:00",
-    "score": "2:1",
     "result": "✓"
   }
 ]
