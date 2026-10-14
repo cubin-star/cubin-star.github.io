@@ -3,17 +3,30 @@ import { writeFileSync, existsSync, readFileSync } from 'fs';
 const API_KEY = process.env.API_FOOTBALL_KEY1;
 
 const FOOTBALL_API = 'https://v3.football.api-sports.io';
-const MIN_ODDS = 2.1;
-const MAX_ODDS = 2.5;
+// === Kurzova pasma =========================================================
+// Drive byly pasy dva oddelene ostruvky (1.75-1.90 a 2.10-2.50) a mezi nimi
+// mrtva zona, do ktere padala vetsina Over 2.5 ze slusnych ligy (Championship
+// @ 2.05 nebyla pouzitelna nikde). Nove je to souvisle spektrum, jehoz useky se
+// prekryvaji - o zarazeni zapasu tak rozhoduje kvalita souteze, ne kurz.
+const ODDS_COLLECT_MIN = 1.70;
+const ODDS_COLLECT_MAX = 2.60;
+const MIN_ODDS = 1.95;   // hot.json
+const MAX_ODDS = 2.60;
 const PICK_COUNT = 6;
 // Samostatny denni vyber do tips.json - nizsi kurzovy pas, primarne tier 1+2,
 // pri nedostatku se dobira z tieru 3 a 4. Max jeden zapas z ligy.
-const TIPS_MIN_ODDS = 1.75;
-const TIPS_MAX_ODDS = 1.9;
+const TIPS_MIN_ODDS = 1.70;
+const TIPS_MAX_ODDS = 2.00;
 const TIPS_PICK_COUNT = 2;
-// Samostatny denni vyber do react1.json - stejny kurzovy pas jako tips.json,
+// Samostatny denni vyber do react1.json - mirne sirsi pas nez tips.json,
 // prednostne tier 1, pak tier 2, pri nedostatku tier 3/4. Max jeden zapas z ligy.
+const REACT1_MIN_ODDS = 1.75;
+const REACT1_MAX_ODDS = 2.10;
 const REACT1_PICK_COUNT = 3;
+// Minimalni pocet bookmakeru, kteri musi dany kurz nabizet. Misto medianu (ktery
+// zapasy na hrane pasma zbytecne strhaval dolu) se bere nejvyssi kurz, na kterem
+// se shodne aspon tolik sazkovek - chrani pred ojedinelou chybou v kurzu.
+const MIN_BOOKMAKERS = 3;
 // react2.json - stejna vyberova logika i kurzovy pas jako hot.json (2.1-2.5, vazeny
 // vyber tieru, stropy, limit zeme/ligy, rozdeleni do skupin), ale tipy jsou jako
 // u react1.json, tedy Over 2.5 / Home win / Away win.
@@ -36,6 +49,27 @@ const MAX_PER_TIER = { 1: 6, 2: 4, 3: 2, 4: 1 };
 // Bez toho by pri 4 kandidatech v T1 a stropu 6 byl vyber deterministicky -
 // vzali by se proste vsichni ctyri. Takhle se ze 4 kandidatu vyberou max 2.
 const MAX_TIER_SHARE = 0.5;
+// === Jadro "prezentovatelnych" soutezi =====================================
+// Tier je jen vaha v losovani - kdyz v T1/T2 nic neni, vahy jsou k nicemu a
+// vyhraje alzirska druha liga. Jadro je tvrda podminka: v kazdem tiketu musi
+// byt aspon CORE_MIN_* zapasu ze souteze, kterou divak zna. Jadro = T1 a T2
+// (top ligy, jejich druhe ligy, UEFA pohary, domaci pohary top zemi) plus
+// vyjmenovane silne mimoevropske ligy.
+const CORE_EXTRA_COUNTRIES = new Set([
+    'usa','brazil','argentina','mexico','japan','south korea','saudi arabia','australia',
+]);
+function isCore(m){
+    if(m.tier===1||m.tier===2)return true;
+    // Z mimoevropskych zemi jen nejvyssi soutez (T3), ne pohary a nizsi divize.
+    return m.tier===3&&CORE_EXTRA_COUNTRIES.has(norm(m.country));
+}
+// Minimalni pocet zapasu z jadra v jednotlivych vyberech. Kdyz jich tolik
+// neexistuje, kvota se snizi na to, co je k dispozici - tiket ma vzdy plny
+// pocet zapasu, jen je slabsi.
+const CORE_MIN_HOT = 4;
+const CORE_MIN_REACT2 = 4;
+const CORE_MIN_REACT1 = 2;
+const CORE_MIN_TIPS = 2;
 // === Golovy filtr (merkky blacklist) =======================================
 // Namereno skriptem measure-goals.mjs do league-goals.json. Pouziva se POUZE
 // na tipy Over 2.5 - v ligach, kde historicky padaji 3+ goly pod touto hranici,
@@ -390,6 +424,15 @@ function shuffle(arr){for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.ra
 function fmtDate(d){return d.toISOString().split('T')[0];}
 // Stredni (medianovy) kurz - pro sudy pocet prumer dvou prostrednich hodnot
 function median(arr){if(!arr||arr.length===0)return NaN;const s=[...arr].sort((a,b)=>a-b);const mid=Math.floor(s.length/2);return s.length%2!==0?s[mid]:(s[mid-1]+s[mid])/2;}
+// Nejvyssi kurz, ktery nabizi aspon MIN_BOOKMAKERS sazkovek. Median zapasy na
+// hrane pasma zbytecne strhaval dolu (2.05 a 2.15 -> 2.10), tohle naopak vezme
+// nejlepsi realne dostupny kurz, ale jen pokud ho potvrdi vic bookmakeru.
+function bestOdds(arr){
+    if(!arr||arr.length===0)return NaN;
+    const s=[...arr].sort((a,b)=>b-a);
+    if(s.length<MIN_BOOKMAKERS)return median(s);
+    return s[MIN_BOOKMAKERS-1];
+}
 // --- Deduplikace proti existujicim json souborum jinych botu -----------------
 function normTeam(s){return String(s||'').toLowerCase().replace(/\s+/g,' ').trim();}
 function normDate(s){return String(s||'').slice(0,10);}
@@ -528,6 +571,26 @@ function applyGoalFilter(pool,goalStats,needed,label){
     return kept;
 }
 
+// Preference golovejsich soutezi: mezi dvema stejne dobrymi kandidaty na Over 2.5
+// vyhrava liga s vyssim over25Rate. Tip zustava vzdy Over 2.5 - u lig pod
+// MIN_OVER25_RATE se nenahrazuje jinym trhem, jen jde na konec fronty.
+function over25Rate(goalStats,m){
+    const st=goalStats.get(norm(m.league)+'|'+norm(m.country));
+    if(!st||st.played<GOALS_MIN_SAMPLE)return 50;
+    return st.over25Rate;
+}
+// Seradi kose tak, ze zapasy s lepsi golovosti jsou na konci pole - vyber je
+// bere pres pop(), takze se saha po nich driv. Netykove trhy zustavaji nahodne.
+function sortByGoals(bucket,goalStats){
+    return bucket.sort((a,b)=>{
+        const ao=a.tip==='Over 2.5',bo=b.tip==='Over 2.5';
+        if(!ao&&!bo)return 0;
+        if(!ao)return 1;
+        if(!bo)return -1;
+        return over25Rate(goalStats,a)-over25Rate(goalStats,b);
+    });
+}
+
 function balanceGroups(picks){
     const indices=picks.map((_,i)=>i);const allP=generatePairings(indices);
     let bestP=null,bestD=Infinity;
@@ -567,28 +630,33 @@ async function main(){
     // Vyrad mladez/zeny/rezervy/pratelaky uplne - nema smysl na ne platit /odds dotazy.
     for(const [k,lg] of leagueMap){if(lg.tier===0)leagueMap.delete(k);}
     console.log('   '+leagueMap.size+' leagues po vyrazeni\n');
-    const candidateMap=new Map();
-    const tipsCandidateMap=new Map();
-    // react1.json ma vlastni pool, kde kazdy zaznam nese i typ tipu (Over 2.5 / Home win / Away win),
-    // proto se klicuje kombinaci fixtureId|tip - jeden zapas tak muze mit vic kandidatu.
-    const react1CandidateMap=new Map();
-    // react2.json pouziva stejne trhy jako react1 (Over 2.5 / Home win / Away win),
-    // ale kurzovy pas jako hot.json (MIN_ODDS-MAX_ODDS).
-    const react2CandidateMap=new Map();
+    // Kandidati se sbiraji jen dvakrat - podle trhu, ne podle vystupniho souboru.
+    // Kurzove pasmo je siroke (ODDS_COLLECT_MIN-MAX) a jednotlive vybery si z nej
+    // pak ukrajuji svuj usek.
+    const overCandidateMap=new Map();
+    // Match Winner kandidati se klicuji kombinaci fixtureId|tip - jeden zapas
+    // tak muze mit zaznam pro Home win i Away win.
+    const winnerCandidateMap=new Map();
     function addCandidate(map,mKey,lg,fix,odd,tip='Over 2.5'){
         if(!map.has(mKey))map.set(mKey,{fixtureId:fix.fixture.id,league:lg.name,country:lg.country,match:fix.teams.home.name+' - '+fix.teams.away.name,kickoff:fix.fixture.date,tip,tier:lg.tier,allOdds:[]});
         map.get(mKey).allOdds.push(odd);
     }
-    for(const[,lg]of leagueMap){for(const d of lg.dates){const oddsData=await getLeagueOdds(lg.id,lg.season,d);for(const entry of oddsData){const fix=fixtureMap.get(entry.fixture?.id);if(!fix)continue;const mKey=fix.fixture.id;for(const bm of entry.bookmakers||[]){for(const bet of bm.bets||[]){for(const v of bet.values||[]){if(v.value!=='Over 2.5')continue;const odd=parseFloat(v.odd);if(isNaN(odd))continue;if(odd>=MIN_ODDS&&odd<=MAX_ODDS){addCandidate(candidateMap,mKey,lg,fix,odd);addCandidate(react2CandidateMap,mKey+'|Over 2.5',lg,fix,odd,'Over 2.5');}if(odd>=TIPS_MIN_ODDS&&odd<=TIPS_MAX_ODDS){addCandidate(tipsCandidateMap,mKey,lg,fix,odd);addCandidate(react1CandidateMap,mKey+'|Over 2.5',lg,fix,odd,'Over 2.5');}}}}};await sleep(450);}}
+    for(const[,lg]of leagueMap){for(const d of lg.dates){const oddsData=await getLeagueOdds(lg.id,lg.season,d);for(const entry of oddsData){const fix=fixtureMap.get(entry.fixture?.id);if(!fix)continue;const mKey=fix.fixture.id;for(const bm of entry.bookmakers||[]){for(const bet of bm.bets||[]){for(const v of bet.values||[]){if(v.value!=='Over 2.5')continue;const odd=parseFloat(v.odd);if(isNaN(odd))continue;if(odd>=ODDS_COLLECT_MIN&&odd<=ODDS_COLLECT_MAX)addCandidate(overCandidateMap,mKey,lg,fix,odd,'Over 2.5');}}}};await sleep(450);}}
     // Extra kolo /odds s bet=1 (Match Winner) - pouzito pro react1.json a react2.json,
     // ostatni soubory zustavaji ciste na Over 2.5.
-    for(const[,lg]of leagueMap){for(const d of lg.dates){const oddsData=await getLeagueOdds(lg.id,lg.season,d,1);for(const entry of oddsData){const fix=fixtureMap.get(entry.fixture?.id);if(!fix)continue;for(const bm of entry.bookmakers||[]){for(const bet of bm.bets||[]){for(const v of bet.values||[]){const tip=v.value==='Home'?'Home win':(v.value==='Away'?'Away win':null);if(!tip)continue;const odd=parseFloat(v.odd);if(isNaN(odd))continue;if(odd>=TIPS_MIN_ODDS&&odd<=TIPS_MAX_ODDS)addCandidate(react1CandidateMap,fix.fixture.id+'|'+tip,lg,fix,odd,tip);if(odd>=MIN_ODDS&&odd<=MAX_ODDS)addCandidate(react2CandidateMap,fix.fixture.id+'|'+tip,lg,fix,odd,tip);}}}};await sleep(450);}}
-    let pool=[...candidateMap.values()].map(m=>({...m,odds:median(m.allOdds).toFixed(2)}));
-    let tipsPool=[...tipsCandidateMap.values()].map(m=>({...m,odds:median(m.allOdds).toFixed(2)})).filter(m=>parseFloat(m.odds)>=TIPS_MIN_ODDS&&parseFloat(m.odds)<=TIPS_MAX_ODDS);
-    let react1Pool=[...react1CandidateMap.values()].map(m=>({...m,odds:median(m.allOdds).toFixed(2)})).filter(m=>parseFloat(m.odds)>=TIPS_MIN_ODDS&&parseFloat(m.odds)<=TIPS_MAX_ODDS);
-    let react2Pool=[...react2CandidateMap.values()].map(m=>({...m,odds:median(m.allOdds).toFixed(2)})).filter(m=>parseFloat(m.odds)>=MIN_ODDS&&parseFloat(m.odds)<=MAX_ODDS);
+    for(const[,lg]of leagueMap){for(const d of lg.dates){const oddsData=await getLeagueOdds(lg.id,lg.season,d,1);for(const entry of oddsData){const fix=fixtureMap.get(entry.fixture?.id);if(!fix)continue;for(const bm of entry.bookmakers||[]){for(const bet of bm.bets||[]){for(const v of bet.values||[]){const tip=v.value==='Home'?'Home win':(v.value==='Away'?'Away win':null);if(!tip)continue;const odd=parseFloat(v.odd);if(isNaN(odd))continue;if(odd>=ODDS_COLLECT_MIN&&odd<=ODDS_COLLECT_MAX)addCandidate(winnerCandidateMap,fix.fixture.id+'|'+tip,lg,fix,odd,tip);}}}};await sleep(450);}}
+    // Kurz = nejlepsi hodnota potvrzena aspon MIN_BOOKMAKERS sazkovkami. Nasbiralo
+    // se siroke pasmo ODDS_COLLECT_MIN-MAX, jednotlive vybery si z nej ukrajuji
+    // svuj usek - useky se prekryvaji, takze dobry zapas nevypadne kvuli kurzu.
+    const overAll=[...overCandidateMap.values()].map(m=>({...m,odds:bestOdds(m.allOdds).toFixed(2)}));
+    const winnerAll=[...winnerCandidateMap.values()].map(m=>({...m,odds:bestOdds(m.allOdds).toFixed(2)}));
+    const inBand=(m,lo,hi)=>parseFloat(m.odds)>=lo&&parseFloat(m.odds)<=hi;
+    let pool=overAll.filter(m=>inBand(m,MIN_ODDS,MAX_ODDS));
+    let tipsPool=overAll.filter(m=>inBand(m,TIPS_MIN_ODDS,TIPS_MAX_ODDS));
+    let react1Pool=[...overAll,...winnerAll].filter(m=>inBand(m,REACT1_MIN_ODDS,REACT1_MAX_ODDS));
+    let react2Pool=[...overAll,...winnerAll].filter(m=>inBand(m,MIN_ODDS,MAX_ODDS));
     console.log('React2 candidates: '+react2Pool.length+' (Over 2.5 / Home win / Away win, odds '+MIN_ODDS+'-'+MAX_ODDS+')');
-    console.log('React1 candidates: '+react1Pool.length+' (Over 2.5 / Home win / Away win, odds '+TIPS_MIN_ODDS+'-'+TIPS_MAX_ODDS+')');
+    console.log('React1 candidates: '+react1Pool.length+' (Over 2.5 / Home win / Away win, odds '+REACT1_MIN_ODDS+'-'+REACT1_MAX_ODDS+')');
     console.log('Tips candidates: '+tipsPool.length+' (Over 2.5, odds '+TIPS_MIN_ODDS+'-'+TIPS_MAX_ODDS+')');
     console.log('Candidates: '+pool.length+' (Over 2.5, odds '+MIN_ODDS+'-'+MAX_ODDS+')');
 
@@ -623,10 +691,13 @@ async function main(){
     console.log('Tier 1: '+tier1.length+', Tier 2: '+tier2.length+', Tier 3: '+tier3.length+', Tier 4: '+tier4.length+'\n');
     // Vazeny nahodny vyber: nejdriv se podle vah vylosuje TIER, teprve pak zapas z nej.
     // Diky tomu pocet zapasu v tieru neovlivnuje jeho sanci (drive 200x T4 prevazilo 5x T1).
+    // Faze 0 nejdriv naplni kvotu zapasu z jadra (CORE_MIN_HOT), aby ve slaby den
+    // nevyhralo losovani par nahodnych exotickych ligy.
     // Faze 1 drzi stropy: pevny MAX_PER_TIER a zaroven podil MAX_TIER_SHARE z poctu
     // kandidatu tieru, aby vyber zustal nahodny i u malych tieru.
     // Faze 2 stropy uvolni, jen kdyby se jinak nepodarilo naplnit PICK_COUNT.
-    const buckets={1:[...tier1],2:[...tier2],3:[...tier3],4:[...tier4]};
+    // Golovejsi souteze jsou na konci kose - vyber bere pres pop(), takze jdou driv.
+    const buckets={1:sortByGoals(tier1,goalStats),2:sortByGoals(tier2,goalStats),3:sortByGoals(tier3,goalStats),4:sortByGoals(tier4,goalStats)};
     const tierCaps={};
     for(const t of [1,2,3,4]){
         const n=buckets[t].length;
@@ -634,6 +705,42 @@ async function main(){
     }
     console.log('Stropy tieru (faze 1): T1='+tierCaps[1]+', T2='+tierCaps[2]+', T3='+tierCaps[3]+', T4='+tierCaps[4]);
     const selected=[],usedLeagues=new Set(),countryCount=new Map(),tierCount={1:0,2:0,3:0,4:0};
+
+    // Kolik zapasu z jadra realne existuje - kvota se nikdy nesmi snazit vybrat vic,
+    // nez je k dispozici, jinak by tiket zustal kratsi.
+    const coreAvail=pool.filter(isCore).length;
+    const coreQuota=Math.min(CORE_MIN_HOT,coreAvail,PICK_COUNT);
+    console.log('Jadro (hot): '+coreAvail+' kandidatu, kvota '+coreQuota+'/'+PICK_COUNT);
+
+    function takePick(m,tier){
+        const lk=m.league+'|'+m.country;
+        if(usedLeagues.has(lk))return false;
+        if((countryCount.get(m.country)||0)>=MAX_PER_COUNTRY)return false;
+        usedLeagues.add(lk);
+        countryCount.set(m.country,(countryCount.get(m.country)||0)+1);
+        tierCount[tier]++;
+        selected.push(m);
+        console.log('   [T'+m.tier+'] '+m.match+' | '+m.league+' ('+m.country+') | Over 2.5 @ '+m.odds+(isCore(m)?' *':''));
+        return true;
+    }
+
+    // Faze 0 - povinna kvota z jadra. Tiery se stale losuji vahami, jen se
+    // ignoruji zapasy mimo jadro.
+    function pickCore(){
+        let coreCount=0;
+        while(coreCount<coreQuota&&selected.length<PICK_COUNT){
+            const avail=[1,2,3,4].filter(t=>buckets[t].some(isCore));
+            if(avail.length===0)return;
+            const totalW=avail.reduce((a,t)=>a+(TIER_WEIGHTS[t]||1),0);
+            let r=Math.random()*totalW,tier=avail[avail.length-1];
+            for(const t of avail){r-=(TIER_WEIGHTS[t]||1);if(r<=0){tier=t;break;}}
+            let idx=-1;
+            for(let i=buckets[tier].length-1;i>=0;i--){if(isCore(buckets[tier][i])){idx=i;break;}}
+            if(idx<0)continue;
+            const m=buckets[tier].splice(idx,1)[0];
+            if(takePick(m,tier))coreCount++;
+        }
+    }
 
     function tryPick(useTierCaps){
         while(selected.length<PICK_COUNT){
@@ -643,30 +750,25 @@ async function main(){
             let r=Math.random()*totalW,tier=avail[avail.length-1];
             for(const t of avail){r-=(TIER_WEIGHTS[t]||1);if(r<=0){tier=t;break;}}
             const m=buckets[tier].pop();
-            const lk=m.league+'|'+m.country;
-            if(usedLeagues.has(lk))continue;
-            if((countryCount.get(m.country)||0)>=MAX_PER_COUNTRY)continue;
-            usedLeagues.add(lk);
-            countryCount.set(m.country,(countryCount.get(m.country)||0)+1);
-            tierCount[tier]++;
-            selected.push(m);
-            console.log('   [T'+m.tier+'] '+m.match+' | '+m.league+' ('+m.country+') | Over 2.5 @ '+m.odds);
+            takePick(m,tier);
         }
     }
 
+    pickCore();
     tryPick(true);
     if(selected.length<PICK_COUNT){
         console.log('   (nedostatek zapasu pri stropech tieru - uvolnuji stropy)');
         tryPick(false);
     }
     console.log('   Rozlozeni tieru: T1='+tierCount[1]+', T2='+tierCount[2]+', T3='+tierCount[3]+', T4='+tierCount[4]);
+    console.log('   Z jadra: '+selected.filter(isCore).length+'/'+PICK_COUNT+' (kvota '+coreQuota+')');
     console.log('\nVybrano: '+selected.length+'/'+PICK_COUNT);
     if(selected.length<PICK_COUNT)console.log('WARNING: Mene nez '+PICK_COUNT+' zapasu.');
-    // === tips.json: 2 nahodne zapasy 1.75-1.9, primarne T1+T2, jinak T3/T4 ====
+    // === tips.json: 2 nahodne zapasy, primarne jadro, pak T1+T2, jinak T3/T4 ====
     const selectedIds=new Set(selected.map(m=>m.fixtureId));
     const tipsSelected=[],tipsUsedLeagues=new Set();
-    function tipsPickFrom(tiers){
-        const bucket=shuffle(tipsPool.filter(m=>tiers.includes(m.tier)&&!selectedIds.has(m.fixtureId)));
+    function tipsPickFrom(tiers,coreOnly=false){
+        const bucket=sortByGoals(shuffle(tipsPool.filter(m=>tiers.includes(m.tier)&&!selectedIds.has(m.fixtureId)&&(!coreOnly||isCore(m)))),goalStats).reverse();
         for(const m of bucket){
             if(tipsSelected.length>=TIPS_PICK_COUNT)return;
             const lk=m.league+'|'+m.country;
@@ -676,7 +778,9 @@ async function main(){
             tipsSelected.push(m);
         }
     }
-    tipsPickFrom([1,2]);
+    // Nejdriv jadro (kvota CORE_MIN_TIPS), pak zbytek - tiket ma vzdy plny pocet.
+    tipsPickFrom([1,2,3,4],true);
+    if(tipsSelected.length<TIPS_PICK_COUNT)tipsPickFrom([1,2]);
     if(tipsSelected.length<TIPS_PICK_COUNT)tipsPickFrom([3,4]);
     const tips=tipsSelected.map(m=>({league:m.league,match:m.match,kickoff:m.kickoff,tip:m.tip,odds:m.odds}));
     writeFileSync('tips.json',JSON.stringify(tips,null,2),'utf-8');
@@ -688,8 +792,8 @@ async function main(){
     // Na rozdil od ostatnich souboru se tu mícha Over 2.5 / Home win / Away win -
     // typ tipu se nijak nevyvazuje, vysledna kombinace je ciste nahodna.
     const react1Selected=[],react1UsedLeagues=new Set(),react1UsedFixtures=new Set();
-    function react1PickFrom(tiers){
-        const bucket=shuffle(react1Pool.filter(m=>tiers.includes(m.tier)&&!selectedIds.has(m.fixtureId)&&!react1UsedFixtures.has(m.fixtureId)));
+    function react1PickFrom(tiers,coreOnly=false){
+        const bucket=sortByGoals(shuffle(react1Pool.filter(m=>tiers.includes(m.tier)&&!selectedIds.has(m.fixtureId)&&!react1UsedFixtures.has(m.fixtureId)&&(!coreOnly||isCore(m)))),goalStats).reverse();
         for(const m of bucket){
             if(react1Selected.length>=REACT1_PICK_COUNT)return;
             const lk=m.league+'|'+m.country;
@@ -700,12 +804,14 @@ async function main(){
             react1Selected.push(m);
         }
     }
-    react1PickFrom([1]);
+    // Nejdriv jadro (kvota CORE_MIN_REACT1), pak klasicky po tierech.
+    react1PickFrom([1,2,3,4],true);
+    if(react1Selected.length<REACT1_PICK_COUNT)react1PickFrom([1]);
     if(react1Selected.length<REACT1_PICK_COUNT)react1PickFrom([2]);
     if(react1Selected.length<REACT1_PICK_COUNT)react1PickFrom([3,4]);
     const react1=react1Selected.map(m=>({league:m.league,match:m.match,kickoff:m.kickoff,tip:m.tip,odds:m.odds}));
     writeFileSync('react1.json',JSON.stringify(react1,null,2),'utf-8');
-    console.log('react1.json: '+react1.length+'/'+REACT1_PICK_COUNT+' zapasu ('+TIPS_MIN_ODDS+'-'+TIPS_MAX_ODDS+')');
+    console.log('react1.json: '+react1.length+'/'+REACT1_PICK_COUNT+' zapasu ('+REACT1_MIN_ODDS+'-'+REACT1_MAX_ODDS+')');
     for(const m of react1Selected)console.log('   [T'+m.tier+'] '+m.match+' | '+m.league+' ('+m.country+') | '+m.tip+' @ '+m.odds);
     if(react1.length<REACT1_PICK_COUNT)console.log('WARNING: react1.json ma mene nez '+REACT1_PICK_COUNT+' zapasu.');
 
@@ -715,7 +821,7 @@ async function main(){
     // omezeni na ligu, zemi a zapas, aby se nic neopakovalo napric tiketem.
     const react2Selected=[],react2UsedLeagues=new Set(),react2Countries=new Map(),react2TierCount={1:0,2:0,3:0,4:0};
     const react2SeenFixtures=new Set(react1UsedFixtures);
-    function react2PickMarket(matchesMarket,want,label){
+    function react2PickMarket(matchesMarket,want,label,coreWant=0){
         const buckets={1:[],2:[],3:[],4:[]};
         const seenHere=new Set();
         // Jeden zapas = max jeden tip, aby se v tiketu neobjevil stejny zapas dvakrat.
@@ -724,6 +830,8 @@ async function main(){
             seenHere.add(m.fixtureId);
             if(buckets[m.tier])buckets[m.tier].push(m);
         }
+        // Golovejsi souteze na konec kose - pop() po nich sahne driv.
+        for(const t of [1,2,3,4])sortByGoals(buckets[t],goalStats);
         const caps={};
         for(const t of [1,2,3,4]){
             const n=buckets[t].length;
@@ -731,6 +839,37 @@ async function main(){
         }
         const tierCount={1:0,2:0,3:0,4:0};
         let got=0;
+        function take(m,tier){
+            const lk=m.league+'|'+m.country;
+            if(react2UsedLeagues.has(lk))return false;
+            if(react2SeenFixtures.has(m.fixtureId))return false;
+            if((react2Countries.get(m.country)||0)>=MAX_PER_COUNTRY)return false;
+            react2UsedLeagues.add(lk);
+            react2SeenFixtures.add(m.fixtureId);
+            react2Countries.set(m.country,(react2Countries.get(m.country)||0)+1);
+            tierCount[tier]++;
+            react2TierCount[tier]++;
+            react2Selected.push(m);
+            got++;
+            return true;
+        }
+        // Faze 0 - kvota zapasu z jadra pro tento trh.
+        function pickCoreHere(){
+            const avail0=buckets[1].concat(buckets[2],buckets[3],buckets[4]).filter(isCore).length;
+            const quota=Math.min(coreWant,avail0,want);
+            let n=0;
+            while(n<quota&&got<want){
+                const avail=[1,2,3,4].filter(t=>buckets[t].some(isCore));
+                if(avail.length===0)return;
+                const totalW=avail.reduce((a,t)=>a+(TIER_WEIGHTS[t]||1),0);
+                let r=Math.random()*totalW,tier=avail[avail.length-1];
+                for(const t of avail){r-=(TIER_WEIGHTS[t]||1);if(r<=0){tier=t;break;}}
+                let idx=-1;
+                for(let i=buckets[tier].length-1;i>=0;i--){if(isCore(buckets[tier][i])){idx=i;break;}}
+                if(idx<0)continue;
+                if(take(buckets[tier].splice(idx,1)[0],tier))n++;
+            }
+        }
         function tryPick(useTierCaps){
             while(got<want){
                 const avail=[1,2,3,4].filter(t=>buckets[t].length>0&&(!useTierCaps||tierCount[t]<caps[t]));
@@ -738,20 +877,10 @@ async function main(){
                 const totalW=avail.reduce((a,t)=>a+(TIER_WEIGHTS[t]||1),0);
                 let r=Math.random()*totalW,tier=avail[avail.length-1];
                 for(const t of avail){r-=(TIER_WEIGHTS[t]||1);if(r<=0){tier=t;break;}}
-                const m=buckets[tier].pop();
-                const lk=m.league+'|'+m.country;
-                if(react2UsedLeagues.has(lk))continue;
-                if(react2SeenFixtures.has(m.fixtureId))continue;
-                if((react2Countries.get(m.country)||0)>=MAX_PER_COUNTRY)continue;
-                react2UsedLeagues.add(lk);
-                react2SeenFixtures.add(m.fixtureId);
-                react2Countries.set(m.country,(react2Countries.get(m.country)||0)+1);
-                tierCount[tier]++;
-                react2TierCount[tier]++;
-                react2Selected.push(m);
-                got++;
+                take(buckets[tier].pop(),tier);
             }
         }
+        if(coreWant>0)pickCoreHere();
         tryPick(true);
         if(got<want)tryPick(false);
         console.log('   react2 '+label+': '+got+'/'+want);
@@ -759,8 +888,10 @@ async function main(){
     }
     const isOver=m=>m.tip==='Over 2.5';
     const isWinner=m=>m.tip==='Home win'||m.tip==='Away win';
-    const gotOver=react2PickMarket(isOver,REACT2_OVER_COUNT,'Over 2.5');
-    const gotWinner=react2PickMarket(isWinner,REACT2_PICK_COUNT-REACT2_OVER_COUNT,'Home/Away win');
+    // Kvota jadra (CORE_MIN_REACT2) se rozdeli mezi oba trhy pomerne k jejich velikosti.
+    const coreOver=Math.round(CORE_MIN_REACT2*REACT2_OVER_COUNT/REACT2_PICK_COUNT);
+    const gotOver=react2PickMarket(isOver,REACT2_OVER_COUNT,'Over 2.5',coreOver);
+    const gotWinner=react2PickMarket(isWinner,REACT2_PICK_COUNT-REACT2_OVER_COUNT,'Home/Away win',CORE_MIN_REACT2-coreOver);
     // Kdyby jeden trh nemel dost kandidatu (slaby den), dobere se tiket z druheho,
     // aby react2.json nikdy nebyl kratsi nez REACT2_PICK_COUNT.
     if(react2Selected.length<REACT2_PICK_COUNT){
@@ -776,6 +907,7 @@ async function main(){
     console.log('\nreact2.json: '+react2.length+'/'+REACT2_PICK_COUNT+' zapasu ('+MIN_ODDS+'-'+MAX_ODDS+')');
     console.log('   Slozeni trhu: Over 2.5='+react2Selected.filter(isOver).length+', Home/Away win='+react2Selected.filter(isWinner).length);
     console.log('   Rozlozeni tieru: T1='+react2TierCount[1]+', T2='+react2TierCount[2]+', T3='+react2TierCount[3]+', T4='+react2TierCount[4]);
+    console.log('   Z jadra: '+react2Selected.filter(isCore).length+'/'+REACT2_PICK_COUNT+' (kvota '+CORE_MIN_REACT2+')');
     for(const m of react2Selected)console.log('   [T'+m.tier+'] '+m.match+' | '+m.league+' ('+m.country+') | '+m.tip+' @ '+m.odds);
     if(react2.length<REACT2_PICK_COUNT)console.log('WARNING: react2.json ma mene nez '+REACT2_PICK_COUNT+' zapasu.');
 
