@@ -1,24 +1,24 @@
 [
   {
+    "League": "Taça de Portugal",
+    "Match": "União Santarém vs GIL Vicente",
+    "Tip": "Over 2.5",
+    "Odds": "1.90",
+    "Date": "2026-10-14T18:00:00+00:00"
+  },
+  {
     "League": "1. Lig",
-    "Match": "Pendikspor vs Vanspor FK",
+    "Match": "Ümraniyespor vs Boluspor",
     "Tip": "Over 2.5",
-    "Odds": "1.88",
-    "Date": "2026-10-13T17:00:00+00:00"
+    "Odds": "1.83",
+    "Date": "2026-10-14T14:00:00+00:00"
   },
   {
-    "League": "Regionalliga - Bayern",
-    "Match": "Greuther Fürth II vs Memmingen",
+    "League": "UEFA Champions League",
+    "Match": "Shakhtar Donetsk vs AEK Athens FC",
     "Tip": "Over 2.5",
-    "Odds": "1.87",
-    "Date": "2026-10-13T17:00:00+00:00"
-  },
-  {
-    "League": "AFC Champions League Elite",
-    "Match": "Buriram United vs Beijing Guoan",
-    "Tip": "Over 2.5",
-    "Odds": "1.76",
-    "Date": "2026-10-13T12:15:00+00:00",
+    "Odds": "1.95",
+    "Date": "2026-10-14T19:00:00+00:00",
     "locked": true
   }
 ]
