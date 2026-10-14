@@ -19,5 +19,37 @@
     "kickoff": "2026-10-14T19:00:00+02:00",
     "tip": "Home win",
     "odds": "1.78"
+  },
+  {
+    "league": "Cup",
+    "match": "Bokelj - Buducnost Podgorica",
+    "kickoff": "2026-10-14T15:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.41",
+    "group": 1
+  },
+  {
+    "league": "1. Division",
+    "match": "Sogndal - ODD Ballklubb",
+    "kickoff": "2026-10-14T19:00:00+02:00",
+    "tip": "Away win",
+    "odds": "1.96",
+    "group": 1
+  },
+  {
+    "league": "Major League Soccer",
+    "match": "Colorado Rapids - Minnesota United FC",
+    "kickoff": "2026-10-15T03:30:00+02:00",
+    "tip": "Home win",
+    "odds": "2.16",
+    "group": 2
+  },
+  {
+    "league": "Super League 2",
+    "match": "Olympiakos Piraeus II - Kallithea",
+    "kickoff": "2026-10-14T13:45:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.08",
+    "group": 2
   }
 ]
