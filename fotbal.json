@@ -1,24 +1,24 @@
 [
   {
-    "League": "Taça de Portugal",
-    "Match": "União Santarém vs GIL Vicente",
+    "League": "1. Lig",
+    "Match": "Muğlaspor vs Bursaspor",
     "Tip": "Over 2.5",
-    "Odds": "1.90",
-    "Date": "2026-10-14T18:00:00+00:00"
+    "Odds": "1.89",
+    "Date": "2026-10-15T17:00:00+00:00"
   },
   {
-    "League": "1. Lig",
-    "Match": "Ümraniyespor vs Boluspor",
+    "League": "I Liga",
+    "Match": "Pogoń Siedlce vs Puszcza Niepołomice",
+    "Tip": "Over 2.5",
+    "Odds": "1.93",
+    "Date": "2026-10-15T16:30:00+00:00"
+  },
+  {
+    "League": "UEFA Europa League",
+    "Match": "Dinamo Zagreb vs Anderlecht",
     "Tip": "Over 2.5",
     "Odds": "1.83",
-    "Date": "2026-10-14T14:00:00+00:00"
-  },
-  {
-    "League": "UEFA Champions League",
-    "Match": "Shakhtar Donetsk vs AEK Athens FC",
-    "Tip": "Over 2.5",
-    "Odds": "1.95",
-    "Date": "2026-10-14T19:00:00+00:00",
+    "Date": "2026-10-15T19:00:00+00:00",
     "locked": true
   }
 ]
