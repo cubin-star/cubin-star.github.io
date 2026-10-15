@@ -1,23 +1,23 @@
 [
   {
-    "league": "Ligue 1",
-    "match": "ES Setif - JS Kabylie",
-    "kickoff": "2026-10-14T19:00:00+02:00",
+    "league": "Premier League",
+    "match": "URA - Entebbe UPPC",
+    "kickoff": "2026-10-15T18:00:00+02:00",
     "tip": "Over 2.5",
     "odds": "2.52"
   },
   {
-    "league": "Botola Pro",
-    "match": "Ittihad Tanger - Maghreb Fès",
-    "kickoff": "2026-10-14T22:00:00+02:00",
+    "league": "Cup",
+    "match": "Petrovac - Kom",
+    "kickoff": "2026-10-15T15:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.45"
+    "odds": "2.31"
   },
   {
-    "league": "Cup",
-    "match": "Bokelj - Buducnost Podgorica",
-    "kickoff": "2026-10-14T15:00:00+02:00",
+    "league": "UEFA Europa League",
+    "match": "Celta Vigo - Juventus",
+    "kickoff": "2026-10-15T21:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.41"
+    "odds": "2.18"
   }
 ]

@@ -1,50 +1,50 @@
 [
   {
-    "league": "Cup",
-    "match": "Bokelj - Buducnost Podgorica",
-    "kickoff": "2026-10-14T15:00:00+02:00",
+    "league": "Premier League",
+    "match": "Express - UPDF",
+    "kickoff": "2026-10-15T15:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.41",
+    "odds": "2.27",
     "group": 1
   },
   {
-    "league": "1. Division",
-    "match": "Sogndal - ODD Ballklubb",
-    "kickoff": "2026-10-14T19:00:00+02:00",
-    "tip": "Away win",
-    "odds": "1.96",
+    "league": "UEFA Europa Conference League",
+    "match": "FC Copenhagen - SC Braga",
+    "kickoff": "2026-10-15T21:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.13",
     "group": 1
   },
   {
-    "league": "Major League Soccer",
-    "match": "Colorado Rapids - Minnesota United FC",
-    "kickoff": "2026-10-15T03:30:00+02:00",
+    "league": "Pro League",
+    "match": "Al Khaleej Saihat - Al-Fayha",
+    "kickoff": "2026-10-15T16:50:00+02:00",
     "tip": "Home win",
-    "odds": "2.16",
+    "odds": "2.11",
     "group": 2
   },
   {
-    "league": "Super League 2",
-    "match": "Olympiakos Piraeus II - Kallithea",
-    "kickoff": "2026-10-14T13:45:00+02:00",
+    "league": "Copa Colombia",
+    "match": "Internacional de Bogota - Llaneros",
+    "kickoff": "2026-10-16T01:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.08",
+    "odds": "2.30",
     "group": 2
   },
   {
     "league": "1. Lig",
-    "match": "Antalyaspor - Kayserispor",
-    "kickoff": "2026-10-14T19:00:00+02:00",
-    "tip": "Away win",
-    "odds": "2.32",
+    "match": "Mardin 1969 - Fatih Karagümrük",
+    "kickoff": "2026-10-15T16:00:00+02:00",
+    "tip": "Home win",
+    "odds": "2.07",
     "group": 3
   },
   {
-    "league": "J-League Cup",
-    "match": "Sagan Tosu - Avispa Fukuoka",
-    "kickoff": "2026-10-14T12:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.06",
+    "league": "UEFA Europa League",
+    "match": "Marseille - Olympiakos Piraeus",
+    "kickoff": "2026-10-15T21:00:00+02:00",
+    "tip": "Home win",
+    "odds": "2.35",
     "group": 3
   }
 ]

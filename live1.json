@@ -1,16 +1,30 @@
 [
   {
-    "league": "J-League Cup",
-    "match": "Sagan Tosu - Avispa Fukuoka",
-    "kickoff": "2026-10-14T12:00:00+02:00",
+    "league": "UEFA Europa League",
+    "match": "Celta Vigo - Juventus",
+    "kickoff": "2026-10-15T21:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.06"
+    "odds": "2.18"
   },
   {
-    "league": "Super League 2",
-    "match": "Olympiakos Piraeus II - Kallithea",
-    "kickoff": "2026-10-14T13:45:00+02:00",
+    "league": "UEFA Europa Conference League",
+    "match": "FC Copenhagen - SC Braga",
+    "kickoff": "2026-10-15T21:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.08"
+    "odds": "2.13"
+  },
+  {
+    "league": "UEFA Europa Conference League",
+    "match": "Riga - Kairat Almaty",
+    "kickoff": "2026-10-15T18:45:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.02"
+  },
+  {
+    "league": "UEFA Europa Conference League",
+    "match": "Universitatea Craiova - Getafe",
+    "kickoff": "2026-10-15T18:45:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.32"
   }
 ]

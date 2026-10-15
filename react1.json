@@ -1,55 +1,51 @@
 [
   {
-    "league": "Major League Soccer",
-    "match": "FC Cincinnati - New England Revolution",
-    "kickoff": "2026-10-15T01:30:00+02:00",
+    "league": "UEFA Europa League",
+    "match": "Ferencvarosi TC - Plzen",
+    "kickoff": "2026-10-15T21:00:00+02:00",
     "tip": "Home win",
-    "odds": "1.75"
+    "odds": "1.95"
   },
   {
-    "league": "UEFA Champions League",
-    "match": "Feyenoord - Como",
-    "kickoff": "2026-10-14T18:45:00+02:00",
+    "league": "UEFA Europa Conference League",
+    "match": "Universitatea Craiova - Getafe",
+    "kickoff": "2026-10-15T18:45:00+02:00",
     "tip": "Away win",
-    "odds": "1.93"
+    "odds": "2.40"
   },
   {
-    "league": "1. Division",
-    "match": "Stromsgodset - Kongsvinger",
-    "kickoff": "2026-10-14T19:00:00+02:00",
-    "tip": "Home win",
-    "odds": "1.78"
-  },
-  {
-    "league": "Cup",
-    "match": "Bokelj - Buducnost Podgorica",
-    "kickoff": "2026-10-14T15:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.41",
-    "group": 1
-  },
-  {
-    "league": "1. Division",
-    "match": "Sogndal - ODD Ballklubb",
-    "kickoff": "2026-10-14T19:00:00+02:00",
+    "league": "1. Lig",
+    "match": "Manisa F.K. - Esenler Erokspor",
+    "kickoff": "2026-10-15T19:00:00+02:00",
     "tip": "Away win",
-    "odds": "1.96",
-    "group": 1
+    "odds": "2.05"
   },
   {
-    "league": "Major League Soccer",
-    "match": "Colorado Rapids - Minnesota United FC",
-    "kickoff": "2026-10-15T03:30:00+02:00",
+    "league": "Pro League",
+    "match": "Al-Ahli Jeddah - Al-Nassr",
+    "kickoff": "2026-10-15T20:00:00+02:00",
+    "tip": "Away win",
+    "odds": "2.10"
+  },
+  {
+    "league": "I Liga",
+    "match": "Pogoń Siedlce - Puszcza Niepołomice",
+    "kickoff": "2026-10-15T18:30:00+02:00",
     "tip": "Home win",
-    "odds": "2.16",
-    "group": 2
+    "odds": "2.55"
   },
   {
-    "league": "Super League 2",
-    "match": "Olympiakos Piraeus II - Kallithea",
-    "kickoff": "2026-10-14T13:45:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.08",
-    "group": 2
+    "league": "League One",
+    "match": "Mansfield Town - Oxford United",
+    "kickoff": "2026-10-15T21:00:00+02:00",
+    "tip": "Home win",
+    "odds": "2.25"
+  },
+  {
+    "league": "Second Division",
+    "match": "Muaither SC - Qatar U23",
+    "kickoff": "2026-10-15T18:45:00+02:00",
+    "tip": "Away win",
+    "odds": "2.30"
   }
 ]
