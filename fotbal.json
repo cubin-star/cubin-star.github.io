@@ -1,24 +1,24 @@
 [
   {
-    "League": "1. Lig",
-    "Match": "Muğlaspor vs Bursaspor",
+    "League": "Süper Lig",
+    "Match": "Çorum FK vs Rizespor",
     "Tip": "Over 2.5",
-    "Odds": "1.89",
-    "Date": "2026-10-15T17:00:00+00:00"
+    "Odds": "1.78",
+    "Date": "2026-10-16T17:00:00+00:00"
   },
   {
-    "League": "I Liga",
-    "Match": "Pogoń Siedlce vs Puszcza Niepołomice",
+    "League": "Cup",
+    "Match": "Standard Liege vs Dender",
     "Tip": "Over 2.5",
-    "Odds": "1.93",
-    "Date": "2026-10-15T16:30:00+00:00"
+    "Odds": "1.86",
+    "Date": "2026-10-16T19:00:00+00:00"
   },
   {
-    "League": "UEFA Europa League",
-    "Match": "Dinamo Zagreb vs Anderlecht",
+    "League": "Ligue 1",
+    "Match": "Le Mans vs Toulouse",
     "Tip": "Over 2.5",
-    "Odds": "1.83",
-    "Date": "2026-10-15T19:00:00+00:00",
+    "Odds": "1.76",
+    "Date": "2026-10-16T18:45:00+00:00",
     "locked": true
   }
 ]
