@@ -1,5 +1,45 @@
 [
   {
+    "sport": "hockey",
+    "league": "NHL",
+    "match": "Ottawa Senators vs New York Islanders",
+    "tip": "Over 3.5",
+    "odds": "1.20",
+    "date": "2026-10-15T23:00:00+00:00",
+    "score": "2:1",
+    "result": "✗"
+  },
+  {
+    "sport": "football",
+    "league": "UEFA Europa League",
+    "match": "Ferencvarosi TC vs Plzen",
+    "tip": "Over 1.5",
+    "odds": "1.19",
+    "date": "2026-10-15T19:00:00+00:00",
+    "score": "2:1",
+    "result": "✓"
+  },
+  {
+    "sport": "hockey",
+    "league": "SHL",
+    "match": "Brynas vs Djurgarden",
+    "tip": "Over 3.5",
+    "odds": "1.23",
+    "date": "2026-10-15T17:00:00+00:00",
+    "score": "3:2",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "UEFA Europa Conference League",
+    "match": "Egnatia Rrogozhinë vs FC Midtjylland",
+    "tip": "Over 1.5",
+    "odds": "1.22",
+    "date": "2026-10-15T16:45:00+00:00",
+    "score": "1:1",
+    "result": "✓"
+  },
+  {
     "sport": "football",
     "league": "UEFA Champions League",
     "match": "Real Betis vs FC Porto",
@@ -1957,46 +1997,6 @@
     "odds": "1.31",
     "date": "2026-07-30T02:00:00+00:00",
     "score": "91:89",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "UEFA Europa Conference League",
-    "match": "Dukagjini vs FC Lugano",
-    "tip": "Over 1.5",
-    "odds": "1.25",
-    "date": "2026-07-29T14:30:00+00:00",
-    "score": "1:5",
-    "result": "✓"
-  },
-  {
-    "sport": "basketball",
-    "league": "NBA W",
-    "match": "Washington Mystics W vs Connecticut Sun W",
-    "tip": "Over 146.5",
-    "odds": "1.28",
-    "date": "2026-07-28T23:30:00+00:00",
-    "score": "92:84",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "UEFA Europa Conference League",
-    "match": "CSKA 1948 vs Spartak Trnava",
-    "tip": "Over 1.5",
-    "odds": "1.31",
-    "date": "2026-07-28T17:30:00+00:00",
-    "score": "0:0",
-    "result": "✗"
-  },
-  {
-    "sport": "football",
-    "league": "UEFA Champions League",
-    "match": "KuPS vs Sabah FA",
-    "tip": "Over 1.5",
-    "odds": "1.25",
-    "date": "2026-07-28T15:00:00+00:00",
-    "score": "0:2",
     "result": "✓"
   }
 ]
