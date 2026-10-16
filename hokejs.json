@@ -1,16 +1,16 @@
 [
   {
-    "league": "SHL",
-    "match": "Brynas vs Djurgarden",
+    "league": "ECHL",
+    "match": "Jacksonville IceMen vs South Carolina Stingrays",
     "tip": "Over 3.5",
-    "odds": "1.23",
-    "date": "2026-10-15T17:00:00+00:00"
+    "odds": "1.27",
+    "date": "2026-10-16T23:00:00+00:00"
   },
   {
-    "league": "NHL",
-    "match": "Ottawa Senators vs New York Islanders",
+    "league": "FPHL",
+    "match": "Topeka Scarecrows vs Indiana Sentinels",
     "tip": "Over 3.5",
-    "odds": "1.20",
-    "date": "2026-10-15T23:00:00+00:00"
+    "odds": "1.24",
+    "date": "2026-10-17T00:05:00+00:00"
   }
 ]
