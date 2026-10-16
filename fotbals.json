@@ -1,16 +1,23 @@
 [
   {
-    "League": "UEFA Europa Conference League",
-    "Match": "Egnatia Rrogozhinë vs FC Midtjylland",
+    "League": "First NL",
+    "Match": "Dinamo Zagreb U21 vs Karlovac 1919",
     "Tip": "Over 1.5",
-    "Odds": "1.22",
-    "Date": "2026-10-15T16:45:00+00:00"
+    "Odds": "1.29",
+    "Date": "2026-10-16T13:30:00+00:00"
   },
   {
-    "League": "UEFA Europa League",
-    "Match": "Ferencvarosi TC vs Plzen",
+    "League": "J1 League",
+    "Match": "Kashima vs V-varen Nagasaki",
+    "Tip": "Over 1.5",
+    "Odds": "1.20",
+    "Date": "2026-10-17T06:00:00+00:00"
+  },
+  {
+    "League": "A-League",
+    "Match": "Macarthur vs Perth Glory",
     "Tip": "Over 1.5",
     "Odds": "1.19",
-    "Date": "2026-10-15T19:00:00+00:00"
+    "Date": "2026-10-17T06:00:00+00:00"
   }
 ]
