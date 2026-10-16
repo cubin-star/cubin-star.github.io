@@ -913,7 +913,9 @@ async function main(){
     // Promichej, aby v tiketu nesly 3 Over za sebou a pak 3 vitezove - skupiny
     // by jinak vzdy vysly jako "cisty Over" vs "cisty vitez".
     const react2Mixed=shuffle(react2Selected);
-    const react2=balanceGroups(react2Mixed).map(m=>({league:m.league,match:m.match,kickoff:m.kickoff,tip:m.tip,odds:m.odds,group:m.group}));
+    // fixtureId je originalni ID zapasu z API-Football (fix.fixture.id). Web ACCA
+    // Scanner podle nej overuje konecne vysledky prime, bez hledani podle nazvu.
+    const react2=balanceGroups(react2Mixed).map(m=>({fixtureId:m.fixtureId,league:m.league,match:m.match,kickoff:m.kickoff,tip:m.tip,odds:m.odds,group:m.group}));
     writeFileSync('react2.json',JSON.stringify(react2,null,2),'utf-8');
     logPicker('react2','react2.json',react2Selected,react2Picker.tierTotals,REACT2_PICK_COUNT,CORE_MIN_REACT2,MIN_ODDS,MAX_ODDS);
 
