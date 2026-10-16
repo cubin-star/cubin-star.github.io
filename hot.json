@@ -1,50 +1,50 @@
 [
   {
-    "league": "UEFA Europa Conference League",
-    "match": "Riga - Kairat Almaty",
-    "kickoff": "2026-10-15T18:45:00+02:00",
+    "league": "J1 League",
+    "match": "Tokyo Verdy - FC Tokyo",
+    "kickoff": "2026-10-17T07:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.02",
+    "odds": "2.10",
     "group": 1
-  },
-  {
-    "league": "Cup",
-    "match": "Petrovac - Kom",
-    "kickoff": "2026-10-15T15:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.31",
-    "group": 1
-  },
-  {
-    "league": "UEFA Europa League",
-    "match": "Celta Vigo - Juventus",
-    "kickoff": "2026-10-15T21:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.18",
-    "group": 2
-  },
-  {
-    "league": "Liga Nacional",
-    "match": "Cobán Imperial - Municipal",
-    "kickoff": "2026-10-15T23:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.04",
-    "group": 2
   },
   {
     "league": "Super League",
-    "match": "Andijan - Qizilqum",
-    "kickoff": "2026-10-15T16:00:00+02:00",
+    "match": "Henan Jianye - Tianjin Teda",
+    "kickoff": "2026-10-16T13:35:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "1.97",
+    "group": 1
+  },
+  {
+    "league": "Super Liga",
+    "match": "Radnik Surdulica - Radnicki NIS",
+    "kickoff": "2026-10-16T17:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.05",
+    "group": 2
+  },
+  {
+    "league": "A-League",
+    "match": "Auckland - Melbourne City",
+    "kickoff": "2026-10-17T06:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.06",
+    "group": 2
+  },
+  {
+    "league": "Premier Division",
+    "match": "Drogheda United - Derry City",
+    "kickoff": "2026-10-16T20:45:00+02:00",
     "tip": "Over 2.5",
     "odds": "2.00",
     "group": 3
   },
   {
-    "league": "Premier League",
-    "match": "URA - Entebbe UPPC",
-    "kickoff": "2026-10-15T18:00:00+02:00",
+    "league": "K League 2",
+    "match": "Gimpo Citizen - Paju Citizen",
+    "kickoff": "2026-10-17T09:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.52",
+    "odds": "2.08",
     "group": 3
   }
 ]

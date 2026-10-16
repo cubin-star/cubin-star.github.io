@@ -1,30 +1,72 @@
 [
   {
-    "league": "UEFA Europa League",
-    "match": "Celta Vigo - Juventus",
-    "kickoff": "2026-10-15T21:00:00+02:00",
+    "league": "First NL",
+    "match": "Opatija - Sesvete",
+    "kickoff": "2026-10-16T15:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.18"
+    "odds": "2.21"
   },
   {
-    "league": "UEFA Europa Conference League",
-    "match": "FC Copenhagen - SC Braga",
-    "kickoff": "2026-10-15T21:00:00+02:00",
+    "league": "Super Liga",
+    "match": "Radnik Surdulica - Radnicki NIS",
+    "kickoff": "2026-10-16T17:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.13"
+    "odds": "2.05"
   },
   {
-    "league": "UEFA Europa Conference League",
-    "match": "Riga - Kairat Almaty",
-    "kickoff": "2026-10-15T18:45:00+02:00",
+    "league": "Ligue 2",
+    "match": "Annecy - Nancy",
+    "kickoff": "2026-10-16T20:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.02"
+    "odds": "2.00"
   },
   {
-    "league": "UEFA Europa Conference League",
-    "match": "Universitatea Craiova - Getafe",
-    "kickoff": "2026-10-15T18:45:00+02:00",
+    "league": "Ligue 2",
+    "match": "Grenoble - Boulogne",
+    "kickoff": "2026-10-16T20:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.32"
+    "odds": "2.35"
+  },
+  {
+    "league": "Ligue 2",
+    "match": "Laval - Clermont Foot",
+    "kickoff": "2026-10-16T20:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.05"
+  },
+  {
+    "league": "Premier Division",
+    "match": "Drogheda United - Derry City",
+    "kickoff": "2026-10-16T20:45:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.00"
+  },
+  {
+    "league": "J1 League",
+    "match": "Mito Hollyhock - Urawa",
+    "kickoff": "2026-10-17T09:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "1.97"
+  },
+  {
+    "league": "J1 League",
+    "match": "Tokyo Verdy - FC Tokyo",
+    "kickoff": "2026-10-17T07:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.10"
+  },
+  {
+    "league": "K League 2",
+    "match": "Gimpo Citizen - Paju Citizen",
+    "kickoff": "2026-10-17T09:30:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.08"
+  },
+  {
+    "league": "K League 2",
+    "match": "Gyeongnam FC - Asan Mugunghwa",
+    "kickoff": "2026-10-17T09:30:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "1.95"
   }
 ]

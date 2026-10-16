@@ -1,16 +1,16 @@
 [
   {
-    "league": "UEFA Europa Conference League",
-    "match": "Mjallby AIF - Inter Club d'Escaldes",
-    "kickoff": "2026-10-15T18:45:00+02:00",
+    "league": "Ekstraklasa",
+    "match": "Widzew Łódź - Wisla Krakow",
+    "kickoff": "2026-10-16T20:30:00+02:00",
     "tip": "Over 2.5",
     "odds": "1.70"
   },
   {
-    "league": "UEFA Europa League",
-    "match": "Celje - Omonia Nicosia",
-    "kickoff": "2026-10-15T18:45:00+02:00",
+    "league": "Championship",
+    "match": "Burnley - Wolves",
+    "kickoff": "2026-10-16T21:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "1.91"
+    "odds": "1.83"
   }
 ]
