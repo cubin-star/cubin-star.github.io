@@ -1,5 +1,21 @@
 [
   {
+    "league": "Pro League",
+    "homeTeam": "Al-Dhafra",
+    "awayTeam": "Dubai United",
+    "tip": "Over 3.5",
+    "odds": "",
+    "halftimeScore": "2:1",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-10-16T13:05:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 2:1 | xG: 2.49 | Shots: 11/7 | winXG: 1.31 | losingXG: 1.18 losingSOT: 2 | @HT | Pre O2.5: 1.65"
+  },
+  {
     "league": "Liga Profesional Argentina",
     "homeTeam": "Huracan",
     "awayTeam": "Gimnasia L.P.",
