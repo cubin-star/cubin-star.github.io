@@ -1,5 +1,26 @@
 [
   {
+    "date": "2026-10-15T05:30:00Z",
+    "matches": [
+      {
+        "league": "UEFA Europa Conference League",
+        "match": "Mjallby AIF - Inter Club d'Escaldes",
+        "tip": "Over 2.5",
+        "odds": "1.70",
+        "score": "2:0",
+        "result": "✗"
+      },
+      {
+        "league": "UEFA Europa League",
+        "match": "Celje - Omonia Nicosia",
+        "tip": "Over 2.5",
+        "odds": "1.91",
+        "score": "0:3",
+        "result": "✓"
+      }
+    ]
+  },
+  {
     "date": "2026-10-14T05:30:00Z",
     "matches": [
       {
