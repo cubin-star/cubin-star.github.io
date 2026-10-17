@@ -1,5 +1,21 @@
 [
   {
+    "league": "Ligue 2",
+    "homeTeam": "Nantes",
+    "awayTeam": "Dunkerque",
+    "tip": "Over 3.5",
+    "odds": "",
+    "halftimeScore": "1:2",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-10-17T12:00:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 1:2 | xG: 1.46 | Shots: 14/5 | winXG: 1.02 | losingXG: 0.44 losingSOT: 2 | @HT | Pre O2.5: 1.69"
+  },
+  {
     "league": "Virsliga",
     "homeTeam": "Grobiņa",
     "awayTeam": "Ogre United",
