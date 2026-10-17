@@ -1,5 +1,21 @@
 [
   {
+    "league": "Virsliga",
+    "homeTeam": "Grobiņa",
+    "awayTeam": "Ogre United",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "1:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-10-17T11:00:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 1:0 | xG: 1.30 | Shots: 13/6 | winXG: 1.15 | losingXG: 0.15 losingSOT: 2 | @HT | Pre O2.5: 1.73"
+  },
+  {
     "league": "Liga I",
     "homeTeam": "Oţelul",
     "awayTeam": "Csikszereda",
