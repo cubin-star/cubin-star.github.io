@@ -38,6 +38,12 @@ const REACT2_PICK_COUNT = 6;
 // Pevne slozeni react2 tiketu: 3x Over 2.5 a 3x Home/Away win. Pri nedostatku
 // kandidatu v jednom trhu se zbytek dobere z druheho, aby tiket nebyl kratsi.
 const REACT2_OVER_COUNT = 3;
+// react3.json - stejny kurzovy pas i vyberova logika jako react2.json, ale 8 zapasu
+// ve 4 skupinach po dvou. Garantovane je minimum Over 2.5 (REACT3_MIN_OVER), zbytek
+// se dobere z obou trhu dohromady. Na rozdil od ostatnich vyberu se NEdeduplikuje -
+// zapasy se smi shodovat s hot.json i react2.json.
+const REACT3_PICK_COUNT = 8;
+const REACT3_MIN_OVER = 4;
 // Max pocet vybranych zapasu z jedne zeme - brani zaplaveni tiketu jednou destinaci.
 const MAX_PER_COUNTRY = 2;
 // Vahy pro vazeny nahodny vyber TIERU (ne jednotlivych zapasu) - vyssi tier ma
@@ -72,6 +78,7 @@ function isCore(m){
 // pocet zapasu, jen je slabsi.
 const CORE_MIN_HOT = 4;
 const CORE_MIN_REACT2 = 4;
+const CORE_MIN_REACT3 = 4;
 const CORE_MIN_REACT1 = 4;
 const CORE_MIN_TIPS = 2;
 // === Golovy filtr (merkky blacklist) =======================================
@@ -689,7 +696,7 @@ async function main(){
     pool=applyGoalFilter(pool,goalStats,PICK_COUNT,'hot');
     tipsPool=applyGoalFilter(tipsPool,goalStats,TIPS_PICK_COUNT,'tips');
     react1Pool=applyGoalFilter(react1Pool,goalStats,REACT1_PICK_COUNT,'react1');
-    react2Pool=applyGoalFilter(react2Pool,goalStats,REACT2_PICK_COUNT,'react2');
+    react2Pool=applyGoalFilter(react2Pool,goalStats,Math.max(REACT2_PICK_COUNT,REACT3_PICK_COUNT),'react2+react3');
 
     const tier1=shuffle(pool.filter(m=>m.tier===1)),tier2=shuffle(pool.filter(m=>m.tier===2)),tier3=shuffle(pool.filter(m=>m.tier===3)),tier4=shuffle(pool.filter(m=>m.tier===4));
     console.log('Tier 1: '+tier1.length+', Tier 2: '+tier2.length+', Tier 3: '+tier3.length+', Tier 4: '+tier4.length+'\n');
@@ -924,6 +931,19 @@ async function main(){
     const react2=balanceGroups(react2Mixed).map(m=>({fixtureId:m.fixtureId,league:m.league,match:m.match,kickoff:m.kickoff,tip:m.tip,odds:m.odds,group:m.group}));
     writeFileSync('react2.json',JSON.stringify(react2,null,2),'utf-8');
     logPicker('react2','react2.json',react2Selected,react2Picker.tierTotals,REACT2_PICK_COUNT,CORE_MIN_REACT2,MIN_ODDS,MAX_ODDS);
+
+    // === react3.json: 8 zapasu ve 4 skupinach, minimalne REACT3_MIN_OVER x Over 2.5 ====
+    // Kurzovy pas i vyberova logika jsou shodne s react2 (stejny pool), ale seen set
+    // je prazdny - react3 smi obsahovat tytez zapasy jako hot.json i react2.json.
+    const react3Picker=createPicker(react2Pool,new Set(),'react3');
+    const react3Selected=react3Picker.selected;
+    const react3CoreOver=Math.round(CORE_MIN_REACT3*REACT3_MIN_OVER/REACT3_PICK_COUNT);
+    react3Picker.pickMarket(isOver,REACT3_MIN_OVER,'Over 2.5 (minimum)',react3CoreOver);
+    react3Picker.pickMarket(anyMarket,REACT3_PICK_COUNT-react3Selected.length,'dobrani (oba trhy)',CORE_MIN_REACT3-react3CoreOver);
+    const react3Mixed=shuffle(react3Selected);
+    const react3=balanceGroups(react3Mixed).map(m=>({fixtureId:m.fixtureId,league:m.league,match:m.match,kickoff:m.kickoff,tip:m.tip,odds:m.odds,group:m.group}));
+    writeFileSync('react3.json',JSON.stringify(react3,null,2),'utf-8');
+    logPicker('react3','react3.json',react3Selected,react3Picker.tierTotals,REACT3_PICK_COUNT,CORE_MIN_REACT3,MIN_ODDS,MAX_ODDS);
 
     // === live1.json: vsechny zapasy z tieru 1 a 2 (bez omezeni poctu) ====
     const live1=pool.filter(m=>m.tier===1||m.tier===2).map(m=>({league:m.league,match:m.match,kickoff:m.kickoff,tip:m.tip,odds:m.odds}));
