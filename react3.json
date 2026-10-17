@@ -1,0 +1,51 @@
+[
+  {
+    "league": "Super Liga",
+    "match": "Macva - OFK Beograd",
+    "kickoff": "2026-10-17T19:00:00+02:00",
+    "tip": "Away win",
+    "odds": "1.95"
+  },
+  {
+    "league": "Czech Liga",
+    "match": "Mlada Boleslav - Teplice",
+    "kickoff": "2026-10-17T15:00:00+02:00",
+    "tip": "Home win",
+    "odds": "2.10"
+  },
+  {
+    "league": "Premier League",
+    "match": "Brentford - Liverpool",
+    "kickoff": "2026-10-17T16:00:00+02:00",
+    "tip": "Home win",
+    "odds": "2.47"
+  },
+  {
+    "league": "Bundesliga",
+    "match": "FC Schalke 04 - FSV Mainz 05",
+    "kickoff": "2026-10-17T15:30:00+02:00",
+    "tip": "Away win",
+    "odds": "2.30"
+  },
+  {
+    "league": "J1 League",
+    "match": "Fagiano Okayama - Vissel Kobe",
+    "kickoff": "2026-10-18T06:55:00+02:00",
+    "tip": "Away win",
+    "odds": "2.45"
+  },
+  {
+    "league": "Ligue 2",
+    "match": "RED Star FC 93 - Saint Etienne",
+    "kickoff": "2026-10-17T20:00:00+02:00",
+    "tip": "Away win",
+    "odds": "2.15"
+  },
+  {
+    "league": "Premiership",
+    "match": "ST Johnstone - Dundee Utd",
+    "kickoff": "2026-10-17T16:00:00+02:00",
+    "tip": "Away win",
+    "odds": "2.50"
+  }
+]
