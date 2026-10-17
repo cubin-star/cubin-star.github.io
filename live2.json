@@ -1,16 +1,23 @@
 [
   {
-    "League": "First NL",
-    "Match": "Dinamo Zagreb U21 vs Karlovac 1919",
+    "League": "League One",
+    "Match": "Milton Keynes Dons vs Luton",
     "Tip": "Over 2.5",
-    "Odds": "1.85",
-    "Date": "2026-10-16T13:30:00+00:00"
+    "Odds": "1.58",
+    "Date": "2026-10-17T11:30:00+00:00"
   },
   {
-    "League": "J1 League",
-    "Match": "Kashima vs V-varen Nagasaki",
+    "League": "Regionalliga - Nordost",
+    "Match": "Lokomotive Leipzig vs BSG Chemie Leipzig",
     "Tip": "Over 2.5",
-    "Odds": "1.61",
-    "Date": "2026-10-17T06:00:00+00:00"
+    "Odds": "1.54",
+    "Date": "2026-10-17T12:00:00+00:00"
+  },
+  {
+    "League": "HNL",
+    "Match": "NK Lokomotiva Zagreb vs Istra 1961",
+    "Tip": "Over 2.5",
+    "Odds": "1.50",
+    "Date": "2026-10-17T13:00:00+00:00"
   }
 ]

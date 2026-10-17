@@ -1,51 +1,156 @@
 [
   {
-    "League": "Division 1",
-    "Match": "Al Fujairah SC vs Palm City",
+    "League": "3. Division",
+    "Match": "Ishøj vs FC Helsingor",
     "Tip": "Over 1.5",
-    "Odds": "1.17",
-    "Date": "2026-10-16T13:00:00+00:00"
+    "Odds": "1.14",
+    "Date": "2026-10-17T11:00:00+00:00"
   },
   {
-    "League": "First NL",
-    "Match": "Dinamo Zagreb U21 vs Karlovac 1919",
+    "League": "2. Lig",
+    "Match": "1461 Trabzon FK vs İnegölspor",
     "Tip": "Over 1.5",
-    "Odds": "1.29",
-    "Date": "2026-10-16T13:30:00+00:00"
+    "Odds": "1.17",
+    "Date": "2026-10-17T11:00:00+00:00"
+  },
+  {
+    "League": "League One",
+    "Match": "Milton Keynes Dons vs Luton",
+    "Tip": "Over 1.5",
+    "Odds": "1.20",
+    "Date": "2026-10-17T11:30:00+00:00"
+  },
+  {
+    "League": "3. Division",
+    "Match": "Hørsholm-Usserød vs Frem",
+    "Tip": "Over 1.5",
+    "Odds": "1.13",
+    "Date": "2026-10-17T12:00:00+00:00"
+  },
+  {
+    "League": "3. Liga",
+    "Match": "SSV Jahn Regensburg vs SV Wehen",
+    "Tip": "Over 1.5",
+    "Odds": "1.14",
+    "Date": "2026-10-17T12:00:00+00:00"
+  },
+  {
+    "League": "Regionalliga - Nordost",
+    "Match": "Lokomotive Leipzig vs BSG Chemie Leipzig",
+    "Tip": "Over 1.5",
+    "Odds": "1.18",
+    "Date": "2026-10-17T12:00:00+00:00"
+  },
+  {
+    "League": "HNL",
+    "Match": "NK Lokomotiva Zagreb vs Istra 1961",
+    "Tip": "Over 1.5",
+    "Odds": "1.17",
+    "Date": "2026-10-17T13:00:00+00:00"
+  },
+  {
+    "League": "Second NL",
+    "Match": "Slavonija Požega vs Dugo Selo",
+    "Tip": "Over 1.5",
+    "Odds": "1.19",
+    "Date": "2026-10-17T13:00:00+00:00"
+  },
+  {
+    "League": "Second NL",
+    "Match": "Trnje vs Zagora",
+    "Tip": "Over 1.5",
+    "Odds": "1.14",
+    "Date": "2026-10-17T13:00:00+00:00"
   },
   {
     "League": "I Liga",
-    "Match": "Warta Poznań vs Unia Skierniewice",
+    "Match": "Miedz Legnica vs Stal Mielec",
     "Tip": "Over 1.5",
-    "Odds": "1.16",
-    "Date": "2026-10-16T16:00:00+00:00"
+    "Odds": "1.13",
+    "Date": "2026-10-17T13:30:00+00:00"
+  },
+  {
+    "League": "2. SNL",
+    "Match": "Rudar vs Slovan Ljubljana",
+    "Tip": "Over 1.5",
+    "Odds": "1.14",
+    "Date": "2026-10-17T13:30:00+00:00"
   },
   {
     "League": "2. Liga",
-    "Match": "Voitsberg vs First Vienna",
+    "Match": "Schwarz-Weiß Bregenz vs SKU Amstetten",
     "Tip": "Over 1.5",
-    "Odds": "1.18",
-    "Date": "2026-10-16T16:30:00+00:00"
+    "Odds": "1.16",
+    "Date": "2026-10-17T13:30:00+00:00"
   },
   {
-    "League": "Eerste Divisie",
-    "Match": "FC Eindhoven vs Vitesse",
+    "League": "League One",
+    "Match": "East Kilbride vs Montrose",
     "Tip": "Over 1.5",
     "Odds": "1.14",
-    "Date": "2026-10-16T18:00:00+00:00"
+    "Date": "2026-10-17T14:00:00+00:00"
   },
   {
-    "League": "La Liga",
-    "Match": "Deportivo La Coruna vs Levante",
+    "League": "Football League - Lowland League",
+    "Match": "Bo'ness United vs Brechin",
     "Tip": "Over 1.5",
-    "Odds": "1.28",
-    "Date": "2026-10-16T19:00:00+00:00"
+    "Odds": "1.12",
+    "Date": "2026-10-17T14:00:00+00:00"
   },
   {
-    "League": "J1 League",
-    "Match": "Kashima vs V-varen Nagasaki",
+    "League": "Non League Premier - Southern Central",
+    "Match": "Leamington vs Needham Market",
     "Tip": "Over 1.5",
-    "Odds": "1.20",
-    "Date": "2026-10-17T06:00:00+00:00"
+    "Odds": "1.14",
+    "Date": "2026-10-17T14:00:00+00:00"
+  },
+  {
+    "League": "Non League Premier - Southern South",
+    "Match": "Evesham United vs Taunton Town",
+    "Tip": "Over 1.5",
+    "Odds": "1.13",
+    "Date": "2026-10-17T14:00:00+00:00"
+  },
+  {
+    "League": "Non League Premier - Southern South",
+    "Match": "Havant & Wville vs Hanworth Villa",
+    "Tip": "Over 1.5",
+    "Odds": "1.13",
+    "Date": "2026-10-17T14:00:00+00:00"
+  },
+  {
+    "League": "Segunda División RFEF - Group 2",
+    "Match": "Ebro vs Girona II",
+    "Tip": "Over 1.5",
+    "Odds": "1.31",
+    "Date": "2026-10-17T14:30:00+00:00"
+  },
+  {
+    "League": "1. Division",
+    "Match": "Apollon Limassol vs Nea Salamis",
+    "Tip": "Over 1.5",
+    "Odds": "1.21",
+    "Date": "2026-10-17T16:00:00+00:00"
+  },
+  {
+    "League": "Stars League",
+    "Match": "Lusail City vs Al Shamal",
+    "Tip": "Over 1.5",
+    "Odds": "1.12",
+    "Date": "2026-10-17T16:45:00+00:00"
+  },
+  {
+    "League": "First Amateur Division",
+    "Match": "Hoogstraten vs Roeselare Daisel",
+    "Tip": "Over 1.5",
+    "Odds": "1.14",
+    "Date": "2026-10-17T18:00:00+00:00"
+  },
+  {
+    "League": "Major League Soccer",
+    "Match": "Portland Timbers vs Colorado Rapids",
+    "Tip": "Over 1.5",
+    "Odds": "1.14",
+    "Date": "2026-10-18T02:30:00+00:00"
   }
 ]
