@@ -1,5 +1,21 @@
 [
   {
+    "league": "League Two",
+    "homeTeam": "Grimsby",
+    "awayTeam": "Northampton",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "0:1",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-10-17T14:00:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 0:1 | xG: 2.18 | Shots: 15/8 | winXG: 1.20 | losingXG: 0.98 losingSOT: 3 | @HT | Pre O2.5: 1.83"
+  },
+  {
     "league": "Virsliga",
     "homeTeam": "Grobiņa",
     "awayTeam": "Ogre United",
