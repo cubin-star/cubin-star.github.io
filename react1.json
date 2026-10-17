@@ -1,51 +1,51 @@
 [
   {
-    "league": "Ligue 1",
-    "match": "Le Mans - Toulouse",
-    "kickoff": "2026-10-16T20:45:00+02:00",
+    "league": "Super Liga",
+    "match": "Macva - OFK Beograd",
+    "kickoff": "2026-10-17T19:00:00+02:00",
     "tip": "Away win",
-    "odds": "2.36"
-  },
-  {
-    "league": "J1 League",
-    "match": "Mito Hollyhock - Urawa",
-    "kickoff": "2026-10-17T09:00:00+02:00",
-    "tip": "Away win",
-    "odds": "2.10"
-  },
-  {
-    "league": "Superliga",
-    "match": "AC Horsens - Randers FC",
-    "kickoff": "2026-10-16T19:00:00+02:00",
-    "tip": "Away win",
-    "odds": "2.40"
-  },
-  {
-    "league": "A-League",
-    "match": "Macarthur - Perth Glory",
-    "kickoff": "2026-10-17T08:00:00+02:00",
-    "tip": "Home win",
     "odds": "1.95"
   },
   {
-    "league": "La Liga",
-    "match": "Deportivo La Coruna - Levante",
-    "kickoff": "2026-10-16T21:00:00+02:00",
+    "league": "Czech Liga",
+    "match": "Mlada Boleslav - Teplice",
+    "kickoff": "2026-10-17T15:00:00+02:00",
     "tip": "Home win",
-    "odds": "2.13"
+    "odds": "2.10"
   },
   {
-    "league": "Eerste Divisie",
-    "match": "VVV Venlo - Jong AZ",
-    "kickoff": "2026-10-16T20:00:00+02:00",
+    "league": "Premier League",
+    "match": "Brentford - Liverpool",
+    "kickoff": "2026-10-17T16:00:00+02:00",
     "tip": "Home win",
+    "odds": "2.47"
+  },
+  {
+    "league": "Bundesliga",
+    "match": "FC Schalke 04 - FSV Mainz 05",
+    "kickoff": "2026-10-17T15:30:00+02:00",
+    "tip": "Away win",
+    "odds": "2.30"
+  },
+  {
+    "league": "J1 League",
+    "match": "Fagiano Okayama - Vissel Kobe",
+    "kickoff": "2026-10-18T06:55:00+02:00",
+    "tip": "Away win",
+    "odds": "2.45"
+  },
+  {
+    "league": "Ligue 2",
+    "match": "RED Star FC 93 - Saint Etienne",
+    "kickoff": "2026-10-17T20:00:00+02:00",
+    "tip": "Away win",
     "odds": "2.15"
   },
   {
-    "league": "FNL",
-    "match": "Prostějov - Ústí nad Labem",
-    "kickoff": "2026-10-16T18:00:00+02:00",
+    "league": "Premiership",
+    "match": "ST Johnstone - Dundee Utd",
+    "kickoff": "2026-10-17T16:00:00+02:00",
     "tip": "Away win",
-    "odds": "2.10"
+    "odds": "2.50"
   }
 ]
