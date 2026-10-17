@@ -20,11 +20,13 @@ const TIPS_MAX_ODDS = 2.00;
 const TIPS_PICK_COUNT = 2;
 // Samostatny denni vyber do react1.json - stejna vyberova logika i kurzovy pas
 // jako react2.json (vazeny vyber tieru, stropy, kvota jadra, limit zeme/ligy),
-// tipy Over 2.5 / Home win / Away win. Na rozdil od react2 se pomer trhu neresi -
-// je jedno, kolik je Over a kolik Home/Away win. Zapasy se nesmi kryt s react2.
+// tipy Over 2.5 / Home win / Away win. Zapasy se nesmi kryt s react2.
 const REACT1_MIN_ODDS = 1.95;
 const REACT1_MAX_ODDS = 2.60;
 const REACT1_PICK_COUNT = 7;
+// Na rozdil od react2 neni slozeni pevne - garantovane je jen minimum Over 2.5,
+// zbytek tiketu se dobere z obou trhu dohromady (muze tedy vyjit i vic Over).
+const REACT1_MIN_OVER = 3;
 // Minimalni pocet bookmakeru, kteri musi dany kurz nabizet. Misto medianu (ktery
 // zapasy na hrane pasma zbytecne strhaval dolu) se bere nejvyssi kurz, na kterem
 // se shodne aspon tolik sazkovek - chrani pred ojedinelou chybou v kurzu.
@@ -876,11 +878,15 @@ async function main(){
     }
 
     // === react1.json: 7 zapasu, stejna logika i kurzovy pas jako react2 ======
-    // Pomer trhu se neresi - je jedno, kolik je Over 2.5 a kolik Home/Away win.
+    // Nejdriv se zajisti minimum Over 2.5 (REACT1_MIN_OVER), zbytek se dobere
+    // z obou trhu dohromady - nahodne tak vyjde Over 2.5 nebo Home/Away win.
     // Blokuje zapasy uz vybrane do hot.json a tips.json (selectedIds).
     const react1Seen=new Set(selectedIds);
     const react1Picker=createPicker(react1Pool,react1Seen,'react1');
-    react1Picker.pickMarket(anyMarket,REACT1_PICK_COUNT,'vyber',CORE_MIN_REACT1);
+    // Kvota jadra se rozdeli pomerne, aby ji nespotrebovala cela prvni faze.
+    const react1CoreOver=Math.round(CORE_MIN_REACT1*REACT1_MIN_OVER/REACT1_PICK_COUNT);
+    react1Picker.pickMarket(isOver,REACT1_MIN_OVER,'Over 2.5 (minimum)',react1CoreOver);
+    react1Picker.pickMarket(anyMarket,REACT1_PICK_COUNT-react1Picker.selected.length,'dobrani (oba trhy)',CORE_MIN_REACT1-react1CoreOver);
     const react1Selected=react1Picker.selected;
     const react1UsedFixtures=new Set(react1Selected.map(m=>m.fixtureId));
     for(const id of react1UsedFixtures)selectedIds.add(id);
