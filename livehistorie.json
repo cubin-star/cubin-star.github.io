@@ -1,5 +1,21 @@
 [
   {
+    "league": "Serie A",
+    "homeTeam": "Gremio",
+    "awayTeam": "Cruzeiro",
+    "tip": "Over 3.5",
+    "odds": "",
+    "halftimeScore": "2:1",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-10-18T19:00:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 2:1 | xG: 2.39 | Shots: 16/7 | winXG: 1.57 | losingXG: 0.82 losingSOT: 3 | @HT | Pre O2.5: 1.71"
+  },
+  {
     "league": "Segunda División",
     "homeTeam": "Valladolid",
     "awayTeam": "Eldense",
