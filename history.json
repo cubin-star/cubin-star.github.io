@@ -1,6 +1,46 @@
 [
   {
     "sport": "hockey",
+    "league": "Division 1",
+    "match": "Manglerud vs Gjovik",
+    "tip": "Over 3.5",
+    "odds": "1.23",
+    "date": "2026-10-17T14:00:00+00:00",
+    "score": "2:6",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "K League 1",
+    "match": "Ulsan Hyundai FC vs Bucheon FC 1995",
+    "tip": "Over 1.5",
+    "odds": "1.18",
+    "date": "2026-10-17T07:30:00+00:00",
+    "score": "2:1",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "J1 League",
+    "match": "Kashima vs V-varen Nagasaki",
+    "tip": "Over 1.5",
+    "odds": "1.20",
+    "date": "2026-10-17T06:00:00+00:00",
+    "score": "2:0",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "A-League",
+    "match": "Macarthur vs Perth Glory",
+    "tip": "Over 1.5",
+    "odds": "1.19",
+    "date": "2026-10-17T06:00:00+00:00",
+    "score": "2:1",
+    "result": "✓"
+  },
+  {
+    "sport": "hockey",
     "league": "FPHL",
     "match": "Topeka Scarecrows vs Indiana Sentinels",
     "tip": "Over 3.5",
@@ -1957,46 +1997,6 @@
     "odds": "1.18",
     "date": "2026-08-03T17:00:00+00:00",
     "score": "1:0",
-    "result": "✗"
-  },
-  {
-    "sport": "football",
-    "league": "Superliga",
-    "match": "Brondby vs Viborg",
-    "tip": "Over 1.5",
-    "odds": "1.20",
-    "date": "2026-08-02T14:00:00+00:00",
-    "score": "1:0",
-    "result": "✗"
-  },
-  {
-    "sport": "football",
-    "league": "Liga MX",
-    "match": "Club Queretaro vs Tigres UANL",
-    "tip": "Over 1.5",
-    "odds": "1.26",
-    "date": "2026-08-01T23:00:00+00:00",
-    "score": "3:2",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Eliteserien",
-    "match": "Fredrikstad vs Sandefjord",
-    "tip": "Over 1.5",
-    "odds": "1.22",
-    "date": "2026-08-01T14:00:00+00:00",
-    "score": "1:0",
-    "result": "✗"
-  },
-  {
-    "sport": "football",
-    "league": "Liga MX",
-    "match": "Atletico San Luis vs Club Tijuana",
-    "tip": "Over 1.5",
-    "odds": "1.20",
-    "date": "2026-08-01T03:00:00+00:00",
-    "score": "0:0",
     "result": "✗"
   }
 ]
