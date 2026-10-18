@@ -1,5 +1,21 @@
 [
   {
+    "league": "Ligue 1",
+    "homeTeam": "Le Havre",
+    "awayTeam": "Auxerre",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "0:1",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-10-18T15:15:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 0:1 | xG: 2.10 | Shots: 14/7 | winXG: 1.31 | losingXG: 0.79 losingSOT: 4 | @HT | Pre O2.5: 1.78"
+  },
+  {
     "league": "Serie A",
     "homeTeam": "Fiorentina",
     "awayTeam": "Como",
