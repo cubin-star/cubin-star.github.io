@@ -337,22 +337,6 @@
   },
   {
     "league": "UEFA Nations League",
-    "homeTeam": "Hungary",
-    "awayTeam": "Georgia",
-    "tip": "Over 1.5",
-    "odds": "",
-    "halftimeScore": "1:0",
-    "liveOdds": "",
-    "finalScore": "1:0",
-    "result": "❌ Lost",
-    "sport": "football",
-    "kickoff": "2026-10-02T18:45:00.000Z",
-    "resolvedAt": "2026-10-02T20:40:05.545Z",
-    "source": "whisper-football",
-    "scoutStats": "Whisper xG-rate surge | HT 1:0 | xG: 1.60 | Shots: 19/5 | winXG: 1.13 | losingXG: 0.47 losingSOT: 2 | @HT | Pre O2.5: 2.2199999999999998"
-  },
-  {
-    "league": "UEFA Nations League",
     "homeTeam": "Kazakhstan",
     "awayTeam": "Moldova",
     "tip": "Over 1.5",
@@ -382,22 +366,6 @@
     "resolvedAt": "2026-10-02T01:55:04.983Z",
     "source": "whisper-football",
     "scoutStats": "Whisper xG-rate surge | HT 1:0 | xG: 1.51 | Shots: 16/6 | winXG: 1.02 | losingXG: 0.50 losingSOT: 2 | @HT | Pre O2.5: 2.01"
-  },
-  {
-    "league": "Serie B",
-    "homeTeam": "Athletic Club",
-    "awayTeam": "Sport Recife",
-    "tip": "Over 3.5",
-    "odds": "",
-    "halftimeScore": "1:2",
-    "liveOdds": "",
-    "finalScore": "1:2",
-    "result": "❌ Lost",
-    "sport": "football",
-    "kickoff": "2026-10-01T23:30:00.000Z",
-    "resolvedAt": "2026-10-02T01:34:08.912Z",
-    "source": "whisper-football",
-    "scoutStats": "Whisper xG-rate surge | HT 1:2 | xG: 2.18 | Shots: 25/10 | winXG: 0.80 | losingXG: 1.38 losingSOT: 5 | @HT | Pre O2.5: 2.3"
   },
   {
     "league": "UEFA Nations League",
