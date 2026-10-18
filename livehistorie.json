@@ -1,5 +1,21 @@
 [
   {
+    "league": "Pro League",
+    "homeTeam": "Ajman",
+    "awayTeam": "Sharjah FC",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "1:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-10-18T15:45:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 1:0 | xG: 1.09 | Shots: 14/6 | winXG: 0.87 | losingXG: 0.22 losingSOT: 3 | @HT | Pre O2.5: 1.66"
+  },
+  {
     "league": "Ligue 1",
     "homeTeam": "Le Havre",
     "awayTeam": "Auxerre",
