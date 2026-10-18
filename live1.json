@@ -1,191 +1,149 @@
 [
   {
-    "league": "K League 2",
-    "match": "Gimpo Citizen - Paju Citizen",
-    "kickoff": "2026-10-17T09:30:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.02"
-  },
-  {
-    "league": "K League 2",
-    "match": "Gyeongnam FC - Asan Mugunghwa",
-    "kickoff": "2026-10-17T09:30:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "1.96"
-  },
-  {
-    "league": "J1 League",
-    "match": "Machida Zelvia - Avispa Fukuoka",
-    "kickoff": "2026-10-18T09:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.09"
-  },
-  {
-    "league": "J1 League",
-    "match": "Fagiano Okayama - Vissel Kobe",
-    "kickoff": "2026-10-18T06:55:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.06"
-  },
-  {
-    "league": "Süper Lig",
-    "match": "Amed - Konyaspor",
-    "kickoff": "2026-10-17T15:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.03"
-  },
-  {
-    "league": "Süper Lig",
-    "match": "Erzurumspor FK - Eyüpspor",
-    "kickoff": "2026-10-17T12:30:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.10"
-  },
-  {
-    "league": "First NL",
-    "match": "Bsk Bijelo Brdo - Orijent 1919",
-    "kickoff": "2026-10-17T15:30:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.17"
-  },
-  {
-    "league": "First NL",
-    "match": "Vukovar - Dubrava Zagreb",
-    "kickoff": "2026-10-17T15:30:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.01"
-  },
-  {
-    "league": "First NL",
-    "match": "Hrvace - Kustosija",
-    "kickoff": "2026-10-17T15:30:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.11"
-  },
-  {
-    "league": "First NL",
-    "match": "Jadran LP - Dugopolje",
-    "kickoff": "2026-10-17T12:45:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "1.95"
-  },
-  {
-    "league": "Championship",
-    "match": "West Brom - Blackburn",
-    "kickoff": "2026-10-17T16:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "1.98"
-  },
-  {
-    "league": "Super League 2",
-    "match": "Asteras Tripolis II - Zakynthos",
-    "kickoff": "2026-10-17T13:45:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.13"
-  },
-  {
-    "league": "Super League 2",
-    "match": "Marko - Ellas Syros",
-    "kickoff": "2026-10-17T14:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.15"
-  },
-  {
-    "league": "Prva Liga",
-    "match": "Jedinstvo Ub - Grafičar",
-    "kickoff": "2026-10-17T18:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.00"
-  },
-  {
-    "league": "Prva Liga",
-    "match": "Napredak - Dubočica",
-    "kickoff": "2026-10-17T18:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.08"
-  },
-  {
-    "league": "Segunda División",
-    "match": "Eibar - Mallorca",
-    "kickoff": "2026-10-17T16:15:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.10"
-  },
-  {
-    "league": "La Liga",
-    "match": "Valencia - Athletic Club",
-    "kickoff": "2026-10-17T21:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.10"
-  },
-  {
-    "league": "1. Lig",
-    "match": "Bodrum FK - Bandırmaspor",
-    "kickoff": "2026-10-17T18:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.01"
-  },
-  {
-    "league": "Serie B",
-    "match": "Padova - Virtus Entella",
-    "kickoff": "2026-10-17T15:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.12"
-  },
-  {
-    "league": "Serie B",
-    "match": "Pisa - Cremonese",
-    "kickoff": "2026-10-17T19:30:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "1.99"
-  },
-  {
-    "league": "Taça de Portugal",
-    "match": "AVS - Moreirense",
-    "kickoff": "2026-10-17T17:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.16"
-  },
-  {
-    "league": "Championship",
-    "match": "Morton - Queen's Park",
-    "kickoff": "2026-10-17T16:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.02"
-  },
-  {
-    "league": "Championship",
-    "match": "Stenhousemuir - Raith Rovers",
-    "kickoff": "2026-10-17T16:00:00+02:00",
+    "league": "K League 1",
+    "match": "Gangwon FC - Incheon United",
+    "kickoff": "2026-10-18T09:30:00+02:00",
     "tip": "Over 2.5",
     "odds": "2.29"
   },
   {
-    "league": "Super League 1",
-    "match": "Levadiakos - Volos NFC",
-    "kickoff": "2026-10-17T16:00:00+02:00",
+    "league": "K League 1",
+    "match": "Pohang Steelers - FC Anyang",
+    "kickoff": "2026-10-18T09:30:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.01"
+  },
+  {
+    "league": "First NL",
+    "match": "Croatia Zmijavci - Mladost Ždralovi",
+    "kickoff": "2026-10-18T12:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.27"
+  },
+  {
+    "league": "Serie A",
+    "match": "Juventus - Lazio",
+    "kickoff": "2026-10-18T20:45:00+02:00",
     "tip": "Over 2.5",
     "odds": "1.97"
   },
   {
-    "league": "Liga I",
-    "match": "Petrolul Ploiesti - Sepsi OSK Sfantu Gheorghe",
-    "kickoff": "2026-10-17T16:15:00+02:00",
+    "league": "Serie A",
+    "match": "Udinese - Lecce",
+    "kickoff": "2026-10-18T12:30:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.01"
+  },
+  {
+    "league": "Süper Lig",
+    "match": "Kasımpaşa - Samsunspor",
+    "kickoff": "2026-10-18T12:30:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.00"
+  },
+  {
+    "league": "Süper Lig",
+    "match": "Kocaelispor - Göztepe",
+    "kickoff": "2026-10-18T15:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.00"
+  },
+  {
+    "league": "Super League 2",
+    "match": "Larisa - Panserraikos",
+    "kickoff": "2026-10-18T13:45:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.27"
+  },
+  {
+    "league": "Super League 2",
+    "match": "Nestos Chrisoupolis - Kallithea",
+    "kickoff": "2026-10-18T14:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.24"
+  },
+  {
+    "league": "Super League 2",
+    "match": "Panthrakikos - Olympiakos Piraeus II",
+    "kickoff": "2026-10-18T14:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.08"
+  },
+  {
+    "league": "Super League 2",
+    "match": "Pyrgos 1968 - Anagennisi Karditsas",
+    "kickoff": "2026-10-18T14:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.46"
+  },
+  {
+    "league": "Prva Liga",
+    "match": "FK Vozdovac - Loznica",
+    "kickoff": "2026-10-18T14:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.27"
+  },
+  {
+    "league": "Segunda División",
+    "match": "Burgos - Sabadell",
+    "kickoff": "2026-10-18T21:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.43"
+  },
+  {
+    "league": "Segunda División",
+    "match": "AD Ceuta FC - Oviedo",
+    "kickoff": "2026-10-18T14:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.00"
+  },
+  {
+    "league": "Segunda División",
+    "match": "Granada CF - Cadiz",
+    "kickoff": "2026-10-18T16:15:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.03"
+  },
+  {
+    "league": "Segunda División",
+    "match": "Valladolid - Eldense",
+    "kickoff": "2026-10-18T18:30:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "1.98"
+  },
+  {
+    "league": "La Liga",
+    "match": "Celta Vigo - Alaves",
+    "kickoff": "2026-10-18T16:15:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.24"
+  },
+  {
+    "league": "Super League 1",
+    "match": "Kalamata - OFI",
+    "kickoff": "2026-10-18T15:00:00+02:00",
     "tip": "Over 2.5",
     "odds": "2.02"
   },
   {
-    "league": "Ligat Ha'al",
-    "match": "Bnei Sakhnin - Hapoel Petah Tikva",
-    "kickoff": "2026-10-17T18:15:00+02:00",
+    "league": "Super League 1",
+    "match": "Kifisia - Aris Thessalonikis",
+    "kickoff": "2026-10-18T19:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.23"
+    "odds": "2.01"
   },
   {
-    "league": "Serie A",
-    "match": "Sao Paulo - Vasco DA Gama",
-    "kickoff": "2026-10-18T02:00:00+02:00",
+    "league": "Serie B",
+    "match": "Juve Stabia - Sudtirol",
+    "kickoff": "2026-10-18T15:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.05"
+    "odds": "1.98"
+  },
+  {
+    "league": "Taça de Portugal",
+    "match": "Salgueiros - Estoril",
+    "kickoff": "2026-10-18T16:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "1.98"
   }
 ]

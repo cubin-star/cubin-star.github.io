@@ -1,50 +1,50 @@
 [
   {
     "league": "Süper Lig",
-    "match": "Amed - Konyaspor",
-    "kickoff": "2026-10-17T15:00:00+02:00",
+    "match": "Kocaelispor - Göztepe",
+    "kickoff": "2026-10-18T15:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.03",
+    "odds": "2.00",
+    "group": 1
+  },
+  {
+    "league": "Serie A",
+    "match": "Udinese - Lecce",
+    "kickoff": "2026-10-18T12:30:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.01",
     "group": 1
   },
   {
     "league": "Taça de Portugal",
-    "match": "AVS - Moreirense",
-    "kickoff": "2026-10-17T17:00:00+02:00",
+    "match": "Salgueiros - Estoril",
+    "kickoff": "2026-10-18T16:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.16",
-    "group": 1
+    "odds": "1.98",
+    "group": 2
   },
   {
     "league": "La Liga",
-    "match": "Valencia - Athletic Club",
-    "kickoff": "2026-10-17T21:00:00+02:00",
+    "match": "Celta Vigo - Alaves",
+    "kickoff": "2026-10-18T16:15:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.10",
+    "odds": "2.24",
     "group": 2
   },
   {
-    "league": "J1 League",
-    "match": "Machida Zelvia - Avispa Fukuoka",
-    "kickoff": "2026-10-18T09:00:00+02:00",
+    "league": "Prva Liga",
+    "match": "FK Vozdovac - Loznica",
+    "kickoff": "2026-10-18T14:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.09",
-    "group": 2
-  },
-  {
-    "league": "Championship",
-    "match": "West Brom - Blackburn",
-    "kickoff": "2026-10-17T16:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "1.98",
+    "odds": "2.27",
     "group": 3
   },
   {
-    "league": "League One",
-    "match": "Bradford - Stevenage",
-    "kickoff": "2026-10-17T16:00:00+02:00",
+    "league": "Segunda División",
+    "match": "Valladolid - Eldense",
+    "kickoff": "2026-10-18T18:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.21",
+    "odds": "1.98",
     "group": 3
   }
 ]
