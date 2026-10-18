@@ -1,24 +1,24 @@
 [
   {
-    "League": "National League - North",
-    "Match": "Hednesford Town vs Brackley Town",
+    "League": "Premier League",
+    "Match": "Nottingham Forest vs Arsenal",
+    "Tip": "Over 2.5",
+    "Odds": "1.95",
+    "Date": "2026-10-18T15:30:00+00:00"
+  },
+  {
+    "League": "Primera División RFEF - Group 1",
+    "Match": "Arenas Getxo vs Mérida AD",
     "Tip": "Over 2.5",
     "Odds": "1.75",
-    "Date": "2026-10-17T14:00:00+00:00"
+    "Date": "2026-10-18T10:00:00+00:00"
   },
   {
-    "League": "FA Cup",
-    "Match": "Wimborne Town vs Chelmsford City",
+    "League": "Serie A",
+    "Match": "AC Milan vs Atalanta",
     "Tip": "Over 2.5",
-    "Odds": "1.80",
-    "Date": "2026-10-17T14:00:00+00:00"
-  },
-  {
-    "League": "Süper Lig",
-    "Match": "Amed vs Konyaspor",
-    "Tip": "Over 2.5",
-    "Odds": "1.94",
-    "Date": "2026-10-17T13:00:00+00:00",
+    "Odds": "1.81",
+    "Date": "2026-10-18T16:00:00+00:00",
     "locked": true
   }
 ]
