@@ -1,5 +1,26 @@
 [
   {
+    "date": "2026-10-18T05:30:00Z",
+    "matches": [
+      {
+        "league": "Taça de Portugal",
+        "match": "Mafra - Santa Clara",
+        "tip": "Over 2.5",
+        "odds": "1.70",
+        "score": "3:2",
+        "result": "✓"
+      },
+      {
+        "league": "Ekstraklasa",
+        "match": "Zaglebie Lubin - Jagiellonia",
+        "tip": "Over 2.5",
+        "odds": "1.73",
+        "score": "1:0",
+        "result": "✗"
+      }
+    ]
+  },
+  {
     "date": "2026-10-17T05:30:00Z",
     "matches": [
       {
