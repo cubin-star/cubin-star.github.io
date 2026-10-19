@@ -1,51 +1,51 @@
 [
   {
-    "league": "Super League 2",
-    "match": "Larisa - Panserraikos",
-    "kickoff": "2026-10-18T13:45:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.27"
-  },
-  {
-    "league": "Süper Lig",
-    "match": "Kasımpaşa - Samsunspor",
-    "kickoff": "2026-10-18T12:30:00+02:00",
+    "league": "Segunda División",
+    "match": "Celta de Vigo II - Tenerife",
+    "kickoff": "2026-10-19T20:30:00+02:00",
     "tip": "Over 2.5",
     "odds": "2.00"
   },
   {
-    "league": "Super League 1",
-    "match": "Kifisia - Aris Thessalonikis",
-    "kickoff": "2026-10-18T19:00:00+02:00",
+    "league": "Super League 2",
+    "match": "PAOK II - Apollon Pontou",
+    "kickoff": "2026-10-19T14:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.01"
-  },
-  {
-    "league": "Liga I",
-    "match": "Uta Arad - CFR 1907 Cluj",
-    "kickoff": "2026-10-18T17:15:00+02:00",
-    "tip": "Home win",
-    "odds": "2.13"
+    "odds": "2.18"
   },
   {
     "league": "Serie A",
-    "match": "Fiorentina - Como",
-    "kickoff": "2026-10-18T15:00:00+02:00",
-    "tip": "Away win",
-    "odds": "2.06"
+    "match": "Parma - Torino",
+    "kickoff": "2026-10-19T20:45:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.34"
   },
   {
-    "league": "Ligue 1",
-    "match": "Lorient - Monaco",
-    "kickoff": "2026-10-18T17:15:00+02:00",
+    "league": "Superliga",
+    "match": "Viborg - FC Midtjylland",
+    "kickoff": "2026-10-19T19:00:00+02:00",
     "tip": "Away win",
-    "odds": "2.10"
+    "odds": "2.27"
+  },
+  {
+    "league": "Süper Lig",
+    "match": "Trabzonspor - Beşiktaş",
+    "kickoff": "2026-10-19T19:00:00+02:00",
+    "tip": "Away win",
+    "odds": "2.50"
+  },
+  {
+    "league": "1. Lig",
+    "match": "Manisa F.K. - Muğlaspor",
+    "kickoff": "2026-10-19T16:00:00+02:00",
+    "tip": "Home win",
+    "odds": "2.30"
   },
   {
     "league": "Premier League",
-    "match": "Leeds - Manchester United",
-    "kickoff": "2026-10-18T15:00:00+02:00",
-    "tip": "Home win",
-    "odds": "2.39"
+    "match": "El Gouna FC - Smouha SC",
+    "kickoff": "2026-10-19T16:00:00+02:00",
+    "tip": "Away win",
+    "odds": "2.20"
   }
 ]

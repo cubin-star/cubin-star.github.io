@@ -1,50 +1,50 @@
 [
   {
-    "league": "Süper Lig",
-    "match": "Kocaelispor - Göztepe",
-    "kickoff": "2026-10-18T15:00:00+02:00",
+    "league": "La Liga",
+    "match": "Getafe - Rayo Vallecano",
+    "kickoff": "2026-10-19T21:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.00",
+    "odds": "2.44",
+    "group": 1
+  },
+  {
+    "league": "Allsvenskan",
+    "match": "Degerfors IF - Kalmar FF",
+    "kickoff": "2026-10-19T19:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "1.98",
     "group": 1
   },
   {
     "league": "Serie A",
-    "match": "Udinese - Lecce",
-    "kickoff": "2026-10-18T12:30:00+02:00",
+    "match": "Corinthians - Vitoria",
+    "kickoff": "2026-10-20T01:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.01",
-    "group": 1
-  },
-  {
-    "league": "Taça de Portugal",
-    "match": "Salgueiros - Estoril",
-    "kickoff": "2026-10-18T16:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "1.98",
+    "odds": "2.10",
     "group": 2
   },
   {
-    "league": "La Liga",
-    "match": "Celta Vigo - Alaves",
-    "kickoff": "2026-10-18T16:15:00+02:00",
+    "league": "Primeira Liga",
+    "match": "SC Braga - GIL Vicente",
+    "kickoff": "2026-10-19T21:15:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.24",
+    "odds": "2.02",
     "group": 2
   },
   {
-    "league": "Prva Liga",
-    "match": "FK Vozdovac - Loznica",
-    "kickoff": "2026-10-18T14:00:00+02:00",
+    "league": "A Lyga",
+    "match": "Suduva Marijampole - Kauno Žalgiris",
+    "kickoff": "2026-10-19T17:45:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.27",
+    "odds": "2.06",
     "group": 3
   },
   {
-    "league": "Segunda División",
-    "match": "Valladolid - Eldense",
-    "kickoff": "2026-10-18T18:30:00+02:00",
+    "league": "Superliga",
+    "match": "Dukagjini - Drenica Skënderaj",
+    "kickoff": "2026-10-19T18:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "1.98",
+    "odds": "2.05",
     "group": 3
   }
 ]
