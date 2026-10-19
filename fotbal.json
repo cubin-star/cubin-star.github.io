@@ -1,24 +1,24 @@
 [
   {
-    "League": "Premier League",
-    "Match": "Nottingham Forest vs Arsenal",
-    "Tip": "Over 2.5",
-    "Odds": "1.95",
-    "Date": "2026-10-18T15:30:00+00:00"
-  },
-  {
-    "League": "Primera División RFEF - Group 1",
-    "Match": "Arenas Getxo vs Mérida AD",
-    "Tip": "Over 2.5",
-    "Odds": "1.75",
-    "Date": "2026-10-18T10:00:00+00:00"
-  },
-  {
-    "League": "Serie A",
-    "Match": "AC Milan vs Atalanta",
+    "League": "1. Lig",
+    "Match": "Fatih Karagümrük vs Keçiörengücü",
     "Tip": "Over 2.5",
     "Odds": "1.81",
-    "Date": "2026-10-18T16:00:00+00:00",
+    "Date": "2026-10-19T14:00:00+00:00"
+  },
+  {
+    "League": "Superliga",
+    "Match": "Ballkani vs Prishtina",
+    "Tip": "Over 2.5",
+    "Odds": "1.80",
+    "Date": "2026-10-19T12:00:00+00:00"
+  },
+  {
+    "League": "1. Division",
+    "Match": "Pafos vs Apoel Nicosia",
+    "Tip": "Over 2.5",
+    "Odds": "1.92",
+    "Date": "2026-10-19T15:00:00+00:00",
     "locked": true
   }
 ]
