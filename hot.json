@@ -1,50 +1,50 @@
 [
   {
-    "league": "La Liga",
-    "match": "Getafe - Rayo Vallecano",
-    "kickoff": "2026-10-19T21:00:00+02:00",
+    "league": "Championship",
+    "match": "Dunfermline - Partick",
+    "kickoff": "2026-10-20T20:45:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.44",
+    "odds": "1.95",
     "group": 1
   },
   {
-    "league": "Allsvenskan",
-    "match": "Degerfors IF - Kalmar FF",
-    "kickoff": "2026-10-19T19:00:00+02:00",
+    "league": "Copa Chile",
+    "match": "Union La Calera - Coquimbo Unido",
+    "kickoff": "2026-10-21T01:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "1.98",
+    "odds": "2.15",
     "group": 1
   },
   {
-    "league": "Serie A",
-    "match": "Corinthians - Vitoria",
-    "kickoff": "2026-10-20T01:00:00+02:00",
+    "league": "League One",
+    "match": "Burton Albion - Bradford",
+    "kickoff": "2026-10-20T20:45:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.10",
+    "odds": "2.05",
     "group": 2
   },
   {
-    "league": "Primeira Liga",
-    "match": "SC Braga - GIL Vicente",
-    "kickoff": "2026-10-19T21:15:00+02:00",
+    "league": "Primera A",
+    "match": "Deportivo Pereira - Chico",
+    "kickoff": "2026-10-20T23:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.02",
+    "odds": "2.12",
     "group": 2
   },
   {
-    "league": "A Lyga",
-    "match": "Suduva Marijampole - Kauno Žalgiris",
-    "kickoff": "2026-10-19T17:45:00+02:00",
+    "league": "Premiership",
+    "match": "Larne - Linfield",
+    "kickoff": "2026-10-20T20:45:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.06",
+    "odds": "1.99",
     "group": 3
   },
   {
-    "league": "Superliga",
-    "match": "Dukagjini - Drenica Skënderaj",
-    "kickoff": "2026-10-19T18:00:00+02:00",
+    "league": "Premier League",
+    "match": "El Geish - Pyramids FC",
+    "kickoff": "2026-10-20T19:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.05",
+    "odds": "2.15",
     "group": 3
   }
 ]

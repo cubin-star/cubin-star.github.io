@@ -1,56 +1,56 @@
 [
   {
-    "fixtureId": 1550153,
-    "league": "Serie A",
-    "match": "Monza - Cagliari",
-    "kickoff": "2026-10-19T18:30:00+02:00",
+    "fixtureId": 1632222,
+    "league": "AFC Challenge League",
+    "match": "Fortis - Goa",
+    "kickoff": "2026-10-20T15:25:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.10",
+    "odds": "2.02",
     "group": 1
   },
   {
-    "fixtureId": 1612261,
-    "league": "Premier League",
-    "match": "Enppi - El Mokawloon",
-    "kickoff": "2026-10-19T19:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.46",
-    "group": 1
-  },
-  {
-    "fixtureId": 1493187,
-    "league": "Liga Profesional Argentina",
-    "match": "Deportivo Riestra - Union Santa Fe",
-    "kickoff": "2026-10-20T02:15:00+02:00",
+    "fixtureId": 1606706,
+    "league": "J2 League",
+    "match": "Montedio Yamagata - Consadole Sapporo",
+    "kickoff": "2026-10-21T06:00:00+02:00",
     "tip": "Home win",
+    "odds": "2.30",
+    "group": 1
+  },
+  {
+    "fixtureId": 1640746,
+    "league": "CONCACAF Central American Cup",
+    "match": "CD Marathon - Alianza",
+    "kickoff": "2026-10-21T04:00:00+02:00",
+    "tip": "Over 2.5",
     "odds": "2.20",
     "group": 2
   },
   {
-    "fixtureId": 1552503,
-    "league": "Ligue 2",
-    "match": "Rodez - Montpellier",
-    "kickoff": "2026-10-19T20:45:00+02:00",
-    "tip": "Away win",
-    "odds": "2.38",
+    "fixtureId": 1612262,
+    "league": "Premier League",
+    "match": "Asyut Petrol - Zamalek SC",
+    "kickoff": "2026-10-20T16:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.30",
     "group": 2
   },
   {
-    "fixtureId": 1558539,
-    "league": "First League",
-    "match": "Petrovac - Otrant-Olympic",
-    "kickoff": "2026-10-19T15:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.29",
+    "fixtureId": 1551003,
+    "league": "Liga MX",
+    "match": "FC Juarez - Atlante FC",
+    "kickoff": "2026-10-21T03:00:00+02:00",
+    "tip": "Away win",
+    "odds": "2.34",
     "group": 3
   },
   {
-    "fixtureId": 1636953,
-    "league": "Super League 2",
-    "match": "Niki Volos - Panionios",
-    "kickoff": "2026-10-19T13:45:00+02:00",
-    "tip": "Home win",
-    "odds": "2.33",
+    "fixtureId": 1646584,
+    "league": "FA Cup",
+    "match": "Anstey Nomads - Macclesfield",
+    "kickoff": "2026-10-20T20:45:00+02:00",
+    "tip": "Away win",
+    "odds": "2.00",
     "group": 3
   }
 ]

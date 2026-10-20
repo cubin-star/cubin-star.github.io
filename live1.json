@@ -1,58 +1,9 @@
 [
   {
-    "league": "Super League 2",
-    "match": "PAOK II - Apollon Pontou",
-    "kickoff": "2026-10-19T14:00:00+02:00",
+    "league": "Championship",
+    "match": "Dunfermline - Partick",
+    "kickoff": "2026-10-20T20:45:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.18"
-  },
-  {
-    "league": "Serie A",
-    "match": "Monza - Cagliari",
-    "kickoff": "2026-10-19T18:30:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.10"
-  },
-  {
-    "league": "Serie A",
-    "match": "Parma - Torino",
-    "kickoff": "2026-10-19T20:45:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.34"
-  },
-  {
-    "league": "Allsvenskan",
-    "match": "Degerfors IF - Kalmar FF",
-    "kickoff": "2026-10-19T19:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "1.98"
-  },
-  {
-    "league": "Segunda División",
-    "match": "Celta de Vigo II - Tenerife",
-    "kickoff": "2026-10-19T20:30:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.00"
-  },
-  {
-    "league": "La Liga",
-    "match": "Getafe - Rayo Vallecano",
-    "kickoff": "2026-10-19T21:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.44"
-  },
-  {
-    "league": "Primeira Liga",
-    "match": "SC Braga - GIL Vicente",
-    "kickoff": "2026-10-19T21:15:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.02"
-  },
-  {
-    "league": "Serie A",
-    "match": "Corinthians - Vitoria",
-    "kickoff": "2026-10-20T01:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.10"
+    "odds": "1.95"
   }
 ]
