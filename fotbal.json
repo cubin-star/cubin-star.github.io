@@ -1,24 +1,24 @@
 [
   {
-    "League": "1. Lig",
-    "Match": "Fatih Karagümrük vs Keçiörengücü",
+    "League": "FA Cup",
+    "Match": "Alvechurch vs Spalding United",
     "Tip": "Over 2.5",
-    "Odds": "1.81",
-    "Date": "2026-10-19T14:00:00+00:00"
+    "Odds": "1.76",
+    "Date": "2026-10-20T18:45:00+00:00"
   },
   {
-    "League": "Superliga",
-    "Match": "Ballkani vs Prishtina",
+    "League": "AFC Challenge League",
+    "Match": "Al Ittihad vs Ahal",
     "Tip": "Over 2.5",
     "Odds": "1.80",
-    "Date": "2026-10-19T12:00:00+00:00"
+    "Date": "2026-10-20T15:00:00+00:00"
   },
   {
-    "League": "1. Division",
-    "Match": "Pafos vs Apoel Nicosia",
+    "League": "League Two",
+    "Match": "Rotherham vs Newport County",
     "Tip": "Over 2.5",
-    "Odds": "1.92",
-    "Date": "2026-10-19T15:00:00+00:00",
+    "Odds": "1.95",
+    "Date": "2026-10-20T18:45:00+00:00",
     "locked": true
   }
 ]
