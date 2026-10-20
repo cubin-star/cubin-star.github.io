@@ -1,5 +1,26 @@
 [
   {
+    "date": "2026-10-19T05:30:00Z",
+    "matches": [
+      {
+        "league": "Prva Liga",
+        "match": "FK Spartak Zdrepceva KRV - Borac Cacak",
+        "tip": "Over 2.5",
+        "odds": "1.83",
+        "score": "3:3",
+        "result": "✓"
+      },
+      {
+        "league": "Superettan",
+        "match": "Varbergs BoIS FC - Helsingborg",
+        "tip": "Over 2.5",
+        "odds": "1.76",
+        "score": "0:0",
+        "result": "✗"
+      }
+    ]
+  },
+  {
     "date": "2026-10-18T05:30:00Z",
     "matches": [
       {
