@@ -1,9 +1,16 @@
 [
   {
-    "League": "Serie A",
-    "Match": "Monza vs Cagliari",
+    "League": "Liga MX",
+    "Match": "FC Juarez vs Atlante FC",
     "Tip": "Over 1.5",
-    "Odds": "1.33",
-    "Date": "2026-10-19T16:30:00+00:00"
+    "Odds": "1.21",
+    "Date": "2026-10-21T01:00:00+00:00"
+  },
+  {
+    "League": "J2 League",
+    "Match": "Montedio Yamagata vs Consadole Sapporo",
+    "Tip": "Over 1.5",
+    "Odds": "1.25",
+    "Date": "2026-10-21T04:00:00+00:00"
   }
 ]
