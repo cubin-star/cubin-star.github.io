@@ -610,6 +610,29 @@ function balanceGroups(picks){
     const result=[];for(let g=0;g<bestP.length;g++){for(const idx of bestP[g])result.push({...picks[idx],group:g+1});}return result;
 }
 
+// Pojistka pred zapisem react1.json: bez platneho fixtureId nedokaze SOCVERO
+// naparovat DailyTip (ExternalMatchId) a vyhodnoceni Winning Examples spadne.
+// Radeji nic nezapsat nez zapsat soubor bez ID.
+export function assertReact1(picks){
+    const errors=[];
+    if(!Array.isArray(picks))errors.push('react1 neni pole');
+    else{
+        if(picks.length!==REACT1_PICK_COUNT)errors.push('ocekavano '+REACT1_PICK_COUNT+' zapasu, nalezeno '+picks.length);
+        picks.forEach((p,i)=>{
+            const id=p?.fixtureId;
+            if(!Number.isInteger(id)||id<=0)errors.push('zaznam #'+(i+1)+' ('+(p?.match??'?')+') ma neplatne fixtureId: '+JSON.stringify(id));
+        });
+        const ids=picks.map(p=>p?.fixtureId).filter(id=>Number.isInteger(id)&&id>0);
+        if(new Set(ids).size!==ids.length)errors.push('fixtureId nejsou unikatni: '+ids.join(', '));
+    }
+    if(errors.length){
+        const msg='FATAL: react1.json neprosel validaci - '+errors.join('; ');
+        console.error(msg);
+        throw new Error(msg);
+    }
+    console.log('react1 validace OK: '+picks.length+' zapasu s unikatnim fixtureId');
+}
+
 async function main(){
     console.log('Kombik Bot - fetch-matches\n');
 
@@ -897,7 +920,10 @@ async function main(){
     const react1Selected=react1Picker.selected;
     const react1UsedFixtures=new Set(react1Selected.map(m=>m.fixtureId));
     for(const id of react1UsedFixtures)selectedIds.add(id);
-    const react1=react1Selected.map(m=>({league:m.league,match:m.match,kickoff:m.kickoff,tip:m.tip,odds:m.odds}));
+    // fixtureId je originalni ID zapasu z API-Football (fix.fixture.id). SOCVERO
+    // podle nej paruje DailyTip (ExternalMatchId) bez hledani podle nazvu.
+    const react1=react1Selected.map(m=>({fixtureId:m.fixtureId,league:m.league,match:m.match,kickoff:m.kickoff,tip:m.tip,odds:m.odds}));
+    assertReact1(react1);
     writeFileSync('react1.json',JSON.stringify(react1,null,2),'utf-8');
     logPicker('react1','react1.json',react1Selected,react1Picker.tierTotals,REACT1_PICK_COUNT,CORE_MIN_REACT1,REACT1_MIN_ODDS,REACT1_MAX_ODDS);
 
