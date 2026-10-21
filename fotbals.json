@@ -1,16 +1,23 @@
 [
   {
-    "League": "Liga MX",
-    "Match": "FC Juarez vs Atlante FC",
+    "League": "J1 League",
+    "Match": "Kyoto Sanga vs Kashima",
     "Tip": "Over 1.5",
-    "Odds": "1.21",
-    "Date": "2026-10-21T01:00:00+00:00"
+    "Odds": "1.24",
+    "Date": "2026-10-21T10:00:00+00:00"
   },
   {
-    "League": "J2 League",
-    "Match": "Montedio Yamagata vs Consadole Sapporo",
+    "League": "CONCACAF Central American Cup",
+    "Match": "Firpo vs Deportivo Saprissa",
     "Tip": "Over 1.5",
     "Odds": "1.25",
-    "Date": "2026-10-21T04:00:00+00:00"
+    "Date": "2026-10-22T00:30:00+00:00"
+  },
+  {
+    "League": "La Liga",
+    "Match": "Levante vs Athletic Club",
+    "Tip": "Over 1.5",
+    "Odds": "1.30",
+    "Date": "2026-10-21T18:00:00+00:00"
   }
 ]

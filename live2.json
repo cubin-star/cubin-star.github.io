@@ -1,1 +1,23 @@
-[]
+[
+  {
+    "League": "J1 League",
+    "Match": "Kyoto Sanga vs Kashima",
+    "Tip": "Over 2.5",
+    "Odds": "1.71",
+    "Date": "2026-10-21T10:00:00+00:00"
+  },
+  {
+    "League": "First Amateur Division",
+    "Match": "Heist vs Tienen",
+    "Tip": "Over 2.5",
+    "Odds": "1.54",
+    "Date": "2026-10-21T18:00:00+00:00"
+  },
+  {
+    "League": "CONCACAF Central American Cup",
+    "Match": "Firpo vs Deportivo Saprissa",
+    "Tip": "Over 2.5",
+    "Odds": "1.75",
+    "Date": "2026-10-22T00:30:00+00:00"
+  }
+]

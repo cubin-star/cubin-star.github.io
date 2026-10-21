@@ -1,44 +1,23 @@
 [
   {
-    "League": "League One",
-    "Match": "Cambridge United vs Wycombe",
+    "League": "J1 League",
+    "Match": "Kyoto Sanga vs Kashima",
     "Tip": "Over 1.5",
-    "Odds": "1.20",
-    "Date": "2026-10-20T18:45:00+00:00"
+    "Odds": "1.24",
+    "Date": "2026-10-21T10:00:00+00:00"
   },
   {
-    "League": "Non League Premier - Isthmian",
-    "Match": "Brentwood Town vs Dartford",
+    "League": "First Amateur Division",
+    "Match": "Heist vs Tienen",
     "Tip": "Over 1.5",
-    "Odds": "1.16",
-    "Date": "2026-10-20T18:45:00+00:00"
+    "Odds": "1.18",
+    "Date": "2026-10-21T18:00:00+00:00"
   },
   {
-    "League": "Non League Premier - Isthmian",
-    "Match": "Three Bridges vs Eastbourne Borough",
+    "League": "CONCACAF Central American Cup",
+    "Match": "Firpo vs Deportivo Saprissa",
     "Tip": "Over 1.5",
-    "Odds": "1.12",
-    "Date": "2026-10-20T18:45:00+00:00"
-  },
-  {
-    "League": "Non League Premier - Southern Central",
-    "Match": "Needham Market vs Bishop's Stortford",
-    "Tip": "Over 1.5",
-    "Odds": "1.15",
-    "Date": "2026-10-20T18:45:00+00:00"
-  },
-  {
-    "League": "Non League Premier - Southern Central",
-    "Match": "Rushall Olympic vs Leamington",
-    "Tip": "Over 1.5",
-    "Odds": "1.14",
-    "Date": "2026-10-20T18:45:00+00:00"
-  },
-  {
-    "League": "Non League Premier - Southern South",
-    "Match": "Chertsey Town vs Evesham United",
-    "Tip": "Over 1.5",
-    "Odds": "1.12",
-    "Date": "2026-10-20T18:45:00+00:00"
+    "Odds": "1.25",
+    "Date": "2026-10-22T00:30:00+00:00"
   }
 ]
