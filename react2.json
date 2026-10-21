@@ -1,56 +1,56 @@
 [
   {
-    "fixtureId": 1632222,
-    "league": "AFC Challenge League",
-    "match": "Fortis - Goa",
-    "kickoff": "2026-10-20T15:25:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.02",
-    "group": 1
-  },
-  {
-    "fixtureId": 1606706,
-    "league": "J2 League",
-    "match": "Montedio Yamagata - Consadole Sapporo",
-    "kickoff": "2026-10-21T06:00:00+02:00",
-    "tip": "Home win",
-    "odds": "2.30",
-    "group": 1
-  },
-  {
-    "fixtureId": 1640746,
-    "league": "CONCACAF Central American Cup",
-    "match": "CD Marathon - Alianza",
-    "kickoff": "2026-10-21T04:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.20",
-    "group": 2
-  },
-  {
-    "fixtureId": 1612262,
-    "league": "Premier League",
-    "match": "Asyut Petrol - Zamalek SC",
-    "kickoff": "2026-10-20T16:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.30",
-    "group": 2
-  },
-  {
-    "fixtureId": 1551003,
+    "fixtureId": 1551006,
     "league": "Liga MX",
-    "match": "FC Juarez - Atlante FC",
-    "kickoff": "2026-10-21T03:00:00+02:00",
+    "match": "Atlas - Club America",
+    "kickoff": "2026-10-22T03:00:00+02:00",
     "tip": "Away win",
-    "odds": "2.34",
+    "odds": "2.05",
+    "group": 1
+  },
+  {
+    "fixtureId": 1645842,
+    "league": "Pro Cup",
+    "match": "Cherno More Varna - Lokomotiv Plovdiv",
+    "kickoff": "2026-10-21T17:30:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.33",
+    "group": 1
+  },
+  {
+    "fixtureId": 1612265,
+    "league": "Premier League",
+    "match": "Ghazl El Mehalla - Al Ittihad",
+    "kickoff": "2026-10-21T16:00:00+02:00",
+    "tip": "Away win",
+    "odds": "2.60",
+    "group": 2
+  },
+  {
+    "fixtureId": 1556101,
+    "league": "J1 League",
+    "match": "Avispa Fukuoka - Gamba Osaka",
+    "kickoff": "2026-10-21T12:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.01",
+    "group": 2
+  },
+  {
+    "fixtureId": 1635630,
+    "league": "UEFA Champions League",
+    "match": "Bayern München - Arsenal",
+    "kickoff": "2026-10-21T21:00:00+02:00",
+    "tip": "Home win",
+    "odds": "2.10",
     "group": 3
   },
   {
-    "fixtureId": 1646584,
-    "league": "FA Cup",
-    "match": "Anstey Nomads - Macclesfield",
-    "kickoff": "2026-10-20T20:45:00+02:00",
-    "tip": "Away win",
-    "odds": "2.00",
+    "fixtureId": 1606707,
+    "league": "J2 League",
+    "match": "Tegevajaro Miyazaki - Blaublitz Akita",
+    "kickoff": "2026-10-21T12:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.25",
     "group": 3
   }
 ]

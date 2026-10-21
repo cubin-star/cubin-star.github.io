@@ -1,50 +1,50 @@
 [
   {
-    "league": "Championship",
-    "match": "Dunfermline - Partick",
-    "kickoff": "2026-10-20T20:45:00+02:00",
+    "league": "La Liga",
+    "match": "Levante - Athletic Club",
+    "kickoff": "2026-10-21T20:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "1.95",
+    "odds": "1.97",
     "group": 1
   },
   {
-    "league": "Copa Chile",
-    "match": "Union La Calera - Coquimbo Unido",
-    "kickoff": "2026-10-21T01:00:00+02:00",
+    "league": "Premier League",
+    "match": "Lugazi - Express",
+    "kickoff": "2026-10-21T15:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.45",
+    "group": 1
+  },
+  {
+    "league": "J1 League",
+    "match": "Shimizu S-pulse - Machida Zelvia",
+    "kickoff": "2026-10-21T12:00:00+02:00",
     "tip": "Over 2.5",
     "odds": "2.15",
-    "group": 1
-  },
-  {
-    "league": "League One",
-    "match": "Burton Albion - Bradford",
-    "kickoff": "2026-10-20T20:45:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.05",
     "group": 2
   },
   {
-    "league": "Primera A",
-    "match": "Deportivo Pereira - Chico",
-    "kickoff": "2026-10-20T23:30:00+02:00",
+    "league": "J2 League",
+    "match": "Albirex Niigata - Sagan Tosu",
+    "kickoff": "2026-10-21T12:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.12",
+    "odds": "2.10",
     "group": 2
   },
   {
-    "league": "Premiership",
-    "match": "Larne - Linfield",
-    "kickoff": "2026-10-20T20:45:00+02:00",
+    "league": "Veikkausliiga",
+    "match": "PK-35 - FF Jaro",
+    "kickoff": "2026-10-21T17:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "1.99",
+    "odds": "2.33",
     "group": 3
   },
   {
     "league": "Premier League",
-    "match": "El Geish - Pyramids FC",
-    "kickoff": "2026-10-20T19:00:00+02:00",
+    "match": "Zabbar St. Patrick - Sliema Wanderers",
+    "kickoff": "2026-10-21T20:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.15",
+    "odds": "2.03",
     "group": 3
   }
 ]
