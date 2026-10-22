@@ -1,79 +1,23 @@
 [
   {
-    "league": "J1 League",
-    "match": "Yokohama F. Marinos - Tokyo Verdy",
-    "kickoff": "2026-10-21T12:00:00+02:00",
+    "league": "UEFA Europa Conference League",
+    "match": "Borac Banja Luka - KuPS",
+    "kickoff": "2026-10-22T21:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.20"
+    "odds": "1.95"
   },
   {
-    "league": "J1 League",
-    "match": "Fagiano Okayama - Mito Hollyhock",
-    "kickoff": "2026-10-21T12:00:00+02:00",
+    "league": "UEFA Europa Conference League",
+    "match": "SC Braga - Gent",
+    "kickoff": "2026-10-22T21:00:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.17"
+  },
+  {
+    "league": "UEFA Europa Conference League",
+    "match": "Getafe - FC Lugano",
+    "kickoff": "2026-10-22T18:45:00+02:00",
     "tip": "Over 2.5",
     "odds": "2.10"
-  },
-  {
-    "league": "J1 League",
-    "match": "Avispa Fukuoka - Gamba Osaka",
-    "kickoff": "2026-10-21T12:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.01"
-  },
-  {
-    "league": "J1 League",
-    "match": "Shimizu S-pulse - Machida Zelvia",
-    "kickoff": "2026-10-21T12:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.15"
-  },
-  {
-    "league": "J2 League",
-    "match": "Tegevajaro Miyazaki - Blaublitz Akita",
-    "kickoff": "2026-10-21T12:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.25"
-  },
-  {
-    "league": "J2 League",
-    "match": "Tokushima Vortis - Vanraure Hachinohe",
-    "kickoff": "2026-10-21T12:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.05"
-  },
-  {
-    "league": "J2 League",
-    "match": "Albirex Niigata - Sagan Tosu",
-    "kickoff": "2026-10-21T12:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.10"
-  },
-  {
-    "league": "J2 League",
-    "match": "Jubilo Iwata - Oita Trinita",
-    "kickoff": "2026-10-21T12:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.05"
-  },
-  {
-    "league": "J2 League",
-    "match": "Shonan Bellmare - Iwaki",
-    "kickoff": "2026-10-21T12:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.00"
-  },
-  {
-    "league": "Veikkausliiga",
-    "match": "PK-35 - FF Jaro",
-    "kickoff": "2026-10-21T17:30:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.33"
-  },
-  {
-    "league": "La Liga",
-    "match": "Levante - Athletic Club",
-    "kickoff": "2026-10-21T20:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "1.97"
   }
 ]
