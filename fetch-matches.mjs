@@ -40,8 +40,8 @@ const REACT2_PICK_COUNT = 6;
 const REACT2_OVER_COUNT = 3;
 // react3.json - stejny kurzovy pas i vyberova logika jako react2.json, ale 8 zapasu
 // ve 4 skupinach po dvou. Garantovane je minimum Over 2.5 (REACT3_MIN_OVER), zbytek
-// se dobere z obou trhu dohromady. Na rozdil od ostatnich vyberu se NEdeduplikuje -
-// zapasy se smi shodovat s hot.json i react2.json.
+// se dobere z obou trhu dohromady. Dedup je spolecny s ostatnimi vystupy - stejny
+// zapas se smi objevit i jinde, ale jen s jinym tipem.
 const REACT3_PICK_COUNT = 8;
 const REACT3_MIN_OVER = 4;
 // Max pocet vybranych zapasu z jedne zeme - brani zaplaveni tiketu jednou destinaci.
@@ -813,6 +813,13 @@ async function main(){
     console.log('\nVybrano: '+selected.length+'/'+PICK_COUNT);
     if(selected.length<PICK_COUNT)console.log('WARNING: Mene nez '+PICK_COUNT+' zapasu.');
     // === tips.json: 2 nahodne zapasy, primarne jadro, pak T1+T2, jinak T3/T4 ====
+    // Globalni dedup napric VSEMI vystupy je na urovni dvojice zapas+tip
+    // (usedPicks). Stejny zapas se tak smi objevit ve vice souborech, ale pokazde
+    // s jinym tipem - 'Arsenal - Liverpool | Home win' existuje jen jednou.
+    // selectedIds (dedup po zapasech) se pouziva uz jen pro tips.json, ktery
+    // nabizi vyhradne Over 2.5 a jinou variantu zapasu tedy nema.
+    const pickKey=m=>m.fixtureId+'|'+m.tip;
+    const usedPicks=new Set(selected.map(pickKey));
     const selectedIds=new Set(selected.map(m=>m.fixtureId));
     const tipsSelected=[],tipsUsedLeagues=new Set();
     function tipsPickFrom(tiers,coreOnly=false){
@@ -823,6 +830,7 @@ async function main(){
             if(tipsUsedLeagues.has(lk))continue;
             tipsUsedLeagues.add(lk);
             selectedIds.add(m.fixtureId);
+            usedPicks.add(pickKey(m));
             tipsSelected.push(m);
         }
     }
@@ -836,17 +844,22 @@ async function main(){
     for(const m of tipsSelected)console.log('   [T'+m.tier+'] '+m.match+' | '+m.league+' ('+m.country+') | Over 2.5 @ '+m.odds);
     if(tips.length<TIPS_PICK_COUNT)console.log('WARNING: tips.json ma mene nez '+TIPS_PICK_COUNT+' zapasu.');
 
-    // === Sdileny vyber pro react1.json a react2.json ========================
+    // === Sdileny vyber pro react1.json, react2.json a react3.json ============
     // Vazeny vyber tieru, stropy MAX_PER_TIER/MAX_TIER_SHARE, kvota zapasu z jadra,
-    // max jeden zapas z ligy a MAX_PER_COUNTRY ze zeme. Stav (pouzite ligy, zeme,
-    // zapasy) je vlastni pro kazdy vyber, takze se oba tikety nekryji.
-    function createPicker(pool,seenFixtures,name){
-        const selected=[],usedLeagues=new Set(),countries=new Map(),tierTotals={1:0,2:0,3:0,4:0};
-        function pickMarket(matchesMarket,want,label,coreWant=0){
+    // max jeden zapas z ligy a MAX_PER_COUNTRY ze zeme.
+    // Dedup ma dve urovne:
+    //   - globalni (usedPicks): dvojice zapas+tip smi byt jen v jednom souboru,
+    //   - lokalni (ownFixtures): v jednom tiketu nesmi byt tentyz zapas dvakrat,
+    //     ani kdyby slo o dva ruzne tipy.
+    // Pri nedostatku kandidatu se uvolnuje POUZE globalni uroven (viz relaxed) -
+    // lokalni pravidlo plati vzdy.
+    function createPicker(pool,blockedPicks,name){
+        const selected=[],usedLeagues=new Set(),countries=new Map(),ownFixtures=new Set(),tierTotals={1:0,2:0,3:0,4:0};
+        function pickMarket(matchesMarket,want,label,coreWant=0,relaxed=false){
             const buckets={1:[],2:[],3:[],4:[]};
             const seenHere=new Set();
             // Jeden zapas = max jeden tip, aby se v tiketu neobjevil stejny zapas dvakrat.
-            for(const m of shuffle(pool.filter(m=>matchesMarket(m)&&!seenFixtures.has(m.fixtureId)))){
+            for(const m of shuffle(pool.filter(m=>matchesMarket(m)&&!ownFixtures.has(m.fixtureId)&&(relaxed||!blockedPicks.has(pickKey(m)))))){
                 if(seenHere.has(m.fixtureId))continue;
                 seenHere.add(m.fixtureId);
                 if(buckets[m.tier])buckets[m.tier].push(m);
@@ -863,10 +876,12 @@ async function main(){
             function take(m,tier){
                 const lk=m.league+'|'+m.country;
                 if(usedLeagues.has(lk))return false;
-                if(seenFixtures.has(m.fixtureId))return false;
+                if(ownFixtures.has(m.fixtureId))return false;
+                if(!relaxed&&blockedPicks.has(pickKey(m)))return false;
                 if((countries.get(m.country)||0)>=MAX_PER_COUNTRY)return false;
                 usedLeagues.add(lk);
-                seenFixtures.add(m.fixtureId);
+                ownFixtures.add(m.fixtureId);
+                blockedPicks.add(pickKey(m));
                 countries.set(m.country,(countries.get(m.country)||0)+1);
                 tierCount[tier]++;
                 tierTotals[tier]++;
@@ -913,6 +928,16 @@ async function main(){
     const isWinner=m=>m.tip==='Home win'||m.tip==='Away win';
     const anyMarket=()=>true;
     const isRichOver=isGoalRichOver(goalStats);
+    // Posledni zachrana ve slaby den: kdyz ani po namichani obou trhu neni dost
+    // volnych dvojic zapas+tip, povoli se castecny dedup - dvojice se smi zopakovat
+    // z jineho souboru. Pravidlo "v jednom tiketu kazdy zapas nejvyse jednou"
+    // zustava v platnosti i tady (resi ho ownFixtures uvnitr pickeru).
+    function fillRelaxed(picker,want,name){
+        if(picker.selected.length>=want)return;
+        const missing=want-picker.selected.length;
+        console.log('   '+name+': MALO ZAPASU - povoluji castecny dedup pro '+missing+' zapasu');
+        picker.pickMarket(anyMarket,missing,'dobrani (uvolneny dedup)',0,true);
+    }
     // Vybere pozadovany pocet Over 2.5 - nejdriv jen z lig nad OVER_PREFER_RATE,
     // a teprve kdyz jich neni dost, dobere zbytek z lig s nizsim procentem.
     // Tiket je tak vzdy plny, jen prednost maji golove souteze.
@@ -933,17 +958,15 @@ async function main(){
     // === react1.json: 7 zapasu, stejna logika i kurzovy pas jako react2 ======
     // Nejdriv se zajisti minimum Over 2.5 (REACT1_MIN_OVER), zbytek se dobere
     // z obou trhu dohromady - nahodne tak vyjde Over 2.5 nebo Home/Away win.
-    // Blokuje zapasy uz vybrane do hot.json a tips.json (selectedIds).
-    const react1Seen=new Set(selectedIds);
-    const react1Picker=createPicker(react1Pool,react1Seen,'react1');
+    // Blokuji se dvojice zapas+tip uz pouzite v hot.json a tips.json (usedPicks).
+    const react1Picker=createPicker(react1Pool,usedPicks,'react1');
     // Kvota jadra se rozdeli pomerne, aby ji nespotrebovala cela prvni faze.
     const react1CoreOver=Math.round(CORE_MIN_REACT1*REACT1_MIN_OVER/REACT1_PICK_COUNT);
     react1Picker.pickMarket(isRichOver,REACT1_MIN_OVER,'Over 2.5 (golove ligy)',react1CoreOver);
     if(react1Picker.selected.length<REACT1_MIN_OVER)react1Picker.pickMarket(isOver,REACT1_MIN_OVER-react1Picker.selected.length,'Over 2.5 (ostatni ligy)');
     react1Picker.pickMarket(anyMarket,REACT1_PICK_COUNT-react1Picker.selected.length,'dobrani (oba trhy)',CORE_MIN_REACT1-react1CoreOver);
+    fillRelaxed(react1Picker,REACT1_PICK_COUNT,'react1');
     const react1Selected=react1Picker.selected;
-    const react1UsedFixtures=new Set(react1Selected.map(m=>m.fixtureId));
-    for(const id of react1UsedFixtures)selectedIds.add(id);
     // fixtureId je originalni ID zapasu z API-Football (fix.fixture.id). SOCVERO
     // podle nej paruje DailyTip (ExternalMatchId) bez hledani podle nazvu.
     const react1=react1Selected.map(m=>({fixtureId:m.fixtureId,league:m.league,match:m.match,kickoff:m.kickoff,tip:m.tip,odds:m.odds}));
@@ -954,13 +977,12 @@ async function main(){
     // === react2.json: 6 zapasu, pevne slozeni REACT2_OVER_COUNT x Over 2.5 ====
     // Oba trhy se vybiraji samostatne (vlastni tierove kose i stropy), ale sdileji
     // omezeni na ligu, zemi a zapas, aby se nic neopakovalo napric tiketem.
-    // Blokuje zapasy uz vybrane do hot.json, tips.json i react1.json.
-    const react2SeenFixtures=new Set(selectedIds);
+    // Blokuji se dvojice zapas+tip pouzite v hot.json, tips.json i react1.json.
     {
-        const free=react2Pool.filter(m=>!react2SeenFixtures.has(m.fixtureId));
+        const free=react2Pool.filter(m=>!usedPicks.has(pickKey(m)));
         console.log('\nreact2 pool: '+new Set(free.map(m=>m.fixtureId)).size+' volnych zapasu (Over 2.5: '+new Set(free.filter(isOver).map(m=>m.fixtureId)).size+', z jadra: '+new Set(free.filter(isCore).map(m=>m.fixtureId)).size+')');
     }
-    const react2Picker=createPicker(react2Pool,react2SeenFixtures,'react2');
+    const react2Picker=createPicker(react2Pool,usedPicks,'react2');
     const react2Selected=react2Picker.selected;
     // Kvota jadra (CORE_MIN_REACT2) se rozdeli mezi oba trhy pomerne k jejich velikosti.
     const coreOver=Math.round(CORE_MIN_REACT2*REACT2_OVER_COUNT/REACT2_PICK_COUNT);
@@ -973,6 +995,7 @@ async function main(){
         console.log('   react2: dobiram '+missing+' zapasu z druheho trhu (nedostatek kandidatu)');
         react2Picker.pickMarket(gotOver<REACT2_OVER_COUNT?isWinner:isOver,missing,'dobrani');
     }
+    fillRelaxed(react2Picker,REACT2_PICK_COUNT,'react2');
     // Promichej, aby v tiketu nesly 3 Over za sebou a pak 3 vitezove - skupiny
     // by jinak vzdy vysly jako "cisty Over" vs "cisty vitez".
     const react2Mixed=shuffle(react2Selected);
@@ -983,14 +1006,15 @@ async function main(){
     logPicker('react2','react2.json',react2Selected,react2Picker.tierTotals,REACT2_PICK_COUNT,CORE_MIN_REACT2,MIN_ODDS,MAX_ODDS);
 
     // === react3.json: 8 zapasu ve 4 skupinach, minimalne REACT3_MIN_OVER x Over 2.5 ====
-    // Kurzovy pas i vyberova logika jsou shodne s react2 (stejny pool), ale seen set
-    // je prazdny - react3 smi obsahovat tytez zapasy jako hot.json i react2.json.
-    const react3Picker=createPicker(react2Pool,new Set(),'react3');
+    // Kurzovy pas i vyberova logika jsou shodne s react2 (stejny pool). Dedup je
+    // take spolecny - stejny zapas se smi opakovat, ale jen s jinym tipem.
+    const react3Picker=createPicker(react2Pool,usedPicks,'react3');
     const react3Selected=react3Picker.selected;
     const react3CoreOver=Math.round(CORE_MIN_REACT3*REACT3_MIN_OVER/REACT3_PICK_COUNT);
     react3Picker.pickMarket(isRichOver,REACT3_MIN_OVER,'Over 2.5 (golove ligy)',react3CoreOver);
     if(react3Selected.length<REACT3_MIN_OVER)react3Picker.pickMarket(isOver,REACT3_MIN_OVER-react3Selected.length,'Over 2.5 (ostatni ligy)');
     react3Picker.pickMarket(anyMarket,REACT3_PICK_COUNT-react3Selected.length,'dobrani (oba trhy)',CORE_MIN_REACT3-react3CoreOver);
+    fillRelaxed(react3Picker,REACT3_PICK_COUNT,'react3');
     const react3Mixed=shuffle(react3Selected);
     const react3=balanceGroups(react3Mixed).map(m=>({fixtureId:m.fixtureId,league:m.league,match:m.match,kickoff:m.kickoff,tip:m.tip,odds:m.odds,group:m.group}));
     writeFileSync('react3.json',JSON.stringify(react3,null,2),'utf-8');
