@@ -1,5 +1,21 @@
 [
   {
+    "league": "Liga MX",
+    "homeTeam": "Atlas",
+    "awayTeam": "Club America",
+    "tip": "Over 2.5",
+    "odds": "",
+    "halftimeScore": "0:2",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-10-22T01:00:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 0:2 | xG: 1.12 | Shots: 17/3 | winXG: 0.55 | losingXG: 0.57 losingSOT: 1 | @HT | Pre O2.5: 1.61"
+  },
+  {
     "league": "League Two",
     "homeTeam": "Rochdale",
     "awayTeam": "Grimsby",
