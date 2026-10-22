@@ -1,1 +1,9 @@
-[]
+[
+  {
+    "league": "NBA",
+    "match": "Philadelphia 76ers vs Cleveland Cavaliers",
+    "tip": "Over 221.5",
+    "odds": "1.20",
+    "date": "2026-10-22T23:00:00+00:00"
+  }
+]
