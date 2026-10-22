@@ -1,5 +1,21 @@
 [
   {
+    "league": "UEFA Europa League",
+    "homeTeam": "Lech Poznan",
+    "awayTeam": "Sunderland",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "0:1",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-10-22T16:45:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 0:1 | xG: 2.84 | Shots: 20/10 | winXG: 1.69 | losingXG: 1.15 losingSOT: 2 | @HT | Pre O2.5: 1.75"
+  },
+  {
     "league": "Liga MX",
     "homeTeam": "Atlas",
     "awayTeam": "Club America",
