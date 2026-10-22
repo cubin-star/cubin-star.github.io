@@ -89,6 +89,14 @@ const CORE_MIN_TIPS = 2;
 const GOALS_FILE = 'league-goals.json';
 // Pod touto uspesnosti Over 2.5 (v %) se soutez povazuje za golove chudou.
 const MIN_OVER25_RATE = 40;
+// Mekci prah NAD tvrdym MIN_OVER25_RATE. Liga mezi MIN_OVER25_RATE a touto
+// hodnotou je "prumerna" - Over 2.5 v ni neni past, ale ani nic extra. Ve
+// vyberech, ktere umi i Home/Away win (react1/2/3), se u takoveho zapasu Over
+// zahodi a nechá se jen tip na viteze. Over 2.5 tak miri do ligy, kde goly
+// opravdu padaji (napr. japonska druha liga uz da viteze, ne Over).
+// Degradace se provede jen tehdy, kdyz ma zapas v kurzovem pasmu alternativu a
+// kdyz po ni v poolu zbyde dost kandidatu - jinak se Over ponecha.
+const OVER_PREFER_RATE = 50;
 // Statistika z mensiho poctu zapasu je nahodny sum - takovou ligu nefiltrujeme.
 const GOALS_MIN_SAMPLE = 60;
 // Ukrajina je vyrazena kvuli valce - zapasy se casto prerusuji poplachy,
@@ -590,6 +598,12 @@ function over25Rate(goalStats,m){
     if(!st||st.played<GOALS_MIN_SAMPLE)return 50;
     return st.over25Rate;
 }
+
+// Pro smisene pooly (Over 2.5 + Home/Away win): Over 2.5 se prednostne bere z lig
+// s vysokou golovosti (nad OVER_PREFER_RATE). Neni to zakaz - kdyz takovych lig
+// neni dost, vyber sahne i do lig s nizsim procentem a tiket se naplni. Zapasy z
+// prumerne golovych lig se tak do tiketu dostanou spis pres Home/Away win.
+const isGoalRichOver=goalStats=>m=>m.tip==='Over 2.5'&&over25Rate(goalStats,m)>=OVER_PREFER_RATE;
 // Seradi kose tak, ze zapasy s lepsi golovosti jsou na konci pole - vyber je
 // bere pres pop(), takze se saha po nich driv. Netykove trhy zustavaji nahodne.
 function sortByGoals(bucket,goalStats){
@@ -898,6 +912,15 @@ async function main(){
     const isOver=m=>m.tip==='Over 2.5';
     const isWinner=m=>m.tip==='Home win'||m.tip==='Away win';
     const anyMarket=()=>true;
+    const isRichOver=isGoalRichOver(goalStats);
+    // Vybere pozadovany pocet Over 2.5 - nejdriv jen z lig nad OVER_PREFER_RATE,
+    // a teprve kdyz jich neni dost, dobere zbytek z lig s nizsim procentem.
+    // Tiket je tak vzdy plny, jen prednost maji golove souteze.
+    function pickOversPreferGoals(picker,want,coreWant,label){
+        const got=picker.pickMarket(isRichOver,want,label+' (golove ligy)',coreWant);
+        if(got<want)picker.pickMarket(isOver,want-got,label+' (ostatni ligy)',Math.max(0,coreWant-got));
+        return picker.selected.filter(isOver).length;
+    }
     function logPicker(name,file,sel,tierTotals,want,coreMin,lo,hi){
         console.log('\n'+file+': '+sel.length+'/'+want+' zapasu ('+lo+'-'+hi+')');
         console.log('   Slozeni trhu: Over 2.5='+sel.filter(isOver).length+', Home/Away win='+sel.filter(isWinner).length);
@@ -915,7 +938,8 @@ async function main(){
     const react1Picker=createPicker(react1Pool,react1Seen,'react1');
     // Kvota jadra se rozdeli pomerne, aby ji nespotrebovala cela prvni faze.
     const react1CoreOver=Math.round(CORE_MIN_REACT1*REACT1_MIN_OVER/REACT1_PICK_COUNT);
-    react1Picker.pickMarket(isOver,REACT1_MIN_OVER,'Over 2.5 (minimum)',react1CoreOver);
+    react1Picker.pickMarket(isRichOver,REACT1_MIN_OVER,'Over 2.5 (golove ligy)',react1CoreOver);
+    if(react1Picker.selected.length<REACT1_MIN_OVER)react1Picker.pickMarket(isOver,REACT1_MIN_OVER-react1Picker.selected.length,'Over 2.5 (ostatni ligy)');
     react1Picker.pickMarket(anyMarket,REACT1_PICK_COUNT-react1Picker.selected.length,'dobrani (oba trhy)',CORE_MIN_REACT1-react1CoreOver);
     const react1Selected=react1Picker.selected;
     const react1UsedFixtures=new Set(react1Selected.map(m=>m.fixtureId));
@@ -940,7 +964,7 @@ async function main(){
     const react2Selected=react2Picker.selected;
     // Kvota jadra (CORE_MIN_REACT2) se rozdeli mezi oba trhy pomerne k jejich velikosti.
     const coreOver=Math.round(CORE_MIN_REACT2*REACT2_OVER_COUNT/REACT2_PICK_COUNT);
-    const gotOver=react2Picker.pickMarket(isOver,REACT2_OVER_COUNT,'Over 2.5',coreOver);
+    const gotOver=pickOversPreferGoals(react2Picker,REACT2_OVER_COUNT,coreOver,'Over 2.5');
     react2Picker.pickMarket(isWinner,REACT2_PICK_COUNT-REACT2_OVER_COUNT,'Home/Away win',CORE_MIN_REACT2-coreOver);
     // Kdyby jeden trh nemel dost kandidatu (slaby den), dobere se tiket z druheho,
     // aby react2.json nikdy nebyl kratsi nez REACT2_PICK_COUNT.
@@ -964,7 +988,8 @@ async function main(){
     const react3Picker=createPicker(react2Pool,new Set(),'react3');
     const react3Selected=react3Picker.selected;
     const react3CoreOver=Math.round(CORE_MIN_REACT3*REACT3_MIN_OVER/REACT3_PICK_COUNT);
-    react3Picker.pickMarket(isOver,REACT3_MIN_OVER,'Over 2.5 (minimum)',react3CoreOver);
+    react3Picker.pickMarket(isRichOver,REACT3_MIN_OVER,'Over 2.5 (golove ligy)',react3CoreOver);
+    if(react3Selected.length<REACT3_MIN_OVER)react3Picker.pickMarket(isOver,REACT3_MIN_OVER-react3Selected.length,'Over 2.5 (ostatni ligy)');
     react3Picker.pickMarket(anyMarket,REACT3_PICK_COUNT-react3Selected.length,'dobrani (oba trhy)',CORE_MIN_REACT3-react3CoreOver);
     const react3Mixed=shuffle(react3Selected);
     const react3=balanceGroups(react3Mixed).map(m=>({fixtureId:m.fixtureId,league:m.league,match:m.match,kickoff:m.kickoff,tip:m.tip,odds:m.odds,group:m.group}));
