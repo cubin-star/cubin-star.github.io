@@ -1,23 +1,23 @@
 [
   {
-    "league": "Iraqi League",
-    "match": "Gharraf - Naft",
-    "kickoff": "2026-10-22T18:00:00+02:00",
+    "league": "Süper Lig",
+    "match": "Alanyaspor - Kocaelispor",
+    "kickoff": "2026-10-23T19:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.43"
+    "odds": "2.30"
   },
   {
-    "league": "Second League",
-    "match": "AL Nasr SC - El Dakhleya",
-    "kickoff": "2026-10-22T14:30:00+02:00",
+    "league": "La Liga",
+    "match": "Alaves - Malaga",
+    "kickoff": "2026-10-23T21:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.28"
+    "odds": "2.08"
   },
   {
-    "league": "UEFA Europa Conference League",
-    "match": "Getafe - FC Lugano",
-    "kickoff": "2026-10-22T18:45:00+02:00",
+    "league": "Segunda División",
+    "match": "Granada CF - Valladolid",
+    "kickoff": "2026-10-23T20:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.10"
+    "odds": "2.08"
   }
 ]
