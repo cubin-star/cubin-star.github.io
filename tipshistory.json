@@ -1,5 +1,26 @@
 [
   {
+    "date": "2026-10-22T05:30:00Z",
+    "matches": [
+      {
+        "league": "Liga II",
+        "match": "Bihor Oradea - CSM Reşiţa",
+        "tip": "Over 2.5",
+        "odds": "1.70",
+        "score": "2:0",
+        "result": "✗"
+      },
+      {
+        "league": "UEFA Europa Conference League",
+        "match": "Kairat Almaty - Panathinaikos",
+        "tip": "Over 2.5",
+        "odds": "1.80",
+        "score": "1:5",
+        "result": "✓"
+      }
+    ]
+  },
+  {
     "date": "2026-10-21T05:30:00Z",
     "matches": [
       {
