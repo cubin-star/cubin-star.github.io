@@ -1,9 +1,37 @@
 [
   {
-    "League": "Copa de la División Profesional",
-    "Match": "Always Ready vs The Strongest",
+    "League": "Liga Leumit",
+    "Match": "Hapoel Kfar Saba vs Hapoel Afula",
     "Tip": "Over 1.5",
-    "Odds": "1.12",
-    "Date": "2026-10-23T00:00:00+00:00"
+    "Odds": "1.17",
+    "Date": "2026-10-23T13:00:00+00:00"
+  },
+  {
+    "League": "FNL",
+    "Match": "Dukla Praha vs Kladno",
+    "Tip": "Over 1.5",
+    "Odds": "1.18",
+    "Date": "2026-10-23T16:00:00+00:00"
+  },
+  {
+    "League": "Ettan - Norra",
+    "Match": "Järfälla vs Hammarby Talang",
+    "Tip": "Over 1.5",
+    "Odds": "1.14",
+    "Date": "2026-10-23T17:30:00+00:00"
+  },
+  {
+    "League": "Premijer Liga",
+    "Match": "Zrinjski vs Radnik Bijeljina",
+    "Tip": "Over 1.5",
+    "Odds": "1.16",
+    "Date": "2026-10-23T18:00:00+00:00"
+  },
+  {
+    "League": "Championship",
+    "Match": "Bolton vs Middlesbrough",
+    "Tip": "Over 1.5",
+    "Odds": "1.14",
+    "Date": "2026-10-23T19:00:00+00:00"
   }
 ]
