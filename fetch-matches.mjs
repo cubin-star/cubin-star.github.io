@@ -1028,7 +1028,9 @@ async function main(){
     const best=[...selected].sort((a,b)=>parseFloat(b.odds)-parseFloat(a.odds)).slice(0,3).map(m=>({league:m.league,match:m.match,kickoff:m.kickoff,tip:m.tip,odds:m.odds}));
     writeFileSync('best.json',JSON.stringify(best,null,2),'utf-8');
     const grouped=balanceGroups(selected);
-    const output=grouped.map(m=>({league:m.league,match:m.match,kickoff:m.kickoff,tip:m.tip,odds:m.odds,group:m.group}));
+    // fixtureId je originalni ID zapasu z API-Football (fix.fixture.id) - stejne
+    // jako v react2.json/react3.json, aby se vysledky daly parovat primo podle ID.
+    const output=grouped.map(m=>({fixtureId:m.fixtureId,league:m.league,match:m.match,kickoff:m.kickoff,tip:m.tip,odds:m.odds,group:m.group}));
     writeFileSync('hot.json',JSON.stringify(output,null,2),'utf-8');
     console.log('\n'+output.length+' matches -> hot.json ('+reqCount+' API req)\n');
     const gc=Math.ceil(output.length/2);
