@@ -1,5 +1,21 @@
 [
   {
+    "league": "Championship",
+    "homeTeam": "Sheffield Utd",
+    "awayTeam": "Derby",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "0:1",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-10-24T11:30:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 0:1 | xG: 1.34 | Shots: 15/5 | winXG: 1.00 | losingXG: 0.34 losingSOT: 1 | @HT | Pre O2.5: 1.74"
+  },
+  {
     "league": "Super League",
     "homeTeam": "Chongqing Tongliang Long",
     "awayTeam": "Qingdao Jonoon",
