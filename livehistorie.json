@@ -1,5 +1,21 @@
 [
   {
+    "league": "Allsvenskan",
+    "homeTeam": "Kalmar FF",
+    "awayTeam": "IF Brommapojkarna",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "0:1",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-10-24T15:30:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 0:1 | xG: 1.04 | Shots: 11/4 | winXG: 0.60 | losingXG: 0.44 losingSOT: 1 | @HT | Pre O2.5: 1.68"
+  },
+  {
     "league": "Premiership",
     "homeTeam": "Dundee Utd",
     "awayTeam": "Aberdeen",
