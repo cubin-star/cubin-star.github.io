@@ -1,24 +1,24 @@
 [
   {
-    "League": "Ligue 1",
-    "Match": "Stade Brestois 29 vs Nice",
-    "Tip": "Over 2.5",
-    "Odds": "1.76",
-    "Date": "2026-10-23T18:45:00+00:00"
-  },
-  {
-    "League": "Jupiler Pro League",
-    "Match": "Kortrijk vs KV Mechelen",
-    "Tip": "Over 2.5",
-    "Odds": "1.85",
-    "Date": "2026-10-23T18:45:00+00:00"
-  },
-  {
     "League": "Premier League",
-    "Match": "Ipswich vs Nottingham Forest",
+    "Match": "Arsenal vs Everton",
     "Tip": "Over 2.5",
-    "Odds": "1.83",
-    "Date": "2026-10-23T19:00:00+00:00",
+    "Odds": "1.94",
+    "Date": "2026-10-24T14:00:00+00:00"
+  },
+  {
+    "League": "Primeira Liga",
+    "Match": "GIL Vicente vs FC Porto",
+    "Tip": "Over 2.5",
+    "Odds": "1.93",
+    "Date": "2026-10-24T19:30:00+00:00"
+  },
+  {
+    "League": "FA Trophy",
+    "Match": "Taunton Town vs Wimborne Town",
+    "Tip": "Over 2.5",
+    "Odds": "1.80",
+    "Date": "2026-10-24T14:00:00+00:00",
     "locked": true
   }
 ]
