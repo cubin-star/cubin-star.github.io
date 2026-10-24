@@ -1,8 +1,8 @@
 [
   {
-    "league": "Premier League",
-    "homeTeam": "Arsenal",
-    "awayTeam": "Everton",
+    "league": "League One",
+    "homeTeam": "AFC Wimbledon",
+    "awayTeam": "Wycombe",
     "tip": "Over 1.5",
     "odds": "",
     "halftimeScore": "1:0",
@@ -13,7 +13,7 @@
     "kickoff": "2026-10-24T14:00:00.000Z",
     "resolvedAt": "",
     "source": "whisper-football",
-    "scoutStats": "Whisper xG-rate surge | HT 1:0 | xG: 1.42 | Shots: 15/4 | winXG: 1.11 | losingXG: 0.31 losingSOT: 2 | @HT | Pre O2.5: 1.72"
+    "scoutStats": "Whisper xG-rate surge | HT 1:0 | xG: 2.63 | Shots: 16/4 | winXG: 1.30 | losingXG: 1.33 losingSOT: 3 | @HT | Pre O2.5: 1.8"
   },
   {
     "league": "Championship",
