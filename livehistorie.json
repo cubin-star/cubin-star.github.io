@@ -1,5 +1,21 @@
 [
   {
+    "league": "Primera División",
+    "homeTeam": "Cusco",
+    "awayTeam": "Sporting Cristal",
+    "tip": "Over 2.5",
+    "odds": "",
+    "halftimeScore": "2:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-10-24T20:15:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 2:0 | xG: 0.95 | Shots: 15/7 | winXG: 0.80 | losingXG: 0.15 losingSOT: 1 | @HT | Pre O2.5: 1.67"
+  },
+  {
     "league": "Serie A",
     "homeTeam": "Internacional",
     "awayTeam": "Botafogo",
