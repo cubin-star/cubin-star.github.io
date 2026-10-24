@@ -1,23 +1,23 @@
 [
   {
+    "league": "Super League 1",
+    "match": "Asteras Tripolis - Levadiakos",
+    "kickoff": "2026-10-24T18:30:00+02:00",
+    "tip": "Over 2.5",
+    "odds": "2.31"
+  },
+  {
     "league": "Süper Lig",
-    "match": "Alanyaspor - Kocaelispor",
-    "kickoff": "2026-10-23T19:00:00+02:00",
+    "match": "Gaziantep FK - Erzurumspor FK",
+    "kickoff": "2026-10-24T15:00:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.30"
+    "odds": "2.07"
   },
   {
-    "league": "La Liga",
-    "match": "Alaves - Malaga",
-    "kickoff": "2026-10-23T21:00:00+02:00",
+    "league": "Serie A",
+    "match": "Mirassol - Sao Paulo",
+    "kickoff": "2026-10-24T21:30:00+02:00",
     "tip": "Over 2.5",
-    "odds": "2.08"
-  },
-  {
-    "league": "Segunda División",
-    "match": "Granada CF - Valladolid",
-    "kickoff": "2026-10-23T20:30:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.08"
+    "odds": "2.07"
   }
 ]
