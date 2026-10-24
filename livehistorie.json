@@ -1,11 +1,11 @@
 [
   {
     "league": "League One",
-    "homeTeam": "AFC Wimbledon",
-    "awayTeam": "Wycombe",
+    "homeTeam": "Burton Albion",
+    "awayTeam": "Leyton Orient",
     "tip": "Over 1.5",
     "odds": "",
-    "halftimeScore": "1:0",
+    "halftimeScore": "0:1",
     "liveOdds": "",
     "finalScore": "",
     "result": "",
@@ -13,7 +13,7 @@
     "kickoff": "2026-10-24T14:00:00.000Z",
     "resolvedAt": "",
     "source": "whisper-football",
-    "scoutStats": "Whisper xG-rate surge | HT 1:0 | xG: 2.63 | Shots: 16/4 | winXG: 1.30 | losingXG: 1.33 losingSOT: 3 | @HT | Pre O2.5: 1.8"
+    "scoutStats": "Whisper xG-rate surge | HT 0:1 | xG: 0.75 | Shots: 13/5 | winXG: 0.41 | losingXG: 0.34 losingSOT: 4 | @HT | Pre O2.5: 1.8"
   },
   {
     "league": "Championship",
