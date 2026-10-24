@@ -1,5 +1,21 @@
 [
   {
+    "league": "Premiership",
+    "homeTeam": "Dundee Utd",
+    "awayTeam": "Aberdeen",
+    "tip": "Over 3.5",
+    "odds": "",
+    "halftimeScore": "2:1",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-10-24T14:00:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 2:1 | xG: 1.30 | Shots: 19/6 | winXG: 0.58 | losingXG: 0.72 losingSOT: 2 | @HT | Pre O2.5: 1.73"
+  },
+  {
     "league": "League One",
     "homeTeam": "Burton Albion",
     "awayTeam": "Leyton Orient",
