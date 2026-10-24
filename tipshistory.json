@@ -1,5 +1,26 @@
 [
   {
+    "date": "2026-10-23T05:30:00Z",
+    "matches": [
+      {
+        "league": "2. Liga",
+        "match": "First Vienna - Floridsdorfer AC",
+        "tip": "Over 2.5",
+        "odds": "1.85",
+        "score": "2:0",
+        "result": "✗"
+      },
+      {
+        "league": "Ekstraklasa",
+        "match": "Motor Lublin - Zaglebie Lubin",
+        "tip": "Over 2.5",
+        "odds": "1.80",
+        "score": "2:2",
+        "result": "✓"
+      }
+    ]
+  },
+  {
     "date": "2026-10-22T05:30:00Z",
     "matches": [
       {
