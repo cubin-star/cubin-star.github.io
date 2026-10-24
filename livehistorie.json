@@ -1,5 +1,21 @@
 [
   {
+    "league": "J1 League",
+    "homeTeam": "Kashima",
+    "awayTeam": "Kashiwa Reysol",
+    "tip": "Over 3.5",
+    "odds": "",
+    "halftimeScore": "1:2",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-10-24T06:00:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 1:2 | xG: 0.56 | Shots: 14/4 | winXG: 0.15 | losingXG: 0.41 losingSOT: 1 | @HT | Pre O2.5: 1.75"
+  },
+  {
     "league": "Allsvenskan",
     "homeTeam": "Vasteras SK FK",
     "awayTeam": "Halmstad",
