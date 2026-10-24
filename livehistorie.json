@@ -1,5 +1,21 @@
 [
   {
+    "league": "Serie A",
+    "homeTeam": "Internacional",
+    "awayTeam": "Botafogo",
+    "tip": "Over 2.5",
+    "odds": "",
+    "halftimeScore": "2:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-10-24T19:30:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 2:0 | xG: 1.45 | Shots: 12/6 | winXG: 1.20 | losingXG: 0.25 losingSOT: 2 | @HT | Pre O2.5: 1.79"
+  },
+  {
     "league": "Allsvenskan",
     "homeTeam": "Kalmar FF",
     "awayTeam": "IF Brommapojkarna",
