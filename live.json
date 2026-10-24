@@ -1,37 +1,107 @@
 [
   {
-    "League": "Liga Leumit",
-    "Match": "Hapoel Kfar Saba vs Hapoel Afula",
+    "League": "Ettan - Södra",
+    "Match": "AFC Malmo vs Angelholms FF",
     "Tip": "Over 1.5",
-    "Odds": "1.17",
-    "Date": "2026-10-23T13:00:00+00:00"
+    "Odds": "1.15",
+    "Date": "2026-10-24T11:00:00+00:00"
   },
   {
-    "League": "FNL",
-    "Match": "Dukla Praha vs Kladno",
-    "Tip": "Over 1.5",
-    "Odds": "1.18",
-    "Date": "2026-10-23T16:00:00+00:00"
-  },
-  {
-    "League": "Ettan - Norra",
-    "Match": "Järfälla vs Hammarby Talang",
+    "League": "Ettan - Södra",
+    "Match": "Eskilsminne vs Lund",
     "Tip": "Over 1.5",
     "Odds": "1.14",
-    "Date": "2026-10-23T17:30:00+00:00"
+    "Date": "2026-10-24T11:00:00+00:00"
   },
   {
-    "League": "Premijer Liga",
-    "Match": "Zrinjski vs Radnik Bijeljina",
+    "League": "Regionalliga - Bayern",
+    "Match": "Augsburg II vs Illertissen",
     "Tip": "Over 1.5",
     "Odds": "1.16",
-    "Date": "2026-10-23T18:00:00+00:00"
+    "Date": "2026-10-24T11:00:00+00:00"
   },
   {
-    "League": "Championship",
-    "Match": "Bolton vs Middlesbrough",
+    "League": "Segunda División",
+    "Match": "Cordoba vs Eibar",
+    "Tip": "Over 1.5",
+    "Odds": "1.18",
+    "Date": "2026-10-24T12:00:00+00:00"
+  },
+  {
+    "League": "3. liga - MSFL",
+    "Match": "Blansko vs Frýdek-Místek",
+    "Tip": "Over 1.5",
+    "Odds": "1.15",
+    "Date": "2026-10-24T12:30:00+00:00"
+  },
+  {
+    "League": "Campionato Primavera - 2",
+    "Match": "Bari U19 vs Pescara U19",
+    "Tip": "Over 1.5",
+    "Odds": "1.16",
+    "Date": "2026-10-24T12:30:00+00:00"
+  },
+  {
+    "League": "Ekstraklasa",
+    "Match": "Korona Kielce vs GKS Katowice",
+    "Tip": "Over 1.5",
+    "Odds": "1.18",
+    "Date": "2026-10-24T12:45:00+00:00"
+  },
+  {
+    "League": "Second NL",
+    "Match": "Zagora vs Križevci",
     "Tip": "Over 1.5",
     "Odds": "1.14",
-    "Date": "2026-10-23T19:00:00+00:00"
+    "Date": "2026-10-24T13:00:00+00:00"
+  },
+  {
+    "League": "Jupiler Pro League",
+    "Match": "Antwerp vs Charleroi",
+    "Tip": "Over 1.5",
+    "Odds": "1.19",
+    "Date": "2026-10-24T14:00:00+00:00"
+  },
+  {
+    "League": "League Two",
+    "Match": "Barnet vs Oldham",
+    "Tip": "Over 1.5",
+    "Odds": "1.18",
+    "Date": "2026-10-24T14:00:00+00:00"
+  },
+  {
+    "League": "Non League Premier - Southern South",
+    "Match": "Basingstoke Town vs Plymouth Parkway",
+    "Tip": "Over 1.5",
+    "Odds": "1.14",
+    "Date": "2026-10-24T14:00:00+00:00"
+  },
+  {
+    "League": "Superettan",
+    "Match": "IK brage vs Osters IF",
+    "Tip": "Over 1.5",
+    "Odds": "1.13",
+    "Date": "2026-10-24T15:00:00+00:00"
+  },
+  {
+    "League": "Ligat Ha'al",
+    "Match": "Hapoel Katamon vs Hapoel Tel Aviv",
+    "Tip": "Over 1.5",
+    "Odds": "1.20",
+    "Date": "2026-10-24T15:45:00+00:00"
+  },
+  {
+    "League": "Challenger Pro League",
+    "Match": "Lokeren-Temse vs KAA Gent II",
+    "Tip": "Over 1.5",
+    "Odds": "1.13",
+    "Date": "2026-10-24T18:00:00+00:00"
+  },
+  {
+    "League": "Liga MX Femenil",
+    "Match": "Cruz Azul W vs Toluca W",
+    "Tip": "Over 1.5",
+    "Odds": "1.13",
+    "Date": "2026-10-25T02:10:00+00:00"
   }
 ]
