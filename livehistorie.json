@@ -1,5 +1,21 @@
 [
   {
+    "league": "Serie A",
+    "homeTeam": "Udinese",
+    "awayTeam": "AC Milan",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "0:1",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-10-25T19:45:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 0:1 | xG: 1.77 | Shots: 11/5 | winXG: 1.60 | losingXG: 0.17 losingSOT: 4 | @HT | Pre O2.5: 1.88"
+  },
+  {
     "league": "Premier League",
     "homeTeam": "Hull City",
     "awayTeam": "Brentford",
