@@ -1,5 +1,21 @@
 [
   {
+    "league": "Liga Profesional Argentina",
+    "homeTeam": "River Plate",
+    "awayTeam": "Racing Club",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "1:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-10-25T22:15:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 1:0 | xG: 1.46 | Shots: 8/6 | winXG: 1.21 | losingXG: 0.25 losingSOT: 3 | @HT | Pre O2.5: 1.9649999999999999"
+  },
+  {
     "league": "Serie A",
     "homeTeam": "Udinese",
     "awayTeam": "AC Milan",
