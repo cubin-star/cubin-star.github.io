@@ -1,5 +1,26 @@
 [
   {
+    "date": "2026-10-24T05:30:00Z",
+    "matches": [
+      {
+        "league": "2. Liga",
+        "match": "Admira Wacker - Wacker Innsbruck",
+        "tip": "Over 2.5",
+        "odds": "1.70",
+        "score": "1:0",
+        "result": "✗"
+      },
+      {
+        "league": "Major League Soccer",
+        "match": "Houston Dynamo - Minnesota United FC",
+        "tip": "Over 2.5",
+        "odds": "1.70",
+        "score": "0:0",
+        "result": "✗"
+      }
+    ]
+  },
+  {
     "date": "2026-10-23T05:30:00Z",
     "matches": [
       {
