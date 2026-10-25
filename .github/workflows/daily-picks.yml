@@ -50,6 +50,14 @@ jobs:
         with:
           node-version: '22'
 
+      - name: Run tests
+        if: steps.guard.outputs.skip != 'true'
+        run: |
+          node test-tiers.mjs
+          node test-react1.mjs
+          node test-selection.mjs
+          node test-stress.mjs
+
       - name: Run bot
         if: steps.guard.outputs.skip != 'true'
         env:
