@@ -1,5 +1,21 @@
 [
   {
+    "league": "Allsvenskan",
+    "homeTeam": "Gais",
+    "awayTeam": "IFK Goteborg",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "1:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-10-25T13:00:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 1:0 | xG: 1.77 | Shots: 11/4 | winXG: 1.18 | losingXG: 0.59 losingSOT: 2 | @HT | Pre O2.5: 1.78"
+  },
+  {
     "league": "1. Lig",
     "homeTeam": "Pendikspor",
     "awayTeam": "Kayserispor",
