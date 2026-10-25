@@ -1,11 +1,11 @@
 [
   {
-    "league": "Premiership",
-    "homeTeam": "Motherwell",
-    "awayTeam": "Heart Of Midlothian",
+    "league": "Premier League",
+    "homeTeam": "Hull City",
+    "awayTeam": "Brentford",
     "tip": "Over 1.5",
     "odds": "",
-    "halftimeScore": "0:1",
+    "halftimeScore": "1:0",
     "liveOdds": "",
     "finalScore": "",
     "result": "",
@@ -13,7 +13,7 @@
     "kickoff": "2026-10-25T14:00:00.000Z",
     "resolvedAt": "",
     "source": "whisper-football",
-    "scoutStats": "Whisper xG-rate surge | HT 0:1 | xG: 1.62 | Shots: 15/5 | winXG: 0.91 | losingXG: 0.71 losingSOT: 3 | @HT | Pre O2.5: 1.62"
+    "scoutStats": "Whisper xG-rate surge | HT 1:0 | xG: 1.45 | Shots: 9/3 | winXG: 0.99 | losingXG: 0.46 losingSOT: 2 | @HT | Pre O2.5: 1.67"
   },
   {
     "league": "Allsvenskan",
