@@ -1,9 +1,16 @@
 [
   {
-    "league": "Mestis",
-    "match": "RoKi vs KeuPa",
+    "league": "Extraliga",
+    "match": "Trinec vs Karlovy Vary",
     "tip": "Over 3.5",
-    "odds": "1.19",
-    "date": "2026-10-24T14:00:00+00:00"
+    "odds": "1.30",
+    "date": "2026-10-25T09:30:00+00:00"
+  },
+  {
+    "league": "National League",
+    "match": "Servette vs Zurich",
+    "tip": "Over 3.5",
+    "odds": "1.18",
+    "date": "2026-10-25T13:00:00+00:00"
   }
 ]
