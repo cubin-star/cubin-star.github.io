@@ -1,107 +1,79 @@
 [
   {
-    "League": "Ettan - Södra",
-    "Match": "AFC Malmo vs Angelholms FF",
+    "League": "J3 League",
+    "Match": "Ehime FC vs Fukushima United",
     "Tip": "Over 1.5",
-    "Odds": "1.15",
-    "Date": "2026-10-24T11:00:00+00:00"
+    "Odds": "1.12",
+    "Date": "2026-10-25T07:00:00+00:00"
   },
   {
-    "League": "Ettan - Södra",
-    "Match": "Eskilsminne vs Lund",
-    "Tip": "Over 1.5",
-    "Odds": "1.14",
-    "Date": "2026-10-24T11:00:00+00:00"
-  },
-  {
-    "League": "Regionalliga - Bayern",
-    "Match": "Augsburg II vs Illertissen",
-    "Tip": "Over 1.5",
-    "Odds": "1.16",
-    "Date": "2026-10-24T11:00:00+00:00"
-  },
-  {
-    "League": "Segunda División",
-    "Match": "Cordoba vs Eibar",
+    "League": "Liga 1",
+    "Match": "Arema FC vs Dewa United",
     "Tip": "Over 1.5",
     "Odds": "1.18",
-    "Date": "2026-10-24T12:00:00+00:00"
+    "Date": "2026-10-25T08:30:00+00:00"
   },
   {
-    "League": "3. liga - MSFL",
-    "Match": "Blansko vs Frýdek-Místek",
-    "Tip": "Over 1.5",
-    "Odds": "1.15",
-    "Date": "2026-10-24T12:30:00+00:00"
-  },
-  {
-    "League": "Campionato Primavera - 2",
-    "Match": "Bari U19 vs Pescara U19",
-    "Tip": "Over 1.5",
-    "Odds": "1.16",
-    "Date": "2026-10-24T12:30:00+00:00"
-  },
-  {
-    "League": "Ekstraklasa",
-    "Match": "Korona Kielce vs GKS Katowice",
-    "Tip": "Over 1.5",
-    "Odds": "1.18",
-    "Date": "2026-10-24T12:45:00+00:00"
-  },
-  {
-    "League": "Second NL",
-    "Match": "Zagora vs Križevci",
-    "Tip": "Over 1.5",
-    "Odds": "1.14",
-    "Date": "2026-10-24T13:00:00+00:00"
-  },
-  {
-    "League": "Jupiler Pro League",
-    "Match": "Antwerp vs Charleroi",
+    "League": "Premiership",
+    "Match": "Motherwell vs Heart Of Midlothian",
     "Tip": "Over 1.5",
     "Odds": "1.19",
-    "Date": "2026-10-24T14:00:00+00:00"
+    "Date": "2026-10-25T14:00:00+00:00"
   },
   {
-    "League": "League Two",
-    "Match": "Barnet vs Oldham",
+    "League": "First Amateur Division",
+    "Match": "Cercle Brugge II vs Hoogstraten",
     "Tip": "Over 1.5",
-    "Odds": "1.18",
-    "Date": "2026-10-24T14:00:00+00:00"
+    "Odds": "1.12",
+    "Date": "2026-10-25T14:00:00+00:00"
   },
   {
-    "League": "Non League Premier - Southern South",
-    "Match": "Basingstoke Town vs Plymouth Parkway",
-    "Tip": "Over 1.5",
-    "Odds": "1.14",
-    "Date": "2026-10-24T14:00:00+00:00"
-  },
-  {
-    "League": "Superettan",
-    "Match": "IK brage vs Osters IF",
-    "Tip": "Over 1.5",
-    "Odds": "1.13",
-    "Date": "2026-10-24T15:00:00+00:00"
-  },
-  {
-    "League": "Ligat Ha'al",
-    "Match": "Hapoel Katamon vs Hapoel Tel Aviv",
+    "League": "Serie C - Girone C",
+    "Match": "Catania vs Giugliano",
     "Tip": "Over 1.5",
     "Odds": "1.20",
-    "Date": "2026-10-24T15:45:00+00:00"
+    "Date": "2026-10-25T14:00:00+00:00"
   },
   {
-    "League": "Challenger Pro League",
-    "Match": "Lokeren-Temse vs KAA Gent II",
+    "League": "Serie D - Girone A",
+    "Match": "Valenzana vs Ligorna",
     "Tip": "Over 1.5",
-    "Odds": "1.13",
-    "Date": "2026-10-24T18:00:00+00:00"
+    "Odds": "1.24",
+    "Date": "2026-10-25T14:00:00+00:00"
   },
   {
-    "League": "Liga MX Femenil",
-    "Match": "Cruz Azul W vs Toluca W",
+    "League": "Serie D - Girone H",
+    "Match": "Nocerina vs Gladiator",
     "Tip": "Over 1.5",
-    "Odds": "1.13",
-    "Date": "2026-10-25T02:10:00+00:00"
+    "Odds": "1.15",
+    "Date": "2026-10-25T14:00:00+00:00"
+  },
+  {
+    "League": "1. Division",
+    "Match": "Bryne vs Egersund",
+    "Tip": "Over 1.5",
+    "Odds": "1.16",
+    "Date": "2026-10-25T16:00:00+00:00"
+  },
+  {
+    "League": "Segunda División RFEF - Group 5",
+    "Match": "Guadalajara vs Real Valladolid II",
+    "Tip": "Over 1.5",
+    "Odds": "1.18",
+    "Date": "2026-10-25T16:00:00+00:00"
+  },
+  {
+    "League": "Primera División RFEF - Group 1",
+    "Match": "Mérida AD vs CD Coria",
+    "Tip": "Over 1.5",
+    "Odds": "1.20",
+    "Date": "2026-10-25T17:45:00+00:00"
+  },
+  {
+    "League": "Liga de Expansión MX",
+    "Match": "Tlaxcala vs Correcaminos Uat",
+    "Tip": "Over 1.5",
+    "Odds": "1.15",
+    "Date": "2026-10-25T18:00:00+00:00"
   }
 ]
