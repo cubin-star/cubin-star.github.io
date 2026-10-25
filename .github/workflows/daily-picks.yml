@@ -69,7 +69,9 @@ jobs:
         run: |
           git config user.name "Kombík Bot"
           git config user.email "bot@kombik.cz"
-          git add hot.json live1.json best.json tips.json react1.json react2.json react3.json league-goals.json
+          # POZOR: bot zapisuje tips-kombik.json, NIKOLIV tips.json – ten patri
+          # botovi generate_fotbal.py a ma jinou strukturu klicu.
+          git add hot.json live1.json best.json tips-kombik.json react1.json react2.json react3.json league-goals.json
           if git diff --cached --quiet; then
             echo "Žádné změny k commitu, končím."
             exit 0
