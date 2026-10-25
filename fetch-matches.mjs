@@ -91,6 +91,10 @@ const CORE_MIN_TIPS = 2;
 // je i kurz 2,3 past (Argentina ~38 %, Libertadores ~33 %, Ghana ~23 %).
 // Home win / Away win se netyka, tam golovost nic nevypovida.
 const GOALS_FILE = 'league-goals.json';
+// Vystupni soubor denniho vyberu tipu. Zamerne NENI 'tips.json' - ten v repu
+// cubin-star.github.io spravuje jiny bot (generate_fotbal.py) a ma jinou
+// strukturu klicu. Kombik cte vyhradne tento soubor.
+const TIPS_FILE = 'tips-kombik.json';
 // Pod touto uspesnosti Over 2.5 (v %) se soutez povazuje za golove chudou.
 const MIN_OVER25_RATE = 40;
 // Mekci prah NAD tvrdym MIN_OVER25_RATE. Liga mezi MIN_OVER25_RATE a touto
@@ -1056,9 +1060,9 @@ async function main(){
     const hotPicker=mkPicker('hot.json',pool,PICK_COUNT,[
         {label:'Over 2.5',market:anyMarket,countsAs:always,want:PICK_COUNT},
     ],CORE_MIN_HOT);
-    // tips.json si drzi puvodni preferencni logiku jadro -> T1+T2 -> T3+T4
+    // tips-kombik.json si drzi puvodni preferencni logiku jadro -> T1+T2 -> T3+T4
     // (zadny vazeny los tieru), ale zustava rovnocennym clenem hlavni skupiny.
-    const tipsPicker=mkPicker('tips.json',tipsPool,TIPS_PICK_COUNT,[
+    const tipsPicker=mkPicker(TIPS_FILE,tipsPool,TIPS_PICK_COUNT,[
         {label:'Over 2.5',market:anyMarket,countsAs:always,want:TIPS_PICK_COUNT},
     ],CORE_MIN_TIPS,{tierStrategy:'preference'});
     const react1Picker=mkPicker('react1.json',react1Pool,REACT1_PICK_COUNT,[
@@ -1081,7 +1085,7 @@ async function main(){
     // poradim, takze zadny z nich nema prednost jen diky poradi generovani.
     const mainPickers=[hotPicker,tipsPicker,react2Picker,react3Picker];
     const pickers=[...mainPickers,react1Picker];
-    console.log('\nHlavni skupina (rovnocenne): hot.json, tips.json, react2.json, react3.json');
+    console.log('\nHlavni skupina (rovnocenne): hot.json, '+TIPS_FILE+', react2.json, react3.json');
     console.log('Vedlejsi skupina (nejnizsi priorita, az po hlavni): react1.json');
     const mainRes=runCoordinatedSelection(mainPickers,msg=>console.log('   '+msg));
     // Hlavni skupina je od teto chvile UZAMCENA - react1 smi prerozdelovat jen
@@ -1134,10 +1138,12 @@ async function main(){
     // hot.json pouziva stejny vyber jako driv, jen koordinovany s ostatnimi.
     const selected=hotPicker.selected;
 
-    // === tips.json ==========================================================
+    // === tips-kombik.json ===================================================
+    // Pozor: soubor se JMENUJE tips-kombik.json, aby nekolidoval s tips.json,
+    // ktery v repu spravuje jiny bot (generate_fotbal.py) s jinou strukturou.
     const tips=tipsPicker.selected.map(m=>({league:m.league,match:m.match,kickoff:m.kickoff,tip:m.tip,odds:m.odds}));
-    writeFileSync('tips.json',JSON.stringify(tips,null,2),'utf-8');
-    console.log('\ntips.json zapsan: '+tips.length+'/'+TIPS_PICK_COUNT+' zapasu ('+TIPS_MIN_ODDS+'-'+TIPS_MAX_ODDS+')');
+    writeFileSync(TIPS_FILE,JSON.stringify(tips,null,2),'utf-8');
+    console.log('\n'+TIPS_FILE+' zapsan: '+tips.length+'/'+TIPS_PICK_COUNT+' zapasu ('+TIPS_MIN_ODDS+'-'+TIPS_MAX_ODDS+')');
 
     // === react1.json ========================================================
     // fixtureId je originalni ID zapasu z API-Football (fix.fixture.id). SOCVERO
