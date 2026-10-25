@@ -1,5 +1,21 @@
 [
   {
+    "league": "Liga MX",
+    "homeTeam": "Monterrey",
+    "awayTeam": "Guadalajara Chivas",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "0:1",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-10-25T02:00:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 0:1 | xG: 1.58 | Shots: 10/6 | winXG: 0.41 | losingXG: 1.17 losingSOT: 3 | @HT | Pre O2.5: 1.73"
+  },
+  {
     "league": "Serie A",
     "homeTeam": "Palmeiras",
     "awayTeam": "RB Bragantino",
