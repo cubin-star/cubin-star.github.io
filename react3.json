@@ -1,74 +1,74 @@
 [
   {
-    "fixtureId": 1565285,
-    "league": "Liga I",
-    "match": "FCSB - Rapid",
-    "kickoff": "2026-10-24T20:00:00+02:00",
+    "fixtureId": 1550160,
+    "league": "Serie A",
+    "match": "Genoa - Venezia",
+    "kickoff": "2026-10-25T15:00:00+01:00",
     "tip": "Home win",
-    "odds": "2.15",
-    "group": 1
-  },
-  {
-    "fixtureId": 1554197,
-    "league": "Prva Liga",
-    "match": "Borac Cacak - Napredak",
-    "kickoff": "2026-10-24T16:00:00+02:00",
-    "tip": "Over 2.5",
     "odds": "2.20",
     "group": 1
   },
   {
-    "fixtureId": 1492428,
-    "league": "Serie A",
-    "match": "Vasco DA Gama - Corinthians",
-    "kickoff": "2026-10-24T23:30:00+02:00",
+    "fixtureId": 1639343,
+    "league": "CAF Champions League",
+    "match": "Club Africain - TP Mazembe",
+    "kickoff": "2026-10-25T18:00:00+01:00",
     "tip": "Over 2.5",
-    "odds": "2.00",
+    "odds": "2.15",
+    "group": 1
+  },
+  {
+    "fixtureId": 1494690,
+    "league": "Eliteserien",
+    "match": "Start - Sandefjord",
+    "kickoff": "2026-10-25T17:00:00+01:00",
+    "tip": "Home win",
+    "odds": "2.22",
     "group": 2
   },
   {
-    "fixtureId": 1603067,
-    "league": "Pro League",
-    "match": "Al Kholood - Al-Ettifaq",
-    "kickoff": "2026-10-24T17:05:00+02:00",
-    "tip": "Home win",
-    "odds": "2.55",
+    "fixtureId": 1590075,
+    "league": "Superliga",
+    "match": "Dinamo Tirana - Egnatia Rrogozhinë",
+    "kickoff": "2026-10-25T18:30:00+01:00",
+    "tip": "Over 2.5",
+    "odds": "2.01",
     "group": 2
   },
   {
-    "fixtureId": 1510478,
-    "league": "K League 2",
-    "match": "Busan I Park - Gyeongnam FC",
-    "kickoff": "2026-10-25T06:00:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.00",
-    "group": 3
-  },
-  {
-    "fixtureId": 1585800,
-    "league": "1. Lig",
-    "match": "Bandırmaspor - Iğdır FK",
-    "kickoff": "2026-10-24T12:30:00+02:00",
+    "fixtureId": 1552203,
+    "league": "Eredivisie",
+    "match": "NEC Nijmegen - Groningen",
+    "kickoff": "2026-10-25T14:30:00+01:00",
     "tip": "Home win",
-    "odds": "2.21",
+    "odds": "2.25",
     "group": 3
   },
   {
-    "fixtureId": 1559680,
-    "league": "Liga Nacional",
-    "match": "Comunicaciones - Antigua GFC",
-    "kickoff": "2026-10-25T02:00:00+02:00",
+    "fixtureId": 1625938,
+    "league": "Serie D - Girone H",
+    "match": "Ebolitana - Gravina",
+    "kickoff": "2026-10-25T14:30:00+01:00",
     "tip": "Over 2.5",
-    "odds": "2.10",
+    "odds": "1.98",
+    "group": 3
+  },
+  {
+    "fixtureId": 1552798,
+    "league": "Ligue 1",
+    "match": "Rennes - Strasbourg",
+    "kickoff": "2026-10-25T17:15:00+01:00",
+    "tip": "Home win",
+    "odds": "1.83",
     "group": 4
   },
   {
-    "fixtureId": 1575201,
-    "league": "Bundesliga",
-    "match": "1. FC Köln - FC Schalke 04",
-    "kickoff": "2026-10-24T15:30:00+02:00",
-    "tip": "Home win",
-    "odds": "2.12",
+    "fixtureId": 1639531,
+    "league": "CAF Confederation Cup",
+    "match": "Singida Black Stars - Tusker",
+    "kickoff": "2026-10-25T17:00:00+01:00",
+    "tip": "Over 2.5",
+    "odds": "2.40",
     "group": 4
   }
 ]

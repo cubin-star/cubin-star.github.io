@@ -1,56 +1,56 @@
 [
   {
-    "fixtureId": 1558659,
-    "league": "Jupiler Pro League",
-    "match": "RAAL La Louvière - Zulte Waregem",
-    "kickoff": "2026-10-24T20:45:00+02:00",
-    "tip": "Away win",
-    "odds": "2.36",
+    "fixtureId": 1552793,
+    "league": "Ligue 1",
+    "match": "Auxerre - Le Mans",
+    "kickoff": "2026-10-25T17:15:00+01:00",
+    "tip": "Home win",
+    "odds": "2.07",
     "group": 1
   },
   {
-    "fixtureId": 1593341,
-    "league": "Super League 1",
-    "match": "Iraklis 1908 - Kifisia",
-    "kickoff": "2026-10-24T18:00:00+02:00",
+    "fixtureId": 1549523,
+    "league": "Primera División",
+    "match": "UCV Moquegua - Alianza Lima",
+    "kickoff": "2026-10-25T19:15:00+01:00",
     "tip": "Over 2.5",
-    "odds": "2.15",
+    "odds": "2.02",
     "group": 1
   },
   {
-    "fixtureId": 1603069,
-    "league": "Pro League",
-    "match": "Al Riyadh - Al Taawon",
-    "kickoff": "2026-10-24T20:00:00+02:00",
+    "fixtureId": 1569991,
+    "league": "Segunda División",
+    "match": "Sabadell - Tenerife",
+    "kickoff": "2026-10-25T14:00:00+01:00",
+    "tip": "Home win",
+    "odds": "1.93",
+    "group": 2
+  },
+  {
+    "fixtureId": 1636963,
+    "league": "Super League 2",
+    "match": "Panthrakikos - Asteras Tripolis II",
+    "kickoff": "2026-10-25T14:00:00+01:00",
+    "tip": "Over 2.5",
+    "odds": "2.22",
+    "group": 2
+  },
+  {
+    "fixtureId": 1575523,
+    "league": "Primeira Liga",
+    "match": "Rio Ave - Famalicao",
+    "kickoff": "2026-10-25T19:00:00+01:00",
     "tip": "Away win",
-    "odds": "2.26",
-    "group": 2
-  },
-  {
-    "fixtureId": 1550158,
-    "league": "Serie A",
-    "match": "Cagliari - Bologna",
-    "kickoff": "2026-10-24T15:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.15",
-    "group": 2
-  },
-  {
-    "fixtureId": 1563215,
-    "league": "Championship",
-    "match": "Blackburn - Wrexham",
-    "kickoff": "2026-10-24T16:00:00+02:00",
-    "tip": "Over 2.5",
-    "odds": "2.11",
+    "odds": "2.10",
     "group": 3
   },
   {
-    "fixtureId": 1565283,
-    "league": "Liga I",
-    "match": "Arges Pitesti - Uta Arad",
-    "kickoff": "2026-10-24T17:00:00+02:00",
-    "tip": "Home win",
-    "odds": "2.53",
+    "fixtureId": 1505541,
+    "league": "Primera División",
+    "match": "Nublense - Coquimbo Unido",
+    "kickoff": "2026-10-25T16:30:00+01:00",
+    "tip": "Over 2.5",
+    "odds": "2.00",
     "group": 3
   }
 ]
