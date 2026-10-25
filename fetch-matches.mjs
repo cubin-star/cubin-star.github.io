@@ -31,6 +31,10 @@ const REACT1_MIN_OVER = 3;
 // zapasy na hrane pasma zbytecne strhaval dolu) se bere nejvyssi kurz, na kterem
 // se shodne aspon tolik sazkovek - chrani pred ojedinelou chybou v kurzu.
 const MIN_BOOKMAKERS = 3;
+// Samostatne kurzove pasmo pro tipy Home win / Away win. Over 2.5 se drzi
+// v sirsim pasmu jednotlivych vyberu, vitez ma vlastni, uzsi hranice.
+const WINNER_MIN_ODDS = 1.75;
+const WINNER_MAX_ODDS = 2.25;
 // react2.json - stejna vyberova logika i kurzovy pas jako hot.json (2.1-2.5, vazeny
 // vyber tieru, stropy, limit zeme/ligy, rozdeleni do skupin), ale tipy jsou jako
 // u react1.json, tedy Over 2.5 / Home win / Away win.
@@ -699,12 +703,16 @@ async function main(){
     const overAll=[...overCandidateMap.values()].map(m=>({...m,odds:bestOdds(m.allOdds).toFixed(2)}));
     const winnerAll=[...winnerCandidateMap.values()].map(m=>({...m,odds:bestOdds(m.allOdds).toFixed(2)}));
     const inBand=(m,lo,hi)=>parseFloat(m.odds)>=lo&&parseFloat(m.odds)<=hi;
+    // Home/Away win ma vlastni kurzove pasmo (WINNER_MIN_ODDS-WINNER_MAX_ODDS),
+    // nezavisle na pasmu jednotlivych vyberu, ktere plati pro Over 2.5.
+    const winnerBand=winnerAll.filter(m=>inBand(m,WINNER_MIN_ODDS,WINNER_MAX_ODDS));
     let pool=overAll.filter(m=>inBand(m,MIN_ODDS,MAX_ODDS));
     let tipsPool=overAll.filter(m=>inBand(m,TIPS_MIN_ODDS,TIPS_MAX_ODDS));
-    let react1Pool=[...overAll,...winnerAll].filter(m=>inBand(m,REACT1_MIN_ODDS,REACT1_MAX_ODDS));
-    let react2Pool=[...overAll,...winnerAll].filter(m=>inBand(m,MIN_ODDS,MAX_ODDS));
-    console.log('React2 candidates: '+react2Pool.length+' (Over 2.5 / Home win / Away win, odds '+MIN_ODDS+'-'+MAX_ODDS+')');
-    console.log('React1 candidates: '+react1Pool.length+' (Over 2.5 / Home win / Away win, odds '+REACT1_MIN_ODDS+'-'+REACT1_MAX_ODDS+')');
+    let react1Pool=[...overAll.filter(m=>inBand(m,REACT1_MIN_ODDS,REACT1_MAX_ODDS)),...winnerBand];
+    let react2Pool=[...overAll.filter(m=>inBand(m,MIN_ODDS,MAX_ODDS)),...winnerBand];
+    console.log('Winner candidates: '+winnerBand.length+' (Home/Away win, odds '+WINNER_MIN_ODDS+'-'+WINNER_MAX_ODDS+')');
+    console.log('React2 candidates: '+react2Pool.length+' (Over 2.5 '+MIN_ODDS+'-'+MAX_ODDS+' / Home-Away win '+WINNER_MIN_ODDS+'-'+WINNER_MAX_ODDS+')');
+    console.log('React1 candidates: '+react1Pool.length+' (Over 2.5 '+REACT1_MIN_ODDS+'-'+REACT1_MAX_ODDS+' / Home-Away win '+WINNER_MIN_ODDS+'-'+WINNER_MAX_ODDS+')');
     console.log('Tips candidates: '+tipsPool.length+' (Over 2.5, odds '+TIPS_MIN_ODDS+'-'+TIPS_MAX_ODDS+')');
     console.log('Candidates: '+pool.length+' (Over 2.5, odds '+MIN_ODDS+'-'+MAX_ODDS+')');
 
