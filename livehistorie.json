@@ -1,5 +1,21 @@
 [
   {
+    "league": "J1 League",
+    "homeTeam": "FC Tokyo",
+    "awayTeam": "Mito Hollyhock",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "1:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-10-25T07:00:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 1:0 | xG: 0.87 | Shots: 13/6 | winXG: 0.50 | losingXG: 0.37 losingSOT: 2 | @HT | Pre O2.5: 1.71"
+  },
+  {
     "league": "Liga MX",
     "homeTeam": "Monterrey",
     "awayTeam": "Guadalajara Chivas",
