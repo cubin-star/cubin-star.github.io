@@ -1,74 +1,74 @@
 [
   {
-    "fixtureId": 1550160,
-    "league": "Serie A",
-    "match": "Genoa - Venezia",
-    "kickoff": "2026-10-25T15:00:00+01:00",
-    "tip": "Home win",
-    "odds": "2.20",
+    "fixtureId": 1645350,
+    "league": "Premier League",
+    "match": "Chemal - Gendrim",
+    "kickoff": "2026-10-26T20:50:00+01:00",
+    "tip": "Over 2.5",
+    "odds": "2.31",
     "group": 1
   },
   {
-    "fixtureId": 1639343,
-    "league": "CAF Champions League",
-    "match": "Club Africain - TP Mazembe",
-    "kickoff": "2026-10-25T18:00:00+01:00",
+    "fixtureId": 1570431,
+    "league": "La Liga",
+    "match": "Sevilla - Osasuna",
+    "kickoff": "2026-10-26T21:00:00+01:00",
+    "tip": "Home win",
+    "odds": "1.99",
+    "group": 1
+  },
+  {
+    "fixtureId": 1603585,
+    "league": "1. Division",
+    "match": "AEK Larnaca - Omonia Nicosia",
+    "kickoff": "2026-10-26T18:00:00+01:00",
+    "tip": "Away win",
+    "odds": "2.05",
+    "group": 2
+  },
+  {
+    "fixtureId": 1646146,
+    "league": "State Cup",
+    "match": "Hapoel Sderot - Maccabi Ahi Nazareth",
+    "kickoff": "2026-10-26T16:30:00+01:00",
+    "tip": "Away win",
+    "odds": "2.18",
+    "group": 2
+  },
+  {
+    "fixtureId": 1636964,
+    "league": "Super League 2",
+    "match": "Zakynthos - Pyrgos 1968",
+    "kickoff": "2026-10-26T13:45:00+01:00",
     "tip": "Over 2.5",
     "odds": "2.15",
-    "group": 1
-  },
-  {
-    "fixtureId": 1494690,
-    "league": "Eliteserien",
-    "match": "Start - Sandefjord",
-    "kickoff": "2026-10-25T17:00:00+01:00",
-    "tip": "Home win",
-    "odds": "2.22",
-    "group": 2
-  },
-  {
-    "fixtureId": 1590075,
-    "league": "Superliga",
-    "match": "Dinamo Tirana - Egnatia Rrogozhinë",
-    "kickoff": "2026-10-25T18:30:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.01",
-    "group": 2
-  },
-  {
-    "fixtureId": 1552203,
-    "league": "Eredivisie",
-    "match": "NEC Nijmegen - Groningen",
-    "kickoff": "2026-10-25T14:30:00+01:00",
-    "tip": "Home win",
-    "odds": "2.25",
     "group": 3
   },
   {
-    "fixtureId": 1625938,
-    "league": "Serie D - Girone H",
-    "match": "Ebolitana - Gravina",
-    "kickoff": "2026-10-25T14:30:00+01:00",
+    "fixtureId": 1629948,
+    "league": "AFC Champions League Elite",
+    "match": "Al Quwa Al Jawiya - Pakhtakor",
+    "kickoff": "2026-10-26T19:15:00+01:00",
     "tip": "Over 2.5",
-    "odds": "1.98",
+    "odds": "2.15",
     "group": 3
   },
   {
-    "fixtureId": 1552798,
-    "league": "Ligue 1",
-    "match": "Rennes - Strasbourg",
-    "kickoff": "2026-10-25T17:15:00+01:00",
-    "tip": "Home win",
-    "odds": "1.83",
+    "fixtureId": 1584446,
+    "league": "Süper Lig",
+    "match": "Rizespor - Trabzonspor",
+    "kickoff": "2026-10-26T17:00:00+01:00",
+    "tip": "Away win",
+    "odds": "1.97",
     "group": 4
   },
   {
-    "fixtureId": 1639531,
-    "league": "CAF Confederation Cup",
-    "match": "Singida Black Stars - Tusker",
-    "kickoff": "2026-10-25T17:00:00+01:00",
+    "fixtureId": 1646970,
+    "league": "Ligue 2",
+    "match": "EM Mahdia - US Tataouine",
+    "kickoff": "2026-10-26T14:30:00+01:00",
     "tip": "Over 2.5",
-    "odds": "2.40",
+    "odds": "2.56",
     "group": 4
   }
 ]

@@ -1,23 +1,23 @@
 [
   {
-    "league": "Super League 2",
-    "match": "Panionios - Marko",
-    "kickoff": "2026-10-25T13:45:00+01:00",
+    "league": "First League",
+    "match": "Lokomotiv Plovdiv - Slavia Sofia",
+    "kickoff": "2026-10-26T16:00:00+01:00",
     "tip": "Over 2.5",
     "odds": "2.55"
   },
   {
-    "league": "Segunda División",
-    "match": "Sabadell - Tenerife",
-    "kickoff": "2026-10-25T14:00:00+01:00",
+    "league": "Ligue 2",
+    "match": "Kerkennah - BS Bouhajla",
+    "kickoff": "2026-10-26T14:30:00+01:00",
     "tip": "Over 2.5",
-    "odds": "2.50"
+    "odds": "2.52"
   },
   {
     "league": "La Liga",
-    "match": "Athletic Club - Getafe",
-    "kickoff": "2026-10-25T14:00:00+01:00",
+    "match": "Sevilla - Osasuna",
+    "kickoff": "2026-10-26T21:00:00+01:00",
     "tip": "Over 2.5",
-    "odds": "2.30"
+    "odds": "2.20"
   }
 ]

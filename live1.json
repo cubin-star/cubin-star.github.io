@@ -1,86 +1,37 @@
 [
   {
-    "league": "I Liga",
-    "match": "Odra Opole - Pogoń Siedlce",
-    "kickoff": "2026-10-25T12:00:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.03"
-  },
-  {
-    "league": "Segunda Liga",
-    "match": "AVS - Tondela",
-    "kickoff": "2026-10-25T12:00:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.04"
-  },
-  {
-    "league": "Segunda Liga",
-    "match": "Felgueiras 1932 - Lusitânia Lourosa",
-    "kickoff": "2026-10-25T15:00:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.27"
-  },
-  {
-    "league": "Veikkausliiga",
-    "match": "FF Jaro - PK-35",
-    "kickoff": "2026-10-25T13:00:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.12"
-  },
-  {
     "league": "Super League 2",
-    "match": "Anagennisi Karditsas - PAOK II",
-    "kickoff": "2026-10-25T14:00:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.10"
-  },
-  {
-    "league": "Super League 2",
-    "match": "Panionios - Marko",
-    "kickoff": "2026-10-25T13:45:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.55"
-  },
-  {
-    "league": "Super League 2",
-    "match": "Panthrakikos - Asteras Tripolis II",
-    "kickoff": "2026-10-25T14:00:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.22"
-  },
-  {
-    "league": "Segunda División",
-    "match": "Sabadell - Tenerife",
-    "kickoff": "2026-10-25T14:00:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.50"
-  },
-  {
-    "league": "La Liga",
-    "match": "Athletic Club - Getafe",
-    "kickoff": "2026-10-25T14:00:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.30"
-  },
-  {
-    "league": "Ligue 1",
-    "match": "Angers - Lorient",
-    "kickoff": "2026-10-25T17:15:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.05"
-  },
-  {
-    "league": "Premier League",
-    "match": "Sunderland - Leeds",
-    "kickoff": "2026-10-25T17:30:00+01:00",
+    "match": "Zakynthos - Pyrgos 1968",
+    "kickoff": "2026-10-26T13:45:00+01:00",
     "tip": "Over 2.5",
     "odds": "2.15"
   },
   {
-    "league": "Super League 1",
-    "match": "Aris Thessalonikis - Atromitos",
-    "kickoff": "2026-10-25T18:30:00+01:00",
+    "league": "First NL",
+    "match": "Mladost Ždralovi - Jadran LP",
+    "kickoff": "2026-10-26T14:00:00+01:00",
     "tip": "Over 2.5",
-    "odds": "1.95"
+    "odds": "1.98"
+  },
+  {
+    "league": "Ligue 2",
+    "match": "Boulogne - Reims",
+    "kickoff": "2026-10-26T20:45:00+01:00",
+    "tip": "Over 2.5",
+    "odds": "2.18"
+  },
+  {
+    "league": "La Liga",
+    "match": "Sevilla - Osasuna",
+    "kickoff": "2026-10-26T21:00:00+01:00",
+    "tip": "Over 2.5",
+    "odds": "2.20"
+  },
+  {
+    "league": "Segunda Liga",
+    "match": "Torreense - Amarante",
+    "kickoff": "2026-10-26T21:45:00+01:00",
+    "tip": "Over 2.5",
+    "odds": "2.07"
   }
 ]
