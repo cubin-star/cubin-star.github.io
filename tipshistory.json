@@ -1,5 +1,26 @@
 [
   {
+    "date": "2026-10-25T05:30:00Z",
+    "matches": [
+      {
+        "league": "Ekstraklasa",
+        "match": "Legia Warszawa - Lech Poznan",
+        "tip": "Over 2.5",
+        "odds": "1.70",
+        "score": "1:2",
+        "result": "✓"
+      },
+      {
+        "league": "Liga II",
+        "match": "Viitorul Şelimbăr - ASA Targu Mures",
+        "tip": "Over 2.5",
+        "odds": "1.78",
+        "score": "1:0",
+        "result": "✗"
+      }
+    ]
+  },
+  {
     "date": "2026-10-24T05:30:00Z",
     "matches": [
       {
