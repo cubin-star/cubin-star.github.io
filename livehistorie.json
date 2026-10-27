@@ -1,8 +1,8 @@
 [
   {
-    "league": "League Cup",
-    "homeTeam": "Bradford",
-    "awayTeam": "Peterborough",
+    "league": "Serie A",
+    "homeTeam": "Torino",
+    "awayTeam": "Como",
     "tip": "Over 1.5",
     "odds": "",
     "halftimeScore": "1:0",
@@ -13,7 +13,7 @@
     "kickoff": "2026-10-27T19:45:00.000Z",
     "resolvedAt": "",
     "source": "whisper-football",
-    "scoutStats": "Whisper xG-rate surge | HT 1:0 | xG: 1.48 | Shots: 10/3 | winXG: 1.29 | losingXG: 0.19 losingSOT: 0 | @HT | Pre O2.5: 1.62"
+    "scoutStats": "Whisper xG-rate surge | HT 1:0 | xG: 1.28 | Shots: 14/5 | winXG: 0.50 | losingXG: 0.78 losingSOT: 2 | @HT | Pre O2.5: 1.665"
   },
   {
     "league": "Liga Profesional Argentina",
