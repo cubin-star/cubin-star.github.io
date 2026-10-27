@@ -1,5 +1,21 @@
 [
   {
+    "league": "Serie A",
+    "homeTeam": "AS Roma",
+    "awayTeam": "Cagliari",
+    "tip": "Over 3.5",
+    "odds": "",
+    "halftimeScore": "2:1",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-10-27T19:45:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 2:1 | xG: 2.71 | Shots: 19/6 | winXG: 1.36 | losingXG: 1.35 losingSOT: 2 | @HT | Pre O2.5: 1.74"
+  },
+  {
     "league": "Liga Profesional Argentina",
     "homeTeam": "River Plate",
     "awayTeam": "Racing Club",
