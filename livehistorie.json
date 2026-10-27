@@ -1,11 +1,11 @@
 [
   {
-    "league": "Serie A",
-    "homeTeam": "AS Roma",
-    "awayTeam": "Cagliari",
-    "tip": "Over 3.5",
+    "league": "League Cup",
+    "homeTeam": "Bradford",
+    "awayTeam": "Peterborough",
+    "tip": "Over 1.5",
     "odds": "",
-    "halftimeScore": "2:1",
+    "halftimeScore": "1:0",
     "liveOdds": "",
     "finalScore": "",
     "result": "",
@@ -13,7 +13,7 @@
     "kickoff": "2026-10-27T19:45:00.000Z",
     "resolvedAt": "",
     "source": "whisper-football",
-    "scoutStats": "Whisper xG-rate surge | HT 2:1 | xG: 2.71 | Shots: 19/6 | winXG: 1.36 | losingXG: 1.35 losingSOT: 2 | @HT | Pre O2.5: 1.74"
+    "scoutStats": "Whisper xG-rate surge | HT 1:0 | xG: 1.48 | Shots: 10/3 | winXG: 1.29 | losingXG: 0.19 losingSOT: 0 | @HT | Pre O2.5: 1.62"
   },
   {
     "league": "Liga Profesional Argentina",
