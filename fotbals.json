@@ -1,9 +1,16 @@
 [
   {
-    "League": "Primeira Liga",
-    "Match": "Santa Clara vs Benfica",
+    "League": "Allsvenskan",
+    "Match": "AIK Stockholm vs IF Elfsborg",
     "Tip": "Over 1.5",
-    "Odds": "1.25",
-    "Date": "2026-10-26T18:45:00+00:00"
+    "Odds": "1.19",
+    "Date": "2026-10-27T18:00:00+00:00"
+  },
+  {
+    "League": "Serie A",
+    "Match": "Torino vs Como",
+    "Tip": "Over 1.5",
+    "Odds": "1.20",
+    "Date": "2026-10-27T19:45:00+00:00"
   }
 ]

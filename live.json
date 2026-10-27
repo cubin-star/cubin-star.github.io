@@ -1,16 +1,23 @@
 [
   {
-    "League": "Liga 1",
-    "Match": "Bhayangkara FC vs PSM Makassar",
+    "League": "2. SNL",
+    "Match": "Ilirija vs Bilje",
     "Tip": "Over 1.5",
-    "Odds": "1.23",
-    "Date": "2026-10-26T12:00:00+00:00"
+    "Odds": "1.18",
+    "Date": "2026-10-27T13:00:00+00:00"
+  },
+  {
+    "League": "Non League Premier - Southern South",
+    "Match": "Basingstoke Town vs Uxbridge",
+    "Tip": "Over 1.5",
+    "Odds": "1.15",
+    "Date": "2026-10-27T19:45:00+00:00"
   },
   {
     "League": "Primera División",
-    "Match": "Nacional Potosí vs Guabirá",
+    "Match": "Juan Pablo II College vs Sport Huancayo",
     "Tip": "Over 1.5",
-    "Odds": "1.12",
-    "Date": "2026-10-26T22:00:00+00:00"
+    "Odds": "1.19",
+    "Date": "2026-10-27T20:00:00+00:00"
   }
 ]
