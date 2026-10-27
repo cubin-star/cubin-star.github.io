@@ -1,7 +1,7 @@
 // Zatezovy bezpecnostni test viceurovnoveho prerozdeleni.
 // Umyslne naraz i na limit kroku (maxSteps) a na maximalni hloubku retezu.
 // Spusteni: node test-stress.mjs
-import { createPicker, runCoordinatedSelection, pickKey } from './fetch-matches.mjs';
+import { createPicker, runCoordinatedSelection, pickKey, createLeagueRegistry, leagueKey } from './fetch-matches.mjs';
 
 let pass = 0, fail = 0;
 function ok(name, cond, detail = '') {
@@ -177,6 +177,244 @@ section('S6. Ochrana proti zacykleni');
     }
     const ms = Date.now() - t0;
     ok('vyber se nezacykli a skonci rychle', ms < 10000, ms + ' ms');
+}
+
+// === S7: postupne uvolnovani globalniho limitu ligy =========================
+section('S7. Relaxace globalniho limitu ligy');
+{
+    const lc = (id, lid, tip = 'Over 2.5') => ({
+        fixtureId: id, leagueId: lid, tip, tier: 1, league: 'Liga ' + lid, country: 'Zeme ' + lid,
+        match: 'H' + id + ' - A' + id, kickoff: '2026-01-01T18:00:00+00:00', odds: '2.10',
+    });
+
+    // 8) Nedostatek lig musi limit uvolnit - ne nechat soubory prazdne.
+    // 4 ligy x 5 zapasu, 3 soubory po 3 = 9 slotu. Lokalni limit je splnitelny
+    // (4 ligy >= 3 sloty), ale globalni limit 2 dovoli jen 8 unikatnich
+    // fixture - na 9. slot se musi limit uvolnit.
+    {
+        let short = 0, relaxed = 0;
+        for (let i = 0; i < 100; i++) {
+            const pool = [];
+            for (let lid = 1; lid <= 4; lid++) for (let j = 0; j < 5; j++) pool.push(lc(lid * 100 + j, lid));
+            const blocked = new Set(), reg = createLeagueRegistry();
+            const ps = ['a', 'b', 'c'].map(n => mk(n, pool, 3, onePhase(3), blocked, { registry: reg }));
+            const res = runCoordinatedSelection(ps, () => { }, { registry: reg });
+            if (ps.some(p => !p.isFull())) short++;
+            if (res.capRelaxations.length > 0) relaxed++;
+        }
+        ok('S7 nedostatek lig spusti relaxaci limitu', relaxed === 100, relaxed + '/100');
+        ok('S7 soubory se diky relaxaci naplni', short === 0, short + ' nenaplnenych');
+    }
+
+    // Relaxace se NEspusti, kdyz limit 2 staci.
+    {
+        let relaxed = 0;
+        for (let i = 0; i < 100; i++) {
+            const pool = [];
+            for (let lid = 1; lid <= 8; lid++) for (let j = 0; j < 3; j++) pool.push(lc(lid * 100 + j, lid));
+            const blocked = new Set(), reg = createLeagueRegistry();
+            const ps = ['a', 'b', 'c'].map(n => mk(n, pool, 3, onePhase(3), blocked, { registry: reg }));
+            const res = runCoordinatedSelection(ps, () => { }, { registry: reg });
+            if (res.capRelaxations.length > 0) relaxed++;
+        }
+        ok('S7 pri dostatku lig se limit neuvolnuje', relaxed === 0, relaxed + '/100');
+    }
+
+    // Relaxace nese duvod a lokalni limit (1 liga/soubor) plati i po ni.
+    {
+        const pool = [];
+        for (let j = 0; j < 6; j++) pool.push(lc(j, 1));
+        const blocked = new Set(), reg = createLeagueRegistry();
+        const ps = ['a', 'b', 'c'].map(n => mk(n, pool, 2, onePhase(2), blocked, { registry: reg }));
+        const res = runCoordinatedSelection(ps, () => { }, { registry: reg });
+        ok('S7 relaxace ma uvedeny duvod', res.capRelaxations.every(r => !!r.reason));
+        const localViol = ps.some(p => new Set(p.selected.map(m => m.league + '|' + m.country)).size !== p.selected.length);
+        ok('S7 lokalni limit 1 liga/soubor plati i po relaxaci', !localViol);
+    }
+
+    // 9) Prerozdeleni udrzuje globalni pocty unikatnich fixture konzistentni.
+    {
+        let bad = 0;
+        for (let i = 0; i < 200; i++) {
+            const pool = [];
+            for (let lid = 1; lid <= 4; lid++) for (let j = 0; j < 3; j++) {
+                pool.push(lc(lid * 100 + j, lid, 'Over 2.5'));
+                pool.push(lc(lid * 100 + j, lid, 'Home win'));
+            }
+            const blocked = new Set(), reg = createLeagueRegistry();
+            const ps = ['a', 'b', 'c', 'd'].map(n => mk(n, pool, 2, onePhase(2), blocked, { registry: reg }));
+            runCoordinatedSelection(ps, () => { }, { registry: reg });
+            // Registr musi presne odpovidat skutecnemu vyberu.
+            const actual = new Map();
+            for (const p of ps) for (const m of p.selected) {
+                const k = leagueKey(m);
+                if (!actual.has(k)) actual.set(k, new Set());
+                actual.get(k).add(m.fixtureId);
+            }
+            for (const [, s] of actual) {
+                const any = ps.flatMap(p => p.selected).find(m => actual.get(leagueKey(m)) === s);
+                if (any && reg.count(any) !== s.size) bad++;
+            }
+        }
+        ok('S7 registr lig presne odpovida vyberu i po prerozdeleni', bad === 0, bad + ' nesouladu');
+    }
+
+    // 15) Pri vycerpani limitu prohledavani se nedostatek NEoznaci za prokazany.
+    {
+        const pool = [];
+        for (let id = 1; id <= 12; id++) pool.push(lc(id, id));
+        const blocked = new Set(), reg = createLeagueRegistry();
+        const ps = [];
+        for (let i = 0; i < 6; i++) ps.push(mk('p' + i, pool, 4, onePhase(4), blocked, { registry: reg }));
+        const res = runCoordinatedSelection(ps, () => { }, { registry: reg, maxSteps: 1, maxDepth: 1 });
+        const dupEntries = ps.flatMap(p => p.entries).filter(e => e.duplicate);
+        ok('S7 pri limitu hledani neni nedostatek oznacen za prokazany',
+            !res.limitHit || dupEntries.every(e => !/prokazany nedostatek/.test(e.reason || '')),
+            'limitHit=' + res.limitHit + ', dup=' + dupEntries.length);
+    }
+
+    // Zatez: mnoho lig s prekryvajicimi se kandidaty.
+    {
+        const t0 = Date.now();
+        let bad = 0;
+        for (let i = 0; i < 30; i++) {
+            const pool = [];
+            for (let lid = 1; lid <= 40; lid++) for (let j = 0; j < 5; j++) {
+                pool.push(lc(lid * 1000 + j, lid, 'Over 2.5'));
+                pool.push(lc(lid * 1000 + j, lid, 'Home win'));
+            }
+            const blocked = new Set(), reg = createLeagueRegistry();
+            const ps = [
+                mk('hot.json', pool, 6, onePhase(6), blocked, { registry: reg }),
+                mk('tips-kombik.json', pool, 2, onePhase(2), blocked, { registry: reg }),
+                mk('react2.json', pool, 6, onePhase(6), blocked, { registry: reg }),
+                mk('react3.json', pool, 8, onePhase(8), blocked, { registry: reg }),
+            ];
+            runCoordinatedSelection(ps, () => { }, { registry: reg });
+            if (!invariants(ps, blocked, 'S7')) { bad++; break; }
+            if (ps.some(p => !p.isFull())) bad++;
+            const uniq = new Map();
+            for (const p of ps) for (const m of p.selected) {
+                const k = leagueKey(m);
+                if (!uniq.has(k)) uniq.set(k, new Set());
+                uniq.get(k).add(m.fixtureId);
+            }
+            for (const [, s] of uniq) if (s.size > 2) bad++;
+        }
+        const ms = Date.now() - t0;
+        ok('S7 zatez 40 lig x 5 zapasu x 2 trhy: vse naplneno a v limitu', bad === 0, bad + ' problemu');
+        ok('S7 zatez skonci rychle', ms < 15000, ms + ' ms');
+    }
+}
+
+// === S8: prerozdeleni zachranuje limit 2 ====================================
+// Klicove: kdyz existuje reseni respektujici limit 2, MUSI ho najit
+// prerozdeleni - uvolneni limitu je az posledni moznost.
+section('S8. Prerozdeleni misto uvolneni limitu');
+{
+    const lc = (id, lid, tip = 'Over 2.5', tier = 1) => ({
+        fixtureId: id, leagueId: lid, tip, tier, league: 'Liga ' + lid, country: 'Zeme ' + lid,
+        match: 'H' + id + ' - A' + id, kickoff: '2026-01-01T18:00:00+00:00', odds: '2.10',
+    });
+    const uniqPerLeague = ps => {
+        const m = new Map();
+        for (const p of ps) for (const x of p.selected) {
+            const k = leagueKey(x);
+            if (!m.has(k)) m.set(k, new Set());
+            m.get(k).add(x.fixtureId);
+        }
+        return m;
+    };
+
+    // Scenar A - vynucene prerozdeleni mezi JSON.
+    // Dva "uzke" soubory umi JEN Over 2.5, a Over existuje pouze v lize 1.
+    // Liga 1 ma presne 2 zapasy = presne na limit 2. "Siroky" soubor umi vse.
+    // Kdyz siroky sahne po lize 1 driv, jeden uzky zustane bez kandidata -
+    // jedine zachrana je prerozdeleni: siroky vrati zapas z ligy 1 a vezme si
+    // nahradu z ligy 2-4. Uvolnit limit by bylo zbytecne.
+    {
+        let short = 0, relaxed = 0, viol = 0, redist = 0;
+        for (let i = 0; i < 300; i++) {
+            const pool = [
+                lc(11, 1, 'Over 2.5'), lc(12, 1, 'Over 2.5'),
+                lc(11, 1, 'Home win'), lc(12, 1, 'Home win'),
+            ];
+            for (let lid = 2; lid <= 4; lid++) pool.push(lc(lid * 10, lid, 'Home win'));
+            const blocked = new Set(), reg = createLeagueRegistry();
+            const isOver = m => m.tip === 'Over 2.5';
+            const ps = [
+                mk('uzky1', pool, 1, onePhase(1, isOver), blocked, { registry: reg }),
+                mk('uzky2', pool, 1, onePhase(1, isOver), blocked, { registry: reg }),
+                mk('siroky', pool, 1, onePhase(1), blocked, { registry: reg }),
+            ];
+            const res = runCoordinatedSelection(ps, () => { }, { registry: reg });
+            if (ps.some(p => !p.isFull())) short++;
+            if (res.capRelaxations.length > 0) relaxed++;
+            if (ps.reduce((a, p) => a + p.stats.redistributed, 0) > 0) redist++;
+            for (const [, s] of uniqPerLeague(ps)) if (s.size > 2) viol++;
+        }
+        ok('S8/A vsechny soubory naplneny', short === 0, short + ' nenaplnenych');
+        ok('S8/A limit 2 NEBYL zbytecne uvolnen', relaxed === 0, relaxed + '/300 uvolneni');
+        ok('S8/A zadna liga nad 2 unikatni fixture', viol === 0, viol + ' poruseni');
+        ok('S8/A prerozdeleni se uplatnilo (konflikt byl realny)', redist > 0, redist + '/300 behu');
+    }
+
+    // Scenar B - uzke hrdlo pres tri soubory s ruznymi trhy.
+    // Over existuje jen v ligach 1 a 2 (po dvou zapasech). onlyOver tedy musi
+    // vzit po jednom z obou. Home/Away soubory by rady sahly po stejnych
+    // ligach, ale tim by v nich vznikl 3. unikatni zapas - musi se proto
+    // prerozdelit do lig 3-5. Reseni pri limitu 2 existuje, relaxace ne.
+    {
+        let short = 0, relaxed = 0, viol = 0;
+        for (let i = 0; i < 300; i++) {
+            const pool = [];
+            for (const [lid, ids] of [[1, [101, 102]], [2, [201, 202]]]) {
+                for (const id of ids) {
+                    pool.push(lc(id, lid, 'Over 2.5'));
+                    pool.push(lc(id, lid, 'Home win'));
+                    pool.push(lc(id, lid, 'Away win'));
+                }
+                // treti zapas v lize jen pro vitezne trhy - past na cap
+                pool.push(lc(lid * 100 + 9, lid, 'Home win'));
+                pool.push(lc(lid * 100 + 9, lid, 'Away win'));
+            }
+            for (let lid = 3; lid <= 5; lid++) {
+                pool.push(lc(lid * 100, lid, 'Home win'));
+                pool.push(lc(lid * 100 + 1, lid, 'Away win'));
+            }
+            const blocked = new Set(), reg = createLeagueRegistry();
+            const ps = [
+                mk('onlyOver', pool, 2, onePhase(2, m => m.tip === 'Over 2.5'), blocked, { registry: reg }),
+                mk('onlyHome', pool, 2, onePhase(2, m => m.tip === 'Home win'), blocked, { registry: reg }),
+                mk('onlyAway', pool, 2, onePhase(2, m => m.tip === 'Away win'), blocked, { registry: reg }),
+            ];
+            const res = runCoordinatedSelection(ps, () => { }, { registry: reg });
+            if (ps.some(p => !p.isFull())) short++;
+            if (res.capRelaxations.length > 0) relaxed++;
+            for (const [, s] of uniqPerLeague(ps)) if (s.size > 2) viol++;
+        }
+        ok('S8/B vsechny tri soubory naplneny', short === 0, short + ' nenaplnenych');
+        ok('S8/B limit 2 NEBYL zbytecne uvolnen', relaxed === 0, relaxed + '/300 uvolneni');
+        ok('S8/B zadna liga nad 2 unikatni fixture', viol === 0, viol + ' poruseni');
+    }
+
+    // Scenar C - kontrolni protipriklad: reseni pri limitu 2 NEEXISTUJE,
+    // relaxace tedy probehnout MUSI (jinak by soubory zustaly prazdne).
+    {
+        let short = 0, relaxed = 0;
+        for (let i = 0; i < 100; i++) {
+            const pool = [];
+            // 3 ligy x 4 zapasy, 4 soubory po 2 = 8 slotu > 3 ligy x 2 = 6.
+            for (let lid = 1; lid <= 3; lid++) for (let j = 0; j < 4; j++) pool.push(lc(lid * 100 + j, lid));
+            const blocked = new Set(), reg = createLeagueRegistry();
+            const ps = ['a', 'b', 'c', 'd'].map(n => mk(n, pool, 2, onePhase(2), blocked, { registry: reg }));
+            const res = runCoordinatedSelection(ps, () => { }, { registry: reg });
+            if (ps.some(p => !p.isFull())) short++;
+            if (res.capRelaxations.length > 0) relaxed++;
+        }
+        ok('S8/C kdyz reseni pri limitu 2 neexistuje, relaxace probehne', relaxed === 100, relaxed + '/100');
+        ok('S8/C soubory se presto naplni', short === 0, short + ' nenaplnenych');
+    }
 }
 
 console.log('\n--------------------------------');

@@ -50,6 +50,15 @@ const REACT3_PICK_COUNT = 8;
 const REACT3_MIN_OVER = 4;
 // Max pocet vybranych zapasu z jedne zeme - brani zaplaveni tiketu jednou destinaci.
 const MAX_PER_COUNTRY = 2;
+// === Globalni limit ligy napric hlavnimi JSON ==============================
+// Krome lokalniho limitu (max 1 zapas z ligy v JEDNOM souboru) plati jeste
+// globalni strop na pocet UNIKATNICH fixture z jedne ligy napric hlavni
+// skupinou (hot, tips-kombik, react2, react3). Stejny zapas ve dvou souborech
+// s jinym tipem se pocita JEDNOU - proto se drzi refcount, ne prosty citac.
+const LEAGUE_GLOBAL_CAP = 2;
+// Postupne uvolneni, kdyz pri CAP=2 uz nelze naplnit vsechny soubory. Uvolnuje
+// se az po vycerpani alternativ i prerozdeleni. Infinity = limit vypnut.
+const LEAGUE_CAP_RELAX_STEPS = [2, 3, 4, Infinity];
 // Vahy pro vazeny nahodny vyber TIERU (ne jednotlivych zapasu) - vyssi tier ma
 // vyrazne vetsi sanci, ale nizsi nejsou vyloucene.
 // T1 = top evropske ligy + UEFA pohary, T2 = druhe ligy/domaci pohary, T3 = ostatni Evropa, T4 = zbytek sveta.
@@ -63,6 +72,31 @@ const MAX_PER_TIER = { 1: 6, 2: 4, 3: 2, 4: 1 };
 // Bez toho by pri 4 kandidatech v T1 a stropu 6 byl vyber deterministicky -
 // vzali by se proste vsichni ctyri. Takhle se ze 4 kandidatu vyberou max 2.
 const MAX_TIER_SHARE = 0.5;
+// === Vahy vazeneho nahodneho losu KANDIDATU ================================
+// Faktory se SCITAJI jako odchylky od 1.0 (ne nasobi), aby se nemohly
+// nekontrolovane eskalovat: w = BASE*(1+suma), s podlahou W_FLOOR. Kazdy
+// kandidat, ktery prosel filtry a tvrdymi limity, ma nenulovou sanci.
+const W_BASE = 1.0;
+const W_FLOOR = 0.05;
+// Kvalita souteze podle tieru: -15 % az +15 %. Nejde o vyrazeni nizsich tieru,
+// vazeny los TIERU (TIER_WEIGHTS) zustava beze zmeny nad timto.
+const LEAGUE_TIER_ADJ = { 1: 0.15, 2: 0.07, 3: 0, 4: -0.15 };
+// Bonus za pocet vhodnych UNIKATNICH fixture v lize: 0 az +15 %, tlumeny
+// logaritmem. Liga s 5 kandidaty ma vyssi sanci nez liga se 2, ale ne 2,5x.
+const W_COUNT_MAX = 0.15;
+const W_COUNT_SATURATION = 6;
+// Bonus za historickou golovost ligy - VYHRADNE pro Over 2.5: 0 az +25 %.
+// Neznama liga nebo maly vzorek = 0 (neutralni), nikdy penalizace.
+const W_GOALS_MAX = 0.25;
+const W_GOALS_BASE_RATE = 50;
+const W_GOALS_SPAN = 25;
+// Penalizace uz zastoupene ligy podle poctu jejich unikatnich fixture v hlavni
+// skupine. Index = pocet unikatnich fixture; od 2 vys plati -35 %.
+// Penalizace je MEKKA - jen snizuje vahu v losovani, nikdy kandidata nevyradi
+// (vysledna vaha ma podlahu W_FLOOR). Zapocita se VZDY JEN JEDNOU: kdyz je
+// k dispozici vlastni registr i read-only registr hlavni skupiny, bere se
+// vyssi z obou poctu a penalizace se aplikuje jedinkrat.
+const W_PRESENCE_PENALTY = [0, -0.20, -0.35];
 // === Jadro "prezentovatelnych" soutezi =====================================
 // Tier je jen vaha v losovani - kdyz v T1/T2 nic neni, vahy jsou k nicemu a
 // vyhraje alzirska druha liga. Jadro je tvrda podminka: v kazdem tiketu musi
@@ -447,7 +481,20 @@ function leagueTier(name,country,type){
 export { leagueTier, norm, leagueLevel };
 function maskKey(k){if(!k)return'(none)';if(k.length<=8)return'***';return k.slice(0,4)+'...'+k.slice(-4)+' (len='+k.length+')';}
 function sleep(ms){return new Promise(r=>setTimeout(r,ms));}
-function shuffle(arr){for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]];}return arr;}
+// Zdroj nahody. V produkci Math.random, v testech lze pres setRng() nasadit
+// deterministicky generator (mulberry32) a vyber tak reprodukovat.
+let rng=Math.random;
+export function setRng(fn){rng=fn||Math.random;}
+export function makeSeededRng(seed){
+    let a=(seed>>>0)||1;
+    return function(){
+        a=(a+0x6D2B79F5)>>>0;
+        let t=Math.imul(a^(a>>>15),1|a);
+        t=(t+Math.imul(t^(t>>>7),61|t))^t;
+        return ((t^(t>>>14))>>>0)/4294967296;
+    };
+}
+function shuffle(arr){for(let i=arr.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]];}return arr;}
 function fmtDate(d){return d.toISOString().split('T')[0];}
 // Stredni (medianovy) kurz - pro sudy pocet prumer dvou prostrednich hodnot
 function median(arr){if(!arr||arr.length===0)return NaN;const s=[...arr].sort((a,b)=>a-b);const mid=Math.floor(s.length/2);return s.length%2!==0?s[mid]:(s[mid-1]+s[mid])/2;}
@@ -612,17 +659,11 @@ function over25Rate(goalStats,m){
 // neni dost, vyber sahne i do lig s nizsim procentem a tiket se naplni. Zapasy z
 // prumerne golovych lig se tak do tiketu dostanou spis pres Home/Away win.
 const isGoalRichOver=goalStats=>m=>m.tip==='Over 2.5'&&over25Rate(goalStats,m)>=OVER_PREFER_RATE;
-// Seradi kose tak, ze zapasy s lepsi golovosti jsou na konci pole - vyber je
-// bere pres pop(), takze se saha po nich driv. Netykove trhy zustavaji nahodne.
-function sortByGoals(bucket,goalStats){
-    return bucket.sort((a,b)=>{
-        const ao=a.tip==='Over 2.5',bo=b.tip==='Over 2.5';
-        if(!ao&&!bo)return 0;
-        if(!ao)return 1;
-        if(!bo)return -1;
-        return over25Rate(goalStats,a)-over25Rate(goalStats,b);
-    });
-}
+// POZN.: drivejsi sortByGoals() byl odstranen. Golovost uz neurcuje poradi
+// kandidatu ve fronte (vyber bral pres pop() vzdy nejgolovejsi zapas) - nyni
+// vstupuje VYHRADNE jako jedna z vah ve weightedPick() (W_GOALS_MAX). Tvrde
+// filtry golovosti (applyGoalFilter/isLowScoring) i fazove deleni pres
+// isGoalRichOver zustavaji beze zmeny.
 
 function balanceGroups(picks){
     const indices=picks.map((_,i)=>i);const allP=generatePairings(indices);
@@ -638,15 +679,125 @@ function balanceGroups(picks){
 // dvakrat v jednom tiketu - a to vzdy, i pri uvolnenem dedupu.
 export const pickKey=m=>m.fixtureId+'|'+m.tip;
 
+// Stabilni identita ligy. Primarne leagueId z API, pri jeho absenci fallback na
+// nazev+zeme. Prefixy 'id:' a 'nm:' zarucuji, ze ciselne ID nikdy nekoliduje
+// s textovym fallbackem (liga pojmenovana "123" neni liga s id 123).
+export function leagueKey(m){
+    const id=m?.leagueId;
+    if(id!=null&&id!==''&&Number.isFinite(Number(id)))return 'id:'+Number(id);
+    return 'nm:'+norm(m?.league)+'|'+norm(m?.country);
+}
+
+// Registr unikatnich fixture podle ligy napric celou skupinou souboru.
+// Drzi refcount na fixture: stejny zapas ve dvou souborech s JINYM tipem
+// zvedne refcount na 2, ale do limitu ligy se pocita porad jako JEDEN zapas.
+// Teprve pokles refcountu na 0 ligu opravdu uvolni.
+export function createLeagueRegistry(cap=LEAGUE_GLOBAL_CAP){
+    const leagues=new Map();
+    const state={cap,relaxLevel:0,relaxations:[]};
+    const bucket=k=>{let b=leagues.get(k);if(!b){b=new Map();leagues.set(k,b);}return b;};
+    return{
+        state,
+        get cap(){return state.cap;},
+        // Pocet UNIKATNICH fixture ligy (ne poctu tipu).
+        count(m){const b=leagues.get(leagueKey(m));return b?b.size:0;},
+        // Novy fixture by ligu pretahl pres limit? Uz zapocitany fixture projde vzdy.
+        wouldExceed(m){
+            const b=leagues.get(leagueKey(m));
+            if(!b)return false;
+            if(b.has(m.fixtureId))return false;
+            return b.size>=state.cap;
+        },
+        add(m){
+            const b=bucket(leagueKey(m));
+            b.set(m.fixtureId,(b.get(m.fixtureId)||0)+1);
+        },
+        remove(m){
+            const k=leagueKey(m),b=leagues.get(k);
+            if(!b)return;
+            const n=(b.get(m.fixtureId)||0)-1;
+            if(n>0)b.set(m.fixtureId,n);
+            else{b.delete(m.fixtureId);if(b.size===0)leagues.delete(k);}
+        },
+        relax(reason){
+            if(state.relaxLevel>=LEAGUE_CAP_RELAX_STEPS.length-1)return false;
+            state.relaxLevel++;
+            state.cap=LEAGUE_CAP_RELAX_STEPS[state.relaxLevel];
+            state.relaxations.push({cap:state.cap,reason});
+            return true;
+        },
+        snapshot(){
+            const out=[];
+            for(const [k,b] of leagues)out.push({league:k,fixtures:b.size});
+            return out.sort((a,b)=>b.fixtures-a.fixtures);
+        },
+    };
+}
+
+// Vaha jednoho kandidata pro vazeny los. Faktory se SCITAJI jako odchylky od
+// 1.0, takze se nemohou nasobit do extremu. Vysledek nikdy neklesne na nulu -
+// kazdy kandidat, ktery prosel filtry, ma sanci.
+export function candidateWeight(m,{goalStats,leagueCounts,registry,presenceRegistry}={}){
+    let adj=0;
+    adj+=LEAGUE_TIER_ADJ[m.tier]??0;
+    const n=leagueCounts?.get(leagueKey(m))||0;
+    if(n>1)adj+=W_COUNT_MAX*Math.min(1,Math.log(n)/Math.log(W_COUNT_SATURATION));
+    // Golovost zvyhodnuje VYHRADNE Over 2.5 - u Home/Away win nevypovida nic.
+    if(m.tip==='Over 2.5'&&goalStats&&goalStats.size>0){
+        const st=goalStats.get(norm(m.league)+'|'+norm(m.country));
+        // Neznama liga nebo maly vzorek = neutralni vaha (0), nikdy penalizace.
+        if(st&&st.played>=GOALS_MIN_SAMPLE){
+            const r=(st.over25Rate-W_GOALS_BASE_RATE)/W_GOALS_SPAN;
+            adj+=W_GOALS_MAX*Math.min(1,Math.max(0,r));
+        }
+    }
+    // Zastoupeni ligy. presenceRegistry je READ-ONLY pohled na jiny registr
+    // (u react1 je to registr hlavni skupiny) - slouzi jen k vazeni, nic do nej
+    // nezapisujeme. Oba pocty se neSCITAJI: bere se maximum a penalizace se
+    // aplikuje prave jednou, takze stejne zastoupeni nemuze penalizovat dvakrat.
+    if(registry||presenceRegistry){
+        const c=Math.max(registry?registry.count(m):0,presenceRegistry?presenceRegistry.count(m):0);
+        adj+=W_PRESENCE_PENALTY[Math.min(c,W_PRESENCE_PENALTY.length-1)];
+    }
+    return Math.max(W_FLOOR,W_BASE*(1+adj));
+}
+
+// Vazeny nahodny vyber jednoho prvku. Nahrazuje puvodni deterministicke
+// pop() po sortByGoals - golovost uz neurcuje poradi, je jen jednou z vah.
+export function weightedPick(list,ctx){
+    if(!list||list.length===0)return null;
+    let total=0;
+    const w=new Array(list.length);
+    for(let i=0;i<list.length;i++){w[i]=candidateWeight(list[i],ctx);total+=w[i];}
+    if(!(total>0))return list[Math.floor(rng()*list.length)];
+    let r=rng()*total;
+    for(let i=0;i<list.length;i++){r-=w[i];if(r<=0)return list[i];}
+    return list[list.length-1];
+}
+
 // Picker drzi stav jednoho vystupniho souboru. Vyber se nedela najednou, ale po
 // jednom zapase (pickOne), aby mohl driver stridat soubory a zadny nemel
 // prednost jen diky poradi generovani.
-export function createPicker({name,pool,want,phases,coreMin=0,blockedPicks,goalStats,tierStrategy='weighted',priority='hlavni skupina'}){
+export function createPicker({name,pool,want,phases,coreMin=0,blockedPicks,goalStats,tierStrategy='weighted',priority='hlavni skupina',registry=null,presenceRegistry=null}){
     const selected=[],entries=[],usedLeagues=new Set(),countries=new Map(),ownFixtures=new Set();
     const tierTotals={1:0,2:0,3:0,4:0};
-    const stats={pool:pool.length,poolFixtures:new Set(pool.map(m=>m.fixtureId)).size,rejLeague:0,rejCountry:0,dedupConflicts:0,redistributed:0,deepRedistributed:0,capRelaxed:0,phaseFallbacks:0,dupAllowed:0};
+    const stats={pool:pool.length,poolFixtures:new Set(pool.map(m=>m.fixtureId)).size,rejLeague:0,rejCountry:0,rejLeagueGlobal:0,dedupConflicts:0,redistributed:0,deepRedistributed:0,capRelaxed:0,phaseFallbacks:0,dupAllowed:0};
     const coreAvail=pool.filter(isCore).length;
     const coreQuota=Math.min(coreMin,coreAvail,want);
+    // Pocet vhodnych UNIKATNICH fixture na ligu v poolu - podklad pro bonus za
+    // velikost nabidky. Jeden zapas se dvema tipy se pocita jen jednou.
+    const leagueCounts=new Map();
+    {
+        const seenPerLeague=new Map();
+        for(const m of pool){
+            const k=leagueKey(m);
+            let s=seenPerLeague.get(k);
+            if(!s){s=new Set();seenPerLeague.set(k,s);}
+            s.add(m.fixtureId);
+        }
+        for(const [k,s] of seenPerLeague)leagueCounts.set(k,s.size);
+    }
+    const wctx=()=>({goalStats,leagueCounts,registry,presenceRegistry});
 
     const isFull=()=>selected.length>=want;
     const coreCount=()=>selected.filter(isCore).length;
@@ -655,7 +806,11 @@ export function createPicker({name,pool,want,phases,coreMin=0,blockedPicks,goalS
     function baseEligible(m,relaxed){
         if(ownFixtures.has(m.fixtureId))return false;
         if(!relaxed&&blockedPicks.has(pickKey(m))){stats.dedupConflicts++;return false;}
+        // Lokalni limit: max 1 zapas z ligy v TOMTO souboru. Plati vzdy, i po
+        // uvolneni globalniho limitu.
         if(usedLeagues.has(m.league+'|'+m.country)){stats.rejLeague++;return false;}
+        // Globalni limit: max N unikatnich fixture z ligy napric skupinou.
+        if(registry&&registry.wouldExceed(m)){stats.rejLeagueGlobal++;return false;}
         if((countries.get(m.country)||0)>=MAX_PER_COUNTRY){stats.rejCountry++;return false;}
         return true;
     }
@@ -673,8 +828,9 @@ export function createPicker({name,pool,want,phases,coreMin=0,blockedPicks,goalS
             seen.add(k);
             if(b[m.tier])b[m.tier].push(m);
         }
-        // Golovejsi souteze na konec kose - vyber bere posledni prvek.
-        for(const t of [1,2,3,4]){shuffle(b[t]);sortByGoals(b[t],goalStats);}
+        // Jen promichani - zadne razeni podle golovosti. Golovost uz neurcuje
+        // poradi fronty, vstupuje vyhradne jako jedna z vah ve weightedPick().
+        for(const t of [1,2,3,4])shuffle(b[t]);
         return b;
     }
     function drawTier(b,useCaps){
@@ -686,7 +842,7 @@ export function createPicker({name,pool,want,phases,coreMin=0,blockedPicks,goalS
         const avail=[1,2,3,4].filter(t=>b[t].length>0&&(!useCaps||tierTotals[t]<caps[t]));
         if(avail.length===0)return 0;
         const totalW=avail.reduce((a,t)=>a+(TIER_WEIGHTS[t]||1),0);
-        let r=Math.random()*totalW,tier=avail[avail.length-1];
+        let r=rng()*totalW,tier=avail[avail.length-1];
         for(const t of avail){r-=(TIER_WEIGHTS[t]||1);if(r<=0){tier=t;break;}}
         return tier;
     }
@@ -696,21 +852,22 @@ export function createPicker({name,pool,want,phases,coreMin=0,blockedPicks,goalS
         ownFixtures.add(m.fixtureId);
         blockedPicks.add(pickKey(m));
         countries.set(m.country,(countries.get(m.country)||0)+1);
+        if(registry)registry.add(m);
         tierTotals[tier]++;
         const entry={m,tier,phase:phaseLabel,capRelaxed:!!meta.capRelaxed,duplicate:dup,reason:meta.reason||''};
         selected.push(m);entries.push(entry);
         if(dup)stats.dupAllowed++;
         return entry;
     }
-    // Preferencni strategie (tips.json): zadny vazeny los tieru, ale puvodni
-    // poradi jadro -> T1+T2 -> T3+T4, uvnitr skupiny rozhoduje golovost ligy.
+    // Preferencni strategie (tips-kombik.json): zadny vazeny los TIERU, poradi
+    // skupin jadro -> T1+T2 -> T3+T4 zustava tvrde. Vazeny los se uplatni jen
+    // UVNITR prave vybrane skupiny, takze kvoty ani poradi skupin neobchazi.
     function pickByPreference(b,coreOnly){
         const groups=coreOnly?[[1,2,3,4]]:[[1,2],[3,4]];
         for(const g of groups){
             const list=[].concat(...g.map(t=>b[t]));
             if(list.length===0)continue;
-            sortByGoals(list,goalStats);
-            return list[list.length-1];
+            return weightedPick(list,wctx());
         }
         return null;
     }
@@ -733,7 +890,7 @@ export function createPicker({name,pool,want,phases,coreMin=0,blockedPicks,goalS
         if(!tier&&(b[1].length||b[2].length||b[3].length||b[4].length)){tier=drawTier(b,false);capRelaxed=!!tier;if(capRelaxed)stats.capRelaxed++;}
         if(!tier&&coreOnly){b=all;tier=drawTier(b,true)||drawTier(b,false);}
         if(!tier)return null;
-        return take(b[tier][b[tier].length-1],tier,phase.label,{capRelaxed,reason:relaxed?'uvolneny dedup':''});
+        return take(weightedPick(b[tier],wctx()),tier,phase.label,{capRelaxed,reason:relaxed?'uvolneny dedup':''});
     }
     // Vybere jeden zapas. Kdyz aktualni faze nema kandidaty, zkusi dalsi
     // nenaplnenou fazi - vyber se tak nikdy nezasekne.
@@ -752,6 +909,7 @@ export function createPicker({name,pool,want,phases,coreMin=0,blockedPicks,goalS
         ownFixtures.add(e.m.fixtureId);
         blockedPicks.add(pickKey(e.m));
         countries.set(e.m.country,(countries.get(e.m.country)||0)+1);
+        if(registry)registry.add(e.m);
         tierTotals[e.tier]++;
         selected.push(e.m);entries.push(e);
     }
@@ -765,6 +923,7 @@ export function createPicker({name,pool,want,phases,coreMin=0,blockedPicks,goalS
         usedLeagues.delete(e.m.league+'|'+e.m.country);
         ownFixtures.delete(e.m.fixtureId);
         countries.set(e.m.country,(countries.get(e.m.country)||0)-1);
+        if(registry)registry.remove(e.m);
         tierTotals[e.tier]--;
         blockedPicks.delete(key);
         const repl=pickOne(false,new Set([key]));
@@ -776,6 +935,7 @@ export function createPicker({name,pool,want,phases,coreMin=0,blockedPicks,goalS
         if(!phase.market(m))return false;
         if(ownFixtures.has(m.fixtureId))return false;
         if(usedLeagues.has(m.league+'|'+m.country))return false;
+        if(registry&&registry.wouldExceed(m))return false;
         if((countries.get(m.country)||0)>=MAX_PER_COUNTRY)return false;
         return true;
     }
@@ -790,6 +950,7 @@ export function createPicker({name,pool,want,phases,coreMin=0,blockedPicks,goalS
         usedLeagues.delete(e.m.league+'|'+e.m.country);
         ownFixtures.delete(e.m.fixtureId);
         countries.set(e.m.country,(countries.get(e.m.country)||0)-1);
+        if(registry)registry.remove(e.m);
         tierTotals[e.tier]--;
         blockedPicks.delete(key);
         return e;
@@ -818,7 +979,7 @@ export function createPicker({name,pool,want,phases,coreMin=0,blockedPicks,goalS
         }
         return shuffle(out);
     }
-    return{name,priority,pool,want,stats,selected,entries,tierTotals,coreQuota,isFull,pickOne,ownsPick,tryYield,canTakeIgnoringDedup,pendingPhases,detach,restoreEntry:restore,takeSpecific,blockedOptions,isBlocked:k=>blockedPicks.has(k)};
+    return{name,priority,pool,want,stats,selected,entries,tierTotals,coreQuota,leagueCounts,registry,isFull,pickOne,ownsPick,tryYield,canTakeIgnoringDedup,pendingPhases,detach,restoreEntry:restore,takeSpecific,blockedOptions,isBlocked:k=>blockedPicks.has(k)};
 }
 
 // Limity hledani prerozdeleni - brani exponencialnimu vybuchu i zacykleni.
@@ -878,25 +1039,45 @@ function tryRedistribute(p,scope,state){
 // smi sahat jen na sve vlastni, hlavni skupina je v te chvili uzamcena).
 export function runCoordinatedSelection(pickers,log=()=>{},opts={}){
     const scope=opts.redistributeScope||pickers;
+    const registry=opts.registry||null;
     const state={steps:0,maxSteps:opts.maxSteps??REDIST_MAX_STEPS,maxDepth:opts.maxDepth??REDIST_MAX_DEPTH,limitHit:false};
-    for(;;){
-        const pending=pickers.filter(p=>!p.isFull());
-        if(pending.length===0)break;
-        // Poradi v kole je nahodna permutace - ani prvni kolo tak nezvyhodnuje
-        // soubor, ktery je v poli drive.
-        const order=shuffle(pending.slice());
-        let progress=false;
-        for(const p of order){if(!p.isFull()&&p.pickOne())progress=true;}
-        if(!progress)break;
-    }
-    // Faze 2 - viceurovnove prerozdeleni kandidatu (bez duplicit).
-    for(;;){
-        let progress=false;
-        for(const p of shuffle(pickers.slice())){
-            if(p.isFull())continue;
-            if(tryRedistribute(p,scope,state)){progress=true;log(p.name+': konflikt vyresen prerozdelenim kandidatu');}
+    // Jedno kolo = normalni vyber + viceurovnove prerozdeleni. Duplicitni
+    // fallback se NEpousti - ten je az uplne posledni zachrana.
+    function fillRound(){
+        for(;;){
+            const pending=pickers.filter(p=>!p.isFull());
+            if(pending.length===0)break;
+            // Poradi v kole je nahodna permutace - ani prvni kolo tak nezvyhodnuje
+            // soubor, ktery je v poli drive.
+            const order=shuffle(pending.slice());
+            let progress=false;
+            for(const p of order){if(!p.isFull()&&p.pickOne())progress=true;}
+            if(!progress)break;
         }
-        if(!progress)break;
+        // Faze 2 - viceurovnove prerozdeleni kandidatu (bez duplicit).
+        for(;;){
+            let progress=false;
+            for(const p of shuffle(pickers.slice())){
+                if(p.isFull())continue;
+                if(tryRedistribute(p,scope,state)){progress=true;log(p.name+': konflikt vyresen prerozdelenim kandidatu');}
+            }
+            if(!progress)break;
+        }
+    }
+    fillRound();
+    // Faze 2b - postupne uvolneni globalniho limitu ligy (2 -> 3 -> 4 -> bez
+    // limitu). Spousti se AZ kdyz uz ani prerozdeleni nedokaze soubory naplnit,
+    // takze limit 2 zustava silnou preferenci, ne prekazkou naplneni.
+    // Lokalni limit (1 zapas z ligy v jednom JSON) plati i po uvolneni.
+    if(registry){
+        while(pickers.some(p=>!p.isFull())){
+            const missing=pickers.filter(p=>!p.isFull()).map(p=>p.name+' ('+p.selected.length+'/'+p.want+')').join(', ');
+            if(!registry.relax('nenaplneno: '+missing))break;
+            log('globalni limit ligy uvolnen na '+(registry.cap===Infinity?'bez limitu':registry.cap)+' - '+missing);
+            const before=pickers.reduce((a,p)=>a+p.selected.length,0);
+            fillRound();
+            if(pickers.reduce((a,p)=>a+p.selected.length,0)===before&&registry.cap===Infinity)break;
+        }
     }
     // Faze 3 - posledni zachrana: povolena duplicita dvojice zapas+tip napric
     // soubory. Zakaz stejneho zapasu v jednom tiketu plati i tady (ownFixtures).
@@ -910,7 +1091,7 @@ export function runCoordinatedSelection(pickers,log=()=>{},opts={}){
             log(p.name+': FALLBACK '+e.reason+' - '+e.m.match+' | '+e.m.tip+' @ '+e.m.odds);
         }
     }
-    return{pickers,limitHit:state.limitHit,steps:state.steps};
+    return{pickers,limitHit:state.limitHit,steps:state.steps,capRelaxations:registry?registry.state.relaxations:[]};
 }
 
 // Pojistka pred zapisem react1.json: bez platneho fixtureId nedokaze SOCVERO
@@ -979,7 +1160,7 @@ async function main(){
     // vyslednou hodnotu. Jeden bookmaker smi prispet jen jednim kurzem na trh,
     // aby se duplicitni zaznamy v API nepocitaly vickrat.
     function addCandidate(map,mKey,lg,fix,odd,tip='Over 2.5',bookId){
-        if(!map.has(mKey))map.set(mKey,{fixtureId:fix.fixture.id,league:lg.name,country:lg.country,match:fix.teams.home.name+' - '+fix.teams.away.name,kickoff:fix.fixture.date,tip,tier:lg.tier,allOdds:[],books:new Set()});
+        if(!map.has(mKey))map.set(mKey,{fixtureId:fix.fixture.id,leagueId:lg.id,season:lg.season,league:lg.name,country:lg.country,match:fix.teams.home.name+' - '+fix.teams.away.name,kickoff:fix.fixture.date,tip,tier:lg.tier,allOdds:[],books:new Set()});
         const c=map.get(mKey);
         const bk=bookId==null?'anon:'+c.allOdds.length:'bm:'+bookId;
         if(c.books.has(bk))return;
@@ -1056,7 +1237,12 @@ async function main(){
     // Globalni dedup napric VSEMI vystupy je na urovni dvojice zapas+tip.
     // Stejny zapas se smi objevit ve vice souborech, ale pokazde s jinym tipem.
     const blockedPicks=new Set();
-    const mkPicker=(name,p,want,phases,coreMin,extra={})=>createPicker({name,pool:p,want,phases,coreMin,blockedPicks,goalStats,...extra});
+    // Globalni registr lig pro HLAVNI skupinu - drzi unikatni fixture na ligu
+    // napric hot/tips-kombik/react2/react3. react1 ma vlastni registr, aby
+    // nemohl zpetne ovlivnit uz dokoncene hlavni vystupy.
+    const mainRegistry=createLeagueRegistry();
+    const react1Registry=createLeagueRegistry();
+    const mkPicker=(name,p,want,phases,coreMin,extra={})=>createPicker({name,pool:p,want,phases,coreMin,blockedPicks,goalStats,registry:mainRegistry,...extra});
     const hotPicker=mkPicker('hot.json',pool,PICK_COUNT,[
         {label:'Over 2.5',market:anyMarket,countsAs:always,want:PICK_COUNT},
     ],CORE_MIN_HOT);
@@ -1069,7 +1255,12 @@ async function main(){
         {label:'Over 2.5 (golove ligy)',market:isRichOver,countsAs:isOver,want:REACT1_MIN_OVER},
         {label:'Over 2.5 (ostatni ligy)',market:isOver,countsAs:isOver,want:REACT1_MIN_OVER},
         {label:'dobrani (oba trhy)',market:anyMarket,countsAs:always,want:REACT1_PICK_COUNT},
-    ],CORE_MIN_REACT1,{priority:'vedlejsi skupina (nejnizsi priorita)'});
+    // react1 ma vlastni registr (tvrdy limit si pocita jen sam za sebe), ale
+    // navic dostava mainRegistry jako READ-ONLY presenceRegistry. Liga, ktera uz
+    // ma v hlavnich ctyrech JSON zastoupeni, tim dostane mekkou penalizaci
+    // (-20 % za 1 unikatni zapas, -35 % za 2 a vic), nikoli zakaz. Zapis do
+    // mainRegistry se nedeje - hlavni skupina zustava nedotcena.
+    ],CORE_MIN_REACT1,{priority:'vedlejsi skupina (nejnizsi priorita)',registry:react1Registry,presenceRegistry:mainRegistry});
     const react2Picker=mkPicker('react2.json',react2Pool,REACT2_PICK_COUNT,[
         {label:'Over 2.5 (golove ligy)',market:isRichOver,countsAs:isOver,want:REACT2_OVER_COUNT},
         {label:'Over 2.5 (ostatni ligy)',market:isOver,countsAs:isOver,want:REACT2_OVER_COUNT},
@@ -1087,11 +1278,11 @@ async function main(){
     const pickers=[...mainPickers,react1Picker];
     console.log('\nHlavni skupina (rovnocenne): hot.json, '+TIPS_FILE+', react2.json, react3.json');
     console.log('Vedlejsi skupina (nejnizsi priorita, az po hlavni): react1.json');
-    const mainRes=runCoordinatedSelection(mainPickers,msg=>console.log('   '+msg));
+    const mainRes=runCoordinatedSelection(mainPickers,msg=>console.log('   '+msg),{registry:mainRegistry});
     // Hlavni skupina je od teto chvile UZAMCENA - react1 smi prerozdelovat jen
     // sve vlastni vybery a prednostne bere zbyle unikatni kandidaty.
     console.log('\nHlavni skupina dokoncena a uzamcena, generuji react1.json...');
-    const r1Res=runCoordinatedSelection([react1Picker],msg=>console.log('   '+msg),{redistributeScope:[react1Picker]});
+    const r1Res=runCoordinatedSelection([react1Picker],msg=>console.log('   '+msg),{redistributeScope:[react1Picker],registry:react1Registry});
 
     // === Diagnostika ========================================================
     // Jen cteni uz hotoveho vyberu - nespotrebovava zadna nahodna cisla.
@@ -1110,7 +1301,7 @@ async function main(){
         console.log('   Rozlozeni tieru: T1='+t[1]+', T2='+t[2]+', T3='+t[3]+', T4='+t[4]);
         console.log('   Slozeni trhu: Over 2.5='+sel.filter(isOver).length+', Home/Away win='+sel.filter(isWinner).length);
         console.log('   Z jadra: '+sel.filter(isCore).length+'/'+p.want+' (kvota '+p.coreQuota+')');
-        console.log('   Odmitnuto limity: liga='+s.rejLeague+', zeme='+s.rejCountry+' | uvolneny strop tieru='+s.capRelaxed+', preskoceni faze='+s.phaseFallbacks);
+        console.log('   Odmitnuto limity: liga(lokalne)='+s.rejLeague+', liga(globalne)='+s.rejLeagueGlobal+', zeme='+s.rejCountry+' | uvolneny strop tieru='+s.capRelaxed+', preskoceni faze='+s.phaseFallbacks);
         console.log('   Konflikty glob. dedupu: '+s.dedupConflicts+' | vyreseno prerozdelenim: '+s.redistributed+' (z toho viceurovnove: '+s.deepRedistributed+') | povolene duplicity: '+s.dupAllowed);
         for(const e of p.entries){
             const m=e.m;
@@ -1134,6 +1325,39 @@ async function main(){
     console.log('   Z toho viceurovnovych: hlavni='+sumStat(mainPickers,'deepRedistributed')+', react1='+react1Picker.stats.deepRedistributed);
     console.log('   Duplicitni fallbacky: hlavni='+sumStat(mainPickers,'dupAllowed')+', react1='+react1Picker.stats.dupAllowed);
     console.log('   Nedostatek kandidatu: hlavni='+(mainRes.limitHit?'NEOVEREN (limit hledani)':'prokazan')+', react1='+(r1Res.limitHit?'NEOVEREN (limit hledani)':'prokazan')+' | kroky: '+mainRes.steps+'/'+r1Res.steps);
+
+    // === Diverzifikace lig ==================================================
+    // Prehled je agregovany (TOP 10 \u002B souhrn), aby log nenarostl o stovky radku.
+    const mainSel=new Map();
+    for(const p of mainPickers){
+        for(const m of p.selected){
+            const k=leagueKey(m);
+            let e=mainSel.get(k);
+            if(!e){e={label:m.league+' ('+m.country+')',fixtures:new Set(),picks:0};mainSel.set(k,e);}
+            e.fixtures.add(m.fixtureId);e.picks++;
+        }
+    }
+    const availByLeague=new Map();
+    for(const p of mainPickers){
+        for(const [k,n] of p.leagueCounts)availByLeague.set(k,Math.max(availByLeague.get(k)||0,n));
+    }
+    const rows=[...mainSel.entries()].map(([k,e])=>({label:e.label,uniq:e.fixtures.size,picks:e.picks,avail:availByLeague.get(k)||0}))
+        .sort((a,b)=>b.uniq-a.uniq||b.avail-a.avail);
+    const mainSlots=mainPickers.reduce((a,p)=>a+p.selected.length,0);
+    console.log('\nDiverzifikace lig (hlavni skupina):');
+    console.log('   Zastoupeno lig: '+rows.length+' | unikatnich zapasu: '+new Set(mainPickers.flatMap(p=>p.selected.map(m=>m.fixtureId))).size+' | obsazenych slotu: '+mainSlots);
+    console.log('   Lig s kandidaty celkem: '+availByLeague.size+' | globalni limit na konci: '+(mainRegistry.cap===Infinity?'bez limitu':mainRegistry.cap));
+    for(const r of rows.slice(0,10))console.log('   '+r.label+': '+r.uniq+' unikatnich zapasu ('+r.picks+' tipu) z '+r.avail+' dostupnych');
+    if(rows.length>10)console.log('   ... a dalsich '+(rows.length-10)+' lig po 1 zapase');
+    const over=rows.filter(r=>r.uniq>LEAGUE_GLOBAL_CAP);
+    console.log('   Nad zakladnim limitem '+LEAGUE_GLOBAL_CAP+': '+(over.length?over.map(r=>r.label+'='+r.uniq).join(', '):'zadna liga'));
+    if(mainRes.capRelaxations.length){
+        console.log('   Uvolneni globalniho limitu: '+mainRes.capRelaxations.length+'x');
+        for(const r of mainRes.capRelaxations)console.log('      -> '+(r.cap===Infinity?'bez limitu':r.cap)+' | duvod: '+r.reason);
+    }else console.log('   Uvolneni globalniho limitu: 0x (limit '+LEAGUE_GLOBAL_CAP+' staci)');
+    if(r1Res.capRelaxations.length)console.log('   react1 uvolnil svuj limit '+r1Res.capRelaxations.length+'x (hlavni skupinu to neovlivnilo)');
+    const unfilled=pickers.filter(p=>p.selected.length<p.want);
+    console.log('   Nenaplnene soubory: '+(unfilled.length?unfilled.map(p=>p.name+' '+p.selected.length+'/'+p.want).join(', '):'zadny'));
 
     // hot.json pouziva stejny vyber jako driv, jen koordinovany s ostatnimi.
     const selected=hotPicker.selected;
