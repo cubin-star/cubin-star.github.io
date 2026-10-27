@@ -1,58 +1,58 @@
 [
   {
-    "fixtureId": 1604037,
-    "league": "Division 1",
-    "match": "Al Bukayriyah - Hajer",
-    "kickoff": "2026-10-26T16:00:00+01:00",
+    "fixtureId": 1596959,
+    "league": "Non League Premier - Southern Central",
+    "match": "Banbury United - Worcester City",
+    "kickoff": "2026-10-27T20:45:00+01:00",
     "tip": "Over 2.5",
-    "odds": "2.10"
+    "odds": "1.95"
   },
   {
-    "fixtureId": 1646973,
-    "league": "Ligue 2",
-    "match": "AS Soliman - CS Chebba",
-    "kickoff": "2026-10-26T14:30:00+01:00",
+    "fixtureId": 1646948,
+    "league": "League Cup",
+    "match": "Orlando Pirates - Milford FC",
+    "kickoff": "2026-10-27T18:00:00+01:00",
     "tip": "Over 2.5",
-    "odds": "2.27"
-  },
-  {
-    "fixtureId": 1549822,
-    "league": "Primera A",
-    "match": "Santa Fe - Bucaramanga",
-    "kickoff": "2026-10-27T02:05:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.11"
-  },
-  {
-    "fixtureId": 1493205,
-    "league": "Liga Profesional Argentina",
-    "match": "Instituto Cordoba - Deportivo Riestra",
-    "kickoff": "2026-10-27T01:15:00+01:00",
-    "tip": "Home win",
-    "odds": "1.83"
-  },
-  {
-    "fixtureId": 1584442,
-    "league": "Süper Lig",
-    "match": "Galatasaray - Fenerbahçe",
-    "kickoff": "2026-10-26T19:30:00+01:00",
-    "tip": "Home win",
-    "odds": "2.05"
-  },
-  {
-    "fixtureId": 1636964,
-    "league": "Super League 2",
-    "match": "Zakynthos - Pyrgos 1968",
-    "kickoff": "2026-10-26T13:45:00+01:00",
-    "tip": "Home win",
     "odds": "2.07"
   },
   {
-    "fixtureId": 1492421,
-    "league": "Serie A",
-    "match": "Coritiba - Gremio",
-    "kickoff": "2026-10-26T23:30:00+01:00",
+    "fixtureId": 1640728,
+    "league": "Azadegan League",
+    "match": "Naft Bandar Abbas - Mes Rafsanjan",
+    "kickoff": "2026-10-27T15:00:00+01:00",
+    "tip": "Over 2.5",
+    "odds": "2.55"
+  },
+  {
+    "fixtureId": 1635509,
+    "league": "Cup",
+    "match": "Panserraikos - Niki Volos",
+    "kickoff": "2026-10-27T15:00:00+01:00",
     "tip": "Home win",
-    "odds": "2.21"
+    "odds": "1.95"
+  },
+  {
+    "fixtureId": 1493198,
+    "league": "Liga Profesional Argentina",
+    "match": "Argentinos JRS - Independ. Rivadavia",
+    "kickoff": "2026-10-27T23:00:00+01:00",
+    "tip": "Home win",
+    "odds": "2.10"
+  },
+  {
+    "fixtureId": 1601577,
+    "league": "Serie B",
+    "match": "Virtus Entella - Avellino",
+    "kickoff": "2026-10-27T20:00:00+01:00",
+    "tip": "Home win",
+    "odds": "2.12"
+  },
+  {
+    "fixtureId": 1641982,
+    "league": "KNVB Beker",
+    "match": "Rijnsburgse Boys - Den Bosch",
+    "kickoff": "2026-10-27T20:00:00+01:00",
+    "tip": "Away win",
+    "odds": "1.85"
   }
 ]

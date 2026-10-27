@@ -1,37 +1,72 @@
 [
   {
-    "league": "Super League 2",
-    "match": "Zakynthos - Pyrgos 1968",
-    "kickoff": "2026-10-26T13:45:00+01:00",
+    "league": "Cupa României",
+    "match": "Corvinul Hunedoara - Rapid",
+    "kickoff": "2026-10-27T20:30:00+01:00",
     "tip": "Over 2.5",
-    "odds": "2.15"
+    "odds": "2.14"
   },
   {
-    "league": "First NL",
-    "match": "Mladost Ždralovi - Jadran LP",
-    "kickoff": "2026-10-26T14:00:00+01:00",
+    "league": "Cupa României",
+    "match": "Uta Arad - FC Botosani",
+    "kickoff": "2026-10-27T18:00:00+01:00",
     "tip": "Over 2.5",
-    "odds": "1.98"
+    "odds": "2.04"
   },
   {
-    "league": "Ligue 2",
-    "match": "Boulogne - Reims",
-    "kickoff": "2026-10-26T20:45:00+01:00",
+    "league": "Cup",
+    "match": "Panserraikos - Niki Volos",
+    "kickoff": "2026-10-27T15:00:00+01:00",
     "tip": "Over 2.5",
-    "odds": "2.18"
+    "odds": "2.00"
   },
   {
-    "league": "La Liga",
-    "match": "Sevilla - Osasuna",
-    "kickoff": "2026-10-26T21:00:00+01:00",
+    "league": "Cup",
+    "match": "Asteras Tripolis - Kifisia",
+    "kickoff": "2026-10-27T16:30:00+01:00",
     "tip": "Over 2.5",
-    "odds": "2.20"
+    "odds": "2.10"
   },
   {
-    "league": "Segunda Liga",
-    "match": "Torreense - Amarante",
-    "kickoff": "2026-10-26T21:45:00+01:00",
+    "league": "Cup",
+    "match": "Macva - Napredak",
+    "kickoff": "2026-10-27T17:30:00+01:00",
     "tip": "Over 2.5",
-    "odds": "2.07"
+    "odds": "2.13"
+  },
+  {
+    "league": "Cup",
+    "match": "Grazer AK - SCR Altach",
+    "kickoff": "2026-10-27T19:00:00+01:00",
+    "tip": "Over 2.5",
+    "odds": "1.95"
+  },
+  {
+    "league": "Serie B",
+    "match": "Virtus Entella - Avellino",
+    "kickoff": "2026-10-27T20:00:00+01:00",
+    "tip": "Over 2.5",
+    "odds": "2.19"
+  },
+  {
+    "league": "Serie B",
+    "match": "Mantova - Cremonese",
+    "kickoff": "2026-10-27T20:00:00+01:00",
+    "tip": "Over 2.5",
+    "odds": "2.00"
+  },
+  {
+    "league": "Serie B",
+    "match": "Padova - Sudtirol",
+    "kickoff": "2026-10-27T20:00:00+01:00",
+    "tip": "Over 2.5",
+    "odds": "2.16"
+  },
+  {
+    "league": "Championship",
+    "match": "Stenhousemuir - Dunfermline",
+    "kickoff": "2026-10-27T20:45:00+01:00",
+    "tip": "Over 2.5",
+    "odds": "2.12"
   }
 ]
