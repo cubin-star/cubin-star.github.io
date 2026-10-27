@@ -1,24 +1,24 @@
 [
   {
-    "League": "Primeira Liga",
-    "Match": "Santa Clara vs Benfica",
+    "League": "Copa del Rey",
+    "Match": "Calamocha vs Europa Fc",
     "Tip": "Over 2.5",
-    "Odds": "1.89",
-    "Date": "2026-10-26T18:45:00+00:00"
+    "Odds": "1.88",
+    "Date": "2026-10-27T18:00:00+00:00"
   },
   {
-    "League": "1. Lig",
-    "Match": "Mardin 1969 vs Manisa F.K.",
+    "League": "National League",
+    "Match": "AFC Hornchurch vs Yeovil Town",
     "Tip": "Over 2.5",
-    "Odds": "1.78",
-    "Date": "2026-10-26T17:00:00+00:00"
+    "Odds": "1.82",
+    "Date": "2026-10-27T19:45:00+00:00"
   },
   {
-    "League": "AFC Champions League Elite",
-    "Match": "Al-Qadisiyah FC vs Al Sadd",
+    "League": "Serie A",
+    "Match": "Sassuolo vs Lazio",
     "Tip": "Over 2.5",
-    "Odds": "1.75",
-    "Date": "2026-10-26T18:15:00+00:00",
+    "Odds": "1.76",
+    "Date": "2026-10-27T17:30:00+00:00",
     "locked": true
   }
 ]
