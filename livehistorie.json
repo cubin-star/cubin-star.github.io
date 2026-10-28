@@ -1,5 +1,21 @@
 [
   {
+    "league": "Premier League",
+    "homeTeam": "National Bank of Egypt",
+    "awayTeam": "AL Masry",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "0:1",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-10-28T14:00:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 0:1 | xG: 1.26 | Shots: 15/6 | winXG: 0.99 | losingXG: 0.27 losingSOT: 2 | @HT | Pre O2.5: 2.085"
+  },
+  {
     "league": "Serie A",
     "homeTeam": "Torino",
     "awayTeam": "Como",
