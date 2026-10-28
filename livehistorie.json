@@ -1,5 +1,21 @@
 [
   {
+    "league": "AFC Champions League Two",
+    "homeTeam": "Al-Jazira",
+    "awayTeam": "Muharraq",
+    "tip": "Over 2.5",
+    "odds": "",
+    "halftimeScore": "0:2",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-10-28T16:00:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 0:2 | xG: 1.63 | Shots: 12/6 | winXG: 1.52 | losingXG: 0.11 losingSOT: 2 | @HT | Pre O2.5: 2.09"
+  },
+  {
     "league": "Premier League",
     "homeTeam": "National Bank of Egypt",
     "awayTeam": "AL Masry",
