@@ -1,8 +1,8 @@
 [
   {
     "league": "AFC Champions League Two",
-    "homeTeam": "Al-Jazira",
-    "awayTeam": "Muharraq",
+    "homeTeam": "Al-Nahda",
+    "awayTeam": "Al-Rayyan SC",
     "tip": "Over 2.5",
     "odds": "",
     "halftimeScore": "0:2",
@@ -13,7 +13,7 @@
     "kickoff": "2026-10-28T16:00:00.000Z",
     "resolvedAt": "",
     "source": "whisper-football",
-    "scoutStats": "Whisper xG-rate surge | HT 0:2 | xG: 1.63 | Shots: 12/6 | winXG: 1.52 | losingXG: 0.11 losingSOT: 2 | @HT | Pre O2.5: 2.09"
+    "scoutStats": "Whisper xG-rate surge | HT 0:2 | xG: 0.79 | Shots: 17/4 | winXG: 0.52 | losingXG: 0.27 losingSOT: 1 | @HT | Pre O2.5: 1.69"
   },
   {
     "league": "Premier League",
