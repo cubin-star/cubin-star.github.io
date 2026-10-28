@@ -1,24 +1,24 @@
 [
   {
     "League": "Copa del Rey",
-    "Match": "Calamocha vs Europa Fc",
+    "Match": "Alcoyano vs Mallorca",
     "Tip": "Over 2.5",
-    "Odds": "1.88",
-    "Date": "2026-10-27T18:00:00+00:00"
+    "Odds": "1.95",
+    "Date": "2026-10-28T19:00:00+00:00"
   },
   {
     "League": "National League",
-    "Match": "AFC Hornchurch vs Yeovil Town",
+    "Match": "Sutton Utd vs Aldershot Town",
     "Tip": "Over 2.5",
-    "Odds": "1.82",
-    "Date": "2026-10-27T19:45:00+00:00"
+    "Odds": "1.78",
+    "Date": "2026-10-28T19:45:00+00:00"
   },
   {
     "League": "Serie A",
-    "Match": "Sassuolo vs Lazio",
+    "Match": "Monza vs Napoli",
     "Tip": "Over 2.5",
-    "Odds": "1.76",
-    "Date": "2026-10-27T17:30:00+00:00",
+    "Odds": "1.79",
+    "Date": "2026-10-28T19:45:00+00:00",
     "locked": true
   }
 ]
