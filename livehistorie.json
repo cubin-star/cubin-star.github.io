@@ -1,6 +1,22 @@
 [
   {
     "league": "AFC Champions League Two",
+    "homeTeam": "Khalidiya",
+    "awayTeam": "Al Wahda FC",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "0:1",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-10-28T18:15:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 0:1 | xG: 0.14 | Shots: 9/3 | winXG: 0.07 | losingXG: 0.07 losingSOT: 2 | @HT | Pre O2.5: 1.76"
+  },
+  {
+    "league": "AFC Champions League Two",
     "homeTeam": "Al-Nahda",
     "awayTeam": "Al-Rayyan SC",
     "tip": "Over 2.5",
