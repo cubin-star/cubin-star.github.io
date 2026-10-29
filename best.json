@@ -1,23 +1,23 @@
 [
   {
-    "league": "Serie A",
-    "match": "Genoa - Juventus",
-    "kickoff": "2026-10-28T20:45:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.38"
-  },
-  {
-    "league": "AGCFF Gulf Champions League",
-    "match": "Al Zawra'a - Al Nasr",
-    "kickoff": "2026-10-28T18:30:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.18"
-  },
-  {
     "league": "Premier League",
-    "match": "National Bank of Egypt - AL Masry",
-    "kickoff": "2026-10-28T15:00:00+01:00",
+    "match": "Nouadhibou - SNIM",
+    "kickoff": "2026-10-29T20:45:00+01:00",
     "tip": "Over 2.5",
-    "odds": "2.10"
+    "odds": "2.28"
+  },
+  {
+    "league": "Liga Nacional",
+    "match": "Marquense - Guastatoya",
+    "kickoff": "2026-10-30T03:10:00+01:00",
+    "tip": "Over 2.5",
+    "odds": "2.24"
+  },
+  {
+    "league": "First League",
+    "match": "Dečić - Otrant-Olympic",
+    "kickoff": "2026-10-29T17:00:00+01:00",
+    "tip": "Over 2.5",
+    "odds": "2.20"
   }
 ]

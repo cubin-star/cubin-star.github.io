@@ -1,107 +1,30 @@
 [
   {
     "league": "Cup",
-    "match": "FK Vozdovac - Novi Pazar",
-    "kickoff": "2026-10-28T16:30:00+01:00",
+    "match": "Volos NFC - Atromitos",
+    "kickoff": "2026-10-29T17:00:00+01:00",
     "tip": "Over 2.5",
-    "odds": "2.02"
-  },
-  {
-    "league": "Cupa României",
-    "match": "Minerul Lupeni - FC Politehnica Timisoara",
-    "kickoff": "2026-10-28T14:00:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "1.95"
-  },
-  {
-    "league": "Cup",
-    "match": "Nestos Chrisoupolis - Kalamata",
-    "kickoff": "2026-10-28T14:00:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.05"
-  },
-  {
-    "league": "Cup",
-    "match": "Panathinaikos - Aris Thessalonikis",
-    "kickoff": "2026-10-28T16:30:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.10"
-  },
-  {
-    "league": "Cup",
-    "match": "PAOK - AEK Athens FC",
-    "kickoff": "2026-10-28T19:30:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.25"
-  },
-  {
-    "league": "Serie A",
-    "match": "Genoa - Juventus",
-    "kickoff": "2026-10-28T20:45:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.38"
-  },
-  {
-    "league": "Serie A",
-    "match": "Parma - Udinese",
-    "kickoff": "2026-10-28T18:30:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.19"
-  },
-  {
-    "league": "Serie B",
-    "match": "Carrarese - Arezzo",
-    "kickoff": "2026-10-28T20:00:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.02"
+    "odds": "2.15"
   },
   {
     "league": "Copa del Rey",
-    "match": "Alcoyano - Mallorca",
-    "kickoff": "2026-10-28T20:00:00+01:00",
+    "match": "Antequera - Águilas",
+    "kickoff": "2026-10-29T20:00:00+01:00",
     "tip": "Over 2.5",
-    "odds": "1.97"
+    "odds": "2.00"
   },
   {
     "league": "Copa del Rey",
     "match": "Coruxo - Zamora",
-    "kickoff": "2026-10-28T19:00:00+01:00",
+    "kickoff": "2026-10-29T19:00:00+01:00",
     "tip": "Over 2.5",
-    "odds": "2.13"
+    "odds": "2.15"
   },
   {
     "league": "Copa del Rey",
-    "match": "Deportiva Minera - FC Cartagena",
-    "kickoff": "2026-10-28T20:30:00+01:00",
+    "match": "SS Reyes - CD Coria",
+    "kickoff": "2026-10-29T19:00:00+01:00",
     "tip": "Over 2.5",
-    "odds": "2.05"
-  },
-  {
-    "league": "Copa del Rey",
-    "match": "Numancia - Oviedo",
-    "kickoff": "2026-10-28T20:00:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.13"
-  },
-  {
-    "league": "Copa del Rey",
-    "match": "Portugalete - Real Unión",
-    "kickoff": "2026-10-28T19:00:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.01"
-  },
-  {
-    "league": "Copa del Rey",
-    "match": "Reddis - Barakaldo",
-    "kickoff": "2026-10-28T20:30:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.11"
-  },
-  {
-    "league": "Serie A",
-    "match": "Fluminense - Internacional",
-    "kickoff": "2026-10-28T23:30:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "1.99"
+    "odds": "2.03"
   }
 ]
