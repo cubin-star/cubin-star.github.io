@@ -1,6 +1,22 @@
 [
   {
     "league": "AFC Champions League Two",
+    "homeTeam": "Shanghai Shenhua",
+    "awayTeam": "Machida Zelvia",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "0:1",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-10-29T12:15:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 0:1 | xG: 0.88 | Shots: 10/2 | winXG: 0.68 | losingXG: 0.20 losingSOT: 1 | @HT | Pre O2.5: 1.7650000000000001"
+  },
+  {
+    "league": "AFC Champions League Two",
     "homeTeam": "Gangwon FC",
     "awayTeam": "Kuching FA",
     "tip": "Over 1.5",
