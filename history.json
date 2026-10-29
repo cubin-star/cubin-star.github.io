@@ -1,6 +1,36 @@
 [
   {
     "sport": "football",
+    "league": "Major League Soccer",
+    "match": "Seattle Sounders vs Houston Dynamo",
+    "tip": "Over 1.5",
+    "odds": "1.19",
+    "date": "2026-10-29T02:30:00+00:00",
+    "score": "0:1",
+    "result": "✗"
+  },
+  {
+    "sport": "football",
+    "league": "Serie A",
+    "match": "Monza vs Napoli",
+    "tip": "Over 1.5",
+    "odds": "1.20",
+    "date": "2026-10-28T19:45:00+00:00",
+    "score": "1:4",
+    "result": "✓"
+  },
+  {
+    "sport": "hockey",
+    "league": "Liiga",
+    "match": "IFK Helsinki vs Ilves",
+    "tip": "Over 3.5",
+    "odds": "1.27",
+    "date": "2026-10-28T16:30:00+00:00",
+    "score": "2:1",
+    "result": "✗"
+  },
+  {
+    "sport": "football",
     "league": "Serie A",
     "match": "Torino vs Como",
     "tip": "Over 1.5",
@@ -1966,36 +1996,6 @@
     "tip": "Over 1.5",
     "odds": "1.22",
     "date": "2026-08-18T19:00:00+00:00",
-    "score": "1:1",
-    "result": "✓"
-  },
-  {
-    "sport": "basketball",
-    "league": "NBA W",
-    "match": "Golden State Valkyries W vs Dallas Wings W",
-    "tip": "Over 151.5",
-    "odds": "1.25",
-    "date": "2026-08-18T02:00:00+00:00",
-    "score": "78:70",
-    "result": "✗"
-  },
-  {
-    "sport": "football",
-    "league": "Liga MX",
-    "match": "Necaxa vs Leon",
-    "tip": "Over 1.5",
-    "odds": "1.20",
-    "date": "2026-08-18T01:00:00+00:00",
-    "score": "1:2",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Serie A",
-    "match": "Internacional vs Remo",
-    "tip": "Over 1.5",
-    "odds": "1.25",
-    "date": "2026-08-17T23:00:00+00:00",
     "score": "1:1",
     "result": "✓"
   }
