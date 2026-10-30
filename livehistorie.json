@@ -1,5 +1,21 @@
 [
   {
+    "league": "Premier Division",
+    "homeTeam": "Drogheda United",
+    "awayTeam": "Galway United",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "1:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-10-30T19:45:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 1:0 | xG: 0.77 | Shots: 12/3 | winXG: 0.56 | losingXG: 0.21 losingSOT: 2 | @HT | Pre O2.5: 1.67"
+  },
+  {
     "league": "Ekstraklasa",
     "homeTeam": "Cracovia Krakow",
     "awayTeam": "Motor Lublin",
