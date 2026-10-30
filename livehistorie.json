@@ -1,5 +1,21 @@
 [
   {
+    "league": "Thai League 1",
+    "homeTeam": "Sisaket United",
+    "awayTeam": "Ratchaburi",
+    "tip": "Over 2.5",
+    "odds": "",
+    "halftimeScore": "2:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-10-30T12:00:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 2:0 | xG: 0.94 | Shots: 14/4 | winXG: 0.52 | losingXG: 0.42 losingSOT: 0 | @HT | Pre O2.5: 1.8"
+  },
+  {
     "league": "Pro League",
     "homeTeam": "Al Khaleej Saihat",
     "awayTeam": "Al-Hazm",
