@@ -1,24 +1,24 @@
 [
   {
-    "League": "Copa del Rey",
-    "Match": "Conquense vs Castellón",
+    "League": "Ligue 1",
+    "Match": "Lille vs Lens",
     "Tip": "Over 2.5",
-    "Odds": "1.95",
-    "Date": "2026-10-29T19:00:00+00:00"
+    "Odds": "1.86",
+    "Date": "2026-10-30T20:05:00+00:00"
   },
   {
-    "League": "Taça da Liga",
-    "Match": "SC Braga vs Famalicao",
-    "Tip": "Over 2.5",
-    "Odds": "1.83",
-    "Date": "2026-10-29T18:45:00+00:00"
-  },
-  {
-    "League": "League Cup",
-    "Match": "Everton vs Newcastle",
+    "League": "First League",
+    "Match": "Lokomotiv Sofia vs Botev Plovdiv",
     "Tip": "Over 2.5",
     "Odds": "1.82",
-    "Date": "2026-10-29T19:45:00+00:00",
+    "Date": "2026-10-30T17:30:00+00:00"
+  },
+  {
+    "League": "1. Division",
+    "Match": "Karmiotissa vs Olympiakos",
+    "Tip": "Over 2.5",
+    "Odds": "1.85",
+    "Date": "2026-10-30T17:00:00+00:00",
     "locked": true
   }
 ]
