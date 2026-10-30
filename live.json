@@ -1,1 +1,44 @@
-[]
+[
+  {
+    "League": "Liga Alef",
+    "Match": "Hapoel Sderot vs Ironi Beit Shemesh",
+    "Tip": "Over 1.5",
+    "Odds": "1.19",
+    "Date": "2026-10-30T10:00:00+00:00"
+  },
+  {
+    "League": "Super League",
+    "Match": "Sogdiana vs Buxoro",
+    "Tip": "Over 1.5",
+    "Odds": "1.19",
+    "Date": "2026-10-30T13:30:00+00:00"
+  },
+  {
+    "League": "Premier League",
+    "Match": "Al Riffa vs Al Najma",
+    "Tip": "Over 1.5",
+    "Odds": "1.15",
+    "Date": "2026-10-30T15:00:00+00:00"
+  },
+  {
+    "League": "Superettan",
+    "Match": "Oddevold vs IK brage",
+    "Tip": "Over 1.5",
+    "Odds": "1.17",
+    "Date": "2026-10-30T18:00:00+00:00"
+  },
+  {
+    "League": "Bundesliga",
+    "Match": "SV Elversberg vs FSV Mainz 05",
+    "Tip": "Over 1.5",
+    "Odds": "1.13",
+    "Date": "2026-10-30T19:30:00+00:00"
+  },
+  {
+    "League": "Premier League",
+    "Match": "Colwyn Bay vs Cambrian & Clydach",
+    "Tip": "Over 1.5",
+    "Odds": "1.14",
+    "Date": "2026-10-30T19:45:00+00:00"
+  }
+]
