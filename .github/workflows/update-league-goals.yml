@@ -1,21 +1,18 @@
 # Aktualizace golovosti soutezi (league-goals.json) - SAMOSTATNY workflow.
 # Nekoliduje s daily-picks.yml: jiny cas, vlastni concurrency skupina.
 #
-# STAV: PRIPRAVENO K TESTOVANI - zadny automaticky zapis do produkce.
-#  - pravidelne spousteni (schedule) je ZAKOMENTOVANE
-#  - commit & push je VYPNUTY (krok se nespusti, dokud ENABLE_PUSH != 'true')
-#  - vysledek se uklada jen jako artefakt (nahled) ke kontrole
-#
-# Az bude schvaleno nasazeni:
-#  1) odkomentovat schedule
-#  2) nastavit env ENABLE_PUSH: 'true'
+# STAV: AKTIVNI
+#  - planovane behy (weekly pondeli 03:00 UTC, monthly 1. den 02:00 UTC) po uspesne
+#    validaci commitnou a pushnou POUZE league-goals.json + league-goals-meta.json
+#  - rucni spusteni je ve vychozim stavu dry-run (jen artefakt); zapis jen s publish=true
+#  - pri chybe testu/API/validace update skonci nenulove a commit krok se neprovede
 
 name: Update League Goals
 
 on:
-  # schedule:
-  #   - cron: '0 3 * * 1'   # kazde pondeli 03:00 UTC - tydenni inkrement
-  #   - cron: '0 2 1 * *'   # 1. den v mesici 02:00 UTC - mesicni korekce
+  schedule:
+    - cron: '0 3 * * 1'   # kazde pondeli 03:00 UTC - tydenni inkrement
+    - cron: '0 2 1 * *'   # 1. den v mesici 02:00 UTC - mesicni korekce
   workflow_dispatch:
     inputs:
       mode:
@@ -24,16 +21,18 @@ on:
         default: 'weekly'
         type: choice
         options: [weekly, monthly]
+      publish:
+        description: 'Zapsat a pushnout vysledek (false = dry-run, jen artefakt)'
+        required: true
+        default: false
+        type: boolean
 
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
   group: league-goals
   cancel-in-progress: false
-
-env:
-  ENABLE_PUSH: 'false'
 
 jobs:
   update:
@@ -55,8 +54,18 @@ jobs:
           if [ -z "$MODE" ]; then
             if [ "${{ github.event.schedule }}" = "0 2 1 * *" ]; then MODE=monthly; else MODE=weekly; fi
           fi
+          PUBLISH=false
+          if [ "${{ github.event_name }}" = "schedule" ] || [ "${{ github.event.inputs.publish }}" = "true" ]; then PUBLISH=true; fi
           echo "mode=$MODE" >> "$GITHUB_OUTPUT"
+          echo "publish=$PUBLISH" >> "$GITHUB_OUTPUT"
           echo "Rezim: $MODE"
+
+      # Queued beh (concurrency) ma GITHUB_SHA z doby spusteni - vzdy pracovat nad aktualnim main.
+      - name: Sync to latest main
+        run: |
+          git fetch origin main
+          git checkout -B main origin/main
+          git log -1 --oneline
 
       - name: Run tests (bez API)
         run: node test-league-goals.mjs
@@ -75,11 +84,11 @@ jobs:
           if-no-files-found: ignore
           retention-days: 14
 
-      # VYPNUTO do schvaleni. Az ENABLE_PUSH='true': prepise produkcni soubory
-      # nahledem a pushne jen tyto dva soubory.
+      # Jen po uspesne validaci (vsechny predchozi kroky OK) a jen pri publikaci.
       - name: Commit & push
-        if: env.ENABLE_PUSH == 'true'
+        if: success() && steps.mode.outputs.publish == 'true'
         run: |
+          test -s preview/league-goals.json && test -s preview/league-goals-meta.json || { echo "Chybi validovany nahled"; exit 1; }
           cp preview/league-goals.json league-goals.json
           cp preview/league-goals-meta.json league-goals-meta.json
           git config user.name "Kombik Bot"

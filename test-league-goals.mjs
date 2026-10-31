@@ -336,7 +336,7 @@ section('11. Kompatibilita s realnymi daty a produkcnim botem');
     const meta = bootstrapMeta(prev);
     meta.lastProcessedDate = addDays(TODAY, -2);
     const { out, anomalies } = buildOutput(meta);
-    ok('bootstrap zachova vsechny standardni ligy', out.length === prev.length - 2 && !out.some(x => /kings/i.test(x.name)), out.length + ' z ' + prev.length);
+    ok('bootstrap zachova vsechny standardni ligy', out.length === prev.filter(x => !isNonStandard(x.name)).length && !out.some(x => /kings/i.test(x.name)), out.length + ' z ' + prev.length);
     ok('rekonstruovana procenta odpovidaji (+-0,1 b.)', out.every(r => { const o = prev.find(x => x.id === r.id); return Math.abs(o.over25Rate - r.over25Rate) <= 0.11; }));
     ok('rekonstruovany played presne', out.every(r => prev.find(x => x.id === r.id).played === r.played));
     ok('vystup z bootstrapu projde validaci', validateOutput(out, prev, 'weekly', anomalies).length === 0, validateOutput(out, prev, 'weekly', anomalies).slice(0, 3).join('; '));
