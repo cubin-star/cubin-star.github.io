@@ -1,7 +1,7 @@
 ﻿// Regresni testy koordinovaneho vyberu a vypoctu kurzu.
 // Spusteni: node test-selection.mjs
 import { readFileSync } from 'fs';
-import { createPicker, runCoordinatedSelection, bestOdds, pickKey, createLeagueRegistry, leagueKey, candidateWeight, setRng, makeSeededRng } from './fetch-matches.mjs';
+import { createPicker, runCoordinatedSelection, bestOdds, pickKey, createLeagueRegistry, leagueKey, candidateWeight, effectiveOver25, goalMultiplier, applyGoalFilter, isLowScoring, norm, setRng, makeSeededRng } from './fetch-matches.mjs';
 
 let pass = 0, fail = 0;
 function ok(name, cond, detail = '') {
@@ -167,7 +167,11 @@ section('H. Zachovani filtru, pasem a poctu');
         ['golove prahy', /const MIN_OVER25_RATE = 40;[\s\S]*?const OVER_PREFER_RATE = 50;[\s\S]*?const GOALS_MIN_SAMPLE = 60;/],
         ['golovy filtr se stale pouziva', /pool=applyGoalFilter\(pool,goalStats,PICK_COUNT,'hot'\);/],
         // Golovost uz NENI razeni fronty (sortByGoals odstranen), ale vaha v losu.
-        ['golovost je vaha, ne poradi', /W_GOALS_MAX[\s\S]*?m\.tip==='Over 2\.5'/],
+        ['golovost je vaha, ne poradi', /function goalMultiplier[\s\S]*?m\.tip!=='Over 2\.5'/],
+        // Golovost se na vysledek nasobi, nescita - jinak ji prebije tier/count.
+        ['golovost je multiplikativni', /W_BASE\*\(1\+adj\)\*goalMultiplier\(m,goalStats\)/],
+        ['Bayesovske vyhlazeni golovosti', /const G_PRIOR = 60;[\s\S]*?const G_PRIOR_RATE = 0\.50;/],
+        ['golova skala je oboustranna', /const G_PIVOT = 50;[\s\S]*?const G_SPAN = 20;[\s\S]*?const G_STRENGTH = 1\.5;[\s\S]*?const G_CLAMP = 1\.5;/],
         ['sortByGoals uz neurcuje poradi', /^(?![\s\S]*function sortByGoals)[\s\S]*$/],
         ['externi dedup', /loadDedupKeysFromUrls\(DEDUP_URLS\)/],
         ['skupiny react2/react3', /balanceGroups\(shuffle\(\[\.\.\.react2Picker\.selected\]\)\)[\s\S]*?balanceGroups\(shuffle\(\[\.\.\.react3Picker\.selected\]\)\)/],
@@ -271,13 +275,112 @@ section('K. Preferencni logika tips.json');
         runCoordinatedSelection([t]);
         if (t.selected[0].league === 'Liga rich') rich++;
     }
-    // Vahy: rich = 1+0.07(T2)+0.25(goly) = 1.32, poor = 1+0.07 = 1.07.
-    // Ocekavany podil rich = 1.32/2.39 = 55,2 %, sigma pri 1000 losech ~1,6 %.
-    // Interval +/-3 sigma je tedy zhruba 505-600.
-    ok('tips preferuje golovejsi ligu (vazene)', rich > 500 && rich < 620, rich + '/1000 (ceka se ~552)');
+    // Golovost se nove NASOBI, takze rozdil je mnohem vyraznejsi nez driv
+    // (predtim slo o aditivnich max +25 %, ktere prebil tier a pocet kandidatu).
+    // rich: eff=(75*200+50*60)/260=69,2 => z=0,962 => x2,40 => 1,07*2,40=2,57
+    // poor: eff=(41*200+50*60)/260=43,1 => z=-0,346 => x0,73 => 1,07*0,73=0,78
+    // Ocekavany podil rich ~ 2,57/3,35 = 76,7 %, sigma pri 1000 losech ~1,3 %.
+    // Interval +/-3 sigma je zhruba 727-807.
+    ok('tips preferuje golovejsi ligu (vazene)', rich > 715 && rich < 820, rich + '/1000 (ceka se ~767)');
     ok('golove chudsi liga neni vyloucena', rich < 1000, (1000 - rich) + '/1000 chudsi');
     ok('tips zustava v hlavni skupine (vychozi priorita)',
         mk('tips-kombik.json', [], 1, onePhase(1), new Set()).priority === 'hlavni skupina');
+}
+
+// --- Q: odstupnovany tvrdy golovy filtr ------------------------------------
+section('Q. Odstupnovany golovy filtr podle velikosti vzorku');
+{
+    const key = (l, c) => norm(l) + '|' + norm(c);
+    const gs = (played, over25Rate) => new Map([[key('L', 'C'), { played, over25Rate }]]);
+    const low = (played, rate) => isLowScoring(gs(played, rate), 'L', 'C');
+
+    // 1) Velky vzorek (>=60): hranice 40 %, striktne - presne 40 % jeste projde.
+    ok('100 zapasu / 39,9 % -> vyradit', low(100, 39.9) === true);
+    ok('100 zapasu / 40 % -> ponechat (hranice je striktni)', low(100, 40) === false);
+    ok('100 zapasu / 40,1 % -> ponechat', low(100, 40.1) === false);
+    ok('presne 60 zapasu uz pouziva prah 40 %', low(60, 39.9) === true && low(60, 40) === false);
+
+    // 2) Stredni vzorek (30-59): shovivavejsi hranice 35 %.
+    ok('45 zapasu / 34,9 % -> vyradit', low(45, 34.9) === true);
+    ok('45 zapasu / 35 % -> ponechat (hranice je striktni)', low(45, 35) === false);
+    ok('45 zapasu / 39 % -> ponechat (pod 40 %, ale maly vzorek)', low(45, 39) === false);
+    ok('presne 30 zapasu uz pouziva prah 35 %', low(30, 34.9) === true && low(30, 35) === false);
+    ok('59 zapasu porad pouziva prah 35 %', low(59, 34.9) === true && low(59, 36) === false);
+
+    // 3) Maly vzorek (<30): zadne tvrde vyrazeni, rozhoduje jen vaha.
+    ok('29 zapasu / 27 % -> ponechat (bez tvrdeho filtru)', low(29, 27) === false);
+    ok('5 zapasu / 0 % -> ponechat (vzorek je sum)', low(5, 0) === false);
+    {
+        const w = candidateWeight({ ...cand(1, 'Over 2.5', 2, 'L', 'C') }, { goalStats: gs(29, 27) });
+        ok('29 zapasu / 27 % je ale penalizovano vahou', w < 1, w.toFixed(3));
+        ok('a presto ma kladnou sanci', w > 0, w.toFixed(3));
+    }
+
+    // 4) Chybejici / nevalidni statistiky = bezpecne chovani (zadne vyrazeni).
+    ok('neznama liga -> ponechat', isLowScoring(new Map(), 'L', 'C') === false);
+    ok('prazdna statistika -> ponechat', low(undefined, undefined) === false);
+    ok('over25Rate null -> ponechat', isLowScoring(new Map([[key('L', 'C'), { played: 100, over25Rate: null }]]), 'L', 'C') === false);
+    ok('over25Rate NaN -> ponechat', isLowScoring(new Map([[key('L', 'C'), { played: 100, over25Rate: NaN }]]), 'L', 'C') === false);
+    ok('chybejici played -> ponechat (bere se jako maly vzorek)',
+        isLowScoring(new Map([[key('L', 'C'), { over25Rate: 10 }]]), 'L', 'C') === false);
+
+    // 5) Filtr se tyka VYHRADNE Over 2.5.
+    {
+        const bad = new Map([[key('Chuda', 'Zeme'), { played: 200, over25Rate: 20 }]]);
+        const mk2 = (id, tip) => ({ ...cand(id, tip, 1, 'Chuda', 'Zeme') });
+        const pool = [mk2(1, 'Over 2.5'), mk2(2, 'Home win'), mk2(3, 'Away win')];
+        const out = applyGoalFilter(pool, bad, 1, 'test');
+        ok('Over 2.5 z chude ligy je vyrazen', !out.some(m => m.tip === 'Over 2.5'));
+        ok('Home win z tehoz ligy zustava', out.some(m => m.tip === 'Home win'));
+        ok('Away win z tehoz ligy zustava', out.some(m => m.tip === 'Away win'));
+        ok('bez statistik se nefiltruje vubec', applyGoalFilter(pool, new Map(), 1, 'test').length === 3);
+    }
+
+    // 6) Fallback pri nedostatku kandidatu: vraci jen chybejici pocet, a to ty
+    //    nejmene spatne - ne cely puvodni pool jako driv.
+    {
+        const rates = [38, 10, 25, 33];   // vsechny pod 40 % pri 200 zapasech
+        const stats = new Map(rates.map((r, i) => [key('Chuda' + i, 'Z' + i), { played: 200, over25Rate: r }]));
+        stats.set(key('Dobra', 'ZD'), { played: 200, over25Rate: 70 });
+        const pool = [
+            { ...cand(99, 'Over 2.5', 1, 'Dobra', 'ZD') },
+            ...rates.map((r, i) => ({ ...cand(i + 1, 'Over 2.5', 1, 'Chuda' + i, 'Z' + i) })),
+        ];
+        const logs = [];
+        const origLog = console.log;
+        console.log = (...a) => logs.push(a.join(' '));
+        const out = applyGoalFilter(pool, stats, 3, 'fallback-test');
+        console.log = origLog;
+
+        ok('fallback doplni pool na potrebny pocet', out.length >= 3, out.length + ' kandidatu');
+        ok('vyhovujici kandidat je v poolu', out.some(m => m.league === 'Dobra'));
+        ok('vyhovujici kandidati jsou v poradi PRVNI', out[0].league === 'Dobra');
+        ok('vraceny jsou nejmene spatne napred (38 % pred 10 %)',
+            out.findIndex(m => m.league === 'Chuda0') < out.findIndex(m => m.league === 'Chuda1'),
+            out.map(m => m.league).join(' > '));
+        ok('fallback je zalogovany s duvodem', logs.some(l => /UVOLNEN/.test(l) && /slaby den/.test(l)), logs.find(l => /UVOLNEN/.test(l)) || '(nic)');
+        ok('log uvadi pocet vracenych kandidatu', logs.some(l => /vraceno \d+ nejlepsich/.test(l)));
+        ok('log uvadi konkretni souteze', logs.some(l => /\+ ZPET:.*Chuda0/.test(l)), logs.find(l => /ZPET/.test(l)) || '(nic)');
+    }
+
+    // 7) Pri dostatku kandidatu se NIC nevraci - to je hlavni rozdil proti
+    //    drivejsimu chovani (driv se vracel cely pool vcetne chudych lig).
+    {
+        const stats = new Map([
+            [key('Dobra1', 'Z1'), { played: 200, over25Rate: 70 }],
+            [key('Dobra2', 'Z2'), { played: 200, over25Rate: 65 }],
+            [key('Dobra3', 'Z3'), { played: 200, over25Rate: 60 }],
+            [key('Chuda', 'ZC'), { played: 200, over25Rate: 15 }],
+        ]);
+        const pool = [
+            { ...cand(1, 'Over 2.5', 1, 'Dobra1', 'Z1') },
+            { ...cand(2, 'Over 2.5', 1, 'Dobra2', 'Z2') },
+            { ...cand(3, 'Over 2.5', 1, 'Dobra3', 'Z3') },
+            { ...cand(4, 'Over 2.5', 1, 'Chuda', 'ZC') },
+        ];
+        const out = applyGoalFilter(pool, stats, 3, 'test');
+        ok('pri dostatku kandidatu se chuda liga nevraci', !out.some(m => m.league === 'Chuda'), out.length + ' kandidatu');
+    }
 }
 
 // --- L: viceurovnove prerozdeleni (retez A <- B <- C) ----------------------
@@ -423,10 +526,95 @@ section('O. Globalni limit ligy (max 2 unikatni fixture)');
         const richOver = candidateWeight(lc(1, 1, 'Over 2.5'), { goalStats: gs });
         const poorOver = candidateWeight(lc(2, 2, 'Over 2.5'), { goalStats: gs });
         ok('golovejsi liga ma vyssi vahu pro Over 2.5', richOver > poorOver, richOver.toFixed(3) + ' vs ' + poorOver.toFixed(3));
-        ok('golovy bonus je max +25 %', richOver / poorOver <= 1.2501, (richOver / poorOver).toFixed(3));
+        // Golovost uz neni aditivni bonus se stropem +25 %, ale nasobitel.
+        ok('golova vaha je vyrazna, ale omezena', richOver / poorOver > 2 && richOver / poorOver < 3.4,
+            (richOver / poorOver).toFixed(3));
+        // Tvrdy strop: ani nejvetsi mozny rozdil neprekroci (1+G_STRENGTH)^(2*G_CLAMP) = ~15,6x.
+        const gsMax = new Map([['liga 1|zeme 1', { played: 5000, over25Rate: 100 }]]);
+        const gsMin = new Map([['liga 1|zeme 1', { played: 5000, over25Rate: 0 }]]);
+        const extremeRich = candidateWeight(lc(1, 1, 'Over 2.5'), { goalStats: gsMax });
+        const extremePoor = candidateWeight(lc(1, 1, 'Over 2.5'), { goalStats: gsMin });
+        ok('golovy nasobitel je zastropovany (max ~15,6x)', extremeRich / extremePoor <= 15.7,
+            (extremeRich / extremePoor).toFixed(2));
+        ok('i golove nejchudsi liga ma kladnou vahu', extremePoor > 0, extremePoor.toFixed(3));
         const richWin = candidateWeight(lc(1, 1, 'Home win'), { goalStats: gs });
         const poorWin = candidateWeight(lc(2, 2, 'Away win'), { goalStats: gs });
         ok('golovost neovlivnuje Home/Away win', richWin === poorWin, richWin.toFixed(3) + ' vs ' + poorWin.toFixed(3));
+    }
+
+    // 6b) Bayesovske vyhlazeni: maly vzorek uz vahu nevypina (driv ji
+    // GOALS_MIN_SAMPLE umlcel u 53 % vsech lig), jen ji stahuje k prumeru.
+    {
+        const eSmall = effectiveOver25({ played: 10, over25Rate: 90 });
+        const eBig = effectiveOver25({ played: 400, over25Rate: 90 });
+        ok('maly vzorek je stazeny k prumeru', eSmall > 50 && eSmall < 65, eSmall.toFixed(1) + ' %');
+        ok('velky vzorek zustava blizko namerene hodnoty', eBig > 84, eBig.toFixed(1) + ' %');
+        ok('vetsi vzorek = silnejsi vliv', eBig > eSmall);
+        ok('neznama liga = neutralni nasobitel', effectiveOver25(null) === null);
+        ok('goalMultiplier bez statistik je 1', goalMultiplier(lc(1, 1, 'Over 2.5'), new Map()) === 1);
+        // Drive: played < 60 => bonus 0. Nyni se liga s malym vzorkem uplatni.
+        const wSmall = candidateWeight(lc(1, 1, 'Over 2.5'), { goalStats: new Map([['liga 1|zeme 1', { played: 45, over25Rate: 77.8 }]]) });
+        const wBig = candidateWeight(lc(1, 1, 'Over 2.5'), { goalStats: new Map([['liga 1|zeme 1', { played: 400, over25Rate: 77.8 }]]) });
+        ok('golova liga s malym vzorkem uz neni ignorovana', wSmall > 1.2, wSmall.toFixed(3));
+        ok('ale nedostane plnou silu velkeho vzorku', wSmall < wBig, wSmall.toFixed(3) + ' vs ' + wBig.toFixed(3));
+    }
+
+    // 6c) Golovost nelze prebit tierem ani poctem kandidatu - to byl hlavni
+    // duvod zmeny na nasobeni. Drive: chuda T1 liga se 6 kandidaty (1,30)
+    // porazila velmi golovou T4 ligu s 1 kandidatem (1,10).
+    {
+        const poorT1 = lc(1, 1, 'Over 2.5', 1), richT4 = lc(2, 2, 'Over 2.5', 4);
+        const gs2 = new Map([['liga 1|zeme 1', { played: 200, over25Rate: 41 }], ['liga 2|zeme 2', { played: 200, over25Rate: 75 }]]);
+        const counts = new Map([[leagueKey(poorT1), 6], [leagueKey(richT4), 1]]);
+        const o = { goalStats: gs2, leagueCounts: counts };
+        ok('golova T4 liga prebije golove chudou T1 ligu',
+            candidateWeight(richT4, o) > candidateWeight(poorT1, o),
+            candidateWeight(richT4, o).toFixed(3) + ' vs ' + candidateWeight(poorT1, o).toFixed(3));
+        ok('u Home win zustava T1 liga silnejsi (golovost se neuplatni)',
+            candidateWeight({ ...poorT1, tip: 'Home win' }, o) > candidateWeight({ ...richT4, tip: 'Home win' }, o));
+    }
+
+    // 6d) Konkretni ligy z league-goals.json - smer vahy musi odpovidat realite.
+    {
+        const real = [
+            ['Bundesliga', 'Germany', { played: 45, over25Rate: 77.8 }],
+            ['Eredivisie', 'Netherlands', { played: 72, over25Rate: 72.2 }],
+            ['K League 2', 'South-Korea', { played: 224, over25Rate: 51.3 }],
+            ['Ligue 2', 'France', { played: 71, over25Rate: 43.7 }],
+            ['Premier League', 'Egypt', { played: 51, over25Rate: 31.4 }],
+            ['Ligue 2', 'Algeria', { played: 29, over25Rate: 27.6 }],
+        ];
+        const gsReal = new Map(real.map(([l, c, st]) => [norm(l) + '|' + norm(c), st]));
+        // Meri se samotny golovy nasobitel, aby do vysledku nemluvil tier bonus.
+        const g = (l, c) => goalMultiplier({ ...lc(1, 1, 'Over 2.5'), league: l, country: c }, gsReal);
+        ok('golove bohate ligy maji nasobitel > 1',
+            g('Bundesliga', 'Germany') > 1.5 && g('Eredivisie', 'Netherlands') > 1.5,
+            g('Bundesliga', 'Germany').toFixed(2) + ' / ' + g('Eredivisie', 'Netherlands').toFixed(2));
+        ok('golove chude ligy maji nasobitel < 1',
+            g('Premier League', 'Egypt') < 0.8 && g('Ligue 2', 'Algeria') < 0.8,
+            g('Premier League', 'Egypt').toFixed(2) + ' / ' + g('Ligue 2', 'Algeria').toFixed(2));
+        ok('prumerna liga (K League 2, 51,3 %) je prakticky neutralni',
+            g('K League 2', 'South-Korea') > 0.95 && g('K League 2', 'South-Korea') < 1.1,
+            g('K League 2', 'South-Korea').toFixed(3));
+        ok('Ligue 2 Francie (43,7 %) je mirne pod neutralem',
+            g('Ligue 2', 'France') < 1 && g('Ligue 2', 'France') > 0.8, g('Ligue 2', 'France').toFixed(3));
+        ok('kazda z lig ma porad kladnou vahu',
+            real.every(([l, c]) => candidateWeight({ ...lc(1, 1, 'Over 2.5'), league: l, country: c }, { goalStats: gsReal }) >= 0.05));
+        // Vyhlazeni zamerne stahuje male vzorky k prumeru, takze poradi NEni
+        // dane jen namerenym procentem. Bundesliga ma vyssi rate nez Eredivisie
+        // (77,8 vs 72,2), ale jen 45 zapasu proti 72 - proto konci nize.
+        ok('mensi vzorek je stazen k prumeru vic nez vetsi',
+            g('Bundesliga', 'Germany') < g('Eredivisie', 'Netherlands'),
+            g('Bundesliga', 'Germany').toFixed(3) + ' < ' + g('Eredivisie', 'Netherlands').toFixed(3));
+        ok('totez plati na chude strane (Egypt 51 zapasu vs Alzirsko 29)',
+            g('Premier League', 'Egypt') < g('Ligue 2', 'Algeria'),
+            g('Premier League', 'Egypt').toFixed(3) + ' < ' + g('Ligue 2', 'Algeria').toFixed(3));
+        // Pri stejnem vzorku uz poradi presne kopiruje golovost.
+        const sameSample = new Map([['a|x', { played: 200, over25Rate: 70 }], ['b|x', { played: 200, over25Rate: 50 }], ['c|x', { played: 200, over25Rate: 35 }]]);
+        const gs3 = n2 => goalMultiplier({ ...lc(1, 1, 'Over 2.5'), league: n2, country: 'x' }, sameSample);
+        ok('pri stejnem vzorku poradi presne kopiruje golovost',
+            gs3('a') > gs3('b') && gs3('b') > gs3('c'),
+            ['a', 'b', 'c'].map(n2 => n2 + '=' + gs3(n2).toFixed(2)).join(', '));
     }
 
     // 7) Uz zastoupena liga ma nizsi vahu nez nezastoupena.

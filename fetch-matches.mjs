@@ -85,11 +85,36 @@ const LEAGUE_TIER_ADJ = { 1: 0.15, 2: 0.07, 3: 0, 4: -0.15 };
 // logaritmem. Liga s 5 kandidaty ma vyssi sanci nez liga se 2, ale ne 2,5x.
 const W_COUNT_MAX = 0.15;
 const W_COUNT_SATURATION = 6;
-// Bonus za historickou golovost ligy - VYHRADNE pro Over 2.5: 0 az +25 %.
-// Neznama liga nebo maly vzorek = 0 (neutralni), nikdy penalizace.
-const W_GOALS_MAX = 0.25;
-const W_GOALS_BASE_RATE = 50;
-const W_GOALS_SPAN = 25;
+// === Golova preference pro Over 2.5 ========================================
+// Golovost se uz NESCITA s ostatnimi faktory, ale aplikuje se MULTIPLIKATIVNE
+// na jejich vysledek. Duvod: pri scitani ji slo prebit tierem a poctem
+// kandidatu (merenim overeno - golove chuda T1 liga se 6 kandidaty mela vyssi
+// vahu nez velmi golova T4 liga). Nasobeni to znemoznuje: u Over 2.5 ma
+// golovost vzdy posledni slovo.
+//
+//   w = max(W_FLOOR, zakladni_vaha * (1+G_STRENGTH)^z)
+//   z = clamp((efektivni_rate - G_PIVOT)/G_SPAN, -G_CLAMP, +G_CLAMP)
+//
+// Skala je SPOJITA A OBOUSTRANNA kolem G_PIVOT: liga pod 50 % dostava zapornou
+// mocninu (penalizaci), liga nad 50 % kladnou. Driv byl bonus oriznuty na 0 pod
+// 50 % a na maximum nad 75 %, takze liga s 31 % mela stejnou vahu jako liga
+// s 50 % a liga s 80 % stejnou jako liga se 75 %.
+const G_PIVOT = 50;      // stred skaly v % Over 2.5 (prumerna liga)
+const G_SPAN = 20;       // o kolik bodu se musi rate lisit pro plny krok
+const G_STRENGTH = 1.5;  // sila: z=+1 => x2.5, z=-1 => x0.4
+// Strop mocniny. Bez nej by liga s extremni hodnotou dostala nekolikanasobek a
+// vyber by prestal byt nahodny. Pri G_CLAMP=1.5 je nejvetsi mozny pomer mezi
+// nejgolovejsi a nejchudsi ligou (1+G_STRENGTH)^3 = ~15,6x - silna preference,
+// ale zadna liga neni z losovani vyrazena.
+const G_CLAMP = 1.5;
+// Bayesovske vyhlazeni (shrinkage). Misto tvrdeho vypnuti vahy pod hranici
+// vzorku se namereny podil stahuje k prumeru podle poctu odehranych zapasu:
+//   efektivni = (rate*played + G_PRIOR_RATE*100*G_PRIOR) / (played + G_PRIOR)
+// Liga s malym vzorkem tak neni ignorovana (drive slo o 53 % vsech lig!), jen
+// je jeji odchylka od prumeru brana opatrneji. Pri velkem vzorku jde vliv
+// prioru k nule a pouzije se prakticky namerena hodnota.
+const G_PRIOR = 60;        // sila prioru vyjadrena v "odehranych zapasech"
+const G_PRIOR_RATE = 0.50; // prior = prumerna liga (50 % Over 2.5)
 // Penalizace uz zastoupene ligy podle poctu jejich unikatnich fixture v hlavni
 // skupine. Index = pocet unikatnich fixture; od 2 vys plati -35 %.
 // Penalizace je MEKKA - jen snizuje vahu v losovani, nikdy kandidata nevyradi
@@ -139,8 +164,22 @@ const MIN_OVER25_RATE = 40;
 // Degradace se provede jen tehdy, kdyz ma zapas v kurzovem pasmu alternativu a
 // kdyz po ni v poolu zbyde dost kandidatu - jinak se Over ponecha.
 const OVER_PREFER_RATE = 50;
-// Statistika z mensiho poctu zapasu je nahodny sum - takovou ligu nefiltrujeme.
+// Tvrdy filtr je ODSTUPNOVANY podle velikosti vzorku - cim mene zapasu,
+// tim mene veri statistice a tim shovivavejsi je prah:
+//   played >= 60            -> vyrazeni pod MIN_OVER25_RATE (40 %)
+//   30 <= played < 60       -> vyrazeni pod MID_OVER25_RATE (35 %)
+//   played < 30             -> ZADNE tvrde vyrazeni
+// U nejmensich vzorku se spolehame vyhradne na multiplikativni golovou vahu
+// s Bayesovskym vyhlazenim (goalMultiplier): liga s 29 zapasy a 27 % projde
+// filtrem, ale v losovani dostane vyrazne nizsi vahu. Tvrde vyrazeni by u tak
+// maleho vzorku bylo hazeni minci.
 const GOALS_MIN_SAMPLE = 60;
+// Stredni vzorek: 30-59 odehranych zapasu.
+const GOALS_MID_SAMPLE = 30;
+const MID_OVER25_RATE = 35;
+// Pri uvolneni tvrdeho filtru se vraci jen chybejici pocet kandidatu plus tato
+// rezerva - cast poolu totiz jeste padne na limit ligy/zeme nebo deduplikaci.
+const GOAL_FALLBACK_SLACK = 3;
 // Ukrajina je vyrazena kvuli valce - zapasy se casto prerusuji poplachy,
 // nedostanou se do tempa a vysledky jsou tim nepredvidatelne.
 const EXCLUDED_COUNTRIES = new Set(['Russia', 'Belarus', 'Ukraine']);
@@ -618,16 +657,30 @@ function loadGoalStats(){
 
 // true = soutez je golove chuda a tip Over 2.5 v ni nedava smysl.
 // Rozhoduje jen pri dostatecnem vzorku; neznama soutez projde.
-function isLowScoring(goalStats,leagueName,country){
+export function isLowScoring(goalStats,leagueName,country){
     const st=goalStats.get(norm(leagueName)+'|'+norm(country));
-    if(!st||st.played<GOALS_MIN_SAMPLE)return false;
-    return st.over25Rate<MIN_OVER25_RATE;
+    // Chybejici nebo nevalidni statistika nikdy nevede k vyrazeni - neznalost
+    // neni dukaz. Takova liga jde dal a rozhodne o ni az vazeny los.
+    if(!st||typeof st.over25Rate!=='number'||!Number.isFinite(st.over25Rate))return false;
+    const played=Number.isFinite(st.played)?st.played:0;
+    // Prahy jsou striktni: presne 40 % (resp. 35 %) jeste PROCHAZI.
+    if(played>=GOALS_MIN_SAMPLE)return st.over25Rate<MIN_OVER25_RATE;
+    if(played>=GOALS_MID_SAMPLE)return st.over25Rate<MID_OVER25_RATE;
+    return false;   // maly vzorek: resi jen vaha, ne tvrdy filtr
 }
 
-// Merkky filtr: golove chude souteze z poolu odstrani jen tehdy, kdyz po
+// Mekky filtr: golove chude souteze z poolu odstrani jen tehdy, kdyz po
 // odstraneni zbyde dost kandidatu na naplneni tiketu. Ve slaby den (ctvrtek,
-// pauza na reprezentaci) se filtr sam vypne, aby aplikace nezustaly prazdne.
-function applyGoalFilter(pool,goalStats,needed,label){
+// pauza na reprezentaci) se filtr MUSI castecne uvolnit, aby aplikace
+// nezustaly prazdne.
+//
+// Uvolneni je ale POSTUPNE, ne vse-nebo-nic. Driv se pri nedostatku vracel cely
+// puvodni pool, takze i v silnem dni s jedinym chybejicim kandidatem se do hry
+// vratily VSECHNY golove chude ligy. Nyni se vyfiltrovani kandidati pripoji az
+// NA KONEC a jen v poctu, ktery skutecne chybi - a serazeni od nejmene spatnych
+// (nejvyssi over25Rate napred). Vysledne poradi uz vyber nijak nedeterminuje
+// (los je vazeny), ale pool obsahuje minimum golove slabych zapasu.
+export function applyGoalFilter(pool,goalStats,needed,label){
     if(goalStats.size===0)return pool;
     const kept=[],dropped=[];
     for(const m of pool){
@@ -636,13 +689,32 @@ function applyGoalFilter(pool,goalStats,needed,label){
         else kept.push(m);
     }
     if(dropped.length===0)return pool;
-    if(kept.length<needed){
-        console.log('Golovy filtr ('+label+'): PRESKOCEN - po filtru by zbylo jen '+kept.length+' z '+needed+' potrebnych (slaby den)');
-        return pool;
-    }
     console.log('Golovy filtr ('+label+'): odstraneno '+dropped.length+' tipu z golove chudych soutezi (zbyva '+kept.length+')');
     for(const m of dropped)console.log('   - LOW: '+m.match+' | '+m.league+' ('+m.country+')');
-    return kept;
+    if(kept.length>=needed)return kept;
+
+    // Nedostatek kandidatu - vracime jen tolik nejlepsich z vyrazenych, kolik
+    // chybi (plus mala rezerva, protoze cast poolu padne na limity lig/zemi).
+    const missing=needed-kept.length;
+    const rescue=[...dropped].sort((a,b)=>rawOver25Rate(goalStats,b)-rawOver25Rate(goalStats,a))
+        .slice(0,missing+GOAL_FALLBACK_SLACK);
+    console.log('Golovy filtr ('+label+'): UVOLNEN - po filtru zbylo jen '+kept.length
+        +' z '+needed+' potrebnych (slaby den), vraceno '+rescue.length+' nejlepsich z vyrazenych');
+    for(const m of rescue){
+        console.log('   + ZPET: '+m.match+' | '+m.league+' ('+m.country+') - Over 2.5 '
+            +rawOver25Rate(goalStats,m).toFixed(1)+' %');
+    }
+    // Vyfiltrovani jdou az za vyhovujici, takze maji prednost vzdy ti lepsi.
+    return [...kept,...rescue];
+}
+
+// Namerena golovost bez prahu vzorku. Slouzi k SERAZENI vyrazenych kandidatu
+// pri uvolneni filtru - potrebujeme vedet, kteri jsou nejmene spatni. Neznama
+// liga dostane 0, aby sla uplne nakonec (vyrazena byt nemohla, takze se sem
+// dostane jen vyjimecne).
+function rawOver25Rate(goalStats,m){
+    const st=goalStats.get(norm(m.league)+'|'+norm(m.country));
+    return st&&Number.isFinite(st.over25Rate)?st.over25Rate:0;
 }
 
 // Preference golovejsich soutezi: mezi dvema stejne dobrymi kandidaty na Over 2.5
@@ -661,9 +733,10 @@ function over25Rate(goalStats,m){
 const isGoalRichOver=goalStats=>m=>m.tip==='Over 2.5'&&over25Rate(goalStats,m)>=OVER_PREFER_RATE;
 // POZN.: drivejsi sortByGoals() byl odstranen. Golovost uz neurcuje poradi
 // kandidatu ve fronte (vyber bral pres pop() vzdy nejgolovejsi zapas) - nyni
-// vstupuje VYHRADNE jako jedna z vah ve weightedPick() (W_GOALS_MAX). Tvrde
+// vstupuje VYHRADNE jako golovy nasobitel vahy ve weightedPick()
+// (goalMultiplier/G_STRENGTH). Tvrde
 // filtry golovosti (applyGoalFilter/isLowScoring) i fazove deleni pres
-// isGoalRichOver zustavaji beze zmeny.
+// isGoalRichOver zustavaji zachovany jako samostatna pojistka.
 
 function balanceGroups(picks){
     const indices=picks.map((_,i)=>i);const allP=generatePairings(indices);
@@ -734,23 +807,36 @@ export function createLeagueRegistry(cap=LEAGUE_GLOBAL_CAP){
     };
 }
 
-// Vaha jednoho kandidata pro vazeny los. Faktory se SCITAJI jako odchylky od
-// 1.0, takze se nemohou nasobit do extremu. Vysledek nikdy neklesne na nulu -
-// kazdy kandidat, ktery prosel filtry, ma sanci.
+// Bayesovsky vyhlazena golovost ligy v %. Vraci null, kdyz o lize nic nevime
+// (pak se golovy nasobitel vubec neuplatni a kandidat zustava neutralni).
+// Mala liga neni ignorovana, jen stazena k prumeru: liga s 29 zapasy a 27,6 %
+// vyjde ~42,5 %, liga s 224 zapasy a 51,3 % zustane ~51,0 %.
+export function effectiveOver25(st){
+    if(!st||typeof st.over25Rate!=='number')return null;
+    const p=Math.max(0,st.played||0);
+    return (st.over25Rate*p+G_PRIOR_RATE*100*G_PRIOR)/(p+G_PRIOR);
+}
+
+// Multiplikativni golovy nasobitel pro Over 2.5. Pro ostatni trhy vraci 1
+// (= zadny vliv), protoze u Home/Away win golovost nevypovida nic.
+export function goalMultiplier(m,goalStats){
+    if(m.tip!=='Over 2.5'||!goalStats||goalStats.size===0)return 1;
+    const eff=effectiveOver25(goalStats.get(norm(m.league)+'|'+norm(m.country)));
+    if(eff==null)return 1;
+    const z=Math.max(-G_CLAMP,Math.min(G_CLAMP,(eff-G_PIVOT)/G_SPAN));
+    return Math.pow(1+G_STRENGTH,z);
+}
+
+// Vaha jednoho kandidata pro vazeny los. Tier, pocet kandidatu a zastoupeni
+// ligy se SCITAJI jako odchylky od 1.0, takze se nemohou nasobit do extremu.
+// Golovost se na ten vysledek az nakonec NASOBI - jen tak ji nelze prebit
+// ostatnimi faktory. Vysledek nikdy neklesne pod W_FLOOR, takze kazdy
+// kandidat, ktery prosel filtry, ma sanci.
 export function candidateWeight(m,{goalStats,leagueCounts,registry,presenceRegistry}={}){
     let adj=0;
     adj+=LEAGUE_TIER_ADJ[m.tier]??0;
     const n=leagueCounts?.get(leagueKey(m))||0;
     if(n>1)adj+=W_COUNT_MAX*Math.min(1,Math.log(n)/Math.log(W_COUNT_SATURATION));
-    // Golovost zvyhodnuje VYHRADNE Over 2.5 - u Home/Away win nevypovida nic.
-    if(m.tip==='Over 2.5'&&goalStats&&goalStats.size>0){
-        const st=goalStats.get(norm(m.league)+'|'+norm(m.country));
-        // Neznama liga nebo maly vzorek = neutralni vaha (0), nikdy penalizace.
-        if(st&&st.played>=GOALS_MIN_SAMPLE){
-            const r=(st.over25Rate-W_GOALS_BASE_RATE)/W_GOALS_SPAN;
-            adj+=W_GOALS_MAX*Math.min(1,Math.max(0,r));
-        }
-    }
     // Zastoupeni ligy. presenceRegistry je READ-ONLY pohled na jiny registr
     // (u react1 je to registr hlavni skupiny) - slouzi jen k vazeni, nic do nej
     // nezapisujeme. Oba pocty se neSCITAJI: bere se maximum a penalizace se
@@ -759,7 +845,8 @@ export function candidateWeight(m,{goalStats,leagueCounts,registry,presenceRegis
         const c=Math.max(registry?registry.count(m):0,presenceRegistry?presenceRegistry.count(m):0);
         adj+=W_PRESENCE_PENALTY[Math.min(c,W_PRESENCE_PENALTY.length-1)];
     }
-    return Math.max(W_FLOOR,W_BASE*(1+adj));
+    // Golovost az nakonec a MULTIPLIKATIVNE (u jinych trhu je nasobitel 1).
+    return Math.max(W_FLOOR,W_BASE*(1+adj)*goalMultiplier(m,goalStats));
 }
 
 // Vazeny nahodny vyber jednoho prvku. Nahrazuje puvodni deterministicke
