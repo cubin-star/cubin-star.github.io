@@ -1,5 +1,21 @@
 [
   {
+    "league": "J1 League",
+    "homeTeam": "Fagiano Okayama",
+    "awayTeam": "FC Tokyo",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "0:1",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-10-31T05:00:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 0:1 | xG: 1.80 | Shots: 12/5 | winXG: 1.53 | losingXG: 0.27 losingSOT: 2 | @HT | Pre O2.5: 1.95"
+  },
+  {
     "league": "Premier Division",
     "homeTeam": "St Patrick's Athl.",
     "awayTeam": "Bohemians",
