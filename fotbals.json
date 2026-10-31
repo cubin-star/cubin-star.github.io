@@ -1,9 +1,16 @@
 [
   {
-    "League": "Bundesliga",
-    "Match": "Grazer AK vs TSV Hartberg",
+    "League": "Challenger Pro League",
+    "Match": "Patro Eisden vs Lokeren-Temse",
     "Tip": "Over 1.5",
-    "Odds": "1.27",
-    "Date": "2026-10-30T18:30:00+00:00"
+    "Odds": "1.21",
+    "Date": "2026-10-31T15:00:00+00:00"
+  },
+  {
+    "League": "Ekstraklasa",
+    "Match": "Wisla Plock vs Piast Gliwice",
+    "Tip": "Over 1.5",
+    "Odds": "1.20",
+    "Date": "2026-10-31T11:15:00+00:00"
   }
 ]

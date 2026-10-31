@@ -1,44 +1,135 @@
 [
   {
-    "League": "Liga Alef",
-    "Match": "Hapoel Sderot vs Ironi Beit Shemesh",
+    "League": "Regionalliga - Nordost",
+    "Match": "Magdeburg II vs Hallescher FC",
+    "Tip": "Over 1.5",
+    "Odds": "1.20",
+    "Date": "2026-10-31T12:00:00+00:00"
+  },
+  {
+    "League": "Meistriliiga",
+    "Match": "Vaprus vs Paide",
+    "Tip": "Over 1.5",
+    "Odds": "1.12",
+    "Date": "2026-10-31T12:30:00+00:00"
+  },
+  {
+    "League": "Premier League",
+    "Match": "Chelsea vs Manchester United",
+    "Tip": "Over 1.5",
+    "Odds": "1.18",
+    "Date": "2026-10-31T12:30:00+00:00"
+  },
+  {
+    "League": "2. SNL",
+    "Match": "Bilje vs Tabor Sežana",
+    "Tip": "Over 1.5",
+    "Odds": "1.17",
+    "Date": "2026-10-31T13:00:00+00:00"
+  },
+  {
+    "League": "La Liga",
+    "Match": "Levante vs Atletico Madrid",
+    "Tip": "Over 1.5",
+    "Odds": "1.14",
+    "Date": "2026-10-31T13:00:00+00:00"
+  },
+  {
+    "League": "3. Liga",
+    "Match": "Verl vs SV Wehen",
+    "Tip": "Over 1.5",
+    "Odds": "1.13",
+    "Date": "2026-10-31T13:00:00+00:00"
+  },
+  {
+    "League": "Second NL",
+    "Match": "Grobničan Čavle vs Zagora",
+    "Tip": "Over 1.5",
+    "Odds": "1.12",
+    "Date": "2026-10-31T13:00:00+00:00"
+  },
+  {
+    "League": "Second NL",
+    "Match": "Križevci vs Slavonija Požega",
     "Tip": "Over 1.5",
     "Odds": "1.19",
-    "Date": "2026-10-30T10:00:00+00:00"
+    "Date": "2026-10-31T13:00:00+00:00"
+  },
+  {
+    "League": "Campionato Primavera - 2",
+    "Match": "Renate U19 vs Brescia U19",
+    "Tip": "Over 1.5",
+    "Odds": "1.14",
+    "Date": "2026-10-31T13:30:00+00:00"
+  },
+  {
+    "League": "2. Division",
+    "Match": "Fremad Amager vs Middelfart",
+    "Tip": "Over 1.5",
+    "Odds": "1.20",
+    "Date": "2026-10-31T14:00:00+00:00"
+  },
+  {
+    "League": "Challenger Pro League",
+    "Match": "Patro Eisden vs Lokeren-Temse",
+    "Tip": "Over 1.5",
+    "Odds": "1.21",
+    "Date": "2026-10-31T15:00:00+00:00"
+  },
+  {
+    "League": "League One",
+    "Match": "Wycombe vs Burton Albion",
+    "Tip": "Over 1.5",
+    "Odds": "1.20",
+    "Date": "2026-10-31T15:00:00+00:00"
+  },
+  {
+    "League": "National League",
+    "Match": "Tamworth vs Woking",
+    "Tip": "Over 1.5",
+    "Odds": "1.13",
+    "Date": "2026-10-31T15:00:00+00:00"
+  },
+  {
+    "League": "National League - South",
+    "Match": "Dorking Wanderers vs Weston-super-Mare",
+    "Tip": "Over 1.5",
+    "Odds": "1.12",
+    "Date": "2026-10-31T15:00:00+00:00"
+  },
+  {
+    "League": "1. Lig",
+    "Match": "Manisa F.K. vs Batman Petrolspor",
+    "Tip": "Over 1.5",
+    "Odds": "1.16",
+    "Date": "2026-10-31T16:00:00+00:00"
   },
   {
     "League": "Super League",
-    "Match": "Sogdiana vs Buxoro",
-    "Tip": "Over 1.5",
-    "Odds": "1.19",
-    "Date": "2026-10-30T13:30:00+00:00"
-  },
-  {
-    "League": "Premier League",
-    "Match": "Al Riffa vs Al Najma",
-    "Tip": "Over 1.5",
-    "Odds": "1.15",
-    "Date": "2026-10-30T15:00:00+00:00"
-  },
-  {
-    "League": "Superettan",
-    "Match": "Oddevold vs IK brage",
-    "Tip": "Over 1.5",
-    "Odds": "1.17",
-    "Date": "2026-10-30T18:00:00+00:00"
-  },
-  {
-    "League": "Bundesliga",
-    "Match": "SV Elversberg vs FSV Mainz 05",
+    "Match": "FC ST. Gallen vs Servette FC",
     "Tip": "Over 1.5",
     "Odds": "1.13",
-    "Date": "2026-10-30T19:30:00+00:00"
+    "Date": "2026-10-31T17:00:00+00:00"
   },
   {
-    "League": "Premier League",
-    "Match": "Colwyn Bay vs Cambrian & Clydach",
+    "League": "First Amateur Division",
+    "Match": "Hoogstraten vs Spouwen-Mopertingen",
     "Tip": "Over 1.5",
     "Odds": "1.14",
-    "Date": "2026-10-30T19:45:00+00:00"
+    "Date": "2026-10-31T19:00:00+00:00"
+  },
+  {
+    "League": "First Amateur Division",
+    "Match": "Mandel United vs Dessel Sport",
+    "Tip": "Over 1.5",
+    "Odds": "1.12",
+    "Date": "2026-10-31T19:00:00+00:00"
+  },
+  {
+    "League": "Primera División",
+    "Match": "Real Oruro vs Nacional Potosí",
+    "Tip": "Over 1.5",
+    "Odds": "1.12",
+    "Date": "2026-10-31T19:00:00+00:00"
   }
 ]
