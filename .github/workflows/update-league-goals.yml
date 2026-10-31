@@ -1,0 +1,94 @@
+# Aktualizace golovosti soutezi (league-goals.json) - SAMOSTATNY workflow.
+# Nekoliduje s daily-picks.yml: jiny cas, vlastni concurrency skupina.
+#
+# STAV: PRIPRAVENO K TESTOVANI - zadny automaticky zapis do produkce.
+#  - pravidelne spousteni (schedule) je ZAKOMENTOVANE
+#  - commit & push je VYPNUTY (krok se nespusti, dokud ENABLE_PUSH != 'true')
+#  - vysledek se uklada jen jako artefakt (nahled) ke kontrole
+#
+# Az bude schvaleno nasazeni:
+#  1) odkomentovat schedule
+#  2) nastavit env ENABLE_PUSH: 'true'
+
+name: Update League Goals
+
+on:
+  # schedule:
+  #   - cron: '0 3 * * 1'   # kazde pondeli 03:00 UTC - tydenni inkrement
+  #   - cron: '0 2 1 * *'   # 1. den v mesici 02:00 UTC - mesicni korekce
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'weekly = inkrementalne (~10 req), monthly = plna korekce aktivnich lig (~900 req)'
+        required: true
+        default: 'weekly'
+        type: choice
+        options: [weekly, monthly]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: league-goals
+  cancel-in-progress: false
+
+env:
+  ENABLE_PUSH: 'false'
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Determine mode
+        id: mode
+        run: |
+          MODE="${{ github.event.inputs.mode }}"
+          if [ -z "$MODE" ]; then
+            if [ "${{ github.event.schedule }}" = "0 2 1 * *" ]; then MODE=monthly; else MODE=weekly; fi
+          fi
+          echo "mode=$MODE" >> "$GITHUB_OUTPUT"
+          echo "Rezim: $MODE"
+
+      - name: Run tests (bez API)
+        run: node test-league-goals.mjs
+
+      - name: Update (nahled, produkcni soubory se nemeni)
+        env:
+          API_FOOTBALL_KEY1: ${{ secrets.API_FOOTBALL_KEY1 }}
+        run: node update-league-goals.mjs --mode=${{ steps.mode.outputs.mode }} --out-dir=preview
+
+      - name: Upload preview
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: league-goals-preview-${{ steps.mode.outputs.mode }}
+          path: preview/
+          if-no-files-found: ignore
+          retention-days: 14
+
+      # VYPNUTO do schvaleni. Az ENABLE_PUSH='true': prepise produkcni soubory
+      # nahledem a pushne jen tyto dva soubory.
+      - name: Commit & push
+        if: env.ENABLE_PUSH == 'true'
+        run: |
+          cp preview/league-goals.json league-goals.json
+          cp preview/league-goals-meta.json league-goals-meta.json
+          git config user.name "Kombik Bot"
+          git config user.email "bot@kombik.cz"
+          git add league-goals.json league-goals-meta.json
+          if git diff --cached --quiet; then echo "Zadne zmeny."; exit 0; fi
+          git commit -m "League goals update (${{ steps.mode.outputs.mode }}) $(date -u +%Y-%m-%d)"
+          for i in 1 2 3; do
+            git pull --rebase origin main && git push origin HEAD:main && exit 0
+            sleep 10
+          done
+          exit 1
