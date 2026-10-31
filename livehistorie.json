@@ -1,6 +1,22 @@
 [
   {
     "league": "J1 League",
+    "homeTeam": "Kashiwa Reysol",
+    "awayTeam": "Urawa",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "1:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-10-31T07:00:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 1:0 | xG: 1.15 | Shots: 17/3 | winXG: 0.71 | losingXG: 0.44 losingSOT: 0 | @HT | Pre O2.5: 1.62"
+  },
+  {
+    "league": "J1 League",
     "homeTeam": "Fagiano Okayama",
     "awayTeam": "FC Tokyo",
     "tip": "Over 1.5",
