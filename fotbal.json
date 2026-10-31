@@ -1,24 +1,24 @@
 [
   {
-    "League": "Ligue 1",
-    "Match": "Lille vs Lens",
+    "League": "National League",
+    "Match": "Solihull Moors vs Kidderminster Harriers",
     "Tip": "Over 2.5",
-    "Odds": "1.86",
-    "Date": "2026-10-30T20:05:00+00:00"
+    "Odds": "1.75",
+    "Date": "2026-10-31T15:00:00+00:00"
   },
   {
-    "League": "First League",
-    "Match": "Lokomotiv Sofia vs Botev Plovdiv",
+    "League": "Challenger Pro League",
+    "Match": "Patro Eisden vs Lokeren-Temse",
     "Tip": "Over 2.5",
-    "Odds": "1.82",
-    "Date": "2026-10-30T17:30:00+00:00"
+    "Odds": "1.76",
+    "Date": "2026-10-31T15:00:00+00:00"
   },
   {
-    "League": "1. Division",
-    "Match": "Karmiotissa vs Olympiakos",
+    "League": "Jupiler Pro League",
+    "Match": "Standard Liege vs Kortrijk",
     "Tip": "Over 2.5",
-    "Odds": "1.85",
-    "Date": "2026-10-30T17:00:00+00:00",
+    "Odds": "1.75",
+    "Date": "2026-10-31T17:15:00+00:00",
     "locked": true
   }
 ]
