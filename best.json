@@ -1,23 +1,23 @@
 [
   {
-    "league": "Premier League",
-    "match": "Olympic El Qanah - Enppi",
-    "kickoff": "2026-10-30T19:00:00+01:00",
+    "league": "Serie B",
+    "match": "Sampdoria - Virtus Entella",
+    "kickoff": "2026-10-31T19:30:00+01:00",
     "tip": "Over 2.5",
-    "odds": "2.55"
+    "odds": "2.22"
   },
   {
-    "league": "Ligue 2",
-    "match": "Laval - Boulogne",
-    "kickoff": "2026-10-30T20:00:00+01:00",
+    "league": "J1 League",
+    "match": "JEF United Chiba - Avispa Fukuoka",
+    "kickoff": "2026-11-01T06:00:00+01:00",
     "tip": "Over 2.5",
     "odds": "2.15"
   },
   {
-    "league": "First NL",
-    "match": "Opatija - Mladost Ždralovi",
-    "kickoff": "2026-10-30T14:00:00+01:00",
+    "league": "Segunda Liga",
+    "match": "Amarante - FC Porto B",
+    "kickoff": "2026-10-31T12:00:00+01:00",
     "tip": "Over 2.5",
-    "odds": "2.13"
+    "odds": "2.15"
   }
 ]

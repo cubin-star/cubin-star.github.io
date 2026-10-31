@@ -1,56 +1,56 @@
 [
   {
-    "fixtureId": 1556124,
+    "fixtureId": 1558037,
+    "league": "1. SNL",
+    "match": "Maribor - Olimpija Ljubljana",
+    "kickoff": "2026-10-31T16:00:00+01:00",
+    "tip": "Over 2.5",
+    "odds": "2.05",
+    "group": 1
+  },
+  {
+    "fixtureId": 1556121,
     "league": "J1 League",
-    "match": "Kyoto Sanga - Shimizu S-pulse",
-    "kickoff": "2026-10-31T06:00:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.00",
-    "group": 1
-  },
-  {
-    "fixtureId": 1612275,
-    "league": "Premier League",
-    "match": "Olympic El Qanah - Enppi",
-    "kickoff": "2026-10-30T19:00:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.55",
-    "group": 1
-  },
-  {
-    "fixtureId": 1552516,
-    "league": "Ligue 2",
-    "match": "Laval - Boulogne",
-    "kickoff": "2026-10-30T20:00:00+01:00",
+    "match": "JEF United Chiba - Avispa Fukuoka",
+    "kickoff": "2026-11-01T06:00:00+01:00",
     "tip": "Over 2.5",
     "odds": "2.15",
-    "group": 2
+    "group": 1
   },
   {
-    "fixtureId": 1549725,
-    "league": "Primera A",
-    "match": "Bucaramanga - Deportivo Pasto",
-    "kickoff": "2026-10-31T02:05:00+01:00",
+    "fixtureId": 1565292,
+    "league": "Liga I",
+    "match": "Petrolul Ploiesti - CFR 1907 Cluj",
+    "kickoff": "2026-10-31T18:00:00+01:00",
     "tip": "Over 2.5",
     "odds": "2.01",
     "group": 2
   },
   {
-    "fixtureId": 1590208,
-    "league": "First NL",
-    "match": "Opatija - Mladost Ždralovi",
-    "kickoff": "2026-10-30T14:00:00+01:00",
+    "fixtureId": 1601590,
+    "league": "Serie B",
+    "match": "Sampdoria - Virtus Entella",
+    "kickoff": "2026-10-31T19:30:00+01:00",
     "tip": "Over 2.5",
-    "odds": "2.13",
+    "odds": "2.22",
+    "group": 2
+  },
+  {
+    "fixtureId": 1555541,
+    "league": "Ligat Ha'al",
+    "match": "Bnei Sakhnin - Ironi Tiberias",
+    "kickoff": "2026-10-31T17:00:00+01:00",
+    "tip": "Over 2.5",
+    "odds": "2.11",
     "group": 3
   },
   {
-    "fixtureId": 1606734,
-    "league": "J2 League",
-    "match": "Tegevajaro Miyazaki - Oita Trinita",
-    "kickoff": "2026-10-31T06:00:00+01:00",
+    "fixtureId": 1576512,
+    "league": "Segunda Liga",
+    "match": "Amarante - FC Porto B",
+    "kickoff": "2026-10-31T12:00:00+01:00",
     "tip": "Over 2.5",
-    "odds": "2.13",
+    "odds": "2.15",
     "group": 3
   }
 ]
