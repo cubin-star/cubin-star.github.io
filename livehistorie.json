@@ -1,21 +1,5 @@
 [
   {
-    "league": "Primeira Liga",
-    "homeTeam": "Academico Viseu",
-    "awayTeam": "Rio Ave",
-    "tip": "Over 1.5",
-    "odds": "",
-    "halftimeScore": "0:1",
-    "liveOdds": "",
-    "finalScore": "",
-    "result": "",
-    "sport": "football",
-    "kickoff": "2026-11-01T18:00:00.000Z",
-    "resolvedAt": "",
-    "source": "whisper-football",
-    "scoutStats": "Whisper xG-rate surge | HT 0:1 | xG: 1.23 | Shots: 17/7 | winXG: 0.83 | losingXG: 0.40 losingSOT: 2 | @HT | Pre O2.5: 1.92"
-  },
-  {
     "league": "HNL",
     "homeTeam": "NK Lokomotiva Zagreb",
     "awayTeam": "NK Osijek",
@@ -23,11 +7,11 @@
     "odds": "",
     "halftimeScore": "0:2",
     "liveOdds": "",
-    "finalScore": "",
-    "result": "",
+    "finalScore": "1:3",
+    "result": "✅ Won",
     "sport": "football",
     "kickoff": "2026-11-01T17:00:00.000Z",
-    "resolvedAt": "",
+    "resolvedAt": "2026-11-01T18:55:18.931Z",
     "source": "whisper-football",
     "scoutStats": "Whisper xG-rate surge | HT 0:2 | xG: 1.73 | Shots: 14/6 | winXG: 1.42 | losingXG: 0.31 losingSOT: 2 | @HT | Pre O2.5: 1.775"
   },
