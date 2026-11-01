@@ -1,24 +1,24 @@
 [
   {
-    "League": "National League",
-    "Match": "Solihull Moors vs Kidderminster Harriers",
+    "League": "Campeonato de Portugal Prio - Group C",
+    "Match": "Fátima vs Fazendense",
     "Tip": "Over 2.5",
-    "Odds": "1.75",
-    "Date": "2026-10-31T15:00:00+00:00"
+    "Odds": "1.85",
+    "Date": "2026-11-01T15:00:00+00:00"
   },
   {
-    "League": "Challenger Pro League",
-    "Match": "Patro Eisden vs Lokeren-Temse",
+    "League": "1. Lig",
+    "Match": "İstanbulspor vs Mardin 1969",
     "Tip": "Over 2.5",
-    "Odds": "1.76",
-    "Date": "2026-10-31T15:00:00+00:00"
+    "Odds": "1.92",
+    "Date": "2026-11-01T13:00:00+00:00"
   },
   {
     "League": "Jupiler Pro League",
-    "Match": "Standard Liege vs Kortrijk",
+    "Match": "Charleroi vs RAAL La Louvière",
     "Tip": "Over 2.5",
-    "Odds": "1.75",
-    "Date": "2026-10-31T17:15:00+00:00",
+    "Odds": "1.78",
+    "Date": "2026-11-01T18:15:00+00:00",
     "locked": true
   }
 ]
