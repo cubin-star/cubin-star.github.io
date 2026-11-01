@@ -1,56 +1,56 @@
 [
   {
-    "fixtureId": 1558037,
-    "league": "1. SNL",
-    "match": "Maribor - Olimpija Ljubljana",
-    "kickoff": "2026-10-31T16:00:00+01:00",
+    "fixtureId": 1550184,
+    "league": "Serie A",
+    "match": "Lecce - Genoa",
+    "kickoff": "2026-11-01T18:00:00+01:00",
     "tip": "Over 2.5",
-    "odds": "2.05",
+    "odds": "2.44",
     "group": 1
   },
   {
-    "fixtureId": 1556121,
-    "league": "J1 League",
-    "match": "JEF United Chiba - Avispa Fukuoka",
-    "kickoff": "2026-11-01T06:00:00+01:00",
+    "fixtureId": 1551483,
+    "league": "First League",
+    "match": "Shkëndija Haraçinë - Tikveš",
+    "kickoff": "2026-11-01T12:00:00+01:00",
+    "tip": "Over 2.5",
+    "odds": "1.99",
+    "group": 1
+  },
+  {
+    "fixtureId": 1593348,
+    "league": "Super League 1",
+    "match": "Levadiakos - Aris Thessalonikis",
+    "kickoff": "2026-11-01T16:00:00+01:00",
     "tip": "Over 2.5",
     "odds": "2.15",
-    "group": 1
-  },
-  {
-    "fixtureId": 1565292,
-    "league": "Liga I",
-    "match": "Petrolul Ploiesti - CFR 1907 Cluj",
-    "kickoff": "2026-10-31T18:00:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.01",
     "group": 2
   },
   {
-    "fixtureId": 1601590,
-    "league": "Serie B",
-    "match": "Sampdoria - Virtus Entella",
-    "kickoff": "2026-10-31T19:30:00+01:00",
+    "fixtureId": 1585809,
+    "league": "1. Lig",
+    "match": "Bodrum FK - Ümraniyespor",
+    "kickoff": "2026-11-01T17:00:00+01:00",
     "tip": "Over 2.5",
-    "odds": "2.22",
+    "odds": "2.00",
     "group": 2
   },
   {
-    "fixtureId": 1555541,
-    "league": "Ligat Ha'al",
-    "match": "Bnei Sakhnin - Ironi Tiberias",
-    "kickoff": "2026-10-31T17:00:00+01:00",
+    "fixtureId": 1576516,
+    "league": "Segunda Liga",
+    "match": "Lusitânia Lourosa - Farense",
+    "kickoff": "2026-11-01T16:30:00+01:00",
     "tip": "Over 2.5",
-    "odds": "2.11",
+    "odds": "2.15",
     "group": 3
   },
   {
-    "fixtureId": 1576512,
-    "league": "Segunda Liga",
-    "match": "Amarante - FC Porto B",
-    "kickoff": "2026-10-31T12:00:00+01:00",
+    "fixtureId": 1590204,
+    "league": "First NL",
+    "match": "Croatia Zmijavci - Dinamo Zagreb U21",
+    "kickoff": "2026-11-01T12:00:00+01:00",
     "tip": "Over 2.5",
-    "odds": "2.15",
+    "odds": "2.07",
     "group": 3
   }
 ]
