@@ -1,6 +1,26 @@
 [
   {
     "sport": "football",
+    "league": "Challenger Pro League",
+    "match": "Patro Eisden vs Lokeren-Temse",
+    "tip": "Over 1.5",
+    "odds": "1.21",
+    "date": "2026-10-31T15:00:00+00:00",
+    "score": "3:1",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "Ekstraklasa",
+    "match": "Wisla Plock vs Piast Gliwice",
+    "tip": "Over 1.5",
+    "odds": "1.20",
+    "date": "2026-10-31T11:15:00+00:00",
+    "score": "2:2",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
     "league": "Bundesliga",
     "match": "Grazer AK vs TSV Hartberg",
     "tip": "Over 1.5",
@@ -1977,26 +1997,6 @@
     "odds": "1.22",
     "date": "2026-08-22T16:15:00+00:00",
     "score": "2:0",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Süper Lig",
-    "match": "Erzurumspor FK vs Galatasaray",
-    "tip": "Over 1.5",
-    "odds": "1.19",
-    "date": "2026-08-21T18:30:00+00:00",
-    "score": "0:4",
-    "result": "✓"
-  },
-  {
-    "sport": "basketball",
-    "league": "LNBP",
-    "match": "Diablos Rojos vs Lobos Plateados",
-    "tip": "Over 154.5",
-    "odds": "1.29",
-    "date": "2026-08-21T02:15:00+00:00",
-    "score": "88:89",
     "result": "✓"
   }
 ]
