@@ -1008,6 +1008,20 @@
     "bttsRate": 52.4
   },
   {
+    "id": 351,
+    "name": "4. liga - Divizie B",
+    "country": "Czech-Republic",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 103,
+    "avgGoals": 3.85,
+    "over15Rate": 92.2,
+    "over25Rate": 80.6,
+    "over35Rate": 51.5,
+    "bttsRate": 70.9
+  },
+  {
     "id": 46,
     "name": "EFL Trophy",
     "country": "England",
@@ -1020,34 +1034,6 @@
     "over25Rate": 80.4,
     "over35Rate": 58.8,
     "bttsRate": 68.6
-  },
-  {
-    "id": 351,
-    "name": "4. liga - Divizie B",
-    "country": "Czech-Republic",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 102,
-    "avgGoals": 3.85,
-    "over15Rate": 92.2,
-    "over25Rate": 80.4,
-    "over35Rate": 51,
-    "bttsRate": 71.6
-  },
-  {
-    "id": 744,
-    "name": "Oberliga - Schleswig-Holstein",
-    "country": "Germany",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 112,
-    "avgGoals": 4.35,
-    "over15Rate": 92,
-    "over25Rate": 80.4,
-    "over35Rate": 67,
-    "bttsRate": 75
   },
   {
     "id": 273,
@@ -1126,12 +1112,12 @@
     "type": "League",
     "tier": 4,
     "season": 2026,
-    "played": 169,
-    "avgGoals": 4.36,
-    "over15Rate": 89.3,
-    "over25Rate": 79.9,
-    "over35Rate": 62.1,
-    "bttsRate": 67.5
+    "played": 172,
+    "avgGoals": 4.35,
+    "over15Rate": 89.5,
+    "over25Rate": 79.7,
+    "over35Rate": 61.6,
+    "bttsRate": 67.4
   },
   {
     "id": 191,
@@ -1160,6 +1146,20 @@
     "over25Rate": 79.3,
     "over35Rate": 60.9,
     "bttsRate": 65.5
+  },
+  {
+    "id": 744,
+    "name": "Oberliga - Schleswig-Holstein",
+    "country": "Germany",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 115,
+    "avgGoals": 4.32,
+    "over15Rate": 91.3,
+    "over25Rate": 79.1,
+    "over35Rate": 66.1,
+    "bttsRate": 73.9
   },
   {
     "id": 954,
@@ -1512,6 +1512,20 @@
     "bttsRate": 70.1
   },
   {
+    "id": 634,
+    "name": "NB III - Southwest",
+    "country": "Hungary",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 97,
+    "avgGoals": 3.93,
+    "over15Rate": 91.8,
+    "over25Rate": 76.3,
+    "over35Rate": 54.6,
+    "bttsRate": 66
+  },
+  {
     "id": 1118,
     "name": "NPSL",
     "country": "USA",
@@ -1524,20 +1538,6 @@
     "over25Rate": 76.3,
     "over35Rate": 54.9,
     "bttsRate": 57.3
-  },
-  {
-    "id": 634,
-    "name": "NB III - Southwest",
-    "country": "Hungary",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 96,
-    "avgGoals": 3.94,
-    "over15Rate": 91.7,
-    "over25Rate": 76,
-    "over35Rate": 55.2,
-    "bttsRate": 65.6
   },
   {
     "id": 777,
@@ -1764,20 +1764,6 @@
     "bttsRate": 63.3
   },
   {
-    "id": 207,
-    "name": "Super League",
-    "country": "Switzerland",
-    "type": "League",
-    "tier": 1,
-    "season": 2026,
-    "played": 66,
-    "avgGoals": 3.67,
-    "over15Rate": 84.8,
-    "over25Rate": 74.2,
-    "over35Rate": 50,
-    "bttsRate": 66.7
-  },
-  {
     "id": 498,
     "name": "Cup",
     "country": "Kazakhstan",
@@ -1792,18 +1778,18 @@
     "bttsRate": 55.6
   },
   {
-    "id": 223,
-    "name": "Regionalliga - West",
-    "country": "Austria",
+    "id": 207,
+    "name": "Super League",
+    "country": "Switzerland",
     "type": "League",
-    "tier": 4,
+    "tier": 1,
     "season": 2026,
-    "played": 107,
-    "avgGoals": 3.68,
-    "over15Rate": 90.7,
-    "over25Rate": 73.8,
-    "over35Rate": 50.5,
-    "bttsRate": 66.4
+    "played": 69,
+    "avgGoals": 3.64,
+    "over15Rate": 85.5,
+    "over25Rate": 73.9,
+    "over35Rate": 49.3,
+    "bttsRate": 68.1
   },
   {
     "id": 166,
@@ -1818,20 +1804,6 @@
     "over25Rate": 73.5,
     "over35Rate": 56.8,
     "bttsRate": 70.5
-  },
-  {
-    "id": 88,
-    "name": "Eredivisie",
-    "country": "Netherlands",
-    "type": "League",
-    "tier": 1,
-    "season": 2026,
-    "played": 90,
-    "avgGoals": 3.8,
-    "over15Rate": 91.1,
-    "over25Rate": 73.3,
-    "over35Rate": 61.1,
-    "bttsRate": 72.2
   },
   {
     "id": 414,
@@ -1874,20 +1846,6 @@
     "over25Rate": 72.8,
     "over35Rate": 57.4,
     "bttsRate": 72.8
-  },
-  {
-    "id": 599,
-    "name": "1. Liga Classic - Group 1",
-    "country": "Switzerland",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 88,
-    "avgGoals": 3.48,
-    "over15Rate": 90.9,
-    "over25Rate": 72.7,
-    "over35Rate": 42,
-    "bttsRate": 76.1
   },
   {
     "id": 899,
@@ -1946,6 +1904,20 @@
     "bttsRate": 63.1
   },
   {
+    "id": 599,
+    "name": "1. Liga Classic - Group 1",
+    "country": "Switzerland",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 95,
+    "avgGoals": 3.48,
+    "over15Rate": 90.5,
+    "over25Rate": 72.6,
+    "over35Rate": 43.2,
+    "bttsRate": 75.8
+  },
+  {
     "id": 256,
     "name": "USL League Two",
     "country": "USA",
@@ -1988,6 +1960,20 @@
     "bttsRate": 64
   },
   {
+    "id": 223,
+    "name": "Regionalliga - West",
+    "country": "Austria",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 112,
+    "avgGoals": 3.63,
+    "over15Rate": 91.1,
+    "over25Rate": 72.3,
+    "over35Rate": 48.2,
+    "bttsRate": 65.2
+  },
+  {
     "id": 352,
     "name": "4. liga - Divizie C",
     "country": "Czech-Republic",
@@ -2000,48 +1986,6 @@
     "over25Rate": 72.3,
     "over35Rate": 54.5,
     "bttsRate": 65.3
-  },
-  {
-    "id": 753,
-    "name": "Oberliga - Baden-Württemberg",
-    "country": "Germany",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 119,
-    "avgGoals": 3.54,
-    "over15Rate": 85.7,
-    "over25Rate": 72.3,
-    "over35Rate": 47.1,
-    "bttsRate": 66.4
-  },
-  {
-    "id": 752,
-    "name": "Oberliga - Rheinland-Pfalz / Saar",
-    "country": "Germany",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 126,
-    "avgGoals": 3.79,
-    "over15Rate": 92.9,
-    "over25Rate": 72.2,
-    "over35Rate": 50,
-    "bttsRate": 65.9
-  },
-  {
-    "id": 78,
-    "name": "Bundesliga",
-    "country": "Germany",
-    "type": "League",
-    "tier": 1,
-    "season": 2026,
-    "played": 64,
-    "avgGoals": 3.58,
-    "over15Rate": 79.7,
-    "over25Rate": 71.9,
-    "over35Rate": 54.7,
-    "bttsRate": 57.8
   },
   {
     "id": 680,
@@ -2084,6 +2028,34 @@
     "over25Rate": 71.7,
     "over35Rate": 49.5,
     "bttsRate": 65.7
+  },
+  {
+    "id": 88,
+    "name": "Eredivisie",
+    "country": "Netherlands",
+    "type": "League",
+    "tier": 1,
+    "season": 2026,
+    "played": 95,
+    "avgGoals": 3.76,
+    "over15Rate": 89.5,
+    "over25Rate": 71.6,
+    "over35Rate": 60,
+    "bttsRate": 69.5
+  },
+  {
+    "id": 58,
+    "name": "Non League Premier - Isthmian",
+    "country": "England",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 154,
+    "avgGoals": 3.49,
+    "over15Rate": 88.3,
+    "over25Rate": 71.4,
+    "over35Rate": 48.1,
+    "bttsRate": 61.7
   },
   {
     "id": 104,
@@ -2198,6 +2170,20 @@
     "bttsRate": 28.6
   },
   {
+    "id": 328,
+    "name": "Esiliiga A",
+    "country": "Estonia",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 164,
+    "avgGoals": 3.63,
+    "over15Rate": 87.2,
+    "over25Rate": 71.3,
+    "over35Rate": 49.4,
+    "bttsRate": 64
+  },
+  {
     "id": 354,
     "name": "4. liga - Divizie E",
     "country": "Czech-Republic",
@@ -2226,6 +2212,20 @@
     "bttsRate": 58.5
   },
   {
+    "id": 748,
+    "name": "Oberliga - Niedersachsen",
+    "country": "Germany",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 94,
+    "avgGoals": 3.57,
+    "over15Rate": 91.5,
+    "over25Rate": 71.3,
+    "over35Rate": 55.3,
+    "bttsRate": 58.5
+  },
+  {
     "id": 102,
     "name": "Emperor Cup",
     "country": "Japan",
@@ -2238,20 +2238,6 @@
     "over25Rate": 71.2,
     "over35Rate": 44.1,
     "bttsRate": 44.1
-  },
-  {
-    "id": 328,
-    "name": "Esiliiga A",
-    "country": "Estonia",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 163,
-    "avgGoals": 3.64,
-    "over15Rate": 87.1,
-    "over25Rate": 71.2,
-    "over35Rate": 49.7,
-    "bttsRate": 63.8
   },
   {
     "id": 672,
@@ -2282,18 +2268,18 @@
     "bttsRate": 58.1
   },
   {
-    "id": 748,
-    "name": "Oberliga - Niedersachsen",
+    "id": 752,
+    "name": "Oberliga - Rheinland-Pfalz / Saar",
     "country": "Germany",
     "type": "League",
     "tier": 4,
     "season": 2026,
-    "played": 93,
-    "avgGoals": 3.53,
-    "over15Rate": 91.4,
+    "played": 131,
+    "avgGoals": 3.73,
+    "over15Rate": 92.4,
     "over25Rate": 71,
-    "over35Rate": 54.8,
-    "bttsRate": 58.1
+    "over35Rate": 48.9,
+    "bttsRate": 64.9
   },
   {
     "id": 982,
@@ -2310,6 +2296,20 @@
     "bttsRate": 64
   },
   {
+    "id": 84,
+    "name": "Regionalliga - Nord",
+    "country": "Germany",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 134,
+    "avgGoals": 3.9,
+    "over15Rate": 91.8,
+    "over25Rate": 70.9,
+    "over35Rate": 52.2,
+    "bttsRate": 62.7
+  },
+  {
     "id": 247,
     "name": "Kakkonen - Lohko A",
     "country": "Finland",
@@ -2324,18 +2324,32 @@
     "bttsRate": 70.1
   },
   {
-    "id": 84,
-    "name": "Regionalliga - Nord",
-    "country": "Germany",
+    "id": 731,
+    "name": "Football League - Lowland League",
+    "country": "Scotland",
     "type": "League",
     "tier": 4,
     "season": 2026,
-    "played": 133,
-    "avgGoals": 3.91,
-    "over15Rate": 91.7,
-    "over25Rate": 70.7,
-    "over35Rate": 52.6,
-    "bttsRate": 63.2
+    "played": 199,
+    "avgGoals": 3.78,
+    "over15Rate": 88.9,
+    "over25Rate": 70.9,
+    "over35Rate": 52.8,
+    "bttsRate": 61.8
+  },
+  {
+    "id": 261,
+    "name": "National Division",
+    "country": "Luxembourg",
+    "type": "League",
+    "tier": 3,
+    "season": 2026,
+    "played": 96,
+    "avgGoals": 3.55,
+    "over15Rate": 88.5,
+    "over25Rate": 70.8,
+    "over35Rate": 40.6,
+    "bttsRate": 53.1
   },
   {
     "id": 87,
@@ -2350,6 +2364,20 @@
     "over25Rate": 70.7,
     "over35Rate": 48.9,
     "bttsRate": 71.4
+  },
+  {
+    "id": 181,
+    "name": "FA Cup",
+    "country": "Scotland",
+    "type": "Cup",
+    "tier": 2,
+    "season": 2026,
+    "played": 41,
+    "avgGoals": 3.49,
+    "over15Rate": 85.4,
+    "over25Rate": 70.7,
+    "over35Rate": 43.9,
+    "bttsRate": 53.7
   },
   {
     "id": 492,
@@ -2394,18 +2422,18 @@
     "bttsRate": 48.1
   },
   {
-    "id": 731,
-    "name": "Football League - Lowland League",
-    "country": "Scotland",
+    "id": 753,
+    "name": "Oberliga - Baden-Württemberg",
+    "country": "Germany",
     "type": "League",
     "tier": 4,
     "season": 2026,
-    "played": 189,
-    "avgGoals": 3.74,
-    "over15Rate": 88.9,
+    "played": 125,
+    "avgGoals": 3.46,
+    "over15Rate": 84.8,
     "over25Rate": 70.4,
-    "over35Rate": 52.4,
-    "bttsRate": 60.8
+    "over35Rate": 45.6,
+    "bttsRate": 65.6
   },
   {
     "id": 90,
@@ -2420,20 +2448,6 @@
     "over25Rate": 70.3,
     "over35Rate": 51.6,
     "bttsRate": 45.3
-  },
-  {
-    "id": 181,
-    "name": "FA Cup",
-    "country": "Scotland",
-    "type": "Cup",
-    "tier": 2,
-    "season": 2026,
-    "played": 37,
-    "avgGoals": 3.43,
-    "over15Rate": 86.5,
-    "over25Rate": 70.3,
-    "over35Rate": 40.5,
-    "bttsRate": 51.4
   },
   {
     "id": 364,
@@ -2484,12 +2498,12 @@
     "type": "League",
     "tier": 4,
     "season": 2026,
-    "played": 137,
-    "avgGoals": 3.66,
-    "over15Rate": 89.1,
+    "played": 144,
+    "avgGoals": 3.67,
+    "over15Rate": 89.6,
     "over25Rate": 70.1,
-    "over35Rate": 46.7,
-    "bttsRate": 60.6
+    "over35Rate": 47.2,
+    "bttsRate": 60.4
   },
   {
     "id": 27,
@@ -2504,6 +2518,20 @@
     "over25Rate": 70,
     "over35Rate": 45,
     "bttsRate": 65
+  },
+  {
+    "id": 78,
+    "name": "Bundesliga",
+    "country": "Germany",
+    "type": "League",
+    "tier": 1,
+    "season": 2026,
+    "played": 70,
+    "avgGoals": 3.51,
+    "over15Rate": 80,
+    "over25Rate": 70,
+    "over35Rate": 52.9,
+    "bttsRate": 57.1
   },
   {
     "id": 294,
@@ -2576,20 +2604,6 @@
     "bttsRate": 62
   },
   {
-    "id": 58,
-    "name": "Non League Premier - Isthmian",
-    "country": "England",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 143,
-    "avgGoals": 3.38,
-    "over15Rate": 87.4,
-    "over25Rate": 69.9,
-    "over35Rate": 45.5,
-    "bttsRate": 60.8
-  },
-  {
     "id": 561,
     "name": "Premier Intermediate League",
     "country": "Northern-Ireland",
@@ -2602,20 +2616,6 @@
     "over25Rate": 69.8,
     "over35Rate": 47.1,
     "bttsRate": 56.4
-  },
-  {
-    "id": 785,
-    "name": "Liga III - Serie 2",
-    "country": "Romania",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 63,
-    "avgGoals": 3.76,
-    "over15Rate": 90.5,
-    "over25Rate": 69.8,
-    "over35Rate": 54,
-    "bttsRate": 57.1
   },
   {
     "id": 126,
@@ -2646,6 +2646,20 @@
     "bttsRate": 63.6
   },
   {
+    "id": 785,
+    "name": "Liga III - Serie 2",
+    "country": "Romania",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 66,
+    "avgGoals": 3.76,
+    "over15Rate": 90.9,
+    "over25Rate": 69.7,
+    "over35Rate": 53,
+    "bttsRate": 57.6
+  },
+  {
     "id": 841,
     "name": "QFA Cup",
     "country": "Qatar",
@@ -2674,18 +2688,18 @@
     "bttsRate": 60.9
   },
   {
-    "id": 261,
-    "name": "National Division",
-    "country": "Luxembourg",
+    "id": 348,
+    "name": "3. liga - CFL A",
+    "country": "Czech-Republic",
     "type": "League",
-    "tier": 3,
+    "tier": 4,
     "season": 2026,
-    "played": 88,
-    "avgGoals": 3.58,
-    "over15Rate": 87.5,
-    "over25Rate": 69.3,
-    "over35Rate": 43.2,
-    "bttsRate": 52.3
+    "played": 98,
+    "avgGoals": 3.63,
+    "over15Rate": 86.7,
+    "over25Rate": 69.4,
+    "over35Rate": 52,
+    "bttsRate": 62.2
   },
   {
     "id": 591,
@@ -2716,20 +2730,6 @@
     "bttsRate": 49.5
   },
   {
-    "id": 348,
-    "name": "3. liga - CFL A",
-    "country": "Czech-Republic",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 97,
-    "avgGoals": 3.62,
-    "over15Rate": 86.6,
-    "over25Rate": 69.1,
-    "over35Rate": 51.5,
-    "bttsRate": 61.9
-  },
-  {
     "id": 398,
     "name": "Premier League",
     "country": "Bangladesh",
@@ -2742,20 +2742,6 @@
     "over25Rate": 69,
     "over35Rate": 48.3,
     "bttsRate": 48.3
-  },
-  {
-    "id": 305,
-    "name": "Stars League",
-    "country": "Qatar",
-    "type": "League",
-    "tier": 3,
-    "season": 2026,
-    "played": 45,
-    "avgGoals": 3.6,
-    "over15Rate": 84.4,
-    "over25Rate": 68.9,
-    "over35Rate": 55.6,
-    "bttsRate": 60
   },
   {
     "id": 381,
@@ -2772,20 +2758,6 @@
     "bttsRate": 51.1
   },
   {
-    "id": 787,
-    "name": "Liga III - Serie 4",
-    "country": "Romania",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 61,
-    "avgGoals": 3.9,
-    "over15Rate": 85.2,
-    "over25Rate": 68.9,
-    "over35Rate": 47.5,
-    "bttsRate": 57.4
-  },
-  {
     "id": 1090,
     "name": "NNSW League 1",
     "country": "Australia",
@@ -2798,6 +2770,20 @@
     "over25Rate": 68.9,
     "over35Rate": 46.7,
     "bttsRate": 58.9
+  },
+  {
+    "id": 305,
+    "name": "Stars League",
+    "country": "Qatar",
+    "type": "League",
+    "tier": 3,
+    "season": 2026,
+    "played": 48,
+    "avgGoals": 3.52,
+    "over15Rate": 83.3,
+    "over25Rate": 68.8,
+    "over35Rate": 54.2,
+    "bttsRate": 60.4
   },
   {
     "id": 416,
@@ -2856,18 +2842,18 @@
     "bttsRate": 58.8
   },
   {
-    "id": 92,
-    "name": "Derde Divisie",
-    "country": "Netherlands",
+    "id": 794,
+    "name": "3. SNL - East",
+    "country": "Slovenia",
     "type": "League",
     "tier": 4,
     "season": 2026,
-    "played": 197,
-    "avgGoals": 3.59,
-    "over15Rate": 85.8,
-    "over25Rate": 68.5,
-    "over35Rate": 50.8,
-    "bttsRate": 62.4
+    "played": 83,
+    "avgGoals": 3.64,
+    "over15Rate": 90.4,
+    "over25Rate": 68.7,
+    "over35Rate": 49.4,
+    "bttsRate": 63.9
   },
   {
     "id": 597,
@@ -2884,6 +2870,48 @@
     "bttsRate": 63.9
   },
   {
+    "id": 92,
+    "name": "Derde Divisie",
+    "country": "Netherlands",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 198,
+    "avgGoals": 3.58,
+    "over15Rate": 85.4,
+    "over25Rate": 68.2,
+    "over35Rate": 50.5,
+    "bttsRate": 62.1
+  },
+  {
+    "id": 787,
+    "name": "Liga III - Serie 4",
+    "country": "Romania",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 66,
+    "avgGoals": 3.82,
+    "over15Rate": 83.3,
+    "over25Rate": 68.2,
+    "over35Rate": 47,
+    "bttsRate": 56.1
+  },
+  {
+    "id": 600,
+    "name": "1. Liga Classic - Group 2",
+    "country": "Switzerland",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 94,
+    "avgGoals": 3.51,
+    "over15Rate": 78.7,
+    "over25Rate": 68.1,
+    "over35Rate": 47.9,
+    "bttsRate": 64.9
+  },
+  {
     "id": 933,
     "name": "Non League Div One - Southern Central",
     "country": "England",
@@ -2896,6 +2924,20 @@
     "over25Rate": 68.1,
     "over35Rate": 50.2,
     "bttsRate": 59.1
+  },
+  {
+    "id": 89,
+    "name": "Eerste Divisie",
+    "country": "Netherlands",
+    "type": "League",
+    "tier": 2,
+    "season": 2026,
+    "played": 125,
+    "avgGoals": 3.58,
+    "over15Rate": 86.4,
+    "over25Rate": 68,
+    "over35Rate": 44,
+    "bttsRate": 70.4
   },
   {
     "id": 688,
@@ -2954,32 +2996,32 @@
     "bttsRate": 49.7
   },
   {
-    "id": 510,
-    "name": "1. Liga Promotion",
-    "country": "Switzerland",
+    "id": 722,
+    "name": "Liga Premier Serie A",
+    "country": "Mexico",
     "type": "League",
     "tier": 4,
     "season": 2026,
-    "played": 115,
-    "avgGoals": 3.34,
-    "over15Rate": 82.6,
+    "played": 90,
+    "avgGoals": 3.43,
+    "over15Rate": 84.4,
     "over25Rate": 67.8,
-    "over35Rate": 44.3,
-    "bttsRate": 59.1
+    "over35Rate": 41.1,
+    "bttsRate": 46.7
   },
   {
-    "id": 89,
-    "name": "Eerste Divisie",
-    "country": "Netherlands",
+    "id": 312,
+    "name": "1a Divisió",
+    "country": "Andorra",
     "type": "League",
-    "tier": 2,
+    "tier": 4,
     "season": 2026,
-    "played": 124,
-    "avgGoals": 3.59,
-    "over15Rate": 86.3,
+    "played": 31,
+    "avgGoals": 3.29,
+    "over15Rate": 90.3,
     "over25Rate": 67.7,
-    "over35Rate": 44.4,
-    "bttsRate": 70.2
+    "over35Rate": 38.7,
+    "bttsRate": 54.8
   },
   {
     "id": 808,
@@ -3008,20 +3050,6 @@
     "over25Rate": 67.5,
     "over35Rate": 40,
     "bttsRate": 60
-  },
-  {
-    "id": 794,
-    "name": "3. SNL - East",
-    "country": "Slovenia",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 77,
-    "avgGoals": 3.65,
-    "over15Rate": 90.9,
-    "over25Rate": 67.5,
-    "over35Rate": 46.8,
-    "bttsRate": 62.3
   },
   {
     "id": 867,
@@ -3164,20 +3192,6 @@
     "bttsRate": 61.7
   },
   {
-    "id": 312,
-    "name": "1a Divisió",
-    "country": "Andorra",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 30,
-    "avgGoals": 3.2,
-    "over15Rate": 90,
-    "over25Rate": 66.7,
-    "over35Rate": 36.7,
-    "bttsRate": 53.3
-  },
-  {
     "id": 331,
     "name": "Division 1",
     "country": "Kuwait",
@@ -3234,6 +3248,20 @@
     "bttsRate": 57.1
   },
   {
+    "id": 510,
+    "name": "1. Liga Promotion",
+    "country": "Switzerland",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 123,
+    "avgGoals": 3.33,
+    "over15Rate": 82.9,
+    "over25Rate": 66.7,
+    "over35Rate": 43.1,
+    "bttsRate": 59.3
+  },
+  {
     "id": 539,
     "name": "Super Cup",
     "country": "Egypt",
@@ -3248,46 +3276,18 @@
     "bttsRate": 66.7
   },
   {
-    "id": 576,
-    "name": "Gamma Ethniki - Group 1",
-    "country": "Greece",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 15,
-    "avgGoals": 3.2,
-    "over15Rate": 73.3,
-    "over25Rate": 66.7,
-    "over35Rate": 46.7,
-    "bttsRate": 60
-  },
-  {
     "id": 646,
     "name": "3. liga - Center",
     "country": "Slovakia",
     "type": "League",
     "tier": 4,
     "season": 2026,
-    "played": 84,
-    "avgGoals": 3.58,
+    "played": 90,
+    "avgGoals": 3.57,
     "over15Rate": 83.3,
     "over25Rate": 66.7,
-    "over35Rate": 44,
-    "bttsRate": 58.3
-  },
-  {
-    "id": 722,
-    "name": "Liga Premier Serie A",
-    "country": "Mexico",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 84,
-    "avgGoals": 3.39,
-    "over15Rate": 83.3,
-    "over25Rate": 66.7,
-    "over35Rate": 39.3,
-    "bttsRate": 46.4
+    "over35Rate": 43.3,
+    "bttsRate": 60
   },
   {
     "id": 732,
@@ -3542,6 +3542,20 @@
     "bttsRate": 50.5
   },
   {
+    "id": 111,
+    "name": "FAW Championship",
+    "country": "Wales",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 188,
+    "avgGoals": 3.44,
+    "over15Rate": 83.5,
+    "over25Rate": 66,
+    "over35Rate": 46.3,
+    "bttsRate": 61.2
+  },
+  {
     "id": 196,
     "name": "Western Australia NPL",
     "country": "Australia",
@@ -3570,32 +3584,18 @@
     "bttsRate": 54.3
   },
   {
-    "id": 600,
-    "name": "1. Liga Classic - Group 2",
-    "country": "Switzerland",
+    "id": 645,
+    "name": "3. liga - East",
+    "country": "Slovakia",
     "type": "League",
     "tier": 4,
     "season": 2026,
-    "played": 88,
-    "avgGoals": 3.39,
-    "over15Rate": 77.3,
+    "played": 91,
+    "avgGoals": 3.02,
+    "over15Rate": 84.6,
     "over25Rate": 65.9,
-    "over35Rate": 45.5,
-    "bttsRate": 62.5
-  },
-  {
-    "id": 780,
-    "name": "III Liga - Group 1",
-    "country": "Poland",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 132,
-    "avgGoals": 3.54,
-    "over15Rate": 88.6,
-    "over25Rate": 65.9,
-    "over35Rate": 45.5,
-    "bttsRate": 69.7
+    "over35Rate": 28.6,
+    "bttsRate": 51.6
   },
   {
     "id": 593,
@@ -3624,34 +3624,6 @@
     "over25Rate": 65.8,
     "over35Rate": 42.1,
     "bttsRate": 47.4
-  },
-  {
-    "id": 795,
-    "name": "3. SNL - West",
-    "country": "Slovenia",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 76,
-    "avgGoals": 3.54,
-    "over15Rate": 82.9,
-    "over25Rate": 65.8,
-    "over35Rate": 43.4,
-    "bttsRate": 53.9
-  },
-  {
-    "id": 111,
-    "name": "FAW Championship",
-    "country": "Wales",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 175,
-    "avgGoals": 3.43,
-    "over15Rate": 82.3,
-    "over25Rate": 65.7,
-    "over35Rate": 46.9,
-    "bttsRate": 59.4
   },
   {
     "id": 687,
@@ -3724,20 +3696,6 @@
     "bttsRate": 60.2
   },
   {
-    "id": 218,
-    "name": "Bundesliga",
-    "country": "Austria",
-    "type": "League",
-    "tier": 1,
-    "season": 2026,
-    "played": 61,
-    "avgGoals": 3.2,
-    "over15Rate": 86.9,
-    "over25Rate": 65.6,
-    "over35Rate": 36.1,
-    "bttsRate": 54.1
-  },
-  {
     "id": 376,
     "name": "National Football League",
     "country": "Fiji",
@@ -3780,18 +3738,18 @@
     "bttsRate": 49.1
   },
   {
-    "id": 144,
-    "name": "Jupiler Pro League",
-    "country": "Belgium",
+    "id": 862,
+    "name": "3. Division",
+    "country": "Denmark",
     "type": "League",
-    "tier": 1,
+    "tier": 4,
     "season": 2026,
-    "played": 81,
-    "avgGoals": 3.22,
-    "over15Rate": 81.5,
-    "over25Rate": 65.4,
-    "over35Rate": 38.3,
-    "bttsRate": 45.7
+    "played": 84,
+    "avgGoals": 3.27,
+    "over15Rate": 83.3,
+    "over25Rate": 65.5,
+    "over35Rate": 44,
+    "bttsRate": 65.5
   },
   {
     "id": 161,
@@ -3836,6 +3794,20 @@
     "bttsRate": 69.2
   },
   {
+    "id": 780,
+    "name": "III Liga - Group 1",
+    "country": "Poland",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 135,
+    "avgGoals": 3.52,
+    "over15Rate": 88.1,
+    "over25Rate": 65.2,
+    "over35Rate": 45.2,
+    "bttsRate": 68.9
+  },
+  {
     "id": 846,
     "name": "Somali Premier League",
     "country": "Somalia",
@@ -3864,32 +3836,46 @@
     "bttsRate": 64.4
   },
   {
+    "id": 218,
+    "name": "Bundesliga",
+    "country": "Austria",
+    "type": "League",
+    "tier": 1,
+    "season": 2026,
+    "played": 63,
+    "avgGoals": 3.17,
+    "over15Rate": 87.3,
+    "over25Rate": 65.1,
+    "over35Rate": 34.9,
+    "bttsRate": 55.6
+  },
+  {
     "id": 635,
     "name": "NB III - Northwest",
     "country": "Hungary",
     "type": "League",
     "tier": 4,
     "season": 2026,
-    "played": 106,
-    "avgGoals": 3.28,
-    "over15Rate": 83,
+    "played": 109,
+    "avgGoals": 3.27,
+    "over15Rate": 83.5,
     "over25Rate": 65.1,
-    "over35Rate": 45.3,
-    "bttsRate": 61.3
+    "over35Rate": 44,
+    "bttsRate": 60.6
   },
   {
-    "id": 862,
-    "name": "3. Division",
-    "country": "Denmark",
+    "id": 795,
+    "name": "3. SNL - West",
+    "country": "Slovenia",
     "type": "League",
     "tier": 4,
     "season": 2026,
     "played": 83,
-    "avgGoals": 3.27,
+    "avgGoals": 3.51,
     "over15Rate": 83.1,
     "over25Rate": 65.1,
     "over35Rate": 43.4,
-    "bttsRate": 65.1
+    "bttsRate": 54.2
   },
   {
     "id": 215,
@@ -3946,6 +3932,20 @@
     "over25Rate": 64.7,
     "over35Rate": 42.6,
     "bttsRate": 48.5
+  },
+  {
+    "id": 144,
+    "name": "Jupiler Pro League",
+    "country": "Belgium",
+    "type": "League",
+    "tier": 1,
+    "season": 2026,
+    "played": 85,
+    "avgGoals": 3.2,
+    "over15Rate": 81.2,
+    "over25Rate": 64.7,
+    "over35Rate": 37.6,
+    "bttsRate": 47.1
   },
   {
     "id": 814,
@@ -4032,20 +4032,6 @@
     "bttsRate": 56.7
   },
   {
-    "id": 59,
-    "name": "Non League Premier - Northern",
-    "country": "England",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 158,
-    "avgGoals": 3.28,
-    "over15Rate": 81.6,
-    "over25Rate": 64.6,
-    "over35Rate": 39.9,
-    "bttsRate": 58.9
-  },
-  {
     "id": 836,
     "name": "Victoria NPL 2",
     "country": "Australia",
@@ -4058,6 +4044,20 @@
     "over25Rate": 64.6,
     "over35Rate": 42.5,
     "bttsRate": 56.9
+  },
+  {
+    "id": 59,
+    "name": "Non League Premier - Northern",
+    "country": "England",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 169,
+    "avgGoals": 3.24,
+    "over15Rate": 81.1,
+    "over25Rate": 64.5,
+    "over35Rate": 39.1,
+    "bttsRate": 59.2
   },
   {
     "id": 923,
@@ -4144,20 +4144,6 @@
     "bttsRate": 50
   },
   {
-    "id": 645,
-    "name": "3. liga - East",
-    "country": "Slovakia",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 84,
-    "avgGoals": 2.99,
-    "over15Rate": 84.5,
-    "over25Rate": 64.3,
-    "over35Rate": 26.2,
-    "bttsRate": 51.2
-  },
-  {
     "id": 729,
     "name": "Coppa Titano",
     "country": "San-Marino",
@@ -4186,18 +4172,18 @@
     "bttsRate": 42.9
   },
   {
-    "id": 253,
-    "name": "Major League Soccer",
-    "country": "USA",
+    "id": 601,
+    "name": "1. Liga Classic - Group 3",
+    "country": "Switzerland",
     "type": "League",
-    "tier": 2,
+    "tier": 4,
     "season": 2026,
-    "played": 480,
-    "avgGoals": 3.25,
-    "over15Rate": 82.9,
+    "played": 95,
+    "avgGoals": 3.06,
+    "over15Rate": 80,
     "over25Rate": 64.2,
-    "over35Rate": 41.3,
-    "bttsRate": 64
+    "over35Rate": 37.9,
+    "bttsRate": 62.1
   },
   {
     "id": 772,
@@ -4228,18 +4214,18 @@
     "bttsRate": 60.6
   },
   {
-    "id": 185,
-    "name": "League Cup",
-    "country": "Scotland",
-    "type": "Cup",
-    "tier": 2,
+    "id": 80,
+    "name": "3. Liga",
+    "country": "Germany",
+    "type": "League",
+    "tier": 3,
     "season": 2026,
-    "played": 78,
-    "avgGoals": 3.33,
-    "over15Rate": 82.1,
+    "played": 117,
+    "avgGoals": 3.3,
+    "over15Rate": 81.2,
     "over25Rate": 64.1,
-    "over35Rate": 43.6,
-    "bttsRate": 33.3
+    "over35Rate": 41,
+    "bttsRate": 63.2
   },
   {
     "id": 248,
@@ -4270,46 +4256,18 @@
     "bttsRate": 64.7
   },
   {
-    "id": 758,
-    "name": "Premier Division",
-    "country": "Gibraltar",
+    "id": 346,
+    "name": "FNL",
+    "country": "Czech-Republic",
     "type": "League",
-    "tier": 4,
+    "tier": 2,
     "season": 2026,
-    "played": 39,
-    "avgGoals": 3.59,
-    "over15Rate": 97.4,
-    "over25Rate": 64.1,
-    "over35Rate": 43.6,
-    "bttsRate": 46.2
-  },
-  {
-    "id": 790,
-    "name": "Liga III - Serie 7",
-    "country": "Romania",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 64,
-    "avgGoals": 3.13,
-    "over15Rate": 78.1,
-    "over25Rate": 64.1,
-    "over35Rate": 34.4,
-    "bttsRate": 50
-  },
-  {
-    "id": 1239,
-    "name": "Regionalliga - North",
-    "country": "Austria",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 103,
-    "avgGoals": 3.2,
-    "over15Rate": 81.6,
-    "over25Rate": 64.1,
-    "over35Rate": 44.7,
-    "bttsRate": 54.4
+    "played": 100,
+    "avgGoals": 3.11,
+    "over15Rate": 84,
+    "over25Rate": 64,
+    "over35Rate": 43,
+    "bttsRate": 67
   },
   {
     "id": 765,
@@ -4326,6 +4284,20 @@
     "bttsRate": 44
   },
   {
+    "id": 253,
+    "name": "Major League Soccer",
+    "country": "USA",
+    "type": "League",
+    "tier": 2,
+    "season": 2026,
+    "played": 488,
+    "avgGoals": 3.24,
+    "over15Rate": 82.8,
+    "over25Rate": 63.9,
+    "over35Rate": 41,
+    "bttsRate": 63.7
+  },
+  {
     "id": 595,
     "name": "Division 2 - Södra Svealand",
     "country": "Sweden",
@@ -4340,18 +4312,18 @@
     "bttsRate": 60.7
   },
   {
-    "id": 80,
-    "name": "3. Liga",
+    "id": 938,
+    "name": "Oberliga - Bayern Nord",
     "country": "Germany",
     "type": "League",
-    "tier": 3,
+    "tier": 4,
     "season": 2026,
-    "played": 116,
+    "played": 152,
     "avgGoals": 3.3,
-    "over15Rate": 81,
+    "over15Rate": 81.6,
     "over25Rate": 63.8,
-    "over35Rate": 41.4,
-    "bttsRate": 62.9
+    "over35Rate": 44.1,
+    "bttsRate": 59.9
   },
   {
     "id": 388,
@@ -4396,20 +4368,6 @@
     "bttsRate": 61.7
   },
   {
-    "id": 184,
-    "name": "League Two",
-    "country": "Scotland",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 55,
-    "avgGoals": 3.36,
-    "over15Rate": 83.6,
-    "over25Rate": 63.6,
-    "over35Rate": 40,
-    "bttsRate": 58.2
-  },
-  {
     "id": 329,
     "name": "Meistriliiga",
     "country": "Estonia",
@@ -4436,6 +4394,62 @@
     "over25Rate": 63.6,
     "over35Rate": 36.4,
     "bttsRate": 63.6
+  },
+  {
+    "id": 750,
+    "name": "Oberliga - Hessen",
+    "country": "Germany",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 140,
+    "avgGoals": 3.34,
+    "over15Rate": 86.4,
+    "over25Rate": 63.6,
+    "over35Rate": 41.4,
+    "bttsRate": 59.3
+  },
+  {
+    "id": 784,
+    "name": "Liga III - Serie 1",
+    "country": "Romania",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 66,
+    "avgGoals": 3.23,
+    "over15Rate": 87.9,
+    "over25Rate": 63.6,
+    "over35Rate": 40.9,
+    "bttsRate": 66.7
+  },
+  {
+    "id": 786,
+    "name": "Liga III - Serie 3",
+    "country": "Romania",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 66,
+    "avgGoals": 3.56,
+    "over15Rate": 83.3,
+    "over25Rate": 63.6,
+    "over35Rate": 45.5,
+    "bttsRate": 54.5
+  },
+  {
+    "id": 790,
+    "name": "Liga III - Serie 7",
+    "country": "Romania",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 66,
+    "avgGoals": 3.09,
+    "over15Rate": 77.3,
+    "over25Rate": 63.6,
+    "over35Rate": 34.8,
+    "bttsRate": 50
   },
   {
     "id": 855,
@@ -4480,32 +4494,18 @@
     "bttsRate": 54.5
   },
   {
-    "id": 263,
-    "name": "Liga de Expansión MX",
-    "country": "Mexico",
+    "id": 43,
+    "name": "National League",
+    "country": "England",
     "type": "League",
     "tier": 4,
     "season": 2026,
-    "played": 115,
-    "avgGoals": 3.23,
-    "over15Rate": 82.6,
+    "played": 189,
+    "avgGoals": 3.16,
+    "over15Rate": 82.5,
     "over25Rate": 63.5,
-    "over35Rate": 43.5,
-    "bttsRate": 58.3
-  },
-  {
-    "id": 938,
-    "name": "Oberliga - Bayern Nord",
-    "country": "Germany",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 148,
-    "avgGoals": 3.29,
-    "over15Rate": 81.8,
-    "over25Rate": 63.5,
-    "over35Rate": 43.2,
-    "bttsRate": 60.1
+    "over35Rate": 39.2,
+    "bttsRate": 64
   },
   {
     "id": 229,
@@ -4522,20 +4522,6 @@
     "bttsRate": 66.8
   },
   {
-    "id": 43,
-    "name": "National League",
-    "country": "England",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 180,
-    "avgGoals": 3.15,
-    "over15Rate": 82.8,
-    "over25Rate": 63.3,
-    "over35Rate": 39.4,
-    "bttsRate": 63.9
-  },
-  {
     "id": 160,
     "name": "Provincial - Oost-Vlaanderen",
     "country": "Belgium",
@@ -4550,6 +4536,34 @@
     "bttsRate": 55.7
   },
   {
+    "id": 184,
+    "name": "League Two",
+    "country": "Scotland",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 60,
+    "avgGoals": 3.35,
+    "over15Rate": 81.7,
+    "over25Rate": 63.3,
+    "over35Rate": 40,
+    "bttsRate": 58.3
+  },
+  {
+    "id": 185,
+    "name": "League Cup",
+    "country": "Scotland",
+    "type": "Cup",
+    "tier": 2,
+    "season": 2026,
+    "played": 79,
+    "avgGoals": 3.3,
+    "over15Rate": 81,
+    "over25Rate": 63.3,
+    "over35Rate": 43,
+    "bttsRate": 32.9
+  },
+  {
     "id": 216,
     "name": "Third NL - Sredite",
     "country": "Croatia",
@@ -4562,20 +4576,6 @@
     "over25Rate": 63.3,
     "over35Rate": 35.8,
     "bttsRate": 60
-  },
-  {
-    "id": 346,
-    "name": "FNL",
-    "country": "Czech-Republic",
-    "type": "League",
-    "tier": 2,
-    "season": 2026,
-    "played": 98,
-    "avgGoals": 3.1,
-    "over15Rate": 83.7,
-    "over25Rate": 63.3,
-    "over35Rate": 42.9,
-    "bttsRate": 67.3
   },
   {
     "id": 485,
@@ -4690,18 +4690,32 @@
     "bttsRate": 73.7
   },
   {
-    "id": 750,
-    "name": "Oberliga - Hessen",
-    "country": "Germany",
+    "id": 332,
+    "name": "Super Liga",
+    "country": "Slovakia",
+    "type": "League",
+    "tier": 2,
+    "season": 2026,
+    "played": 76,
+    "avgGoals": 3.25,
+    "over15Rate": 86.8,
+    "over25Rate": 63.2,
+    "over35Rate": 39.5,
+    "bttsRate": 59.2
+  },
+  {
+    "id": 576,
+    "name": "Gamma Ethniki - Group 1",
+    "country": "Greece",
     "type": "League",
     "tier": 4,
     "season": 2026,
-    "played": 136,
-    "avgGoals": 3.33,
-    "over15Rate": 86.8,
+    "played": 19,
+    "avgGoals": 3.05,
+    "over15Rate": 68.4,
     "over25Rate": 63.2,
-    "over35Rate": 41.2,
-    "bttsRate": 59.6
+    "over35Rate": 42.1,
+    "bttsRate": 52.6
   },
   {
     "id": 964,
@@ -4730,6 +4744,20 @@
     "over25Rate": 63.2,
     "over35Rate": 42.1,
     "bttsRate": 47.4
+  },
+  {
+    "id": 103,
+    "name": "Eliteserien",
+    "country": "Norway",
+    "type": "League",
+    "tier": 1,
+    "season": 2026,
+    "played": 195,
+    "avgGoals": 3.24,
+    "over15Rate": 87.2,
+    "over25Rate": 63.1,
+    "over35Rate": 36.9,
+    "bttsRate": 60
   },
   {
     "id": 143,
@@ -4774,18 +4802,46 @@
     "bttsRate": 40.7
   },
   {
-    "id": 103,
-    "name": "Eliteserien",
-    "country": "Norway",
+    "id": 263,
+    "name": "Liga de Expansión MX",
+    "country": "Mexico",
     "type": "League",
-    "tier": 1,
+    "tier": 4,
     "season": 2026,
-    "played": 193,
+    "played": 116,
     "avgGoals": 3.22,
-    "over15Rate": 87,
+    "over15Rate": 82.8,
+    "over25Rate": 62.9,
+    "over35Rate": 43.1,
+    "bttsRate": 57.8
+  },
+  {
+    "id": 1239,
+    "name": "Regionalliga - North",
+    "country": "Austria",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 105,
+    "avgGoals": 3.16,
+    "over15Rate": 81,
+    "over25Rate": 62.9,
+    "over35Rate": 43.8,
+    "bttsRate": 53.3
+  },
+  {
+    "id": 145,
+    "name": "Challenger Pro League",
+    "country": "Belgium",
+    "type": "League",
+    "tier": 2,
+    "season": 2026,
+    "played": 59,
+    "avgGoals": 3.17,
+    "over15Rate": 78,
     "over25Rate": 62.7,
-    "over35Rate": 36.8,
-    "bttsRate": 60.1
+    "over35Rate": 35.6,
+    "bttsRate": 52.5
   },
   {
     "id": 177,
@@ -4794,12 +4850,26 @@
     "type": "League",
     "tier": 4,
     "season": 2026,
-    "played": 107,
-    "avgGoals": 3.39,
-    "over15Rate": 86.9,
+    "played": 115,
+    "avgGoals": 3.35,
+    "over15Rate": 87,
     "over25Rate": 62.6,
-    "over35Rate": 40.2,
-    "bttsRate": 52.3
+    "over35Rate": 39.1,
+    "bttsRate": 51.3
+  },
+  {
+    "id": 205,
+    "name": "2. Lig",
+    "country": "Turkey",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 136,
+    "avgGoals": 3.26,
+    "over15Rate": 77.9,
+    "over25Rate": 62.5,
+    "over35Rate": 43.4,
+    "bttsRate": 58.1
   },
   {
     "id": 420,
@@ -4816,18 +4886,18 @@
     "bttsRate": 46.9
   },
   {
-    "id": 601,
-    "name": "1. Liga Classic - Group 3",
-    "country": "Switzerland",
+    "id": 758,
+    "name": "Premier Division",
+    "country": "Gibraltar",
     "type": "League",
     "tier": 4,
     "season": 2026,
-    "played": 88,
-    "avgGoals": 3.03,
-    "over15Rate": 78.4,
+    "played": 40,
+    "avgGoals": 3.52,
+    "over15Rate": 95,
     "over25Rate": 62.5,
-    "over35Rate": 37.5,
-    "bttsRate": 61.4
+    "over35Rate": 42.5,
+    "bttsRate": 45
   },
   {
     "id": 806,
@@ -4858,18 +4928,32 @@
     "bttsRate": 37.5
   },
   {
-    "id": 175,
-    "name": "Third League - Northeast",
+    "id": 781,
+    "name": "III Liga - Group 2",
+    "country": "Poland",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 133,
+    "avgGoals": 3.47,
+    "over15Rate": 82,
+    "over25Rate": 62.4,
+    "over35Rate": 48.1,
+    "bttsRate": 66.2
+  },
+  {
+    "id": 176,
+    "name": "Third League - Northwest",
     "country": "Bulgaria",
     "type": "League",
     "tier": 4,
     "season": 2026,
-    "played": 85,
-    "avgGoals": 3.39,
-    "over15Rate": 78.8,
-    "over25Rate": 62.4,
-    "over35Rate": 38.8,
-    "bttsRate": 52.9
+    "played": 53,
+    "avgGoals": 3.4,
+    "over15Rate": 77.4,
+    "over25Rate": 62.3,
+    "over35Rate": 52.8,
+    "bttsRate": 58.5
   },
   {
     "id": 226,
@@ -4884,34 +4968,6 @@
     "over25Rate": 62.3,
     "over35Rate": 42.3,
     "bttsRate": 60.3
-  },
-  {
-    "id": 781,
-    "name": "III Liga - Group 2",
-    "country": "Poland",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 130,
-    "avgGoals": 3.45,
-    "over15Rate": 81.5,
-    "over25Rate": 62.3,
-    "over35Rate": 47.7,
-    "bttsRate": 65.4
-  },
-  {
-    "id": 205,
-    "name": "2. Lig",
-    "country": "Turkey",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 135,
-    "avgGoals": 3.22,
-    "over15Rate": 77.8,
-    "over25Rate": 62.2,
-    "over35Rate": 43,
-    "bttsRate": 57.8
   },
   {
     "id": 536,
@@ -4942,6 +4998,20 @@
     "bttsRate": 50
   },
   {
+    "id": 939,
+    "name": "Oberliga - Bayern Süd",
+    "country": "Germany",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 153,
+    "avgGoals": 3.28,
+    "over15Rate": 84.3,
+    "over25Rate": 62.1,
+    "over35Rate": 43.1,
+    "bttsRate": 60.1
+  },
+  {
     "id": 1113,
     "name": "Copa Venezuela",
     "country": "Venezuela",
@@ -4954,6 +5024,20 @@
     "over25Rate": 62.1,
     "over35Rate": 46.6,
     "bttsRate": 53.4
+  },
+  {
+    "id": 175,
+    "name": "Third League - Northeast",
+    "country": "Bulgaria",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 92,
+    "avgGoals": 3.38,
+    "over15Rate": 79.3,
+    "over25Rate": 62,
+    "over35Rate": 39.1,
+    "bttsRate": 53.3
   },
   {
     "id": 353,
@@ -4982,62 +5066,6 @@
     "over25Rate": 62,
     "over35Rate": 42.4,
     "bttsRate": 59.8
-  },
-  {
-    "id": 939,
-    "name": "Oberliga - Bayern Süd",
-    "country": "Germany",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 150,
-    "avgGoals": 3.28,
-    "over15Rate": 84,
-    "over25Rate": 62,
-    "over35Rate": 43.3,
-    "bttsRate": 60
-  },
-  {
-    "id": 110,
-    "name": "Premier League",
-    "country": "Wales",
-    "type": "League",
-    "tier": 3,
-    "season": 2026,
-    "played": 118,
-    "avgGoals": 3.36,
-    "over15Rate": 81.4,
-    "over25Rate": 61.9,
-    "over35Rate": 40.7,
-    "bttsRate": 50
-  },
-  {
-    "id": 784,
-    "name": "Liga III - Serie 1",
-    "country": "Romania",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 63,
-    "avgGoals": 3.21,
-    "over15Rate": 87.3,
-    "over25Rate": 61.9,
-    "over35Rate": 39.7,
-    "bttsRate": 66.7
-  },
-  {
-    "id": 210,
-    "name": "HNL",
-    "country": "Croatia",
-    "type": "League",
-    "tier": 1,
-    "season": 2026,
-    "played": 55,
-    "avgGoals": 3.02,
-    "over15Rate": 80,
-    "over25Rate": 61.8,
-    "over35Rate": 40,
-    "bttsRate": 54.5
   },
   {
     "id": 833,
@@ -5096,6 +5124,20 @@
     "bttsRate": 50
   },
   {
+    "id": 40,
+    "name": "Championship",
+    "country": "England",
+    "type": "League",
+    "tier": 2,
+    "season": 2026,
+    "played": 156,
+    "avgGoals": 2.93,
+    "over15Rate": 76.9,
+    "over25Rate": 61.5,
+    "over35Rate": 38.5,
+    "bttsRate": 62.2
+  },
+  {
     "id": 156,
     "name": "Provincial - Liege",
     "country": "Belgium",
@@ -5138,20 +5180,6 @@
     "bttsRate": 38.5
   },
   {
-    "id": 394,
-    "name": "Super Liga",
-    "country": "Moldova",
-    "type": "League",
-    "tier": 3,
-    "season": 2026,
-    "played": 65,
-    "avgGoals": 2.98,
-    "over15Rate": 78.5,
-    "over25Rate": 61.5,
-    "over35Rate": 33.8,
-    "bttsRate": 49.2
-  },
-  {
     "id": 554,
     "name": "3. Lig - Group 3",
     "country": "Turkey",
@@ -5180,32 +5208,60 @@
     "bttsRate": 23.1
   },
   {
-    "id": 61,
-    "name": "Ligue 1",
-    "country": "France",
+    "id": 210,
+    "name": "HNL",
+    "country": "Croatia",
     "type": "League",
     "tier": 1,
     "season": 2026,
-    "played": 75,
-    "avgGoals": 3.04,
-    "over15Rate": 78.7,
-    "over25Rate": 61.3,
-    "over35Rate": 36,
-    "bttsRate": 62.7
+    "played": 57,
+    "avgGoals": 3.02,
+    "over15Rate": 78.9,
+    "over25Rate": 61.4,
+    "over35Rate": 40.4,
+    "bttsRate": 52.6
   },
   {
-    "id": 786,
-    "name": "Liga III - Serie 3",
-    "country": "Romania",
+    "id": 931,
+    "name": "Non League Premier - Southern Central",
+    "country": "England",
     "type": "League",
     "tier": 4,
     "season": 2026,
-    "played": 62,
-    "avgGoals": 3.4,
-    "over15Rate": 82.3,
+    "played": 158,
+    "avgGoals": 3.17,
+    "over15Rate": 81,
+    "over25Rate": 61.4,
+    "over35Rate": 41.8,
+    "bttsRate": 63.3
+  },
+  {
+    "id": 110,
+    "name": "Premier League",
+    "country": "Wales",
+    "type": "League",
+    "tier": 3,
+    "season": 2026,
+    "played": 119,
+    "avgGoals": 3.33,
+    "over15Rate": 80.7,
     "over25Rate": 61.3,
-    "over35Rate": 43.5,
-    "bttsRate": 51.6
+    "over35Rate": 40.3,
+    "bttsRate": 49.6
+  },
+  {
+    "id": 135,
+    "name": "Serie A",
+    "country": "Italy",
+    "type": "League",
+    "tier": 1,
+    "season": 2026,
+    "played": 93,
+    "avgGoals": 3.2,
+    "over15Rate": 86,
+    "over25Rate": 61.3,
+    "over35Rate": 35.5,
+    "bttsRate": 59.1
   },
   {
     "id": 564,
@@ -5214,40 +5270,12 @@
     "type": "League",
     "tier": 4,
     "season": 2026,
-    "played": 227,
-    "avgGoals": 3.15,
-    "over15Rate": 80.2,
-    "over25Rate": 61.2,
-    "over35Rate": 39.2,
-    "bttsRate": 62.1
-  },
-  {
-    "id": 332,
-    "name": "Super Liga",
-    "country": "Slovakia",
-    "type": "League",
-    "tier": 2,
-    "season": 2026,
-    "played": 72,
-    "avgGoals": 3.21,
-    "over15Rate": 86.1,
+    "played": 229,
+    "avgGoals": 3.14,
+    "over15Rate": 79.9,
     "over25Rate": 61.1,
-    "over35Rate": 38.9,
-    "bttsRate": 58.3
-  },
-  {
-    "id": 454,
-    "name": "Tercera División RFEF - Group 16",
-    "country": "Spain",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 72,
-    "avgGoals": 2.88,
-    "over15Rate": 77.8,
-    "over25Rate": 61.1,
-    "over35Rate": 25,
-    "bttsRate": 56.9
+    "over35Rate": 39.3,
+    "bttsRate": 62
   },
   {
     "id": 586,
@@ -5306,6 +5334,20 @@
     "bttsRate": 46.1
   },
   {
+    "id": 109,
+    "name": "II Liga - East",
+    "country": "Poland",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 125,
+    "avgGoals": 3.09,
+    "over15Rate": 81.6,
+    "over25Rate": 60.8,
+    "over35Rate": 35.2,
+    "bttsRate": 60.8
+  },
+  {
     "id": 309,
     "name": "Division 2",
     "country": "Saudi-Arabia",
@@ -5320,18 +5362,18 @@
     "bttsRate": 56.9
   },
   {
-    "id": 344,
-    "name": "Primera División",
-    "country": "Bolivia",
+    "id": 454,
+    "name": "Tercera División RFEF - Group 16",
+    "country": "Spain",
     "type": "League",
     "tier": 4,
     "season": 2026,
-    "played": 186,
-    "avgGoals": 3.02,
-    "over15Rate": 82.8,
+    "played": 74,
+    "avgGoals": 2.86,
+    "over15Rate": 77,
     "over25Rate": 60.8,
-    "over35Rate": 36,
-    "bttsRate": 60.8
+    "over35Rate": 25.7,
+    "bttsRate": 55.4
   },
   {
     "id": 691,
@@ -5348,18 +5390,18 @@
     "bttsRate": 54.6
   },
   {
-    "id": 145,
-    "name": "Challenger Pro League",
-    "country": "Belgium",
+    "id": 106,
+    "name": "Ekstraklasa",
+    "country": "Poland",
     "type": "League",
-    "tier": 2,
+    "tier": 1,
     "season": 2026,
-    "played": 56,
-    "avgGoals": 3.09,
-    "over15Rate": 76.8,
+    "played": 112,
+    "avgGoals": 2.98,
+    "over15Rate": 83,
     "over25Rate": 60.7,
-    "over35Rate": 33.9,
-    "bttsRate": 51.8
+    "over35Rate": 33,
+    "bttsRate": 66.1
   },
   {
     "id": 227,
@@ -5432,6 +5474,48 @@
     "bttsRate": 55.8
   },
   {
+    "id": 344,
+    "name": "Primera División",
+    "country": "Bolivia",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 188,
+    "avgGoals": 3.02,
+    "over15Rate": 83,
+    "over25Rate": 60.6,
+    "over35Rate": 36.2,
+    "bttsRate": 61.2
+  },
+  {
+    "id": 394,
+    "name": "Super Liga",
+    "country": "Moldova",
+    "type": "League",
+    "tier": 3,
+    "season": 2026,
+    "played": 66,
+    "avgGoals": 2.97,
+    "over15Rate": 78.8,
+    "over25Rate": 60.6,
+    "over35Rate": 33.3,
+    "bttsRate": 50
+  },
+  {
+    "id": 563,
+    "name": "Ettan - Norra",
+    "country": "Sweden",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 226,
+    "avgGoals": 3.15,
+    "over15Rate": 83.2,
+    "over25Rate": 60.6,
+    "over35Rate": 39.4,
+    "bttsRate": 58.4
+  },
+  {
     "id": 642,
     "name": "Curaçao Sekshon Pagá",
     "country": "Curacao",
@@ -5444,6 +5528,34 @@
     "over25Rate": 60.6,
     "over35Rate": 38,
     "bttsRate": 60.6
+  },
+  {
+    "id": 1036,
+    "name": "Copa Santa Catarina",
+    "country": "Brazil",
+    "type": "Cup",
+    "tier": 4,
+    "season": 2026,
+    "played": 33,
+    "avgGoals": 3.06,
+    "over15Rate": 69.7,
+    "over25Rate": 60.6,
+    "over35Rate": 39.4,
+    "bttsRate": 54.5
+  },
+  {
+    "id": 61,
+    "name": "Ligue 1",
+    "country": "France",
+    "type": "League",
+    "tier": 1,
+    "season": 2026,
+    "played": 76,
+    "avgGoals": 3.03,
+    "over15Rate": 78.9,
+    "over25Rate": 60.5,
+    "over35Rate": 35.5,
+    "bttsRate": 61.8
   },
   {
     "id": 2,
@@ -5460,20 +5572,6 @@
     "bttsRate": 56
   },
   {
-    "id": 176,
-    "name": "Third League - Northwest",
-    "country": "Bulgaria",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 48,
-    "avgGoals": 3.35,
-    "over15Rate": 77.1,
-    "over25Rate": 60.4,
-    "over35Rate": 50,
-    "bttsRate": 58.3
-  },
-  {
     "id": 303,
     "name": "Division 1",
     "country": "United-Arab-Emirates",
@@ -5486,6 +5584,20 @@
     "over25Rate": 60.4,
     "over35Rate": 43.4,
     "bttsRate": 60.4
+  },
+  {
+    "id": 318,
+    "name": "1. Division",
+    "country": "Cyprus",
+    "type": "League",
+    "tier": 2,
+    "season": 2026,
+    "played": 53,
+    "avgGoals": 2.91,
+    "over15Rate": 79.2,
+    "over25Rate": 60.4,
+    "over35Rate": 37.7,
+    "bttsRate": 56.6
   },
   {
     "id": 489,
@@ -5502,20 +5614,6 @@
     "bttsRate": 59.7
   },
   {
-    "id": 563,
-    "name": "Ettan - Norra",
-    "country": "Sweden",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 224,
-    "avgGoals": 3.15,
-    "over15Rate": 83,
-    "over25Rate": 60.3,
-    "over35Rate": 39.3,
-    "bttsRate": 58
-  },
-  {
     "id": 718,
     "name": "Piala Indonesia",
     "country": "Indonesia",
@@ -5530,46 +5628,18 @@
     "bttsRate": 47.3
   },
   {
-    "id": 109,
-    "name": "II Liga - East",
-    "country": "Poland",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 123,
-    "avgGoals": 3.09,
-    "over15Rate": 81.3,
-    "over25Rate": 60.2,
-    "over35Rate": 35.8,
-    "bttsRate": 60.2
-  },
-  {
-    "id": 40,
-    "name": "Championship",
-    "country": "England",
+    "id": 219,
+    "name": "2. Liga",
+    "country": "Austria",
     "type": "League",
     "tier": 2,
     "season": 2026,
-    "played": 148,
-    "avgGoals": 2.89,
-    "over15Rate": 76.4,
-    "over25Rate": 60.1,
-    "over35Rate": 37.2,
-    "bttsRate": 62.8
-  },
-  {
-    "id": 135,
-    "name": "Serie A",
-    "country": "Italy",
-    "type": "League",
-    "tier": 1,
-    "season": 2026,
-    "played": 90,
-    "avgGoals": 3.16,
-    "over15Rate": 85.6,
-    "over25Rate": 60,
-    "over35Rate": 34.4,
-    "bttsRate": 57.8
+    "played": 88,
+    "avgGoals": 3.11,
+    "over15Rate": 77.3,
+    "over25Rate": 60.2,
+    "over35Rate": 42,
+    "bttsRate": 54.5
   },
   {
     "id": 188,
@@ -5584,20 +5654,6 @@
     "over25Rate": 60,
     "over35Rate": 20,
     "bttsRate": 73.3
-  },
-  {
-    "id": 318,
-    "name": "1. Division",
-    "country": "Cyprus",
-    "type": "League",
-    "tier": 2,
-    "season": 2026,
-    "played": 50,
-    "avgGoals": 2.88,
-    "over15Rate": 78,
-    "over25Rate": 60,
-    "over35Rate": 36,
-    "bttsRate": 56
   },
   {
     "id": 418,
@@ -5684,46 +5740,18 @@
     "bttsRate": 40
   },
   {
-    "id": 219,
-    "name": "2. Liga",
-    "country": "Austria",
-    "type": "League",
-    "tier": 2,
-    "season": 2026,
-    "played": 82,
-    "avgGoals": 3.11,
-    "over15Rate": 76.8,
-    "over25Rate": 59.8,
-    "over35Rate": 42.7,
-    "bttsRate": 54.9
-  },
-  {
     "id": 506,
     "name": "2. liga",
     "country": "Slovakia",
     "type": "League",
     "tier": 4,
     "season": 2026,
-    "played": 117,
-    "avgGoals": 2.93,
-    "over15Rate": 81.2,
-    "over25Rate": 59.8,
-    "over35Rate": 32.5,
-    "bttsRate": 59
-  },
-  {
-    "id": 106,
-    "name": "Ekstraklasa",
-    "country": "Poland",
-    "type": "League",
-    "tier": 1,
-    "season": 2026,
-    "played": 109,
-    "avgGoals": 2.94,
-    "over15Rate": 82.6,
-    "over25Rate": 59.6,
-    "over35Rate": 31.2,
-    "bttsRate": 65.1
+    "played": 119,
+    "avgGoals": 2.91,
+    "over15Rate": 80.7,
+    "over25Rate": 59.7,
+    "over35Rate": 31.9,
+    "bttsRate": 58
   },
   {
     "id": 124,
@@ -5738,20 +5766,6 @@
     "over25Rate": 59.6,
     "over35Rate": 40.4,
     "bttsRate": 55.1
-  },
-  {
-    "id": 383,
-    "name": "Ligat Ha'al",
-    "country": "Israel",
-    "type": "League",
-    "tier": 2,
-    "season": 2026,
-    "played": 57,
-    "avgGoals": 2.96,
-    "over15Rate": 77.2,
-    "over25Rate": 59.6,
-    "over35Rate": 33.3,
-    "bttsRate": 56.1
   },
   {
     "id": 685,
@@ -5810,34 +5824,6 @@
     "bttsRate": 62.2
   },
   {
-    "id": 342,
-    "name": "Premier League",
-    "country": "Armenia",
-    "type": "League",
-    "tier": 3,
-    "season": 2026,
-    "played": 69,
-    "avgGoals": 2.97,
-    "over15Rate": 82.6,
-    "over25Rate": 59.4,
-    "over35Rate": 29,
-    "bttsRate": 49.3
-  },
-  {
-    "id": 1036,
-    "name": "Copa Santa Catarina",
-    "country": "Brazil",
-    "type": "Cup",
-    "tier": 4,
-    "season": 2026,
-    "played": 32,
-    "avgGoals": 3,
-    "over15Rate": 68.8,
-    "over25Rate": 59.4,
-    "over35Rate": 37.5,
-    "bttsRate": 53.1
-  },
-  {
     "id": 56,
     "name": "Non League Div One - Southern South",
     "country": "England",
@@ -5850,34 +5836,6 @@
     "over25Rate": 59.3,
     "over35Rate": 39.5,
     "bttsRate": 55.8
-  },
-  {
-    "id": 122,
-    "name": "2. Division",
-    "country": "Denmark",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 81,
-    "avgGoals": 3,
-    "over15Rate": 86.4,
-    "over25Rate": 59.3,
-    "over35Rate": 38.3,
-    "bttsRate": 64.2
-  },
-  {
-    "id": 183,
-    "name": "League One",
-    "country": "Scotland",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 59,
-    "avgGoals": 2.85,
-    "over15Rate": 78,
-    "over25Rate": 59.3,
-    "over35Rate": 25.4,
-    "bttsRate": 45.8
   },
   {
     "id": 31,
@@ -5894,34 +5852,6 @@
     "bttsRate": 39.8
   },
   {
-    "id": 644,
-    "name": "3. liga - West",
-    "country": "Slovakia",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 98,
-    "avgGoals": 3.28,
-    "over15Rate": 81.6,
-    "over25Rate": 59.2,
-    "over35Rate": 43.9,
-    "bttsRate": 56.1
-  },
-  {
-    "id": 931,
-    "name": "Non League Premier - Southern Central",
-    "country": "England",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 147,
-    "avgGoals": 3.07,
-    "over15Rate": 80.3,
-    "over25Rate": 59.2,
-    "over35Rate": 38.1,
-    "bttsRate": 61.9
-  },
-  {
     "id": 96,
     "name": "Taça de Portugal",
     "country": "Portugal",
@@ -5934,20 +5864,6 @@
     "over25Rate": 59.1,
     "over35Rate": 39.8,
     "bttsRate": 33.3
-  },
-  {
-    "id": 179,
-    "name": "Premiership",
-    "country": "Scotland",
-    "type": "League",
-    "tier": 1,
-    "season": 2026,
-    "played": 66,
-    "avgGoals": 2.85,
-    "over15Rate": 78.8,
-    "over25Rate": 59.1,
-    "over35Rate": 28.8,
-    "bttsRate": 57.6
   },
   {
     "id": 914,
@@ -5978,6 +5894,20 @@
     "bttsRate": 41.5
   },
   {
+    "id": 122,
+    "name": "2. Division",
+    "country": "Denmark",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 83,
+    "avgGoals": 2.96,
+    "over15Rate": 85.5,
+    "over25Rate": 59,
+    "over35Rate": 37.3,
+    "bttsRate": 63.9
+  },
+  {
     "id": 361,
     "name": "1 Lyga",
     "country": "Lithuania",
@@ -6006,6 +5936,34 @@
     "bttsRate": 63.4
   },
   {
+    "id": 179,
+    "name": "Premiership",
+    "country": "Scotland",
+    "type": "League",
+    "tier": 1,
+    "season": 2026,
+    "played": 68,
+    "avgGoals": 2.84,
+    "over15Rate": 77.9,
+    "over25Rate": 58.8,
+    "over35Rate": 29.4,
+    "bttsRate": 57.4
+  },
+  {
+    "id": 203,
+    "name": "Süper Lig",
+    "country": "Turkey",
+    "type": "League",
+    "tier": 1,
+    "season": 2026,
+    "played": 85,
+    "avgGoals": 2.89,
+    "over15Rate": 76.5,
+    "over25Rate": 58.8,
+    "over35Rate": 30.6,
+    "bttsRate": 45.9
+  },
+  {
     "id": 296,
     "name": "Thai League 1",
     "country": "Thailand",
@@ -6018,20 +5976,6 @@
     "over25Rate": 58.8,
     "over35Rate": 31.4,
     "bttsRate": 66.7
-  },
-  {
-    "id": 407,
-    "name": "Championship",
-    "country": "Northern-Ireland",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 102,
-    "avgGoals": 3.14,
-    "over15Rate": 80.4,
-    "over25Rate": 58.8,
-    "over35Rate": 42.2,
-    "bttsRate": 58.8
   },
   {
     "id": 1009,
@@ -6076,6 +6020,34 @@
     "bttsRate": 55.6
   },
   {
+    "id": 342,
+    "name": "Premier League",
+    "country": "Armenia",
+    "type": "League",
+    "tier": 3,
+    "season": 2026,
+    "played": 70,
+    "avgGoals": 2.96,
+    "over15Rate": 82.9,
+    "over25Rate": 58.6,
+    "over35Rate": 28.6,
+    "bttsRate": 48.6
+  },
+  {
+    "id": 644,
+    "name": "3. liga - West",
+    "country": "Slovakia",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 99,
+    "avgGoals": 3.25,
+    "over15Rate": 80.8,
+    "over25Rate": 58.6,
+    "over35Rate": 43.4,
+    "bttsRate": 55.6
+  },
+  {
     "id": 52,
     "name": "Non League Div One - Isthmian North",
     "country": "England",
@@ -6090,18 +6062,18 @@
     "bttsRate": 52.6
   },
   {
-    "id": 203,
-    "name": "Süper Lig",
-    "country": "Turkey",
+    "id": 783,
+    "name": "III Liga - Group 4",
+    "country": "Poland",
     "type": "League",
-    "tier": 1,
+    "tier": 4,
     "season": 2026,
-    "played": 84,
-    "avgGoals": 2.89,
-    "over15Rate": 76.2,
-    "over25Rate": 58.3,
-    "over35Rate": 31,
-    "bttsRate": 45.2
+    "played": 135,
+    "avgGoals": 2.98,
+    "over15Rate": 79.3,
+    "over25Rate": 58.5,
+    "over35Rate": 34.1,
+    "bttsRate": 58.5
   },
   {
     "id": 314,
@@ -6116,6 +6088,34 @@
     "over25Rate": 58.3,
     "over35Rate": 41.7,
     "bttsRate": 50
+  },
+  {
+    "id": 330,
+    "name": "Premier League",
+    "country": "Kuwait",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 36,
+    "avgGoals": 3.25,
+    "over15Rate": 80.6,
+    "over25Rate": 58.3,
+    "over35Rate": 36.1,
+    "bttsRate": 52.8
+  },
+  {
+    "id": 383,
+    "name": "Ligat Ha'al",
+    "country": "Israel",
+    "type": "League",
+    "tier": 2,
+    "season": 2026,
+    "played": 60,
+    "avgGoals": 2.93,
+    "over15Rate": 78.3,
+    "over25Rate": 58.3,
+    "over35Rate": 31.7,
+    "bttsRate": 58.3
   },
   {
     "id": 395,
@@ -6146,20 +6146,6 @@
     "bttsRate": 61.1
   },
   {
-    "id": 783,
-    "name": "III Liga - Group 4",
-    "country": "Poland",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 132,
-    "avgGoals": 2.98,
-    "over15Rate": 78.8,
-    "over25Rate": 58.3,
-    "over35Rate": 34.1,
-    "bttsRate": 57.6
-  },
-  {
     "id": 822,
     "name": "Cup",
     "country": "Morocco",
@@ -6174,18 +6160,18 @@
     "bttsRate": 25
   },
   {
-    "id": 875,
-    "name": "Segunda División RFEF - Group 1",
-    "country": "Spain",
+    "id": 60,
+    "name": "Non League Premier - Southern South",
+    "country": "England",
     "type": "League",
     "tier": 4,
     "season": 2026,
-    "played": 72,
-    "avgGoals": 2.86,
-    "over15Rate": 77.8,
-    "over25Rate": 58.3,
-    "over35Rate": 31.9,
-    "bttsRate": 55.6
+    "played": 153,
+    "avgGoals": 3.18,
+    "over15Rate": 83,
+    "over25Rate": 58.2,
+    "over35Rate": 39.9,
+    "bttsRate": 60.1
   },
   {
     "id": 169,
@@ -6214,6 +6200,20 @@
     "over25Rate": 58.2,
     "over35Rate": 48.4,
     "bttsRate": 46.2
+  },
+  {
+    "id": 875,
+    "name": "Segunda División RFEF - Group 1",
+    "country": "Spain",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 74,
+    "avgGoals": 2.82,
+    "over15Rate": 77,
+    "over25Rate": 58.1,
+    "over35Rate": 31.1,
+    "bttsRate": 55.4
   },
   {
     "id": 1234,
@@ -6258,6 +6258,20 @@
     "bttsRate": 70
   },
   {
+    "id": 407,
+    "name": "Championship",
+    "country": "Northern-Ireland",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 107,
+    "avgGoals": 3.12,
+    "over15Rate": 80.4,
+    "over25Rate": 57.9,
+    "over35Rate": 41.1,
+    "bttsRate": 58.9
+  },
+  {
     "id": 54,
     "name": "Non League Div One - Northern West",
     "country": "England",
@@ -6272,18 +6286,18 @@
     "bttsRate": 55.4
   },
   {
-    "id": 60,
-    "name": "Non League Premier - Southern South",
-    "country": "England",
+    "id": 183,
+    "name": "League One",
+    "country": "Scotland",
     "type": "League",
     "tier": 4,
     "season": 2026,
-    "played": 142,
-    "avgGoals": 3.12,
-    "over15Rate": 83.1,
-    "over25Rate": 57.7,
-    "over35Rate": 38,
-    "bttsRate": 59.9
+    "played": 64,
+    "avgGoals": 2.8,
+    "over15Rate": 78.1,
+    "over25Rate": 57.8,
+    "over35Rate": 23.4,
+    "bttsRate": 46.9
   },
   {
     "id": 572,
@@ -6342,6 +6356,20 @@
     "bttsRate": 52.2
   },
   {
+    "id": 791,
+    "name": "Liga III - Serie 8",
+    "country": "Romania",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 66,
+    "avgGoals": 3.12,
+    "over15Rate": 81.8,
+    "over25Rate": 57.6,
+    "over35Rate": 39.4,
+    "bttsRate": 53
+  },
+  {
     "id": 119,
     "name": "Superliga",
     "country": "Denmark",
@@ -6368,6 +6396,20 @@
     "over25Rate": 57.5,
     "over35Rate": 35,
     "bttsRate": 51.7
+  },
+  {
+    "id": 449,
+    "name": "Tercera División RFEF - Group 11",
+    "country": "Spain",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 73,
+    "avgGoals": 2.88,
+    "over15Rate": 78.1,
+    "over25Rate": 57.5,
+    "over35Rate": 28.8,
+    "bttsRate": 52.1
   },
   {
     "id": 946,
@@ -6398,20 +6440,6 @@
     "bttsRate": 43.5
   },
   {
-    "id": 782,
-    "name": "III Liga - Group 3",
-    "country": "Poland",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 131,
-    "avgGoals": 2.95,
-    "over15Rate": 76.3,
-    "over25Rate": 57.3,
-    "over35Rate": 37.4,
-    "bttsRate": 55.7
-  },
-  {
     "id": 35,
     "name": "Asian Cup - Qualification",
     "country": "World",
@@ -6438,20 +6466,6 @@
     "over25Rate": 57.1,
     "over35Rate": 57.1,
     "bttsRate": 57.1
-  },
-  {
-    "id": 451,
-    "name": "Tercera División RFEF - Group 13",
-    "country": "Spain",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 63,
-    "avgGoals": 2.75,
-    "over15Rate": 76.2,
-    "over25Rate": 57.1,
-    "over35Rate": 30.2,
-    "bttsRate": 60.3
   },
   {
     "id": 459,
@@ -6524,60 +6538,18 @@
     "bttsRate": 57.3
   },
   {
-    "id": 307,
-    "name": "Pro League",
-    "country": "Saudi-Arabia",
-    "type": "League",
-    "tier": 3,
-    "season": 2026,
-    "played": 102,
-    "avgGoals": 3.02,
-    "over15Rate": 77.5,
-    "over25Rate": 56.9,
-    "over35Rate": 38.2,
-    "bttsRate": 53.9
-  },
-  {
-    "id": 445,
-    "name": "Tercera División RFEF - Group 7",
-    "country": "Spain",
+    "id": 1242,
+    "name": "Primera Premier",
+    "country": "Mexico",
     "type": "League",
     "tier": 4,
     "season": 2026,
     "played": 72,
-    "avgGoals": 3.28,
-    "over15Rate": 80.6,
+    "avgGoals": 2.78,
+    "over15Rate": 76.4,
     "over25Rate": 56.9,
-    "over35Rate": 44.4,
-    "bttsRate": 68.1
-  },
-  {
-    "id": 455,
-    "name": "Tercera División RFEF - Group 17",
-    "country": "Spain",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 72,
-    "avgGoals": 2.72,
-    "over15Rate": 77.8,
-    "over25Rate": 56.9,
-    "over35Rate": 31.9,
-    "bttsRate": 48.6
-  },
-  {
-    "id": 788,
-    "name": "Liga III - Serie 5",
-    "country": "Romania",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 65,
-    "avgGoals": 3.22,
-    "over15Rate": 80,
-    "over25Rate": 56.9,
-    "over35Rate": 35.4,
-    "bttsRate": 58.5
+    "over35Rate": 27.8,
+    "bttsRate": 55.6
   },
   {
     "id": 1,
@@ -6608,20 +6580,6 @@
     "bttsRate": 53.4
   },
   {
-    "id": 272,
-    "name": "NB II",
-    "country": "Hungary",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 88,
-    "avgGoals": 2.97,
-    "over15Rate": 78.4,
-    "over25Rate": 56.8,
-    "over35Rate": 33,
-    "bttsRate": 56.8
-  },
-  {
     "id": 511,
     "name": "Cup",
     "country": "Tunisia",
@@ -6636,18 +6594,46 @@
     "bttsRate": 37.8
   },
   {
-    "id": 449,
-    "name": "Tercera División RFEF - Group 11",
+    "id": 140,
+    "name": "La Liga",
     "country": "Spain",
+    "type": "League",
+    "tier": 1,
+    "season": 2026,
+    "played": 104,
+    "avgGoals": 3.02,
+    "over15Rate": 76.9,
+    "over25Rate": 56.7,
+    "over35Rate": 35.6,
+    "bttsRate": 57.7
+  },
+  {
+    "id": 307,
+    "name": "Pro League",
+    "country": "Saudi-Arabia",
+    "type": "League",
+    "tier": 3,
+    "season": 2026,
+    "played": 104,
+    "avgGoals": 3.03,
+    "over15Rate": 77.9,
+    "over25Rate": 56.7,
+    "over35Rate": 38.5,
+    "bttsRate": 53.8
+  },
+  {
+    "id": 782,
+    "name": "III Liga - Group 3",
+    "country": "Poland",
     "type": "League",
     "tier": 4,
     "season": 2026,
-    "played": 67,
-    "avgGoals": 2.81,
+    "played": 134,
+    "avgGoals": 2.93,
     "over15Rate": 76.1,
     "over25Rate": 56.7,
-    "over35Rate": 28.4,
-    "bttsRate": 52.2
+    "over35Rate": 37.3,
+    "bttsRate": 55.2
   },
   {
     "id": 469,
@@ -6678,18 +6664,18 @@
     "bttsRate": 54.7
   },
   {
-    "id": 221,
-    "name": "Regionalliga - Ost",
-    "country": "Austria",
+    "id": 872,
+    "name": "Liga Premier Serie B",
+    "country": "Mexico",
     "type": "League",
     "tier": 4,
     "season": 2026,
-    "played": 108,
-    "avgGoals": 3.08,
-    "over15Rate": 77.8,
+    "played": 23,
+    "avgGoals": 3.39,
+    "over15Rate": 82.6,
     "over25Rate": 56.5,
-    "over35Rate": 36.1,
-    "bttsRate": 51.9
+    "over35Rate": 30.4,
+    "bttsRate": 52.2
   },
   {
     "id": 854,
@@ -6706,6 +6692,20 @@
     "bttsRate": 59
   },
   {
+    "id": 79,
+    "name": "2. Bundesliga",
+    "country": "Germany",
+    "type": "League",
+    "tier": 2,
+    "season": 2026,
+    "played": 87,
+    "avgGoals": 3.01,
+    "over15Rate": 77,
+    "over25Rate": 56.3,
+    "over35Rate": 31,
+    "bttsRate": 56.3
+  },
+  {
     "id": 214,
     "name": "Third NL - Jug",
     "country": "Croatia",
@@ -6718,6 +6718,20 @@
     "over25Rate": 56.3,
     "over35Rate": 32.1,
     "bttsRate": 49.6
+  },
+  {
+    "id": 221,
+    "name": "Regionalliga - Ost",
+    "country": "Austria",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 112,
+    "avgGoals": 3.07,
+    "over15Rate": 78.6,
+    "over25Rate": 56.3,
+    "over35Rate": 35.7,
+    "bttsRate": 52.7
   },
   {
     "id": 284,
@@ -6748,6 +6762,20 @@
     "bttsRate": 59.8
   },
   {
+    "id": 788,
+    "name": "Liga III - Serie 5",
+    "country": "Romania",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 66,
+    "avgGoals": 3.2,
+    "over15Rate": 80.3,
+    "over25Rate": 56.1,
+    "over35Rate": 34.8,
+    "bttsRate": 57.6
+  },
+  {
     "id": 1224,
     "name": "Copa Sul-Sudeste",
     "country": "Brazil",
@@ -6776,6 +6804,48 @@
     "bttsRate": 60
   },
   {
+    "id": 94,
+    "name": "Primeira Liga",
+    "country": "Portugal",
+    "type": "League",
+    "tier": 1,
+    "season": 2026,
+    "played": 84,
+    "avgGoals": 2.75,
+    "over15Rate": 75,
+    "over25Rate": 56,
+    "over35Rate": 35.7,
+    "bttsRate": 48.8
+  },
+  {
+    "id": 445,
+    "name": "Tercera División RFEF - Group 7",
+    "country": "Spain",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 75,
+    "avgGoals": 3.24,
+    "over15Rate": 80,
+    "over25Rate": 56,
+    "over35Rate": 44,
+    "bttsRate": 68
+  },
+  {
+    "id": 455,
+    "name": "Tercera División RFEF - Group 17",
+    "country": "Spain",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 75,
+    "avgGoals": 2.72,
+    "over15Rate": 78.7,
+    "over25Rate": 56,
+    "over35Rate": 32,
+    "bttsRate": 48
+  },
+  {
     "id": 83,
     "name": "Regionalliga - Bayern",
     "country": "Germany",
@@ -6788,6 +6858,34 @@
     "over25Rate": 55.9,
     "over35Rate": 34.2,
     "bttsRate": 55.3
+  },
+  {
+    "id": 114,
+    "name": "Superettan",
+    "country": "Sweden",
+    "type": "League",
+    "tier": 2,
+    "season": 2026,
+    "played": 229,
+    "avgGoals": 2.93,
+    "over15Rate": 77.7,
+    "over25Rate": 55.9,
+    "over35Rate": 35.8,
+    "bttsRate": 59.8
+  },
+  {
+    "id": 271,
+    "name": "NB I",
+    "country": "Hungary",
+    "type": "League",
+    "tier": 2,
+    "season": 2026,
+    "played": 68,
+    "avgGoals": 2.99,
+    "over15Rate": 79.4,
+    "over25Rate": 55.9,
+    "over35Rate": 32.4,
+    "bttsRate": 58.8
   },
   {
     "id": 274,
@@ -6804,18 +6902,18 @@
     "bttsRate": 61.8
   },
   {
-    "id": 330,
-    "name": "Premier League",
-    "country": "Kuwait",
+    "id": 451,
+    "name": "Tercera División RFEF - Group 13",
+    "country": "Spain",
     "type": "League",
     "tier": 4,
     "season": 2026,
-    "played": 34,
-    "avgGoals": 3.18,
-    "over15Rate": 79.4,
+    "played": 68,
+    "avgGoals": 2.78,
+    "over15Rate": 76.5,
     "over25Rate": 55.9,
-    "over35Rate": 32.4,
-    "bttsRate": 50
+    "over35Rate": 30.9,
+    "bttsRate": 58.8
   },
   {
     "id": 636,
@@ -6830,20 +6928,6 @@
     "over25Rate": 55.9,
     "over35Rate": 37.6,
     "bttsRate": 39.8
-  },
-  {
-    "id": 79,
-    "name": "2. Bundesliga",
-    "country": "Germany",
-    "type": "League",
-    "tier": 2,
-    "season": 2026,
-    "played": 86,
-    "avgGoals": 3.01,
-    "over15Rate": 76.7,
-    "over25Rate": 55.8,
-    "over35Rate": 31.4,
-    "bttsRate": 55.8
   },
   {
     "id": 101,
@@ -6902,46 +6986,32 @@
     "bttsRate": 55
   },
   {
-    "id": 1242,
-    "name": "Primera Premier",
-    "country": "Mexico",
+    "id": 272,
+    "name": "NB II",
+    "country": "Hungary",
     "type": "League",
     "tier": 4,
     "season": 2026,
-    "played": 70,
-    "avgGoals": 2.7,
-    "over15Rate": 75.7,
-    "over25Rate": 55.7,
-    "over35Rate": 25.7,
-    "bttsRate": 54.3
+    "played": 90,
+    "avgGoals": 2.93,
+    "over15Rate": 77.8,
+    "over25Rate": 55.6,
+    "over35Rate": 32.2,
+    "bttsRate": 56.7
   },
   {
-    "id": 374,
-    "name": "2. SNL",
-    "country": "Slovenia",
+    "id": 345,
+    "name": "Czech Liga",
+    "country": "Czech-Republic",
     "type": "League",
-    "tier": 4,
+    "tier": 1,
     "season": 2026,
     "played": 99,
-    "avgGoals": 2.93,
-    "over15Rate": 75.8,
+    "avgGoals": 2.75,
+    "over15Rate": 78.8,
     "over25Rate": 55.6,
-    "over35Rate": 36.4,
-    "bttsRate": 46.5
-  },
-  {
-    "id": 791,
-    "name": "Liga III - Serie 8",
-    "country": "Romania",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 63,
-    "avgGoals": 3.03,
-    "over15Rate": 81,
-    "over25Rate": 55.6,
-    "over35Rate": 36.5,
-    "bttsRate": 50.8
+    "over35Rate": 27.3,
+    "bttsRate": 51.5
   },
   {
     "id": 903,
@@ -6956,34 +7026,6 @@
     "over25Rate": 55.6,
     "over35Rate": 44.4,
     "bttsRate": 55.6
-  },
-  {
-    "id": 140,
-    "name": "La Liga",
-    "country": "Spain",
-    "type": "League",
-    "tier": 1,
-    "season": 2026,
-    "played": 101,
-    "avgGoals": 2.98,
-    "over15Rate": 76.2,
-    "over25Rate": 55.4,
-    "over35Rate": 35.6,
-    "bttsRate": 57.4
-  },
-  {
-    "id": 271,
-    "name": "NB I",
-    "country": "Hungary",
-    "type": "League",
-    "tier": 2,
-    "season": 2026,
-    "played": 65,
-    "avgGoals": 3,
-    "over15Rate": 80,
-    "over25Rate": 55.4,
-    "over35Rate": 32.3,
-    "bttsRate": 60
   },
   {
     "id": 1104,
@@ -7014,20 +7056,6 @@
     "bttsRate": 44
   },
   {
-    "id": 114,
-    "name": "Superettan",
-    "country": "Sweden",
-    "type": "League",
-    "tier": 2,
-    "season": 2026,
-    "played": 226,
-    "avgGoals": 2.92,
-    "over15Rate": 77.4,
-    "over25Rate": 55.3,
-    "over35Rate": 35.8,
-    "bttsRate": 59.7
-  },
-  {
     "id": 192,
     "name": "New South Wales NPL",
     "country": "Australia",
@@ -7054,6 +7082,34 @@
     "over25Rate": 55.3,
     "over35Rate": 36.1,
     "bttsRate": 52.6
+  },
+  {
+    "id": 50,
+    "name": "National League - North",
+    "country": "England",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 172,
+    "avgGoals": 2.78,
+    "over15Rate": 76.7,
+    "over25Rate": 55.2,
+    "over35Rate": 26.2,
+    "bttsRate": 55.8
+  },
+  {
+    "id": 178,
+    "name": "Third League - Southwest",
+    "country": "Bulgaria",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 125,
+    "avgGoals": 2.81,
+    "over15Rate": 74.4,
+    "over25Rate": 55.2,
+    "over35Rate": 31.2,
+    "bttsRate": 52.8
   },
   {
     "id": 467,
@@ -7084,18 +7140,32 @@
     "bttsRate": 43.3
   },
   {
-    "id": 50,
-    "name": "National League - North",
-    "country": "England",
+    "id": 374,
+    "name": "2. SNL",
+    "country": "Slovenia",
     "type": "League",
     "tier": 4,
     "season": 2026,
-    "played": 160,
-    "avgGoals": 2.75,
-    "over15Rate": 76.3,
+    "played": 100,
+    "avgGoals": 2.91,
+    "over15Rate": 75,
     "over25Rate": 55,
-    "over35Rate": 25.6,
-    "bttsRate": 56.3
+    "over35Rate": 36,
+    "bttsRate": 46
+  },
+  {
+    "id": 568,
+    "name": "Eerste Divisie",
+    "country": "Suriname",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 20,
+    "avgGoals": 2.65,
+    "over15Rate": 75,
+    "over25Rate": 55,
+    "over35Rate": 30,
+    "bttsRate": 35
   },
   {
     "id": 796,
@@ -7126,34 +7196,6 @@
     "bttsRate": 40
   },
   {
-    "id": 94,
-    "name": "Primeira Liga",
-    "country": "Portugal",
-    "type": "League",
-    "tier": 1,
-    "season": 2026,
-    "played": 82,
-    "avgGoals": 2.73,
-    "over15Rate": 74.4,
-    "over25Rate": 54.9,
-    "over35Rate": 35.4,
-    "bttsRate": 48.8
-  },
-  {
-    "id": 265,
-    "name": "Primera División",
-    "country": "Chile",
-    "type": "League",
-    "tier": 3,
-    "season": 2026,
-    "played": 199,
-    "avgGoals": 2.9,
-    "over15Rate": 74.4,
-    "over25Rate": 54.8,
-    "over35Rate": 32.7,
-    "bttsRate": 54.8
-  },
-  {
     "id": 879,
     "name": "Segunda División RFEF - Group 5",
     "country": "Spain",
@@ -7166,34 +7208,6 @@
     "over25Rate": 54.8,
     "over35Rate": 28.8,
     "bttsRate": 53.4
-  },
-  {
-    "id": 120,
-    "name": "1. Division",
-    "country": "Denmark",
-    "type": "League",
-    "tier": 2,
-    "season": 2026,
-    "played": 75,
-    "avgGoals": 2.75,
-    "over15Rate": 77.3,
-    "over25Rate": 54.7,
-    "over35Rate": 30.7,
-    "bttsRate": 61.3
-  },
-  {
-    "id": 178,
-    "name": "Third League - Southwest",
-    "country": "Bulgaria",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 117,
-    "avgGoals": 2.78,
-    "over15Rate": 74.4,
-    "over25Rate": 54.7,
-    "over35Rate": 30.8,
-    "bttsRate": 52.1
   },
   {
     "id": 365,
@@ -7210,32 +7224,46 @@
     "bttsRate": 54.1
   },
   {
-    "id": 367,
-    "name": "Meistaradeildin",
-    "country": "Faroe-Islands",
+    "id": 393,
+    "name": "Premier League",
+    "country": "Malta",
     "type": "League",
     "tier": 3,
     "season": 2026,
-    "played": 130,
-    "avgGoals": 2.85,
-    "over15Rate": 76.9,
-    "over25Rate": 54.6,
-    "over35Rate": 29.2,
-    "bttsRate": 56.9
+    "played": 64,
+    "avgGoals": 2.84,
+    "over15Rate": 89.1,
+    "over25Rate": 54.7,
+    "over35Rate": 26.6,
+    "bttsRate": 60.9
   },
   {
-    "id": 872,
-    "name": "Liga Premier Serie B",
-    "country": "Mexico",
+    "id": 265,
+    "name": "Primera División",
+    "country": "Chile",
+    "type": "League",
+    "tier": 3,
+    "season": 2026,
+    "played": 200,
+    "avgGoals": 2.89,
+    "over15Rate": 74,
+    "over25Rate": 54.5,
+    "over35Rate": 32.5,
+    "bttsRate": 54.5
+  },
+  {
+    "id": 392,
+    "name": "Challenge League",
+    "country": "Malta",
     "type": "League",
     "tier": 4,
     "season": 2026,
-    "played": 22,
-    "avgGoals": 3.36,
-    "over15Rate": 81.8,
+    "played": 44,
+    "avgGoals": 2.64,
+    "over15Rate": 77.3,
     "over25Rate": 54.5,
-    "over35Rate": 27.3,
-    "bttsRate": 50
+    "over35Rate": 25,
+    "bttsRate": 52.3
   },
   {
     "id": 901,
@@ -7250,20 +7278,6 @@
     "over25Rate": 54.5,
     "over35Rate": 18.2,
     "bttsRate": 68.2
-  },
-  {
-    "id": 281,
-    "name": "Primera División",
-    "country": "Peru",
-    "type": "League",
-    "tier": 3,
-    "season": 2026,
-    "played": 278,
-    "avgGoals": 2.81,
-    "over15Rate": 74.8,
-    "over25Rate": 54.3,
-    "over35Rate": 33.8,
-    "bttsRate": 59
   },
   {
     "id": 433,
@@ -7294,18 +7308,18 @@
     "bttsRate": 42.5
   },
   {
-    "id": 41,
-    "name": "League One",
-    "country": "England",
+    "id": 281,
+    "name": "Primera División",
+    "country": "Peru",
     "type": "League",
     "tier": 3,
     "season": 2026,
-    "played": 146,
-    "avgGoals": 2.79,
-    "over15Rate": 78.8,
+    "played": 279,
+    "avgGoals": 2.8,
+    "over15Rate": 74.6,
     "over25Rate": 54.1,
-    "over35Rate": 30.1,
-    "bttsRate": 56.8
+    "over35Rate": 33.7,
+    "bttsRate": 58.8
   },
   {
     "id": 325,
@@ -7320,6 +7334,20 @@
     "over25Rate": 54.1,
     "over35Rate": 30.6,
     "bttsRate": 35.3
+  },
+  {
+    "id": 367,
+    "name": "Meistaradeildin",
+    "country": "Faroe-Islands",
+    "type": "League",
+    "tier": 3,
+    "season": 2026,
+    "played": 135,
+    "avgGoals": 2.81,
+    "over15Rate": 76.3,
+    "over25Rate": 54.1,
+    "over35Rate": 28.9,
+    "bttsRate": 55.6
   },
   {
     "id": 16,
@@ -7364,6 +7392,34 @@
     "bttsRate": 47.5
   },
   {
+    "id": 41,
+    "name": "League One",
+    "country": "England",
+    "type": "League",
+    "tier": 3,
+    "season": 2026,
+    "played": 154,
+    "avgGoals": 2.82,
+    "over15Rate": 79.9,
+    "over25Rate": 53.9,
+    "over35Rate": 30.5,
+    "bttsRate": 57.1
+  },
+  {
+    "id": 120,
+    "name": "1. Division",
+    "country": "Denmark",
+    "type": "League",
+    "tier": 2,
+    "season": 2026,
+    "played": 76,
+    "avgGoals": 2.74,
+    "over15Rate": 77.6,
+    "over25Rate": 53.9,
+    "over35Rate": 30.3,
+    "bttsRate": 61.8
+  },
+  {
     "id": 267,
     "name": "Copa Chile",
     "country": "Chile",
@@ -7376,6 +7432,20 @@
     "over25Rate": 53.9,
     "over35Rate": 30.4,
     "bttsRate": 54.8
+  },
+  {
+    "id": 440,
+    "name": "Tercera División RFEF - Group 2",
+    "country": "Spain",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 76,
+    "avgGoals": 2.82,
+    "over15Rate": 77.6,
+    "over25Rate": 53.9,
+    "over35Rate": 30.3,
+    "bttsRate": 52.6
   },
   {
     "id": 10,
@@ -7420,34 +7490,6 @@
     "bttsRate": 57.7
   },
   {
-    "id": 327,
-    "name": "Erovnuli Liga",
-    "country": "Georgia",
-    "type": "League",
-    "tier": 3,
-    "season": 2026,
-    "played": 151,
-    "avgGoals": 2.66,
-    "over15Rate": 73.5,
-    "over25Rate": 53.6,
-    "over35Rate": 25.8,
-    "bttsRate": 56.3
-  },
-  {
-    "id": 392,
-    "name": "Challenge League",
-    "country": "Malta",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 43,
-    "avgGoals": 2.63,
-    "over15Rate": 76.7,
-    "over25Rate": 53.5,
-    "over35Rate": 25.6,
-    "bttsRate": 53.5
-  },
-  {
     "id": 113,
     "name": "Allsvenskan",
     "country": "Sweden",
@@ -7490,18 +7532,18 @@
     "bttsRate": 55.8
   },
   {
-    "id": 393,
-    "name": "Premier League",
-    "country": "Malta",
+    "id": 327,
+    "name": "Erovnuli Liga",
+    "country": "Georgia",
     "type": "League",
     "tier": 3,
     "season": 2026,
-    "played": 60,
-    "avgGoals": 2.8,
-    "over15Rate": 88.3,
+    "played": 152,
+    "avgGoals": 2.64,
+    "over15Rate": 73,
     "over25Rate": 53.3,
-    "over35Rate": 25,
-    "bttsRate": 60
+    "over35Rate": 25.7,
+    "bttsRate": 55.9
   },
   {
     "id": 466,
@@ -7546,32 +7588,18 @@
     "bttsRate": 51.6
   },
   {
-    "id": 345,
-    "name": "Czech Liga",
-    "country": "Czech-Republic",
+    "id": 450,
+    "name": "Tercera División RFEF - Group 12",
+    "country": "Spain",
     "type": "League",
-    "tier": 1,
+    "tier": 4,
     "season": 2026,
-    "played": 94,
-    "avgGoals": 2.69,
-    "over15Rate": 77.7,
+    "played": 79,
+    "avgGoals": 2.96,
+    "over15Rate": 79.7,
     "over25Rate": 53.2,
-    "over35Rate": 25.5,
-    "bttsRate": 51.1
-  },
-  {
-    "id": 408,
-    "name": "Premiership",
-    "country": "Northern-Ireland",
-    "type": "League",
-    "tier": 3,
-    "season": 2026,
-    "played": 77,
-    "avgGoals": 2.71,
-    "over15Rate": 79.2,
-    "over25Rate": 53.2,
-    "over35Rate": 27.3,
-    "bttsRate": 51.9
+    "over35Rate": 32.9,
+    "bttsRate": 54.4
   },
   {
     "id": 300,
@@ -7588,18 +7616,18 @@
     "bttsRate": 56
   },
   {
-    "id": 789,
-    "name": "Liga III - Serie 6",
-    "country": "Romania",
+    "id": 408,
+    "name": "Premiership",
+    "country": "Northern-Ireland",
     "type": "League",
-    "tier": 4,
+    "tier": 3,
     "season": 2026,
-    "played": 64,
-    "avgGoals": 2.86,
-    "over15Rate": 78.1,
+    "played": 81,
+    "avgGoals": 2.78,
+    "over15Rate": 79,
     "over25Rate": 53.1,
-    "over35Rate": 34.4,
-    "bttsRate": 50
+    "over35Rate": 28.4,
+    "bttsRate": 53.1
   },
   {
     "id": 55,
@@ -7614,6 +7642,20 @@
     "over25Rate": 53,
     "over35Rate": 31,
     "bttsRate": 56.6
+  },
+  {
+    "id": 789,
+    "name": "Liga III - Serie 6",
+    "country": "Romania",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 66,
+    "avgGoals": 2.83,
+    "over15Rate": 77.3,
+    "over25Rate": 53,
+    "over35Rate": 33.3,
+    "bttsRate": 48.5
   },
   {
     "id": 293,
@@ -7644,18 +7686,18 @@
     "bttsRate": 55.9
   },
   {
-    "id": 369,
-    "name": "Super League",
-    "country": "Uzbekistan",
+    "id": 362,
+    "name": "A Lyga",
+    "country": "Lithuania",
     "type": "League",
-    "tier": 4,
+    "tier": 3,
     "season": 2026,
-    "played": 204,
-    "avgGoals": 2.64,
-    "over15Rate": 72.1,
+    "played": 155,
+    "avgGoals": 2.65,
+    "over15Rate": 74.8,
     "over25Rate": 52.9,
-    "over35Rate": 27,
-    "bttsRate": 56.4
+    "over35Rate": 29.7,
+    "bttsRate": 47.7
   },
   {
     "id": 520,
@@ -7686,20 +7728,6 @@
     "bttsRate": 60.6
   },
   {
-    "id": 440,
-    "name": "Tercera División RFEF - Group 2",
-    "country": "Spain",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 72,
-    "avgGoals": 2.74,
-    "over15Rate": 76.4,
-    "over25Rate": 52.8,
-    "over35Rate": 29.2,
-    "bttsRate": 52.8
-  },
-  {
     "id": 138,
     "name": "Serie C - Girone A",
     "country": "Italy",
@@ -7712,6 +7740,34 @@
     "over25Rate": 52.7,
     "over35Rate": 25,
     "bttsRate": 54.5
+  },
+  {
+    "id": 262,
+    "name": "Liga MX",
+    "country": "Mexico",
+    "type": "League",
+    "tier": 2,
+    "season": 2026,
+    "played": 129,
+    "avgGoals": 2.99,
+    "over15Rate": 80.6,
+    "over25Rate": 52.7,
+    "over35Rate": 32.6,
+    "bttsRate": 61.2
+  },
+  {
+    "id": 369,
+    "name": "Super League",
+    "country": "Uzbekistan",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 205,
+    "avgGoals": 2.63,
+    "over15Rate": 71.7,
+    "over25Rate": 52.7,
+    "over35Rate": 26.8,
+    "bttsRate": 56.1
   },
   {
     "id": 371,
@@ -7728,6 +7784,20 @@
     "bttsRate": 43.6
   },
   {
+    "id": 317,
+    "name": "1st League - RS",
+    "country": "Bosnia",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 95,
+    "avgGoals": 2.79,
+    "over15Rate": 72.6,
+    "over25Rate": 52.6,
+    "over35Rate": 26.3,
+    "bttsRate": 45.3
+  },
+  {
     "id": 502,
     "name": "Copa Bicentenario",
     "country": "Peru",
@@ -7740,6 +7810,20 @@
     "over25Rate": 52.6,
     "over35Rate": 21.1,
     "bttsRate": 47.4
+  },
+  {
+    "id": 865,
+    "name": "Liga 3",
+    "country": "Portugal",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 76,
+    "avgGoals": 2.64,
+    "over15Rate": 71.1,
+    "over25Rate": 52.6,
+    "over35Rate": 32.9,
+    "bttsRate": 52.6
   },
   {
     "id": 986,
@@ -7812,34 +7896,6 @@
     "bttsRate": 52.4
   },
   {
-    "id": 262,
-    "name": "Liga MX",
-    "country": "Mexico",
-    "type": "League",
-    "tier": 2,
-    "season": 2026,
-    "played": 128,
-    "avgGoals": 2.99,
-    "over15Rate": 80.5,
-    "over25Rate": 52.3,
-    "over35Rate": 32.8,
-    "bttsRate": 61.7
-  },
-  {
-    "id": 362,
-    "name": "A Lyga",
-    "country": "Lithuania",
-    "type": "League",
-    "tier": 3,
-    "season": 2026,
-    "played": 153,
-    "avgGoals": 2.63,
-    "over15Rate": 74.5,
-    "over25Rate": 52.3,
-    "over35Rate": 29.4,
-    "bttsRate": 47.1
-  },
-  {
     "id": 932,
     "name": "Non League Div One - Northern East",
     "country": "England",
@@ -7852,20 +7908,6 @@
     "over25Rate": 52.3,
     "over35Rate": 34.2,
     "bttsRate": 47
-  },
-  {
-    "id": 136,
-    "name": "Serie B",
-    "country": "Italy",
-    "type": "League",
-    "tier": 2,
-    "season": 2026,
-    "played": 90,
-    "avgGoals": 2.69,
-    "over15Rate": 80,
-    "over25Rate": 52.2,
-    "over35Rate": 24.4,
-    "bttsRate": 61.1
   },
   {
     "id": 137,
@@ -7882,20 +7924,6 @@
     "bttsRate": 39.1
   },
   {
-    "id": 317,
-    "name": "1st League - RS",
-    "country": "Bosnia",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 90,
-    "avgGoals": 2.73,
-    "over15Rate": 72.2,
-    "over25Rate": 52.2,
-    "over35Rate": 24.4,
-    "bttsRate": 45.6
-  },
-  {
     "id": 470,
     "name": "National 3 - Group K",
     "country": "France",
@@ -7910,32 +7938,18 @@
     "bttsRate": 50.5
   },
   {
-    "id": 865,
-    "name": "Liga 3",
-    "country": "Portugal",
+    "id": 51,
+    "name": "National League - South",
+    "country": "England",
     "type": "League",
     "tier": 4,
     "season": 2026,
-    "played": 71,
-    "avgGoals": 2.63,
-    "over15Rate": 69,
-    "over25Rate": 52.1,
-    "over35Rate": 33.8,
-    "bttsRate": 52.1
-  },
-  {
-    "id": 450,
-    "name": "Tercera División RFEF - Group 12",
-    "country": "Spain",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 75,
-    "avgGoals": 2.97,
-    "over15Rate": 80,
+    "played": 171,
+    "avgGoals": 2.92,
+    "over15Rate": 78.9,
     "over25Rate": 52,
     "over35Rate": 33.3,
-    "bttsRate": 56
+    "bttsRate": 52
   },
   {
     "id": 754,
@@ -7952,6 +7966,48 @@
     "bttsRate": 57.3
   },
   {
+    "id": 759,
+    "name": "Liga Mayor",
+    "country": "Dominican-Republic",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 50,
+    "avgGoals": 2.58,
+    "over15Rate": 64,
+    "over25Rate": 52,
+    "over35Rate": 30,
+    "bttsRate": 50
+  },
+  {
+    "id": 442,
+    "name": "Tercera División RFEF - Group 4",
+    "country": "Spain",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 79,
+    "avgGoals": 2.72,
+    "over15Rate": 79.7,
+    "over25Rate": 51.9,
+    "over35Rate": 22.8,
+    "bttsRate": 50.6
+  },
+  {
+    "id": 197,
+    "name": "Super League 1",
+    "country": "Greece",
+    "type": "League",
+    "tier": 1,
+    "season": 2026,
+    "played": 56,
+    "avgGoals": 2.8,
+    "over15Rate": 80.4,
+    "over25Rate": 51.8,
+    "over35Rate": 33.9,
+    "bttsRate": 50
+  },
+  {
     "id": 682,
     "name": "Campeonato de Portugal Prio - Group F",
     "country": "Portugal",
@@ -7964,20 +8020,6 @@
     "over25Rate": 51.8,
     "over35Rate": 27.1,
     "bttsRate": 51.8
-  },
-  {
-    "id": 943,
-    "name": "Serie C - Girone C",
-    "country": "Italy",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 114,
-    "avgGoals": 2.8,
-    "over15Rate": 73.7,
-    "over25Rate": 51.8,
-    "over35Rate": 32.5,
-    "bttsRate": 53.5
   },
   {
     "id": 464,
@@ -7994,32 +8036,18 @@
     "bttsRate": 57.9
   },
   {
-    "id": 441,
-    "name": "Tercera División RFEF - Group 3",
-    "country": "Spain",
+    "id": 943,
+    "name": "Serie C - Girone C",
+    "country": "Italy",
     "type": "League",
     "tier": 4,
     "season": 2026,
-    "played": 74,
-    "avgGoals": 2.68,
-    "over15Rate": 78.4,
-    "over25Rate": 51.4,
-    "over35Rate": 28.4,
-    "bttsRate": 45.9
-  },
-  {
-    "id": 443,
-    "name": "Tercera División RFEF - Group 5",
-    "country": "Spain",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 72,
-    "avgGoals": 2.65,
-    "over15Rate": 69.4,
-    "over25Rate": 51.4,
-    "over35Rate": 33.3,
-    "bttsRate": 52.8
+    "played": 116,
+    "avgGoals": 2.78,
+    "over15Rate": 73.3,
+    "over25Rate": 51.7,
+    "over35Rate": 31.9,
+    "bttsRate": 53.4
   },
   {
     "id": 452,
@@ -8078,6 +8106,20 @@
     "bttsRate": 51.2
   },
   {
+    "id": 441,
+    "name": "Tercera División RFEF - Group 3",
+    "country": "Spain",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 80,
+    "avgGoals": 2.67,
+    "over15Rate": 77.5,
+    "over25Rate": 51.2,
+    "over35Rate": 28.7,
+    "bttsRate": 46.3
+  },
+  {
     "id": 30,
     "name": "World Cup - Qualification Asia",
     "country": "World",
@@ -8090,34 +8132,6 @@
     "over25Rate": 51.1,
     "over35Rate": 35.1,
     "bttsRate": 38.2
-  },
-  {
-    "id": 370,
-    "name": "Primera Division",
-    "country": "El-Salvador",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 102,
-    "avgGoals": 2.65,
-    "over15Rate": 76.5,
-    "over25Rate": 51,
-    "over35Rate": 33.3,
-    "bttsRate": 54.9
-  },
-  {
-    "id": 404,
-    "name": "Campionato",
-    "country": "San-Marino",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 49,
-    "avgGoals": 2.88,
-    "over15Rate": 81.6,
-    "over25Rate": 51,
-    "over35Rate": 32.7,
-    "bttsRate": 42.9
   },
   {
     "id": 610,
@@ -8134,46 +8148,46 @@
     "bttsRate": 38.8
   },
   {
-    "id": 51,
-    "name": "National League - South",
-    "country": "England",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 159,
-    "avgGoals": 2.93,
-    "over15Rate": 79.2,
-    "over25Rate": 50.9,
-    "over35Rate": 33.3,
-    "bttsRate": 53.5
-  },
-  {
     "id": 71,
     "name": "Serie A",
     "country": "Brazil",
     "type": "League",
     "tier": 2,
     "season": 2026,
-    "played": 328,
+    "played": 329,
     "avgGoals": 2.66,
-    "over15Rate": 78,
-    "over25Rate": 50.9,
-    "over35Rate": 25.3,
-    "bttsRate": 58.8
+    "over15Rate": 78.1,
+    "over25Rate": 50.8,
+    "over35Rate": 25.2,
+    "bttsRate": 58.7
   },
   {
-    "id": 197,
-    "name": "Super League 1",
-    "country": "Greece",
+    "id": 204,
+    "name": "1. Lig",
+    "country": "Turkey",
     "type": "League",
-    "tier": 1,
+    "tier": 2,
     "season": 2026,
-    "played": 55,
+    "played": 124,
     "avgGoals": 2.76,
-    "over15Rate": 80,
-    "over25Rate": 50.9,
-    "over35Rate": 32.7,
-    "bttsRate": 49.1
+    "over15Rate": 80.6,
+    "over25Rate": 50.8,
+    "over35Rate": 26.6,
+    "bttsRate": 54
+  },
+  {
+    "id": 234,
+    "name": "Liga Nacional",
+    "country": "Honduras",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 69,
+    "avgGoals": 2.71,
+    "over15Rate": 76.8,
+    "over25Rate": 50.7,
+    "over35Rate": 27.5,
+    "bttsRate": 52.2
   },
   {
     "id": 338,
@@ -8204,32 +8218,18 @@
     "bttsRate": 56.5
   },
   {
-    "id": 107,
-    "name": "I Liga",
-    "country": "Poland",
+    "id": 370,
+    "name": "Primera Division",
+    "country": "El-Salvador",
     "type": "League",
-    "tier": 2,
+    "tier": 4,
     "season": 2026,
-    "played": 109,
-    "avgGoals": 2.68,
-    "over15Rate": 73.4,
+    "played": 103,
+    "avgGoals": 2.63,
+    "over15Rate": 75.7,
     "over25Rate": 50.5,
-    "over35Rate": 25.7,
-    "bttsRate": 53.2
-  },
-  {
-    "id": 204,
-    "name": "1. Lig",
-    "country": "Turkey",
-    "type": "League",
-    "tier": 2,
-    "season": 2026,
-    "played": 123,
-    "avgGoals": 2.76,
-    "over15Rate": 80.5,
-    "over25Rate": 50.4,
-    "over35Rate": 26.8,
-    "bttsRate": 53.7
+    "over35Rate": 33,
+    "bttsRate": 54.4
   },
   {
     "id": 389,
@@ -8316,6 +8316,20 @@
     "bttsRate": 25
   },
   {
+    "id": 107,
+    "name": "I Liga",
+    "country": "Poland",
+    "type": "League",
+    "tier": 2,
+    "season": 2026,
+    "played": 112,
+    "avgGoals": 2.69,
+    "over15Rate": 74.1,
+    "over25Rate": 50,
+    "over35Rate": 25.9,
+    "bttsRate": 54.5
+  },
+  {
     "id": 170,
     "name": "League One",
     "country": "China",
@@ -8328,20 +8342,6 @@
     "over25Rate": 50,
     "over35Rate": 27.6,
     "bttsRate": 54.3
-  },
-  {
-    "id": 172,
-    "name": "First League",
-    "country": "Bulgaria",
-    "type": "League",
-    "tier": 3,
-    "season": 2026,
-    "played": 86,
-    "avgGoals": 2.74,
-    "over15Rate": 79.1,
-    "over25Rate": 50,
-    "over35Rate": 27.9,
-    "bttsRate": 53.5
   },
   {
     "id": 199,
@@ -8372,18 +8372,18 @@
     "bttsRate": 48.9
   },
   {
-    "id": 319,
-    "name": "2. Division",
-    "country": "Cyprus",
+    "id": 390,
+    "name": "Premier League",
+    "country": "Lebanon",
     "type": "League",
     "tier": 4,
     "season": 2026,
-    "played": 46,
-    "avgGoals": 2.67,
-    "over15Rate": 78.3,
+    "played": 24,
+    "avgGoals": 2.46,
+    "over15Rate": 79.2,
     "over25Rate": 50,
-    "over35Rate": 26.1,
-    "bttsRate": 47.8
+    "over35Rate": 8.3,
+    "bttsRate": 45.8
   },
   {
     "id": 396,
@@ -8400,18 +8400,18 @@
     "bttsRate": 56.8
   },
   {
-    "id": 417,
-    "name": "Premier League",
-    "country": "Bahrain",
+    "id": 443,
+    "name": "Tercera División RFEF - Group 5",
+    "country": "Spain",
     "type": "League",
     "tier": 4,
     "season": 2026,
-    "played": 38,
-    "avgGoals": 2.76,
-    "over15Rate": 76.3,
+    "played": 74,
+    "avgGoals": 2.64,
+    "over15Rate": 70.3,
     "over25Rate": 50,
-    "over35Rate": 34.2,
-    "bttsRate": 52.6
+    "over35Rate": 32.4,
+    "bttsRate": 52.7
   },
   {
     "id": 457,
@@ -8524,20 +8524,6 @@
     "over25Rate": 50,
     "over35Rate": 30,
     "bttsRate": 53.3
-  },
-  {
-    "id": 759,
-    "name": "Liga Mayor",
-    "country": "Dominican-Republic",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 48,
-    "avgGoals": 2.5,
-    "over15Rate": 62.5,
-    "over25Rate": 50,
-    "over35Rate": 27.1,
-    "bttsRate": 47.9
   },
   {
     "id": 766,
@@ -8848,6 +8834,20 @@
     "bttsRate": 54.6
   },
   {
+    "id": 141,
+    "name": "Segunda División",
+    "country": "Spain",
+    "type": "League",
+    "tier": 2,
+    "season": 2026,
+    "played": 125,
+    "avgGoals": 2.7,
+    "over15Rate": 74.4,
+    "over25Rate": 49.6,
+    "over35Rate": 32,
+    "bttsRate": 52
+  },
+  {
     "id": 320,
     "name": "3. Division",
     "country": "Cyprus",
@@ -8890,32 +8890,46 @@
     "bttsRate": 54.4
   },
   {
-    "id": 283,
-    "name": "Liga I",
-    "country": "Romania",
+    "id": 136,
+    "name": "Serie B",
+    "country": "Italy",
     "type": "League",
-    "tier": 1,
+    "tier": 2,
     "season": 2026,
-    "played": 105,
-    "avgGoals": 2.73,
-    "over15Rate": 72.4,
+    "played": 95,
+    "avgGoals": 2.65,
+    "over15Rate": 81.1,
     "over25Rate": 49.5,
-    "over35Rate": 36.2,
-    "bttsRate": 47.6
+    "over35Rate": 23.2,
+    "bttsRate": 61.1
   },
   {
-    "id": 39,
-    "name": "Premier League",
-    "country": "England",
+    "id": 252,
+    "name": "Division Profesional - Clausura",
+    "country": "Paraguay",
     "type": "League",
-    "tier": 1,
+    "tier": 3,
     "season": 2026,
-    "played": 81,
-    "avgGoals": 2.77,
-    "over15Rate": 76.5,
+    "played": 101,
+    "avgGoals": 2.49,
+    "over15Rate": 72.3,
+    "over25Rate": 49.5,
+    "over35Rate": 19.8,
+    "bttsRate": 51.5
+  },
+  {
+    "id": 95,
+    "name": "Segunda Liga",
+    "country": "Portugal",
+    "type": "League",
+    "tier": 2,
+    "season": 2026,
+    "played": 77,
+    "avgGoals": 2.4,
+    "over15Rate": 71.4,
     "over25Rate": 49.4,
-    "over35Rate": 30.9,
-    "bttsRate": 49.4
+    "over35Rate": 20.8,
+    "bttsRate": 46.8
   },
   {
     "id": 295,
@@ -8932,34 +8946,6 @@
     "bttsRate": 58.7
   },
   {
-    "id": 234,
-    "name": "Liga Nacional",
-    "country": "Honduras",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 67,
-    "avgGoals": 2.63,
-    "over15Rate": 76.1,
-    "over25Rate": 49.3,
-    "over35Rate": 25.4,
-    "bttsRate": 50.7
-  },
-  {
-    "id": 448,
-    "name": "Tercera División RFEF - Group 10",
-    "country": "Spain",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 71,
-    "avgGoals": 2.68,
-    "over15Rate": 73.2,
-    "over25Rate": 49.3,
-    "over35Rate": 29.6,
-    "bttsRate": 50.7
-  },
-  {
     "id": 792,
     "name": "Liga III - Serie 9",
     "country": "Romania",
@@ -8972,20 +8958,6 @@
     "over25Rate": 49.3,
     "over35Rate": 28.3,
     "bttsRate": 46.4
-  },
-  {
-    "id": 141,
-    "name": "Segunda División",
-    "country": "Spain",
-    "type": "League",
-    "tier": 2,
-    "season": 2026,
-    "played": 122,
-    "avgGoals": 2.69,
-    "over15Rate": 73.8,
-    "over25Rate": 49.2,
-    "over35Rate": 32,
-    "bttsRate": 50.8
   },
   {
     "id": 419,
@@ -9016,6 +8988,20 @@
     "bttsRate": 57.3
   },
   {
+    "id": 316,
+    "name": "1st League - FBiH",
+    "country": "Bosnia",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 96,
+    "avgGoals": 2.65,
+    "over15Rate": 71.9,
+    "over25Rate": 49,
+    "over35Rate": 28.1,
+    "bttsRate": 47.9
+  },
+  {
     "id": 130,
     "name": "Copa Argentina",
     "country": "Argentina",
@@ -9028,6 +9014,34 @@
     "over25Rate": 48.9,
     "over35Rate": 24.4,
     "bttsRate": 28.9
+  },
+  {
+    "id": 172,
+    "name": "First League",
+    "country": "Bulgaria",
+    "type": "League",
+    "tier": 3,
+    "season": 2026,
+    "played": 88,
+    "avgGoals": 2.69,
+    "over15Rate": 77.3,
+    "over25Rate": 48.9,
+    "over35Rate": 27.3,
+    "bttsRate": 52.3
+  },
+  {
+    "id": 286,
+    "name": "Super Liga",
+    "country": "Serbia",
+    "type": "League",
+    "tier": 1,
+    "season": 2026,
+    "played": 92,
+    "avgGoals": 2.64,
+    "over15Rate": 71.7,
+    "over25Rate": 48.9,
+    "over35Rate": 28.3,
+    "bttsRate": 44.6
   },
   {
     "id": 310,
@@ -9044,6 +9058,20 @@
     "bttsRate": 60
   },
   {
+    "id": 319,
+    "name": "2. Division",
+    "country": "Cyprus",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 47,
+    "avgGoals": 2.64,
+    "over15Rate": 76.6,
+    "over25Rate": 48.9,
+    "over35Rate": 25.5,
+    "bttsRate": 46.8
+  },
+  {
     "id": 322,
     "name": "Premier League",
     "country": "Jamaica",
@@ -9056,20 +9084,6 @@
     "over25Rate": 48.9,
     "over35Rate": 31.1,
     "bttsRate": 44.4
-  },
-  {
-    "id": 436,
-    "name": "Primera División RFEF - Group 2",
-    "country": "Spain",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 92,
-    "avgGoals": 2.7,
-    "over15Rate": 75,
-    "over25Rate": 48.9,
-    "over35Rate": 28.3,
-    "bttsRate": 53.3
   },
   {
     "id": 461,
@@ -9142,6 +9156,20 @@
     "bttsRate": 42.2
   },
   {
+    "id": 283,
+    "name": "Liga I",
+    "country": "Romania",
+    "type": "League",
+    "tier": 1,
+    "season": 2026,
+    "played": 107,
+    "avgGoals": 2.72,
+    "over15Rate": 72.9,
+    "over25Rate": 48.6,
+    "over35Rate": 35.5,
+    "bttsRate": 47.7
+  },
+  {
     "id": 411,
     "name": "Elite One",
     "country": "Cameroon",
@@ -9156,17 +9184,17 @@
     "bttsRate": 44.8
   },
   {
-    "id": 442,
-    "name": "Tercera División RFEF - Group 4",
+    "id": 448,
+    "name": "Tercera División RFEF - Group 10",
     "country": "Spain",
     "type": "League",
     "tier": 4,
     "season": 2026,
     "played": 72,
-    "avgGoals": 2.68,
-    "over15Rate": 79.2,
+    "avgGoals": 2.64,
+    "over15Rate": 72.2,
     "over25Rate": 48.6,
-    "over35Rate": 22.2,
+    "over35Rate": 29.2,
     "bttsRate": 50
   },
   {
@@ -9182,6 +9210,20 @@
     "over25Rate": 48.6,
     "over35Rate": 27.8,
     "bttsRate": 37.5
+  },
+  {
+    "id": 62,
+    "name": "Ligue 2",
+    "country": "France",
+    "type": "League",
+    "tier": 2,
+    "season": 2026,
+    "played": 97,
+    "avgGoals": 2.67,
+    "over15Rate": 71.1,
+    "over25Rate": 48.5,
+    "over35Rate": 28.9,
+    "bttsRate": 57.7
   },
   {
     "id": 162,
@@ -9212,6 +9254,20 @@
     "bttsRate": 47.1
   },
   {
+    "id": 69,
+    "name": "National 2 - Group C",
+    "country": "France",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 64,
+    "avgGoals": 2.58,
+    "over15Rate": 67.2,
+    "over25Rate": 48.4,
+    "over35Rate": 31.3,
+    "bttsRate": 46.9
+  },
+  {
     "id": 173,
     "name": "Second League",
     "country": "Bulgaria",
@@ -9226,18 +9282,18 @@
     "bttsRate": 47.5
   },
   {
-    "id": 286,
-    "name": "Super Liga",
-    "country": "Serbia",
+    "id": 436,
+    "name": "Primera División RFEF - Group 2",
+    "country": "Spain",
     "type": "League",
-    "tier": 1,
+    "tier": 4,
     "season": 2026,
-    "played": 91,
-    "avgGoals": 2.6,
-    "over15Rate": 71.4,
+    "played": 95,
+    "avgGoals": 2.69,
+    "over15Rate": 75.8,
     "over25Rate": 48.4,
-    "over35Rate": 27.5,
-    "bttsRate": 44
+    "over35Rate": 28.4,
+    "bttsRate": 52.6
   },
   {
     "id": 471,
@@ -9268,6 +9324,20 @@
     "bttsRate": 48.3
   },
   {
+    "id": 578,
+    "name": "Gamma Ethniki - Group 3",
+    "country": "Greece",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 29,
+    "avgGoals": 2.38,
+    "over15Rate": 62.1,
+    "over25Rate": 48.3,
+    "over35Rate": 24.1,
+    "bttsRate": 48.3
+  },
+  {
     "id": 297,
     "name": "Thai League 2",
     "country": "Thailand",
@@ -9282,20 +9352,6 @@
     "bttsRate": 50.6
   },
   {
-    "id": 252,
-    "name": "Division Profesional - Clausura",
-    "country": "Paraguay",
-    "type": "League",
-    "tier": 3,
-    "season": 2026,
-    "played": 98,
-    "avgGoals": 2.47,
-    "over15Rate": 71.4,
-    "over25Rate": 48,
-    "over35Rate": 20.4,
-    "bttsRate": 52
-  },
-  {
     "id": 507,
     "name": "Cup",
     "country": "South-Africa",
@@ -9308,34 +9364,6 @@
     "over25Rate": 48,
     "over35Rate": 8,
     "bttsRate": 32
-  },
-  {
-    "id": 62,
-    "name": "Ligue 2",
-    "country": "France",
-    "type": "League",
-    "tier": 2,
-    "season": 2026,
-    "played": 96,
-    "avgGoals": 2.67,
-    "over15Rate": 70.8,
-    "over25Rate": 47.9,
-    "over35Rate": 29.2,
-    "bttsRate": 58.3
-  },
-  {
-    "id": 95,
-    "name": "Segunda Liga",
-    "country": "Portugal",
-    "type": "League",
-    "tier": 2,
-    "season": 2026,
-    "played": 73,
-    "avgGoals": 2.4,
-    "over15Rate": 71.2,
-    "over25Rate": 47.9,
-    "over35Rate": 20.5,
-    "bttsRate": 45.2
   },
   {
     "id": 1106,
@@ -9366,46 +9394,32 @@
     "bttsRate": 47.8
   },
   {
-    "id": 390,
+    "id": 39,
     "name": "Premier League",
-    "country": "Lebanon",
+    "country": "England",
     "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 23,
-    "avgGoals": 2.43,
-    "over15Rate": 78.3,
-    "over25Rate": 47.8,
-    "over35Rate": 8.7,
-    "bttsRate": 43.5
-  },
-  {
-    "id": 962,
-    "name": "Premier League",
-    "country": "Lesotho",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 67,
-    "avgGoals": 2.61,
-    "over15Rate": 67.2,
-    "over25Rate": 47.8,
-    "over35Rate": 32.8,
-    "bttsRate": 47.8
-  },
-  {
-    "id": 316,
-    "name": "1st League - FBiH",
-    "country": "Bosnia",
-    "type": "League",
-    "tier": 4,
+    "tier": 1,
     "season": 2026,
     "played": 88,
-    "avgGoals": 2.59,
-    "over15Rate": 71.6,
+    "avgGoals": 2.74,
+    "over15Rate": 77.3,
     "over25Rate": 47.7,
-    "over35Rate": 28.4,
-    "bttsRate": 47.7
+    "over35Rate": 30.7,
+    "bttsRate": 48.9
+  },
+  {
+    "id": 239,
+    "name": "Primera A",
+    "country": "Colombia",
+    "type": "League",
+    "tier": 3,
+    "season": 2026,
+    "played": 365,
+    "avgGoals": 2.53,
+    "over15Rate": 74.5,
+    "over25Rate": 47.7,
+    "over35Rate": 23.8,
+    "bttsRate": 54.5
   },
   {
     "id": 734,
@@ -9436,20 +9450,6 @@
     "bttsRate": 54.9
   },
   {
-    "id": 239,
-    "name": "Primera A",
-    "country": "Colombia",
-    "type": "League",
-    "tier": 3,
-    "season": 2026,
-    "played": 364,
-    "avgGoals": 2.53,
-    "over15Rate": 74.5,
-    "over25Rate": 47.5,
-    "over35Rate": 23.6,
-    "bttsRate": 54.4
-  },
-  {
     "id": 251,
     "name": "Division Intermedia",
     "country": "Paraguay",
@@ -9462,6 +9462,20 @@
     "over25Rate": 47.5,
     "over35Rate": 29.2,
     "bttsRate": 56.7
+  },
+  {
+    "id": 417,
+    "name": "Premier League",
+    "country": "Bahrain",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 40,
+    "avgGoals": 2.67,
+    "over15Rate": 75,
+    "over25Rate": 47.5,
+    "over35Rate": 32.5,
+    "bttsRate": 50
   },
   {
     "id": 429,
@@ -9492,6 +9506,20 @@
     "bttsRate": 46.3
   },
   {
+    "id": 456,
+    "name": "Tercera División RFEF - Group 18",
+    "country": "Spain",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 78,
+    "avgGoals": 2.76,
+    "over15Rate": 73.1,
+    "over25Rate": 47.4,
+    "over35Rate": 33.3,
+    "bttsRate": 47.4
+  },
+  {
     "id": 1231,
     "name": "Federation Cup",
     "country": "Nigeria",
@@ -9520,18 +9548,46 @@
     "bttsRate": 48.6
   },
   {
+    "id": 42,
+    "name": "League Two",
+    "country": "England",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 163,
+    "avgGoals": 2.69,
+    "over15Rate": 76.7,
+    "over25Rate": 47.2,
+    "over35Rate": 30.7,
+    "bttsRate": 58.3
+  },
+  {
     "id": 304,
     "name": "Liga Panameña de Fútbol",
     "country": "Panama",
     "type": "League",
     "tier": 4,
     "season": 2026,
-    "played": 178,
-    "avgGoals": 2.63,
-    "over15Rate": 70.2,
+    "played": 180,
+    "avgGoals": 2.64,
+    "over15Rate": 70.6,
     "over25Rate": 47.2,
-    "over35Rate": 29.8,
-    "bttsRate": 54.5
+    "over35Rate": 30,
+    "bttsRate": 53.9
+  },
+  {
+    "id": 404,
+    "name": "Campionato",
+    "country": "San-Marino",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 53,
+    "avgGoals": 2.75,
+    "over15Rate": 77.4,
+    "over25Rate": 47.2,
+    "over35Rate": 30.2,
+    "bttsRate": 41.5
   },
   {
     "id": 465,
@@ -9576,20 +9632,6 @@
     "bttsRate": 51.7
   },
   {
-    "id": 568,
-    "name": "Eerste Divisie",
-    "country": "Suriname",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 17,
-    "avgGoals": 2.35,
-    "over15Rate": 70.6,
-    "over25Rate": 47.1,
-    "over35Rate": 17.6,
-    "bttsRate": 29.4
-  },
-  {
     "id": 621,
     "name": "Piauiense",
     "country": "Brazil",
@@ -9632,6 +9674,34 @@
     "bttsRate": 37.9
   },
   {
+    "id": 962,
+    "name": "Premier League",
+    "country": "Lesotho",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 68,
+    "avgGoals": 2.57,
+    "over15Rate": 66.2,
+    "over25Rate": 47.1,
+    "over35Rate": 32.4,
+    "bttsRate": 47.1
+  },
+  {
+    "id": 373,
+    "name": "1. SNL",
+    "country": "Slovenia",
+    "type": "League",
+    "tier": 2,
+    "season": 2026,
+    "played": 66,
+    "avgGoals": 2.58,
+    "over15Rate": 69.7,
+    "over25Rate": 47,
+    "over35Rate": 30.3,
+    "bttsRate": 48.5
+  },
+  {
     "id": 213,
     "name": "Third NL - Istok",
     "country": "Croatia",
@@ -9644,20 +9714,6 @@
     "over25Rate": 46.9,
     "over35Rate": 29.2,
     "bttsRate": 39.8
-  },
-  {
-    "id": 373,
-    "name": "1. SNL",
-    "country": "Slovenia",
-    "type": "League",
-    "tier": 2,
-    "season": 2026,
-    "played": 64,
-    "avgGoals": 2.56,
-    "over15Rate": 70.3,
-    "over25Rate": 46.9,
-    "over35Rate": 29.7,
-    "bttsRate": 50
   },
   {
     "id": 430,
@@ -9800,6 +9856,20 @@
     "bttsRate": 50
   },
   {
+    "id": 877,
+    "name": "Segunda División RFEF - Group 3",
+    "country": "Spain",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 69,
+    "avgGoals": 2.67,
+    "over15Rate": 73.9,
+    "over25Rate": 46.4,
+    "over35Rate": 29,
+    "bttsRate": 53.6
+  },
+  {
     "id": 264,
     "name": "Copa MX",
     "country": "Mexico",
@@ -9812,20 +9882,6 @@
     "over25Rate": 46.3,
     "over35Rate": 26.3,
     "bttsRate": 48.8
-  },
-  {
-    "id": 877,
-    "name": "Segunda División RFEF - Group 3",
-    "country": "Spain",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 67,
-    "avgGoals": 2.63,
-    "over15Rate": 73.1,
-    "over25Rate": 46.3,
-    "over35Rate": 28.4,
-    "bttsRate": 52.2
   },
   {
     "id": 580,
@@ -9870,32 +9926,18 @@
     "bttsRate": 15.4
   },
   {
-    "id": 42,
-    "name": "League Two",
-    "country": "England",
+    "id": 67,
+    "name": "National 2 - Group A",
+    "country": "France",
     "type": "League",
     "tier": 4,
     "season": 2026,
-    "played": 154,
-    "avgGoals": 2.68,
-    "over15Rate": 76,
-    "over25Rate": 46.1,
-    "over35Rate": 30.5,
-    "bttsRate": 56.5
-  },
-  {
-    "id": 299,
-    "name": "Primera División",
-    "country": "Venezuela",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 214,
-    "avgGoals": 2.57,
-    "over15Rate": 72,
-    "over25Rate": 45.8,
-    "over35Rate": 25.7,
-    "bttsRate": 55.1
+    "played": 61,
+    "avgGoals": 2.66,
+    "over15Rate": 70.5,
+    "over25Rate": 45.9,
+    "over35Rate": 32.8,
+    "bttsRate": 59
   },
   {
     "id": 439,
@@ -9904,12 +9946,26 @@
     "type": "League",
     "tier": 4,
     "season": 2026,
-    "played": 72,
-    "avgGoals": 2.58,
-    "over15Rate": 69.4,
+    "played": 74,
+    "avgGoals": 2.59,
+    "over15Rate": 70.3,
+    "over25Rate": 45.9,
+    "over35Rate": 28.4,
+    "bttsRate": 58.1
+  },
+  {
+    "id": 299,
+    "name": "Primera División",
+    "country": "Venezuela",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 216,
+    "avgGoals": 2.57,
+    "over15Rate": 71.8,
     "over25Rate": 45.8,
-    "over35Rate": 27.8,
-    "bttsRate": 59.7
+    "over35Rate": 25.9,
+    "bttsRate": 55.1
   },
   {
     "id": 1219,
@@ -9968,32 +10024,18 @@
     "bttsRate": 48.1
   },
   {
-    "id": 69,
-    "name": "National 2 - Group C",
-    "country": "France",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 57,
-    "avgGoals": 2.51,
-    "over15Rate": 66.7,
-    "over25Rate": 45.6,
-    "over35Rate": 28.1,
-    "bttsRate": 45.6
-  },
-  {
     "id": 435,
     "name": "Primera División RFEF - Group 1",
     "country": "Spain",
     "type": "League",
     "tier": 4,
     "season": 2026,
-    "played": 90,
-    "avgGoals": 2.58,
-    "over15Rate": 70,
-    "over25Rate": 45.6,
-    "over35Rate": 26.7,
-    "bttsRate": 51.1
+    "played": 94,
+    "avgGoals": 2.55,
+    "over15Rate": 69.1,
+    "over25Rate": 45.7,
+    "over35Rate": 26.6,
+    "bttsRate": 50
   },
   {
     "id": 590,
@@ -10022,6 +10064,20 @@
     "over25Rate": 45.6,
     "over35Rate": 35.6,
     "bttsRate": 45.6
+  },
+  {
+    "id": 201,
+    "name": "Botola 2",
+    "country": "Morocco",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 44,
+    "avgGoals": 2.41,
+    "over15Rate": 70.5,
+    "over25Rate": 45.5,
+    "over35Rate": 20.5,
+    "bttsRate": 56.8
   },
   {
     "id": 683,
@@ -10108,20 +10164,6 @@
     "bttsRate": 42.2
   },
   {
-    "id": 447,
-    "name": "Tercera División RFEF - Group 9",
-    "country": "Spain",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 73,
-    "avgGoals": 2.55,
-    "over15Rate": 74,
-    "over25Rate": 45.2,
-    "over35Rate": 26,
-    "bttsRate": 49.3
-  },
-  {
     "id": 497,
     "name": "Japan Football League",
     "country": "Japan",
@@ -10192,32 +10234,18 @@
     "bttsRate": 44.8
   },
   {
-    "id": 828,
-    "name": "Ligue 2",
-    "country": "Tunisia",
+    "id": 447,
+    "name": "Tercera División RFEF - Group 9",
+    "country": "Spain",
     "type": "League",
     "tier": 4,
     "season": 2026,
-    "played": 76,
-    "avgGoals": 2.11,
-    "over15Rate": 59.2,
-    "over25Rate": 44.7,
-    "over35Rate": 14.5,
-    "bttsRate": 42.1
-  },
-  {
-    "id": 67,
-    "name": "National 2 - Group A",
-    "country": "France",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 56,
-    "avgGoals": 2.59,
-    "over15Rate": 69.6,
+    "played": 74,
+    "avgGoals": 2.51,
+    "over15Rate": 73,
     "over25Rate": 44.6,
-    "over35Rate": 32.1,
-    "bttsRate": 58.9
+    "over35Rate": 25.7,
+    "bttsRate": 48.6
   },
   {
     "id": 813,
@@ -10276,20 +10304,6 @@
     "bttsRate": 49.4
   },
   {
-    "id": 456,
-    "name": "Tercera División RFEF - Group 18",
-    "country": "Spain",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 72,
-    "avgGoals": 2.63,
-    "over15Rate": 72.2,
-    "over25Rate": 44.4,
-    "over35Rate": 29.2,
-    "bttsRate": 44.4
-  },
-  {
     "id": 463,
     "name": "National 3 - Group C",
     "country": "France",
@@ -10324,12 +10338,12 @@
     "type": "League",
     "tier": 3,
     "season": 2026,
-    "played": 274,
+    "played": 276,
     "avgGoals": 2.38,
-    "over15Rate": 67.2,
+    "over15Rate": 67.4,
     "over25Rate": 44.2,
-    "over35Rate": 21.5,
-    "bttsRate": 50.4
+    "over35Rate": 21.4,
+    "bttsRate": 50.7
   },
   {
     "id": 402,
@@ -10346,18 +10360,18 @@
     "bttsRate": 43.5
   },
   {
-    "id": 68,
-    "name": "National 2 - Group B",
-    "country": "France",
+    "id": 828,
+    "name": "Ligue 2",
+    "country": "Tunisia",
     "type": "League",
     "tier": 4,
     "season": 2026,
-    "played": 59,
-    "avgGoals": 2.15,
-    "over15Rate": 66.1,
-    "over25Rate": 44.1,
-    "over35Rate": 16.9,
-    "bttsRate": 45.8
+    "played": 77,
+    "avgGoals": 2.09,
+    "over15Rate": 58.4,
+    "over25Rate": 44.2,
+    "over35Rate": 14.3,
+    "bttsRate": 41.6
   },
   {
     "id": 18,
@@ -10388,20 +10402,6 @@
     "bttsRate": 52
   },
   {
-    "id": 578,
-    "name": "Gamma Ethniki - Group 3",
-    "country": "Greece",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 25,
-    "avgGoals": 2.28,
-    "over15Rate": 56,
-    "over25Rate": 44,
-    "over35Rate": 24,
-    "bttsRate": 44
-  },
-  {
     "id": 579,
     "name": "Gamma Ethniki - Group 4",
     "country": "Greece",
@@ -10414,6 +10414,62 @@
     "over25Rate": 44,
     "over35Rate": 20,
     "bttsRate": 52
+  },
+  {
+    "id": 876,
+    "name": "Segunda División RFEF - Group 2",
+    "country": "Spain",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 75,
+    "avgGoals": 2.44,
+    "over15Rate": 68,
+    "over25Rate": 44,
+    "over35Rate": 25.3,
+    "bttsRate": 49.3
+  },
+  {
+    "id": 282,
+    "name": "Segunda División",
+    "country": "Peru",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 173,
+    "avgGoals": 2.53,
+    "over15Rate": 67.6,
+    "over25Rate": 43.9,
+    "over35Rate": 26,
+    "bttsRate": 43.4
+  },
+  {
+    "id": 942,
+    "name": "Serie C - Girone B",
+    "country": "Italy",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 114,
+    "avgGoals": 2.52,
+    "over15Rate": 76.3,
+    "over25Rate": 43.9,
+    "over35Rate": 22.8,
+    "bttsRate": 54.4
+  },
+  {
+    "id": 68,
+    "name": "National 2 - Group B",
+    "country": "France",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 64,
+    "avgGoals": 2.14,
+    "over15Rate": 65.6,
+    "over25Rate": 43.8,
+    "over35Rate": 17.2,
+    "bttsRate": 46.9
   },
   {
     "id": 560,
@@ -10430,20 +10486,6 @@
     "bttsRate": 43.8
   },
   {
-    "id": 942,
-    "name": "Serie C - Girone B",
-    "country": "Italy",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 112,
-    "avgGoals": 2.51,
-    "over15Rate": 75.9,
-    "over25Rate": 43.8,
-    "over35Rate": 22.3,
-    "bttsRate": 53.6
-  },
-  {
     "id": 29,
     "name": "World Cup - Qualification Africa",
     "country": "World",
@@ -10456,34 +10498,6 @@
     "over25Rate": 43.7,
     "over35Rate": 25.6,
     "bttsRate": 37.4
-  },
-  {
-    "id": 446,
-    "name": "Tercera División RFEF - Group 8",
-    "country": "Spain",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 71,
-    "avgGoals": 2.51,
-    "over15Rate": 73.2,
-    "over25Rate": 43.7,
-    "over35Rate": 21.1,
-    "bttsRate": 46.5
-  },
-  {
-    "id": 876,
-    "name": "Segunda División RFEF - Group 2",
-    "country": "Spain",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 71,
-    "avgGoals": 2.44,
-    "over15Rate": 67.6,
-    "over25Rate": 43.7,
-    "over35Rate": 25.4,
-    "bttsRate": 47.9
   },
   {
     "id": 73,
@@ -10542,20 +10556,6 @@
     "bttsRate": 52.4
   },
   {
-    "id": 444,
-    "name": "Tercera División RFEF - Group 6",
-    "country": "Spain",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 67,
-    "avgGoals": 2.33,
-    "over15Rate": 74.6,
-    "over25Rate": 43.3,
-    "over35Rate": 17.9,
-    "bttsRate": 53.7
-  },
-  {
     "id": 604,
     "name": "Catarinense - 1",
     "country": "Brazil",
@@ -10568,20 +10568,6 @@
     "over25Rate": 43.3,
     "over35Rate": 20.9,
     "bttsRate": 44.8
-  },
-  {
-    "id": 694,
-    "name": "Gamma Ethniki - Group 10",
-    "country": "Greece",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 30,
-    "avgGoals": 2.63,
-    "over15Rate": 70,
-    "over25Rate": 43.3,
-    "over35Rate": 26.7,
-    "bttsRate": 50
   },
   {
     "id": 427,
@@ -10604,12 +10590,12 @@
     "type": "League",
     "tier": 4,
     "season": 2026,
-    "played": 74,
-    "avgGoals": 2.49,
-    "over15Rate": 67.6,
+    "played": 81,
+    "avgGoals": 2.51,
+    "over15Rate": 69.1,
     "over25Rate": 43.2,
-    "over35Rate": 29.7,
-    "bttsRate": 44.6
+    "over35Rate": 28.4,
+    "bttsRate": 46.9
   },
   {
     "id": 25,
@@ -10626,18 +10612,46 @@
     "bttsRate": 35.7
   },
   {
-    "id": 423,
-    "name": "Ligue 1",
-    "country": "Burkina-Faso",
+    "id": 187,
+    "name": "Ligue 2",
+    "country": "Algeria",
     "type": "League",
     "tier": 4,
     "season": 2026,
-    "played": 49,
-    "avgGoals": 2.43,
-    "over15Rate": 59.2,
+    "played": 119,
+    "avgGoals": 2.22,
+    "over15Rate": 58,
     "over25Rate": 42.9,
-    "over35Rate": 26.5,
-    "bttsRate": 42.9
+    "over35Rate": 21,
+    "bttsRate": 40.3
+  },
+  {
+    "id": 323,
+    "name": "Indian Super League",
+    "country": "India",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 21,
+    "avgGoals": 2.52,
+    "over15Rate": 76.2,
+    "over25Rate": 42.9,
+    "over35Rate": 23.8,
+    "bttsRate": 61.9
+  },
+  {
+    "id": 444,
+    "name": "Tercera División RFEF - Group 6",
+    "country": "Spain",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 70,
+    "avgGoals": 2.33,
+    "over15Rate": 74.3,
+    "over25Rate": 42.9,
+    "over35Rate": 18.6,
+    "bttsRate": 52.9
   },
   {
     "id": 935,
@@ -10716,12 +10730,12 @@
     "type": "League",
     "tier": 4,
     "season": 2026,
-    "played": 351,
+    "played": 354,
     "avgGoals": 2.33,
-    "over15Rate": 68.7,
+    "over15Rate": 68.6,
     "over25Rate": 42.7,
-    "over35Rate": 18.2,
-    "bttsRate": 46.4
+    "over35Rate": 18.4,
+    "bttsRate": 46.6
   },
   {
     "id": 250,
@@ -10766,20 +10780,6 @@
     "bttsRate": 49.1
   },
   {
-    "id": 187,
-    "name": "Ligue 2",
-    "country": "Algeria",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 115,
-    "avgGoals": 2.2,
-    "over15Rate": 57.4,
-    "over25Rate": 42.6,
-    "over35Rate": 20.9,
-    "bttsRate": 40
-  },
-  {
     "id": 623,
     "name": "Sul-Matogrossense",
     "country": "Brazil",
@@ -10792,34 +10792,6 @@
     "over25Rate": 42.6,
     "over35Rate": 20.4,
     "bttsRate": 64.8
-  },
-  {
-    "id": 201,
-    "name": "Botola 2",
-    "country": "Morocco",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 40,
-    "avgGoals": 2.3,
-    "over15Rate": 67.5,
-    "over25Rate": 42.5,
-    "over35Rate": 17.5,
-    "bttsRate": 52.5
-  },
-  {
-    "id": 282,
-    "name": "Segunda División",
-    "country": "Peru",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 167,
-    "avgGoals": 2.45,
-    "over15Rate": 67.1,
-    "over25Rate": 42.5,
-    "over35Rate": 24.6,
-    "bttsRate": 42.5
   },
   {
     "id": 767,
@@ -10836,46 +10808,46 @@
     "bttsRate": 37.5
   },
   {
-    "id": 585,
-    "name": "Premier League",
-    "country": "Uganda",
+    "id": 315,
+    "name": "Premijer Liga",
+    "country": "Bosnia",
+    "type": "League",
+    "tier": 3,
+    "season": 2026,
+    "played": 57,
+    "avgGoals": 2.6,
+    "over15Rate": 75.4,
+    "over25Rate": 42.1,
+    "over35Rate": 24.6,
+    "bttsRate": 49.1
+  },
+  {
+    "id": 446,
+    "name": "Tercera División RFEF - Group 8",
+    "country": "Spain",
     "type": "League",
     "tier": 4,
     "season": 2026,
-    "played": 71,
-    "avgGoals": 2.21,
-    "over15Rate": 60.6,
-    "over25Rate": 42.3,
+    "played": 76,
+    "avgGoals": 2.47,
+    "over15Rate": 73.7,
+    "over25Rate": 42.1,
     "over35Rate": 19.7,
-    "bttsRate": 40.8
+    "bttsRate": 46.1
   },
   {
-    "id": 326,
-    "name": "Erovnuli Liga 2",
-    "country": "Georgia",
+    "id": 242,
+    "name": "Liga Pro",
+    "country": "Ecuador",
     "type": "League",
     "tier": 4,
     "season": 2026,
-    "played": 152,
-    "avgGoals": 2.4,
-    "over15Rate": 70.4,
-    "over25Rate": 42.1,
-    "over35Rate": 20.4,
-    "bttsRate": 50
-  },
-  {
-    "id": 711,
-    "name": "Segunda División",
-    "country": "Chile",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 140,
-    "avgGoals": 2.39,
-    "over15Rate": 62.9,
-    "over25Rate": 42.1,
-    "over35Rate": 23.6,
-    "bttsRate": 51.4
+    "played": 274,
+    "avgGoals": 2.32,
+    "over15Rate": 66.8,
+    "over25Rate": 42,
+    "over35Rate": 19,
+    "bttsRate": 47.4
   },
   {
     "id": 603,
@@ -10892,6 +10864,34 @@
     "bttsRate": 48
   },
   {
+    "id": 711,
+    "name": "Segunda División",
+    "country": "Chile",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 143,
+    "avgGoals": 2.38,
+    "over15Rate": 62.2,
+    "over25Rate": 42,
+    "over35Rate": 23.8,
+    "bttsRate": 51
+  },
+  {
+    "id": 326,
+    "name": "Erovnuli Liga 2",
+    "country": "Georgia",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 155,
+    "avgGoals": 2.39,
+    "over15Rate": 69.7,
+    "over25Rate": 41.9,
+    "over35Rate": 20.6,
+    "bttsRate": 49.7
+  },
+  {
     "id": 460,
     "name": "Campeonato de Portugal Prio - Group D",
     "country": "Portugal",
@@ -10906,46 +10906,18 @@
     "bttsRate": 60.5
   },
   {
-    "id": 242,
-    "name": "Liga Pro",
-    "country": "Ecuador",
+    "id": 694,
+    "name": "Gamma Ethniki - Group 10",
+    "country": "Greece",
     "type": "League",
     "tier": 4,
     "season": 2026,
-    "played": 271,
-    "avgGoals": 2.32,
-    "over15Rate": 66.4,
-    "over25Rate": 41.7,
-    "over35Rate": 18.8,
-    "bttsRate": 47.6
-  },
-  {
-    "id": 570,
-    "name": "Premier League",
-    "country": "Ghana",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 72,
-    "avgGoals": 2.18,
-    "over15Rate": 58.3,
-    "over25Rate": 41.7,
-    "over35Rate": 19.4,
-    "bttsRate": 44.4
-  },
-  {
-    "id": 622,
-    "name": "Pernambucano - 1",
-    "country": "Brazil",
-    "type": "League",
-    "tier": 4,
-    "season": 2027,
     "played": 36,
     "avgGoals": 2.5,
     "over15Rate": 69.4,
     "over25Rate": 41.7,
-    "over35Rate": 25,
-    "bttsRate": 50
+    "over35Rate": 22.2,
+    "bttsRate": 47.2
   },
   {
     "id": 856,
@@ -10990,6 +10962,34 @@
     "bttsRate": 33.3
   },
   {
+    "id": 63,
+    "name": "Ligue 3",
+    "country": "France",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 99,
+    "avgGoals": 2.43,
+    "over15Rate": 76.8,
+    "over25Rate": 41.4,
+    "over35Rate": 19.2,
+    "bttsRate": 49.5
+  },
+  {
+    "id": 399,
+    "name": "NPFL",
+    "country": "Nigeria",
+    "type": "League",
+    "tier": 4,
+    "season": 2027,
+    "played": 99,
+    "avgGoals": 2.34,
+    "over15Rate": 67.7,
+    "over25Rate": 41.4,
+    "over35Rate": 26.3,
+    "bttsRate": 46.5
+  },
+  {
     "id": 355,
     "name": "First League",
     "country": "Montenegro",
@@ -11018,18 +11018,60 @@
     "bttsRate": 48.2
   },
   {
-    "id": 200,
-    "name": "Botola Pro",
-    "country": "Morocco",
+    "id": 570,
+    "name": "Premier League",
+    "country": "Ghana",
     "type": "League",
-    "tier": 3,
+    "tier": 4,
     "season": 2026,
+    "played": 73,
+    "avgGoals": 2.15,
+    "over15Rate": 57.5,
+    "over25Rate": 41.1,
+    "over35Rate": 19.2,
+    "bttsRate": 43.8
+  },
+  {
+    "id": 585,
+    "name": "Premier League",
+    "country": "Uganda",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 73,
+    "avgGoals": 2.18,
+    "over15Rate": 58.9,
+    "over25Rate": 41.1,
+    "over35Rate": 19.2,
+    "bttsRate": 39.7
+  },
+  {
+    "id": 567,
+    "name": "Ligi kuu Bara",
+    "country": "Tanzania",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 78,
+    "avgGoals": 2.37,
+    "over15Rate": 71.8,
+    "over25Rate": 41,
+    "over35Rate": 15.4,
+    "bttsRate": 48.7
+  },
+  {
+    "id": 622,
+    "name": "Pernambucano - 1",
+    "country": "Brazil",
+    "type": "League",
+    "tier": 4,
+    "season": 2027,
     "played": 39,
     "avgGoals": 2.41,
-    "over15Rate": 61.5,
+    "over15Rate": 66.7,
     "over25Rate": 41,
     "over35Rate": 23.1,
-    "bttsRate": 53.8
+    "bttsRate": 48.7
   },
   {
     "id": 976,
@@ -11060,34 +11102,6 @@
     "bttsRate": 41.5
   },
   {
-    "id": 269,
-    "name": "Segunda División",
-    "country": "Uruguay",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 211,
-    "avgGoals": 2.35,
-    "over15Rate": 70.1,
-    "over25Rate": 40.8,
-    "over35Rate": 20.9,
-    "bttsRate": 52.6
-  },
-  {
-    "id": 399,
-    "name": "NPFL",
-    "country": "Nigeria",
-    "type": "League",
-    "tier": 4,
-    "season": 2027,
-    "played": 98,
-    "avgGoals": 2.33,
-    "over15Rate": 67.3,
-    "over25Rate": 40.8,
-    "over35Rate": 25.5,
-    "bttsRate": 45.9
-  },
-  {
     "id": 475,
     "name": "Paulista - A1",
     "country": "Brazil",
@@ -11100,34 +11114,6 @@
     "over25Rate": 40.8,
     "over35Rate": 16.9,
     "bttsRate": 40.8
-  },
-  {
-    "id": 567,
-    "name": "Ligi kuu Bara",
-    "country": "Tanzania",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 76,
-    "avgGoals": 2.39,
-    "over15Rate": 72.4,
-    "over25Rate": 40.8,
-    "over35Rate": 15.8,
-    "bttsRate": 48.7
-  },
-  {
-    "id": 63,
-    "name": "Ligue 3",
-    "country": "France",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 91,
-    "avgGoals": 2.41,
-    "over15Rate": 74.7,
-    "over25Rate": 40.7,
-    "over35Rate": 18.7,
-    "bttsRate": 48.4
   },
   {
     "id": 888,
@@ -11158,6 +11144,20 @@
     "bttsRate": 35.1
   },
   {
+    "id": 423,
+    "name": "Ligue 1",
+    "country": "Burkina-Faso",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 52,
+    "avgGoals": 2.35,
+    "over15Rate": 57.7,
+    "over25Rate": 40.4,
+    "over35Rate": 25,
+    "bttsRate": 40.4
+  },
+  {
     "id": 75,
     "name": "Serie C",
     "country": "Brazil",
@@ -11186,32 +11186,32 @@
     "bttsRate": 44.8
   },
   {
-    "id": 315,
-    "name": "Premijer Liga",
-    "country": "Bosnia",
-    "type": "League",
-    "tier": 3,
-    "season": 2026,
-    "played": 55,
-    "avgGoals": 2.51,
-    "over15Rate": 74.5,
-    "over25Rate": 40,
-    "over35Rate": 21.8,
-    "bttsRate": 49.1
-  },
-  {
-    "id": 323,
-    "name": "Indian Super League",
-    "country": "India",
+    "id": 269,
+    "name": "Segunda División",
+    "country": "Uruguay",
     "type": "League",
     "tier": 4,
     "season": 2026,
-    "played": 20,
-    "avgGoals": 2.5,
-    "over15Rate": 75,
+    "played": 214,
+    "avgGoals": 2.34,
+    "over15Rate": 70.1,
+    "over25Rate": 40.2,
+    "over35Rate": 20.6,
+    "bttsRate": 52.3
+  },
+  {
+    "id": 566,
+    "name": "Ligue A",
+    "country": "Burundi",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 70,
+    "avgGoals": 2.29,
+    "over15Rate": 70,
     "over25Rate": 40,
-    "over35Rate": 25,
-    "bttsRate": 60
+    "over35Rate": 17.1,
+    "bttsRate": 48.6
   },
   {
     "id": 575,
@@ -11340,6 +11340,20 @@
     "bttsRate": 43.8
   },
   {
+    "id": 458,
+    "name": "Campeonato de Portugal Prio - Group B",
+    "country": "Portugal",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 43,
+    "avgGoals": 2.3,
+    "over15Rate": 72.1,
+    "over25Rate": 39.5,
+    "over35Rate": 20.9,
+    "bttsRate": 46.5
+  },
+  {
     "id": 494,
     "name": "Super League 2",
     "country": "Greece",
@@ -11354,6 +11368,20 @@
     "bttsRate": 45.5
   },
   {
+    "id": 400,
+    "name": "Super League",
+    "country": "Zambia",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 46,
+    "avgGoals": 2.09,
+    "over15Rate": 52.2,
+    "over25Rate": 39.1,
+    "over35Rate": 23.9,
+    "bttsRate": 37
+  },
+  {
     "id": 437,
     "name": "Primera División RFEF - Group 3",
     "country": "Spain",
@@ -11366,20 +11394,6 @@
     "over25Rate": 39.1,
     "over35Rate": 16.8,
     "bttsRate": 44.5
-  },
-  {
-    "id": 566,
-    "name": "Ligue A",
-    "country": "Burundi",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 69,
-    "avgGoals": 2.28,
-    "over15Rate": 69.6,
-    "over25Rate": 39.1,
-    "over35Rate": 17.4,
-    "bttsRate": 47.8
   },
   {
     "id": 1195,
@@ -11402,12 +11416,26 @@
     "type": "League",
     "tier": 3,
     "season": 2026,
-    "played": 77,
-    "avgGoals": 2.32,
-    "over15Rate": 72.7,
-    "over25Rate": 39,
-    "over35Rate": 16.9,
-    "bttsRate": 48.1
+    "played": 80,
+    "avgGoals": 2.31,
+    "over15Rate": 72.5,
+    "over25Rate": 38.8,
+    "over35Rate": 16.3,
+    "bttsRate": 48.8
+  },
+  {
+    "id": 128,
+    "name": "Liga Profesional Argentina",
+    "country": "Argentina",
+    "type": "League",
+    "tier": 2,
+    "season": 2026,
+    "played": 466,
+    "avgGoals": 2.16,
+    "over15Rate": 65,
+    "over25Rate": 38.6,
+    "over35Rate": 15.9,
+    "bttsRate": 46.8
   },
   {
     "id": 629,
@@ -11466,20 +11494,6 @@
     "bttsRate": 42.3
   },
   {
-    "id": 128,
-    "name": "Liga Profesional Argentina",
-    "country": "Argentina",
-    "type": "League",
-    "tier": 2,
-    "season": 2026,
-    "played": 464,
-    "avgGoals": 2.16,
-    "over15Rate": 64.9,
-    "over25Rate": 38.4,
-    "over35Rate": 15.7,
-    "bttsRate": 46.8
-  },
-  {
     "id": 692,
     "name": "Primera División RFEF - Group 5",
     "country": "Spain",
@@ -11494,18 +11508,18 @@
     "bttsRate": 43.5
   },
   {
-    "id": 458,
-    "name": "Campeonato de Portugal Prio - Group B",
-    "country": "Portugal",
+    "id": 200,
+    "name": "Botola Pro",
+    "country": "Morocco",
     "type": "League",
-    "tier": 4,
+    "tier": 3,
     "season": 2026,
     "played": 42,
-    "avgGoals": 2.29,
-    "over15Rate": 71.4,
+    "avgGoals": 2.31,
+    "over15Rate": 57.1,
     "over25Rate": 38.1,
     "over35Rate": 21.4,
-    "bttsRate": 45.2
+    "bttsRate": 50
   },
   {
     "id": 681,
@@ -11620,34 +11634,6 @@
     "bttsRate": 46.1
   },
   {
-    "id": 400,
-    "name": "Super League",
-    "country": "Zambia",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 43,
-    "avgGoals": 2.02,
-    "over15Rate": 51.2,
-    "over25Rate": 37.2,
-    "over35Rate": 20.9,
-    "bttsRate": 34.9
-  },
-  {
-    "id": 397,
-    "name": "Girabola",
-    "country": "Angola",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 62,
-    "avgGoals": 1.95,
-    "over15Rate": 61.3,
-    "over25Rate": 37.1,
-    "over35Rate": 8.1,
-    "bttsRate": 43.5
-  },
-  {
     "id": 477,
     "name": "Gaúcho - 1",
     "country": "Brazil",
@@ -11668,12 +11654,26 @@
     "type": "League",
     "tier": 3,
     "season": 2026,
-    "played": 68,
-    "avgGoals": 2.32,
-    "over15Rate": 67.6,
-    "over25Rate": 36.8,
-    "over35Rate": 22.1,
-    "bttsRate": 47.1
+    "played": 73,
+    "avgGoals": 2.33,
+    "over15Rate": 67.1,
+    "over25Rate": 37,
+    "over35Rate": 23.3,
+    "bttsRate": 46.6
+  },
+  {
+    "id": 397,
+    "name": "Girabola",
+    "country": "Angola",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 65,
+    "avgGoals": 1.97,
+    "over15Rate": 61.5,
+    "over25Rate": 36.9,
+    "over35Rate": 9.2,
+    "bttsRate": 44.6
   },
   {
     "id": 34,
@@ -11746,6 +11746,20 @@
     "bttsRate": 48.1
   },
   {
+    "id": 425,
+    "name": "Premier League",
+    "country": "Syria",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 22,
+    "avgGoals": 2,
+    "over15Rate": 59.1,
+    "over25Rate": 36.4,
+    "over35Rate": 13.6,
+    "bttsRate": 36.4
+  },
+  {
     "id": 631,
     "name": "Tocantinense",
     "country": "Brazil",
@@ -11786,6 +11800,20 @@
     "over25Rate": 36,
     "over35Rate": 22.1,
     "bttsRate": 31.4
+  },
+  {
+    "id": 415,
+    "name": "Championnat National",
+    "country": "Benin",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 50,
+    "avgGoals": 2.16,
+    "over15Rate": 72,
+    "over25Rate": 36,
+    "over35Rate": 16,
+    "bttsRate": 50
   },
   {
     "id": 535,
@@ -11844,32 +11872,18 @@
     "bttsRate": 38.2
   },
   {
-    "id": 415,
-    "name": "Championnat National",
-    "country": "Benin",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 45,
-    "avgGoals": 2.2,
-    "over15Rate": 73.3,
-    "over25Rate": 35.6,
-    "over35Rate": 17.8,
-    "bttsRate": 48.9
-  },
-  {
     "id": 542,
     "name": "Iraqi League",
     "country": "Iraq",
     "type": "League",
     "tier": 4,
     "season": 2026,
-    "played": 116,
-    "avgGoals": 2.17,
+    "played": 119,
+    "avgGoals": 2.16,
     "over15Rate": 67.2,
     "over25Rate": 35.3,
-    "over35Rate": 15.5,
-    "bttsRate": 43.1
+    "over35Rate": 15.1,
+    "bttsRate": 43.7
   },
   {
     "id": 847,
@@ -11942,6 +11956,20 @@
     "bttsRate": 43.6
   },
   {
+    "id": 129,
+    "name": "Primera Nacional",
+    "country": "Argentina",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 643,
+    "avgGoals": 1.96,
+    "over15Rate": 59.7,
+    "over25Rate": 33.4,
+    "over35Rate": 12.8,
+    "bttsRate": 39.8
+  },
+  {
     "id": 23,
     "name": "EAFF E-1 Football Championship",
     "country": "World",
@@ -11954,20 +11982,6 @@
     "over25Rate": 33.3,
     "over35Rate": 16.7,
     "bttsRate": 16.7
-  },
-  {
-    "id": 129,
-    "name": "Primera Nacional",
-    "country": "Argentina",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 630,
-    "avgGoals": 1.96,
-    "over15Rate": 59.8,
-    "over25Rate": 33.3,
-    "over35Rate": 12.5,
-    "bttsRate": 39.8
   },
   {
     "id": 202,
@@ -11995,20 +12009,6 @@
     "over15Rate": 53.3,
     "over25Rate": 33.3,
     "over35Rate": 20,
-    "bttsRate": 33.3
-  },
-  {
-    "id": 425,
-    "name": "Premier League",
-    "country": "Syria",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 21,
-    "avgGoals": 1.95,
-    "over15Rate": 57.1,
-    "over25Rate": 33.3,
-    "over35Rate": 14.3,
     "bttsRate": 33.3
   },
   {
@@ -12068,20 +12068,6 @@
     "bttsRate": 42.9
   },
   {
-    "id": 762,
-    "name": "Premier League",
-    "country": "Mauritania",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 18,
-    "avgGoals": 2.17,
-    "over15Rate": 72.2,
-    "over25Rate": 33.3,
-    "over35Rate": 16.7,
-    "bttsRate": 44.4
-  },
-  {
     "id": 900,
     "name": "Tipsport Malta Cup",
     "country": "World",
@@ -12136,6 +12122,34 @@
     "over25Rate": 33.3,
     "over35Rate": 0,
     "bttsRate": 33.3
+  },
+  {
+    "id": 289,
+    "name": "1st Division",
+    "country": "South-Africa",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 70,
+    "avgGoals": 2.07,
+    "over15Rate": 60,
+    "over25Rate": 32.9,
+    "over35Rate": 15.7,
+    "bttsRate": 41.4
+  },
+  {
+    "id": 180,
+    "name": "Championship",
+    "country": "Scotland",
+    "type": "League",
+    "tier": 2,
+    "season": 2026,
+    "played": 64,
+    "avgGoals": 2.19,
+    "over15Rate": 71.9,
+    "over25Rate": 32.8,
+    "over35Rate": 14.1,
+    "bttsRate": 37.5
   },
   {
     "id": 198,
@@ -12208,20 +12222,6 @@
     "bttsRate": 32.4
   },
   {
-    "id": 131,
-    "name": "Primera B Metropolitana",
-    "country": "Argentina",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 451,
-    "avgGoals": 1.98,
-    "over15Rate": 61,
-    "over25Rate": 32.4,
-    "over35Rate": 14.2,
-    "bttsRate": 40.4
-  },
-  {
     "id": 276,
     "name": "FKF Premier League",
     "country": "Kenya",
@@ -12234,20 +12234,6 @@
     "over25Rate": 32.4,
     "over35Rate": 17.6,
     "bttsRate": 44.1
-  },
-  {
-    "id": 289,
-    "name": "1st Division",
-    "country": "South-Africa",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 68,
-    "avgGoals": 2.09,
-    "over15Rate": 60.3,
-    "over25Rate": 32.4,
-    "over35Rate": 16.2,
-    "bttsRate": 42.6
   },
   {
     "id": 598,
@@ -12264,18 +12250,18 @@
     "bttsRate": 34.1
   },
   {
-    "id": 186,
-    "name": "Ligue 1",
-    "country": "Algeria",
+    "id": 131,
+    "name": "Primera B Metropolitana",
+    "country": "Argentina",
     "type": "League",
-    "tier": 3,
+    "tier": 4,
     "season": 2026,
-    "played": 53,
-    "avgGoals": 2.13,
-    "over15Rate": 56.6,
-    "over25Rate": 32.1,
-    "over35Rate": 20.8,
-    "bttsRate": 34
+    "played": 456,
+    "avgGoals": 1.98,
+    "over15Rate": 61.2,
+    "over25Rate": 32.2,
+    "over35Rate": 14,
+    "bttsRate": 40.8
   },
   {
     "id": 630,
@@ -12290,20 +12276,6 @@
     "over25Rate": 32,
     "over35Rate": 20,
     "bttsRate": 36
-  },
-  {
-    "id": 693,
-    "name": "Gamma Ethniki - Group 9",
-    "country": "Greece",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 25,
-    "avgGoals": 2.04,
-    "over15Rate": 48,
-    "over25Rate": 32,
-    "over35Rate": 16,
-    "bttsRate": 20
   },
   {
     "id": 889,
@@ -12390,6 +12362,20 @@
     "bttsRate": 35.9
   },
   {
+    "id": 693,
+    "name": "Gamma Ethniki - Group 9",
+    "country": "Greece",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 26,
+    "avgGoals": 1.96,
+    "over15Rate": 46.2,
+    "over25Rate": 30.8,
+    "over35Rate": 15.4,
+    "bttsRate": 19.2
+  },
+  {
     "id": 1043,
     "name": "African Football League",
     "country": "World",
@@ -12410,12 +12396,26 @@
     "type": "League",
     "tier": 4,
     "season": 2026,
-    "played": 503,
-    "avgGoals": 1.9,
-    "over15Rate": 54.9,
-    "over25Rate": 30.6,
-    "over35Rate": 14.3,
-    "bttsRate": 33.4
+    "played": 508,
+    "avgGoals": 1.91,
+    "over15Rate": 55.1,
+    "over25Rate": 30.7,
+    "over35Rate": 14.2,
+    "bttsRate": 33.3
+  },
+  {
+    "id": 186,
+    "name": "Ligue 1",
+    "country": "Algeria",
+    "type": "League",
+    "tier": 3,
+    "season": 2026,
+    "played": 56,
+    "avgGoals": 2.13,
+    "over15Rate": 58.9,
+    "over25Rate": 30.4,
+    "over35Rate": 19.6,
+    "bttsRate": 33.9
   },
   {
     "id": 386,
@@ -12432,18 +12432,18 @@
     "bttsRate": 48.5
   },
   {
-    "id": 387,
-    "name": "League",
-    "country": "Jordan",
+    "id": 762,
+    "name": "Premier League",
+    "country": "Mauritania",
     "type": "League",
     "tier": 4,
     "season": 2026,
-    "played": 33,
-    "avgGoals": 2.03,
-    "over15Rate": 48.5,
-    "over25Rate": 30.3,
-    "over35Rate": 24.2,
-    "bttsRate": 30.3
+    "played": 20,
+    "avgGoals": 2.1,
+    "over15Rate": 70,
+    "over25Rate": 30,
+    "over35Rate": 15,
+    "bttsRate": 45
   },
   {
     "id": 998,
@@ -12488,6 +12488,20 @@
     "bttsRate": 38.6
   },
   {
+    "id": 387,
+    "name": "League",
+    "country": "Jordan",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 34,
+    "avgGoals": 2,
+    "over15Rate": 47.1,
+    "over25Rate": 29.4,
+    "over35Rate": 23.5,
+    "bttsRate": 29.4
+  },
+  {
     "id": 845,
     "name": "GFA League",
     "country": "Gambia",
@@ -12530,32 +12544,18 @@
     "bttsRate": 35.7
   },
   {
-    "id": 180,
-    "name": "Championship",
-    "country": "Scotland",
-    "type": "League",
-    "tier": 2,
-    "season": 2026,
-    "played": 60,
-    "avgGoals": 2,
-    "over15Rate": 70,
-    "over25Rate": 28.3,
-    "over35Rate": 8.3,
-    "bttsRate": 35
-  },
-  {
     "id": 132,
     "name": "Primera C",
     "country": "Argentina",
     "type": "League",
     "tier": 4,
     "season": 2026,
-    "played": 460,
+    "played": 463,
     "avgGoals": 1.9,
-    "over15Rate": 57.8,
-    "over25Rate": 28,
-    "over35Rate": 12.8,
-    "bttsRate": 36.1
+    "over15Rate": 58.1,
+    "over25Rate": 28.1,
+    "over35Rate": 12.7,
+    "bttsRate": 36.5
   },
   {
     "id": 608,
@@ -12614,6 +12614,20 @@
     "bttsRate": 44.2
   },
   {
+    "id": 363,
+    "name": "Premier League",
+    "country": "Ethiopia",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 34,
+    "avgGoals": 1.82,
+    "over15Rate": 50,
+    "over25Rate": 26.5,
+    "over35Rate": 14.7,
+    "bttsRate": 41.2
+  },
+  {
     "id": 589,
     "name": "Taiwan Football Premier League",
     "country": "Chinese-Taipei",
@@ -12642,46 +12656,32 @@
     "bttsRate": 41.7
   },
   {
-    "id": 405,
-    "name": "National Soccer League",
-    "country": "Rwanda",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 45,
-    "avgGoals": 1.84,
-    "over15Rate": 57.8,
-    "over25Rate": 24.4,
-    "over35Rate": 11.1,
-    "bttsRate": 26.7
-  },
-  {
-    "id": 363,
-    "name": "Premier League",
-    "country": "Ethiopia",
-    "type": "League",
-    "tier": 4,
-    "season": 2026,
-    "played": 33,
-    "avgGoals": 1.76,
-    "over15Rate": 48.5,
-    "over25Rate": 24.2,
-    "over35Rate": 12.1,
-    "bttsRate": 39.4
-  },
-  {
     "id": 1196,
     "name": "Division One League",
     "country": "Ghana",
     "type": "League",
     "tier": 4,
     "season": 2026,
-    "played": 121,
-    "avgGoals": 1.82,
-    "over15Rate": 55.4,
-    "over25Rate": 24,
-    "over35Rate": 7.4,
-    "bttsRate": 38
+    "played": 128,
+    "avgGoals": 1.84,
+    "over15Rate": 55.5,
+    "over25Rate": 25,
+    "over35Rate": 7.8,
+    "bttsRate": 35.9
+  },
+  {
+    "id": 405,
+    "name": "National Soccer League",
+    "country": "Rwanda",
+    "type": "League",
+    "tier": 4,
+    "season": 2026,
+    "played": 46,
+    "avgGoals": 1.85,
+    "over15Rate": 58.7,
+    "over25Rate": 23.9,
+    "over35Rate": 10.9,
+    "bttsRate": 28.3
   },
   {
     "id": 424,
@@ -12690,12 +12690,12 @@
     "type": "League",
     "tier": 4,
     "season": 2026,
-    "played": 28,
-    "avgGoals": 1.32,
-    "over15Rate": 46.4,
-    "over25Rate": 21.4,
+    "played": 30,
+    "avgGoals": 1.37,
+    "over15Rate": 46.7,
+    "over25Rate": 23.3,
     "over35Rate": 0,
-    "bttsRate": 32.1
+    "bttsRate": 33.3
   },
   {
     "id": 904,
@@ -13110,6 +13110,20 @@
     "type": "Cup",
     "tier": 4,
     "season": 2025,
+    "played": 1,
+    "avgGoals": 1,
+    "over15Rate": 0,
+    "over25Rate": 0,
+    "over35Rate": 0,
+    "bttsRate": 0
+  },
+  {
+    "id": 1165,
+    "name": "Copa Fares Lopes",
+    "country": "Brazil",
+    "type": "Cup",
+    "tier": 4,
+    "season": 2026,
     "played": 1,
     "avgGoals": 1,
     "over15Rate": 0,
