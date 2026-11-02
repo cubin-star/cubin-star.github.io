@@ -1,16 +1,16 @@
 [
   {
-    "league": "K League 1",
-    "match": "FC Anyang - Bucheon FC 1995",
-    "kickoff": "2026-11-01T08:30:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "1.90"
-  },
-  {
-    "league": "Liga II",
-    "match": "Slatina - Concordia",
-    "kickoff": "2026-11-01T10:00:00+01:00",
+    "league": "Liga I",
+    "match": "FC Voluntari - Farul Constanta",
+    "kickoff": "2026-11-02T16:30:00+01:00",
     "tip": "Over 2.5",
     "odds": "1.75"
+  },
+  {
+    "league": "Prva Liga",
+    "match": "OFK Bor 1919 - FK Spartak Zdrepceva KRV",
+    "kickoff": "2026-11-02T13:00:00+01:00",
+    "tip": "Over 2.5",
+    "odds": "1.79"
   }
 ]
