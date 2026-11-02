@@ -1,5 +1,21 @@
 [
   {
+    "league": "Segunda División",
+    "homeTeam": "Oviedo",
+    "awayTeam": "Las Palmas",
+    "tip": "Over 2.5",
+    "odds": "",
+    "halftimeScore": "0:2",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-11-02T15:15:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 0:2 | xG: 1.37 | Shots: 14/4 | winXG: 1.31 | losingXG: 0.06 losingSOT: 0 | @HT | Pre O2.5: 1.85"
+  },
+  {
     "league": "La Liga",
     "homeTeam": "Athletic Club",
     "awayTeam": "Real Sociedad",
