@@ -1,11 +1,11 @@
 [
   {
     "league": "Ligue 2",
-    "homeTeam": "Reims",
-    "awayTeam": "Sochaux",
-    "tip": "Over 2.5",
+    "homeTeam": "RED Star FC 93",
+    "awayTeam": "Nancy",
+    "tip": "Over 3.5",
     "odds": "",
-    "halftimeScore": "2:0",
+    "halftimeScore": "1:2",
     "liveOdds": "",
     "finalScore": "",
     "result": "",
@@ -13,7 +13,7 @@
     "kickoff": "2026-11-02T19:45:00.000Z",
     "resolvedAt": "",
     "source": "whisper-football",
-    "scoutStats": "Whisper xG-rate surge | HT 2:0 | xG: 1.73 | Shots: 12/5 | winXG: 1.23 | losingXG: 0.50 losingSOT: 2 | @HT | Pre O2.5: 1.725"
+    "scoutStats": "Whisper xG-rate surge | HT 1:2 | xG: 2.00 | Shots: 12/5 | winXG: 0.90 | losingXG: 1.10 losingSOT: 2 | @HT | Pre O2.5: 1.95"
   },
   {
     "league": "Segunda División",
