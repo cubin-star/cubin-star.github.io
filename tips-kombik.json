@@ -1,16 +1,16 @@
 [
   {
-    "league": "Liga I",
-    "match": "FC Voluntari - Farul Constanta",
-    "kickoff": "2026-11-02T16:30:00+01:00",
+    "league": "Championship",
+    "match": "Watford - Lincoln",
+    "kickoff": "2026-11-03T20:45:00+01:00",
     "tip": "Over 2.5",
-    "odds": "1.75"
+    "odds": "1.89"
   },
   {
-    "league": "Prva Liga",
-    "match": "OFK Bor 1919 - FK Spartak Zdrepceva KRV",
-    "kickoff": "2026-11-02T13:00:00+01:00",
+    "league": "UEFA Champions League",
+    "match": "Shakhtar Donetsk - Sporting CP",
+    "kickoff": "2026-11-03T18:45:00+01:00",
     "tip": "Over 2.5",
-    "odds": "1.79"
+    "odds": "1.72"
   }
 ]

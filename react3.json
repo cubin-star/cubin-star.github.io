@@ -1,74 +1,74 @@
 [
   {
-    "fixtureId": 1575533,
-    "league": "Primeira Liga",
-    "match": "GIL Vicente - Vitória SC",
-    "kickoff": "2026-11-02T21:15:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.25",
-    "group": 1
-  },
-  {
-    "fixtureId": 1593346,
-    "league": "Super League 1",
-    "match": "Kalamata - Iraklis 1908",
-    "kickoff": "2026-11-02T18:30:00+01:00",
-    "tip": "Over 2.5",
+    "fixtureId": 1564342,
+    "league": "League One",
+    "match": "Wigan - Mansfield Town",
+    "kickoff": "2026-11-03T20:45:00+01:00",
+    "tip": "Away win",
     "odds": "2.15",
     "group": 1
   },
   {
-    "fixtureId": 1520954,
-    "league": "Serie B",
-    "match": "Fortaleza EC - Atletico Goianiense",
-    "kickoff": "2026-11-02T20:00:00+01:00",
-    "tip": "Home win",
-    "odds": "2.21",
-    "group": 2
-  },
-  {
-    "fixtureId": 1565290,
-    "league": "Liga I",
-    "match": "FC Voluntari - Farul Constanta",
-    "kickoff": "2026-11-02T16:30:00+01:00",
+    "fixtureId": 1635723,
+    "league": "UEFA Champions League",
+    "match": "Shakhtar Donetsk - Sporting CP",
+    "kickoff": "2026-11-03T18:45:00+01:00",
     "tip": "Away win",
-    "odds": "2.20",
-    "group": 2
+    "odds": "2.02",
+    "group": 1
   },
   {
-    "fixtureId": 1551139,
-    "league": "First League",
-    "match": "Cherno More Varna - Botev Vratsa",
-    "kickoff": "2026-11-02T16:00:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.25",
-    "group": 3
-  },
-  {
-    "fixtureId": 1584452,
-    "league": "Süper Lig",
-    "match": "Gençlerbirliği S.K. - Alanyaspor",
-    "kickoff": "2026-11-02T18:00:00+01:00",
+    "fixtureId": 1630390,
+    "league": "AFC Champions League Two",
+    "match": "East Bengal II - Al Seeb",
+    "kickoff": "2026-11-03T14:45:00+01:00",
     "tip": "Over 2.5",
     "odds": "2.07",
+    "group": 2
+  },
+  {
+    "fixtureId": 1563240,
+    "league": "Championship",
+    "match": "Blackburn - Stoke City",
+    "kickoff": "2026-11-03T20:45:00+01:00",
+    "tip": "Over 2.5",
+    "odds": "2.10",
+    "group": 2
+  },
+  {
+    "fixtureId": 1549852,
+    "league": "Primera A",
+    "match": "Deportivo Pereira - Deportes Tolima",
+    "kickoff": "2026-11-03T21:30:00+01:00",
+    "tip": "Over 2.5",
+    "odds": "1.95",
     "group": 3
   },
   {
-    "fixtureId": 1576517,
-    "league": "Segunda Liga",
-    "match": "Penafiel - Feirense",
-    "kickoff": "2026-11-02T19:00:00+01:00",
+    "fixtureId": 1640302,
+    "league": "League Cup",
+    "match": "Abu Qair Semad - Ceramica Cleopatra",
+    "kickoff": "2026-11-03T16:00:00+01:00",
     "tip": "Over 2.5",
-    "odds": "2.10",
+    "odds": "2.41",
+    "group": 3
+  },
+  {
+    "fixtureId": 1558264,
+    "league": "I Liga",
+    "match": "Pogoń Siedlce - Ruch Chorzów",
+    "kickoff": "2026-11-03T18:00:00+01:00",
+    "tip": "Away win",
+    "odds": "1.80",
     "group": 4
   },
   {
-    "fixtureId": 1493215,
-    "league": "Liga Profesional Argentina",
-    "match": "Defensa Y Justicia - Independiente",
-    "kickoff": "2026-11-02T23:00:00+01:00",
-    "tip": "Home win",
-    "odds": "2.22",
+    "fixtureId": 1648024,
+    "league": "Premier League",
+    "match": "SNIM - Chemal",
+    "kickoff": "2026-11-03T17:15:00+01:00",
+    "tip": "Over 2.5",
+    "odds": "2.41",
     "group": 4
   }
 ]

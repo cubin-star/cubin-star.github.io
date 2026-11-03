@@ -1,58 +1,58 @@
 [
   {
-    "fixtureId": 1648023,
-    "league": "Premier League",
-    "match": "AC Douane - Nouadhibou",
-    "kickoff": "2026-11-02T20:50:00+01:00",
+    "fixtureId": 1563242,
+    "league": "Championship",
+    "match": "Portsmouth - Swansea",
+    "kickoff": "2026-11-03T20:45:00+01:00",
     "tip": "Over 2.5",
-    "odds": "2.27"
+    "odds": "2.18"
   },
   {
-    "fixtureId": 1629962,
+    "fixtureId": 1640297,
+    "league": "League Cup",
+    "match": "Smouha SC - Pyramids FC",
+    "kickoff": "2026-11-03T19:00:00+01:00",
+    "tip": "Over 2.5",
+    "odds": "2.40"
+  },
+  {
+    "fixtureId": 1558552,
+    "league": "First League",
+    "match": "Jezero - Dečić",
+    "kickoff": "2026-11-03T17:00:00+01:00",
+    "tip": "Over 2.5",
+    "odds": "2.25"
+  },
+  {
+    "fixtureId": 1635669,
+    "league": "UEFA Champions League",
+    "match": "Galatasaray - VfB Stuttgart",
+    "kickoff": "2026-11-03T18:45:00+01:00",
+    "tip": "Home win",
+    "odds": "2.18"
+  },
+  {
+    "fixtureId": 1629965,
     "league": "AFC Champions League Elite",
-    "match": "Tractor Sazi - Neftchi",
-    "kickoff": "2026-11-02T17:00:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.46"
+    "match": "Newcastle Jets - SHANGHAI SIPG",
+    "kickoff": "2026-11-03T08:45:00+01:00",
+    "tip": "Away win",
+    "odds": "1.78"
   },
   {
-    "fixtureId": 1648246,
-    "league": "Premier League",
-    "match": "Waterhouse - Cavalier",
-    "kickoff": "2026-11-03T02:00:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "1.98"
-  },
-  {
-    "fixtureId": 1606741,
-    "league": "J2 League",
-    "match": "Tegevajaro Miyazaki - Tochigi City",
-    "kickoff": "2026-11-03T06:00:00+01:00",
+    "fixtureId": 1564322,
+    "league": "League One",
+    "match": "Huddersfield - Luton",
+    "kickoff": "2026-11-03T20:45:00+01:00",
     "tip": "Home win",
-    "odds": "1.85"
+    "odds": "2.02"
   },
   {
-    "fixtureId": 1553905,
-    "league": "Super Liga",
-    "match": "Radnicki NIS - Železničar Pančevo",
-    "kickoff": "2026-11-02T18:00:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.00"
-  },
-  {
-    "fixtureId": 1570002,
-    "league": "Segunda División",
-    "match": "Valladolid - Leganes",
-    "kickoff": "2026-11-02T18:30:00+01:00",
-    "tip": "Home win",
-    "odds": "2.05"
-  },
-  {
-    "fixtureId": 1553213,
-    "league": "Ekstraklasa",
-    "match": "Radomiak Radom - Slask Wroclaw",
-    "kickoff": "2026-11-02T18:00:00+01:00",
-    "tip": "Home win",
-    "odds": "2.10"
+    "fixtureId": 1632050,
+    "league": "Division Profesional - Clausura",
+    "match": "2 de Mayo - Sportivo Trinidense",
+    "kickoff": "2026-11-03T21:00:00+01:00",
+    "tip": "Away win",
+    "odds": "2.20"
   }
 ]
