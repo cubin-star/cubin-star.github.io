@@ -1,5 +1,21 @@
 [
   {
+    "league": "League One",
+    "homeTeam": "Huddersfield",
+    "awayTeam": "Luton",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "0:1",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-11-03T19:45:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 0:1 | xG: 0.77 | Shots: 12/6 | winXG: 0.24 | losingXG: 0.53 losingSOT: 4 | @HT | Pre O2.5: 1.63"
+  },
+  {
     "league": "AFC Champions League Elite",
     "homeTeam": "Jeonbuk Motors",
     "awayTeam": "Johor Darul Takzim FC",
