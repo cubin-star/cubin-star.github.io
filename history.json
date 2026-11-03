@@ -1,5 +1,35 @@
 [
   {
+    "sport": "basketball",
+    "league": "NCAA",
+    "match": "Marquette vs Mercyhurst Lakers",
+    "tip": "Over 139.5",
+    "odds": "1.27",
+    "date": "2026-11-03T00:30:00+00:00",
+    "score": "43:78",
+    "result": "✗"
+  },
+  {
+    "sport": "football",
+    "league": "Super League 1",
+    "match": "Kalamata vs Iraklis 1908",
+    "tip": "Over 1.5",
+    "odds": "1.35",
+    "date": "2026-11-02T17:30:00+00:00",
+    "score": "1:1",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "Süper Lig",
+    "match": "Gençlerbirliği S.K. vs Alanyaspor",
+    "tip": "Over 1.5",
+    "odds": "1.32",
+    "date": "2026-11-02T17:00:00+00:00",
+    "score": "5:0",
+    "result": "✓"
+  },
+  {
     "sport": "football",
     "league": "Jupiler Pro League",
     "match": "Lommel United vs Gent",
@@ -1966,36 +1996,6 @@
     "tip": "Over 1.5",
     "odds": "1.29",
     "date": "2026-08-25T10:30:00+00:00",
-    "score": "0:0",
-    "result": "✗"
-  },
-  {
-    "sport": "basketball",
-    "league": "NBA W",
-    "match": "Minnesota Lynx W vs Golden State Valkyries W",
-    "tip": "Over 148.5",
-    "odds": "1.20",
-    "date": "2026-08-25T00:00:00+00:00",
-    "score": "66:80",
-    "result": "✗"
-  },
-  {
-    "sport": "football",
-    "league": "Süper Lig",
-    "match": "Kocaelispor vs Amed",
-    "tip": "Over 1.5",
-    "odds": "1.34",
-    "date": "2026-08-24T18:30:00+00:00",
-    "score": "2:0",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "La Liga",
-    "match": "Osasuna vs Levante",
-    "tip": "Over 1.5",
-    "odds": "1.32",
-    "date": "2026-08-24T17:30:00+00:00",
     "score": "0:0",
     "result": "✗"
   }
