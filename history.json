@@ -1,5 +1,25 @@
 [
   {
+    "sport": "football",
+    "league": "Serie A",
+    "match": "Chapecoense-sc vs Mirassol",
+    "tip": "Over 1.5",
+    "odds": "1.26",
+    "date": "2026-11-03T22:30:00+00:00",
+    "score": "1:2",
+    "result": "✓"
+  },
+  {
+    "sport": "basketball",
+    "league": "Champions League",
+    "match": "Strasbourg vs Cibona",
+    "tip": "Over 156.5",
+    "odds": "1.29",
+    "date": "2026-11-03T19:00:00+00:00",
+    "score": "95:70",
+    "result": "✓"
+  },
+  {
     "sport": "basketball",
     "league": "NCAA",
     "match": "Marquette vs Mercyhurst Lakers",
@@ -1978,25 +1998,5 @@
     "date": "2026-08-26T00:00:00+00:00",
     "score": "96:78",
     "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "La Liga",
-    "match": "Valencia vs Real Betis",
-    "tip": "Over 1.5",
-    "odds": "1.32",
-    "date": "2026-08-25T19:00:00+00:00",
-    "score": "0:1",
-    "result": "✗"
-  },
-  {
-    "sport": "football",
-    "league": "K League 1",
-    "match": "Gimcheon Sangmu FC vs Jeonbuk Motors",
-    "tip": "Over 1.5",
-    "odds": "1.29",
-    "date": "2026-08-25T10:30:00+00:00",
-    "score": "0:0",
-    "result": "✗"
   }
 ]
