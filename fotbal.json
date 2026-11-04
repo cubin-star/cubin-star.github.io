@@ -1,24 +1,24 @@
 [
   {
-    "League": "Copa del Rey",
-    "Match": "Pamplona vs Eibar",
+    "League": "Jupiler Pro League",
+    "Match": "Kortrijk vs KV Mechelen",
     "Tip": "Over 2.5",
-    "Odds": "1.93",
-    "Date": "2026-11-03T18:00:00+00:00"
+    "Odds": "1.90",
+    "Date": "2026-11-04T19:30:00+00:00"
   },
   {
-    "League": "Cup",
-    "Match": "Mladost Ždralovi vs NK Slaven Belupo",
+    "League": "UEFA Champions League",
+    "Match": "FC Porto vs Napoli",
     "Tip": "Over 2.5",
-    "Odds": "1.85",
-    "Date": "2026-11-03T13:00:00+00:00"
+    "Odds": "1.79",
+    "Date": "2026-11-04T20:00:00+00:00"
   },
   {
-    "League": "I Liga",
-    "Match": "Pogoń Siedlce vs Ruch Chorzów",
+    "League": "AFC Champions League Elite",
+    "Match": "Pohang Steelers vs Gamba Osaka",
     "Tip": "Over 2.5",
-    "Odds": "1.88",
-    "Date": "2026-11-03T17:00:00+00:00",
+    "Odds": "1.81",
+    "Date": "2026-11-04T10:00:00+00:00",
     "locked": true
   }
 ]
