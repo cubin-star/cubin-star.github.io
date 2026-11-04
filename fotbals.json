@@ -1,9 +1,16 @@
 [
   {
     "League": "Serie A",
-    "Match": "Chapecoense-sc vs Mirassol",
+    "Match": "Atletico Paranaense vs Vasco DA Gama",
     "Tip": "Over 1.5",
-    "Odds": "1.26",
-    "Date": "2026-11-03T22:30:00+00:00"
+    "Odds": "1.22",
+    "Date": "2026-11-04T22:30:00+00:00"
+  },
+  {
+    "League": "UEFA Europa League",
+    "Match": "Rennes vs Olympiakos Piraeus",
+    "Tip": "Over 1.5",
+    "Odds": "1.23",
+    "Date": "2026-11-04T15:30:00+00:00"
   }
 ]
