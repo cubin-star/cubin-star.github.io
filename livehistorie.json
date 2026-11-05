@@ -1,5 +1,21 @@
 [
   {
+    "league": "UEFA Europa League",
+    "homeTeam": "AZ Alkmaar",
+    "awayTeam": "Juventus",
+    "tip": "Over 2.5",
+    "odds": "",
+    "halftimeScore": "0:2",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-11-05T20:00:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 0:2 | xG: 0.90 | Shots: 11/3 | winXG: 0.48 | losingXG: 0.42 losingSOT: 1 | @HT | Pre O2.5: 1.8"
+  },
+  {
     "league": "League One",
     "homeTeam": "Huddersfield",
     "awayTeam": "Luton",
