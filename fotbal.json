@@ -1,24 +1,24 @@
 [
   {
-    "League": "Jupiler Pro League",
-    "Match": "Kortrijk vs KV Mechelen",
+    "League": "UEFA Europa Conference League",
+    "Match": "Universitatea Craiova vs Egnatia Rrogozhinë",
     "Tip": "Over 2.5",
-    "Odds": "1.90",
-    "Date": "2026-11-04T19:30:00+00:00"
+    "Odds": "1.78",
+    "Date": "2026-11-05T20:00:00+00:00"
   },
   {
-    "League": "UEFA Champions League",
-    "Match": "FC Porto vs Napoli",
+    "League": "UEFA Europa League",
+    "Match": "Levski Sofia vs Jagiellonia",
     "Tip": "Over 2.5",
-    "Odds": "1.79",
-    "Date": "2026-11-04T20:00:00+00:00"
+    "Odds": "1.91",
+    "Date": "2026-11-05T17:45:00+00:00"
   },
   {
-    "League": "AFC Champions League Elite",
-    "Match": "Pohang Steelers vs Gamba Osaka",
+    "League": "Birinci Dasta",
+    "Match": "Baku Sportinq vs Xankəndi FK",
     "Tip": "Over 2.5",
-    "Odds": "1.81",
-    "Date": "2026-11-04T10:00:00+00:00",
+    "Odds": "1.95",
+    "Date": "2026-11-05T11:00:00+00:00",
     "locked": true
   }
 ]
