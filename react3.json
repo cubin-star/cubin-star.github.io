@@ -1,74 +1,74 @@
 [
   {
-    "fixtureId": 1630628,
-    "league": "Super League",
-    "match": "Nkana - Kansanshi Dynamos",
-    "kickoff": "2026-11-04T14:00:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.49",
-    "group": 1
-  },
-  {
-    "fixtureId": 1563250,
-    "league": "Championship",
-    "match": "Wrexham - Middlesbrough",
-    "kickoff": "2026-11-04T20:45:00+01:00",
-    "tip": "Away win",
-    "odds": "1.76",
-    "group": 1
-  },
-  {
-    "fixtureId": 1630393,
+    "fixtureId": 1630399,
     "league": "AFC Champions League Two",
-    "match": "Arkadag - Gol Gohar",
-    "kickoff": "2026-11-04T14:45:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.38",
+    "match": "Kitchee - Phnom Penh Crown",
+    "kickoff": "2026-11-05T11:00:00+01:00",
+    "tip": "Home win",
+    "odds": "2.12",
+    "group": 1
+  },
+  {
+    "fixtureId": 1632055,
+    "league": "Division Profesional - Clausura",
+    "match": "Rubio NU - Sportivo Luqueno",
+    "kickoff": "2026-11-05T23:00:00+01:00",
+    "tip": "Home win",
+    "odds": "2.15",
+    "group": 1
+  },
+  {
+    "fixtureId": 1636347,
+    "league": "UEFA Europa League",
+    "match": "Torreense - Ararat-Armenia",
+    "kickoff": "2026-11-05T21:00:00+01:00",
+    "tip": "Home win",
+    "odds": "1.81",
     "group": 2
   },
   {
-    "fixtureId": 1549851,
-    "league": "Primera A",
-    "match": "Millonarios - America de Cali",
-    "kickoff": "2026-11-05T02:30:00+01:00",
-    "tip": "Home win",
-    "odds": "1.87",
+    "fixtureId": 1606559,
+    "league": "Second Division",
+    "match": "Qatar U23 - Al-Khor",
+    "kickoff": "2026-11-05T15:15:00+01:00",
+    "tip": "Away win",
+    "odds": "2.15",
     "group": 2
   },
   {
-    "fixtureId": 1492448,
-    "league": "Serie A",
-    "match": "Sao Paulo - Corinthians",
-    "kickoff": "2026-11-05T01:30:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.35",
-    "group": 3
-  },
-  {
-    "fixtureId": 1635656,
-    "league": "UEFA Champions League",
-    "match": "FC Porto - Napoli",
-    "kickoff": "2026-11-04T21:00:00+01:00",
+    "fixtureId": 1493233,
+    "league": "Liga Profesional Argentina",
+    "match": "Gimnasia L.P. - Belgrano Cordoba",
+    "kickoff": "2026-11-05T23:15:00+01:00",
     "tip": "Home win",
-    "odds": "1.96",
+    "odds": "2.25",
     "group": 3
   },
   {
-    "fixtureId": 1616432,
-    "league": "Tercera División RFEF - Group 13",
-    "match": "Cotillas CD - Unión Molinense",
-    "kickoff": "2026-11-04T21:00:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.04",
+    "fixtureId": 1648426,
+    "league": "Primera B",
+    "match": "Union Magdalena - Ind. Yumbo",
+    "kickoff": "2026-11-06T01:00:00+01:00",
+    "tip": "Home win",
+    "odds": "1.79",
+    "group": 3
+  },
+  {
+    "fixtureId": 1574784,
+    "league": "Ligue 3",
+    "match": "Valenciennes - Orleans",
+    "kickoff": "2026-11-05T20:45:00+01:00",
+    "tip": "Home win",
+    "odds": "2.15",
     "group": 4
   },
   {
-    "fixtureId": 1559178,
-    "league": "Challenger Pro League",
-    "match": "Francs Borains - Dender",
-    "kickoff": "2026-11-04T20:00:00+01:00",
+    "fixtureId": 1642307,
+    "league": "Liga Nacional",
+    "match": "Génesis - Real Espana",
+    "kickoff": "2026-11-05T22:00:00+01:00",
     "tip": "Away win",
-    "odds": "2.18",
+    "odds": "2.06",
     "group": 4
   }
 ]

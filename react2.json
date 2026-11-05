@@ -1,56 +1,56 @@
 [
   {
-    "fixtureId": 1635681,
-    "league": "UEFA Champions League",
-    "match": "Lens - Como",
-    "kickoff": "2026-11-04T21:00:00+01:00",
-    "tip": "Away win",
-    "odds": "2.12",
-    "group": 1
-  },
-  {
-    "fixtureId": 1571805,
-    "league": "NB II",
-    "match": "Szeged 2011 - BVSC",
-    "kickoff": "2026-11-04T17:00:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.13",
-    "group": 1
-  },
-  {
-    "fixtureId": 1647455,
-    "league": "Superliga",
-    "match": "Drita - Prishtina",
-    "kickoff": "2026-11-04T13:00:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "1.99",
-    "group": 2
-  },
-  {
-    "fixtureId": 1640303,
-    "league": "League Cup",
-    "match": "AL Masry - Petrojet",
-    "kickoff": "2026-11-04T19:00:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.50",
-    "group": 2
-  },
-  {
-    "fixtureId": 1563248,
-    "league": "Championship",
-    "match": "Cardiff - West Ham",
-    "kickoff": "2026-11-04T20:45:00+01:00",
+    "fixtureId": 1636376,
+    "league": "UEFA Europa Conference League",
+    "match": "Aarhus - SC Braga",
+    "kickoff": "2026-11-05T18:45:00+01:00",
     "tip": "Away win",
     "odds": "2.00",
+    "group": 1
+  },
+  {
+    "fixtureId": 1636219,
+    "league": "UEFA Europa League",
+    "match": "AZ Alkmaar - Juventus",
+    "kickoff": "2026-11-05T21:00:00+01:00",
+    "tip": "Away win",
+    "odds": "2.04",
+    "group": 1
+  },
+  {
+    "fixtureId": 1630463,
+    "league": "Birinci Dasta",
+    "match": "Səbail - Cəbrayıl",
+    "kickoff": "2026-11-05T12:00:00+01:00",
+    "tip": "Home win",
+    "odds": "1.82",
+    "group": 2
+  },
+  {
+    "fixtureId": 1630633,
+    "league": "Super League",
+    "match": "Mutondo Stars - Mufulira Wanderers",
+    "kickoff": "2026-11-05T14:00:00+01:00",
+    "tip": "Away win",
+    "odds": "2.25",
+    "group": 2
+  },
+  {
+    "fixtureId": 1642308,
+    "league": "Liga Nacional",
+    "match": "Atlético Choloma - Atletico Independiente",
+    "kickoff": "2026-11-06T00:15:00+01:00",
+    "tip": "Home win",
+    "odds": "1.97",
     "group": 3
   },
   {
-    "fixtureId": 1636324,
-    "league": "UEFA Europa League",
-    "match": "Rennes - Olympiakos Piraeus",
-    "kickoff": "2026-11-04T16:30:00+01:00",
-    "tip": "Home win",
-    "odds": "2.25",
+    "fixtureId": 1628029,
+    "league": "Iraqi League",
+    "match": "Al Kahrabaa - Zakho",
+    "kickoff": "2026-11-05T14:00:00+01:00",
+    "tip": "Away win",
+    "odds": "2.22",
     "group": 3
   }
 ]

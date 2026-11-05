@@ -1,9 +1,37 @@
 [
   {
-    "league": "Serie A",
-    "match": "Sao Paulo - Corinthians",
-    "kickoff": "2026-11-05T01:30:00+01:00",
+    "league": "UEFA Europa League",
+    "match": "Torreense - Ararat-Armenia",
+    "kickoff": "2026-11-05T21:00:00+01:00",
     "tip": "Over 2.5",
-    "odds": "2.35"
+    "odds": "2.04"
+  },
+  {
+    "league": "UEFA Europa Conference League",
+    "match": "Aarhus - SC Braga",
+    "kickoff": "2026-11-05T18:45:00+01:00",
+    "tip": "Over 2.5",
+    "odds": "2.00"
+  },
+  {
+    "league": "UEFA Europa Conference League",
+    "match": "Getafe - Brighton",
+    "kickoff": "2026-11-05T21:00:00+01:00",
+    "tip": "Over 2.5",
+    "odds": "1.95"
+  },
+  {
+    "league": "UEFA Europa Conference League",
+    "match": "KuPS - Gent",
+    "kickoff": "2026-11-05T18:45:00+01:00",
+    "tip": "Over 2.5",
+    "odds": "1.95"
+  },
+  {
+    "league": "UEFA Europa Conference League",
+    "match": "Mjallby AIF - Borac Banja Luka",
+    "kickoff": "2026-11-05T18:45:00+01:00",
+    "tip": "Over 2.5",
+    "odds": "2.01"
   }
 ]

@@ -1,23 +1,23 @@
 [
   {
-    "league": "Tercera División RFEF - Group 6",
-    "match": "Buñol - Hércules II",
-    "kickoff": "2026-11-04T20:00:00+01:00",
+    "league": "Professional League",
+    "match": "Dhofar - Saham",
+    "kickoff": "2026-11-05T16:20:00+01:00",
     "tip": "Over 2.5",
-    "odds": "2.30"
+    "odds": "2.29"
   },
   {
     "league": "Division Profesional - Clausura",
-    "match": "Sportivo Ameliano - Club Guarani",
-    "kickoff": "2026-11-04T23:00:00+01:00",
+    "match": "Rubio NU - Sportivo Luqueno",
+    "kickoff": "2026-11-05T23:00:00+01:00",
     "tip": "Over 2.5",
-    "odds": "2.15"
+    "odds": "2.10"
   },
   {
-    "league": "Copa Chile",
-    "match": "Union La Calera - Coquimbo Unido",
-    "kickoff": "2026-11-04T23:00:00+01:00",
+    "league": "UEFA Europa League",
+    "match": "Torreense - Ararat-Armenia",
+    "kickoff": "2026-11-05T21:00:00+01:00",
     "tip": "Over 2.5",
-    "odds": "2.00"
+    "odds": "2.04"
   }
 ]
