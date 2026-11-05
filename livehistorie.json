@@ -1,11 +1,11 @@
 [
   {
-    "league": "UEFA Europa Conference League",
-    "homeTeam": "Universitatea Craiova",
-    "awayTeam": "Egnatia Rrogozhinë",
+    "league": "UEFA Europa League",
+    "homeTeam": "Sunderland",
+    "awayTeam": "Dinamo Zagreb",
     "tip": "Over 2.5",
     "odds": "",
-    "halftimeScore": "2:0",
+    "halftimeScore": "0:2",
     "liveOdds": "",
     "finalScore": "",
     "result": "",
@@ -13,7 +13,7 @@
     "kickoff": "2026-11-05T20:00:00.000Z",
     "resolvedAt": "",
     "source": "whisper-football",
-    "scoutStats": "Whisper xG-rate surge | HT 2:0 | xG: 1.25 | Shots: 13/5 | winXG: 1.03 | losingXG: 0.22 losingSOT: 1 | @HT | Pre O2.5: 1.6749999999999998"
+    "scoutStats": "Whisper xG-rate surge | HT 0:2 | xG: 1.63 | Shots: 13/7 | winXG: 1.18 | losingXG: 0.45 losingSOT: 3 | @HT | Pre O2.5: 1.6549999999999998"
   },
   {
     "league": "League One",
