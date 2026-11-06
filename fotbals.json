@@ -1,16 +1,23 @@
 [
   {
-    "League": "UEFA Europa Conference League",
-    "Match": "Aarhus vs SC Braga",
+    "League": "Liga 3",
+    "Match": "União Santarém vs Mafra",
     "Tip": "Over 1.5",
-    "Odds": "1.30",
-    "Date": "2026-11-05T17:45:00+00:00"
+    "Odds": "1.32",
+    "Date": "2026-11-06T19:00:00+00:00"
   },
   {
-    "League": "UEFA Europa League",
-    "Match": "Celta Vigo vs Union St. Gilloise",
+    "League": "Ligue 1",
+    "Match": "Toulouse vs Strasbourg",
     "Tip": "Over 1.5",
-    "Odds": "1.24",
-    "Date": "2026-11-05T20:00:00+00:00"
+    "Odds": "1.19",
+    "Date": "2026-11-06T19:45:00+00:00"
+  },
+  {
+    "League": "J1 League",
+    "Match": "Yokohama F. Marinos vs Fagiano Okayama",
+    "Tip": "Over 1.5",
+    "Odds": "1.25",
+    "Date": "2026-11-07T05:00:00+00:00"
   }
 ]

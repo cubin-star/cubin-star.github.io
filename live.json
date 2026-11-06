@@ -1,1 +1,58 @@
-[]
+[
+  {
+    "League": "Liga Alef",
+    "Match": "Ironi Beit Shemesh vs Hapoel Azor",
+    "Tip": "Over 1.5",
+    "Odds": "1.17",
+    "Date": "2026-11-06T10:30:00+00:00"
+  },
+  {
+    "League": "Liga 1",
+    "Match": "Persepam Madura Utd vs Arema FC",
+    "Tip": "Over 1.5",
+    "Odds": "1.20",
+    "Date": "2026-11-06T12:00:00+00:00"
+  },
+  {
+    "League": "Division 1",
+    "Match": "Dibba Al-Fujairah vs Al Hamriyah",
+    "Tip": "Over 1.5",
+    "Odds": "1.17",
+    "Date": "2026-11-06T12:45:00+00:00"
+  },
+  {
+    "League": "Second NL",
+    "Match": "Uljanik vs Inter Zapresic",
+    "Tip": "Over 1.5",
+    "Odds": "1.14",
+    "Date": "2026-11-06T13:00:00+00:00"
+  },
+  {
+    "League": "Super League",
+    "Match": "Sogdiana vs Dinamo Samarqand",
+    "Tip": "Over 1.5",
+    "Odds": "1.19",
+    "Date": "2026-11-06T13:30:00+00:00"
+  },
+  {
+    "League": "Liga 3",
+    "Match": "União Santarém vs Mafra",
+    "Tip": "Over 1.5",
+    "Odds": "1.32",
+    "Date": "2026-11-06T19:00:00+00:00"
+  },
+  {
+    "League": "Non League Premier - Northern",
+    "Match": "Quorn vs Alfreton Town",
+    "Tip": "Over 1.5",
+    "Odds": "1.14",
+    "Date": "2026-11-06T19:45:00+00:00"
+  },
+  {
+    "League": "J3 League",
+    "Match": "Fukushima United vs FC Ryukyu",
+    "Tip": "Over 1.5",
+    "Odds": "1.12",
+    "Date": "2026-11-07T05:00:00+00:00"
+  }
+]
