@@ -1,5 +1,21 @@
 [
   {
+    "league": "A-League",
+    "homeTeam": "Sydney",
+    "awayTeam": "Central Coast Mariners",
+    "tip": "Over 2.5",
+    "odds": "",
+    "halftimeScore": "2:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-11-06T08:40:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 2:0 | xG: 0.85 | Shots: 10/4 | winXG: 0.39 | losingXG: 0.47 losingSOT: 2 | @HT | Pre O2.5: 1.635"
+  },
+  {
     "league": "Serie B",
     "homeTeam": "Botafogo SP",
     "awayTeam": "Londrina",
