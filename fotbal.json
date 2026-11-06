@@ -1,24 +1,24 @@
 [
   {
-    "League": "UEFA Europa Conference League",
-    "Match": "Universitatea Craiova vs Egnatia Rrogozhinë",
+    "League": "Premier League",
+    "Match": "Everton vs Coventry",
+    "Tip": "Over 2.5",
+    "Odds": "1.81",
+    "Date": "2026-11-06T20:00:00+00:00"
+  },
+  {
+    "League": "1. Lig",
+    "Match": "Antalyaspor vs Bursaspor",
     "Tip": "Over 2.5",
     "Odds": "1.78",
-    "Date": "2026-11-05T20:00:00+00:00"
+    "Date": "2026-11-06T17:00:00+00:00"
   },
   {
-    "League": "UEFA Europa League",
-    "Match": "Levski Sofia vs Jagiellonia",
+    "League": "Challenger Pro League",
+    "Match": "Sporting Hasselt vs Patro Eisden",
     "Tip": "Over 2.5",
-    "Odds": "1.91",
-    "Date": "2026-11-05T17:45:00+00:00"
-  },
-  {
-    "League": "Birinci Dasta",
-    "Match": "Baku Sportinq vs Xankəndi FK",
-    "Tip": "Over 2.5",
-    "Odds": "1.95",
-    "Date": "2026-11-05T11:00:00+00:00",
+    "Odds": "1.75",
+    "Date": "2026-11-06T19:00:00+00:00",
     "locked": true
   }
 ]
