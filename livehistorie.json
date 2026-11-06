@@ -1,5 +1,21 @@
 [
   {
+    "league": "Ekstraklasa",
+    "homeTeam": "Wisla Krakow",
+    "awayTeam": "Cracovia Krakow",
+    "tip": "Over 3.5",
+    "odds": "",
+    "halftimeScore": "2:1",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-11-06T19:30:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 2:1 | xG: 2.00 | Shots: 18/8 | winXG: 0.82 | losingXG: 1.18 losingSOT: 2 | @HT | Pre O2.5: 1.7"
+  },
+  {
     "league": "2. Bundesliga",
     "homeTeam": "Dynamo Dresden",
     "awayTeam": "SpVgg Greuther Fürth",
