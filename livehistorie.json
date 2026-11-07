@@ -1,5 +1,21 @@
 [
   {
+    "league": "Ligat Ha'al",
+    "homeTeam": "Hapoel Petah Tikva",
+    "awayTeam": "Hapoel Ramat Gan",
+    "tip": "Over 2.5",
+    "odds": "",
+    "halftimeScore": "2:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-11-07T13:00:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 2:0 | xG: 1.59 | Shots: 10/3 | winXG: 0.79 | losingXG: 0.80 losingSOT: 0 | @HT | Pre O2.5: 1.75"
+  },
+  {
     "league": "Thai League 1",
     "homeTeam": "Uthai Thani",
     "awayTeam": "Chiangrai United",
