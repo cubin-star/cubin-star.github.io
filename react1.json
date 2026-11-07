@@ -1,58 +1,58 @@
 [
   {
-    "fixtureId": 1556138,
-    "league": "J1 League",
-    "match": "Shimizu S-pulse - Tokyo Verdy",
-    "kickoff": "2026-11-07T05:00:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.34"
-  },
-  {
-    "fixtureId": 1633928,
-    "league": "V.League 1",
-    "match": "Hồng Lĩnh Hà Tĩnh - Nam Dinh",
-    "kickoff": "2026-11-06T12:00:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.13"
-  },
-  {
-    "fixtureId": 1597813,
-    "league": "Liga 3",
-    "match": "União Santarém - Mafra",
-    "kickoff": "2026-11-06T20:00:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.05"
-  },
-  {
-    "fixtureId": 1570450,
+    "fixtureId": 1570446,
     "league": "La Liga",
-    "match": "Sevilla - Alaves",
-    "kickoff": "2026-11-06T21:00:00+01:00",
-    "tip": "Home win",
-    "odds": "1.97"
+    "match": "Espanyol - Deportivo La Coruna",
+    "kickoff": "2026-11-07T16:15:00+01:00",
+    "tip": "Over 2.5",
+    "odds": "2.08"
   },
   {
-    "fixtureId": 1552817,
-    "league": "Ligue 1",
-    "match": "Toulouse - Strasbourg",
-    "kickoff": "2026-11-06T20:45:00+01:00",
-    "tip": "Home win",
-    "odds": "2.11"
-  },
-  {
-    "fixtureId": 1552527,
-    "league": "Ligue 2",
-    "match": "Montpellier - Metz",
-    "kickoff": "2026-11-06T20:00:00+01:00",
-    "tip": "Home win",
-    "odds": "1.97"
-  },
-  {
-    "fixtureId": 1576522,
+    "fixtureId": 1576521,
     "league": "Segunda Liga",
-    "match": "AVS - Vizela",
-    "kickoff": "2026-11-06T19:45:00+01:00",
+    "match": "Academica - Amarante",
+    "kickoff": "2026-11-07T16:30:00+01:00",
+    "tip": "Over 2.5",
+    "odds": "2.00"
+  },
+  {
+    "fixtureId": 1555542,
+    "league": "Ligat Ha'al",
+    "match": "Hapoel Katamon - Bnei Sakhnin",
+    "kickoff": "2026-11-07T17:00:00+01:00",
+    "tip": "Over 2.5",
+    "odds": "2.10"
+  },
+  {
+    "fixtureId": 1494331,
+    "league": "Allsvenskan",
+    "match": "Degerfors IF - Gais",
+    "kickoff": "2026-11-07T17:30:00+01:00",
     "tip": "Away win",
-    "odds": "2.20"
+    "odds": "2.23"
+  },
+  {
+    "fixtureId": 1552217,
+    "league": "Eredivisie",
+    "match": "Fortuna Sittard - Telstar",
+    "kickoff": "2026-11-07T16:30:00+01:00",
+    "tip": "Home win",
+    "odds": "2.07"
+  },
+  {
+    "fixtureId": 1646798,
+    "league": "FA Cup",
+    "match": "Cheltenham - FC Halifax Town",
+    "kickoff": "2026-11-07T16:00:00+01:00",
+    "tip": "Home win",
+    "odds": "1.92"
+  },
+  {
+    "fixtureId": 1584460,
+    "league": "Süper Lig",
+    "match": "Eyüpspor - Kocaelispor",
+    "kickoff": "2026-11-07T11:30:00+01:00",
+    "tip": "Away win",
+    "odds": "1.93"
   }
 ]
