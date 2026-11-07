@@ -1,24 +1,24 @@
 [
   {
-    "League": "Premier League",
-    "Match": "Everton vs Coventry",
-    "Tip": "Over 2.5",
-    "Odds": "1.81",
-    "Date": "2026-11-06T20:00:00+00:00"
-  },
-  {
     "League": "1. Lig",
-    "Match": "Antalyaspor vs Bursaspor",
+    "Match": "Muğlaspor vs Esenler Erokspor",
     "Tip": "Over 2.5",
-    "Odds": "1.78",
-    "Date": "2026-11-06T17:00:00+00:00"
+    "Odds": "1.84",
+    "Date": "2026-11-07T13:00:00+00:00"
   },
   {
-    "League": "Challenger Pro League",
-    "Match": "Sporting Hasselt vs Patro Eisden",
+    "League": "Premiership",
+    "Match": "ST Johnstone vs Dundee",
     "Tip": "Over 2.5",
-    "Odds": "1.75",
-    "Date": "2026-11-06T19:00:00+00:00",
+    "Odds": "1.80",
+    "Date": "2026-11-07T15:00:00+00:00"
+  },
+  {
+    "League": "FA Cup",
+    "Match": "Eastleigh vs Shrewsbury",
+    "Tip": "Over 2.5",
+    "Odds": "1.80",
+    "Date": "2026-11-07T15:00:00+00:00",
     "locked": true
   }
 ]
