@@ -1,5 +1,21 @@
 [
   {
+    "league": "Primera División",
+    "homeTeam": "ADT",
+    "awayTeam": "Sporting Cristal",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "0:1",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-11-07T18:00:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 0:1 | xG: 0.61 | Shots: 9/5 | winXG: 0.07 | losingXG: 0.54 losingSOT: 4 | @HT | Pre O2.5: 1.75"
+  },
+  {
     "league": "Segunda División",
     "homeTeam": "Leganes",
     "awayTeam": "Albacete",
