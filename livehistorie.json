@@ -1,11 +1,11 @@
 [
   {
-    "league": "Premier League",
-    "homeTeam": "Nottingham Forest",
-    "awayTeam": "Manchester City",
+    "league": "Segunda División",
+    "homeTeam": "Leganes",
+    "awayTeam": "Albacete",
     "tip": "Over 2.5",
     "odds": "",
-    "halftimeScore": "2:0",
+    "halftimeScore": "0:2",
     "liveOdds": "",
     "finalScore": "",
     "result": "",
@@ -13,7 +13,7 @@
     "kickoff": "2026-11-07T17:30:00.000Z",
     "resolvedAt": "",
     "source": "whisper-football",
-    "scoutStats": "Whisper xG-rate surge | HT 2:0 | xG: 1.76 | Shots: 13/7 | winXG: 0.85 | losingXG: 0.91 losingSOT: 3 | @HT | Pre O2.5: 1.6549999999999998"
+    "scoutStats": "Whisper xG-rate surge | HT 0:2 | xG: 1.50 | Shots: 14/4 | winXG: 0.94 | losingXG: 0.56 losingSOT: 2 | @HT | Pre O2.5: 1.9249999999999998"
   },
   {
     "league": "Czech Liga",
