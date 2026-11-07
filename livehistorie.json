@@ -1,5 +1,21 @@
 [
   {
+    "league": "Thai League 1",
+    "homeTeam": "Uthai Thani",
+    "awayTeam": "Chiangrai United",
+    "tip": "Over 3.5",
+    "odds": "",
+    "halftimeScore": "2:1",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-11-07T11:30:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 2:1 | xG: 0.87 | Shots: 11/4 | winXG: 0.50 | losingXG: 0.37 losingSOT: 1 | @HT | Pre O2.5: 1.77"
+  },
+  {
     "league": "Ekstraklasa",
     "homeTeam": "Wisla Krakow",
     "awayTeam": "Cracovia Krakow",
