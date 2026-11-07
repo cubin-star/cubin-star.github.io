@@ -1,5 +1,21 @@
 [
   {
+    "league": "Super League",
+    "homeTeam": "Grasshoppers",
+    "awayTeam": "Lausanne",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "1:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-11-07T19:30:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 1:0 | xG: 1.52 | Shots: 13/5 | winXG: 0.83 | losingXG: 0.69 losingSOT: 2 | @HT | Pre O2.5: 1.645"
+  },
+  {
     "league": "Primera División",
     "homeTeam": "ADT",
     "awayTeam": "Sporting Cristal",
