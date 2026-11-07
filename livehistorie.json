@@ -1,5 +1,21 @@
 [
   {
+    "league": "Super Liga",
+    "homeTeam": "Cukaricki",
+    "awayTeam": "Radnicki NIS",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "0:1",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-11-07T14:00:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 0:1 | xG: 0.68 | Shots: 9/4 | winXG: 0.22 | losingXG: 0.46 losingSOT: 2 | @HT | Pre O2.5: 1.795"
+  },
+  {
     "league": "1. Lig",
     "homeTeam": "Muğlaspor",
     "awayTeam": "Esenler Erokspor",
