@@ -1,9 +1,23 @@
 [
   {
-    "League": "Liga 3",
-    "Match": "União Santarém vs Mafra",
+    "League": "Liga II",
+    "Match": "Concordia vs ASA Targu Mures",
     "Tip": "Over 2.5",
-    "Odds": "1.94",
-    "Date": "2026-11-06T19:00:00+00:00"
+    "Odds": "1.50",
+    "Date": "2026-11-07T09:00:00+00:00"
+  },
+  {
+    "League": "National League - North",
+    "Match": "Scarborough Athletic vs Buxton",
+    "Tip": "Over 2.5",
+    "Odds": "1.56",
+    "Date": "2026-11-07T15:00:00+00:00"
+  },
+  {
+    "League": "National 2 - Group C",
+    "Match": "Lyon Duchere vs Fréjus St-Raphaël",
+    "Tip": "Over 2.5",
+    "Odds": "2.09",
+    "Date": "2026-11-07T17:00:00+00:00"
   }
 ]
