@@ -1,5 +1,21 @@
 [
   {
+    "league": "Czech Liga",
+    "homeTeam": "Zbrojovka Brno",
+    "awayTeam": "Baník Ostrava",
+    "tip": "Over 2.5",
+    "odds": "",
+    "halftimeScore": "0:2",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-11-07T17:00:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 0:2 | xG: 1.34 | Shots: 10/5 | winXG: 0.56 | losingXG: 0.78 losingSOT: 1 | @HT | Pre O2.5: 1.8250000000000002"
+  },
+  {
     "league": "Segunda División",
     "homeTeam": "Cadiz",
     "awayTeam": "Oviedo",
