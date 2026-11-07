@@ -1,5 +1,35 @@
 [
   {
+    "sport": "basketball",
+    "league": "NBA",
+    "match": "New Orleans Pelicans vs Minnesota Timberwolves",
+    "tip": "Over 213.5",
+    "odds": "1.18",
+    "date": "2026-11-07T01:00:00+00:00",
+    "score": "109:115",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "Ligue 1",
+    "match": "Toulouse vs Strasbourg",
+    "tip": "Over 1.5",
+    "odds": "1.19",
+    "date": "2026-11-06T19:45:00+00:00",
+    "score": "3:1",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "Liga 3",
+    "match": "União Santarém vs Mafra",
+    "tip": "Over 1.5",
+    "odds": "1.32",
+    "date": "2026-11-06T19:00:00+00:00",
+    "score": "2:1",
+    "result": "✓"
+  },
+  {
     "sport": "football",
     "league": "UEFA Europa League",
     "match": "Celta Vigo vs Union St. Gilloise",
@@ -1966,36 +1996,6 @@
     "tip": "Over 1.5",
     "odds": "1.28",
     "date": "2026-08-29T10:00:00+00:00",
-    "score": "2:1",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Ligue 1",
-    "match": "Lille vs Paris Saint Germain",
-    "tip": "Over 1.5",
-    "odds": "1.22",
-    "date": "2026-08-28T18:45:00+00:00",
-    "score": "2:2",
-    "result": "✓"
-  },
-  {
-    "sport": "basketball",
-    "league": "World Cup",
-    "match": "Croatia vs Latvia",
-    "tip": "Over 160.5",
-    "odds": "1.23",
-    "date": "2026-08-27T18:00:00+00:00",
-    "score": "115:80",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "UEFA Europa League",
-    "match": "Lillestrom vs Egnatia Rrogozhinë",
-    "tip": "Over 1.5",
-    "odds": "1.24",
-    "date": "2026-08-27T17:00:00+00:00",
     "score": "2:1",
     "result": "✓"
   }
