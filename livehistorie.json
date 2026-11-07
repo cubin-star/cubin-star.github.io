@@ -1,5 +1,21 @@
 [
   {
+    "league": "Segunda División",
+    "homeTeam": "Cadiz",
+    "awayTeam": "Oviedo",
+    "tip": "Over 2.5",
+    "odds": "",
+    "halftimeScore": "0:2",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-11-07T15:15:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 0:2 | xG: 1.25 | Shots: 11/3 | winXG: 0.37 | losingXG: 0.88 losingSOT: 1 | @HT | Pre O2.5: 1.99"
+  },
+  {
     "league": "Super Liga",
     "homeTeam": "Cukaricki",
     "awayTeam": "Radnicki NIS",
