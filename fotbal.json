@@ -1,24 +1,24 @@
 [
   {
-    "League": "1. Lig",
-    "Match": "Muğlaspor vs Esenler Erokspor",
+    "League": "Premier League",
+    "Match": "Ipswich vs Bournemouth",
     "Tip": "Over 2.5",
-    "Odds": "1.84",
-    "Date": "2026-11-07T13:00:00+00:00"
+    "Odds": "1.75",
+    "Date": "2026-11-08T14:00:00+00:00"
   },
   {
-    "League": "Premiership",
-    "Match": "ST Johnstone vs Dundee",
+    "League": "Ligue 1",
+    "Match": "Rennes vs Lille",
     "Tip": "Over 2.5",
-    "Odds": "1.80",
-    "Date": "2026-11-07T15:00:00+00:00"
+    "Odds": "1.75",
+    "Date": "2026-11-08T14:00:00+00:00"
   },
   {
-    "League": "FA Cup",
-    "Match": "Eastleigh vs Shrewsbury",
+    "League": "Campeonato de Portugal Prio - Group A",
+    "Match": "Rebordosa vs Brito",
     "Tip": "Over 2.5",
-    "Odds": "1.80",
-    "Date": "2026-11-07T15:00:00+00:00",
+    "Odds": "1.75",
+    "Date": "2026-11-08T15:00:00+00:00",
     "locked": true
   }
 ]
