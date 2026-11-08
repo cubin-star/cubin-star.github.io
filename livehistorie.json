@@ -1,5 +1,21 @@
 [
   {
+    "league": "Serie A",
+    "homeTeam": "Napoli",
+    "awayTeam": "Lazio",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "0:1",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-11-08T11:30:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 0:1 | xG: 1.52 | Shots: 18/6 | winXG: 0.70 | losingXG: 0.82 losingSOT: 2 | @HT | Pre O2.5: 1.62"
+  },
+  {
     "league": "Super League",
     "homeTeam": "Dalian Zhixing",
     "awayTeam": "Tianjin Teda",
