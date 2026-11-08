@@ -1,8 +1,8 @@
 [
   {
-    "league": "Serie A",
-    "homeTeam": "Genoa",
-    "awayTeam": "AC Milan",
+    "league": "Serie B",
+    "homeTeam": "Virtus Entella",
+    "awayTeam": "Modena",
     "tip": "Over 2.5",
     "odds": "",
     "halftimeScore": "0:2",
@@ -13,7 +13,7 @@
     "kickoff": "2026-11-08T14:00:00.000Z",
     "resolvedAt": "",
     "source": "whisper-football",
-    "scoutStats": "Whisper xG-rate surge | HT 0:2 | xG: 1.00 | Shots: 11/4 | winXG: 0.58 | losingXG: 0.42 losingSOT: 2 | @HT | Pre O2.5: 2.1900000000000004"
+    "scoutStats": "Whisper xG-rate surge | HT 0:2 | xG: 1.05 | Shots: 11/5 | winXG: 0.91 | losingXG: 0.14 losingSOT: 1 | @HT | Pre O2.5: 2.0949999999999998"
   },
   {
     "league": "1. Lig",
