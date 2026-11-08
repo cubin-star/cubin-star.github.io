@@ -1,5 +1,21 @@
 [
   {
+    "league": "Serie A",
+    "homeTeam": "Genoa",
+    "awayTeam": "AC Milan",
+    "tip": "Over 2.5",
+    "odds": "",
+    "halftimeScore": "0:2",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-11-08T14:00:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 0:2 | xG: 1.00 | Shots: 11/4 | winXG: 0.58 | losingXG: 0.42 losingSOT: 2 | @HT | Pre O2.5: 2.1900000000000004"
+  },
+  {
     "league": "1. Lig",
     "homeTeam": "Boluspor",
     "awayTeam": "Bodrum FK",
