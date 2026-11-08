@@ -1,23 +1,23 @@
 [
   {
     "league": "Primeira Liga",
-    "match": "Alverca - Casa Pia",
-    "kickoff": "2026-11-07T19:00:00+01:00",
+    "match": "Santa Clara - GIL Vicente",
+    "kickoff": "2026-11-08T16:30:00+01:00",
     "tip": "Over 2.5",
-    "odds": "2.20"
+    "odds": "2.53"
   },
   {
-    "league": "La Liga",
-    "match": "Osasuna - Athletic Club",
-    "kickoff": "2026-11-07T18:30:00+01:00",
+    "league": "Serie B",
+    "match": "Virtus Entella - Modena",
+    "kickoff": "2026-11-08T15:00:00+01:00",
     "tip": "Over 2.5",
-    "odds": "2.13"
+    "odds": "2.15"
   },
   {
-    "league": "J2 League",
-    "match": "Vanraure Hachinohe - Consadole Sapporo",
-    "kickoff": "2026-11-08T05:00:00+01:00",
+    "league": "Primera A",
+    "match": "Alianza Valledupar - Llaneros",
+    "kickoff": "2026-11-09T02:15:00+01:00",
     "tip": "Over 2.5",
-    "odds": "2.05"
+    "odds": "2.15"
   }
 ]

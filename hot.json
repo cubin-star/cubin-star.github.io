@@ -1,56 +1,56 @@
 [
   {
-    "fixtureId": 1570448,
-    "league": "La Liga",
-    "match": "Osasuna - Athletic Club",
-    "kickoff": "2026-11-07T18:30:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.13",
-    "group": 1
-  },
-  {
-    "fixtureId": 1558675,
-    "league": "Jupiler Pro League",
-    "match": "RAAL La Louvière - Cercle Brugge",
-    "kickoff": "2026-11-07T20:45:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "1.95",
-    "group": 1
-  },
-  {
-    "fixtureId": 1575536,
-    "league": "Primeira Liga",
-    "match": "Alverca - Casa Pia",
-    "kickoff": "2026-11-07T19:00:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.20",
-    "group": 2
-  },
-  {
-    "fixtureId": 1601598,
+    "fixtureId": 1601597,
     "league": "Serie B",
-    "match": "Juve Stabia - Arezzo",
-    "kickoff": "2026-11-07T15:00:00+01:00",
+    "match": "Virtus Entella - Modena",
+    "kickoff": "2026-11-08T15:00:00+01:00",
     "tip": "Over 2.5",
-    "odds": "1.95",
+    "odds": "2.15",
+    "group": 1
+  },
+  {
+    "fixtureId": 1585820,
+    "league": "1. Lig",
+    "match": "Bandırmaspor - Fatih Karagümrük",
+    "kickoff": "2026-11-08T11:30:00+01:00",
+    "tip": "Over 2.5",
+    "odds": "2.10",
+    "group": 1
+  },
+  {
+    "fixtureId": 1593354,
+    "league": "Super League 1",
+    "match": "Asteras Tripolis - Kalamata",
+    "kickoff": "2026-11-08T16:00:00+01:00",
+    "tip": "Over 2.5",
+    "odds": "2.01",
     "group": 2
   },
   {
-    "fixtureId": 1606752,
-    "league": "J2 League",
-    "match": "Vanraure Hachinohe - Consadole Sapporo",
-    "kickoff": "2026-11-08T05:00:00+01:00",
+    "fixtureId": 1549853,
+    "league": "Primera A",
+    "match": "Alianza Valledupar - Llaneros",
+    "kickoff": "2026-11-09T02:15:00+01:00",
     "tip": "Over 2.5",
-    "odds": "2.05",
+    "odds": "2.15",
+    "group": 2
+  },
+  {
+    "fixtureId": 1575542,
+    "league": "Primeira Liga",
+    "match": "Santa Clara - GIL Vicente",
+    "kickoff": "2026-11-08T16:30:00+01:00",
+    "tip": "Over 2.5",
+    "odds": "2.53",
     "group": 3
   },
   {
-    "fixtureId": 1570012,
-    "league": "Segunda División",
-    "match": "Leganes - Albacete",
-    "kickoff": "2026-11-07T18:30:00+01:00",
+    "fixtureId": 1565301,
+    "league": "Liga I",
+    "match": "Sepsi OSK Sfantu Gheorghe - FC Voluntari",
+    "kickoff": "2026-11-08T15:00:00+01:00",
     "tip": "Over 2.5",
-    "odds": "1.97",
+    "odds": "1.95",
     "group": 3
   }
 ]

@@ -1,56 +1,56 @@
 [
   {
-    "fixtureId": 1602545,
-    "league": "Liga II",
-    "match": "Bihor Oradea - Slatina",
-    "kickoff": "2026-11-07T11:30:00+01:00",
-    "tip": "Home win",
+    "fixtureId": 1550190,
+    "league": "Serie A",
+    "match": "Genoa - AC Milan",
+    "kickoff": "2026-11-08T15:00:00+01:00",
+    "tip": "Over 2.5",
     "odds": "2.15",
     "group": 1
   },
   {
-    "fixtureId": 1556702,
-    "league": "Premiership",
-    "match": "Dundee Utd - Motherwell",
-    "kickoff": "2026-11-07T16:00:00+01:00",
-    "tip": "Home win",
-    "odds": "2.05",
+    "fixtureId": 1556132,
+    "league": "J1 League",
+    "match": "JEF United Chiba - Mito Hollyhock",
+    "kickoff": "2026-11-08T09:00:00+01:00",
+    "tip": "Over 2.5",
+    "odds": "2.00",
     "group": 1
   },
   {
-    "fixtureId": 1553911,
-    "league": "Super Liga",
-    "match": "Železničar Pančevo - Radnicki 1923",
-    "kickoff": "2026-11-07T17:00:00+01:00",
+    "fixtureId": 1496013,
+    "league": "1. Division",
+    "match": "Stabaek - Stromsgodset",
+    "kickoff": "2026-11-08T13:00:00+01:00",
     "tip": "Home win",
-    "odds": "2.07",
+    "odds": "2.04",
     "group": 2
   },
   {
-    "fixtureId": 1576526,
-    "league": "Segunda Liga",
-    "match": "Felgueiras 1932 - Leixoes",
-    "kickoff": "2026-11-07T12:00:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.14",
-    "group": 2
-  },
-  {
-    "fixtureId": 1584460,
-    "league": "Süper Lig",
-    "match": "Eyüpspor - Kocaelispor",
-    "kickoff": "2026-11-07T11:30:00+01:00",
+    "fixtureId": 1554217,
+    "league": "Prva Liga",
+    "match": "FK Vozdovac - Borac Cacak",
+    "kickoff": "2026-11-08T14:00:00+01:00",
     "tip": "Over 2.5",
     "odds": "2.10",
+    "group": 2
+  },
+  {
+    "fixtureId": 1555423,
+    "league": "Super League",
+    "match": "FC Thun - FC Basel 1893",
+    "kickoff": "2026-11-08T16:30:00+01:00",
+    "tip": "Home win",
+    "odds": "2.15",
     "group": 3
   },
   {
-    "fixtureId": 1550194,
-    "league": "Serie A",
-    "match": "Parma - Bologna",
-    "kickoff": "2026-11-07T18:00:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.10",
+    "fixtureId": 1570449,
+    "league": "La Liga",
+    "match": "Real Sociedad - Rayo Vallecano",
+    "kickoff": "2026-11-08T16:15:00+01:00",
+    "tip": "Home win",
+    "odds": "1.81",
     "group": 3
   }
 ]
