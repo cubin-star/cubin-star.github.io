@@ -1,6 +1,22 @@
 [
   {
     "league": "Super League",
+    "homeTeam": "Dalian Zhixing",
+    "awayTeam": "Tianjin Teda",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "1:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-11-08T07:30:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 1:0 | xG: 0.50 | Shots: 6/3 | winXG: 0.22 | losingXG: 0.28 losingSOT: 2 | @HT | Pre O2.5: 1.72"
+  },
+  {
+    "league": "Super League",
     "homeTeam": "Grasshoppers",
     "awayTeam": "Lausanne",
     "tip": "Over 1.5",
