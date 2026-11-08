@@ -1,21 +1,5 @@
 [
   {
-    "league": "Serie B",
-    "homeTeam": "Virtus Entella",
-    "awayTeam": "Modena",
-    "tip": "Over 2.5",
-    "odds": "",
-    "halftimeScore": "0:2",
-    "liveOdds": "",
-    "finalScore": "",
-    "result": "",
-    "sport": "football",
-    "kickoff": "2026-11-08T14:00:00.000Z",
-    "resolvedAt": "",
-    "source": "whisper-football",
-    "scoutStats": "Whisper xG-rate surge | HT 0:2 | xG: 1.05 | Shots: 11/5 | winXG: 0.91 | losingXG: 0.14 losingSOT: 1 | @HT | Pre O2.5: 2.0949999999999998"
-  },
-  {
     "league": "1. Lig",
     "homeTeam": "Boluspor",
     "awayTeam": "Bodrum FK",
@@ -23,11 +7,11 @@
     "odds": "",
     "halftimeScore": "0:2",
     "liveOdds": "",
-    "finalScore": "",
-    "result": "",
+    "finalScore": "1:2",
+    "result": "✅ Won",
     "sport": "football",
     "kickoff": "2026-11-08T13:00:00.000Z",
-    "resolvedAt": "",
+    "resolvedAt": "2026-11-08T14:55:12.868Z",
     "source": "whisper-football",
     "scoutStats": "Whisper xG-rate surge | HT 0:2 | xG: 1.20 | Shots: 11/7 | winXG: 0.89 | losingXG: 0.31 losingSOT: 2 | @HT | Pre O2.5: 1.8"
   },
