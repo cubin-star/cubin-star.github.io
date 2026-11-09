@@ -1,9 +1,16 @@
 [
   {
-    "League": "Czech Liga",
-    "Match": "Plzen vs Sparta Praha",
+    "League": "Segunda Liga",
+    "Match": "Torreense vs União de Leiria",
     "Tip": "Over 1.5",
-    "Odds": "1.21",
-    "Date": "2026-11-08T17:00:00+00:00"
+    "Odds": "1.22",
+    "Date": "2026-11-09T20:15:00+00:00"
+  },
+  {
+    "League": "Segunda División",
+    "Match": "Sabadell vs Real Sociedad II",
+    "Tip": "Over 1.5",
+    "Odds": "1.33",
+    "Date": "2026-11-09T19:30:00+00:00"
   }
 ]

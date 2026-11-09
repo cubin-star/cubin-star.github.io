@@ -1,58 +1,16 @@
 [
   {
-    "League": "Premier League",
-    "Match": "Eastern District vs Wofoo Tai Po",
-    "Tip": "Over 1.5",
-    "Odds": "1.12",
-    "Date": "2026-11-08T11:00:00+00:00"
-  },
-  {
-    "League": "Regionalliga - Nordost",
-    "Match": "FSV Zwickau vs Lokomotive Leipzig",
+    "League": "Liga Leumit",
+    "Match": "Hapoel Kfar Saba vs Maccabi Bnei Raina",
     "Tip": "Over 1.5",
     "Odds": "1.18",
-    "Date": "2026-11-08T13:00:00+00:00"
+    "Date": "2026-11-09T17:00:00+00:00"
   },
   {
-    "League": "Serie D - Girone H",
-    "Match": "USD Palmese vs Martina Franca",
-    "Tip": "Over 1.5",
-    "Odds": "1.25",
-    "Date": "2026-11-08T13:30:00+00:00"
-  },
-  {
-    "League": "Ekstraklasa",
-    "Match": "Jagiellonia vs GKS Katowice",
+    "League": "Non League Premier - Southern Central",
+    "Match": "Redditch United vs Peterborough Sports",
     "Tip": "Over 1.5",
     "Odds": "1.12",
-    "Date": "2026-11-08T13:45:00+00:00"
-  },
-  {
-    "League": "Premier League",
-    "Match": "Ipswich vs Bournemouth",
-    "Tip": "Over 1.5",
-    "Odds": "1.21",
-    "Date": "2026-11-08T14:00:00+00:00"
-  },
-  {
-    "League": "First Amateur Division",
-    "Match": "Tienen vs Hoogstraten",
-    "Tip": "Over 1.5",
-    "Odds": "1.16",
-    "Date": "2026-11-08T14:00:00+00:00"
-  },
-  {
-    "League": "Premijer Liga",
-    "Match": "Borac Banja Luka vs Radnik Bijeljina",
-    "Tip": "Over 1.5",
-    "Odds": "1.17",
-    "Date": "2026-11-08T14:00:00+00:00"
-  },
-  {
-    "League": "Ekstraklasa",
-    "Match": "Legia Warszawa vs Raków Częstochowa",
-    "Tip": "Over 1.5",
-    "Odds": "1.19",
-    "Date": "2026-11-08T16:30:00+00:00"
+    "Date": "2026-11-09T19:45:00+00:00"
   }
 ]
