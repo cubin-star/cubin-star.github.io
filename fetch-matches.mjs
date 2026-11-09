@@ -1,4 +1,5 @@
-import { writeFileSync, existsSync, readFileSync } from 'fs';
+import { writeFileSync, existsSync, readFileSync, renameSync } from 'fs';
+import { loadEngine, evaluateEngine, planEngineSelection, toFeedItem, assertFeed, ACCA_COUNT, QUAD_COUNT } from './engine-picks.mjs';
 
 const API_KEY = process.env.API_FOOTBALL_KEY1;
 
@@ -520,6 +521,12 @@ function leagueTier(name,country,type){
 export { leagueTier, norm, leagueLevel };
 function maskKey(k){if(!k)return'(none)';if(k.length<=8)return'***';return k.slice(0,4)+'...'+k.slice(-4)+' (len='+k.length+')';}
 function sleep(ms){return new Promise(r=>setTimeout(r,ms));}
+// Atomicky zapis JSON: nejdriv docasny soubor, pak prejmenovani. Pri padu
+// procesu tak nikdy nezustane napul zapsany soubor.
+function writeJsonAtomic(path,data){const tmp=path+'.tmp';writeFileSync(tmp,JSON.stringify(data,null,2),'utf-8');renameSync(tmp,path);}
+// Nazvy soutezi podle league.id z /leagues - FVE engine posila jen leagueId,
+// ale ACCA/QUAD backendy vyzaduji neprazdne pole league.
+const leagueNames=new Map();
 // Zdroj nahody. V produkci Math.random, v testech lze pres setRng() nasadit
 // deterministicky generator (mulberry32) a vyber tak reprodukovat.
 let rng=Math.random;
@@ -624,7 +631,7 @@ async function getFixtures(date){fixtureFetchAttempts++;const data=await apiFetc
 async function getLeagueTypes(){
     const data=await apiFetch('/leagues');
     const map=new Map();
-    for(const it of data.response||[]){if(it?.league?.id!=null)map.set(it.league.id,it.league.type);}
+    for(const it of data.response||[]){if(it?.league?.id!=null){map.set(it.league.id,it.league.type);if(it.league.name)leagueNames.set(it.league.id,it.league.name);}}
     console.log('Metadata soutezi: '+map.size+' lig nacteno');
     return map;
 }
@@ -1207,6 +1214,10 @@ export function assertReact1(picks){
 async function main(){
     console.log('Kombik Bot - fetch-matches\n');
 
+    // 0) FVE ENGINE - prioritni zdroj pro react2.json (ACCA) a react3.json (QUAD 4).
+    // Ceka se nejvys do 09:30 Europe/Prague, pak se pokracuje puvodnim vyberem.
+    const engineLoad=await loadEngine({log:m=>console.log(m)});
+
     // 1) Nacti existujici vybery jinych botu (fotbal.json, live2.json z GitHubu) -> dedup set
     const dedupSet=await loadDedupKeysFromUrls(DEDUP_URLS);
     console.log('Dedup klicu celkem: '+dedupSet.size+'\n');
@@ -1323,6 +1334,25 @@ async function main(){
 
     // Globalni dedup napric VSEMI vystupy je na urovni dvojice zapas+tip.
     // Stejny zapas se smi objevit ve vice souborech, ale pokazde s jinym tipem.
+    // === FVE ENGINE ========================================================
+    // 0-19 validnich unikatnich zapasu -> ACCA i QUAD puvodni vyber,
+    // 20-24 -> ACCA z enginu, QUAD puvodni, 25+ -> oba z enginu (bez prekryvu).
+    // Engine tipy obchazeji dedup proti ostatnim vystupum i jinym botum.
+    const engineEval=evaluateEngine(engineLoad.doc,{now:new Date(),today:engineLoad.today,resolveLeague:p=>(typeof p.league==='string'&&p.league.trim())?p.league:(leagueNames.get(Number(p.leagueId))||'')});
+    const enginePlan=planEngineSelection(engineEval,engineLoad.today);
+    console.log('\nFVE ENGINE: '+(engineEval.reason||'nedostupny')+' | validnich unikatnich: '+enginePlan.count+(engineEval.rejected.length?' | vyrazeno: '+engineEval.rejected.length:''));
+    for(const r of engineEval.rejected.slice(0,20))console.log('   - ENGINE vyrazen '+r.fixtureId+': '+r.reason);
+    console.log('   ACCA (react2.json): '+(enginePlan.accaFromEngine?'ENGINE':'puvodni vyber')+' | QUAD 4 (react3.json): '+(enginePlan.quadFromEngine?'ENGINE':'puvodni vyber'));
+    let react3Pool=react2Pool;
+    if(enginePlan.accaFromEngine&&!enginePlan.quadFromEngine){
+        // QUAD puvodnim vyberem: vynech zapasy z ACCA, jen pokud zustane dost kandidatu.
+        const accaIds=new Set(enginePlan.acca.map(m=>m.fixtureId));
+        const filtered=react2Pool.filter(m=>!accaIds.has(m.fixtureId));
+        const left=new Set(filtered.map(m=>m.fixtureId)).size;
+        if(left>=REACT3_PICK_COUNT*2){react3Pool=filtered;console.log('   QUAD 4: vynechano '+(react2Pool.length-filtered.length)+' tipu na ACCA zapasy, zbyva '+left+' zapasu');}
+        else console.warn('!!! VAROVANI QUAD 4: ACCA zapasy NEVYNECHANY - bez nich by zbylo jen '+left+' zapasu (potreba '+(REACT3_PICK_COUNT*2)+'). Mozny prekryv s ACCA: '+[...accaIds].join(', '));
+    }
+
     const blockedPicks=new Set();
     // Globalni registr lig pro HLAVNI skupinu - drzi unikatni fixture na ligu
     // napric hot/tips-kombik/react2/react3. react1 ma vlastni registr, aby
@@ -1354,14 +1384,15 @@ async function main(){
         {label:'Home/Away win',market:isWinner,countsAs:isWinner,want:REACT2_PICK_COUNT-REACT2_OVER_COUNT},
         {label:'dobrani (oba trhy)',market:anyMarket,countsAs:always,want:REACT2_PICK_COUNT},
     ],CORE_MIN_REACT2);
-    const react3Picker=mkPicker('react3.json',react2Pool,REACT3_PICK_COUNT,[
+    const react3Picker=mkPicker('react3.json',react3Pool,REACT3_PICK_COUNT,[
         {label:'Over 2.5 (golove ligy)',market:isRichOver,countsAs:isOver,want:REACT3_MIN_OVER},
         {label:'Over 2.5 (ostatni ligy)',market:isOver,countsAs:isOver,want:REACT3_MIN_OVER},
         {label:'dobrani (oba trhy)',market:anyMarket,countsAs:always,want:REACT3_PICK_COUNT},
     ],CORE_MIN_REACT3);
     // Hlavni skupina = 4 rovnocenne soubory. Vyber bezi po kolech s nahodnym
     // poradim, takze zadny z nich nema prednost jen diky poradi generovani.
-    const mainPickers=[hotPicker,tipsPicker,react2Picker,react3Picker];
+    // Soubor plneny z FVE ENGINE se koordinovaneho vyberu neucastni.
+    const mainPickers=[hotPicker,tipsPicker,...(enginePlan.accaFromEngine?[]:[react2Picker]),...(enginePlan.quadFromEngine?[]:[react3Picker])];
     const pickers=[...mainPickers,react1Picker];
     console.log('\nHlavni skupina (rovnocenne): hot.json, '+TIPS_FILE+', react2.json, react3.json');
     console.log('Vedlejsi skupina (nejnizsi priorita, az po hlavni): react1.json');
@@ -1467,13 +1498,27 @@ async function main(){
     // === react2.json ========================================================
     // Promichej, aby v tiketu nesly 3 Over za sebou a pak 3 vitezove - skupiny
     // by jinak vzdy vysly jako "cisty Over" vs "cisty vitez".
-    const react2=balanceGroups(shuffle([...react2Picker.selected])).map(m=>({fixtureId:m.fixtureId,league:m.league,match:m.match,kickoff:m.kickoff,tip:m.tip,odds:m.odds,group:m.group}));
-    writeFileSync('react2.json',JSON.stringify(react2,null,2),'utf-8');
+    let react2;
+    if(enginePlan.accaFromEngine){react2=enginePlan.acca.map(toFeedItem);assertFeed(react2,ACCA_COUNT,'react2.json');console.log('react2.json: zdroj FVE ENGINE');}
+    else react2=balanceGroups(shuffle([...react2Picker.selected])).map(m=>({fixtureId:m.fixtureId,league:m.league,match:m.match,kickoff:m.kickoff,tip:m.tip,odds:m.odds,group:m.group}));
+    writeJsonAtomic('react2.json',react2);
     console.log('react2.json zapsan: '+react2.length+'/'+REACT2_PICK_COUNT+' zapasu ('+MIN_ODDS+'-'+MAX_ODDS+')');
 
     // === react3.json ========================================================
-    const react3=balanceGroups(shuffle([...react3Picker.selected])).map(m=>({fixtureId:m.fixtureId,league:m.league,match:m.match,kickoff:m.kickoff,tip:m.tip,odds:m.odds,group:m.group}));
-    writeFileSync('react3.json',JSON.stringify(react3,null,2),'utf-8');
+    let react3;
+    if(enginePlan.quadFromEngine){
+        react3=enginePlan.quad.map(toFeedItem);assertFeed(react3,QUAD_COUNT,'react3.json');
+        const shared=react3.filter(m=>react2.some(x=>x.fixtureId===m.fixtureId));
+        if(shared.length)throw new Error('react2.json a react3.json sdileji ENGINE zapasy: '+shared.map(m=>m.fixtureId).join(', '));
+        console.log('react3.json: zdroj FVE ENGINE');
+    }
+    else react3=balanceGroups(shuffle([...react3Picker.selected])).map(m=>({fixtureId:m.fixtureId,league:m.league,match:m.match,kickoff:m.kickoff,tip:m.tip,odds:m.odds,group:m.group}));
+    if(enginePlan.accaFromEngine&&!enginePlan.quadFromEngine){
+        const overlap=react3.filter(m=>react2.some(x=>x.fixtureId===m.fixtureId)).map(m=>m.fixtureId);
+        if(overlap.length)console.warn('!!!!!!!! VAROVANI: QUAD 4 (puvodni vyber) sdili '+overlap.length+' zapas(y) s ACCA (ENGINE) - fixtureId: '+overlap.join(', ')+' !!!!!!!!');
+        else console.log('   QUAD 4 bez prekryvu s ACCA (ENGINE).');
+    }
+    writeJsonAtomic('react3.json',react3);
     console.log('react3.json zapsan: '+react3.length+'/'+REACT3_PICK_COUNT+' zapasu ('+MIN_ODDS+'-'+MAX_ODDS+')');
 
     // === live1.json: vsechny zapasy z tieru 1 a 2 (bez omezeni poctu) ====

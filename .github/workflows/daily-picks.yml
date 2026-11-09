@@ -1,17 +1,26 @@
-# Denní aktualizace hot.json – výběr 6 fotbalových zápasů (Over, kurz 2.2-3.0)
-# Hlavní čas: 7:17 UTC (9:17 CEST). Záložní čas: 9:17 UTC (11:17 CEST)
-# – záloha se sama ukončí, pokud dnes už hot.json byl aktualizován.
+﻿# Denní aktualizace hot.json, best.json, tips-kombik.json, react1/2/3.json.
+# Hlavní čas: 09:20 Europe/Prague (po dokončení FVE ENGINE ~09:00).
+# GitHub cron umí jen UTC, proto jsou pro každý čas dva sloty (letní/zimní)
+# a schedule-gate.mjs pustí jen ten, který odpovídá aktuálnímu offsetu Prahy.
+# Záloha 11:50 Praha se spustí jen tehdy, když dnes ještě neproběhl commit.
 
 name: Daily Picks Bot
 
 on:
   schedule:
-    - cron: '17 7 * * *' # 7:17 UTC = 9:17 CEST – hlavní čas
-    - cron: '17 9 * * *' # 9:17 UTC = 11:17 CEST – záloha, kdyby GitHub první slot vynechal
+    - cron: '20 7 * * *'  # 09:20 CEST – hlavní (léto)
+    - cron: '20 8 * * *'  # 09:20 CET  – hlavní (zima)
+    - cron: '50 9 * * *'  # 11:50 CEST – záloha (léto)
+    - cron: '50 10 * * *' # 11:50 CET  – záloha (zima)
   workflow_dispatch: # Ruční spuštění
 
 permissions:
   contents: write
+
+# Běhy se nikdy nepřekrývají – záloha počká na hlavní běh a pak se sama přeskočí.
+concurrency:
+  group: daily-picks
+  cancel-in-progress: false
 
 jobs:
   update-picks:
@@ -23,49 +32,54 @@ jobs:
         with:
           fetch-depth: 0 # potřebujeme historii, abychom zjistili poslední commit hot.json
 
-      - name: Skip if hot.json already updated today
-        id: guard
-        run: |
-          # Guard se uplatní JEN u záložního naplánovaného slotu (17 9 UTC).
-          # Hlavní slot, ruční spuštění i re-run běží vždy.
-          if [ "${{ github.event_name }}" != "schedule" ] || [ "${{ github.event.schedule }}" != "17 9 * * *" ]; then
-            echo "Není to záložní naplánovaný běh (event=${{ github.event_name }}, schedule=${{ github.event.schedule }}) – generuji vždy."
-            echo "skip=false" >> "$GITHUB_OUTPUT"
-            exit 0
-          fi
-          TODAY=$(date -u +%Y-%m-%d)
-          LAST=$(git log -1 --format=%cs -- hot.json || echo "")
-          echo "Záložní běh. Dnes (UTC): $TODAY, poslední commit hot.json: $LAST"
-          if [ "$LAST" = "$TODAY" ]; then
-            echo "hot.json už byl dnes aktualizován, záložní běh se přeskakuje."
-            echo "skip=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "hot.json dnes ještě nebyl aktualizován – záložní běh generuje."
-            echo "skip=false" >> "$GITHUB_OUTPUT"
-          fi
-
       - name: Setup Node.js
-        if: steps.guard.outputs.skip != 'true'
         uses: actions/setup-node@v4
         with:
           node-version: '22'
 
+      - name: DST gate (09:20 Europe/Prague)
+        id: gate
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          EVENT_SCHEDULE: ${{ github.event.schedule }}
+        run: node schedule-gate.mjs
+
+      - name: Skip backup if already updated today
+        id: guard
+        if: steps.gate.outputs.run == 'true'
+        run: |
+          if [ "${{ steps.gate.outputs.kind }}" != "backup" ]; then
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          git pull --ff-only origin "${GITHUB_REF_NAME}" || true
+          TODAY=$(TZ=Europe/Prague date +%Y-%m-%d)
+          LAST=$(TZ=Europe/Prague git log -1 --format=%cd --date=format-local:%Y-%m-%d -- hot.json || echo "")
+          echo "Záložní běh. Dnes (Praha): $TODAY, poslední commit hot.json: $LAST"
+          if [ "$LAST" = "$TODAY" ]; then
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Run tests
-        if: steps.guard.outputs.skip != 'true'
+        if: steps.gate.outputs.run == 'true' && steps.guard.outputs.skip != 'true'
         run: |
           node test-tiers.mjs
           node test-react1.mjs
           node test-selection.mjs
           node test-stress.mjs
+          node test-engine.mjs
 
       - name: Run bot
-        if: steps.guard.outputs.skip != 'true'
+        if: steps.gate.outputs.run == 'true' && steps.guard.outputs.skip != 'true'
         env:
           API_FOOTBALL_KEY1: ${{ secrets.API_FOOTBALL_KEY1 }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: node fetch-matches.mjs
 
       - name: Commit & push
-        if: steps.guard.outputs.skip != 'true'
+        if: steps.gate.outputs.run == 'true' && steps.guard.outputs.skip != 'true'
         run: |
           git config user.name "Kombík Bot"
           git config user.email "bot@kombik.cz"
@@ -76,7 +90,7 @@ jobs:
             echo "Žádné změny k commitu, končím."
             exit 0
           fi
-          git commit -m "🤖 Denní tipy $(date +%Y-%m-%d)"
+          git commit -m "🤖 Denní tipy $(TZ=Europe/Prague date +%Y-%m-%d)"
           for i in 1 2 3; do
             git pull --rebase origin "${GITHUB_REF_NAME}" && \
             git push origin "HEAD:${GITHUB_REF_NAME}" && exit 0
