@@ -1,142 +1,23 @@
 [
   {
-    "league": "K League 1",
-    "match": "Gangwon FC - Jeonbuk Motors",
-    "kickoff": "2026-11-08T08:30:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.18"
-  },
-  {
-    "league": "K League 1",
-    "match": "Bucheon FC 1995 - Pohang Steelers",
-    "kickoff": "2026-11-08T08:30:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.22"
-  },
-  {
-    "league": "J1 League",
-    "match": "JEF United Chiba - Mito Hollyhock",
-    "kickoff": "2026-11-08T09:00:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.00"
-  },
-  {
-    "league": "1. Lig",
-    "match": "Bandırmaspor - Fatih Karagümrük",
-    "kickoff": "2026-11-08T11:30:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.10"
-  },
-  {
-    "league": "Segunda Liga",
-    "match": "FC Porto B - Portimonense",
-    "kickoff": "2026-11-08T12:00:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.08"
-  },
-  {
-    "league": "Segunda Liga",
-    "match": "Feirense - Lusitânia Lourosa",
-    "kickoff": "2026-11-08T12:00:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.15"
-  },
-  {
-    "league": "Segunda Liga",
-    "match": "Sporting CP B - Tondela",
-    "kickoff": "2026-11-08T19:00:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.10"
-  },
-  {
-    "league": "Serie A",
-    "match": "Genoa - AC Milan",
-    "kickoff": "2026-11-08T15:00:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.15"
-  },
-  {
-    "league": "Super Liga",
-    "match": "Novi Pazar - Mladost Lucani",
-    "kickoff": "2026-11-08T13:00:00+01:00",
+    "league": "Super League 2",
+    "match": "Zakynthos - Niki Volos",
+    "kickoff": "2026-11-09T14:00:00+01:00",
     "tip": "Over 2.5",
     "odds": "1.97"
   },
   {
     "league": "Prva Liga",
-    "match": "FK Vozdovac - Borac Cacak",
-    "kickoff": "2026-11-08T14:00:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.10"
-  },
-  {
-    "league": "La Liga",
-    "match": "Celta Vigo - Levante",
-    "kickoff": "2026-11-08T18:30:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "1.96"
-  },
-  {
-    "league": "Ligue 1",
-    "match": "Le Havre - Lorient",
-    "kickoff": "2026-11-08T17:15:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.05"
-  },
-  {
-    "league": "Liga I",
-    "match": "Sepsi OSK Sfantu Gheorghe - FC Voluntari",
-    "kickoff": "2026-11-08T15:00:00+01:00",
+    "match": "Napredak - OFK Bor 1919",
+    "kickoff": "2026-11-09T16:00:00+01:00",
     "tip": "Over 2.5",
     "odds": "1.95"
   },
   {
-    "league": "Serie B",
-    "match": "Carrarese - Sampdoria",
-    "kickoff": "2026-11-08T17:15:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "1.96"
-  },
-  {
-    "league": "Serie B",
-    "match": "Virtus Entella - Modena",
-    "kickoff": "2026-11-08T15:00:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.15"
-  },
-  {
-    "league": "Serie B",
-    "match": "Vicenza Virtus - Cremonese",
-    "kickoff": "2026-11-08T19:30:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.00"
-  },
-  {
-    "league": "Super League 1",
-    "match": "Asteras Tripolis - Kalamata",
-    "kickoff": "2026-11-08T16:00:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.01"
-  },
-  {
-    "league": "Super League 1",
-    "match": "OFI - Atromitos",
-    "kickoff": "2026-11-08T17:30:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.00"
-  },
-  {
     "league": "Segunda División",
-    "match": "Sporting Gijon - Valladolid",
-    "kickoff": "2026-11-08T18:30:00+01:00",
+    "match": "Sabadell - Real Sociedad II",
+    "kickoff": "2026-11-09T20:30:00+01:00",
     "tip": "Over 2.5",
-    "odds": "2.15"
-  },
-  {
-    "league": "Primeira Liga",
-    "match": "Santa Clara - GIL Vicente",
-    "kickoff": "2026-11-08T16:30:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.53"
+    "odds": "2.08"
   }
 ]

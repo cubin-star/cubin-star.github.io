@@ -1,23 +1,23 @@
 [
   {
-    "league": "Primeira Liga",
-    "match": "Santa Clara - GIL Vicente",
-    "kickoff": "2026-11-08T16:30:00+01:00",
+    "league": "Segunda División",
+    "match": "Sabadell - Real Sociedad II",
+    "kickoff": "2026-11-09T20:30:00+01:00",
     "tip": "Over 2.5",
-    "odds": "2.53"
+    "odds": "2.08"
   },
   {
-    "league": "Serie B",
-    "match": "Virtus Entella - Modena",
-    "kickoff": "2026-11-08T15:00:00+01:00",
+    "league": "Liga Pro",
+    "match": "Tecnico Universitario - Manta FC",
+    "kickoff": "2026-11-09T21:30:00+01:00",
     "tip": "Over 2.5",
-    "odds": "2.15"
+    "odds": "2.05"
   },
   {
-    "league": "Primera A",
-    "match": "Alianza Valledupar - Llaneros",
-    "kickoff": "2026-11-09T02:15:00+01:00",
+    "league": "Super League 2",
+    "match": "Zakynthos - Niki Volos",
+    "kickoff": "2026-11-09T14:00:00+01:00",
     "tip": "Over 2.5",
-    "odds": "2.15"
+    "odds": "1.97"
   }
 ]

@@ -1,16 +1,16 @@
 [
   {
-    "league": "Segunda Liga",
-    "match": "Farense - Benfica B",
-    "kickoff": "2026-11-08T15:00:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "1.75"
-  },
-  {
-    "league": "Segunda División",
-    "match": "Girona - Almeria",
-    "kickoff": "2026-11-08T16:15:00+01:00",
+    "league": "Liga I",
+    "match": "FC Botosani - Oţelul",
+    "kickoff": "2026-11-09T19:00:00+01:00",
     "tip": "Over 2.5",
     "odds": "1.80"
+  },
+  {
+    "league": "Prva Liga",
+    "match": "Javor - TSC Backa Topola",
+    "kickoff": "2026-11-09T18:00:00+01:00",
+    "tip": "Over 2.5",
+    "odds": "1.75"
   }
 ]
