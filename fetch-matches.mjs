@@ -1193,6 +1193,52 @@ export function runCoordinatedSelection(pickers,log=()=>{},opts={}){
 // MIN_ODDS-MAX_ODDS, platny cas zacatku, 3 skupiny po 2 zapasech. Backend
 // nekompletni feed odmitne a ponecha predchozi tiket, proto se nekompletni
 // hot.json NIKDY nezapisuje.
+// Diagnostika THE OVER 6 - ciste cteni, nemeni vstupy, nevola API ani RNG.
+// Souhrn se loguje vzdy, detail kandidatu jen pri selhani nebo HOT_DIAG=1.
+export function hotFunnelStats(list){
+    const ids=new Set(),leagues=new Set(),countries=new Set();
+    for(const m of list||[]){ids.add(m.fixtureId);leagues.add(leagueKey(m));countries.add(m.country);}
+    return{matches:ids.size,leagues:leagues.size,countries:countries.size};
+}
+export function hotDiagnostics({overAll=[],bandPool=[],hotPool=[],rescuePool=[],selected=[],hotRes=null,finalCount=0}){
+    const fmt=st=>st.matches+' zapasu / '+st.leagues+' soutezi / '+st.countries+' zemi';
+    const over=hotFunnelStats(overAll.filter(m=>m.tip==='Over 2.5'));
+    const band=hotFunnelStats(bandPool),hp=hotFunnelStats(hotPool),rp=hotFunnelStats(rescuePool);
+    const added=st=>(hotRes?.steps||[]).find(x=>x.step===st)?.added||0;
+    const summary=[
+        '[HOT-DIAG] ===== THE OVER 6 - souhrn =====',
+        '[HOT-DIAG] Over 2.5 dostupne:              '+fmt(over),
+        '[HOT-DIAG] po kurzu '+MIN_ODDS+'-'+MAX_ODDS+':             '+fmt(band),
+        '[HOT-DIAG] po golovem filtru (bez dedupu): '+fmt(rp),
+        '[HOT-DIAG] po dedupu + golovem filtru:     '+fmt(hp),
+        '[HOT-DIAG] puvodne vybrano:                '+(hotRes?.base??selected.length),
+        '[HOT-DIAG] doplneno ve 1. stupni:          '+added(1),
+        '[HOT-DIAG] doplneno ve 2. stupni:          '+added(2),
+        '[HOT-DIAG] konecny pocet THE OVER 6:       '+finalCount+'/'+PICK_COUNT,
+    ];
+    const details=['[HOT-DIAG] ----- kandidati (doplnovaci pool) -----'];
+    const selIds=new Set(selected.map(m=>m.fixtureId));
+    const finIds=new Set((hotRes?.picks||[]).map(m=>m.fixtureId));
+    const hotIds=new Set(hotPool.map(m=>m.fixtureId));
+    const selLeagues=new Set(selected.map(m=>leagueKey(m)));
+    const selCountry=new Map();for(const m of selected)selCountry.set(m.country,(selCountry.get(m.country)||0)+1);
+    for(const m of rescuePool){
+        let why;
+        if(selIds.has(m.fixtureId))why='VYBRAN (puvodni algoritmus)';
+        else if(finIds.has(m.fixtureId))why='DOPLNEN';
+        else{
+            const r=[];
+            if(!hotIds.has(m.fixtureId))r.push('prekryv s jinym JSON');
+            if(selLeagues.has(leagueKey(m)))r.push('soutez uz ve vyberu');
+            if((selCountry.get(m.country)||0)>=MAX_PER_COUNTRY)r.push('limit zeme');
+            why='nevybran: '+(r.join(', ')||'globalni limit ligy / obsazen jinym souborem / kvota');
+        }
+        details.push('[HOT-DIAG]   '+m.fixtureId+' | '+m.league+' ('+m.country+') T'+m.tier+' | '+m.match+' | '+m.odds+' | '+m.kickoff+' -> '+why);
+    }
+    const rpIds=new Set(rescuePool.map(m=>m.fixtureId));
+    for(const m of bandPool){if(!rpIds.has(m.fixtureId))details.push('[HOT-DIAG]   '+m.fixtureId+' | '+m.league+' ('+m.country+') | '+m.match+' | '+m.odds+' -> vyrazen golovym filtrem');}
+    return{summary,details};
+}
 export const HOT_RELAX_STEPS=['puvodni algoritmus','povoleny prekryv s jinymi JSON','povoleno vice zapasu ze stejne ligy'];
 export function isValidHotCandidate(m,{minOdds=MIN_ODDS,maxOdds=MAX_ODDS,now=Date.now()}={}){
     if(!m||m.tip!=='Over 2.5')return false;
@@ -1625,6 +1671,11 @@ async function main(){
     let output=null,hotError='';
     if(hotRes.ok){try{output=buildHotOutput(hotRes.picks);}catch(e){hotError=e.message;}}
     else hotError=hotRes.reason;
+    {
+        const hotDiag=hotDiagnostics({overAll,bandPool:hotPoolNoDedup,hotPool:pool,rescuePool:hotRescuePool,selected,hotRes,finalCount:output?output.length:0});
+        for(const l of hotDiag.summary)console.log(l);
+        if(!output||process.env.HOT_DIAG==='1')for(const l of hotDiag.details)console.log(l);
+    }
     if(!output){
         const msg='THE OVER 6 SELHAL: hot.json NEBYL AKTUALIZOVAN (zustava predchozi soubor). Kandidatu: '+hotRes.candidates+', vybrano: '+hotRes.picks.length+'/'+PICK_COUNT+'. Duvod: '+hotError;
         console.error('\n'+'!'.repeat(78));

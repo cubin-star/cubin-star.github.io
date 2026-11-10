@@ -1,6 +1,6 @@
 // Testy doplneni THE OVER 6 (hot.json). Spusteni: node test-hot.mjs
 import { readFileSync } from 'fs';
-import { completeHotSelection, buildHotOutput, assertHot, isValidHotCandidate } from './fetch-matches.mjs';
+import { completeHotSelection, buildHotOutput, assertHot, isValidHotCandidate, hotDiagnostics, hotFunnelStats } from './fetch-matches.mjs';
 
 let pass = 0, fail = 0;
 function ok(cond, name) { if (cond) { pass++; } else { fail++; console.error('FAIL: ' + name); } }
@@ -125,6 +125,37 @@ const uniq = a => new Set(a.map(m => m.fixtureId)).size === a.length;
     ok(/node test-hot\.mjs/.test(wf), 'workflow: test-hot v Run tests');
     ok(/git log -1 --format=%cd[^\n]*-- hot\.json/.test(wf), 'workflow: zaloha se ridi datem commitu hot.json');
     ok(src.indexOf("writeJsonAtomic('react3.json'") < src.indexOf('// === hot.json (THE OVER 6)'), 'main: react2/react3 zapsany pred hot (nezavisle)');
+}
+
+// --- diagnostika: zapnuti/vypnuti nemeni vyber ani vystup
+{
+    const sel = Array.from({ length: 4 }, () => mk());
+    const pool = [...sel, mk({ leagueId: sel[0].leagueId, league: sel[0].league }), mk(), mk({ odds: '1.80' })];
+    const snap = JSON.stringify({ sel, pool });
+    const runOnce = diag => {
+        const prev = process.env.HOT_DIAG;
+        if (diag) process.env.HOT_DIAG = '1'; else delete process.env.HOT_DIAG;
+        const r = run(sel, pool.filter(m => parseFloat(m.odds) >= 1.95));
+        const out = r.ok ? buildHotOutput(r.picks) : null;
+        let d = null;
+        if (diag) d = hotDiagnostics({ overAll: pool, bandPool: pool.filter(m => parseFloat(m.odds) >= 1.95), hotPool: sel, rescuePool: pool.filter(m => parseFloat(m.odds) >= 1.95), selected: sel, hotRes: r, finalCount: out ? out.length : 0 });
+        if (prev === undefined) delete process.env.HOT_DIAG; else process.env.HOT_DIAG = prev;
+        return { r, out, d };
+    };
+    const off = runOnce(false), on = runOnce(true);
+    ok(JSON.stringify(off.r.picks) === JSON.stringify(on.r.picks), 'diag: vyber stejny se zapnutou i vypnutou diagnostikou');
+    ok(JSON.stringify(off.out) === JSON.stringify(on.out), 'diag: obsah hot.json stejny');
+    ok(JSON.stringify({ sel, pool }) === snap, 'diag: vstupy nejsou mutovany');
+    const txt = on.d.summary.join('\n');
+    ok(/Over 2\.5 dostupne:\s+7 zapasu/.test(txt) && /po kurzu 1\.95-2\.6:\s+6 zapasu/.test(txt), 'diag: souhrn obsahuje pocty pred/po kurzu');
+    ok(/1\. stupni:\s+1/.test(txt) && /2\. stupni:\s+1/.test(txt) && /konecny pocet THE OVER 6:\s+6\/6/.test(txt), 'diag: souhrn stupnu a konecny pocet');
+    ok(on.d.details.some(l => /DOPLNEN/.test(l)) && on.d.details.some(l => /VYBRAN/.test(l)), 'diag: detail kandidatu s duvody');
+    ok(hotFunnelStats(sel).leagues === 4, 'diag: pocet soutezi');
+    const src = readFileSync(new URL('./fetch-matches.mjs', import.meta.url), 'utf-8');
+    const fn = src.slice(src.indexOf('export function hotDiagnostics'), src.indexOf('export const HOT_RELAX_STEPS'));
+    ok(!/apiFetch|fetch\(|rng\(|shuffle|writeFileSync|appendFileSync|API_KEY|process\.env/.test(fn), 'diag: bez API, RNG, zapisu a citlivych udaju');
+    const call = src.slice(src.indexOf('const hotDiag=hotDiagnostics'), src.indexOf('if(!output){\n        const msg') >= 0 ? src.indexOf('if(!output){\n        const msg') : src.indexOf("const msg='THE OVER 6 SELHAL"));
+    ok(/if\(!output\|\|process\.env\.HOT_DIAG==='1'\)/.test(call) && !/API_KEY|writeFileSync/.test(call), 'diag: detail jen pri selhani nebo HOT_DIAG=1');
 }
 
 console.log('\ntest-hot: ' + pass + ' passed, ' + fail + ' failed');
