@@ -1,8 +1,14 @@
 [
   {
-    "league": "Liiga",
-    "match": "TPS Turku vs KalPa",
+    "league": "ECHL",
+    "match": "Greenville Swamp Rabbits vs Orlando Solar Bears",
     "tip": "Over 5.5",
-    "odds": "2.11"
+    "odds": "1.91"
+  },
+  {
+    "league": "AHL",
+    "match": "Milwaukee Admirals vs Iowa Wild",
+    "tip": "Over 5.5",
+    "odds": "2.32"
   }
 ]
