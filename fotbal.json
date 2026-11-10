@@ -1,24 +1,24 @@
 [
   {
-    "League": "1. Division",
-    "Match": "Hvidovre vs Aarhus Fremad",
+    "League": "EFL Trophy",
+    "Match": "Crewe vs Wigan",
     "Tip": "Over 2.5",
-    "Odds": "1.80",
-    "Date": "2026-11-09T18:00:00+00:00"
+    "Odds": "1.75",
+    "Date": "2026-11-10T19:00:00+00:00"
   },
   {
-    "League": "Liga I",
-    "Match": "FC Botosani vs Oţelul",
-    "Tip": "Over 2.5",
-    "Odds": "1.83",
-    "Date": "2026-11-09T18:00:00+00:00"
-  },
-  {
-    "League": "Prva Liga",
-    "Match": "Javor vs TSC Backa Topola",
+    "League": "Copa del Rey",
+    "Match": "Amorebieta vs UD Logroñés",
     "Tip": "Over 2.5",
     "Odds": "1.85",
-    "Date": "2026-11-09T17:00:00+00:00",
+    "Date": "2026-11-10T19:00:00+00:00"
+  },
+  {
+    "League": "Liga II",
+    "Match": "Metalul Buzău vs CSA Steaua Bucureşti",
+    "Tip": "Over 2.5",
+    "Odds": "1.87",
+    "Date": "2026-11-10T17:30:00+00:00",
     "locked": true
   }
 ]
