@@ -70,6 +70,7 @@ jobs:
           node test-selection.mjs
           node test-stress.mjs
           node test-engine.mjs
+          node test-hot.mjs
 
       - name: Run bot
         if: steps.gate.outputs.run == 'true' && steps.guard.outputs.skip != 'true'

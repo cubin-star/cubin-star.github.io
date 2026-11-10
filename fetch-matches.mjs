@@ -1,4 +1,4 @@
-import { writeFileSync, existsSync, readFileSync, renameSync } from 'fs';
+import { writeFileSync, existsSync, readFileSync, renameSync, appendFileSync } from 'fs';
 import { loadEngine, evaluateEngine, planEngineSelection, toFeedItem, assertFeed, ACCA_COUNT, QUAD_COUNT } from './engine-picks.mjs';
 
 const API_KEY = process.env.API_FOOTBALL_KEY1;
@@ -1188,6 +1188,91 @@ export function runCoordinatedSelection(pickers,log=()=>{},opts={}){
     return{pickers,limitHit:state.limitHit,steps:state.steps,capRelaxations:registry?registry.state.relaxations:[]};
 }
 
+// === THE OVER 6 (hot.json) - doplneni a validace ===========================
+// Kontrakt THE OVER 6: presne 6 ruznych fixtureId, jen Over 2.5, kurz
+// MIN_ODDS-MAX_ODDS, platny cas zacatku, 3 skupiny po 2 zapasech. Backend
+// nekompletni feed odmitne a ponecha predchozi tiket, proto se nekompletni
+// hot.json NIKDY nezapisuje.
+export const HOT_RELAX_STEPS=['puvodni algoritmus','povoleny prekryv s jinymi JSON','povoleno vice zapasu ze stejne ligy'];
+export function isValidHotCandidate(m,{minOdds=MIN_ODDS,maxOdds=MAX_ODDS,now=Date.now()}={}){
+    if(!m||m.tip!=='Over 2.5')return false;
+    if(!Number.isInteger(m.fixtureId)||m.fixtureId<=0)return false;
+    const o=parseFloat(m.odds);
+    if(!Number.isFinite(o)||o<minOdds||o>maxOdds)return false;
+    const t=Date.parse(m.kickoff);
+    if(!Number.isFinite(t)||t<=now)return false;
+    return true;
+}
+// Doplni hot vyber, kdyz puvodni algoritmus vybral mene nez 'want' zapasu.
+// Stupen 1: kandidati vyrazeni jen kvuli prekryvu s jinymi JSON (fotbal.json,
+//           live2.json, tips/react*). Lokalni limit 1 zapas z ligy plati dal.
+// Stupen 2: navic povoleno vice zapasu ze stejne ligy.
+// Vsechny ostatni filtry (trh, kurz, cas, golovy filtr poolu, limit zeme)
+// zustavaji. Puvodni vyber se nikdy nemeni, jen doplnuje. Funkce je cista -
+// nemeni sdileny stav ostatnich souboru (react2/react3/ENGINE).
+export function completeHotSelection({selected,rescuePool,want=PICK_COUNT,maxPerCountry=MAX_PER_COUNTRY,goalStats=null,minOdds=MIN_ODDS,maxOdds=MAX_ODDS,now=Date.now()}){
+    const vopts={minOdds,maxOdds,now};
+    const picks=[];const ids=new Set();const leagues=new Set();const countries=new Map();
+    const add=(m,step)=>{picks.push({...m,hotStep:step});ids.add(m.fixtureId);leagues.add(leagueKey(m));countries.set(m.country,(countries.get(m.country)||0)+1);};
+    for(const m of selected||[]){if(picks.length<want&&isValidHotCandidate(m,vopts)&&!ids.has(m.fixtureId))add(m,0);}
+    const base=picks.length;
+    const steps=[{step:0,label:HOT_RELAX_STEPS[0],added:base}];
+    // Unikatni kandidati podle fixtureId (pri vice zaznamech vyssi kurz).
+    const byId=new Map();
+    for(const m of rescuePool||[]){
+        if(!isValidHotCandidate(m,vopts))continue;
+        const prev=byId.get(m.fixtureId);
+        if(!prev||parseFloat(m.odds)>parseFloat(prev.odds))byId.set(m.fixtureId,m);
+    }
+    const rank=m=>[m.tier??9,-goalMultiplier(m,goalStats),-parseFloat(m.odds),m.fixtureId];
+    const cmp=(a,b)=>{const x=rank(a),y=rank(b);for(let i=0;i<x.length;i++){if(x[i]!==y[i])return x[i]<y[i]?-1:1;}return 0;};
+    const sorted=[...byId.values()].sort(cmp);
+    const rejected={duplicate:0,league:0,country:0};
+    for(const step of [1,2]){
+        if(picks.length>=want)break;
+        let added=0;rejected.duplicate=0;rejected.league=0;rejected.country=0;
+        for(const m of sorted){
+            if(picks.length>=want)break;
+            if(ids.has(m.fixtureId)){rejected.duplicate++;continue;}
+            if(step<2&&leagues.has(leagueKey(m))){rejected.league++;continue;}
+            if((countries.get(m.country)||0)>=maxPerCountry){rejected.country++;continue;}
+            add(m,step);added++;
+        }
+        steps.push({step,label:HOT_RELAX_STEPS[step],added});
+    }
+    const ok=picks.length===want;
+    let reason='';
+    if(!ok){
+        reason='dostupnych validnich kandidatu (Over 2.5, kurz '+minOdds+'-'+maxOdds+', budouci zacatek): '+byId.size
+            +'; vybrano '+picks.length+'/'+want+' i po uvolneni prekryvu a limitu ligy'
+            +'; posledni stupen odmitl: uz vybrano='+rejected.duplicate+', limit zeme='+rejected.country;
+    }
+    return{ok,picks,base,steps,candidates:byId.size,reason};
+}
+// Sestavi presny vystup hot.json (puvodni struktura) a overi kontrakt.
+export function buildHotOutput(picks,want=PICK_COUNT){
+    const grouped=balanceGroups(picks);
+    const output=grouped.map(m=>({fixtureId:m.fixtureId,league:m.league,match:m.match,kickoff:m.kickoff,tip:m.tip,odds:m.odds,group:m.group}));
+    assertHot(output,want);
+    return output;
+}
+export function assertHot(output,want=PICK_COUNT){
+    const errors=[];
+    if(!Array.isArray(output)||output.length!==want)errors.push('ocekavano '+want+' zapasu, nalezeno '+(Array.isArray(output)?output.length:'?'));
+    else{
+        const ids=output.map(m=>m.fixtureId);
+        if(ids.some(id=>!Number.isInteger(id)||id<=0))errors.push('neplatne fixtureId');
+        if(new Set(ids).size!==ids.length)errors.push('duplicitni fixtureId');
+        if(output.some(m=>m.tip!=='Over 2.5'))errors.push('jiny trh nez Over 2.5');
+        if(output.some(m=>!(parseFloat(m.odds)>=MIN_ODDS)))errors.push('kurz pod '+MIN_ODDS);
+        if(output.some(m=>!Number.isFinite(Date.parse(m.kickoff))))errors.push('neplatny kickoff');
+        const groups=Math.ceil(want/2);
+        for(let g=1;g<=groups;g++){const n=output.filter(m=>m.group===g).length;if(n!==2)errors.push('skupina '+g+' ma '+n+' zapasu');}
+        if(output.some(m=>!Number.isInteger(m.group)||m.group<1||m.group>groups))errors.push('neplatne cislo skupiny');
+    }
+    if(errors.length)throw new Error('hot.json neprosel validaci - '+errors.join('; '));
+}
+
 // Pojistka pred zapisem react1.json: bez platneho fixtureId nedokaze SOCVERO
 // naparovat DailyTip (ExternalMatchId) a vyhodnoceni Winning Examples spadne.
 // Radeji nic nezapsat nez zapsat soubor bez ID.
@@ -1288,6 +1373,9 @@ async function main(){
     console.log('Tips candidates: '+tipsPool.length+' (Over 2.5, odds '+TIPS_MIN_ODDS+'-'+TIPS_MAX_ODDS+')');
     console.log('Candidates: '+pool.length+' (Over 2.5, odds '+MIN_ODDS+'-'+MAX_ODDS+')');
 
+    // Snapshot hot poolu PRED externim dedupem - slouzi jen pro doplneni
+    // THE OVER 6 (stupen 1: povoleny prekryv s jinymi JSON).
+    const hotPoolNoDedup=pool;
     // 2) Odfiltruj zapasy, ktere uz vybral fotbal.json / live2.json
     if(dedupSet.size>0){
         const before=pool.length;
@@ -1311,6 +1399,7 @@ async function main(){
     // prazdny vyber.
     const goalStats=loadGoalStats();
     pool=applyGoalFilter(pool,goalStats,PICK_COUNT,'hot');
+    const hotRescuePool=applyGoalFilter(hotPoolNoDedup,goalStats,PICK_COUNT,'hot-doplneni');
     tipsPool=applyGoalFilter(tipsPool,goalStats,TIPS_PICK_COUNT,'tips');
     react1Pool=applyGoalFilter(react1Pool,goalStats,REACT1_PICK_COUNT,'react1');
     react2Pool=applyGoalFilter(react2Pool,goalStats,Math.max(REACT2_PICK_COUNT,REACT3_PICK_COUNT),'react2+react3');
@@ -1525,15 +1614,36 @@ async function main(){
     const live1=pool.filter(m=>m.tier===1||m.tier===2).map(m=>({league:m.league,match:m.match,kickoff:m.kickoff,tip:m.tip,odds:m.odds}));
     writeFileSync('live1.json',JSON.stringify(live1,null,2),'utf-8');
     console.log('live1.json: '+live1.length+' matches (tier 1+2)');
-    if(selected.length===0){writeFileSync('hot.json',JSON.stringify([],null,2),'utf-8');writeFileSync('best.json',JSON.stringify([],null,2),'utf-8');console.log('Zadne zapasy. ('+reqCount+' API req)');process.exit(0);}
-    const best=[...selected].sort((a,b)=>parseFloat(b.odds)-parseFloat(a.odds)).slice(0,3).map(m=>({league:m.league,match:m.match,kickoff:m.kickoff,tip:m.tip,odds:m.odds}));
+    // === hot.json (THE OVER 6) =============================================
+    // Nejdriv puvodni vyber beze zmen; jen kdyz je kratky, postupne doplneni.
+    // Nekompletni hot.json se NEZAPISUJE (backend by ho odmitl a stary tiket by
+    // se tvaril jako dnesni) - zustane predchozi soubor a log to jasne rekne.
+    const hotRes=completeHotSelection({selected,rescuePool:hotRescuePool,goalStats});
+    console.log('\nTHE OVER 6 (hot.json): puvodni algoritmus vybral '+hotRes.base+'/'+PICK_COUNT+' zapasu');
+    for(const st of hotRes.steps.slice(1))console.log('   stupen '+st.step+' ('+st.label+'): doplneno '+st.added);
+    for(const m of hotRes.picks.filter(p=>p.hotStep>0))console.log('   + DOPLNENO [stupen '+m.hotStep+'] '+m.league+' ('+m.country+') | '+m.match+' | '+m.tip+' @ '+m.odds+' | '+m.kickoff);
+    let output=null,hotError='';
+    if(hotRes.ok){try{output=buildHotOutput(hotRes.picks);}catch(e){hotError=e.message;}}
+    else hotError=hotRes.reason;
+    if(!output){
+        const msg='THE OVER 6 SELHAL: hot.json NEBYL AKTUALIZOVAN (zustava predchozi soubor). Kandidatu: '+hotRes.candidates+', vybrano: '+hotRes.picks.length+'/'+PICK_COUNT+'. Duvod: '+hotError;
+        console.error('\n'+'!'.repeat(78));
+        console.error('!!!!!!!! '+msg);
+        console.error('!!!!!!!! hot.json i best.json NEBYLY prepsany a mohou obsahovat data z PREDCHOZIHO dne - NEJDE o dnesni vyber.');
+        console.error('!!!!!!!! Ostatni soubory (tips-kombik, react1, react2, react3, live1) byly vygenerovany normalne.');
+        console.error('!'.repeat(78)+'\n');
+        console.log('::error title=THE OVER 6 neaktualizovan::'+msg);
+        if(process.env.GITHUB_STEP_SUMMARY){try{appendFileSync(process.env.GITHUB_STEP_SUMMARY,'## THE OVER 6: SELHALO\n\n'+msg+'\n\nhot.json i best.json nebyly prepsany a mohou obsahovat data z predchoziho dne (nejde o dnesni vyber). Ostatni soubory byly vygenerovany normalne.\n');}catch{}}
+        console.log('('+reqCount+' API req)');
+        return;
+    }
+    const best=[...hotRes.picks].sort((a,b)=>parseFloat(b.odds)-parseFloat(a.odds)).slice(0,3).map(m=>({league:m.league,match:m.match,kickoff:m.kickoff,tip:m.tip,odds:m.odds}));
     writeFileSync('best.json',JSON.stringify(best,null,2),'utf-8');
-    const grouped=balanceGroups(selected);
     // fixtureId je originalni ID zapasu z API-Football (fix.fixture.id) - stejne
     // jako v react2.json/react3.json, aby se vysledky daly parovat primo podle ID.
-    const output=grouped.map(m=>({fixtureId:m.fixtureId,league:m.league,match:m.match,kickoff:m.kickoff,tip:m.tip,odds:m.odds,group:m.group}));
     writeFileSync('hot.json',JSON.stringify(output,null,2),'utf-8');
-    console.log('\n'+output.length+' matches -> hot.json ('+reqCount+' API req)\n');
+    console.log('\nTHE OVER 6 OK: '+output.length+' matches -> hot.json'+(hotRes.base<PICK_COUNT?' (doplneno '+(PICK_COUNT-hotRes.base)+' uvolnenim omezeni)':'')+' ('+reqCount+' API req)\n');
+    if(process.env.GITHUB_STEP_SUMMARY){try{appendFileSync(process.env.GITHUB_STEP_SUMMARY,'## THE OVER 6: OK ('+output.length+' zapasu, z toho doplneno '+(PICK_COUNT-hotRes.base)+')\n');}catch{}}
     const gc=Math.ceil(output.length/2);
     for(let g=1;g<=gc;g++){const gm=output.filter(m=>m.group===g);const go=gm.reduce((a,m)=>a*parseFloat(m.odds),1);console.log('  Gr.'+g+' ('+go.toFixed(2)+'):');gm.forEach(m=>console.log('     ['+m.league+'] '+m.match+' | '+m.tip+' @ '+m.odds+' | '+m.kickoff));}
 }
