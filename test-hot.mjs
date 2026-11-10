@@ -123,7 +123,7 @@ const uniq = a => new Set(a.map(m => m.fixtureId)).size === a.length;
     ok(/const best=\[\.\.\.hotRes\.picks\]/.test(hotSec) && hotSec.indexOf("writeFileSync('best.json'") > hotSec.indexOf('if(!output)'), 'main: best.json z finalnich 6 zapasu az po uspechu');
     const wf = readFileSync(new URL('./.github/workflows/daily-picks.yml', import.meta.url), 'utf-8');
     ok(/node test-hot\.mjs/.test(wf), 'workflow: test-hot v Run tests');
-    ok(/git log -1 --format=%cd[^\n]*-- hot\.json/.test(wf), 'workflow: zaloha se ridi datem commitu hot.json');
+    ok(/node backup-plan\.mjs/.test(wf), 'workflow: zaloha se ridi overenym stavem (backup-plan.mjs), stary hot.json ji nepreskoci');
     ok(src.indexOf("writeJsonAtomic('react3.json'") < src.indexOf('// === hot.json (THE OVER 6)'), 'main: react2/react3 zapsany pred hot (nezavisle)');
 }
 

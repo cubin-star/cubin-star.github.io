@@ -1,5 +1,5 @@
 import { writeFileSync, existsSync, readFileSync, renameSync, appendFileSync } from 'fs';
-import { loadEngine, evaluateEngine, planEngineSelection, toFeedItem, assertFeed, ACCA_COUNT, QUAD_COUNT } from './engine-picks.mjs';
+import { loadEngine, pragueDate, evaluateEngine, planEngineSelection, toFeedItem, assertFeed, ACCA_COUNT, QUAD_COUNT } from './engine-picks.mjs';
 
 const API_KEY = process.env.API_FOOTBALL_KEY1;
 
@@ -523,6 +523,11 @@ function maskKey(k){if(!k)return'(none)';if(k.length<=8)return'***';return k.sli
 function sleep(ms){return new Promise(r=>setTimeout(r,ms));}
 // Atomicky zapis JSON: nejdriv docasny soubor, pak prejmenovani. Pri padu
 // procesu tak nikdy nezustane napul zapsany soubor.
+// HOT ONLY (zalozni beh): zapisuje se vyhradne hot.json a best.json. Ostatni
+// denni soubory (ACCA/QUAD 4, react1, tips, live1) uz byly rano publikovane.
+export const HOT_ONLY_WRITABLE=new Set(['hot.json','best.json']);
+export function isHotOnly(env=process.env){return env.HOT_ONLY==='1';}
+export function shouldWriteFile(name,hotOnly){return !hotOnly||HOT_ONLY_WRITABLE.has(name);}
 function writeJsonAtomic(path,data){const tmp=path+'.tmp';writeFileSync(tmp,JSON.stringify(data,null,2),'utf-8');renameSync(tmp,path);}
 // Nazvy soutezi podle league.id z /leagues - FVE engine posila jen leagueId,
 // ale ACCA/QUAD backendy vyzaduji neprazdne pole league.
@@ -1347,7 +1352,9 @@ async function main(){
 
     // 0) FVE ENGINE - prioritni zdroj pro react2.json (ACCA) a react3.json (QUAD 4).
     // Ceka se nejvys do 09:30 Europe/Prague, pak se pokracuje puvodnim vyberem.
-    const engineLoad=await loadEngine({log:m=>console.log(m)});
+    const HOT_ONLY=isHotOnly();
+    if(HOT_ONLY)console.log('REZIM HOT ONLY: FVE ENGINE se nenacita, zapisuje se jen hot.json a best.json.\n');
+    const engineLoad=HOT_ONLY?{doc:null,error:'hot-only',today:pragueDate(new Date())}:await loadEngine({log:m=>console.log(m)});
 
     // 1) Nacti existujici vybery jinych botu (fotbal.json, live2.json z GitHubu) -> dedup set
     const dedupSet=await loadDedupKeysFromUrls(DEDUP_URLS);
@@ -1619,7 +1626,7 @@ async function main(){
     // Pozor: soubor se JMENUJE tips-kombik.json, aby nekolidoval s tips.json,
     // ktery v repu spravuje jiny bot (generate_fotbal.py) s jinou strukturou.
     const tips=tipsPicker.selected.map(m=>({league:m.league,match:m.match,kickoff:m.kickoff,tip:m.tip,odds:m.odds}));
-    writeFileSync(TIPS_FILE,JSON.stringify(tips,null,2),'utf-8');
+    if(shouldWriteFile(TIPS_FILE,HOT_ONLY))writeFileSync(TIPS_FILE,JSON.stringify(tips,null,2),'utf-8');
     console.log('\n'+TIPS_FILE+' zapsan: '+tips.length+'/'+TIPS_PICK_COUNT+' zapasu ('+TIPS_MIN_ODDS+'-'+TIPS_MAX_ODDS+')');
 
     // === react1.json ========================================================
@@ -1627,7 +1634,7 @@ async function main(){
     // podle nej paruje DailyTip (ExternalMatchId) bez hledani podle nazvu.
     const react1=react1Picker.selected.map(m=>({fixtureId:m.fixtureId,league:m.league,match:m.match,kickoff:m.kickoff,tip:m.tip,odds:m.odds}));
     assertReact1(react1);
-    writeFileSync('react1.json',JSON.stringify(react1,null,2),'utf-8');
+    if(shouldWriteFile('react1.json',HOT_ONLY))writeFileSync('react1.json',JSON.stringify(react1,null,2),'utf-8');
     console.log('react1.json zapsan: '+react1.length+'/'+REACT1_PICK_COUNT+' zapasu ('+REACT1_MIN_ODDS+'-'+REACT1_MAX_ODDS+')');
 
     // === react2.json ========================================================
@@ -1636,7 +1643,7 @@ async function main(){
     let react2;
     if(enginePlan.accaFromEngine){react2=enginePlan.acca.map(toFeedItem);assertFeed(react2,ACCA_COUNT,'react2.json');console.log('react2.json: zdroj FVE ENGINE');}
     else react2=balanceGroups(shuffle([...react2Picker.selected])).map(m=>({fixtureId:m.fixtureId,league:m.league,match:m.match,kickoff:m.kickoff,tip:m.tip,odds:m.odds,group:m.group}));
-    writeJsonAtomic('react2.json',react2);
+    if(shouldWriteFile('react2.json',HOT_ONLY))writeJsonAtomic('react2.json',react2);
     console.log('react2.json zapsan: '+react2.length+'/'+REACT2_PICK_COUNT+' zapasu ('+MIN_ODDS+'-'+MAX_ODDS+')');
 
     // === react3.json ========================================================
@@ -1653,12 +1660,13 @@ async function main(){
         if(overlap.length)console.warn('!!!!!!!! VAROVANI: QUAD 4 (puvodni vyber) sdili '+overlap.length+' zapas(y) s ACCA (ENGINE) - fixtureId: '+overlap.join(', ')+' !!!!!!!!');
         else console.log('   QUAD 4 bez prekryvu s ACCA (ENGINE).');
     }
-    writeJsonAtomic('react3.json',react3);
+    if(shouldWriteFile('react3.json',HOT_ONLY))writeJsonAtomic('react3.json',react3);
     console.log('react3.json zapsan: '+react3.length+'/'+REACT3_PICK_COUNT+' zapasu ('+MIN_ODDS+'-'+MAX_ODDS+')');
 
     // === live1.json: vsechny zapasy z tieru 1 a 2 (bez omezeni poctu) ====
     const live1=pool.filter(m=>m.tier===1||m.tier===2).map(m=>({league:m.league,match:m.match,kickoff:m.kickoff,tip:m.tip,odds:m.odds}));
-    writeFileSync('live1.json',JSON.stringify(live1,null,2),'utf-8');
+    if(shouldWriteFile('live1.json',HOT_ONLY))writeFileSync('live1.json',JSON.stringify(live1,null,2),'utf-8');
+    if(HOT_ONLY)console.log('HOT ONLY: tips-kombik/react1/react2/react3/live1 NEZAPSANY (ponechany ranni verze).');
     console.log('live1.json: '+live1.length+' matches (tier 1+2)');
     // === hot.json (THE OVER 6) =============================================
     // Nejdriv puvodni vyber beze zmen; jen kdyz je kratky, postupne doplneni.
