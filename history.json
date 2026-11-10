@@ -1,6 +1,46 @@
 [
   {
     "sport": "football",
+    "league": "Segunda Liga",
+    "match": "Torreense vs União de Leiria",
+    "tip": "Over 1.5",
+    "odds": "1.22",
+    "date": "2026-11-09T20:15:00+00:00",
+    "score": "2:3",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "Segunda División",
+    "match": "Sabadell vs Real Sociedad II",
+    "tip": "Over 1.5",
+    "odds": "1.33",
+    "date": "2026-11-09T19:30:00+00:00",
+    "score": "0:0",
+    "result": "✗"
+  },
+  {
+    "sport": "basketball",
+    "league": "BBL",
+    "match": "Jena vs Hamburg",
+    "tip": "Over 158.5",
+    "odds": "1.29",
+    "date": "2026-11-09T19:00:00+00:00",
+    "score": "87:91",
+    "result": "✓"
+  },
+  {
+    "sport": "hockey",
+    "league": "Liiga",
+    "match": "TPS Turku vs KalPa",
+    "tip": "Over 3.5",
+    "odds": "1.26",
+    "date": "2026-11-09T16:30:00+00:00",
+    "score": "3:2",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
     "league": "Czech Liga",
     "match": "Plzen vs Sparta Praha",
     "tip": "Over 1.5",
@@ -1956,46 +1996,6 @@
     "tip": "Over 1.5",
     "odds": "1.24",
     "date": "2026-09-03T18:30:00+00:00",
-    "score": "1:0",
-    "result": "✗"
-  },
-  {
-    "sport": "football",
-    "league": "Czech Liga",
-    "match": "Zbrojovka Brno vs Hradec Králové",
-    "tip": "Over 1.5",
-    "odds": "1.28",
-    "date": "2026-09-02T16:00:00+00:00",
-    "score": "1:0",
-    "result": "✗"
-  },
-  {
-    "sport": "football",
-    "league": "Superettan",
-    "match": "Helsingborg vs Orebro SK",
-    "tip": "Over 1.5",
-    "odds": "1.19",
-    "date": "2026-09-01T17:00:00+00:00",
-    "score": "1:1",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Primera División",
-    "match": "U. Catolica vs O'Higgins",
-    "tip": "Over 1.5",
-    "odds": "1.23",
-    "date": "2026-09-01T00:45:00+00:00",
-    "score": "3:2",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Serie A",
-    "match": "Atalanta vs Bologna",
-    "tip": "Over 1.5",
-    "odds": "1.29",
-    "date": "2026-08-31T18:45:00+00:00",
     "score": "1:0",
     "result": "✗"
   }
