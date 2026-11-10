@@ -1,16 +1,16 @@
 [
   {
-    "league": "Liga I",
-    "match": "FC Botosani - Oţelul",
-    "kickoff": "2026-11-09T19:00:00+01:00",
+    "league": "Copa del Rey",
+    "match": "Mijas Las Lagunas - Real Jaén",
+    "kickoff": "2026-11-10T20:00:00+01:00",
     "tip": "Over 2.5",
-    "odds": "1.80"
+    "odds": "1.91"
   },
   {
-    "league": "Prva Liga",
-    "match": "Javor - TSC Backa Topola",
-    "kickoff": "2026-11-09T18:00:00+01:00",
+    "league": "Liga II",
+    "match": "Metalul Buzău - CSA Steaua Bucureşti",
+    "kickoff": "2026-11-10T18:30:00+01:00",
     "tip": "Over 2.5",
-    "odds": "1.75"
+    "odds": "1.80"
   }
 ]

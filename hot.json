@@ -1,56 +1,38 @@
 [
   {
-    "fixtureId": 1554325,
-    "league": "Prva Liga",
-    "match": "Napredak - OFK Bor 1919",
-    "kickoff": "2026-11-09T16:00:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "1.95",
-    "group": 1
-  },
-  {
-    "fixtureId": 1636980,
-    "league": "Super League 2",
-    "match": "Zakynthos - Niki Volos",
-    "kickoff": "2026-11-09T14:00:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "1.97",
-    "group": 1
-  },
-  {
-    "fixtureId": 1571612,
-    "league": "Second League",
-    "match": "CSKA Sofia II - Rilski Sportist",
-    "kickoff": "2026-11-09T13:30:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "1.95",
-    "group": 2
-  },
-  {
-    "fixtureId": 1639835,
-    "league": "Liga Pro",
-    "match": "Tecnico Universitario - Manta FC",
-    "kickoff": "2026-11-09T21:30:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.05",
-    "group": 2
-  },
-  {
-    "fixtureId": 1632059,
-    "league": "Division Profesional - Clausura",
-    "match": "Club Sp. San Lorenzo - Rubio NU",
-    "kickoff": "2026-11-09T21:00:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "1.95",
-    "group": 3
-  },
-  {
-    "fixtureId": 1570013,
-    "league": "Segunda División",
-    "match": "Sabadell - Real Sociedad II",
-    "kickoff": "2026-11-09T20:30:00+01:00",
+    "fixtureId": 1643947,
+    "league": "Ligue 2",
+    "match": "Paradou AC - JSM Skikda",
+    "kickoff": "2026-11-10T15:00:00+01:00",
     "tip": "Over 2.5",
     "odds": "2.08",
-    "group": 3
+    "group": 1
+  },
+  {
+    "fixtureId": 1648306,
+    "league": "Cup",
+    "match": "El Mokawloon - Itesalat",
+    "kickoff": "2026-11-10T16:00:00+01:00",
+    "tip": "Over 2.5",
+    "odds": "2.20",
+    "group": 1
+  },
+  {
+    "fixtureId": 1648691,
+    "league": "Copa Colombia",
+    "match": "Once Caldas - Atletico Nacional",
+    "kickoff": "2026-11-11T02:30:00+01:00",
+    "tip": "Over 2.5",
+    "odds": "2.10",
+    "group": 2
+  },
+  {
+    "fixtureId": 1649432,
+    "league": "Copa Uruguay",
+    "match": "Boston River - Atletico Torque",
+    "kickoff": "2026-11-10T20:30:00+01:00",
+    "tip": "Over 2.5",
+    "odds": "2.17",
+    "group": 2
   }
 ]
