@@ -1,24 +1,24 @@
 [
   {
-    "League": "EFL Trophy",
-    "Match": "Crewe vs Wigan",
+    "League": "1 Lyga",
+    "Match": "Babrungas vs Minija",
     "Tip": "Over 2.5",
-    "Odds": "1.75",
-    "Date": "2026-11-10T19:00:00+00:00"
+    "Odds": "1.80",
+    "Date": "2026-11-11T16:30:00+00:00"
   },
   {
-    "League": "Copa del Rey",
-    "Match": "Amorebieta vs UD Logroñés",
+    "League": "Persha Liga",
+    "Match": "Chernihiv vs Inhulets",
     "Tip": "Over 2.5",
-    "Odds": "1.85",
-    "Date": "2026-11-10T19:00:00+00:00"
+    "Odds": "1.80",
+    "Date": "2026-11-11T09:30:00+00:00"
   },
   {
-    "League": "Liga II",
-    "Match": "Metalul Buzău vs CSA Steaua Bucureşti",
+    "League": "Segunda División RFEF - Group 3",
+    "Match": "Cieza vs Valencia II",
     "Tip": "Over 2.5",
-    "Odds": "1.87",
-    "Date": "2026-11-10T17:30:00+00:00",
+    "Odds": "1.86",
+    "Date": "2026-11-11T19:30:00+00:00",
     "locked": true
   }
 ]
