@@ -1,58 +1,58 @@
 [
   {
-    "fixtureId": 1628312,
-    "league": "Ligue 2",
-    "match": "JS Jijel - CR Béni Thour",
-    "kickoff": "2026-11-10T15:00:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.38"
-  },
-  {
-    "fixtureId": 1596002,
-    "league": "Non League Premier - Isthmian",
-    "match": "Chatham Town - Leatherhead",
-    "kickoff": "2026-11-10T20:45:00+01:00",
+    "fixtureId": 1648707,
+    "league": "SAFF Championship",
+    "match": "Bangladesh - Sri Lanka",
+    "kickoff": "2026-11-11T15:00:00+01:00",
     "tip": "Home win",
-    "odds": "1.97"
-  },
-  {
-    "fixtureId": 1588825,
-    "league": "EFL Trophy",
-    "match": "Crewe - Wigan",
-    "kickoff": "2026-11-10T20:00:00+01:00",
-    "tip": "Home win",
-    "odds": "2.17"
-  },
-  {
-    "fixtureId": 1648691,
-    "league": "Copa Colombia",
-    "match": "Once Caldas - Atletico Nacional",
-    "kickoff": "2026-11-11T02:30:00+01:00",
-    "tip": "Over 2.5",
     "odds": "2.10"
   },
   {
-    "fixtureId": 1649433,
-    "league": "Copa Uruguay",
-    "match": "Liverpool Montevideo - Juventud",
-    "kickoff": "2026-11-11T01:00:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.10"
-  },
-  {
-    "fixtureId": 1602548,
-    "league": "Liga II",
-    "match": "Metalul Buzău - CSA Steaua Bucureşti",
-    "kickoff": "2026-11-10T18:30:00+01:00",
+    "fixtureId": 1572699,
+    "league": "Segunda División RFEF - Group 3",
+    "match": "Cieza - Valencia II",
+    "kickoff": "2026-11-11T20:30:00+01:00",
     "tip": "Home win",
-    "odds": "1.99"
+    "odds": "2.11"
   },
   {
-    "fixtureId": 1644362,
-    "league": "Copa del Rey",
-    "match": "Mijas Las Lagunas - Real Jaén",
-    "kickoff": "2026-11-10T20:00:00+01:00",
+    "fixtureId": 1591077,
+    "league": "3. Lig - Group 3",
+    "match": "Silifke Belediyespor - Yeni Mersin Idmanyurdu",
+    "kickoff": "2026-11-11T17:00:00+01:00",
     "tip": "Away win",
-    "odds": "1.91"
+    "odds": "2.16"
+  },
+  {
+    "fixtureId": 1588852,
+    "league": "EFL Trophy",
+    "match": "Barnsley - Oldham",
+    "kickoff": "2026-11-11T20:00:00+01:00",
+    "tip": "Home win",
+    "odds": "1.78"
+  },
+  {
+    "fixtureId": 1590465,
+    "league": "3. Lig - Group 1",
+    "match": "Pazarspor - Kartal Bulvarspor",
+    "kickoff": "2026-11-11T11:00:00+01:00",
+    "tip": "Home win",
+    "odds": "1.85"
+  },
+  {
+    "fixtureId": 1648031,
+    "league": "J-League Cup",
+    "match": "Vissel Kobe - Machida Zelvia",
+    "kickoff": "2026-11-11T11:00:00+01:00",
+    "tip": "Over 2.5",
+    "odds": "2.01"
+  },
+  {
+    "fixtureId": 1649008,
+    "league": "Friendlies",
+    "match": "Thailand U23 - Qatar U23",
+    "kickoff": "2026-11-12T09:00:00+01:00",
+    "tip": "Over 2.5",
+    "odds": "2.06"
   }
 ]
