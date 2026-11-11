@@ -1,5 +1,25 @@
 [
   {
+    "sport": "hockey",
+    "league": "AHL",
+    "match": "Charlotte Checkers vs Providence Bruins",
+    "tip": "Over 3.5",
+    "odds": "1.21",
+    "date": "2026-11-11T00:00:00+00:00",
+    "score": "4:2",
+    "result": "✓"
+  },
+  {
+    "sport": "basketball",
+    "league": "FIBA Europe Cup",
+    "match": "Manchester Basketball vs Chalon/Saone",
+    "tip": "Over 150.5",
+    "odds": "1.28",
+    "date": "2026-11-10T19:00:00+00:00",
+    "score": "73:94",
+    "result": "✓"
+  },
+  {
     "sport": "football",
     "league": "Segunda Liga",
     "match": "Torreense vs União de Leiria",
@@ -1978,25 +1998,5 @@
     "date": "2026-09-04T16:00:00+00:00",
     "score": "3:4",
     "result": "✓"
-  },
-  {
-    "sport": "hockey",
-    "league": "Liiga",
-    "match": "KalPa vs Jukurit",
-    "tip": "Over 3.5",
-    "odds": "1.25",
-    "date": "2026-09-04T15:30:00+00:00",
-    "score": "4:0",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Jupiler Pro League",
-    "match": "Gent vs OH Leuven",
-    "tip": "Over 1.5",
-    "odds": "1.24",
-    "date": "2026-09-03T18:30:00+00:00",
-    "score": "1:0",
-    "result": "✗"
   }
 ]
