@@ -1,18 +1,18 @@
 {
   "schemaVersion": 1,
-  "date": "2026-11-10",
+  "date": "2026-11-11",
   "timeZone": "Europe/Prague",
-  "windowStartUtc": "2026-11-10T06:00:00Z",
-  "windowEndUtc": "2026-11-11T06:00:00Z",
+  "windowStartUtc": "2026-11-11T06:00:00Z",
+  "windowEndUtc": "2026-11-12T06:00:00Z",
   "status": "READY",
   "paperOnly": true,
-  "runId": 6,
-  "decisionUtc": "2026-11-10T08:00:00Z",
-  "lockedUtc": "2026-11-10T08:00:16Z",
+  "runId": 7,
+  "decisionUtc": "2026-11-11T08:00:00Z",
+  "lockedUtc": "2026-11-11T08:00:28Z",
   "coverage": "Complete",
   "calibrationVersion": "iso-20261105221902",
   "reasons": [],
   "picks": [],
-  "generatedAtUtc": "2026-11-10T08:15:00Z",
-  "contentSha256": "33368519841cf6a9b3faa2e138eb96c4ad60bb3b60387b094d5ee59a0eacf48b"
+  "generatedAtUtc": "2026-11-11T08:15:00Z",
+  "contentSha256": "5c60552d3c1ad25b5d8a5597b025520f115765d2da278a8132ab0d6f710f128c"
 }
