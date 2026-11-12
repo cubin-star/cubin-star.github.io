@@ -1,11 +1,11 @@
 [
   {
-    "league": "Africa Cup of Nations - Qualification",
-    "homeTeam": "Ivory Coast",
-    "awayTeam": "Gambia",
-    "tip": "Over 3.5",
+    "league": "CONCACAF Nations League",
+    "homeTeam": "Barbados",
+    "awayTeam": "Guadeloupe",
+    "tip": "Over 2.5",
     "odds": "",
-    "halftimeScore": "2:1",
+    "halftimeScore": "0:2",
     "liveOdds": "",
     "finalScore": "",
     "result": "",
@@ -13,7 +13,7 @@
     "kickoff": "2026-11-12T19:00:00.000Z",
     "resolvedAt": "",
     "source": "whisper-football",
-    "scoutStats": "Whisper xG-rate surge | HT 2:1 | xG: 1.26 | Shots: 13/5 | winXG: 1.14 | losingXG: 0.12 losingSOT: 2 | @HT | Pre O2.5: 1.64"
+    "scoutStats": "Whisper xG-rate surge | HT 0:2 | xG: 1.41 | Shots: 13/5 | winXG: 1.27 | losingXG: 0.14 losingSOT: 2 | @HT | Pre O2.5: 1.63"
   },
   {
     "league": "Division Profesional - Clausura",
