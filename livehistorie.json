@@ -1,5 +1,21 @@
 [
   {
+    "league": "Africa Cup of Nations - Qualification",
+    "homeTeam": "Ivory Coast",
+    "awayTeam": "Gambia",
+    "tip": "Over 3.5",
+    "odds": "",
+    "halftimeScore": "2:1",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-11-12T19:00:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 2:1 | xG: 1.26 | Shots: 13/5 | winXG: 1.14 | losingXG: 0.12 losingSOT: 2 | @HT | Pre O2.5: 1.64"
+  },
+  {
     "league": "Division Profesional - Clausura",
     "homeTeam": "Club Sp. San Lorenzo",
     "awayTeam": "Rubio NU",
