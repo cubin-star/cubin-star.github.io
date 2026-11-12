@@ -1,5 +1,25 @@
 [
   {
+    "sport": "football",
+    "league": "Serie B",
+    "match": "Londrina vs Nautico Recife",
+    "tip": "Over 1.5",
+    "odds": "1.21",
+    "date": "2026-11-11T22:00:00+00:00",
+    "score": "2:1",
+    "result": "✓"
+  },
+  {
+    "sport": "basketball",
+    "league": "B League",
+    "match": "Levanga Hokkaido vs NeoPhoenix",
+    "tip": "Over 165.5",
+    "odds": "1.18",
+    "date": "2026-11-11T10:05:00+00:00",
+    "score": "96:110",
+    "result": "✓"
+  },
+  {
     "sport": "hockey",
     "league": "AHL",
     "match": "Charlotte Checkers vs Providence Bruins",
@@ -1977,26 +1997,6 @@
     "odds": "1.27",
     "date": "2026-09-05T03:00:00+00:00",
     "score": "0:2",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Major League Soccer",
-    "match": "New York City FC vs Nashville SC",
-    "tip": "Over 1.5",
-    "odds": "1.23",
-    "date": "2026-09-04T23:30:00+00:00",
-    "score": "0:0",
-    "result": "✗"
-  },
-  {
-    "sport": "hockey",
-    "league": "Club Friendly",
-    "match": "Malmo vs Linkoping",
-    "tip": "Over 3.5",
-    "odds": "1.25",
-    "date": "2026-09-04T16:00:00+00:00",
-    "score": "3:4",
     "result": "✓"
   }
 ]
