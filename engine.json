@@ -1,18 +1,37 @@
 {
   "schemaVersion": 1,
-  "date": "2026-11-11",
+  "date": "2026-11-12",
   "timeZone": "Europe/Prague",
-  "windowStartUtc": "2026-11-11T06:00:00Z",
-  "windowEndUtc": "2026-11-12T06:00:00Z",
+  "windowStartUtc": "2026-11-12T06:00:00Z",
+  "windowEndUtc": "2026-11-13T06:00:00Z",
   "status": "READY",
   "paperOnly": true,
-  "runId": 7,
-  "decisionUtc": "2026-11-11T08:00:00Z",
-  "lockedUtc": "2026-11-11T08:00:28Z",
+  "runId": 8,
+  "decisionUtc": "2026-11-12T08:00:00Z",
+  "lockedUtc": "2026-11-12T08:00:19Z",
   "coverage": "Complete",
   "calibrationVersion": "iso-20261105221902",
   "reasons": [],
-  "picks": [],
-  "generatedAtUtc": "2026-11-11T08:15:00Z",
-  "contentSha256": "5c60552d3c1ad25b5d8a5597b025520f115765d2da278a8132ab0d6f710f128c"
+  "picks": [
+    {
+      "fixtureId": 1600659,
+      "leagueId": 370,
+      "home": "Atletico Balboa",
+      "away": "Inca Aruba",
+      "kickoffUtc": "2026-11-12T21:30:00Z",
+      "market": "OU2.5",
+      "selection": "OU2.5:UNDER",
+      "odds": 2.25,
+      "bookmaker": "Bet365",
+      "oddsQueriedAtUtc": "2026-11-12T07:30:07Z",
+      "modelProbability": 0.5255921452984924,
+      "rawProbability": 0.5446749445314241,
+      "calibrationStatus": "Calibrated",
+      "impliedProbability": 0.4444444444444444,
+      "edge": 0.08114770085404799,
+      "expectedValue": 0.18258232692160803
+    }
+  ],
+  "generatedAtUtc": "2026-11-12T08:15:13Z",
+  "contentSha256": "e5d5b21036ef26816fc95448ab8876dd7ad6bf46907ab57607b3605c37224bc5"
 }
