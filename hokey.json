@@ -1,14 +1,15 @@
 [
   {
-    "league": "Liiga",
-    "match": "Ilves vs Pelicans",
+    "league": "National League",
+    "match": "Biel vs Zurich",
     "tip": "Over 5.5",
-    "odds": "2.42"
+    "odds": "1.77",
+    "qualified15": true
   },
   {
-    "league": "Liiga",
-    "match": "Kiekko-Espoo vs Vaasan Sport",
+    "league": "Fjordkraft-ligaen",
+    "match": "Nidaros vs Valerenga",
     "tip": "Over 5.5",
-    "odds": "2.04"
+    "odds": "1.75"
   }
 ]
