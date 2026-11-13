@@ -1,21 +1,21 @@
 {
-  "updated_at": "12.11.2026 08:01",
+  "updated_at": "13.11.2026 08:01",
   "tips": [
     {
-      "league": "WTA 125K - Sopo, Colombia",
-      "match": "Mandlik, Elizabeth vs Lazaro Garcia, Andrea",
-      "tip": "Over21.5",
-      "odds": "1.92",
-      "date": "12.11.2026",
-      "time": "16:00"
-    },
-    {
-      "league": "WTA - WTA Tour Finals, Group 1",
-      "match": "Kostyuk, Marta vs Gauff, Coco",
+      "league": "WTA - WTA Tour Finals, Group 2",
+      "match": "Andreeva, Mirra vs Muchova, Karolina",
       "tip": "Over20.5",
       "odds": "1.76",
-      "date": "12.11.2026",
+      "date": "13.11.2026",
       "time": "21:00"
+    },
+    {
+      "league": "Challenger - Knoxville, USA",
+      "match": "Draxl, Liam vs Chidekh, Clement",
+      "tip": "Over21.5",
+      "odds": "1.79",
+      "date": "13.11.2026",
+      "time": "18:00"
     }
   ]
 }
