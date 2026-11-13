@@ -1,51 +1,107 @@
 [
   {
     "league": "Africa Cup of Nations - Qualification",
-    "match": "Cameroon - Namibia",
-    "kickoff": "2026-11-12T20:00:00+01:00",
+    "match": "Comoros - Congo",
+    "kickoff": "2026-11-13T14:00:00+01:00",
     "tip": "Over 2.5",
-    "odds": "2.20"
+    "odds": "2.49"
   },
   {
     "league": "Africa Cup of Nations - Qualification",
-    "match": "Equatorial Guinea - Zimbabwe",
-    "kickoff": "2026-11-12T17:00:00+01:00",
+    "match": "Mali - Rwanda",
+    "kickoff": "2026-11-13T20:00:00+01:00",
     "tip": "Over 2.5",
-    "odds": "2.46"
+    "odds": "2.10"
   },
   {
     "league": "Africa Cup of Nations - Qualification",
-    "match": "Madagascar - Guinea-Bissau",
-    "kickoff": "2026-11-12T17:00:00+01:00",
+    "match": "Mozambique - Ethiopia",
+    "kickoff": "2026-11-13T14:00:00+01:00",
     "tip": "Over 2.5",
-    "odds": "2.38"
+    "odds": "2.17"
   },
   {
     "league": "Africa Cup of Nations - Qualification",
-    "match": "Benin - Central African Republic",
-    "kickoff": "2026-11-12T20:00:00+01:00",
+    "match": "Burkina Faso - Mauritania",
+    "kickoff": "2026-11-13T17:00:00+01:00",
     "tip": "Over 2.5",
-    "odds": "2.20"
+    "odds": "2.30"
   },
   {
-    "league": "UEFA Nations League",
-    "match": "Armenia - Cyprus",
-    "kickoff": "2026-11-12T18:00:00+01:00",
+    "league": "Africa Cup of Nations - Qualification",
+    "match": "South Africa - Kenya",
+    "kickoff": "2026-11-13T17:00:00+01:00",
     "tip": "Over 2.5",
     "odds": "2.05"
   },
   {
-    "league": "UEFA Nations League",
-    "match": "Albania - Finland",
-    "kickoff": "2026-11-12T20:45:00+01:00",
+    "league": "Africa Cup of Nations - Qualification",
+    "match": "Tunisia - Libya",
+    "kickoff": "2026-11-13T17:00:00+01:00",
     "tip": "Over 2.5",
-    "odds": "2.55"
+    "odds": "2.20"
   },
   {
-    "league": "CONCACAF Nations League",
-    "match": "Curaçao - Panama",
-    "kickoff": "2026-11-13T01:30:00+01:00",
+    "league": "Africa Cup of Nations - Qualification",
+    "match": "Zambia - Burundi",
+    "kickoff": "2026-11-13T14:00:00+01:00",
     "tip": "Over 2.5",
-    "odds": "2.25"
+    "odds": "2.32"
+  },
+  {
+    "league": "UEFA Nations League",
+    "match": "Moldova - Kazakhstan",
+    "kickoff": "2026-11-13T18:00:00+01:00",
+    "tip": "Over 2.5",
+    "odds": "2.51"
+  },
+  {
+    "league": "UEFA Nations League",
+    "match": "Bulgaria - Iceland",
+    "kickoff": "2026-11-13T20:45:00+01:00",
+    "tip": "Over 2.5",
+    "odds": "2.12"
+  },
+  {
+    "league": "UEFA Nations League",
+    "match": "Liechtenstein - Azerbaijan",
+    "kickoff": "2026-11-13T20:45:00+01:00",
+    "tip": "Over 2.5",
+    "odds": "2.10"
+  },
+  {
+    "league": "UEFA Nations League",
+    "match": "Luxembourg - Estonia",
+    "kickoff": "2026-11-13T20:45:00+01:00",
+    "tip": "Over 2.5",
+    "odds": "2.57"
+  },
+  {
+    "league": "UEFA Nations League",
+    "match": "Slovenia - Switzerland",
+    "kickoff": "2026-11-13T20:45:00+01:00",
+    "tip": "Over 2.5",
+    "odds": "2.57"
+  },
+  {
+    "league": "Segunda División",
+    "match": "Leganes - Burgos",
+    "kickoff": "2026-11-13T20:30:00+01:00",
+    "tip": "Over 2.5",
+    "odds": "2.27"
+  },
+  {
+    "league": "J2 League",
+    "match": "Albirex Niigata - Tegevajaro Miyazaki",
+    "kickoff": "2026-11-14T06:00:00+01:00",
+    "tip": "Over 2.5",
+    "odds": "2.15"
+  },
+  {
+    "league": "J2 League",
+    "match": "Fujieda MYFC - Ventforet Kofu",
+    "kickoff": "2026-11-14T06:00:00+01:00",
+    "tip": "Over 2.5",
+    "odds": "1.95"
   }
 ]
