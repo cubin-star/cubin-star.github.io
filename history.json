@@ -2,6 +2,26 @@
   {
     "sport": "football",
     "league": "Serie B",
+    "match": "Ponte Preta vs Operario-PR",
+    "tip": "Over 1.5",
+    "odds": "1.21",
+    "date": "2026-11-12T22:00:00+00:00",
+    "score": "0:2",
+    "result": "✓"
+  },
+  {
+    "sport": "hockey",
+    "league": "SHL",
+    "match": "Vaxjo vs Timrå",
+    "tip": "Over 3.5",
+    "odds": "1.31",
+    "date": "2026-11-12T18:00:00+00:00",
+    "score": "5:0",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "Serie B",
     "match": "Londrina vs Nautico Recife",
     "tip": "Over 1.5",
     "odds": "1.21",
@@ -1977,26 +1997,6 @@
     "odds": "1.18",
     "date": "2026-09-06T01:00:00+00:00",
     "score": "1:1",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Serie A",
-    "match": "AS Roma vs Atalanta",
-    "tip": "Over 1.5",
-    "odds": "1.24",
-    "date": "2026-09-05T18:45:00+00:00",
-    "score": "2:1",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Liga MX",
-    "match": "FC Juarez vs CF Pachuca",
-    "tip": "Over 1.5",
-    "odds": "1.27",
-    "date": "2026-09-05T03:00:00+00:00",
-    "score": "0:2",
     "result": "✓"
   }
 ]
