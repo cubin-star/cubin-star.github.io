@@ -1,15 +1,16 @@
 [
   {
-    "league": "National League",
-    "match": "Biel vs Zurich",
+    "league": "Swiss League",
+    "match": "Visp vs Basel",
     "tip": "Over 5.5",
-    "odds": "1.77",
+    "odds": "1.75",
     "qualified15": true
   },
   {
-    "league": "Fjordkraft-ligaen",
-    "match": "Nidaros vs Valerenga",
+    "league": "Mestis",
+    "match": "Hermes vs Kettera",
     "tip": "Over 5.5",
-    "odds": "1.75"
+    "odds": "1.82",
+    "qualified15": true
   }
 ]
