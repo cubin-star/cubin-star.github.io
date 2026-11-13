@@ -1,5 +1,21 @@
 [
   {
+    "league": "UEFA Nations League",
+    "homeTeam": "Bulgaria",
+    "awayTeam": "Iceland",
+    "tip": "Over 2.5",
+    "odds": "",
+    "halftimeScore": "0:2",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-11-13T19:45:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 0:2 | xG: 1.96 | Shots: 11/2 | winXG: 1.34 | losingXG: 0.62 losingSOT: 0 | @HT | Pre O2.5: 2.035"
+  },
+  {
     "league": "CONCACAF Nations League",
     "homeTeam": "Barbados",
     "awayTeam": "Guadeloupe",
