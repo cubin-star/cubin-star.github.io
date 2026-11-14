@@ -1,74 +1,74 @@
 [
   {
-    "fixtureId": 1570019,
+    "fixtureId": 1641212,
+    "league": "Botola 2",
+    "match": "Olympique Dcheïra - El Massira",
+    "kickoff": "2026-11-14T16:00:00+01:00",
+    "tip": "Over 2.5",
+    "odds": "2.33",
+    "group": 1
+  },
+  {
+    "fixtureId": 1570021,
     "league": "Segunda División",
-    "match": "Leganes - Burgos",
-    "kickoff": "2026-11-13T20:30:00+01:00",
+    "match": "Oviedo - Girona",
+    "kickoff": "2026-11-14T21:00:00+01:00",
     "tip": "Over 2.5",
-    "odds": "2.27",
+    "odds": "2.00",
     "group": 1
   },
   {
-    "fixtureId": 1649057,
-    "league": "Primera División",
-    "match": "Atletico Torque - Racing Montevideo",
-    "kickoff": "2026-11-13T21:00:00+01:00",
-    "tip": "Home win",
-    "odds": "1.85",
-    "group": 1
-  },
-  {
-    "fixtureId": 1606758,
-    "league": "J2 League",
-    "match": "Albirex Niigata - Tegevajaro Miyazaki",
-    "kickoff": "2026-11-14T06:00:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.15",
-    "group": 2
-  },
-  {
-    "fixtureId": 1555803,
-    "league": "J3 League",
-    "match": "Kitakyushu - Thespakusatsu Gunma",
-    "kickoff": "2026-11-14T06:00:00+01:00",
-    "tip": "Home win",
-    "odds": "1.95",
-    "group": 2
-  },
-  {
-    "fixtureId": 1528968,
-    "league": "UEFA Nations League",
-    "match": "Moldova - Kazakhstan",
-    "kickoff": "2026-11-13T18:00:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.51",
-    "group": 3
-  },
-  {
-    "fixtureId": 1636034,
-    "league": "Primera Premier",
-    "match": "Reboceros La Piedad - Racing de Veracruz",
-    "kickoff": "2026-11-14T03:00:00+01:00",
+    "fixtureId": 1648035,
+    "league": "J-League Cup",
+    "match": "Cerezo Osaka - Urawa",
+    "kickoff": "2026-11-15T07:00:00+01:00",
     "tip": "Away win",
-    "odds": "1.80",
+    "odds": "2.25",
+    "group": 2
+  },
+  {
+    "fixtureId": 1549554,
+    "league": "Primera División",
+    "match": "Alianza Atletico - FBC Melgar",
+    "kickoff": "2026-11-14T22:00:00+01:00",
+    "tip": "Away win",
+    "odds": "2.10",
+    "group": 2
+  },
+  {
+    "fixtureId": 1648004,
+    "league": "Coupe de France",
+    "match": "Versailles - Rodez",
+    "kickoff": "2026-11-14T14:00:00+01:00",
+    "tip": "Away win",
+    "odds": "2.22",
     "group": 3
   },
   {
-    "fixtureId": 1647638,
-    "league": "Friendlies",
-    "match": "Bahrain - Yemen",
-    "kickoff": "2026-11-14T07:00:00+01:00",
+    "fixtureId": 1642329,
+    "league": "Copa Argentina",
+    "match": "Banfield - Boca Juniors",
+    "kickoff": "2026-11-14T23:00:00+01:00",
     "tip": "Over 2.5",
-    "odds": "2.12",
+    "odds": "2.20",
+    "group": 3
+  },
+  {
+    "fixtureId": 1549872,
+    "league": "Primera A",
+    "match": "Deportivo Pereira - America de Cali",
+    "kickoff": "2026-11-14T21:30:00+01:00",
+    "tip": "Away win",
+    "odds": "1.75",
     "group": 4
   },
   {
-    "fixtureId": 1549869,
-    "league": "Primera A",
-    "match": "Internacional de Bogota - Santa Fe",
-    "kickoff": "2026-11-14T02:30:00+01:00",
-    "tip": "Away win",
-    "odds": "2.10",
+    "fixtureId": 1545884,
+    "league": "Africa Cup of Nations - Qualification",
+    "match": "Uganda - Botswana",
+    "kickoff": "2026-11-14T17:00:00+01:00",
+    "tip": "Over 2.5",
+    "odds": "2.36",
     "group": 4
   }
 ]

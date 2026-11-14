@@ -1,58 +1,58 @@
 [
   {
-    "fixtureId": 1528969,
-    "league": "UEFA Nations League",
-    "match": "Bulgaria - Iceland",
-    "kickoff": "2026-11-13T20:45:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.12"
-  },
-  {
-    "fixtureId": 1545865,
-    "league": "Africa Cup of Nations - Qualification",
-    "match": "Burkina Faso - Mauritania",
-    "kickoff": "2026-11-13T17:00:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.30"
-  },
-  {
-    "fixtureId": 1608744,
-    "league": "Serie C - Girone B",
-    "match": "Latina - Campobasso FC",
-    "kickoff": "2026-11-13T20:30:00+01:00",
+    "fixtureId": 1649019,
+    "league": "Friendlies",
+    "match": "Vietnam U23 - Qatar U23",
+    "kickoff": "2026-11-14T13:00:00+01:00",
     "tip": "Over 2.5",
     "odds": "2.10"
   },
   {
-    "fixtureId": 1606760,
-    "league": "J2 League",
-    "match": "Fujieda MYFC - Ventforet Kofu",
-    "kickoff": "2026-11-14T06:00:00+01:00",
+    "fixtureId": 1615854,
+    "league": "Tercera División RFEF - Group 11",
+    "match": "Binissalem - Constància",
+    "kickoff": "2026-11-14T16:00:00+01:00",
+    "tip": "Over 2.5",
+    "odds": "2.31"
+  },
+  {
+    "fixtureId": 1608361,
+    "league": "Serie C - Girone A",
+    "match": "Albinoleffe - Union Brescia",
+    "kickoff": "2026-11-14T14:30:00+01:00",
+    "tip": "Over 2.5",
+    "odds": "2.00"
+  },
+  {
+    "fixtureId": 1647956,
+    "league": "Coupe de France",
+    "match": "Croix Football IC - Thaon",
+    "kickoff": "2026-11-14T17:00:00+01:00",
     "tip": "Home win",
-    "odds": "1.96"
+    "odds": "2.10"
   },
   {
-    "fixtureId": 1555801,
-    "league": "J3 League",
-    "match": "Fukushima United - Sagamihara",
-    "kickoff": "2026-11-14T06:00:00+01:00",
-    "tip": "Away win",
-    "odds": "2.19"
-  },
-  {
-    "fixtureId": 1575842,
-    "league": "2. Division",
-    "match": "HIK - B 93",
-    "kickoff": "2026-11-13T19:00:00+01:00",
-    "tip": "Away win",
+    "fixtureId": 1528971,
+    "league": "UEFA Nations League",
+    "match": "Kosovo - Israel",
+    "kickoff": "2026-11-14T15:00:00+01:00",
+    "tip": "Home win",
     "odds": "1.80"
   },
   {
-    "fixtureId": 1634409,
-    "league": "Division 2",
-    "match": "Al-Wajj - Al Qwarah",
-    "kickoff": "2026-11-13T14:45:00+01:00",
+    "fixtureId": 1570020,
+    "league": "Segunda División",
+    "match": "Mallorca - Cordoba",
+    "kickoff": "2026-11-14T18:30:00+01:00",
     "tip": "Home win",
-    "odds": "2.00"
+    "odds": "1.97"
+  },
+  {
+    "fixtureId": 1636982,
+    "league": "Super League 2",
+    "match": "Asteras Tripolis II - PAOK II",
+    "kickoff": "2026-11-14T14:00:00+01:00",
+    "tip": "Over 2.5",
+    "odds": "2.15"
   }
 ]
