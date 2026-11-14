@@ -1,11 +1,11 @@
 [
   {
     "league": "Primera A",
-    "homeTeam": "Cucuta",
-    "awayTeam": "Jaguares",
+    "homeTeam": "Deportivo Pereira",
+    "awayTeam": "America de Cali",
     "tip": "Over 1.5",
     "odds": "",
-    "halftimeScore": "1:0",
+    "halftimeScore": "0:1",
     "liveOdds": "",
     "finalScore": "",
     "result": "",
@@ -13,7 +13,7 @@
     "kickoff": "2026-11-14T20:30:00.000Z",
     "resolvedAt": "",
     "source": "whisper-football",
-    "scoutStats": "Whisper xG-rate surge | HT 1:0 | xG: 1.19 | Shots: 16/9 | winXG: 1.05 | losingXG: 0.14 losingSOT: 2 | @HT | Pre O2.5: 1.71"
+    "scoutStats": "Whisper xG-rate surge | HT 0:1 | xG: 1.31 | Shots: 12/5 | winXG: 1.20 | losingXG: 0.11 losingSOT: 1 | @HT | Pre O2.5: 1.71"
   },
   {
     "league": "Serie B",
