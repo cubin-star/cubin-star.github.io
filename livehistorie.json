@@ -1,5 +1,21 @@
 [
   {
+    "league": "Primera A",
+    "homeTeam": "Cucuta",
+    "awayTeam": "Jaguares",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "1:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-11-14T20:30:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 1:0 | xG: 1.19 | Shots: 16/9 | winXG: 1.05 | losingXG: 0.14 losingSOT: 2 | @HT | Pre O2.5: 1.71"
+  },
+  {
     "league": "Serie B",
     "homeTeam": "Sport Recife",
     "awayTeam": "Goias",
