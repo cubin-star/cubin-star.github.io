@@ -6,5 +6,21 @@
     "tip": "Over 1.5",
     "odds": "1.24",
     "date": "2026-10-23T18:45:00+00:00"
+  },
+  {
+    "sport": "football",
+    "league": "J2 League",
+    "match": "Fujieda MYFC vs Ventforet Kofu",
+    "tip": "Over 1.5",
+    "odds": "1.28",
+    "date": "2026-11-14T05:00:00+00:00"
+  },
+  {
+    "sport": "basketball",
+    "league": "NBL W",
+    "match": "Bendigo W vs Sydney W",
+    "tip": "Over 147.5",
+    "odds": "1.18",
+    "date": "2026-11-14T04:00:00+00:00"
   }
 ]

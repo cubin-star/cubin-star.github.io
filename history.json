@@ -1,5 +1,15 @@
 [
   {
+    "sport": "hockey",
+    "league": "AHL",
+    "match": "Iowa Wild vs Grand Rapids Griffins",
+    "tip": "Over 3.5",
+    "odds": "1.22",
+    "date": "2026-11-14T01:00:00+00:00",
+    "score": "0:3",
+    "result": "✗"
+  },
+  {
     "sport": "football",
     "league": "Serie B",
     "match": "Ponte Preta vs Operario-PR",
@@ -1988,15 +1998,5 @@
     "date": "2026-09-06T10:00:00+00:00",
     "score": "0:0",
     "result": "✗"
-  },
-  {
-    "sport": "football",
-    "league": "Liga MX",
-    "match": "Tigres UANL vs Necaxa",
-    "tip": "Over 1.5",
-    "odds": "1.18",
-    "date": "2026-09-06T01:00:00+00:00",
-    "score": "1:1",
-    "result": "✓"
   }
 ]
