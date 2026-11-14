@@ -1,21 +1,5 @@
 [
   {
-    "league": "Primera A",
-    "homeTeam": "Deportivo Pereira",
-    "awayTeam": "America de Cali",
-    "tip": "Over 1.5",
-    "odds": "",
-    "halftimeScore": "0:1",
-    "liveOdds": "",
-    "finalScore": "",
-    "result": "",
-    "sport": "football",
-    "kickoff": "2026-11-14T20:30:00.000Z",
-    "resolvedAt": "",
-    "source": "whisper-football",
-    "scoutStats": "Whisper xG-rate surge | HT 0:1 | xG: 1.31 | Shots: 12/5 | winXG: 1.20 | losingXG: 0.11 losingSOT: 1 | @HT | Pre O2.5: 1.71"
-  },
-  {
     "league": "Serie B",
     "homeTeam": "Sport Recife",
     "awayTeam": "Goias",
@@ -23,11 +7,11 @@
     "odds": "",
     "halftimeScore": "2:0",
     "liveOdds": "",
-    "finalScore": "",
-    "result": "",
+    "finalScore": "3:0",
+    "result": "✅ Won",
     "sport": "football",
     "kickoff": "2026-11-14T19:30:00.000Z",
-    "resolvedAt": "",
+    "resolvedAt": "2026-11-14T21:40:05.618Z",
     "source": "whisper-football",
     "scoutStats": "Whisper xG-rate surge | HT 2:0 | xG: 2.43 | Shots: 16/5 | winXG: 1.60 | losingXG: 0.83 losingSOT: 1 | @HT | Pre O2.5: 1.76"
   },
