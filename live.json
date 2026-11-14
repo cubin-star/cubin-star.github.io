@@ -1,9 +1,51 @@
 [
   {
-    "League": "J3 League",
-    "Match": "Fukushima United vs Sagamihara",
+    "League": "2. Lig",
+    "Match": "Ankaraspor vs Aliağa FAŞ",
     "Tip": "Over 1.5",
-    "Odds": "1.17",
-    "Date": "2026-11-14T05:00:00+00:00"
+    "Odds": "1.16",
+    "Date": "2026-11-14T10:00:00+00:00"
+  },
+  {
+    "League": "2. Lig",
+    "Match": "Kütahyaspor vs Ankaragücü",
+    "Tip": "Over 1.5",
+    "Odds": "1.21",
+    "Date": "2026-11-14T11:00:00+00:00"
+  },
+  {
+    "League": "3. Division",
+    "Match": "ASA Aarhus vs Holbæk B&I",
+    "Tip": "Over 1.5",
+    "Odds": "1.12",
+    "Date": "2026-11-14T14:00:00+00:00"
+  },
+  {
+    "League": "League Two",
+    "Match": "Forfar Athletic vs Spartans",
+    "Tip": "Over 1.5",
+    "Odds": "1.22",
+    "Date": "2026-11-14T15:00:00+00:00"
+  },
+  {
+    "League": "National League",
+    "Match": "Harrogate Town vs Altrincham",
+    "Tip": "Over 1.5",
+    "Odds": "1.16",
+    "Date": "2026-11-14T15:00:00+00:00"
+  },
+  {
+    "League": "National League",
+    "Match": "Scunthorpe vs Worthing",
+    "Tip": "Over 1.5",
+    "Odds": "1.12",
+    "Date": "2026-11-14T15:00:00+00:00"
+  },
+  {
+    "League": "Non League Premier - Southern Central",
+    "Match": "Needham Market vs Banbury United",
+    "Tip": "Over 1.5",
+    "Odds": "1.19",
+    "Date": "2026-11-14T15:00:00+00:00"
   }
 ]
