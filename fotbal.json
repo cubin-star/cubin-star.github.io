@@ -1,24 +1,24 @@
 [
   {
-    "League": "Primera División RFEF - Group 1",
-    "Match": "Real Unión vs Cultural Leonesa",
-    "Tip": "Over 2.5",
-    "Odds": "1.80",
-    "Date": "2026-11-14T15:30:00+00:00"
-  },
-  {
     "League": "Coupe de France",
-    "Match": "Croix Football IC vs Thaon",
+    "Match": "Gobelins vs RED Star FC 93",
     "Tip": "Over 2.5",
-    "Odds": "1.85",
-    "Date": "2026-11-14T16:00:00+00:00"
+    "Odds": "1.90",
+    "Date": "2026-11-15T13:00:00+00:00"
   },
   {
-    "League": "FA Trophy",
-    "Match": "Maidstone Utd vs Maidenhead",
+    "League": "Primera División RFEF - Group 1",
+    "Match": "Zamora vs Real Avilés",
     "Tip": "Over 2.5",
-    "Odds": "1.85",
-    "Date": "2026-11-14T15:00:00+00:00",
+    "Odds": "1.88",
+    "Date": "2026-11-15T13:15:00+00:00"
+  },
+  {
+    "League": "Gamma Ethniki - Group 10",
+    "Match": "Giouchtas vs Platanias",
+    "Tip": "Over 2.5",
+    "Odds": "1.75",
+    "Date": "2026-11-15T13:00:00+00:00",
     "locked": true
   }
 ]
