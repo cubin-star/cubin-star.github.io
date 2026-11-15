@@ -1,5 +1,75 @@
 [
   {
+    "sport": "football",
+    "league": "Serie A",
+    "match": "Mirassol vs Atletico-MG",
+    "tip": "Over 1.5",
+    "odds": "1.26",
+    "date": "2026-11-14T21:30:00+00:00",
+    "score": "0:0",
+    "result": "✗"
+  },
+  {
+    "sport": "hockey",
+    "league": "Ligue Magnus",
+    "match": "Anglet vs Angers",
+    "tip": "Over 3.5",
+    "odds": "1.21",
+    "date": "2026-11-14T19:30:00+00:00",
+    "score": "6:8",
+    "result": "✓"
+  },
+  {
+    "sport": "hockey",
+    "league": "Alps Hockey League",
+    "match": "KHL Sisak vs Merano",
+    "tip": "Over 3.5",
+    "odds": "1.18",
+    "date": "2026-11-14T18:30:00+00:00",
+    "score": "7:2",
+    "result": "✓"
+  },
+  {
+    "sport": "basketball",
+    "league": "Latvia-Estonian League",
+    "match": "BC Kalev vs Latvijas Universitate",
+    "tip": "Over 160.5",
+    "odds": "1.29",
+    "date": "2026-11-14T16:00:00+00:00",
+    "score": "89:76",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "League Two",
+    "match": "Forfar Athletic vs Spartans",
+    "tip": "Over 1.5",
+    "odds": "1.22",
+    "date": "2026-11-14T15:00:00+00:00",
+    "score": "2:1",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "J2 League",
+    "match": "Fujieda MYFC vs Ventforet Kofu",
+    "tip": "Over 1.5",
+    "odds": "1.28",
+    "date": "2026-11-14T05:00:00+00:00",
+    "score": "1:0",
+    "result": "✗"
+  },
+  {
+    "sport": "basketball",
+    "league": "NBL W",
+    "match": "Bendigo W vs Sydney W",
+    "tip": "Over 147.5",
+    "odds": "1.18",
+    "date": "2026-11-14T04:00:00+00:00",
+    "score": "97:70",
+    "result": "✓"
+  },
+  {
     "sport": "hockey",
     "league": "AHL",
     "match": "Iowa Wild vs Grand Rapids Griffins",
@@ -1928,75 +1998,5 @@
     "date": "2026-09-09T23:30:00+00:00",
     "score": "2:1",
     "result": "✓"
-  },
-  {
-    "sport": "hockey",
-    "league": "Club Friendly",
-    "match": "Zilina vs Poprad",
-    "tip": "Over 3.5",
-    "odds": "1.19",
-    "date": "2026-09-09T15:30:00+00:00",
-    "score": "1:3",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "UEFA Champions League",
-    "match": "Lille vs Real Betis",
-    "tip": "Over 1.5",
-    "odds": "1.24",
-    "date": "2026-09-08T19:00:00+00:00",
-    "score": "0:0",
-    "result": "✗"
-  },
-  {
-    "sport": "hockey",
-    "league": "Club Friendly",
-    "match": "Timrå vs Luleå",
-    "tip": "Over 3.5",
-    "odds": "1.23",
-    "date": "2026-09-08T16:00:00+00:00",
-    "score": "4:3",
-    "result": "✓"
-  },
-  {
-    "sport": "hockey",
-    "league": "Liiga",
-    "match": "Hameenlinna vs Ilves",
-    "tip": "Over 3.5",
-    "odds": "1.29",
-    "date": "2026-09-08T15:30:00+00:00",
-    "score": "0:4",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Primeira Liga",
-    "match": "Estoril vs Arouca",
-    "tip": "Over 1.5",
-    "odds": "1.24",
-    "date": "2026-09-07T19:15:00+00:00",
-    "score": "0:0",
-    "result": "✗"
-  },
-  {
-    "sport": "football",
-    "league": "Ekstraklasa",
-    "match": "Pogon Szczecin vs Wisla Plock",
-    "tip": "Over 1.5",
-    "odds": "1.21",
-    "date": "2026-09-07T18:30:00+00:00",
-    "score": "1:1",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "J1 League",
-    "match": "Cerezo Osaka vs Tokyo Verdy",
-    "tip": "Over 1.5",
-    "odds": "1.32",
-    "date": "2026-09-06T10:00:00+00:00",
-    "score": "0:0",
-    "result": "✗"
   }
 ]
