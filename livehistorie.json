@@ -1,5 +1,21 @@
 [
   {
+    "league": "CONCACAF Nations League",
+    "homeTeam": "Guyana",
+    "awayTeam": "Puerto Rico",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "0:1",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-11-16T19:00:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 0:1 | xG: 0.73 | Shots: 8/6 | winXG: 0.59 | losingXG: 0.14 losingSOT: 3 | @HT | Pre O2.5: 1.72"
+  },
+  {
     "league": "Africa Cup of Nations - Qualification",
     "homeTeam": "Zimbabwe",
     "awayTeam": "Equatorial Guinea",
