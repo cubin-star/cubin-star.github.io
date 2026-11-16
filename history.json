@@ -1,5 +1,55 @@
 [
   {
+    "sport": "hockey",
+    "league": "ECHL",
+    "match": "Kansas City vs Wichita Thunder",
+    "tip": "Over 3.5",
+    "odds": "1.20",
+    "date": "2026-11-15T22:05:00+00:00",
+    "score": "4:2",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "Segunda Liga",
+    "match": "Leixoes vs Chaves",
+    "tip": "Over 1.5",
+    "odds": "1.29",
+    "date": "2026-11-15T18:00:00+00:00",
+    "score": "2:0",
+    "result": "✓"
+  },
+  {
+    "sport": "basketball",
+    "league": "LNB",
+    "match": "Le Mans vs Lyon-Villeurbanne",
+    "tip": "Over 163.5",
+    "odds": "1.18",
+    "date": "2026-11-15T18:00:00+00:00",
+    "score": "109:93",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "Segunda División",
+    "match": "Tenerife vs AD Ceuta FC",
+    "tip": "Over 1.5",
+    "odds": "1.29",
+    "date": "2026-11-15T13:00:00+00:00",
+    "score": "2:0",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "J2 League",
+    "match": "Vanraure Hachinohe vs Iwaki",
+    "tip": "Over 1.5",
+    "odds": "1.27",
+    "date": "2026-11-15T04:00:00+00:00",
+    "score": "2:2",
+    "result": "✓"
+  },
+  {
     "sport": "football",
     "league": "Serie A",
     "match": "Mirassol vs Atletico-MG",
@@ -1947,56 +1997,6 @@
     "odds": "1.19",
     "date": "2026-09-11T15:00:00+00:00",
     "score": "3:1",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Super League 1",
-    "match": "Panathinaikos vs Kifisia",
-    "tip": "Over 1.5",
-    "odds": "1.20",
-    "date": "2026-09-10T18:15:00+00:00",
-    "score": "3:1",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "UEFA Champions League",
-    "match": "Fenerbahçe vs AS Roma",
-    "tip": "Over 1.5",
-    "odds": "1.20",
-    "date": "2026-09-10T16:45:00+00:00",
-    "score": "1:1",
-    "result": "✓"
-  },
-  {
-    "sport": "hockey",
-    "league": "Club Friendly",
-    "match": "Brynas vs Luleå",
-    "tip": "Over 3.5",
-    "odds": "1.24",
-    "date": "2026-09-10T16:00:00+00:00",
-    "score": "3:4",
-    "result": "✓"
-  },
-  {
-    "sport": "hockey",
-    "league": "Champions League",
-    "match": "SaiPa vs Pardubice",
-    "tip": "Over 3.5",
-    "odds": "1.22",
-    "date": "2026-09-10T15:30:00+00:00",
-    "score": "3:2",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Major League Soccer",
-    "match": "DC United vs Columbus Crew",
-    "tip": "Over 1.5",
-    "odds": "1.21",
-    "date": "2026-09-09T23:30:00+00:00",
-    "score": "2:1",
     "result": "✓"
   }
 ]
