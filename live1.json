@@ -1,93 +1,79 @@
 [
   {
-    "league": "Super League 2",
-    "match": "Apollon Pontou - Kallithea",
-    "kickoff": "2026-11-15T11:30:00+01:00",
+    "league": "Africa Cup of Nations - Qualification",
+    "match": "Central African Republic - Benin",
+    "kickoff": "2026-11-16T17:00:00+01:00",
     "tip": "Over 2.5",
-    "odds": "1.98"
+    "odds": "2.07"
   },
   {
-    "league": "Segunda Liga",
-    "match": "Amarante - Felgueiras 1932",
-    "kickoff": "2026-11-15T12:00:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.40"
-  },
-  {
-    "league": "Segunda Liga",
-    "match": "Penafiel - Lusitânia Lourosa",
-    "kickoff": "2026-11-15T16:30:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.05"
-  },
-  {
-    "league": "Segunda Liga",
-    "match": "Portimonense - Academica",
-    "kickoff": "2026-11-15T15:00:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.08"
-  },
-  {
-    "league": "Segunda Liga",
-    "match": "Tondela - Farense",
-    "kickoff": "2026-11-15T12:00:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.10"
-  },
-  {
-    "league": "Prva Liga",
-    "match": "Metalac GM - Napredak",
-    "kickoff": "2026-11-15T16:00:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.13"
-  },
-  {
-    "league": "Prva Liga",
-    "match": "OFK Vršac - Javor",
-    "kickoff": "2026-11-15T13:00:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.05"
-  },
-  {
-    "league": "Segunda División",
-    "match": "Eldense - Sabadell",
-    "kickoff": "2026-11-15T18:30:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.60"
-  },
-  {
-    "league": "Segunda División",
-    "match": "Granada CF - Las Palmas",
-    "kickoff": "2026-11-15T16:15:00+01:00",
+    "league": "Africa Cup of Nations - Qualification",
+    "match": "Eritrea - Guinea",
+    "kickoff": "2026-11-16T17:00:00+01:00",
     "tip": "Over 2.5",
     "odds": "1.95"
   },
   {
-    "league": "Segunda División",
-    "match": "Tenerife - AD Ceuta FC",
-    "kickoff": "2026-11-15T14:00:00+01:00",
+    "league": "Africa Cup of Nations - Qualification",
+    "match": "Namibia - Cameroon",
+    "kickoff": "2026-11-16T14:00:00+01:00",
+    "tip": "Over 2.5",
+    "odds": "2.32"
+  },
+  {
+    "league": "Africa Cup of Nations - Qualification",
+    "match": "Sudan - Senegal",
+    "kickoff": "2026-11-16T14:00:00+01:00",
+    "tip": "Over 2.5",
+    "odds": "1.97"
+  },
+  {
+    "league": "Africa Cup of Nations - Qualification",
+    "match": "Zimbabwe - Equatorial Guinea",
+    "kickoff": "2026-11-16T14:00:00+01:00",
+    "tip": "Over 2.5",
+    "odds": "2.55"
+  },
+  {
+    "league": "UEFA Nations League",
+    "match": "Kazakhstan - Slovakia",
+    "kickoff": "2026-11-16T16:00:00+01:00",
     "tip": "Over 2.5",
     "odds": "1.95"
   },
   {
     "league": "UEFA Nations League",
-    "match": "Belarus - Albania",
-    "kickoff": "2026-11-15T18:00:00+01:00",
+    "match": "Faroe Islands - Moldova",
+    "kickoff": "2026-11-16T16:00:00+01:00",
     "tip": "Over 2.5",
-    "odds": "2.35"
+    "odds": "2.25"
   },
   {
     "league": "UEFA Nations League",
-    "match": "Latvia - Armenia",
-    "kickoff": "2026-11-15T15:00:00+01:00",
+    "match": "Estonia - Bulgaria",
+    "kickoff": "2026-11-16T18:00:00+01:00",
     "tip": "Over 2.5",
-    "odds": "2.33"
+    "odds": "2.28"
   },
   {
-    "league": "CONCACAF Nations League",
-    "match": "Panama - Curaçao",
-    "kickoff": "2026-11-16T00:00:00+01:00",
+    "league": "UEFA Nations League",
+    "match": "Gibraltar - Malta",
+    "kickoff": "2026-11-16T20:45:00+01:00",
     "tip": "Over 2.5",
-    "odds": "2.08"
+    "odds": "2.50"
+  },
+  {
+    "league": "UEFA Nations League",
+    "match": "Switzerland - Scotland",
+    "kickoff": "2026-11-16T20:45:00+01:00",
+    "tip": "Over 2.5",
+    "odds": "2.05"
+  },
+  {
+    "league": "UEFA Nations League",
+    "match": "FYR Macedonia - Slovenia",
+    "kickoff": "2026-11-16T20:45:00+01:00",
+    "tip": "Over 2.5",
+    "odds": "2.16"
   }
 ]
