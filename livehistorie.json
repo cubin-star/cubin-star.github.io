@@ -1,5 +1,21 @@
 [
   {
+    "league": "Africa Cup of Nations - Qualification",
+    "homeTeam": "Mauritania",
+    "awayTeam": "Burkina Faso",
+    "tip": "Over 2.5",
+    "odds": "",
+    "halftimeScore": "0:2",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-11-17T19:00:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 0:2 | xG: 2.22 | Shots: 13/4 | winXG: 1.68 | losingXG: 0.54 losingSOT: 2 | @HT | Pre O2.5: 2.62"
+  },
+  {
     "league": "CONCACAF Nations League",
     "homeTeam": "Guyana",
     "awayTeam": "Puerto Rico",
