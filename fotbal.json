@@ -1,24 +1,24 @@
 [
   {
-    "League": "Prva Liga",
-    "Match": "OFK Bor 1919 vs Semendrija 1924",
+    "League": "National League - North",
+    "Match": "Bedford Town vs Chorley",
     "Tip": "Over 2.5",
     "Odds": "1.75",
-    "Date": "2026-11-16T12:00:00+00:00"
-  },
-  {
-    "League": "Africa Cup of Nations - Qualification",
-    "Match": "Eritrea vs Guinea",
-    "Tip": "Over 2.5",
-    "Odds": "1.95",
-    "Date": "2026-11-16T16:00:00+00:00"
+    "Date": "2026-11-17T19:45:00+00:00"
   },
   {
     "League": "Friendlies",
-    "Match": "Yemen vs Malaysia",
+    "Match": "Russia vs Venezuela",
     "Tip": "Over 2.5",
-    "Odds": "1.86",
-    "Date": "2026-11-17T06:00:00+00:00",
+    "Odds": "1.89",
+    "Date": "2026-11-17T16:00:00+00:00"
+  },
+  {
+    "League": "UEFA Nations League",
+    "Match": "Bosnia & Herzegovina vs Romania",
+    "Tip": "Over 2.5",
+    "Odds": "1.87",
+    "Date": "2026-11-17T19:45:00+00:00",
     "locked": true
   }
 ]
