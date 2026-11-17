@@ -1,58 +1,58 @@
 [
   {
-    "fixtureId": 1528986,
+    "fixtureId": 1528997,
     "league": "UEFA Nations League",
-    "match": "Kazakhstan - Slovakia",
-    "kickoff": "2026-11-16T16:00:00+01:00",
+    "match": "Rep. Of Ireland - Kosovo",
+    "kickoff": "2026-11-17T20:45:00+01:00",
     "tip": "Over 2.5",
-    "odds": "1.95"
+    "odds": "2.49"
   },
   {
-    "fixtureId": 1545888,
-    "league": "Africa Cup of Nations - Qualification",
-    "match": "Central African Republic - Benin",
-    "kickoff": "2026-11-16T17:00:00+01:00",
+    "fixtureId": 1647366,
+    "league": "Friendlies",
+    "match": "Kyrgyzstan - Vietnam",
+    "kickoff": "2026-11-17T13:00:00+01:00",
     "tip": "Over 2.5",
-    "odds": "2.07"
-  },
-  {
-    "fixtureId": 1549560,
-    "league": "Primera División",
-    "match": "UCV Moquegua - Atletico Grau",
-    "kickoff": "2026-11-16T21:15:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "1.95"
-  },
-  {
-    "fixtureId": 1554326,
-    "league": "Prva Liga",
-    "match": "OFK Bor 1919 - Semendrija 1924",
-    "kickoff": "2026-11-16T13:00:00+01:00",
-    "tip": "Away win",
-    "odds": "2.02"
-  },
-  {
-    "fixtureId": 1648349,
-    "league": "Liga de Ascenso",
-    "match": "Pitbulls Santa Barbara FC - Rosario",
-    "kickoff": "2026-11-17T02:00:00+01:00",
-    "tip": "Home win",
     "odds": "2.00"
   },
   {
-    "fixtureId": 1608745,
-    "league": "Serie C - Girone B",
-    "match": "Perugia - Torres",
-    "kickoff": "2026-11-16T20:45:00+01:00",
+    "fixtureId": 1595996,
+    "league": "Non League Premier - Isthmian",
+    "match": "Leatherhead - Wingate & Finchley",
+    "kickoff": "2026-11-17T20:45:00+01:00",
     "tip": "Home win",
-    "odds": "1.93"
+    "odds": "1.91"
   },
   {
-    "fixtureId": 1649063,
-    "league": "Primera División",
-    "match": "Wanderers - Juventud",
-    "kickoff": "2026-11-17T00:00:00+01:00",
+    "fixtureId": 1588399,
+    "league": "National League - South",
+    "match": "Truro City - Billericay Town",
+    "kickoff": "2026-11-17T20:45:00+01:00",
     "tip": "Home win",
-    "odds": "2.15"
+    "odds": "1.75"
+  },
+  {
+    "fixtureId": 1649489,
+    "league": "Copa Colombia",
+    "match": "Atletico Nacional - Once Caldas",
+    "kickoff": "2026-11-18T00:30:00+01:00",
+    "tip": "Over 2.5",
+    "odds": "2.00"
+  },
+  {
+    "fixtureId": 1595297,
+    "league": "Second NL",
+    "match": "Koprivnica - Solin",
+    "kickoff": "2026-11-17T17:30:00+01:00",
+    "tip": "Away win",
+    "odds": "1.75"
+  },
+  {
+    "fixtureId": 1648330,
+    "league": "Torneo Federal A",
+    "match": "Olimpo Bahia Blanca - Kimberley Mar del Plata",
+    "kickoff": "2026-11-18T00:15:00+01:00",
+    "tip": "Home win",
+    "odds": "1.82"
   }
 ]

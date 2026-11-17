@@ -1,79 +1,114 @@
 [
   {
     "league": "Africa Cup of Nations - Qualification",
-    "match": "Central African Republic - Benin",
-    "kickoff": "2026-11-16T17:00:00+01:00",
+    "match": "Congo - Comoros",
+    "kickoff": "2026-11-17T20:00:00+01:00",
     "tip": "Over 2.5",
-    "odds": "2.07"
+    "odds": "2.50"
   },
   {
     "league": "Africa Cup of Nations - Qualification",
-    "match": "Eritrea - Guinea",
-    "kickoff": "2026-11-16T17:00:00+01:00",
+    "match": "Ethiopia - Mozambique",
+    "kickoff": "2026-11-17T14:00:00+01:00",
     "tip": "Over 2.5",
-    "odds": "1.95"
+    "odds": "2.60"
   },
   {
     "league": "Africa Cup of Nations - Qualification",
-    "match": "Namibia - Cameroon",
-    "kickoff": "2026-11-16T14:00:00+01:00",
+    "match": "Gambia - Ivory Coast",
+    "kickoff": "2026-11-17T17:00:00+01:00",
     "tip": "Over 2.5",
-    "odds": "2.32"
+    "odds": "2.25"
   },
   {
     "league": "Africa Cup of Nations - Qualification",
-    "match": "Sudan - Senegal",
-    "kickoff": "2026-11-16T14:00:00+01:00",
+    "match": "Guinea-Bissau - Madagascar",
+    "kickoff": "2026-11-17T17:00:00+01:00",
     "tip": "Over 2.5",
-    "odds": "1.97"
+    "odds": "2.10"
   },
   {
     "league": "Africa Cup of Nations - Qualification",
-    "match": "Zimbabwe - Equatorial Guinea",
-    "kickoff": "2026-11-16T14:00:00+01:00",
+    "match": "Kenya - South Africa",
+    "kickoff": "2026-11-17T17:00:00+01:00",
     "tip": "Over 2.5",
-    "odds": "2.55"
+    "odds": "2.51"
+  },
+  {
+    "league": "Africa Cup of Nations - Qualification",
+    "match": "Lesotho - Gabon",
+    "kickoff": "2026-11-17T14:00:00+01:00",
+    "tip": "Over 2.5",
+    "odds": "2.23"
+  },
+  {
+    "league": "Africa Cup of Nations - Qualification",
+    "match": "Liberia - Cape Verde Islands",
+    "kickoff": "2026-11-17T20:00:00+01:00",
+    "tip": "Over 2.5",
+    "odds": "2.27"
+  },
+  {
+    "league": "Africa Cup of Nations - Qualification",
+    "match": "Libya - Tunisia",
+    "kickoff": "2026-11-17T17:00:00+01:00",
+    "tip": "Over 2.5",
+    "odds": "2.50"
+  },
+  {
+    "league": "Africa Cup of Nations - Qualification",
+    "match": "Rwanda - Mali",
+    "kickoff": "2026-11-17T20:00:00+01:00",
+    "tip": "Over 2.5",
+    "odds": "2.40"
+  },
+  {
+    "league": "Africa Cup of Nations - Qualification",
+    "match": "Sierra Leone - Congo DR",
+    "kickoff": "2026-11-17T17:00:00+01:00",
+    "tip": "Over 2.5",
+    "odds": "2.12"
+  },
+  {
+    "league": "Africa Cup of Nations - Qualification",
+    "match": "South Sudan - Angola",
+    "kickoff": "2026-11-17T14:00:00+01:00",
+    "tip": "Over 2.5",
+    "odds": "2.00"
+  },
+  {
+    "league": "Africa Cup of Nations - Qualification",
+    "match": "Tanzania - Nigeria",
+    "kickoff": "2026-11-17T14:00:00+01:00",
+    "tip": "Over 2.5",
+    "odds": "2.10"
+  },
+  {
+    "league": "Africa Cup of Nations - Qualification",
+    "match": "Togo - Algeria",
+    "kickoff": "2026-11-17T17:00:00+01:00",
+    "tip": "Over 2.5",
+    "odds": "2.35"
   },
   {
     "league": "UEFA Nations League",
-    "match": "Kazakhstan - Slovakia",
-    "kickoff": "2026-11-16T16:00:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "1.95"
-  },
-  {
-    "league": "UEFA Nations League",
-    "match": "Faroe Islands - Moldova",
-    "kickoff": "2026-11-16T16:00:00+01:00",
+    "match": "Ukraine - Georgia",
+    "kickoff": "2026-11-17T20:45:00+01:00",
     "tip": "Over 2.5",
     "odds": "2.25"
   },
   {
     "league": "UEFA Nations League",
-    "match": "Estonia - Bulgaria",
-    "kickoff": "2026-11-16T18:00:00+01:00",
+    "match": "Hungary - Northern Ireland",
+    "kickoff": "2026-11-17T20:45:00+01:00",
     "tip": "Over 2.5",
-    "odds": "2.28"
+    "odds": "2.49"
   },
   {
     "league": "UEFA Nations League",
-    "match": "Gibraltar - Malta",
-    "kickoff": "2026-11-16T20:45:00+01:00",
+    "match": "Rep. Of Ireland - Kosovo",
+    "kickoff": "2026-11-17T20:45:00+01:00",
     "tip": "Over 2.5",
-    "odds": "2.50"
-  },
-  {
-    "league": "UEFA Nations League",
-    "match": "Switzerland - Scotland",
-    "kickoff": "2026-11-16T20:45:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.05"
-  },
-  {
-    "league": "UEFA Nations League",
-    "match": "FYR Macedonia - Slovenia",
-    "kickoff": "2026-11-16T20:45:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.16"
+    "odds": "2.49"
   }
 ]
