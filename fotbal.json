@@ -1,24 +1,24 @@
 [
   {
-    "League": "National League - North",
-    "Match": "Bedford Town vs Chorley",
+    "League": "Cup",
+    "Match": "Dubočica vs Radnicki NIS",
+    "Tip": "Over 2.5",
+    "Odds": "1.90",
+    "Date": "2026-11-18T15:00:00+00:00"
+  },
+  {
+    "League": "2. Lig",
+    "Match": "Serik Spor vs 24 Erzincanspor",
     "Tip": "Over 2.5",
     "Odds": "1.75",
-    "Date": "2026-11-17T19:45:00+00:00"
+    "Date": "2026-11-18T10:00:00+00:00"
   },
   {
-    "League": "Friendlies",
-    "Match": "Russia vs Venezuela",
+    "League": "ASEAN Club Championship",
+    "Match": "Pusamania Borneo vs Manila Digger",
     "Tip": "Over 2.5",
-    "Odds": "1.89",
-    "Date": "2026-11-17T16:00:00+00:00"
-  },
-  {
-    "League": "UEFA Nations League",
-    "Match": "Bosnia & Herzegovina vs Romania",
-    "Tip": "Over 2.5",
-    "Odds": "1.87",
-    "Date": "2026-11-17T19:45:00+00:00",
+    "Odds": "1.75",
+    "Date": "2026-11-18T12:00:00+00:00",
     "locked": true
   }
 ]
