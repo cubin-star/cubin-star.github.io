@@ -1,9 +1,16 @@
 [
   {
-    "league": "DEL 2",
-    "match": "Dusseldorf vs Starbulls Rosenheim",
+    "league": "AHL",
+    "match": "Belleville Senators vs Laval Rocket",
     "tip": "Over 3.5",
     "odds": "1.20",
-    "date": "2026-11-17T18:30:00+00:00"
+    "date": "2026-11-18T15:30:00+00:00"
+  },
+  {
+    "league": "Champions League",
+    "match": "Pardubice vs SaiPa",
+    "tip": "Over 3.5",
+    "odds": "1.19",
+    "date": "2026-11-18T17:00:00+00:00"
   }
 ]
