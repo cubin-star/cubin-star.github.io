@@ -1,6 +1,36 @@
 [
   {
     "sport": "basketball",
+    "league": "NCAA",
+    "match": "Florida vs Notre Dame",
+    "tip": "Over 142.5",
+    "odds": "1.33",
+    "date": "2026-11-17T21:30:00+00:00",
+    "score": "86:78",
+    "result": "✓"
+  },
+  {
+    "sport": "hockey",
+    "league": "DEL 2",
+    "match": "Dusseldorf vs Starbulls Rosenheim",
+    "tip": "Over 3.5",
+    "odds": "1.20",
+    "date": "2026-11-17T18:30:00+00:00",
+    "score": "4:5",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "Friendlies",
+    "match": "Saudi Arabia vs Uzbekistan",
+    "tip": "Over 1.5",
+    "odds": "1.38",
+    "date": "2026-11-17T15:30:00+00:00",
+    "score": "1:2",
+    "result": "✓"
+  },
+  {
+    "sport": "basketball",
     "league": "NBA",
     "match": "Brooklyn Nets vs Philadelphia 76ers",
     "tip": "Over 210.5",
@@ -1968,35 +1998,5 @@
     "date": "2026-09-12T14:00:00+00:00",
     "score": "1:2",
     "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Liga MX",
-    "match": "Necaxa vs Puebla",
-    "tip": "Over 1.5",
-    "odds": "1.21",
-    "date": "2026-09-12T01:00:00+00:00",
-    "score": "0:1",
-    "result": "✗"
-  },
-  {
-    "sport": "football",
-    "league": "Liga Profesional Argentina",
-    "match": "Boca Juniors vs Central Cordoba de Santiago",
-    "tip": "Over 1.5",
-    "odds": "1.33",
-    "date": "2026-09-12T00:30:00+00:00",
-    "score": "3:1",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Ligue 2",
-    "match": "Rodez vs Grenoble",
-    "tip": "Over 1.5",
-    "odds": "1.22",
-    "date": "2026-09-11T18:00:00+00:00",
-    "score": "0:1",
-    "result": "✗"
   }
 ]
