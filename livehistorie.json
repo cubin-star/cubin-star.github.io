@@ -1,5 +1,26 @@
 [
   {
+    "league": "Serie A",
+    "homeTeam": "Remo",
+    "awayTeam": "Chapecoense-sc",
+    "tip": "Over 2.5",
+    "odds": "",
+    "halftimeScore": "2:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-11-18T23:00:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 2:0 | xG: 2.13 | Shots: 13/6 | winXG: 1.63 | losingXG: 0.50 losingSOT: 3 | @HT | Pre O2.5: 1.78",
+    "apiFixtureId": 1492456,
+    "tipSource": "A",
+    "tipEvalA": true,
+    "tipEvalB": false,
+    "tipEvalC": false
+  },
+  {
     "league": "Africa Cup of Nations - Qualification",
     "homeTeam": "Mauritania",
     "awayTeam": "Burkina Faso",
