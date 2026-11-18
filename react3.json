@@ -1,74 +1,74 @@
 [
   {
-    "fixtureId": 1595297,
-    "league": "Second NL",
-    "match": "Koprivnica - Solin",
-    "kickoff": "2026-11-17T17:30:00+01:00",
+    "fixtureId": 1645824,
+    "league": "Cup",
+    "match": "Zemun - Radnicki 1923",
+    "kickoff": "2026-11-18T18:30:00+01:00",
     "tip": "Away win",
-    "odds": "1.75",
-    "group": 1
-  },
-  {
-    "fixtureId": 1528995,
-    "league": "UEFA Nations League",
-    "match": "Hungary - Northern Ireland",
-    "kickoff": "2026-11-17T20:45:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.49",
-    "group": 1
-  },
-  {
-    "fixtureId": 1596512,
-    "league": "Non League Premier - Northern",
-    "match": "Hyde United - Rylands",
-    "kickoff": "2026-11-17T20:45:00+01:00",
-    "tip": "Away win",
-    "odds": "2.05",
-    "group": 2
-  },
-  {
-    "fixtureId": 1597459,
-    "league": "Non League Premier - Southern South",
-    "match": "Havant & Wville - Bracknell Town",
-    "kickoff": "2026-11-17T20:45:00+01:00",
-    "tip": "Home win",
     "odds": "1.85",
+    "group": 1
+  },
+  {
+    "fixtureId": 1492451,
+    "league": "Serie A",
+    "match": "Coritiba - Santos",
+    "kickoff": "2026-11-18T23:30:00+01:00",
+    "tip": "Away win",
+    "odds": "2.14",
+    "group": 1
+  },
+  {
+    "fixtureId": 1572123,
+    "league": "Segunda División RFEF - Group 1",
+    "match": "Bergantiños - Sestao River",
+    "kickoff": "2026-11-18T20:00:00+01:00",
+    "tip": "Over 2.5",
+    "odds": "2.02",
     "group": 2
   },
   {
-    "fixtureId": 1649489,
-    "league": "Copa Colombia",
-    "match": "Atletico Nacional - Once Caldas",
-    "kickoff": "2026-11-18T00:30:00+01:00",
+    "fixtureId": 1645200,
+    "league": "Cup",
+    "match": "Iliria Fushë-Krujë - Luftëtari",
+    "kickoff": "2026-11-18T13:00:00+01:00",
     "tip": "Over 2.5",
-    "odds": "2.00",
+    "odds": "1.98",
+    "group": 2
+  },
+  {
+    "fixtureId": 1616433,
+    "league": "Tercera División RFEF - Group 13",
+    "match": "Cartagena LU II - Santomera",
+    "kickoff": "2026-11-18T18:00:00+01:00",
+    "tip": "Away win",
+    "odds": "1.85",
     "group": 3
   },
   {
-    "fixtureId": 1650228,
-    "league": "Liga Panameña de Fútbol",
-    "match": "CD Arabe Unido - Veraguas",
-    "kickoff": "2026-11-18T02:30:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "1.95",
-    "group": 3
-  },
-  {
-    "fixtureId": 1649024,
-    "league": "Friendlies",
-    "match": "Korea Republic U21 - Mexico U23",
-    "kickoff": "2026-11-17T11:00:00+01:00",
+    "fixtureId": 1635324,
+    "league": "Premier League",
+    "match": "Mbarara City - Lugazi",
+    "kickoff": "2026-11-18T14:00:00+01:00",
     "tip": "Over 2.5",
     "odds": "2.38",
+    "group": 3
+  },
+  {
+    "fixtureId": 1591687,
+    "league": "2. Lig",
+    "match": "Serik Spor - 24 Erzincanspor",
+    "kickoff": "2026-11-18T11:00:00+01:00",
+    "tip": "Away win",
+    "odds": "2.10",
     "group": 4
   },
   {
-    "fixtureId": 1648330,
-    "league": "Torneo Federal A",
-    "match": "Olimpo Bahia Blanca - Kimberley Mar del Plata",
-    "kickoff": "2026-11-18T00:15:00+01:00",
-    "tip": "Home win",
-    "odds": "1.82",
+    "fixtureId": 1648176,
+    "league": "Coppa Italia Serie D",
+    "match": "Villa Valle - Valenzana",
+    "kickoff": "2026-11-18T14:30:00+01:00",
+    "tip": "Over 2.5",
+    "odds": "1.98",
     "group": 4
   }
 ]
