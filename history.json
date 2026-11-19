@@ -1,5 +1,35 @@
 [
   {
+    "sport": "football",
+    "league": "Serie A",
+    "match": "Cruzeiro vs Palmeiras",
+    "tip": "Over 1.5",
+    "odds": "1.23",
+    "date": "2026-11-18T23:30:00+00:00",
+    "score": "2:1",
+    "result": "✓"
+  },
+  {
+    "sport": "hockey",
+    "league": "Champions League",
+    "match": "Pardubice vs SaiPa",
+    "tip": "Over 3.5",
+    "odds": "1.19",
+    "date": "2026-11-18T17:00:00+00:00",
+    "score": "5:2",
+    "result": "✓"
+  },
+  {
+    "sport": "hockey",
+    "league": "AHL",
+    "match": "Belleville Senators vs Laval Rocket",
+    "tip": "Over 3.5",
+    "odds": "1.20",
+    "date": "2026-11-18T15:30:00+00:00",
+    "score": "4:8",
+    "result": "✓"
+  },
+  {
     "sport": "basketball",
     "league": "NCAA",
     "match": "Florida vs Notre Dame",
@@ -1967,36 +1997,6 @@
     "odds": "1.19",
     "date": "2026-09-13T12:00:00+00:00",
     "score": "3:4",
-    "result": "✓"
-  },
-  {
-    "sport": "hockey",
-    "league": "Champions League",
-    "match": "Storhamar vs Frölunda",
-    "tip": "Over 3.5",
-    "odds": "1.22",
-    "date": "2026-09-12T16:00:00+00:00",
-    "score": "3:5",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Championship",
-    "match": "Blackburn vs Millwall",
-    "tip": "Over 1.5",
-    "odds": "1.28",
-    "date": "2026-09-12T14:00:00+00:00",
-    "score": "3:1",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Premier League",
-    "match": "Aston Villa vs Nottingham Forest",
-    "tip": "Over 1.5",
-    "odds": "1.29",
-    "date": "2026-09-12T14:00:00+00:00",
-    "score": "1:2",
     "result": "✓"
   }
 ]
