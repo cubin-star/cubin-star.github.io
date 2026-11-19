@@ -1,16 +1,16 @@
 [
   {
-    "league": "AHL",
-    "match": "Belleville Senators vs Laval Rocket",
+    "league": "SHL",
+    "match": "Linkoping vs HV 71",
     "tip": "Over 3.5",
-    "odds": "1.20",
-    "date": "2026-11-18T15:30:00+00:00"
+    "odds": "1.24",
+    "date": "2026-11-19T18:00:00+00:00"
   },
   {
-    "league": "Champions League",
-    "match": "Pardubice vs SaiPa",
+    "league": "NHL",
+    "match": "Ottawa Senators vs Philadelphia Flyers",
     "tip": "Over 3.5",
-    "odds": "1.19",
-    "date": "2026-11-18T17:00:00+00:00"
+    "odds": "1.18",
+    "date": "2026-11-20T00:00:00+00:00"
   }
 ]
