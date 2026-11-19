@@ -1,16 +1,16 @@
 [
   {
-    "league": "ICE Hockey League",
-    "match": "Ferencvaros vs Villach",
+    "league": "Championship",
+    "match": "Beibarys Atyrau vs Karaganda",
     "tip": "Over 5.5",
-    "odds": "1.88",
+    "odds": "3.2",
     "qualified15": true
   },
   {
-    "league": "Champions League",
-    "match": "Pardubice vs SaiPa",
+    "league": "National League",
+    "match": "Lausanne vs Zurich",
     "tip": "Over 5.5",
-    "odds": "1.82",
+    "odds": "1.85",
     "qualified15": true
   }
 ]
