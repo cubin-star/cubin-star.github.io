@@ -1,24 +1,24 @@
 [
   {
-    "League": "Cup",
-    "Match": "Dubočica vs Radnicki NIS",
+    "League": "Birinci Dasta",
+    "Match": "MOIK vs Səbail",
     "Tip": "Over 2.5",
-    "Odds": "1.90",
-    "Date": "2026-11-18T15:00:00+00:00"
+    "Odds": "1.85",
+    "Date": "2026-11-19T10:00:00+00:00"
   },
   {
-    "League": "2. Lig",
-    "Match": "Serik Spor vs 24 Erzincanspor",
+    "League": "Ligue 3",
+    "Match": "Amiens vs Caen",
     "Tip": "Over 2.5",
-    "Odds": "1.75",
-    "Date": "2026-11-18T10:00:00+00:00"
+    "Odds": "1.95",
+    "Date": "2026-11-19T19:45:00+00:00"
   },
   {
     "League": "ASEAN Club Championship",
-    "Match": "Pusamania Borneo vs Manila Digger",
+    "Match": "Svay Rieng vs Port FC",
     "Tip": "Over 2.5",
-    "Odds": "1.75",
-    "Date": "2026-11-18T12:00:00+00:00",
+    "Odds": "1.90",
+    "Date": "2026-11-19T12:00:00+00:00",
     "locked": true
   }
 ]
