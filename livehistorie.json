@@ -1,6 +1,27 @@
 [
   {
     "league": "Serie A",
+    "homeTeam": "Vitoria",
+    "awayTeam": "RB Bragantino",
+    "tip": "Over 2.5",
+    "odds": "",
+    "halftimeScore": "2:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-11-19T22:30:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 2:0 | xG: 1.35 | Shots: 15/5 | winXG: 0.99 | losingXG: 0.36 losingSOT: 2 | @HT | Pre O2.5: 1.815",
+    "apiFixtureId": 1492459,
+    "tipSource": "A+C",
+    "tipEvalA": true,
+    "tipEvalB": false,
+    "tipEvalC": true
+  },
+  {
+    "league": "Serie A",
     "homeTeam": "Remo",
     "awayTeam": "Chapecoense-sc",
     "tip": "Over 2.5",
