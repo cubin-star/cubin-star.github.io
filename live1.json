@@ -1,44 +1,9 @@
 [
   {
-    "league": "Cup",
-    "match": "Zemun - Radnicki 1923",
-    "kickoff": "2026-11-18T18:30:00+01:00",
+    "league": "Serie A",
+    "match": "Sao Paulo - Fluminense",
+    "kickoff": "2026-11-20T01:30:00+01:00",
     "tip": "Over 2.5",
-    "odds": "2.29"
-  },
-  {
-    "league": "Copa del Rey",
-    "match": "Alcoyano - Mallorca",
-    "kickoff": "2026-11-18T20:00:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "1.95"
-  },
-  {
-    "league": "Copa del Rey",
-    "match": "Badajoz - Tenerife",
-    "kickoff": "2026-11-18T20:00:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "1.98"
-  },
-  {
-    "league": "Copa del Rey",
-    "match": "Deportiva Minera - FC Cartagena",
-    "kickoff": "2026-11-18T20:30:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.31"
-  },
-  {
-    "league": "Copa del Rey",
-    "match": "Portugalete - Real Unión",
-    "kickoff": "2026-11-18T19:00:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.08"
-  },
-  {
-    "league": "Copa del Rey",
-    "match": "Reddis - Barakaldo",
-    "kickoff": "2026-11-18T20:30:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.19"
+    "odds": "2.15"
   }
 ]
