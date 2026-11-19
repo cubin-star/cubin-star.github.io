@@ -1,6 +1,27 @@
 [
   {
     "league": "Serie A",
+    "homeTeam": "Vasco DA Gama",
+    "awayTeam": "Internacional",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "1:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-11-19T22:30:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 1:0 | xG: 0.67 | Shots: 10/2 | winXG: 0.53 | losingXG: 0.14 losingSOT: 0 | @HT | Pre O2.5: 1.73",
+    "apiFixtureId": 1492458,
+    "tipSource": "B",
+    "tipEvalA": false,
+    "tipEvalB": true,
+    "tipEvalC": false
+  },
+  {
+    "league": "Serie A",
     "homeTeam": "Vitoria",
     "awayTeam": "RB Bragantino",
     "tip": "Over 2.5",
