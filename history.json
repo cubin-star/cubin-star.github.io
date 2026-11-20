@@ -1,5 +1,45 @@
 [
   {
+    "sport": "hockey",
+    "league": "NHL",
+    "match": "Ottawa Senators vs Philadelphia Flyers",
+    "tip": "Over 3.5",
+    "odds": "1.18",
+    "date": "2026-11-20T00:00:00+00:00",
+    "score": "5:6",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "Serie A",
+    "match": "Vasco DA Gama vs Internacional",
+    "tip": "Over 1.5",
+    "odds": "1.22",
+    "date": "2026-11-19T22:30:00+00:00",
+    "score": "2:1",
+    "result": "✓"
+  },
+  {
+    "sport": "basketball",
+    "league": "NBB",
+    "match": "Unifacisa vs Flamengo",
+    "tip": "Over 149.5",
+    "odds": "1.28",
+    "date": "2026-11-19T22:00:00+00:00",
+    "score": "102:79",
+    "result": "✓"
+  },
+  {
+    "sport": "hockey",
+    "league": "SHL",
+    "match": "Linkoping vs HV 71",
+    "tip": "Over 3.5",
+    "odds": "1.24",
+    "date": "2026-11-19T18:00:00+00:00",
+    "score": "3:1",
+    "result": "✓"
+  },
+  {
     "sport": "football",
     "league": "Serie A",
     "match": "Cruzeiro vs Palmeiras",
@@ -1958,45 +1998,5 @@
     "date": "2026-09-14T19:45:00+00:00",
     "score": "1:0",
     "result": "✗"
-  },
-  {
-    "sport": "football",
-    "league": "Süper Lig",
-    "match": "Gaziantep FK vs Fenerbahçe",
-    "tip": "Over 1.5",
-    "odds": "1.21",
-    "date": "2026-09-14T17:00:00+00:00",
-    "score": "0:0",
-    "result": "✗"
-  },
-  {
-    "sport": "basketball",
-    "league": "Champions League",
-    "match": "Breogan vs Rilski Sportist",
-    "tip": "Over 163.5",
-    "odds": "1.30",
-    "date": "2026-09-14T15:45:00+00:00",
-    "score": "126:80",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Primeira Liga",
-    "match": "Famalicao vs Sporting CP",
-    "tip": "Over 1.5",
-    "odds": "1.24",
-    "date": "2026-09-13T19:30:00+00:00",
-    "score": "1:1",
-    "result": "✓"
-  },
-  {
-    "sport": "hockey",
-    "league": "Champions League",
-    "match": "Fribourg vs Adler Mannheim",
-    "tip": "Over 3.5",
-    "odds": "1.19",
-    "date": "2026-09-13T12:00:00+00:00",
-    "score": "3:4",
-    "result": "✓"
   }
 ]
