@@ -1,16 +1,16 @@
 [
   {
-    "league": "Championship",
-    "match": "Beibarys Atyrau vs Karaganda",
+    "league": "Extraliga",
+    "match": "Mountfield HK vs Kladno",
     "tip": "Over 5.5",
-    "odds": "3.2",
+    "odds": "2.02",
     "qualified15": true
   },
   {
-    "league": "National League",
-    "match": "Lausanne vs Zurich",
+    "league": "Swiss League",
+    "match": "Olten vs Sierre",
     "tip": "Over 5.5",
-    "odds": "1.85",
+    "odds": "3.0",
     "qualified15": true
   }
 ]
