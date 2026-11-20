@@ -1,24 +1,24 @@
 [
   {
-    "League": "Birinci Dasta",
-    "Match": "MOIK vs Səbail",
+    "League": "Ligue 1",
+    "Match": "Estac Troyes vs Le Havre",
     "Tip": "Over 2.5",
-    "Odds": "1.85",
-    "Date": "2026-11-19T10:00:00+00:00"
+    "Odds": "1.94",
+    "Date": "2026-11-20T19:45:00+00:00"
   },
   {
-    "League": "Ligue 3",
-    "Match": "Amiens vs Caen",
+    "League": "1. Lig",
+    "Match": "Iğdır FK vs Ümraniyespor",
     "Tip": "Over 2.5",
-    "Odds": "1.95",
-    "Date": "2026-11-19T19:45:00+00:00"
+    "Odds": "1.92",
+    "Date": "2026-11-20T17:00:00+00:00"
   },
   {
-    "League": "ASEAN Club Championship",
-    "Match": "Svay Rieng vs Port FC",
+    "League": "La Liga",
+    "Match": "Athletic Club vs Espanyol",
     "Tip": "Over 2.5",
-    "Odds": "1.90",
-    "Date": "2026-11-19T12:00:00+00:00",
+    "Odds": "1.92",
+    "Date": "2026-11-20T20:00:00+00:00",
     "locked": true
   }
 ]
