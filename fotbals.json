@@ -1,9 +1,16 @@
 [
   {
-    "League": "J1 League",
-    "Match": "Machida Zelvia vs V-varen Nagasaki",
+    "League": "Ekstraklasa",
+    "Match": "Zaglebie Lubin vs Gornik Zabrze",
     "Tip": "Over 1.5",
-    "Odds": "1.25",
-    "Date": "2026-11-21T05:00:00+00:00"
+    "Odds": "1.32",
+    "Date": "2026-11-21T16:30:00+00:00"
+  },
+  {
+    "League": "Czech Liga",
+    "Match": "Bohemians 1905 vs Plzen",
+    "Tip": "Over 1.5",
+    "Odds": "1.22",
+    "Date": "2026-11-21T17:00:00+00:00"
   }
 ]

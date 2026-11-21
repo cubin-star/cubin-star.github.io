@@ -1,58 +1,114 @@
 [
   {
-    "League": "J1 League",
-    "Match": "Kashiwa Reysol vs JEF United Chiba",
-    "Tip": "Over 1.5",
-    "Odds": "1.18",
-    "Date": "2026-11-20T10:00:00+00:00"
-  },
-  {
-    "League": "Pro League",
-    "Match": "Al-Ittihad Kalba vs Sharjah FC",
-    "Tip": "Over 1.5",
-    "Odds": "1.24",
-    "Date": "2026-11-20T12:45:00+00:00"
-  },
-  {
-    "League": "Pro League",
-    "Match": "Shabab Al Ahli Dubai vs Ajman",
-    "Tip": "Over 1.5",
-    "Odds": "1.12",
-    "Date": "2026-11-20T15:25:00+00:00"
-  },
-  {
-    "League": "2. SNL",
-    "Match": "Dravinja vs Ilirija",
+    "League": "Júniores U19",
+    "Match": "SC Farense U19 vs Santa Clara U19",
     "Tip": "Over 1.5",
     "Odds": "1.19",
-    "Date": "2026-11-20T16:00:00+00:00"
+    "Date": "2026-11-21T11:00:00+00:00"
   },
   {
-    "League": "FNL",
-    "Match": "Táborsko vs Slavia Praha II",
-    "Tip": "Over 1.5",
-    "Odds": "1.16",
-    "Date": "2026-11-20T16:00:00+00:00"
-  },
-  {
-    "League": "Superliga",
-    "Match": "Aarhus vs Lyngby",
-    "Tip": "Over 1.5",
-    "Odds": "1.16",
-    "Date": "2026-11-20T18:00:00+00:00"
-  },
-  {
-    "League": "Challenger Pro League",
-    "Match": "Club Brugge II vs Excelsior Virton",
-    "Tip": "Over 1.5",
-    "Odds": "1.15",
-    "Date": "2026-11-20T19:00:00+00:00"
-  },
-  {
-    "League": "Premier League",
-    "Match": "Llandudno vs Barry Town",
+    "League": "1. Division",
+    "Match": "Vejle vs HB Koge",
     "Tip": "Over 1.5",
     "Odds": "1.14",
-    "Date": "2026-11-20T19:45:00+00:00"
+    "Date": "2026-11-21T12:30:00+00:00"
+  },
+  {
+    "League": "Division 1",
+    "Match": "Forte Virtus vs Gulf United",
+    "Tip": "Over 1.5",
+    "Odds": "1.15",
+    "Date": "2026-11-21T12:45:00+00:00"
+  },
+  {
+    "League": "Tweede Divisie",
+    "Match": "Hoek vs GVVV Veenendaal",
+    "Tip": "Over 1.5",
+    "Odds": "1.12",
+    "Date": "2026-11-21T13:30:00+00:00"
+  },
+  {
+    "League": "FAW Championship",
+    "Match": "Holyhead Hotspur vs Bala Town",
+    "Tip": "Over 1.5",
+    "Odds": "1.16",
+    "Date": "2026-11-21T14:00:00+00:00"
+  },
+  {
+    "League": "2. Liga",
+    "Match": "Sturm Graz II vs SKU Amstetten",
+    "Tip": "Over 1.5",
+    "Odds": "1.13",
+    "Date": "2026-11-21T14:30:00+00:00"
+  },
+  {
+    "League": "League Two",
+    "Match": "Spartans vs Dumbarton",
+    "Tip": "Over 1.5",
+    "Odds": "1.13",
+    "Date": "2026-11-21T15:00:00+00:00"
+  },
+  {
+    "League": "League One",
+    "Match": "Burton Albion vs Luton",
+    "Tip": "Over 1.5",
+    "Odds": "1.18",
+    "Date": "2026-11-21T15:00:00+00:00"
+  },
+  {
+    "League": "League One",
+    "Match": "Mansfield Town vs Milton Keynes Dons",
+    "Tip": "Over 1.5",
+    "Odds": "1.19",
+    "Date": "2026-11-21T15:00:00+00:00"
+  },
+  {
+    "League": "Non League Premier - Northern",
+    "Match": "United of Manchester vs Rylands",
+    "Tip": "Over 1.5",
+    "Odds": "1.14",
+    "Date": "2026-11-21T15:00:00+00:00"
+  },
+  {
+    "League": "Non League Premier - Southern Central",
+    "Match": "Hitchin Town vs Anstey Nomads",
+    "Tip": "Over 1.5",
+    "Odds": "1.13",
+    "Date": "2026-11-21T15:00:00+00:00"
+  },
+  {
+    "League": "1. Division",
+    "Match": "Aris vs Nea Salamis",
+    "Tip": "Over 1.5",
+    "Odds": "1.20",
+    "Date": "2026-11-21T17:00:00+00:00"
+  },
+  {
+    "League": "Ligue 1",
+    "Match": "Strasbourg vs Stade Brestois 29",
+    "Tip": "Over 1.5",
+    "Odds": "1.20",
+    "Date": "2026-11-21T19:45:00+00:00"
+  },
+  {
+    "League": "Primera División",
+    "Match": "ABB vs Aurora",
+    "Tip": "Over 1.5",
+    "Odds": "1.15",
+    "Date": "2026-11-21T21:15:00+00:00"
+  },
+  {
+    "League": "Liga MX",
+    "Match": "Tigres UANL vs Club America",
+    "Tip": "Over 1.5",
+    "Odds": "1.19",
+    "Date": "2026-11-22T03:00:00+00:00"
+  },
+  {
+    "League": "Australian Championship",
+    "Match": "Avondale vs Wests APIA",
+    "Tip": "Over 1.5",
+    "Odds": "1.13",
+    "Date": "2026-11-22T04:00:00+00:00"
   }
 ]
