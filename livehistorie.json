@@ -1,5 +1,26 @@
 [
   {
+    "league": "Ligue 1",
+    "homeTeam": "Lens",
+    "awayTeam": "Toulouse",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "0:1",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-11-21T19:45:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 0:1 | xG: 0.92 | Shots: 10/5 | winXG: 0.59 | losingXG: 0.33 losingSOT: 3 | @HT | Pre O2.5: 1.8",
+    "apiFixtureId": 1552819,
+    "tipSource": "B",
+    "tipEvalA": false,
+    "tipEvalB": true,
+    "tipEvalC": false
+  },
+  {
     "league": "Primera División",
     "homeTeam": "Real Tomayapo",
     "awayTeam": "Nacional Potosí",
