@@ -1,5 +1,26 @@
 [
   {
+    "league": "Serie B",
+    "homeTeam": "Empoli",
+    "awayTeam": "Pisa",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "0:1",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-11-21T18:30:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 0:1 | xG: 1.33 | Shots: 17/4 | winXG: 0.94 | losingXG: 0.39 losingSOT: 2 | @HT | Pre O2.5: 1.71",
+    "apiFixtureId": 1601608,
+    "tipSource": "B+C",
+    "tipEvalA": false,
+    "tipEvalB": true,
+    "tipEvalC": true
+  },
+  {
     "league": "Premier League",
     "homeTeam": "Bournemouth",
     "awayTeam": "Nottingham Forest",
