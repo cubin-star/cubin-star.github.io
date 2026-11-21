@@ -1,58 +1,58 @@
 [
   {
-    "fixtureId": 1648184,
-    "league": "Cup",
-    "match": "Al Wihdat - Al Arabi",
-    "kickoff": "2026-11-20T17:00:00+01:00",
+    "fixtureId": 1548565,
+    "league": "HNL",
+    "match": "Rudes - NK Varazdin",
+    "kickoff": "2026-11-21T18:00:00+01:00",
     "tip": "Over 2.5",
+    "odds": "1.95"
+  },
+  {
+    "fixtureId": 1570034,
+    "league": "Segunda División",
+    "match": "Sabadell - Granada CF",
+    "kickoff": "2026-11-21T14:00:00+01:00",
+    "tip": "Over 2.5",
+    "odds": "2.30"
+  },
+  {
+    "fixtureId": 1563265,
+    "league": "Championship",
+    "match": "Lincoln - Wrexham",
+    "kickoff": "2026-11-21T16:00:00+01:00",
+    "tip": "Over 2.5",
+    "odds": "2.20"
+  },
+  {
+    "fixtureId": 1593708,
+    "league": "A-League",
+    "match": "Wellington Phoenix - Macarthur",
+    "kickoff": "2026-11-22T03:00:00+01:00",
+    "tip": "Home win",
+    "odds": "1.89"
+  },
+  {
+    "fixtureId": 1649591,
+    "league": "Persian Gulf Pro League",
+    "match": "Nassaji Mazandaran - Aluminium Arak",
+    "kickoff": "2026-11-21T13:45:00+01:00",
+    "tip": "Away win",
     "odds": "2.24"
   },
   {
-    "fixtureId": 1559425,
-    "league": "Second League",
-    "match": "Kom - Zeta",
-    "kickoff": "2026-11-20T13:00:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.02"
-  },
-  {
-    "fixtureId": 1633935,
-    "league": "V.League 1",
-    "match": "Thanh Hóa - Hoang Anh Gia Lai",
-    "kickoff": "2026-11-20T11:00:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "1.97"
-  },
-  {
-    "fixtureId": 1556149,
-    "league": "J1 League",
-    "match": "Tokyo Verdy - Nagoya Grampus",
-    "kickoff": "2026-11-21T06:00:00+01:00",
-    "tip": "Away win",
-    "odds": "2.19"
-  },
-  {
-    "fixtureId": 1551888,
-    "league": "Eerste Divisie",
-    "match": "De Graafschap - MVV",
-    "kickoff": "2026-11-20T20:00:00+01:00",
+    "fixtureId": 1576240,
+    "league": "2. Bundesliga",
+    "match": "FC St. Pauli - VfL Bochum",
+    "kickoff": "2026-11-21T20:30:00+01:00",
     "tip": "Home win",
-    "odds": "1.85"
+    "odds": "2.10"
   },
   {
-    "fixtureId": 1553230,
-    "league": "Ekstraklasa",
-    "match": "Pogon Szczecin - Slask Wroclaw",
-    "kickoff": "2026-11-20T20:30:00+01:00",
+    "fixtureId": 1494337,
+    "league": "Allsvenskan",
+    "match": "AIK Stockholm - Degerfors IF",
+    "kickoff": "2026-11-21T15:00:00+01:00",
     "tip": "Home win",
-    "odds": "1.78"
-  },
-  {
-    "fixtureId": 1552534,
-    "league": "Ligue 2",
-    "match": "Metz - Boulogne",
-    "kickoff": "2026-11-20T20:00:00+01:00",
-    "tip": "Home win",
-    "odds": "2.14"
+    "odds": "2.07"
   }
 ]

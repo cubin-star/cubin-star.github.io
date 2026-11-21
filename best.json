@@ -1,23 +1,23 @@
 [
   {
-    "league": "First League",
-    "match": "Septemvri Sofia - Lokomotiv Plovdiv",
-    "kickoff": "2026-11-20T17:00:00+01:00",
+    "league": "Taça de Portugal",
+    "match": "AVS - Tondela",
+    "kickoff": "2026-11-21T16:00:00+01:00",
     "tip": "Over 2.5",
-    "odds": "2.35"
+    "odds": "2.25"
   },
   {
-    "league": "Primera A",
-    "match": "Bucaramanga - America de Cali",
-    "kickoff": "2026-11-21T00:35:00+01:00",
+    "league": "Ligue 1",
+    "match": "Lille - Lyon",
+    "kickoff": "2026-11-21T20:45:00+01:00",
     "tip": "Over 2.5",
-    "odds": "2.20"
+    "odds": "2.10"
   },
   {
-    "league": "J2 League",
-    "match": "Blaublitz Akita - Montedio Yamagata",
-    "kickoff": "2026-11-21T06:00:00+01:00",
+    "league": "Allsvenskan",
+    "match": "Ostersunds FK - Varbergs BoIS FC",
+    "kickoff": "2026-11-21T13:00:00+01:00",
     "tip": "Over 2.5",
-    "odds": "2.15"
+    "odds": "2.08"
   }
 ]
