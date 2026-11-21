@@ -1,5 +1,26 @@
 [
   {
+    "league": "Premier League",
+    "homeTeam": "Bournemouth",
+    "awayTeam": "Nottingham Forest",
+    "tip": "Over 2.5",
+    "odds": "",
+    "halftimeScore": "2:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-11-21T15:00:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 2:0 | xG: 1.72 | Shots: 18/5 | winXG: 1.25 | losingXG: 0.47 losingSOT: 0 | @HT | Pre O2.5: 2.01",
+    "apiFixtureId": 1557468,
+    "tipSource": "A",
+    "tipEvalA": true,
+    "tipEvalB": false,
+    "tipEvalC": false
+  },
+  {
     "league": "Czech Liga",
     "homeTeam": "Baník Ostrava",
     "awayTeam": "Teplice",
