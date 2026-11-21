@@ -1,11 +1,11 @@
 [
   {
-    "league": "Ligue 1",
-    "homeTeam": "Lens",
-    "awayTeam": "Toulouse",
-    "tip": "Over 1.5",
+    "league": "Jupiler Pro League",
+    "homeTeam": "Zulte Waregem",
+    "awayTeam": "Antwerp",
+    "tip": "Over 2.5",
     "odds": "",
-    "halftimeScore": "0:1",
+    "halftimeScore": "0:2",
     "liveOdds": "",
     "finalScore": "",
     "result": "",
@@ -13,11 +13,11 @@
     "kickoff": "2026-11-21T19:45:00.000Z",
     "resolvedAt": "",
     "source": "whisper-football",
-    "scoutStats": "Whisper xG-rate surge | HT 0:1 | xG: 0.92 | Shots: 10/5 | winXG: 0.59 | losingXG: 0.33 losingSOT: 3 | @HT | Pre O2.5: 1.8",
-    "apiFixtureId": 1552819,
-    "tipSource": "B",
-    "tipEvalA": false,
-    "tipEvalB": true,
+    "scoutStats": "Whisper xG-rate surge | HT 0:2 | xG: 0.96 | Shots: 9/3 | winXG: 0.37 | losingXG: 0.59 losingSOT: 2 | @HT | Pre O2.5: 1.81",
+    "apiFixtureId": 1558688,
+    "tipSource": "A",
+    "tipEvalA": true,
+    "tipEvalB": false,
     "tipEvalC": false
   },
   {
