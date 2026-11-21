@@ -1,5 +1,26 @@
 [
   {
+    "league": "2. Bundesliga",
+    "homeTeam": "FC St. Pauli",
+    "awayTeam": "VfL Bochum",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "1:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-11-21T19:30:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 1:0 | xG: 1.33 | Shots: 13/5 | winXG: 0.48 | losingXG: 0.85 losingSOT: 3 | @HT | Pre O2.5: 1.725",
+    "apiFixtureId": 1576240,
+    "tipSource": "B",
+    "tipEvalA": false,
+    "tipEvalB": true,
+    "tipEvalC": false
+  },
+  {
     "league": "Primera División",
     "homeTeam": "Real Tomayapo",
     "awayTeam": "Nacional Potosí",
