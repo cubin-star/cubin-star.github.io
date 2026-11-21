@@ -1,6 +1,16 @@
 [
   {
     "sport": "hockey",
+    "league": "Extraliga",
+    "match": "Litvinov vs Trinec",
+    "tip": "Over 3.5",
+    "odds": "1.26",
+    "date": "2026-11-20T16:30:00+00:00",
+    "score": "5:2",
+    "result": "✓"
+  },
+  {
+    "sport": "hockey",
     "league": "NHL",
     "match": "Ottawa Senators vs Philadelphia Flyers",
     "tip": "Over 3.5",
@@ -1988,15 +1998,5 @@
     "date": "2026-09-15T17:00:00+00:00",
     "score": "2:1",
     "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Primeira Liga",
-    "match": "SC Braga vs Estoril",
-    "tip": "Over 1.5",
-    "odds": "1.20",
-    "date": "2026-09-14T19:45:00+00:00",
-    "score": "1:0",
-    "result": "✗"
   }
 ]
