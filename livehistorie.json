@@ -1,5 +1,26 @@
 [
   {
+    "league": "Primera División",
+    "homeTeam": "Real Tomayapo",
+    "awayTeam": "Nacional Potosí",
+    "tip": "Over 2.5",
+    "odds": "",
+    "halftimeScore": "0:2",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-11-21T19:00:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 0:2 | xG: 1.38 | Shots: 15/5 | winXG: 1.05 | losingXG: 0.33 losingSOT: 2 | @HT | Pre O2.5: 1.65",
+    "apiFixtureId": 1645542,
+    "tipSource": "A",
+    "tipEvalA": true,
+    "tipEvalB": false,
+    "tipEvalC": false
+  },
+  {
     "league": "Serie B",
     "homeTeam": "Empoli",
     "awayTeam": "Pisa",
