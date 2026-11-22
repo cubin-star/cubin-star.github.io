@@ -1,5 +1,26 @@
 [
   {
+    "league": "NB I",
+    "homeTeam": "Nyiregyhaza",
+    "awayTeam": "Debreceni VSC",
+    "tip": "Over 2.5",
+    "odds": "",
+    "halftimeScore": "0:2",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-11-22T15:00:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 0:2 | xG: 0.98 | Shots: 10/5 | winXG: 0.74 | losingXG: 0.24 losingSOT: 3 | @HT | Pre O2.5: 1.62",
+    "apiFixtureId": 1560281,
+    "tipSource": "A",
+    "tipEvalA": true,
+    "tipEvalB": false,
+    "tipEvalC": false
+  },
+  {
     "league": "Serie A",
     "homeTeam": "Bologna",
     "awayTeam": "Udinese",
