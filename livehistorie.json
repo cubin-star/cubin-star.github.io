@@ -1,5 +1,26 @@
 [
   {
+    "league": "Allsvenskan",
+    "homeTeam": "Sirius",
+    "awayTeam": "Djurgardens IF",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "1:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-11-22T13:00:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 1:0 | xG: 1.35 | Shots: 11/2 | winXG: 0.42 | losingXG: 0.93 losingSOT: 0 | @HT | Pre O2.5: 1.71",
+    "apiFixtureId": 1494344,
+    "tipSource": "B",
+    "tipEvalA": false,
+    "tipEvalB": true,
+    "tipEvalC": false
+  },
+  {
     "league": "1. Lig",
     "homeTeam": "Batman Petrolspor",
     "awayTeam": "Muğlaspor",
