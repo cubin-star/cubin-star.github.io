@@ -1,5 +1,26 @@
 [
   {
+    "league": "La Liga",
+    "homeTeam": "Getafe",
+    "awayTeam": "Atletico Madrid",
+    "tip": "Over 2.5",
+    "odds": "",
+    "halftimeScore": "0:2",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-11-22T20:00:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 0:2 | xG: 2.75 | Shots: 16/8 | winXG: 2.47 | losingXG: 0.28 losingSOT: 1 | @HT | Pre O2.5: 2.2",
+    "apiFixtureId": 1570456,
+    "tipSource": "A",
+    "tipEvalA": true,
+    "tipEvalB": false,
+    "tipEvalC": false
+  },
+  {
     "league": "Serie A",
     "homeTeam": "Atletico Paranaense",
     "awayTeam": "Remo",
