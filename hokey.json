@@ -1,16 +1,14 @@
 [
   {
-    "league": "MySports League",
-    "match": "EHC Frauenfeld vs Huttwil",
+    "league": "Extraliga",
+    "match": "Pardubice vs Sparta Prague",
     "tip": "Over 5.5",
-    "odds": "1.85",
-    "qualified15": true
+    "odds": "1.88"
   },
   {
-    "league": "Swiss League",
-    "match": "Thurgau vs Visp",
+    "league": "Extraliga",
+    "match": "Liberec vs Mlada Boleslav",
     "tip": "Over 5.5",
-    "odds": "2.09",
-    "qualified15": true
+    "odds": "2.15"
   }
 ]
