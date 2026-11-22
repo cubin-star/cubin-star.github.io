@@ -1,6 +1,56 @@
 [
   {
     "sport": "hockey",
+    "league": "National League",
+    "match": "Ajoie vs Fribourg",
+    "tip": "Over 3.5",
+    "odds": "1.19",
+    "date": "2026-11-21T18:45:00+00:00",
+    "score": "2:1",
+    "result": "✗"
+  },
+  {
+    "sport": "football",
+    "league": "Czech Liga",
+    "match": "Bohemians 1905 vs Plzen",
+    "tip": "Over 1.5",
+    "odds": "1.22",
+    "date": "2026-11-21T17:00:00+00:00",
+    "score": "1:2",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "Ekstraklasa",
+    "match": "Zaglebie Lubin vs Gornik Zabrze",
+    "tip": "Over 1.5",
+    "odds": "1.32",
+    "date": "2026-11-21T16:30:00+00:00",
+    "score": "2:0",
+    "result": "✓"
+  },
+  {
+    "sport": "basketball",
+    "league": "NBL",
+    "match": "Melbourne United vs New Zealand Breakers",
+    "tip": "Over 173.5",
+    "odds": "1.20",
+    "date": "2026-11-21T08:30:00+00:00",
+    "score": "94:91",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "J1 League",
+    "match": "Machida Zelvia vs V-varen Nagasaki",
+    "tip": "Over 1.5",
+    "odds": "1.25",
+    "date": "2026-11-21T05:00:00+00:00",
+    "score": "0:0",
+    "result": "✗"
+  },
+  {
+    "sport": "hockey",
     "league": "Extraliga",
     "match": "Litvinov vs Trinec",
     "tip": "Over 3.5",
@@ -1948,55 +1998,5 @@
     "date": "2026-09-17T17:00:00+00:00",
     "score": "2:1",
     "result": "✗"
-  },
-  {
-    "sport": "football",
-    "league": "UEFA Europa League",
-    "match": "Ararat-Armenia vs Sparta Praha",
-    "tip": "Over 1.5",
-    "odds": "1.20",
-    "date": "2026-09-16T16:45:00+00:00",
-    "score": "1:4",
-    "result": "✓"
-  },
-  {
-    "sport": "hockey",
-    "league": "Liiga",
-    "match": "IFK Helsinki vs Jukurit",
-    "tip": "Over 3.5",
-    "odds": "1.27",
-    "date": "2026-09-16T15:30:00+00:00",
-    "score": "4:7",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Ekstraklasa",
-    "match": "Korona Kielce vs Gornik Zabrze",
-    "tip": "Over 1.5",
-    "odds": "1.26",
-    "date": "2026-09-15T18:30:00+00:00",
-    "score": "0:2",
-    "result": "✓"
-  },
-  {
-    "sport": "hockey",
-    "league": "National League",
-    "match": "Lausanne vs Zug",
-    "tip": "Over 3.5",
-    "odds": "1.34",
-    "date": "2026-09-15T17:45:00+00:00",
-    "score": "0:5",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "La Liga",
-    "match": "Rayo Vallecano vs Espanyol",
-    "tip": "Over 1.5",
-    "odds": "1.28",
-    "date": "2026-09-15T17:00:00+00:00",
-    "score": "2:1",
-    "result": "✓"
   }
 ]
