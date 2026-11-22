@@ -1,5 +1,26 @@
 [
   {
+    "league": "Serie A",
+    "homeTeam": "Sassuolo",
+    "awayTeam": "Genoa",
+    "tip": "Over 2.5",
+    "odds": "",
+    "halftimeScore": "0:2",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-11-22T14:00:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 0:2 | xG: 2.38 | Shots: 14/7 | winXG: 1.74 | losingXG: 0.64 losingSOT: 3 | @HT | Pre O2.5: 1.9449999999999998",
+    "apiFixtureId": 1550206,
+    "tipSource": "A",
+    "tipEvalA": true,
+    "tipEvalB": false,
+    "tipEvalC": false
+  },
+  {
     "league": "Allsvenskan",
     "homeTeam": "Sirius",
     "awayTeam": "Djurgardens IF",
