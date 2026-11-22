@@ -1,11 +1,11 @@
 [
   {
-    "league": "Serie A",
-    "homeTeam": "Sassuolo",
-    "awayTeam": "Genoa",
-    "tip": "Over 2.5",
+    "league": "Serie B",
+    "homeTeam": "Avellino",
+    "awayTeam": "Mantova",
+    "tip": "Over 3.5",
     "odds": "",
-    "halftimeScore": "0:2",
+    "halftimeScore": "2:1",
     "liveOdds": "",
     "finalScore": "",
     "result": "",
@@ -13,12 +13,12 @@
     "kickoff": "2026-11-22T14:00:00.000Z",
     "resolvedAt": "",
     "source": "whisper-football",
-    "scoutStats": "Whisper xG-rate surge | HT 0:2 | xG: 2.38 | Shots: 14/7 | winXG: 1.74 | losingXG: 0.64 losingSOT: 3 | @HT | Pre O2.5: 1.9449999999999998",
-    "apiFixtureId": 1550206,
-    "tipSource": "A",
-    "tipEvalA": true,
+    "scoutStats": "Whisper xG-rate surge | HT 2:1 | xG: 1.63 | Shots: 17/10 | winXG: 0.84 | losingXG: 0.79 losingSOT: 6 | @HT | Pre O2.5: 1.88",
+    "apiFixtureId": 1601605,
+    "tipSource": "C",
+    "tipEvalA": false,
     "tipEvalB": false,
-    "tipEvalC": false
+    "tipEvalC": true
   },
   {
     "league": "Allsvenskan",
