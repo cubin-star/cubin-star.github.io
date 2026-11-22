@@ -1,5 +1,26 @@
 [
   {
+    "league": "A-League",
+    "homeTeam": "Wellington Phoenix",
+    "awayTeam": "Macarthur",
+    "tip": "Over 2.5",
+    "odds": "",
+    "halftimeScore": "0:2",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-11-22T02:00:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 0:2 | xG: 0.91 | Shots: 9/6 | winXG: 0.58 | losingXG: 0.33 losingSOT: 3 | @HT | Pre O2.5: 1.71",
+    "apiFixtureId": 1593708,
+    "tipSource": "A",
+    "tipEvalA": true,
+    "tipEvalB": false,
+    "tipEvalC": false
+  },
+  {
     "league": "Jupiler Pro League",
     "homeTeam": "Zulte Waregem",
     "awayTeam": "Antwerp",
