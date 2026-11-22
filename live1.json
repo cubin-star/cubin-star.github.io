@@ -1,191 +1,107 @@
 [
   {
-    "league": "1. Lig",
-    "match": "Mardin 1969 - Bandırmaspor",
-    "kickoff": "2026-11-21T11:30:00+01:00",
+    "league": "Süper Lig",
+    "match": "Erzurumspor FK - Göztepe",
+    "kickoff": "2026-11-22T11:30:00+01:00",
     "tip": "Over 2.5",
-    "odds": "2.01"
+    "odds": "2.11"
   },
   {
-    "league": "First NL",
-    "match": "Bsk Bijelo Brdo - Dugopolje",
-    "kickoff": "2026-11-21T13:30:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "1.96"
-  },
-  {
-    "league": "First NL",
-    "match": "Dubrava Zagreb - Mladost Ždralovi",
-    "kickoff": "2026-11-21T13:30:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.03"
-  },
-  {
-    "league": "First NL",
-    "match": "Orijent 1919 - Sesvete",
-    "kickoff": "2026-11-21T12:00:00+01:00",
+    "league": "Taça de Portugal",
+    "match": "Estrela - Portimonense",
+    "kickoff": "2026-11-22T19:00:00+01:00",
     "tip": "Over 2.5",
     "odds": "2.02"
   },
   {
-    "league": "Taça de Portugal",
-    "match": "AVS - Tondela",
-    "kickoff": "2026-11-21T16:00:00+01:00",
+    "league": "Serie A",
+    "match": "Sassuolo - Genoa",
+    "kickoff": "2026-11-22T15:00:00+01:00",
     "tip": "Over 2.5",
-    "odds": "2.25"
+    "odds": "1.99"
   },
   {
-    "league": "Taça de Portugal",
-    "match": "Vitória SC - SC Braga",
-    "kickoff": "2026-11-21T21:30:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.10"
-  },
-  {
-    "league": "Super Liga",
-    "match": "Mladost Lucani - Železničar Pančevo",
-    "kickoff": "2026-11-21T15:00:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.03"
-  },
-  {
-    "league": "Allsvenskan",
-    "match": "Ostersunds FK - Varbergs BoIS FC",
-    "kickoff": "2026-11-21T13:00:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.08"
-  },
-  {
-    "league": "Championship",
-    "match": "Lincoln - Wrexham",
-    "kickoff": "2026-11-21T16:00:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.20"
-  },
-  {
-    "league": "Championship",
-    "match": "Stoke City - Birmingham",
-    "kickoff": "2026-11-21T16:00:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.20"
-  },
-  {
-    "league": "Championship",
-    "match": "Swansea - West Brom",
-    "kickoff": "2026-11-21T16:00:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.00"
-  },
-  {
-    "league": "Super League 2",
-    "match": "Larisa - Asteras Tripolis II",
-    "kickoff": "2026-11-21T13:45:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "1.95"
-  },
-  {
-    "league": "Super League 2",
-    "match": "Nestos Chrisoupolis - Ellas Syros",
-    "kickoff": "2026-11-21T14:00:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.22"
-  },
-  {
-    "league": "Super League 2",
-    "match": "Panthrakikos - Panionios",
-    "kickoff": "2026-11-21T14:00:00+01:00",
+    "league": "Segunda División",
+    "match": "Burgos - Albacete",
+    "kickoff": "2026-11-22T21:00:00+01:00",
     "tip": "Over 2.5",
     "odds": "2.12"
   },
   {
-    "league": "Liga I",
-    "match": "CFR 1907 Cluj - Oţelul",
-    "kickoff": "2026-11-21T16:30:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "1.95"
-  },
-  {
-    "league": "Liga I",
-    "match": "Csikszereda - Corvinul Hunedoara",
-    "kickoff": "2026-11-21T14:00:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "1.96"
-  },
-  {
     "league": "Segunda División",
-    "match": "Sabadell - Granada CF",
-    "kickoff": "2026-11-21T14:00:00+01:00",
+    "match": "Sporting Gijon - Las Palmas",
+    "kickoff": "2026-11-22T16:15:00+01:00",
     "tip": "Over 2.5",
-    "odds": "2.30"
-  },
-  {
-    "league": "Segunda División",
-    "match": "Tenerife - Mallorca",
-    "kickoff": "2026-11-21T21:00:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.27"
+    "odds": "1.98"
   },
   {
     "league": "La Liga",
-    "match": "Alaves - Deportivo La Coruna",
-    "kickoff": "2026-11-21T14:00:00+01:00",
+    "match": "Getafe - Atletico Madrid",
+    "kickoff": "2026-11-22T21:00:00+01:00",
     "tip": "Over 2.5",
-    "odds": "2.20"
+    "odds": "2.13"
   },
   {
     "league": "La Liga",
-    "match": "Rayo Vallecano - Valencia",
-    "kickoff": "2026-11-21T16:15:00+01:00",
+    "match": "Osasuna - Malaga",
+    "kickoff": "2026-11-22T18:30:00+01:00",
     "tip": "Over 2.5",
     "odds": "2.04"
   },
   {
-    "league": "Ekstraklasa",
-    "match": "Zaglebie Lubin - Gornik Zabrze",
-    "kickoff": "2026-11-21T17:30:00+01:00",
+    "league": "Ligue 1",
+    "match": "Lorient - Rennes",
+    "kickoff": "2026-11-22T17:15:00+01:00",
     "tip": "Over 2.5",
-    "odds": "2.05"
+    "odds": "2.02"
   },
   {
-    "league": "HNL",
-    "match": "Rudes - NK Varazdin",
-    "kickoff": "2026-11-21T18:00:00+01:00",
+    "league": "Segunda Liga",
+    "match": "Vizela - Feirense",
+    "kickoff": "2026-11-22T15:00:00+01:00",
+    "tip": "Over 2.5",
+    "odds": "2.20"
+  },
+  {
+    "league": "Super League 1",
+    "match": "Levadiakos - Atromitos",
+    "kickoff": "2026-11-22T15:00:00+01:00",
+    "tip": "Over 2.5",
+    "odds": "2.52"
+  },
+  {
+    "league": "Super League 1",
+    "match": "Panetolikos - Volos NFC",
+    "kickoff": "2026-11-22T16:00:00+01:00",
+    "tip": "Over 2.5",
+    "odds": "2.18"
+  },
+  {
+    "league": "Serie B",
+    "match": "Arezzo - Padova",
+    "kickoff": "2026-11-22T17:15:00+01:00",
+    "tip": "Over 2.5",
+    "odds": "2.06"
+  },
+  {
+    "league": "Serie B",
+    "match": "Avellino - Mantova",
+    "kickoff": "2026-11-22T15:00:00+01:00",
     "tip": "Over 2.5",
     "odds": "1.95"
   },
   {
-    "league": "1. SNL",
-    "match": "Mura - Bravo",
-    "kickoff": "2026-11-21T17:30:00+01:00",
+    "league": "Liga I",
+    "match": "Arges Pitesti - FCSB",
+    "kickoff": "2026-11-22T19:30:00+01:00",
     "tip": "Over 2.5",
-    "odds": "1.96"
+    "odds": "2.00"
   },
   {
-    "league": "Serie B",
-    "match": "Carrarese - Virtus Entella",
-    "kickoff": "2026-11-21T15:00:00+01:00",
+    "league": "Liga I",
+    "match": "Uta Arad - Universitatea Craiova",
+    "kickoff": "2026-11-22T16:30:00+01:00",
     "tip": "Over 2.5",
-    "odds": "2.20"
-  },
-  {
-    "league": "Serie B",
-    "match": "Sampdoria - Benevento",
-    "kickoff": "2026-11-21T15:00:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.07"
-  },
-  {
-    "league": "Serie B",
-    "match": "Sudtirol - Cremonese",
-    "kickoff": "2026-11-21T15:00:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.20"
-  },
-  {
-    "league": "Ligue 1",
-    "match": "Lille - Lyon",
-    "kickoff": "2026-11-21T20:45:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.10"
+    "odds": "2.02"
   }
 ]
