@@ -1,24 +1,24 @@
 [
   {
-    "League": "Süper Lig",
-    "Match": "Kasımpaşa vs Alanyaspor",
+    "League": "Premier League",
+    "Match": "Brentford vs Everton",
     "Tip": "Over 2.5",
-    "Odds": "1.94",
-    "Date": "2026-11-22T13:00:00+00:00"
+    "Odds": "1.89",
+    "Date": "2026-11-23T20:00:00+00:00"
   },
   {
-    "League": "Taça de Portugal",
-    "Match": "Vitória de Sernache vs Lusitânia Lourosa",
+    "League": "AFC Champions League Elite",
+    "Match": "Al Ain vs Esteghlal FC",
     "Tip": "Over 2.5",
-    "Odds": "1.78",
-    "Date": "2026-11-22T14:00:00+00:00"
+    "Odds": "1.82",
+    "Date": "2026-11-23T16:00:00+00:00"
   },
   {
-    "League": "Primera División RFEF - Group 1",
-    "Match": "Deportivo La Coruña II vs CD Coria",
+    "League": "1st Division",
+    "Match": "Kastrioti Krujë vs Besa Kavajë",
     "Tip": "Over 2.5",
-    "Odds": "1.75",
-    "Date": "2026-11-22T15:00:00+00:00",
+    "Odds": "1.85",
+    "Date": "2026-11-23T12:30:00+00:00",
     "locked": true
   }
 ]
