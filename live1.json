@@ -1,107 +1,51 @@
 [
   {
-    "league": "Süper Lig",
-    "match": "Erzurumspor FK - Göztepe",
-    "kickoff": "2026-11-22T11:30:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.11"
-  },
-  {
-    "league": "Taça de Portugal",
-    "match": "Estrela - Portimonense",
-    "kickoff": "2026-11-22T19:00:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.02"
-  },
-  {
-    "league": "Serie A",
-    "match": "Sassuolo - Genoa",
-    "kickoff": "2026-11-22T15:00:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "1.99"
-  },
-  {
-    "league": "Segunda División",
-    "match": "Burgos - Albacete",
-    "kickoff": "2026-11-22T21:00:00+01:00",
+    "league": "Super League 2",
+    "match": "PAOK II - Niki Volos",
+    "kickoff": "2026-11-23T14:00:00+01:00",
     "tip": "Over 2.5",
     "odds": "2.12"
   },
   {
-    "league": "Segunda División",
-    "match": "Sporting Gijon - Las Palmas",
-    "kickoff": "2026-11-22T16:15:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "1.98"
-  },
-  {
-    "league": "La Liga",
-    "match": "Getafe - Atletico Madrid",
-    "kickoff": "2026-11-22T21:00:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.13"
-  },
-  {
-    "league": "La Liga",
-    "match": "Osasuna - Malaga",
-    "kickoff": "2026-11-22T18:30:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.04"
-  },
-  {
-    "league": "Ligue 1",
-    "match": "Lorient - Rennes",
-    "kickoff": "2026-11-22T17:15:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.02"
-  },
-  {
-    "league": "Segunda Liga",
-    "match": "Vizela - Feirense",
-    "kickoff": "2026-11-22T15:00:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.20"
-  },
-  {
     "league": "Super League 1",
-    "match": "Levadiakos - Atromitos",
-    "kickoff": "2026-11-22T15:00:00+01:00",
+    "match": "Asteras Tripolis - Aris Thessalonikis",
+    "kickoff": "2026-11-23T16:00:00+01:00",
     "tip": "Over 2.5",
-    "odds": "2.52"
+    "odds": "2.21"
   },
   {
-    "league": "Super League 1",
-    "match": "Panetolikos - Volos NFC",
-    "kickoff": "2026-11-22T16:00:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.18"
-  },
-  {
-    "league": "Serie B",
-    "match": "Arezzo - Padova",
-    "kickoff": "2026-11-22T17:15:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.06"
-  },
-  {
-    "league": "Serie B",
-    "match": "Avellino - Mantova",
-    "kickoff": "2026-11-22T15:00:00+01:00",
+    "league": "1. Lig",
+    "match": "Bodrum FK - Vanspor FK",
+    "kickoff": "2026-11-23T18:00:00+01:00",
     "tip": "Over 2.5",
     "odds": "1.95"
   },
   {
+    "league": "1. Division",
+    "match": "Krasava Ypsonas - Anorthosis",
+    "kickoff": "2026-11-23T18:00:00+01:00",
+    "tip": "Over 2.5",
+    "odds": "2.05"
+  },
+  {
     "league": "Liga I",
-    "match": "Arges Pitesti - FCSB",
-    "kickoff": "2026-11-22T19:30:00+01:00",
+    "match": "Sepsi OSK Sfantu Gheorghe - Rapid",
+    "kickoff": "2026-11-23T19:00:00+01:00",
+    "tip": "Over 2.5",
+    "odds": "2.02"
+  },
+  {
+    "league": "Ligue 2",
+    "match": "Nantes - Grenoble",
+    "kickoff": "2026-11-23T20:45:00+01:00",
     "tip": "Over 2.5",
     "odds": "2.00"
   },
   {
-    "league": "Liga I",
-    "match": "Uta Arad - Universitatea Craiova",
-    "kickoff": "2026-11-22T16:30:00+01:00",
+    "league": "Serie A",
+    "match": "Botafogo - Sao Paulo",
+    "kickoff": "2026-11-24T00:00:00+01:00",
     "tip": "Over 2.5",
-    "odds": "2.02"
+    "odds": "1.96"
   }
 ]

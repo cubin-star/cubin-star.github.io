@@ -1,23 +1,23 @@
 [
   {
-    "league": "Super League 1",
-    "match": "Levadiakos - Atromitos",
-    "kickoff": "2026-11-22T15:00:00+01:00",
+    "league": "Ligue 2",
+    "match": "EM Mahdia - CS Chebba",
+    "kickoff": "2026-11-23T14:30:00+01:00",
     "tip": "Over 2.5",
-    "odds": "2.52"
+    "odds": "2.44"
   },
   {
-    "league": "Segunda Liga",
-    "match": "Vizela - Feirense",
-    "kickoff": "2026-11-22T15:00:00+01:00",
+    "league": "CAF Confederation Cup",
+    "match": "AC Douane - CR Belouizdad",
+    "kickoff": "2026-11-23T18:00:00+01:00",
     "tip": "Over 2.5",
-    "odds": "2.20"
+    "odds": "2.14"
   },
   {
-    "league": "Premijer Liga",
-    "match": "Čelik - Sloga Doboj",
-    "kickoff": "2026-11-22T15:00:00+01:00",
+    "league": "Super League 2",
+    "match": "PAOK II - Niki Volos",
+    "kickoff": "2026-11-23T14:00:00+01:00",
     "tip": "Over 2.5",
-    "odds": "2.20"
+    "odds": "2.12"
   }
 ]
