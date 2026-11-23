@@ -1,5 +1,26 @@
 [
   {
+    "league": "HNL",
+    "homeTeam": "NK Slaven Belupo",
+    "awayTeam": "NK Osijek",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "1:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-11-23T17:00:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 1:0 | xG: 1.11 | Shots: 9/2 | winXG: 0.78 | losingXG: 0.33 losingSOT: 1 | @HT | Pre O2.5: 1.64",
+    "apiFixtureId": 1548566,
+    "tipSource": "B",
+    "tipEvalA": false,
+    "tipEvalB": true,
+    "tipEvalC": false
+  },
+  {
     "league": "La Liga",
     "homeTeam": "Getafe",
     "awayTeam": "Atletico Madrid",
