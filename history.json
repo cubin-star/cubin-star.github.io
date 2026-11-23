@@ -1,5 +1,45 @@
 [
   {
+    "sport": "basketball",
+    "league": "LKL",
+    "match": "Lietkabelis vs Zalgiris Kaunas",
+    "tip": "Over 153.5",
+    "odds": "1.28",
+    "date": "2026-11-22T14:50:00+00:00",
+    "score": "94:123",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "Serie A",
+    "match": "Bologna vs Udinese",
+    "tip": "Over 1.5",
+    "odds": "1.27",
+    "date": "2026-11-22T14:00:00+00:00",
+    "score": "1:1",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "Serie D - Girone B",
+    "match": "Milan II vs Tritium",
+    "tip": "Over 1.5",
+    "odds": "1.23",
+    "date": "2026-11-22T13:30:00+00:00",
+    "score": "3:0",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "Tercera División RFEF - Group 7",
+    "match": "Galapagar vs Alcobendas Sport",
+    "tip": "Over 1.5",
+    "odds": "1.22",
+    "date": "2026-11-22T10:30:00+00:00",
+    "score": "1:1",
+    "result": "✓"
+  },
+  {
     "sport": "hockey",
     "league": "National League",
     "match": "Ajoie vs Fribourg",
@@ -1958,45 +1998,5 @@
     "date": "2026-09-18T18:00:00+00:00",
     "score": "89:82",
     "result": "✓"
-  },
-  {
-    "sport": "hockey",
-    "league": "National League",
-    "match": "Langnau Tigers vs Zurich",
-    "tip": "Over 3.5",
-    "odds": "1.31",
-    "date": "2026-09-18T17:45:00+00:00",
-    "score": "3:4",
-    "result": "✓"
-  },
-  {
-    "sport": "hockey",
-    "league": "Swiss League",
-    "match": "Thurgau vs Visp",
-    "tip": "Over 3.5",
-    "odds": "1.31",
-    "date": "2026-09-18T17:45:00+00:00",
-    "score": "0:1",
-    "result": "✗"
-  },
-  {
-    "sport": "football",
-    "league": "UEFA Europa League",
-    "match": "Real Sociedad vs Bournemouth",
-    "tip": "Over 1.5",
-    "odds": "1.21",
-    "date": "2026-09-17T19:00:00+00:00",
-    "score": "1:2",
-    "result": "✓"
-  },
-  {
-    "sport": "hockey",
-    "league": "Fjordkraft-ligaen",
-    "match": "Storhamar vs Frisk Asker",
-    "tip": "Over 3.5",
-    "odds": "1.18",
-    "date": "2026-09-17T17:00:00+00:00",
-    "score": "2:1",
-    "result": "✗"
   }
 ]
