@@ -1,9 +1,16 @@
 [
   {
-    "league": "Championship",
-    "match": "Kokshetau vs Beibarys Atyrau",
+    "league": "Extraliga",
+    "match": "Zilina vs Zvolen",
     "tip": "Over 3.5",
-    "odds": "1.22",
-    "date": "2026-11-23T14:00:00+00:00"
+    "odds": "1.23",
+    "date": "2026-11-24T17:30:00+00:00"
+  },
+  {
+    "league": "National League",
+    "match": "Lugano vs Biel",
+    "tip": "Over 3.5",
+    "odds": "1.18",
+    "date": "2026-11-24T18:45:00+00:00"
   }
 ]
