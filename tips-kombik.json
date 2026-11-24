@@ -1,16 +1,16 @@
 [
   {
-    "league": "I Liga",
-    "match": "Podbeskidzie - Nieciecza",
-    "kickoff": "2026-11-23T18:00:00+01:00",
+    "league": "UEFA Champions League",
+    "match": "Arsenal - Borussia Dortmund",
+    "kickoff": "2026-11-24T21:00:00+01:00",
     "tip": "Over 2.5",
-    "odds": "1.70"
+    "odds": "1.74"
   },
   {
-    "league": "Premier League",
-    "match": "Brentford - Everton",
-    "kickoff": "2026-11-23T21:00:00+01:00",
+    "league": "Serie B",
+    "match": "Cesena - Ascoli",
+    "kickoff": "2026-11-24T20:00:00+01:00",
     "tip": "Over 2.5",
-    "odds": "1.83"
+    "odds": "1.88"
   }
 ]

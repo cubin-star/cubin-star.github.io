@@ -1,56 +1,56 @@
 [
   {
-    "fixtureId": 1565309,
-    "league": "Liga I",
-    "match": "Sepsi OSK Sfantu Gheorghe - Rapid",
-    "kickoff": "2026-11-23T19:00:00+01:00",
+    "fixtureId": 1563275,
+    "league": "Championship",
+    "match": "Bristol City - Wrexham",
+    "kickoff": "2026-11-24T20:45:00+01:00",
+    "tip": "Over 2.5",
+    "odds": "2.10",
+    "group": 1
+  },
+  {
+    "fixtureId": 1635335,
+    "league": "Premier League",
+    "match": "UPDF - Mbarara City",
+    "kickoff": "2026-11-24T14:00:00+01:00",
+    "tip": "Over 2.5",
+    "odds": "2.30",
+    "group": 1
+  },
+  {
+    "fixtureId": 1601618,
+    "league": "Serie B",
+    "match": "Vicenza Virtus - Carrarese",
+    "kickoff": "2026-11-24T20:00:00+01:00",
     "tip": "Over 2.5",
     "odds": "2.02",
-    "group": 1
+    "group": 2
   },
   {
-    "fixtureId": 1636994,
-    "league": "Super League 2",
-    "match": "PAOK II - Niki Volos",
-    "kickoff": "2026-11-23T14:00:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.12",
-    "group": 1
-  },
-  {
-    "fixtureId": 1552536,
+    "fixtureId": 1649986,
     "league": "Ligue 2",
-    "match": "Nantes - Grenoble",
-    "kickoff": "2026-11-23T20:45:00+01:00",
+    "match": "Stade Gabesien - AS Kasserine",
+    "kickoff": "2026-11-24T14:00:00+01:00",
     "tip": "Over 2.5",
-    "odds": "2.00",
+    "odds": "2.52",
     "group": 2
   },
   {
-    "fixtureId": 1640793,
-    "league": "CAF Confederation Cup",
-    "match": "AC Douane - CR Belouizdad",
-    "kickoff": "2026-11-23T18:00:00+01:00",
+    "fixtureId": 1650513,
+    "league": "Primera A",
+    "match": "Millonarios - Bucaramanga",
+    "kickoff": "2026-11-25T00:20:00+01:00",
     "tip": "Over 2.5",
-    "odds": "2.14",
-    "group": 2
-  },
-  {
-    "fixtureId": 1650507,
-    "league": "Primera División",
-    "match": "Albion FC - Danubio",
-    "kickoff": "2026-11-23T23:30:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "1.95",
+    "odds": "2.20",
     "group": 3
   },
   {
-    "fixtureId": 1649976,
-    "league": "Ligue 2",
-    "match": "EM Mahdia - CS Chebba",
-    "kickoff": "2026-11-23T14:30:00+01:00",
+    "fixtureId": 1563773,
+    "league": "League Two",
+    "match": "Port Vale - Northampton",
+    "kickoff": "2026-11-24T20:45:00+01:00",
     "tip": "Over 2.5",
-    "odds": "2.44",
+    "odds": "2.21",
     "group": 3
   }
 ]

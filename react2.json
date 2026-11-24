@@ -1,56 +1,56 @@
 [
   {
-    "fixtureId": 1565309,
-    "league": "Liga I",
-    "match": "Sepsi OSK Sfantu Gheorghe - Rapid",
-    "kickoff": "2026-11-23T19:00:00+01:00",
-    "tip": "Away win",
-    "odds": "1.87",
-    "group": 1
-  },
-  {
-    "fixtureId": 1593359,
-    "league": "Super League 1",
-    "match": "Asteras Tripolis - Aris Thessalonikis",
-    "kickoff": "2026-11-23T16:00:00+01:00",
-    "tip": "Away win",
-    "odds": "2.25",
-    "group": 1
-  },
-  {
-    "fixtureId": 1649567,
-    "league": "Liga Profesional Argentina",
-    "match": "Gimnasia L.P. - Newells Old Boys",
-    "kickoff": "2026-11-23T21:00:00+01:00",
+    "fixtureId": 1649497,
+    "league": "Major League Soccer",
+    "match": "San Jose Earthquakes - Houston Dynamo",
+    "kickoff": "2026-11-25T04:00:00+01:00",
     "tip": "Home win",
     "odds": "2.15",
+    "group": 1
+  },
+  {
+    "fixtureId": 1630406,
+    "league": "AFC Champions League Two",
+    "match": "Al Seeb - Al Shorta",
+    "kickoff": "2026-11-24T17:00:00+01:00",
+    "tip": "Over 2.5",
+    "odds": "2.07",
+    "group": 1
+  },
+  {
+    "fixtureId": 1635667,
+    "league": "UEFA Champions League",
+    "match": "Galatasaray - Aston Villa",
+    "kickoff": "2026-11-24T18:45:00+01:00",
+    "tip": "Away win",
+    "odds": "2.25",
     "group": 2
   },
   {
-    "fixtureId": 1585830,
-    "league": "1. Lig",
-    "match": "Bodrum FK - Vanspor FK",
-    "kickoff": "2026-11-23T18:00:00+01:00",
+    "fixtureId": 1649155,
+    "league": "Challenge Cup",
+    "match": "Ayr Utd - Inverness CT",
+    "kickoff": "2026-11-24T20:45:00+01:00",
     "tip": "Over 2.5",
     "odds": "1.95",
     "group": 2
   },
   {
-    "fixtureId": 1629978,
-    "league": "AFC Champions League Elite",
-    "match": "Tractor Sazi - Al-Wasl FC",
-    "kickoff": "2026-11-23T17:00:00+01:00",
+    "fixtureId": 1585359,
+    "league": "National League",
+    "match": "AFC Hornchurch - Sutton Utd",
+    "kickoff": "2026-11-24T20:45:00+01:00",
     "tip": "Over 2.5",
-    "odds": "2.05",
+    "odds": "2.00",
     "group": 3
   },
   {
-    "fixtureId": 1603609,
-    "league": "1. Division",
-    "match": "Krasava Ypsonas - Anorthosis",
-    "kickoff": "2026-11-23T18:00:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.05",
+    "fixtureId": 1612285,
+    "league": "Premier League",
+    "match": "El Mokawloon - Olympic El Qanah",
+    "kickoff": "2026-11-24T19:00:00+01:00",
+    "tip": "Home win",
+    "odds": "2.15",
     "group": 3
   }
 ]
