@@ -1,5 +1,26 @@
 [
   {
+    "league": "Premiership",
+    "homeTeam": "Hibernian",
+    "awayTeam": "Dundee",
+    "tip": "Over 2.5",
+    "odds": "",
+    "halftimeScore": "2:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-11-24T19:45:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 2:0 | xG: 1.59 | Shots: 13/3 | winXG: 1.24 | losingXG: 0.35 losingSOT: 0 | @HT | Pre O2.5: 1.63",
+    "apiFixtureId": 1556696,
+    "tipSource": "A",
+    "tipEvalA": true,
+    "tipEvalB": false,
+    "tipEvalC": false
+  },
+  {
     "league": "Serie B",
     "homeTeam": "Juve Stabia",
     "awayTeam": "Catanzaro",
