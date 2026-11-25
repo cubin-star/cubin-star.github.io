@@ -1,5 +1,26 @@
 [
   {
+    "league": "J1 League",
+    "homeTeam": "Urawa",
+    "awayTeam": "Cerezo Osaka",
+    "tip": "Over 2.5",
+    "odds": "",
+    "halftimeScore": "2:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-11-25T10:30:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 2:0 | xG: 1.69 | Shots: 19/7 | winXG: 1.03 | losingXG: 0.66 losingSOT: 4 | @HT | Pre O2.5: 1.67",
+    "apiFixtureId": 1556156,
+    "tipSource": "A+B",
+    "tipEvalA": true,
+    "tipEvalB": true,
+    "tipEvalC": false
+  },
+  {
     "league": "AFC Champions League Elite",
     "homeTeam": "Kashima",
     "awayTeam": "Jeonbuk Motors",
