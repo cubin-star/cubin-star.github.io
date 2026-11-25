@@ -1,5 +1,35 @@
 [
   {
+    "sport": "football",
+    "league": "Major League Soccer",
+    "match": "San Jose Earthquakes vs Houston Dynamo",
+    "tip": "Over 1.5",
+    "odds": "1.21",
+    "date": "2026-11-25T03:00:00+00:00",
+    "score": "2:1",
+    "result": "✓"
+  },
+  {
+    "sport": "hockey",
+    "league": "National League",
+    "match": "Lugano vs Biel",
+    "tip": "Over 3.5",
+    "odds": "1.18",
+    "date": "2026-11-24T18:45:00+00:00",
+    "score": "3:6",
+    "result": "✓"
+  },
+  {
+    "sport": "hockey",
+    "league": "Extraliga",
+    "match": "Zilina vs Zvolen",
+    "tip": "Over 3.5",
+    "odds": "1.23",
+    "date": "2026-11-24T17:30:00+00:00",
+    "score": "5:1",
+    "result": "✓"
+  },
+  {
     "sport": "basketball",
     "league": "NBA",
     "match": "Charlotte Hornets vs Memphis Grizzlies",
@@ -1967,36 +1997,6 @@
     "odds": "1.20",
     "date": "2026-09-20T12:30:00+00:00",
     "score": "4:1",
-    "result": "✓"
-  },
-  {
-    "sport": "basketball",
-    "league": "NBA W",
-    "match": "Golden State Valkyries W vs Seattle Storm W",
-    "tip": "Over 141.5",
-    "odds": "1.30",
-    "date": "2026-09-20T01:00:00+00:00",
-    "score": "70:57",
-    "result": "✗"
-  },
-  {
-    "sport": "football",
-    "league": "Ekstraklasa",
-    "match": "GKS Katowice vs Cracovia Krakow",
-    "tip": "Over 1.5",
-    "odds": "1.20",
-    "date": "2026-09-19T15:30:00+00:00",
-    "score": "3:2",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "League Two",
-    "match": "Kelty Hearts vs Edinburgh City",
-    "tip": "Over 1.5",
-    "odds": "1.21",
-    "date": "2026-09-19T14:00:00+00:00",
-    "score": "1:3",
     "result": "✓"
   }
 ]
