@@ -1,5 +1,26 @@
 [
   {
+    "league": "AFC Champions League Two",
+    "homeTeam": "Persib Bandung",
+    "awayTeam": "FC Seoul",
+    "tip": "Over 3.5",
+    "odds": "",
+    "halftimeScore": "2:1",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-11-25T12:15:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 2:1 | xG: 2.06 | Shots: 15/9 | winXG: 0.58 | losingXG: 1.48 losingSOT: 5 | @HT | Pre O2.5: 1.65",
+    "apiFixtureId": 1637495,
+    "tipSource": "B",
+    "tipEvalA": false,
+    "tipEvalB": true,
+    "tipEvalC": false
+  },
+  {
     "league": "J1 League",
     "homeTeam": "Urawa",
     "awayTeam": "Cerezo Osaka",
