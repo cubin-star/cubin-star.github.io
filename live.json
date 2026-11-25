@@ -1,37 +1,16 @@
 [
   {
-    "League": "League Two",
-    "Match": "Crawley Town vs Barnet",
+    "League": "Premier League",
+    "Match": "Enppi vs Ceramica Cleopatra",
     "Tip": "Over 1.5",
-    "Odds": "1.16",
-    "Date": "2026-11-24T19:45:00+00:00"
+    "Odds": "1.38",
+    "Date": "2026-11-25T18:00:00+00:00"
   },
   {
-    "League": "National League",
-    "Match": "Woking vs Worthing",
+    "League": "Championship",
+    "Match": "Burnley vs Birmingham",
     "Tip": "Over 1.5",
-    "Odds": "1.14",
-    "Date": "2026-11-24T19:45:00+00:00"
-  },
-  {
-    "League": "National League - North",
-    "Match": "AFC Telford United vs Buxton",
-    "Tip": "Over 1.5",
-    "Odds": "1.20",
-    "Date": "2026-11-24T19:45:00+00:00"
-  },
-  {
-    "League": "Non League Premier - Northern",
-    "Match": "Leek Town vs Gainsborough Trinity",
-    "Tip": "Over 1.5",
-    "Odds": "1.19",
-    "Date": "2026-11-24T19:45:00+00:00"
-  },
-  {
-    "League": "Non League Premier - Southern Central",
-    "Match": "Anstey Nomads vs Redditch United",
-    "Tip": "Over 1.5",
-    "Odds": "1.12",
-    "Date": "2026-11-24T19:45:00+00:00"
+    "Odds": "1.22",
+    "Date": "2026-11-25T19:45:00+00:00"
   }
 ]
