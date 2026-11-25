@@ -1,5 +1,26 @@
 [
   {
+    "league": "Championship",
+    "homeTeam": "Burnley",
+    "awayTeam": "Birmingham",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "0:1",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-11-25T19:45:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 0:1 | xG: 2.00 | Shots: 22/7 | winXG: 1.47 | losingXG: 0.53 losingSOT: 3 | @HT | Pre O2.5: 1.74",
+    "apiFixtureId": 1563284,
+    "tipSource": "B+C",
+    "tipEvalA": false,
+    "tipEvalB": true,
+    "tipEvalC": true
+  },
+  {
     "league": "AFC Champions League Two",
     "homeTeam": "Persib Bandung",
     "awayTeam": "FC Seoul",
