@@ -1,6 +1,27 @@
 [
   {
     "league": "Championship",
+    "homeTeam": "Stoke City",
+    "awayTeam": "Millwall",
+    "tip": "Over 2.5",
+    "odds": "",
+    "halftimeScore": "2:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-11-25T20:00:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 2:0 | xG: 1.48 | Shots: 15/5 | winXG: 1.14 | losingXG: 0.34 losingSOT: 1 | @HT | Pre O2.5: 2.1",
+    "apiFixtureId": 1563285,
+    "tipSource": "A",
+    "tipEvalA": true,
+    "tipEvalB": false,
+    "tipEvalC": false
+  },
+  {
+    "league": "Championship",
     "homeTeam": "Burnley",
     "awayTeam": "Birmingham",
     "tip": "Over 1.5",
