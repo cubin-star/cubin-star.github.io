@@ -1,16 +1,16 @@
 [
   {
-    "league": "UEFA Champions League",
-    "match": "Arsenal - Borussia Dortmund",
-    "kickoff": "2026-11-24T21:00:00+01:00",
+    "league": "J2 League",
+    "match": "Yokohama FC - Vegalta Sendai",
+    "kickoff": "2026-11-25T11:00:00+01:00",
     "tip": "Over 2.5",
-    "odds": "1.74"
+    "odds": "1.79"
   },
   {
-    "league": "Serie B",
-    "match": "Cesena - Ascoli",
-    "kickoff": "2026-11-24T20:00:00+01:00",
+    "league": "UEFA Champions League",
+    "match": "Lille - Bayern München",
+    "kickoff": "2026-11-25T21:00:00+01:00",
     "tip": "Over 2.5",
-    "odds": "1.88"
+    "odds": "1.76"
   }
 ]

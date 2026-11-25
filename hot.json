@@ -1,56 +1,56 @@
 [
   {
-    "fixtureId": 1563275,
-    "league": "Championship",
-    "match": "Bristol City - Wrexham",
-    "kickoff": "2026-11-24T20:45:00+01:00",
+    "fixtureId": 1606776,
+    "league": "J2 League",
+    "match": "Vanraure Hachinohe - Albirex Niigata",
+    "kickoff": "2026-11-25T10:30:00+01:00",
     "tip": "Over 2.5",
-    "odds": "2.10",
+    "odds": "2.15",
     "group": 1
   },
   {
-    "fixtureId": 1635335,
-    "league": "Premier League",
-    "match": "UPDF - Mbarara City",
-    "kickoff": "2026-11-24T14:00:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.30",
-    "group": 1
-  },
-  {
-    "fixtureId": 1601618,
+    "fixtureId": 1601615,
     "league": "Serie B",
-    "match": "Vicenza Virtus - Carrarese",
-    "kickoff": "2026-11-24T20:00:00+01:00",
+    "match": "Cremonese - Avellino",
+    "kickoff": "2026-11-25T19:00:00+01:00",
     "tip": "Over 2.5",
-    "odds": "2.02",
+    "odds": "2.15",
+    "group": 1
+  },
+  {
+    "fixtureId": 1553905,
+    "league": "Super Liga",
+    "match": "Radnicki NIS - Železničar Pančevo",
+    "kickoff": "2026-11-25T13:00:00+01:00",
+    "tip": "Over 2.5",
+    "odds": "2.05",
     "group": 2
   },
   {
-    "fixtureId": 1649986,
-    "league": "Ligue 2",
-    "match": "Stade Gabesien - AS Kasserine",
-    "kickoff": "2026-11-24T14:00:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.52",
-    "group": 2
-  },
-  {
-    "fixtureId": 1650513,
+    "fixtureId": 1650516,
     "league": "Primera A",
-    "match": "Millonarios - Bucaramanga",
-    "kickoff": "2026-11-25T00:20:00+01:00",
+    "match": "Atletico Nacional - Independiente Medellin",
+    "kickoff": "2026-11-26T02:30:00+01:00",
+    "tip": "Over 2.5",
+    "odds": "2.27",
+    "group": 2
+  },
+  {
+    "fixtureId": 1650573,
+    "league": "Pernambucano - 1",
+    "match": "América PE - Central SC",
+    "kickoff": "2026-11-25T20:00:00+01:00",
     "tip": "Over 2.5",
     "odds": "2.20",
     "group": 3
   },
   {
-    "fixtureId": 1563773,
-    "league": "League Two",
-    "match": "Port Vale - Northampton",
-    "kickoff": "2026-11-24T20:45:00+01:00",
+    "fixtureId": 1648102,
+    "league": "Coppa Titano",
+    "match": "La Fiorita - Cosmos",
+    "kickoff": "2026-11-25T20:45:00+01:00",
     "tip": "Over 2.5",
-    "odds": "2.21",
+    "odds": "2.13",
     "group": 3
   }
 ]
