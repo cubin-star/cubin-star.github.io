@@ -1,11 +1,11 @@
 [
   {
-    "league": "UEFA Europa League",
-    "homeTeam": "Sparta Praha",
-    "awayTeam": "AZ Alkmaar",
-    "tip": "Over 2.5",
+    "league": "UEFA Europa Conference League",
+    "homeTeam": "Inter Club d'Escaldes",
+    "awayTeam": "FC Copenhagen",
+    "tip": "Over 1.5",
     "odds": "",
-    "halftimeScore": "2:0",
+    "halftimeScore": "1:0",
     "liveOdds": "",
     "finalScore": "",
     "result": "",
@@ -13,11 +13,11 @@
     "kickoff": "2026-11-26T20:00:00.000Z",
     "resolvedAt": "",
     "source": "whisper-football",
-    "scoutStats": "Whisper xG-rate surge | HT 2:0 | xG: 1.70 | Shots: 18/5 | winXG: 1.32 | losingXG: 0.38 losingSOT: 1 | @HT | Pre O2.5: 1.7349999999999999",
-    "apiFixtureId": 1636336,
-    "tipSource": "A",
-    "tipEvalA": true,
-    "tipEvalB": false,
+    "scoutStats": "Whisper xG-rate surge | HT 1:0 | xG: 0.52 | Shots: 8/3 | winXG: 0.10 | losingXG: 0.42 losingSOT: 2 | @HT | Pre O2.5: 1.75",
+    "apiFixtureId": 1636428,
+    "tipSource": "B",
+    "tipEvalA": false,
+    "tipEvalB": true,
     "tipEvalC": false
   },
   {
