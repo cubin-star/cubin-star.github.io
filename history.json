@@ -1,5 +1,45 @@
 [
   {
+    "sport": "hockey",
+    "league": "AHL",
+    "match": "Hershey Bears vs Wilkes-Barre/Scranton",
+    "tip": "Over 3.5",
+    "odds": "1.18",
+    "date": "2026-11-26T00:00:00+00:00",
+    "score": "6:1",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "Serie A",
+    "match": "Atletico-MG vs Corinthians",
+    "tip": "Over 1.5",
+    "odds": "1.32",
+    "date": "2026-11-25T23:00:00+00:00",
+    "score": "1:1",
+    "result": "✓"
+  },
+  {
+    "sport": "basketball",
+    "league": "NCAA",
+    "match": "Miami (Ohio) vs Eastern Kentucky",
+    "tip": "Over 151.5",
+    "odds": "1.35",
+    "date": "2026-11-25T18:00:00+00:00",
+    "score": "85:72",
+    "result": "✓"
+  },
+  {
+    "sport": "football",
+    "league": "J1 League",
+    "match": "Avispa Fukuoka vs Yokohama F. Marinos",
+    "tip": "Over 1.5",
+    "odds": "1.29",
+    "date": "2026-11-25T10:00:00+00:00",
+    "score": "1:2",
+    "result": "✓"
+  },
+  {
     "sport": "football",
     "league": "Major League Soccer",
     "match": "San Jose Earthquakes vs Houston Dynamo",
@@ -1957,46 +1997,6 @@
     "odds": "1.18",
     "date": "2026-09-21T09:30:00+00:00",
     "score": "96:91",
-    "result": "✓"
-  },
-  {
-    "sport": "basketball",
-    "league": "NBL",
-    "match": "Usti n. Labem vs Srsni Pisek",
-    "tip": "Over 163.5",
-    "odds": "1.30",
-    "date": "2026-09-20T16:00:00+00:00",
-    "score": "78:80",
-    "result": "✗"
-  },
-  {
-    "sport": "hockey",
-    "league": "Extraliga",
-    "match": "Vitkovice vs Litvinov",
-    "tip": "Over 3.5",
-    "odds": "1.26",
-    "date": "2026-09-20T15:00:00+00:00",
-    "score": "2:3",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Primeira Liga",
-    "match": "Estrela vs Academico Viseu",
-    "tip": "Over 1.5",
-    "odds": "1.30",
-    "date": "2026-09-20T14:30:00+00:00",
-    "score": "0:2",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "Bundesliga",
-    "match": "Ried vs Wolfsberger AC",
-    "tip": "Over 1.5",
-    "odds": "1.20",
-    "date": "2026-09-20T12:30:00+00:00",
-    "score": "4:1",
     "result": "✓"
   }
 ]
