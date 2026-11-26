@@ -10,8 +10,7 @@
 #    Settings → Secrets and variables → Actions → New repository secret
 #    Name: API_HOCKEY_KEY
 #    Value: (váš klíč z api-sports.io)
-# 4. V Settings → Actions → General povolte:
-#    "Read and write permissions" pro GITHUB_TOKEN
+# 4. Workflow má vlastní oprávnění "contents: write" – ruční nastavení v Settings není potřeba
 
 name: 🏒 Update Hockey Tips
 
@@ -19,6 +18,9 @@ on:
   schedule:
     - cron: '0 7 * * *'    # Každý den v 7:00 UTC
   workflow_dispatch:         # Ruční spuštění tlačítkem na GitHubu
+
+permissions:
+  contents: write
 
 jobs:
   update-tips:
