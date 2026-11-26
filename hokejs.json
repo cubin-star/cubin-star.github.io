@@ -1,9 +1,16 @@
 [
   {
-    "league": "AHL",
-    "match": "Hershey Bears vs Wilkes-Barre/Scranton",
+    "league": "1. Liga",
+    "match": "Trnava vs HC 19 Humenne",
     "tip": "Over 3.5",
-    "odds": "1.18",
-    "date": "2026-11-26T00:00:00+00:00"
+    "odds": "1.21",
+    "date": "2026-11-26T16:30:00+00:00"
+  },
+  {
+    "league": "SHL",
+    "match": "Timrå vs Farjestad",
+    "tip": "Over 3.5",
+    "odds": "1.30",
+    "date": "2026-11-26T18:00:00+00:00"
   }
 ]
