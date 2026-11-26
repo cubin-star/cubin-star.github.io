@@ -1,5 +1,26 @@
 [
   {
+    "league": "UEFA Europa League",
+    "homeTeam": "Sparta Praha",
+    "awayTeam": "AZ Alkmaar",
+    "tip": "Over 2.5",
+    "odds": "",
+    "halftimeScore": "2:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-11-26T20:00:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 2:0 | xG: 1.70 | Shots: 18/5 | winXG: 1.32 | losingXG: 0.38 losingSOT: 1 | @HT | Pre O2.5: 1.7349999999999999",
+    "apiFixtureId": 1636336,
+    "tipSource": "A",
+    "tipEvalA": true,
+    "tipEvalB": false,
+    "tipEvalC": false
+  },
+  {
     "league": "Pro League",
     "homeTeam": "Al-Faisaly FC",
     "awayTeam": "Al Diriyah",
