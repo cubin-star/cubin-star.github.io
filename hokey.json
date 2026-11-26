@@ -1,16 +1,15 @@
 [
   {
-    "league": "ELJ",
-    "match": "Karlovy Vary U20 vs Plzen U20",
+    "league": "Erste Liga",
+    "match": "Ujpest vs Gyergyoi",
     "tip": "Over 5.5",
-    "odds": "1.77",
-    "qualified15": true
+    "odds": "1.78",
+    "qualified13": true
   },
   {
-    "league": "Hockey Allsvenskan",
-    "match": "Kalmar vs AIK",
+    "league": "National League",
+    "match": "Fribourg vs Zug",
     "tip": "Over 5.5",
-    "odds": "1.87",
-    "qualified15": true
+    "odds": "1.93"
   }
 ]
