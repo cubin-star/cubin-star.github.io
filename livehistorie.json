@@ -1,5 +1,26 @@
 [
   {
+    "league": "Pro League",
+    "homeTeam": "Al-Faisaly FC",
+    "awayTeam": "Al Diriyah",
+    "tip": "Over 2.5",
+    "odds": "",
+    "halftimeScore": "0:2",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-11-26T17:30:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 0:2 | xG: 1.59 | Shots: 13/7 | winXG: 1.29 | losingXG: 0.30 losingSOT: 4 | @HT | Pre O2.5: 1.66",
+    "apiFixtureId": 1603083,
+    "tipSource": "A",
+    "tipEvalA": true,
+    "tipEvalB": false,
+    "tipEvalC": false
+  },
+  {
     "league": "Championship",
     "homeTeam": "Stoke City",
     "awayTeam": "Millwall",
