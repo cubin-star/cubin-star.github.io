@@ -1,5 +1,26 @@
 [
   {
+    "league": "Ligue 1",
+    "homeTeam": "Stade Brestois 29",
+    "awayTeam": "Paris FC",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "1:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-11-27T19:45:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 1:0 | xG: 1.26 | Shots: 19/5 | winXG: 0.88 | losingXG: 0.38 losingSOT: 3 | @HT | Pre O2.5: 1.92",
+    "apiFixtureId": 1552830,
+    "tipSource": "C",
+    "tipEvalA": false,
+    "tipEvalB": false,
+    "tipEvalC": true
+  },
+  {
     "league": "Liga Pro",
     "homeTeam": "Delfin SC",
     "awayTeam": "Orense SC",
