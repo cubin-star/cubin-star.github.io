@@ -1,37 +1,18 @@
 {
   "schemaVersion": 1,
-  "date": "2026-11-26",
+  "date": "2026-11-27",
   "timeZone": "Europe/Prague",
-  "windowStartUtc": "2026-11-26T06:00:00Z",
-  "windowEndUtc": "2026-11-27T06:00:00Z",
+  "windowStartUtc": "2026-11-27T06:00:00Z",
+  "windowEndUtc": "2026-11-28T06:00:00Z",
   "status": "READY",
   "paperOnly": true,
-  "runId": 22,
-  "decisionUtc": "2026-11-26T08:00:00Z",
-  "lockedUtc": "2026-11-26T08:02:12Z",
+  "runId": 23,
+  "decisionUtc": "2026-11-27T08:00:00Z",
+  "lockedUtc": "2026-11-27T08:02:11Z",
   "coverage": "Complete",
   "calibrationVersion": "iso-20261105221902",
   "reasons": [],
-  "picks": [
-    {
-      "fixtureId": 1630470,
-      "leagueId": 418,
-      "home": "Baku Sportinq",
-      "away": "\u015Eahda\u011F",
-      "kickoffUtc": "2026-11-26T10:30:00Z",
-      "market": "OU2.5",
-      "selection": "OU2.5:UNDER",
-      "odds": 2.08,
-      "bookmaker": "Bet365",
-      "oddsQueriedAtUtc": "2026-11-26T07:30:08Z",
-      "modelProbability": 0.5967268281318648,
-      "rawProbability": 0.6384498203492052,
-      "calibrationStatus": "Calibrated",
-      "impliedProbability": 0.4807692307692307,
-      "edge": 0.11595759736263411,
-      "expectedValue": 0.24119180251427896
-    }
-  ],
-  "generatedAtUtc": "2026-11-26T08:15:01Z",
-  "contentSha256": "78b1d85f39c7ceebdd8d41f23b05ce84a7067b46866fb2d937a6767e23808e7b"
+  "picks": [],
+  "generatedAtUtc": "2026-11-27T08:15:04Z",
+  "contentSha256": "9a3829a132c738613593def1d906ce168d83aa518d5279ed783f664d9308bcb1"
 }
