@@ -1,5 +1,26 @@
 [
   {
+    "league": "1. Lig",
+    "homeTeam": "Sarıyer",
+    "awayTeam": "İstanbulspor",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "1:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-11-27T17:00:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 1:0 | xG: 2.54 | Shots: 14/5 | winXG: 1.15 | losingXG: 1.39 losingSOT: 4 | @HT | Pre O2.5: 2",
+    "apiFixtureId": 1585845,
+    "tipSource": "C",
+    "tipEvalA": false,
+    "tipEvalB": false,
+    "tipEvalC": true
+  },
+  {
     "league": "UEFA Europa Conference League",
     "homeTeam": "HNK Hajduk Split",
     "awayTeam": "St. Truiden",
