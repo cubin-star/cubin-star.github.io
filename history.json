@@ -1,5 +1,35 @@
 [
   {
+    "sport": "football",
+    "league": "UEFA Europa Conference League",
+    "match": "FC Nordsjaelland vs Panathinaikos",
+    "tip": "Over 1.5",
+    "odds": "1.20",
+    "date": "2026-11-26T20:00:00+00:00",
+    "score": "3:2",
+    "result": "✓"
+  },
+  {
+    "sport": "hockey",
+    "league": "SHL",
+    "match": "Timrå vs Farjestad",
+    "tip": "Over 3.5",
+    "odds": "1.30",
+    "date": "2026-11-26T18:00:00+00:00",
+    "score": "4:5",
+    "result": "✓"
+  },
+  {
+    "sport": "hockey",
+    "league": "1. Liga",
+    "match": "Trnava vs HC 19 Humenne",
+    "tip": "Over 3.5",
+    "odds": "1.21",
+    "date": "2026-11-26T16:30:00+00:00",
+    "score": "3:4",
+    "result": "✓"
+  },
+  {
     "sport": "hockey",
     "league": "AHL",
     "match": "Hershey Bears vs Wilkes-Barre/Scranton",
@@ -1967,36 +1997,6 @@
     "odds": "1.25",
     "date": "2026-09-22T17:00:00+00:00",
     "score": "1:5",
-    "result": "✓"
-  },
-  {
-    "sport": "basketball",
-    "league": "Intercontinental Cup",
-    "match": "Beijing Royal Fighters vs Boca Juniors",
-    "tip": "Over 153.5",
-    "odds": "1.29",
-    "date": "2026-09-22T11:30:00+00:00",
-    "score": "78:88",
-    "result": "✓"
-  },
-  {
-    "sport": "football",
-    "league": "1. Division",
-    "match": "HB Koge vs Hobro",
-    "tip": "Over 1.5",
-    "odds": "1.24",
-    "date": "2026-09-21T17:00:00+00:00",
-    "score": "5:2",
-    "result": "✓"
-  },
-  {
-    "sport": "basketball",
-    "league": "NBL",
-    "match": "Tasmania JackJumpers vs South East Melbourne",
-    "tip": "Over 169.5",
-    "odds": "1.18",
-    "date": "2026-09-21T09:30:00+00:00",
-    "score": "96:91",
     "result": "✓"
   }
 ]
