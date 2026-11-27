@@ -1,9 +1,51 @@
 [
   {
-    "League": "Thai League 2",
-    "Match": "Nong Bua Pitchaya vs Muang Loei United",
+    "League": "Liga Alef",
+    "Match": "Ironi Baka El Garbiya vs Beitar Nahariya",
+    "Tip": "Over 1.5",
+    "Odds": "1.15",
+    "Date": "2026-11-27T10:00:00+00:00"
+  },
+  {
+    "League": "Ligat Ha'al",
+    "Match": "Maccabi Petah Tikva vs Hapoel Tel Aviv",
+    "Tip": "Over 1.5",
+    "Odds": "1.18",
+    "Date": "2026-11-27T12:00:00+00:00"
+  },
+  {
+    "League": "Liga Leumit",
+    "Match": "Maccabi Ahi Nazareth vs Kiryat Yam SC",
+    "Tip": "Over 1.5",
+    "Odds": "1.17",
+    "Date": "2026-11-27T13:00:00+00:00"
+  },
+  {
+    "League": "Ekstraklasa",
+    "Match": "Raków Częstochowa vs Piast Gliwice",
     "Tip": "Over 1.5",
     "Odds": "1.14",
-    "Date": "2026-11-26T12:00:00+00:00"
+    "Date": "2026-11-27T17:00:00+00:00"
+  },
+  {
+    "League": "Regionalliga - Bayern",
+    "Match": "Bayreuth vs Greuther Fürth II",
+    "Tip": "Over 1.5",
+    "Odds": "1.17",
+    "Date": "2026-11-27T18:00:00+00:00"
+  },
+  {
+    "League": "Non League Premier - Northern",
+    "Match": "Rylands vs Lancaster City",
+    "Tip": "Over 1.5",
+    "Odds": "1.13",
+    "Date": "2026-11-27T19:45:00+00:00"
+  },
+  {
+    "League": "J1 League",
+    "Match": "Kashima vs Fagiano Okayama",
+    "Tip": "Over 1.5",
+    "Odds": "1.28",
+    "Date": "2026-11-28T06:00:00+00:00"
   }
 ]

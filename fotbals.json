@@ -1,9 +1,16 @@
 [
   {
-    "League": "UEFA Europa Conference League",
-    "Match": "FC Nordsjaelland vs Panathinaikos",
+    "League": "J1 League",
+    "Match": "Kashima vs Fagiano Okayama",
     "Tip": "Over 1.5",
-    "Odds": "1.20",
-    "Date": "2026-11-26T20:00:00+00:00"
+    "Odds": "1.28",
+    "Date": "2026-11-28T06:00:00+00:00"
+  },
+  {
+    "League": "Süper Lig",
+    "Match": "Rizespor vs Kasımpaşa",
+    "Tip": "Over 1.5",
+    "Odds": "1.21",
+    "Date": "2026-11-27T17:00:00+00:00"
   }
 ]
