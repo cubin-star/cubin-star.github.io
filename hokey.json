@@ -1,15 +1,16 @@
 [
   {
-    "league": "Erste Liga",
-    "match": "Ujpest vs Gyergyoi",
+    "league": "Polish Hockey League",
+    "match": "Tychy vs Unia Oswiecim",
     "tip": "Over 5.5",
     "odds": "1.78",
-    "qualified13": true
+    "qualified15": true
   },
   {
-    "league": "National League",
-    "match": "Fribourg vs Zug",
+    "league": "ELJ",
+    "match": "Poruba U20 vs Mlada Boleslav U20",
     "tip": "Over 5.5",
-    "odds": "1.93"
+    "odds": "1.96",
+    "qualified15": true
   }
 ]
