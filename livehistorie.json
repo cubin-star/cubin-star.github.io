@@ -1,5 +1,26 @@
 [
   {
+    "league": "Division Profesional - Clausura",
+    "homeTeam": "Sportivo Luqueno",
+    "awayTeam": "Olimpia",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "0:1",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-11-27T23:00:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 0:1 | xG: 0.60 | Shots: 13/5 | winXG: 0.36 | losingXG: 0.24 losingSOT: 3 | @HT | Pre O2.5: 1.72",
+    "apiFixtureId": 1632072,
+    "tipSource": "B",
+    "tipEvalA": false,
+    "tipEvalB": true,
+    "tipEvalC": false
+  },
+  {
     "league": "Ligue 1",
     "homeTeam": "Stade Brestois 29",
     "awayTeam": "Paris FC",
