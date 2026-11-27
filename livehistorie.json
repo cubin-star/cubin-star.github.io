@@ -1,5 +1,26 @@
 [
   {
+    "league": "Bundesliga",
+    "homeTeam": "Grazer AK",
+    "awayTeam": "SCR Altach",
+    "tip": "Over 2.5",
+    "odds": "",
+    "halftimeScore": "0:2",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-11-27T18:30:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 0:2 | xG: 1.72 | Shots: 19/9 | winXG: 0.67 | losingXG: 1.05 losingSOT: 7 | @HT | Pre O2.5: 1.85",
+    "apiFixtureId": 1561974,
+    "tipSource": "A",
+    "tipEvalA": true,
+    "tipEvalB": false,
+    "tipEvalC": false
+  },
+  {
     "league": "1. Lig",
     "homeTeam": "Sarıyer",
     "awayTeam": "İstanbulspor",
