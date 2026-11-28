@@ -1,11 +1,11 @@
 [
   {
-    "league": "Premiership",
-    "homeTeam": "Aberdeen",
-    "awayTeam": "Dundee",
+    "league": "League Two",
+    "homeTeam": "Salford City",
+    "awayTeam": "Gillingham",
     "tip": "Over 1.5",
     "odds": "",
-    "halftimeScore": "1:0",
+    "halftimeScore": "0:1",
     "liveOdds": "",
     "finalScore": "",
     "result": "",
@@ -13,12 +13,12 @@
     "kickoff": "2026-11-28T15:00:00.000Z",
     "resolvedAt": "",
     "source": "whisper-football",
-    "scoutStats": "Whisper xG-rate surge | HT 1:0 | xG: 2.14 | Shots: 12/6 | winXG: 1.80 | losingXG: 0.34 losingSOT: 2 | @HT | Pre O2.5: 1.65",
-    "apiFixtureId": 1556712,
-    "tipSource": "B",
+    "scoutStats": "Whisper xG-rate surge | HT 0:1 | xG: 1.31 | Shots: 13/4 | winXG: 0.89 | losingXG: 0.42 losingSOT: 2 | @HT | Pre O2.5: 1.65",
+    "apiFixtureId": 1563883,
+    "tipSource": "C",
     "tipEvalA": false,
-    "tipEvalB": true,
-    "tipEvalC": false
+    "tipEvalB": false,
+    "tipEvalC": true
   },
   {
     "league": "Indian Super League",
