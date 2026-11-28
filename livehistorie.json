@@ -1,8 +1,8 @@
 [
   {
-    "league": "League Two",
-    "homeTeam": "Crewe",
-    "awayTeam": "Grimsby",
+    "league": "League One",
+    "homeTeam": "Bromley",
+    "awayTeam": "Burton Albion",
     "tip": "Over 2.5",
     "odds": "",
     "halftimeScore": "0:2",
@@ -13,11 +13,11 @@
     "kickoff": "2026-11-28T15:00:00.000Z",
     "resolvedAt": "",
     "source": "whisper-football",
-    "scoutStats": "Whisper xG-rate surge | HT 0:2 | xG: 1.75 | Shots: 16/6 | winXG: 1.44 | losingXG: 0.31 losingSOT: 1 | @HT | Pre O2.5: 1.7",
-    "apiFixtureId": 1563877,
-    "tipSource": "A+B",
+    "scoutStats": "Whisper xG-rate surge | HT 0:2 | xG: 2.14 | Shots: 16/4 | winXG: 1.77 | losingXG: 0.37 losingSOT: 1 | @HT | Pre O2.5: 1.77",
+    "apiFixtureId": 1564428,
+    "tipSource": "A",
     "tipEvalA": true,
-    "tipEvalB": true,
+    "tipEvalB": false,
     "tipEvalC": false
   },
   {
