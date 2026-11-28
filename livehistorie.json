@@ -1,5 +1,26 @@
 [
   {
+    "league": "Indian Super League",
+    "homeTeam": "Chennaiyin",
+    "awayTeam": "Mumbai City",
+    "tip": "Over 2.5",
+    "odds": "",
+    "halftimeScore": "2:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-11-28T14:00:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 2:0 | xG: 1.10 | Shots: 13/7 | winXG: 0.80 | losingXG: 0.30 losingSOT: 2 | @HT | Pre O2.5: 1.67",
+    "apiFixtureId": 1642204,
+    "tipSource": "A",
+    "tipEvalA": true,
+    "tipEvalB": false,
+    "tipEvalC": false
+  },
+  {
     "league": "Ekstraklasa",
     "homeTeam": "Widzew Łódź",
     "awayTeam": "Zaglebie Lubin",
