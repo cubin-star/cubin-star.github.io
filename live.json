@@ -1,51 +1,107 @@
 [
   {
-    "League": "Liga Alef",
-    "Match": "Ironi Baka El Garbiya vs Beitar Nahariya",
+    "League": "Campionato Primavera - 2",
+    "Match": "Pisa U19 vs Pescara U19",
+    "Tip": "Over 1.5",
+    "Odds": "1.12",
+    "Date": "2026-11-28T10:30:00+00:00"
+  },
+  {
+    "League": "Championship",
+    "Match": "Preston vs Norwich",
+    "Tip": "Over 1.5",
+    "Odds": "1.18",
+    "Date": "2026-11-28T12:30:00+00:00"
+  },
+  {
+    "League": "National League",
+    "Match": "Altrincham vs Worthing",
+    "Tip": "Over 1.5",
+    "Odds": "1.13",
+    "Date": "2026-11-28T15:00:00+00:00"
+  },
+  {
+    "League": "Non League Premier - Southern Central",
+    "Match": "Bishop's Stortford vs Peterborough Sports",
+    "Tip": "Over 1.5",
+    "Odds": "1.13",
+    "Date": "2026-11-28T15:00:00+00:00"
+  },
+  {
+    "League": "Non League Premier - Southern Central",
+    "Match": "Leamington vs Alvechurch",
+    "Tip": "Over 1.5",
+    "Odds": "1.13",
+    "Date": "2026-11-28T15:00:00+00:00"
+  },
+  {
+    "League": "Non League Premier - Southern South",
+    "Match": "Basingstoke Town vs Gloucester City",
+    "Tip": "Over 1.5",
+    "Odds": "1.14",
+    "Date": "2026-11-28T15:00:00+00:00"
+  },
+  {
+    "League": "Non League Premier - Southern South",
+    "Match": "Berkhamsted vs Evesham United",
     "Tip": "Over 1.5",
     "Odds": "1.15",
-    "Date": "2026-11-27T10:00:00+00:00"
+    "Date": "2026-11-28T15:00:00+00:00"
+  },
+  {
+    "League": "Non League Premier - Southern South",
+    "Match": "Poole Town vs Havant & Wville",
+    "Tip": "Over 1.5",
+    "Odds": "1.13",
+    "Date": "2026-11-28T15:00:00+00:00"
+  },
+  {
+    "League": "NB I",
+    "Match": "MTK Budapest vs Ujpest",
+    "Tip": "Over 1.5",
+    "Odds": "1.15",
+    "Date": "2026-11-28T15:45:00+00:00"
+  },
+  {
+    "League": "Challenge League",
+    "Match": "FC WIL 1900 vs Yverdon Sport",
+    "Tip": "Over 1.5",
+    "Odds": "1.15",
+    "Date": "2026-11-28T17:00:00+00:00"
+  },
+  {
+    "League": "National League",
+    "Match": "Hartlepool vs Southend",
+    "Tip": "Over 1.5",
+    "Odds": "1.15",
+    "Date": "2026-11-28T17:30:00+00:00"
   },
   {
     "League": "Ligat Ha'al",
-    "Match": "Maccabi Petah Tikva vs Hapoel Tel Aviv",
-    "Tip": "Over 1.5",
-    "Odds": "1.18",
-    "Date": "2026-11-27T12:00:00+00:00"
-  },
-  {
-    "League": "Liga Leumit",
-    "Match": "Maccabi Ahi Nazareth vs Kiryat Yam SC",
-    "Tip": "Over 1.5",
-    "Odds": "1.17",
-    "Date": "2026-11-27T13:00:00+00:00"
-  },
-  {
-    "League": "Ekstraklasa",
-    "Match": "Raków Częstochowa vs Piast Gliwice",
-    "Tip": "Over 1.5",
-    "Odds": "1.14",
-    "Date": "2026-11-27T17:00:00+00:00"
-  },
-  {
-    "League": "Regionalliga - Bayern",
-    "Match": "Bayreuth vs Greuther Fürth II",
-    "Tip": "Over 1.5",
-    "Odds": "1.17",
-    "Date": "2026-11-27T18:00:00+00:00"
-  },
-  {
-    "League": "Non League Premier - Northern",
-    "Match": "Rylands vs Lancaster City",
+    "Match": "Beitar Jerusalem vs Hapoel Katamon",
     "Tip": "Over 1.5",
     "Odds": "1.13",
-    "Date": "2026-11-27T19:45:00+00:00"
+    "Date": "2026-11-28T18:15:00+00:00"
+  },
+  {
+    "League": "Primera Premier",
+    "Match": "Deportiva Venados vs Chapulineros",
+    "Tip": "Over 1.5",
+    "Odds": "1.19",
+    "Date": "2026-11-28T23:00:00+00:00"
+  },
+  {
+    "League": "Major League Soccer",
+    "Match": "FC Cincinnati vs Nashville SC",
+    "Tip": "Over 1.5",
+    "Odds": "1.14",
+    "Date": "2026-11-28T23:30:00+00:00"
   },
   {
     "League": "J1 League",
-    "Match": "Kashima vs Fagiano Okayama",
+    "Match": "Kawasaki Frontale vs Gamba Osaka",
     "Tip": "Over 1.5",
-    "Odds": "1.28",
-    "Date": "2026-11-28T06:00:00+00:00"
+    "Odds": "1.14",
+    "Date": "2026-11-29T06:00:00+00:00"
   }
 ]
