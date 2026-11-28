@@ -1,11 +1,11 @@
 [
   {
     "league": "League Two",
-    "homeTeam": "Salford City",
-    "awayTeam": "Gillingham",
-    "tip": "Over 1.5",
+    "homeTeam": "Colchester",
+    "awayTeam": "York",
+    "tip": "Over 3.5",
     "odds": "",
-    "halftimeScore": "0:1",
+    "halftimeScore": "2:1",
     "liveOdds": "",
     "finalScore": "",
     "result": "",
@@ -13,12 +13,12 @@
     "kickoff": "2026-11-28T15:00:00.000Z",
     "resolvedAt": "",
     "source": "whisper-football",
-    "scoutStats": "Whisper xG-rate surge | HT 0:1 | xG: 1.31 | Shots: 13/4 | winXG: 0.89 | losingXG: 0.42 losingSOT: 2 | @HT | Pre O2.5: 1.65",
-    "apiFixtureId": 1563883,
-    "tipSource": "C",
+    "scoutStats": "Whisper xG-rate surge | HT 2:1 | xG: 1.18 | Shots: 10/6 | winXG: 0.91 | losingXG: 0.27 losingSOT: 3 | @HT | Pre O2.5: 1.7",
+    "apiFixtureId": 1563876,
+    "tipSource": "B",
     "tipEvalA": false,
-    "tipEvalB": false,
-    "tipEvalC": true
+    "tipEvalB": true,
+    "tipEvalC": false
   },
   {
     "league": "Indian Super League",
