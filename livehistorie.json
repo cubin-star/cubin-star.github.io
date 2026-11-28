@@ -1,5 +1,26 @@
 [
   {
+    "league": "Premiership",
+    "homeTeam": "Aberdeen",
+    "awayTeam": "Dundee",
+    "tip": "Over 1.5",
+    "odds": "",
+    "halftimeScore": "1:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-11-28T15:00:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 1:0 | xG: 2.14 | Shots: 12/6 | winXG: 1.80 | losingXG: 0.34 losingSOT: 2 | @HT | Pre O2.5: 1.65",
+    "apiFixtureId": 1556712,
+    "tipSource": "B",
+    "tipEvalA": false,
+    "tipEvalB": true,
+    "tipEvalC": false
+  },
+  {
     "league": "Indian Super League",
     "homeTeam": "Chennaiyin",
     "awayTeam": "Mumbai City",
