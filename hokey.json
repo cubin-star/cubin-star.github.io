@@ -1,16 +1,16 @@
 [
   {
-    "league": "Polish Hockey League",
-    "match": "Tychy vs Unia Oswiecim",
+    "league": "ELJ",
+    "match": "Kometa Brno U20 vs Mlada Boleslav U20",
     "tip": "Over 5.5",
-    "odds": "1.78",
+    "odds": "1.95",
     "qualified15": true
   },
   {
-    "league": "ELJ",
-    "match": "Poruba U20 vs Mlada Boleslav U20",
+    "league": "SHL",
+    "match": "HV 71 vs IF Bjorkloven",
     "tip": "Over 5.5",
-    "odds": "1.96",
+    "odds": "1.94",
     "qualified15": true
   }
 ]
