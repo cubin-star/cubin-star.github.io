@@ -1,23 +1,23 @@
 [
   {
-    "league": "Süper Lig",
-    "match": "Alanyaspor - Konyaspor",
-    "kickoff": "2026-11-27T18:00:00+01:00",
+    "league": "J1 League",
+    "match": "Machida Zelvia - Tokyo Verdy",
+    "kickoff": "2026-11-29T08:00:00+01:00",
     "tip": "Over 2.5",
-    "odds": "2.30"
+    "odds": "2.20"
   },
   {
-    "league": "Serie A",
-    "match": "Venezia - Bologna",
-    "kickoff": "2026-11-27T20:45:00+01:00",
-    "tip": "Over 2.5",
-    "odds": "2.17"
-  },
-  {
-    "league": "Primera A",
-    "match": "Millonarios - America de Cali",
-    "kickoff": "2026-11-28T02:40:00+01:00",
+    "league": "Ligue 1",
+    "match": "Le Mans - Lille",
+    "kickoff": "2026-11-28T20:45:00+01:00",
     "tip": "Over 2.5",
     "odds": "2.15"
+  },
+  {
+    "league": "Coupe de France",
+    "match": "Epinal - Amiens",
+    "kickoff": "2026-11-28T15:00:00+01:00",
+    "tip": "Over 2.5",
+    "odds": "2.10"
   }
 ]
