@@ -1,5 +1,26 @@
 [
   {
+    "league": "Ekstraklasa",
+    "homeTeam": "Widzew Łódź",
+    "awayTeam": "Zaglebie Lubin",
+    "tip": "Over 2.5",
+    "odds": "",
+    "halftimeScore": "2:0",
+    "liveOdds": "",
+    "finalScore": "",
+    "result": "",
+    "sport": "football",
+    "kickoff": "2026-11-28T13:45:00.000Z",
+    "resolvedAt": "",
+    "source": "whisper-football",
+    "scoutStats": "Whisper xG-rate surge | HT 2:0 | xG: 1.35 | Shots: 15/4 | winXG: 1.17 | losingXG: 0.18 losingSOT: 1 | @HT | Pre O2.5: 1.88",
+    "apiFixtureId": 1553243,
+    "tipSource": "A",
+    "tipEvalA": true,
+    "tipEvalB": false,
+    "tipEvalC": false
+  },
+  {
     "league": "J1 League",
     "homeTeam": "Kashiwa Reysol",
     "awayTeam": "Sanfrecce Hiroshima",
